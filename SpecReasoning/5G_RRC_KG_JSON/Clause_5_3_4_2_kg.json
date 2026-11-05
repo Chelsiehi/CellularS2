@@ -1,0 +1,105 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.4.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_COMMAND_PROCEDURE",
+      "name": "Security Mode Command Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to establish security between the network and UE in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "SRB1",
+      "name": "Signalling Radio Bearer 1",
+      "entity_type": "Property",
+      "description": "First signalling radio bearer used for RRC and NAS message transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "SRB2",
+      "name": "Signalling Radio Bearer 2",
+      "entity_type": "Property",
+      "description": "Second signalling radio bearer used for NAS message transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "DRB",
+      "name": "Data Radio Bearer",
+      "entity_type": "Property",
+      "description": "Radio bearer used for user data transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "MRB",
+      "name": "Multicast Radio Bearer",
+      "entity_type": "Property",
+      "description": "Radio bearer used for multicast data transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "ONLY_SRB1_ESTABLISHED",
+      "name": "Only SRB1 established condition",
+      "entity_type": "Condition",
+      "description": "Condition where SRB1 is established but SRB2, multicast MRBs and/or DRBs are not yet established.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_MODE_COMMAND_PROCEDURE",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Security mode command procedure requires the UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SECURITY_MODE_COMMAND_PROCEDURE",
+      "target": "ONLY_SRB1_ESTABLISHED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security mode command procedure is applied when only SRB1 is established.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ONLY_SRB1_ESTABLISHED",
+      "target": "SRB1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where only SRB1 is established prior to establishment of SRB2, multicast MRBs and/or DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.2"
+      ]
+    }
+  ]
+}

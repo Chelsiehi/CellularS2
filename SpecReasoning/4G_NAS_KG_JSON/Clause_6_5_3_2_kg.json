@@ -1,0 +1,172 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.2",
+  "title": "UE requested bearer resource allocation procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "name": "UE requested bearer resource allocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to request allocation of bearer resources for one traffic flow aggregate. The UE sends a BEARER RESOURCE ALLOCATION REQUEST message, starts timer T3480, and enters the PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2",
+        "Figure 6.5.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the MME to request bearer resource allocation for a traffic flow aggregate.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2",
+        "Figure 6.5.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE included in BEARER RESOURCE ALLOCATION REQUEST message containing the EPS bearer identity of the default EPS bearer associated with the requested bearer resource.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_TRAFFIC_FLOW_AGGREGATE",
+      "name": "Traffic flow aggregate",
+      "entity_type": "Information Element",
+      "description": "IE included in BEARER RESOURCE ALLOCATION REQUEST message containing TFT operation code and packet filters. For NBIFOM procedures, specific values may be set when not needed.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_REQUIRED_TRAFFIC_FLOW_QOS",
+      "name": "Required traffic flow QoS",
+      "entity_type": "Information Element",
+      "description": "IE included in BEARER RESOURCE ALLOCATION REQUEST message indicating QCI and optionally GBR for the traffic flow aggregate.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3480",
+      "name": "T3480",
+      "entity_type": "Timer",
+      "description": "Timer started by the UE upon sending BEARER RESOURCE ALLOCATION REQUEST message. Stopped upon receiving network response.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2",
+        "Figure 6.5.3.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by the UE after sending BEARER RESOURCE ALLOCATION REQUEST message and starting timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "COND_NBIFOM_TRAFFIC_FLOW_NOT_NEEDED",
+      "name": "NBIFOM traffic flow aggregate not needed condition",
+      "entity_type": "Condition",
+      "description": "Condition for NBIFOM procedures where traffic flow aggregate IE is not needed, requiring specific IE value settings.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "target": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the BEARER RESOURCE ALLOCATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "target": "TIMER_T3480",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3480 when initiated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "target": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires the UE to enter the PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IE_TRAFFIC_FLOW_AGGREGATE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Traffic flow aggregate IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IE_REQUIRED_TRAFFIC_FLOW_QOS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Required traffic flow QoS IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_TRAFFIC_FLOW_AGGREGATE",
+      "target": "COND_NBIFOM_TRAFFIC_FLOW_NOT_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The IE content is guarded by the NBIFOM condition when traffic flow aggregate is not needed.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_REQUIRED_TRAFFIC_FLOW_QOS",
+      "target": "COND_NBIFOM_TRAFFIC_FLOW_NOT_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The IE content is guarded by the NBIFOM condition when traffic flow aggregate is not needed.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.11",
+  "title": "Multi-homed IPv6 PDU session",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that may support multi-homed IPv6 PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "MULTI_HOMED_IPV6_PDU_SESSION",
+      "name": "Multi-homed IPv6 PDU session",
+      "entity_type": "Property",
+      "description": "A PDU session type that allows multiple IPv6 prefixes for the same session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "TYPE_C_HOST",
+      "name": "Type C host",
+      "entity_type": "Property",
+      "description": "UE acting as a type C host as specified in IETF RFC 4191.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to establish a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "IPV6_PDU_SESSION_TYPE",
+      "name": "IPv6 PDU session type",
+      "entity_type": "Property",
+      "description": "PDU session type supporting IPv6.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "IPV4V6_PDU_SESSION_TYPE",
+      "name": "IPv4v6 PDU session type",
+      "entity_type": "Property",
+      "description": "PDU session type supporting both IPv4 and IPv6.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE moves from S1 mode to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "SINGLE_REGISTRATION_MODE_N26",
+      "name": "Single-registration mode with N26 interface",
+      "entity_type": "Condition",
+      "description": "Condition where UE operates in single-registration mode in a network supporting N26 interface.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "MULTI_HOMED_IPV6_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE may support multi-homed IPv6 PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MULTI_HOMED_IPV6_PDU_SESSION",
+      "target": "TYPE_C_HOST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "If UE supports multi-homed IPv6 PDU session, it shall support acting as a type C host.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "MULTI_HOMED_IPV6_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE indicates support of multi-homed IPv6 PDU session during UE-requested PDU session establishment for IPv6 or IPv4v6 PDU session types.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "MULTI_HOMED_IPV6_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE indicates support of multi-homed IPv6 PDU session during UE-requested PDU session modification after inter-system change from S1 to N1 mode, under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IPV6_PDU_SESSION_TYPE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session establishment requires IPv6 or IPv4v6 PDU session type for multi-homed IPv6 support indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IPV4V6_PDU_SESSION_TYPE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session establishment requires IPv6 or IPv4v6 PDU session type for multi-homed IPv6 support indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session modification for multi-homed IPv6 support indication requires inter-system change from S1 to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "SINGLE_REGISTRATION_MODE_N26",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session modification for multi-homed IPv6 support indication requires UE to be in single-registration mode with N26 interface support.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IPV6_PDU_SESSION_TYPE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session modification for multi-homed IPv6 support indication requires IPv6 or IPv4v6 PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IPV4V6_PDU_SESSION_TYPE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-requested PDU session modification for multi-homed IPv6 support indication requires IPv6 or IPv4v6 PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.11"
+      ]
+    }
+  ]
+}

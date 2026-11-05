@@ -1,0 +1,210 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.2",
+  "title": "Default EPS bearer context activation initiated by the network",
+  "entities": [
+    {
+      "id": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "name": "Default EPS bearer context activation",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to activate a default EPS bearer context. The MME sends ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST and enters BEARER CONTEXT ACTIVE PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to initiate default EPS bearer context activation. Contains EPS bearer identity, PTI, and Access Point Name IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept the default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject the default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE_PENDING",
+      "name": "BEARER CONTEXT ACTIVE PENDING",
+      "entity_type": "State",
+      "description": "State entered by MME after sending ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST, waiting for UE response.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3485",
+      "name": "T3485",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when sending ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST in stand-alone PDN connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identity assigned by MME for the EPS bearer, included in ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity retrieved from PDN CONNECTIVITY REQUEST message, included in ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_POINT_NAME",
+      "name": "Access Point Name IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing both network identifier and operator identifier parts, included in ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_PROCEDURE",
+      "name": "During attach procedure",
+      "entity_type": "Condition",
+      "description": "Condition when default bearer activation is part of attach procedure. MME sends ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST with ATTACH ACCEPT and does not start T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "COND_STANDALONE_PDN_CONNECTIVITY",
+      "name": "Stand-alone PDN connectivity request",
+      "entity_type": "Condition",
+      "description": "Condition when default bearer activation is in response to stand-alone PDN CONNECTIVITY REQUEST. MME sends ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST alone and starts T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires entering BEARER CONTEXT ACTIVE PENDING state after sending the request.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains PTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_ACCESS_POINT_NAME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains Access Point Name IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_STANDALONE_PDN_CONNECTIVITY",
+      "target": "TIMER_T3485",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "During stand-alone PDN connectivity, MME starts timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_ATTACH_PROCEDURE",
+      "target": "TIMER_T3485",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "During attach procedure, MME does not start timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.2"
+      ]
+    }
+  ]
+}

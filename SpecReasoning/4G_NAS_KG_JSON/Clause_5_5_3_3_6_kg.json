@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_COMBINED_TA_UPDATE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating tracking area for EPS and non-EPS services",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "MSG_TA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept tracking area update request",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM Cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the cause of EMM procedure outcome",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "Timer T3430",
+      "entity_type": "Timer",
+      "description": "Timer used during tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter < 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter = 5 for certain UE modes",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "STATE_MM_IDLE",
+      "name": "MM IDLE state",
+      "entity_type": "State",
+      "description": "Mobility Management idle state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REG_ATTEMPTING_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "EMM registered state where UE is attempting to update mobility management",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "COUNTER_TA_UPDATE_ATTEMPTS",
+      "name": "Tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of tracking area update attempts",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "COND_ATTEMPT_COUNTER_LESS_5",
+      "name": "Tracking area updating attempt counter < 5",
+      "entity_type": "Condition",
+      "description": "Condition when tracking area update attempt counter is less than 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "COND_ATTEMPT_COUNTER_EQUAL_5",
+      "name": "Tracking area updating attempt counter = 5",
+      "entity_type": "Condition",
+      "description": "Condition when tracking area update attempt counter equals 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_LAI_TMSI",
+      "name": "Delete LAI, TMSI and ciphering key sequence number",
+      "entity_type": "Property",
+      "description": "Action to delete location area identity, temporary mobile subscriber identity and ciphering key sequence number",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TA_UPDATE_ACCEPT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain EMM Cause IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_COMBINED_TA_UPDATE",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3430 during abnormal case handling",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ATTEMPT_COUNTER_LESS_5",
+      "target": "TIMER_T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When attempt counter < 5, UE starts timer T3411",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ATTEMPT_COUNTER_LESS_5",
+      "target": "STATE_EMM_REG_ATTEMPTING_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When attempt counter < 5, UE enters EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ATTEMPT_COUNTER_EQUAL_5",
+      "target": "TIMER_T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When attempt counter = 5 for certain UE modes, UE starts timer T3402",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ATTEMPT_COUNTER_EQUAL_5",
+      "target": "PROP_DELETE_LAI_TMSI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When attempt counter = 5, UE deletes LAI, TMSI and ciphering key sequence number",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_COMBINED_TA_UPDATE",
+      "target": "COUNTER_TA_UPDATE_ATTEMPTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior depends on tracking area updating attempt counter value",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_COMBINED_TA_UPDATE",
+      "target": "STATE_MM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters MM IDLE state during abnormal case handling",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.6"
+      ]
+    }
+  ]
+}

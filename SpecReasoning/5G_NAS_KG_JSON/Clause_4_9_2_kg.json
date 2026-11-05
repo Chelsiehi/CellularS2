@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.9.2",
+  "title": "Disabling and re-enabling of UE's N1 mode capability for 3GPP access",
+  "entities": [
+    {
+      "id": "N1_MODE_CAPABILITY",
+      "name": "N1 mode capability for 3GPP access",
+      "entity_type": "Property",
+      "description": "UE's capability to operate in N1 mode over 3GPP access. Can be disabled and re-enabled under various conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5GMM idle state where UE can disable N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_PLMN_SEARCH",
+      "name": "5GMM-REGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "State entered when UE cannot find suitable cell and performs PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "State entered when UE has no registered PLMN and performs PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_LIMITED_SERVICE",
+      "name": "5GMM-REGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "State entered during redirection to EPC when no suitable cell found.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure to select a PLMN when N1 mode is disabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SNPN_SELECTION",
+      "name": "SNPN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure to select an SNPN when N1 mode is disabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_DEREGISTRATION",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that may prevent re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "IE_UE_NETWORK_CAPABILITY",
+      "name": "UE network capability IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing N1mode bit indicating N1 mode support.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "name": "Implementation-specific timer",
+      "entity_type": "Timer",
+      "description": "Timer started during redirection to EPC when no suitable cell found.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "CONDITION_REDIRECTION_EPC",
+      "name": "Redirection to EPC required",
+      "entity_type": "Condition",
+      "description": "Condition triggered by cause value #31 requiring N1 mode disable.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_NETWORK_SLICE",
+      "name": "No network slice available",
+      "entity_type": "Condition",
+      "description": "Condition where UE may disable N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "N1_MODE_CAPABILITY",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "N1 mode capability can only be disabled when UE is in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_PLMN_SELECTION",
+      "target": "STATE_5GMM_REGISTERED_PLMN_SEARCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PLMN selection procedure requires entering PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_SNPN_SELECTION",
+      "target": "STATE_5GMM_REGISTERED_PLMN_SEARCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SNPN selection procedure requires entering PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_REDIRECTION_EPC",
+      "target": "STATE_5GMM_REGISTERED_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Redirection to EPC condition establishes LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_REDIRECTION_EPC",
+      "target": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Redirection to EPC condition starts implementation-specific timer.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "target": "N1_MODE_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer expiry establishes re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_UE_NETWORK_CAPABILITY",
+      "target": "N1_MODE_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE network capability IE contains N1mode bit indicating N1 mode support status.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_NO_NETWORK_SLICE",
+      "target": "N1_MODE_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "No network slice available condition establishes disabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_UE_DEREGISTRATION",
+      "target": "N1_MODE_CAPABILITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure guards re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.2"
+      ]
+    }
+  ]
+}

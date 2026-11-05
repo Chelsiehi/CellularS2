@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.5",
+  "title": "Combined attach not accepted by the network",
+  "entities": [
+    {
+      "id": "ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE when attach request is not accepted. Contains EMM cause value and may include T3346 value IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element in ATTACH REJECT message indicating reason for rejection. Various values trigger different UE behaviors.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer assigned by network for congestion control. UE starts this timer when receiving integrity-protected ATTACH REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer running during attach procedure. UE stops this timer upon receiving ATTACH REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by UE after attach rejection. Has substates like LIMITED-SERVICE, PLMN-SEARCH, and NO-IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "MM_IDLE",
+      "name": "MM IDLE",
+      "entity_type": "State",
+      "description": "MM state entered by UE after receiving ATTACH REJECT message with integrity protection or reject cause other than #25.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTION_REQUIRED",
+      "name": "Integrity protection required",
+      "entity_type": "Condition",
+      "description": "Condition where ATTACH REJECT message must be integrity protected for UE to process certain cause values and start timers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "UE_CLEANUP_ACTIONS",
+      "name": "UE cleanup actions",
+      "entity_type": "Property",
+      "description": "UE actions after attach rejection including deleting GUTI, TAI list, eKSI, resetting counters, and updating EPS status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "FORBIDDEN_LISTS",
+      "name": "Forbidden lists",
+      "entity_type": "Property",
+      "description": "UE stores PLMNs or TAIs in forbidden lists based on EMM cause value and integrity protection status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE after attach rejection with certain EMM cause values according to TS 23.122.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_REJECT",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3410 upon receiving ATTACH REJECT message with integrity protection or cause other than #25.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_REJECT",
+      "target": "MM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters MM IDLE state after receiving ATTACH REJECT with integrity protection or cause other than #25.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTEGRITY_PROTECTION_REQUIRED",
+      "target": "T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE starts T3346 with provided value only if ATTACH REJECT is integrity protected.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMM_CAUSE",
+      "target": "UE_CLEANUP_ACTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific EMM cause values trigger UE cleanup actions like deleting GUTI, TAI list, and updating EPS status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMM_CAUSE",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters EMM-DEREGISTERED state with specific substate based on EMM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMM_CAUSE",
+      "target": "FORBIDDEN_LISTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE stores PLMNs or TAIs in forbidden lists based on EMM cause value and integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMM_CAUSE",
+      "target": "PLMN_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Certain EMM cause values trigger UE to perform PLMN selection procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ATTACH_REJECT",
+      "target": "INTEGRITY_PROTECTION_REQUIRED",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ATTACH REJECT message with cause #25 must be integrity protected for UE to process it.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ATTACH_REJECT",
+      "target": "T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3346 when T3346 value IE is present in ATTACH REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.5"
+      ]
+    }
+  ]
+}

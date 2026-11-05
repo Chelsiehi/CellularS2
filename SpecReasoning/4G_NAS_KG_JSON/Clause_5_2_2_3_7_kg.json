@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.3.7",
+  "title": "NO-CELL-AVAILABLE",
+  "entities": [
+    {
+      "id": "STATE_NO_CELL_AVAILABLE",
+      "name": "NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "UE substate where no cell is available for service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "STATE_NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "UE substate entered when a cell is found and normal service can be resumed.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_CELL_SELECTION",
+      "name": "Cell Selection",
+      "entity_type": "Procedure",
+      "description": "UE procedure to search for and select an available cell according to 3GPP TS 36.304.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_S101_TO_S1_HANDOVER",
+      "name": "S101 mode to S1 mode handover",
+      "entity_type": "Procedure",
+      "description": "Handover procedure from S101 mode to S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_CELL_FOUND",
+      "name": "Cell found condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE successfully finds a cell during cell selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_PLMN_NOT_FORBIDDEN",
+      "name": "PLMN not in forbidden lists",
+      "entity_type": "Condition",
+      "description": "Condition where the PLMN identity of the target cell is not in any forbidden PLMN list.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_NO_CELL_AVAILABLE",
+      "target": "PROCEDURE_CELL_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in NO-CELL-AVAILABLE state performs cell selection procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_CELL_SELECTION",
+      "target": "CONDITION_CELL_FOUND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful cell selection establishes cell found condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_CELL_FOUND",
+      "target": "STATE_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell found condition leads to transition to NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_S101_TO_S1_HANDOVER",
+      "target": "CONDITION_PLMN_NOT_FORBIDDEN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "S101 to S1 handover requires PLMN not in forbidden lists condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_PLMN_NOT_FORBIDDEN",
+      "target": "STATE_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PLMN not forbidden condition establishes transition to NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.7"
+      ]
+    }
+  ]
+}

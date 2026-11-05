@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.3.2",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UE_SMS_ONLY",
+      "name": "UE requesting SMS only",
+      "entity_type": "Condition",
+      "description": "A UE that requested SMS only in the combined attach procedure or combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    },
+    {
+      "id": "CS_SERVICE_NOTIFICATION",
+      "name": "CS SERVICE NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "A message that may be ignored by a UE that requested SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    },
+    {
+      "id": "PAGING_IND_CS",
+      "name": "Paging indication with CN domain indicator set to CS",
+      "entity_type": "Message",
+      "description": "A paging indication that may be ignored by a UE that requested SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    },
+    {
+      "id": "IGNORE_BEHAVIOR",
+      "name": "Ignore CS domain messages",
+      "entity_type": "Property",
+      "description": "The UE may ignore CS SERVICE NOTIFICATION messages or paging indications with CN domain indicator set to CS when it requested SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_SMS_ONLY",
+      "target": "IGNORE_BEHAVIOR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition of UE requesting SMS only establishes the behavior of ignoring CS domain messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IGNORE_BEHAVIOR",
+      "target": "CS_SERVICE_NOTIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ignore behavior applies to CS SERVICE NOTIFICATION messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IGNORE_BEHAVIOR",
+      "target": "PAGING_IND_CS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ignore behavior applies to paging indications with CN domain indicator set to CS.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.2"
+      ]
+    }
+  ]
+}

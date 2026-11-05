@@ -1,0 +1,171 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.22",
+  "title": "Interaction between MICO mode with active time and extended idle mode DRX cycle",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that can request MICO mode with active time and eDRX during registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "MICO_MODE_ACTIVE_TIME",
+      "name": "MICO mode with active time",
+      "entity_type": "Property",
+      "description": "A power saving mode where the UE remains reachable for a certain active time period after registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22",
+        "TS 24.501, Subclause 5.3.6"
+      ]
+    },
+    {
+      "id": "EDRX",
+      "name": "Extended idle mode DRX cycle",
+      "entity_type": "Property",
+      "description": "Extended Discontinuous Reception cycle that allows longer sleep periods for the UE to save power.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22",
+        "TS 24.501, Subclause 5.3.16"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the UE can request MICO mode with active time and eDRX.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network entity that decides whether to enable MICO mode with active time, eDRX, both, or none.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "EXTENDED_DRX_PARAMETERS",
+      "name": "Extended DRX parameters",
+      "entity_type": "Property",
+      "description": "Parameters provided to the UE when both MICO mode with active time and eDRX are accepted, configured to allow multiple paging occasions before active timer expires.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "ACTIVE_TIMER",
+      "name": "Active timer",
+      "entity_type": "Timer",
+      "description": "Timer that defines the active time period in MICO mode during which the UE is reachable.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "PAGING_OCCASIONS",
+      "name": "Paging occasions",
+      "entity_type": "Condition",
+      "description": "Time instances when the network can page the UE, which should occur multiple times before the active timer expires when both MICO mode with active time and eDRX are enabled.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE requests MICO mode with active time and eDRX during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "MICO_MODE_ACTIVE_TIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure can include request for MICO mode with active time.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "EDRX",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure can include request for extended idle mode DRX cycle.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NETWORK",
+      "target": "MICO_MODE_ACTIVE_TIME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network decides whether to enable MICO mode with active time.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NETWORK",
+      "target": "EDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network decides whether to enable extended idle mode DRX cycle.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NETWORK",
+      "target": "EXTENDED_DRX_PARAMETERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network provides extended DRX parameters to the UE when both MICO mode with active time and eDRX are accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EXTENDED_DRX_PARAMETERS",
+      "target": "PAGING_OCCASIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended DRX parameters should allow for multiple paging occasions before active timer expires.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PAGING_OCCASIONS",
+      "target": "ACTIVE_TIMER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Multiple paging occasions should occur before the active timer expires.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.22"
+      ]
+    }
+  ]
+}

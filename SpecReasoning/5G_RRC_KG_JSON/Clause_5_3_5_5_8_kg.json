@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.8",
+  "title": "SCell Release",
+  "entities": [
+    {
+      "id": "PROCEDURE_SCELL_RELEASE",
+      "name": "SCell Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing Secondary Cells (SCells) based on sCellToReleaseList configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "IE_SCELL_TO_RELEASE_LIST",
+      "name": "sCellToReleaseList",
+      "entity_type": "Information Element",
+      "description": "List of SCell indexes to be released from UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "IE_SCELL_TO_ADD_MOD_LIST",
+      "name": "sCellToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of SCell indexes to be added or modified in UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "IE_SCELL_INDEX",
+      "name": "sCellIndex",
+      "entity_type": "Information Element",
+      "description": "Identifier for a specific Secondary Cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "IE_SCELL_STATE",
+      "name": "sCellState",
+      "entity_type": "Information Element",
+      "description": "Indicates whether SCell should be in activated or deactivated state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "STATE_SCELL_ACTIVATED",
+      "name": "SCell Activated State",
+      "entity_type": "State",
+      "description": "State where SCell is considered activated by lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "STATE_SCELL_DEACTIVATED",
+      "name": "SCell Deactivated State",
+      "entity_type": "State",
+      "description": "State where SCell is considered deactivated by lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "CONDITION_SCELL_IN_CONFIG",
+      "name": "SCell in current UE configuration",
+      "entity_type": "Condition",
+      "description": "Condition checking if SCell with given index exists in current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_RELEASE_SCELL",
+      "name": "Release SCell",
+      "entity_type": "Property",
+      "description": "Action to release an SCell from UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_ADD_SCELL",
+      "name": "Add SCell",
+      "entity_type": "Property",
+      "description": "Action to add an SCell to UE configuration with common and dedicated configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_MODIFY_SCELL",
+      "name": "Modify SCell",
+      "entity_type": "Property",
+      "description": "Action to modify SCell configuration based on dedicated configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_SCELL_RELEASE",
+      "target": "IE_SCELL_TO_RELEASE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCell release procedure uses sCellToReleaseList to determine which SCells to release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_SCELL_RELEASE",
+      "target": "IE_SCELL_TO_ADD_MOD_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCell release procedure uses sCellToAddModList to determine which SCells to add or modify.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SCELL_TO_RELEASE_LIST",
+      "target": "IE_SCELL_INDEX",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sCellToReleaseList contains sCellIndex values identifying SCells to release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_SCELL_TO_ADD_MOD_LIST",
+      "target": "IE_SCELL_INDEX",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sCellToAddModList contains sCellIndex values identifying SCells to add or modify.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_RELEASE_SCELL",
+      "target": "CONDITION_SCELL_IN_CONFIG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SCell release is guarded by condition that SCell exists in current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_SCELL_STATE",
+      "target": "STATE_SCELL_ACTIVATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "sCellState IE establishes SCell activated state when configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_SCELL_STATE",
+      "target": "STATE_SCELL_DEACTIVATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "sCellState IE establishes SCell deactivated state when configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROPERTY_ADD_SCELL",
+      "target": "IE_SCELL_STATE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCell addition procedure uses sCellState to configure activation state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROPERTY_MODIFY_SCELL",
+      "target": "IE_SCELL_STATE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCell modification procedure uses sCellState to configure activation state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.8"
+      ]
+    }
+  ]
+}

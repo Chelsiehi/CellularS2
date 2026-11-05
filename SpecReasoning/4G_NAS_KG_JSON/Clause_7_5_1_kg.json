@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.5.1",
+  "title": "Common procedures",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives messages and performs error handling procedures.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "Network entity that receives messages and performs error handling procedures.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_HANDLING_PROCEDURE",
+      "name": "Error Handling Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when UE or network receives a message with specific error conditions.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "EMM_STATUS",
+      "name": "EMM STATUS",
+      "entity_type": "Message",
+      "description": "EMM status message sent to indicate error conditions in EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ESM_STATUS",
+      "name": "ESM STATUS",
+      "entity_type": "Message",
+      "description": "ESM status message sent to indicate error conditions in ESM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "CAUSE_96",
+      "name": "Cause #96",
+      "entity_type": "Property",
+      "description": "Cause value indicating 'invalid mandatory information' in status messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_CONDITIONS",
+      "name": "Error Conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that trigger error handling: imperative message part error, missing mandatory IE, syntactically incorrect mandatory IE, unknown comprehension required IE, or out of sequence comprehension required IE.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "EXCLUDED_MESSAGES_UE",
+      "name": "Excluded Messages for UE",
+      "entity_type": "Condition",
+      "description": "Messages listed in clause 7.5.3, items a, b, c, or d that are excluded from UE error handling procedure.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "EXCLUDED_MESSAGES_NETWORK",
+      "name": "Excluded Messages for Network",
+      "entity_type": "Condition",
+      "description": "Messages listed in clause 7.5.3, items e, f, g, or h that are excluded from network error handling procedure.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "ERROR_CONDITIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Error handling procedure is triggered by specific error conditions.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "ERROR_HANDLING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE performs error handling procedure when error conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NETWORK",
+      "target": "ERROR_HANDLING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network performs error handling procedure when error conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "EMM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error handling procedure results in sending EMM STATUS message with cause #96.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "ESM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error handling procedure results in sending ESM STATUS message with cause #96.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Status messages sent during error handling contain cause #96.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "EXCLUDED_MESSAGES_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE error handling procedure is not applied to excluded messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ERROR_HANDLING_PROCEDURE",
+      "target": "EXCLUDED_MESSAGES_NETWORK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network error handling procedure is not applied to excluded messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.1"
+      ]
+    }
+  ]
+}

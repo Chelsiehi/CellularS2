@@ -1,0 +1,269 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.3",
+  "title": "Measurement identity addition/modification",
+  "entities": [
+    {
+      "id": "PROC_MEAS_ID_MOD",
+      "name": "Measurement identity addition/modification",
+      "entity_type": "Procedure",
+      "description": "Procedure for adding or modifying measurement identities in UE configuration. The network configures measId only if corresponding measurement object, reporting configuration, and quantity configuration are configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID",
+      "name": "Measurement identity",
+      "entity_type": "Information Element",
+      "description": "Identifier that links a measurement object with a reporting configuration and quantity configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID_TO_ADD_MOD_LIST",
+      "name": "Measurement identity to add/modify list",
+      "entity_type": "Information Element",
+      "description": "List containing measurement identities to be added or modified in UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG",
+      "name": "Variable measurement configuration",
+      "entity_type": "Property",
+      "description": "UE's stored measurement configuration containing the measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST",
+      "name": "Variable measurement report list",
+      "entity_type": "Property",
+      "description": "UE's stored measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "Timer T321",
+      "entity_type": "Timer",
+      "description": "Timer used for measurement reporting with reportCGI, with values ranging from 200 ms to 16 seconds depending on frequency range and autonomous gaps configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "Timer T322",
+      "entity_type": "Timer",
+      "description": "Timer used for SFTD measurement reporting, with values of 3 seconds for FR1 and 24 seconds for FR2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_REPORT_CGI",
+      "name": "Report type is reportCGI",
+      "entity_type": "Condition",
+      "description": "Condition where the reportType is set to reportCGI in the reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_REPORT_SFTD",
+      "name": "Report type is reportSFTD with DRX",
+      "entity_type": "Condition",
+      "description": "Condition where reportType is set to reportSFTD and drx-SFTD-NeighMeas is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_USE_AUTONOMOUS_GAPS",
+      "name": "Use autonomous gaps included",
+      "entity_type": "Condition",
+      "description": "Condition where useAutonomousGaps is included in the reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_MEAS_OBJECT_EUTRA",
+      "name": "Measurement object concerns E-UTRA",
+      "entity_type": "Condition",
+      "description": "Condition where the measurement object associated with measId concerns E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_MEAS_OBJECT_NR_FR1",
+      "name": "Measurement object concerns NR FR1",
+      "entity_type": "Condition",
+      "description": "Condition where the measurement object associated with measId concerns NR FR1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "COND_MEAS_OBJECT_NR_FR2",
+      "name": "Measurement object concerns NR FR2",
+      "entity_type": "Condition",
+      "description": "Condition where the measurement object associated with measId concerns NR FR2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEAS_ID_MOD",
+      "target": "IE_MEAS_ID_TO_ADD_MOD_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure operates on the measurement identity to add/modify list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MEAS_ID_MOD",
+      "target": "VAR_MEAS_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure modifies the variable measurement configuration by adding or replacing entries in measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MEAS_ID_MOD",
+      "target": "VAR_MEAS_REPORT_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure removes measurement reporting entries from the variable measurement report list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MEAS_ID_MOD",
+      "target": "TIMER_T321",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T321 under specific conditions for reportCGI.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_MEAS_ID_MOD",
+      "target": "TIMER_T322",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T322 under specific conditions for reportSFTD.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REPORT_CGI",
+      "target": "TIMER_T321",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T321 is started when reportType is set to reportCGI.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REPORT_SFTD",
+      "target": "TIMER_T322",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T322 is started when reportType is set to reportSFTD and drx-SFTD-NeighMeas is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_USE_AUTONOMOUS_GAPS",
+      "target": "TIMER_T321",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of timer T321 depends on whether useAutonomousGaps is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_MEAS_OBJECT_EUTRA",
+      "target": "TIMER_T321",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T321 value depends on whether measurement object concerns E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_MEAS_OBJECT_NR_FR1",
+      "target": "TIMER_T321",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T321 value depends on whether measurement object concerns NR FR1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_MEAS_OBJECT_NR_FR2",
+      "target": "TIMER_T321",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T321 value depends on whether measurement object concerns NR FR2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_MEAS_OBJECT_NR_FR1",
+      "target": "TIMER_T322",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T322 value is 3 seconds when measurement object concerns NR FR1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_MEAS_OBJECT_NR_FR2",
+      "target": "TIMER_T322",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T322 value is 24 seconds when measurement object concerns NR FR2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------",
+    "The purpose of the authentication and key agreement procedure for 5G ProSe UE-to-network relay is to perform the authentication for 5G ProSe remote UE initiated by the 5G ProSe UE-to-network relay and to agree on the KAUSF_P and KNR_ProSe when the security for 5G ProSe communication via 5G ProSe UE-to-network relay is performed over control plane as specified in 3GPPTS33.503[56]",
+    "The procedure as shown in figure5.5.4.1.1 is initiated by the UE when the UE receives the ProSe direct link establishment request including the SUCI of the 5G ProSe remote UE from the 5G ProSe remote UE, for establishing secure PC5 unicast link as specified in 3GPPTS24.554[19E]",
+    "If the network decides to process the relay key request message, the EAP based authentication and key agreement procedure is initiated and controlled by the network. The exchanges of EAP messages between the 5G ProSe remote UE and the network are relayed by the UE",
+    "Figure5.5.4.1.1: Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.5.4.1.1",
+      "file": "Figure_5_5_4_1_1_p405.png.json",
+      "title": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+      "content": {
+        "figure_id": "5.5.4.1.1",
+        "title": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "RELAY KEY REQUEST",
+              "notes": "Start T35xx"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "RELAY KEY REJECT",
+              "notes": "Stop T35xx, <Key request is rejected>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "RELAY AUTHENTICATION REQUEST",
+              "notes": "Stop T35xx, <EAP-request message A>"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "RELAY AUTHENTICATION RESPONSE",
+              "notes": "Start T35xx, <EAP-response message to EAP-request message A>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "RELAY AUTHENTICATION REQUEST",
+              "notes": "Stop T35xx, <EAP-request message B>"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "RELAY AUTHENTICATION RESPONSE",
+              "notes": "Start T35xx, <EAP-response message to EAP-request message B>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "RELAY KEY ACCEPT",
+              "notes": "Stop T35xx, <EAP-success message>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "RELAY KEY REJECT",
+              "notes": "Stop T35xx, <EAP-failure message>"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "OR condition between RELAY KEY REJECT and RELAY AUTHENTICATION REQUEST after initial RELAY KEY REQUEST",
+            "OR condition between RELAY KEY ACCEPT and RELAY KEY REJECT at the end of the procedure"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

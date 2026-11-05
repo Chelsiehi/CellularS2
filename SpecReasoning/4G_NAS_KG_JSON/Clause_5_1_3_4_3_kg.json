@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.4.3",
+  "title": "EMM-REGISTERED",
+  "entities": [
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State where an EMM context has been established and a default EPS bearer context may be activated in the MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "CONTEXT_EMM",
+      "name": "EMM context",
+      "entity_type": "Property",
+      "description": "Established context in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "CONTEXT_DEFAULT_EPS_BEARER",
+      "name": "Default EPS bearer context",
+      "entity_type": "Property",
+      "description": "Bearer context activated in MME under certain conditions in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "COND_NO_PDN_CONNECTION_SUPPORT",
+      "name": "EMM-REGISTERED without PDN connection not supported",
+      "entity_type": "Condition",
+      "description": "Condition where UE or MME does not support EMM-REGISTERED without PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "COND_PDN_CONNECTION_REQUESTED",
+      "name": "UE requested PDN connectivity",
+      "entity_type": "Condition",
+      "description": "Condition where UE has requested connectivity to a PDN and default EPS bearer is successfully established.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "CONTEXT_EMM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM-REGISTERED state establishes an EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NO_PDN_CONNECTION_SUPPORT",
+      "target": "CONTEXT_DEFAULT_EPS_BEARER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no PDN connection support establishes default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PDN_CONNECTION_REQUESTED",
+      "target": "CONTEXT_DEFAULT_EPS_BEARER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of UE requesting PDN connectivity establishes default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "COND_NO_PDN_CONNECTION_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM-REGISTERED state is guarded by condition of no PDN connection support.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "COND_PDN_CONNECTION_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM-REGISTERED state is guarded by condition of UE requesting PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.4.3"
+      ]
+    }
+  ]
+}

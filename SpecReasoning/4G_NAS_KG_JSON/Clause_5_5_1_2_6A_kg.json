@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.6A",
+  "title": "Abnormal cases in the UE, SMS services not accepted",
+  "entities": [
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message received during attach procedure that may contain SMS services status IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "SMS_SERVICES_STATUS_IE",
+      "name": "SMS services status IE",
+      "entity_type": "Information Element",
+      "description": "Information element in ATTACH ACCEPT message indicating SMS service status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer that is stopped when abnormal SMS services case occurs.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter is less than 5, triggers tracking area updating procedure upon expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter equals 5, triggers tracking area updating procedure upon expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state entered when UE sets EPS update status to EU1 UPDATED during abnormal SMS services case.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "name": "EPS update status EU1 UPDATED",
+      "entity_type": "Property",
+      "description": "EPS update status set to EU1 UPDATED when UE enters EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "name": "Tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Counter that is incremented during abnormal SMS services case, unless already set to 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when timer T3411 or T3402 expires, can be normal or combined tracking area updating for EPS services and SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "SMS_SERVICES_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains SMS services status IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SMS_SERVICES_STATUS_IE",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When ATTACH ACCEPT contains specific SMS services status IE value, UE stops timer T3410.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "target": "T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3411 when tracking area updating attempt counter is less than 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3402 when tracking area updating attempt counter equals 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "T3411",
+      "target": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3411 expires, UE triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "T3402",
+      "target": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3402 expires, UE triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Setting EPS update status to EU1 UPDATED establishes EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6A"
+      ]
+    }
+  ]
+}

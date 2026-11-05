@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.3.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "DOWNLINK_NAS_TRANSPORT",
+      "name": "DOWNLINK NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "A NAS message transported from network to UE that may not be delivered due to lower layer issues.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "NON_DELIVERED_INDICATION",
+      "name": "Lower layer indication of non-delivered NAS PDU",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate that a NAS PDU was not successfully delivered to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "MME_DISCARD_ACTION",
+      "name": "MME discards message",
+      "entity_type": "Property",
+      "description": "Behavior where the MME may discard the DOWNLINK NAS TRANSPORT message if delivery fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NON_DELIVERED_INDICATION",
+      "target": "DOWNLINK_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-delivery indication condition applies to the DOWNLINK NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NON_DELIVERED_INDICATION",
+      "target": "MME_DISCARD_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-delivery indication may lead to MME discarding the message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.5"
+      ]
+    }
+  ]
+}

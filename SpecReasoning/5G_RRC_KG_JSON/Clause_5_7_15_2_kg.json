@@ -1,0 +1,78 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.15.2",
+  "title": "Actions Related to SRS for Positioning at Cell Re-selection in RRC_INACTIVE",
+  "entities": [
+    {
+      "id": "CELL_RESELECTION_SRS_POSITIONING",
+      "name": "Cell Reselection with SRS Positioning Configuration",
+      "entity_type": "Condition",
+      "description": "Condition where cell reselection occurs while srs-PosRRC-InactiveConfig is configured in the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    },
+    {
+      "id": "SRS_POS_RRC_INACTIVE_CONFIG",
+      "name": "srs-PosRRC-InactiveConfig",
+      "entity_type": "Property",
+      "description": "Configuration for SRS (Sounding Reference Signal) for Positioning in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    },
+    {
+      "id": "TA_SRS_POSITIONING",
+      "name": "Timing Advance for SRS Positioning Transmission",
+      "entity_type": "Property",
+      "description": "Timing Advance value used for SRS for Positioning transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where the UE is inactive but maintains some context.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_RESELECTION_SRS_POSITIONING",
+      "target": "TA_SRS_POSITIONING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell reselection with srs-PosRRC-InactiveConfig configured causes the UE to consider the Timing Advance value for SRS for Positioning transmission as invalid.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_RESELECTION_SRS_POSITIONING",
+      "target": "SRS_POS_RRC_INACTIVE_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell reselection with srs-PosRRC-InactiveConfig configured causes the UE to release the srs-PosRRC-InactiveConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CELL_RESELECTION_SRS_POSITIONING",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The actions for SRS for Positioning at cell reselection apply when the UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.2"
+      ]
+    }
+  ]
+}

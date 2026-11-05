@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.5",
+  "title": "Normal and periodic tracking area updating procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking Area Updating Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update tracking area information with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "name": "TRACKING AREA UPDATE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to reject tracking area updating request from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for rejection in TRACKING AREA UPDATE REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_EMM_CAUSE",
+      "name": "Extended EMM cause",
+      "entity_type": "Information Element",
+      "description": "Additional cause information for EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "IE_T3346_VALUE",
+      "name": "T3346 value",
+      "entity_type": "Information Element",
+      "description": "Timer value for back-off timer T3346 included in reject message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "T3430",
+      "entity_type": "Timer",
+      "description": "Timer for tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer for congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Integrity protected message",
+      "entity_type": "Condition",
+      "description": "Condition where NAS message has integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "PROP_UE_STOPS_USER_DATA",
+      "name": "UE stops user data transmission",
+      "entity_type": "Property",
+      "description": "Behavior where UE stops transmitting user data upon receiving reject message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TRACKING_AREA_UPDATE",
+      "target": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Tracking area updating procedure includes sending TRACKING AREA UPDATE REJECT message when rejected.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT message contains EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "target": "IE_T3346_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT message may contain T3346 value IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receiving TRACKING AREA UPDATE REJECT, UE stops timer T3430.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "target": "PROP_UE_STOPS_USER_DATA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving TRACKING AREA UPDATE REJECT causes UE to stop user data transmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3346 when T3346 value IE is present in reject message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "MSG_TRACKING_AREA_UPDATE_REJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE behavior depends on whether TRACKING AREA UPDATE REJECT is integrity protected.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_EMM_CAUSE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific EMM cause values cause UE to enter EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_EMM_CAUSE",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific EMM cause values cause UE to enter EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_EMM_CAUSE",
+      "target": "IE_EXTENDED_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended EMM cause IE may be included with specific EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5"
+      ]
+    }
+  ]
+}

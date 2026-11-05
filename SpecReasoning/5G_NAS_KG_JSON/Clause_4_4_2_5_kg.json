@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.5",
+  "title": "Establishment of secure exchange of NAS messages",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to establish secure exchange of NAS messages by selecting security algorithms and activating security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message sent by UE during registration procedure, used to establish secure exchange.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Response message from AMF to UE that can be used to establish secure exchange.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "name": "Native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context created through primary authentication and key agreement procedure in 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "MAPPED_5G_NAS_SECURITY_CONTEXT",
+      "name": "Mapped 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context derived from EPS security context during inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Key Set Identifier that indicates which NAS security context is being used.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5G Mobility Management connected state where UE has active NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5G Mobility Management idle state where UE does not have active NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE",
+      "name": "Inter-system change",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing between S1 mode (EPS) and N1 mode (5GS).",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "PRIMARY_AUTHENTICATION_AKA",
+      "name": "Primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to create fresh native 5G NAS security context through authentication.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Security mode control procedure establishes use of native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_REQUEST",
+      "target": "NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains ngKSI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_REQUEST",
+      "target": "NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "REGISTRATION REQUEST message requires integrity protection using native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "REGISTRATION ACCEPT message requires integrity protection and ciphering using native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTER_SYSTEM_CHANGE",
+      "target": "5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change in 5GMM-CONNECTED mode requires UE to be in connected state.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "INTER_SYSTEM_CHANGE",
+      "target": "MAPPED_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Inter-system change from S1 mode to N1 mode establishes mapped 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PRIMARY_AUTHENTICATION_AKA",
+      "target": "NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Primary authentication and key agreement procedure establishes fresh native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "MAPPED_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Security mode control procedure can establish use of mapped 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "5GMM_IDLE",
+      "target": "REGISTRATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "When UE is in 5GMM-IDLE mode, it transmits REGISTRATION REQUEST to establish secure exchange.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.5"
+      ]
+    }
+  ]
+}

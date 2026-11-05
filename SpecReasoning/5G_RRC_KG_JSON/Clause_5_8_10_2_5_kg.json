@@ -1,0 +1,265 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.2.5",
+  "title": "Sidelink measurement object addition/modification",
+  "entities": [
+    {
+      "id": "SL_MEAS_OBJECT_ADD_MOD_PROCEDURE",
+      "name": "Sidelink measurement object addition/modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the UE when adding or modifying sidelink measurement objects based on received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_MEAS_OBJECT_TO_ADD_MOD_LIST",
+      "name": "sl-MeasObjectToAddModList",
+      "entity_type": "Information Element",
+      "description": "List containing sidelink measurement objects to be added or modified.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_MEAS_OBJECT_ID",
+      "name": "sl-MeasObjectId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement object.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_MEAS_OBJECT_LIST",
+      "name": "sl-MeasObjectList",
+      "entity_type": "Information Element",
+      "description": "List of configured sidelink measurement objects stored in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG_SL",
+      "name": "VarMeasConfigSL",
+      "entity_type": "Information Element",
+      "description": "Variable storing the sidelink measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement configuration linking objects and reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID_LIST",
+      "name": "sl-MeasIdList",
+      "entity_type": "Information Element",
+      "description": "List of sidelink measurement identifiers in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Information Element",
+      "description": "Variable storing sidelink measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer used for periodic sidelink measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "SL_TIME_TO_TRIGGER",
+      "name": "sl-TimeToTrigger",
+      "entity_type": "Information Element",
+      "description": "Time-to-trigger parameter associated with sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "EXISTING_ENTRY_CONDITION",
+      "name": "Existing entry condition",
+      "entity_type": "Condition",
+      "description": "Condition where an entry with matching sl-MeasObjectId exists in sl-MeasObjectList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "MEAS_REPORT_ENTRY_REMOVAL",
+      "name": "Measurement reporting entry removal",
+      "entity_type": "Property",
+      "description": "Property where the UE removes measurement reporting entries for associated sl-MeasId from VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_STOP_RESET",
+      "name": "Timer stop and reset",
+      "entity_type": "Property",
+      "description": "Property where the UE stops the periodical reporting timer and resets associated information for the sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "ENTRY_RECONFIGURATION",
+      "name": "Entry reconfiguration",
+      "entity_type": "Property",
+      "description": "Property where the UE reconfigures an existing entry with received sl-MeasObject values.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "NEW_ENTRY_ADDITION",
+      "name": "New entry addition",
+      "entity_type": "Property",
+      "description": "Property where the UE adds a new entry for the received sl-MeasObject to sl-MeasObjectList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_MEAS_OBJECT_ADD_MOD_PROCEDURE",
+      "target": "SL_MEAS_OBJECT_TO_ADD_MOD_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure processes the sl-MeasObjectToAddModList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_MEAS_OBJECT_ADD_MOD_PROCEDURE",
+      "target": "EXISTING_ENTRY_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure checks if an entry with matching sl-MeasObjectId exists.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EXISTING_ENTRY_CONDITION",
+      "target": "MEAS_REPORT_ENTRY_REMOVAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If condition is met, measurement reporting entries are removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EXISTING_ENTRY_CONDITION",
+      "target": "TIMER_STOP_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If condition is met, the periodical reporting timer is stopped and reset.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EXISTING_ENTRY_CONDITION",
+      "target": "ENTRY_RECONFIGURATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If condition is met, the existing entry is reconfigured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SL_MEAS_OBJECT_ADD_MOD_PROCEDURE",
+      "target": "NEW_ENTRY_ADDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure adds a new entry for the received sl-MeasObject.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_STOP_RESET",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "The timer stop and reset property stops the periodical reporting timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_STOP_RESET",
+      "target": "SL_TIME_TO_TRIGGER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "The timer stop and reset property resets associated information like sl-TimeToTrigger.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SL_MEAS_ID_LIST",
+      "target": "SL_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-MeasIdList contains sl-MeasId identifiers.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "VAR_MEAS_CONFIG_SL",
+      "target": "SL_MEAS_OBJECT_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfigSL contains the sl-MeasObjectList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "VAR_MEAS_CONFIG_SL",
+      "target": "SL_MEAS_ID_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfigSL contains the sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.5"
+      ]
+    }
+  ]
+}

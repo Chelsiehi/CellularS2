@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.3",
+  "title": "LIMITED-SERVICE",
+  "entities": [
+    {
+      "id": "STATE_LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE state",
+      "entity_type": "State",
+      "description": "A UE state where only limited services are available, including cell selection/reselection, paging response with IMSI, and emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_CELL_SELECTION",
+      "name": "Cell selection/reselection",
+      "entity_type": "Procedure",
+      "description": "UE performs cell selection and reselection according to 3GPP TS 36.304.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PAGING_RESPONSE",
+      "name": "Paging response with IMSI",
+      "entity_type": "Procedure",
+      "description": "UE may respond to paging using IMSI, with MUSIM UE implementation option to not respond based on paging message information.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_EMERGENCY_ATTACH",
+      "name": "Emergency attach procedure",
+      "entity_type": "Procedure",
+      "description": "UE may detach locally and initiate attach for emergency bearer services or access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "UE configured for eCall only mode performs eCall inactivity procedure at expiry of timer T3444 or T3445.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_ECALL_ONLY_MODE",
+      "name": "eCall only mode configured",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for eCall only mode as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "PROCEDURE_CELL_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, UE shall perform cell selection/reselection.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "PROCEDURE_PAGING_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, UE may respond to paging with IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "PROCEDURE_EMERGENCY_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, UE may detach locally and initiate attach for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ECALL_ONLY_MODE",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If UE is configured for eCall only mode, it shall perform eCall inactivity procedure at timer expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3444",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3444 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_T3445",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3445 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.3"
+      ]
+    }
+  ]
+}

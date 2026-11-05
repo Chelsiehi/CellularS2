@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.7",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that when running prevents UE from starting registration procedure for mobility and periodic registration update except under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that when running prevents UE from starting mobility and periodic registration update procedure with Uplink data status IE or Follow-on request indicator set to 'Follow-on request pending' except under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer that when running prevents UE in 5GMM-IDLE mode from starting mobility and periodic registration update procedure with Follow-on request indicator set to 'Follow-on request pending' except under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3510",
+      "name": "Timer T3510",
+      "entity_type": "Timer",
+      "description": "Timer that shall be stopped if still running in certain abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3511",
+      "name": "Timer T3511",
+      "entity_type": "Timer",
+      "description": "Timer started in abnormal cases to trigger registration update procedure again when it expires.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer started when registration attempt counter reaches 5.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to update its registration with the network for mobility and periodic updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_PROCEDURE",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_ATTEMPTING_UPDATE",
+      "name": "5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+      "entity_type": "State",
+      "description": "State entered when UE attempts registration update after abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_NORMAL_SERVICE",
+      "name": "5GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "State entered when registration update is successful.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_PLMN_SEARCH",
+      "name": "5GMM-REGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Optional state entered when registration attempt counter reaches 5 to perform PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_BARRED",
+      "name": "Access barred indication",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate that access attempt is barred.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_TAI_CHANGE",
+      "name": "Change in current TAI",
+      "entity_type": "Condition",
+      "description": "Condition where Tracking Area Identity changes before registration procedure completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_5GS_UPDATE_STATUS_5U2",
+      "name": "5GS update status set to 5U2 NOT UPDATED",
+      "entity_type": "Property",
+      "description": "Property where UE sets 5GS update status to NOT UPDATED in various abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TIMER_T3346",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running prevents starting registration procedure except under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TIMER_T3447",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3447 running prevents starting mobility and periodic registration update procedure with specific IEs set.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3448",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3448 running prevents UE in 5GMM-IDLE mode from starting mobility and periodic registration update procedure with Follow-on request indicator set.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ACCESS_BARRED",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barred indication prevents starting registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_TAI_CHANGE",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI change before registration completion causes procedure abortion and re-initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_TAI_CHANGE",
+      "target": "PROPERTY_5GS_UPDATE_STATUS_5U2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change establishes 5GS update status to 5U2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "target": "STATE_5GMM_REGISTERED_ATTEMPTING_UPDATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure requires state 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE in certain abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "target": "STATE_5GMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Successful registration procedure requires state 5GMM-REGISTERED.NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "target": "STATE_5GMM_REGISTERED_PLMN_SEARCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure with attempt counter 5 optionally requires state 5GMM-REGISTERED.PLMN-SEARCH.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "target": "DEREGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration procedure collision with de-registration procedure determines which procedure progresses.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "TIMER_T3511",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3511 starts to trigger registration update procedure again when it expires.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "TIMER_T3510",
+      "target": "REGISTRATION_PROCEDURE_MOBILITY_PERIODIC",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Timer T3510 stops if still running in certain abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.7"
+      ]
+    }
+  ]
+}

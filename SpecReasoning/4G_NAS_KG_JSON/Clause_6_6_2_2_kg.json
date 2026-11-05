@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.2.2",
+  "title": "Notification procedure initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_NOTIFICATION",
+      "name": "Notification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to inform the UE about events relevant for the upper layer. Can be initiated at any time while a PDN connection exists or a procedure transaction is ongoing.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_NOTIFICATION",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate the notification procedure. Contains notification indicator for upper layer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_NOTIFICATION_INDICATOR",
+      "name": "Notification indicator",
+      "entity_type": "Information Element",
+      "description": "Information element contained in NOTIFICATION message that provides event information to the upper layer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_CONNECTION_EXISTS",
+      "name": "PDN connection exists",
+      "entity_type": "Condition",
+      "description": "Condition where a Packet Data Network connection is active, allowing network to initiate notification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_PROCEDURE_TRANSACTION_ONGOING",
+      "name": "Procedure transaction ongoing",
+      "entity_type": "Condition",
+      "description": "Condition where a procedure transaction is in progress, allowing network to initiate notification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "PROP_NOTIFY_UPPER_LAYER",
+      "name": "Notify upper layer",
+      "entity_type": "Property",
+      "description": "Behavior where ESM protocol entity provides notification indicator to upper layer upon receiving NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NOTIFICATION",
+      "target": "MSG_NOTIFICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Notification procedure includes sending NOTIFICATION message as its initiating step.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_NOTIFICATION",
+      "target": "IE_NOTIFICATION_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NOTIFICATION message contains notification indicator information element.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NOTIFICATION",
+      "target": "COND_PDN_CONNECTION_EXISTS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Notification procedure can be initiated when PDN connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NOTIFICATION",
+      "target": "COND_PROCEDURE_TRANSACTION_ONGOING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Notification procedure can be initiated when procedure transaction is ongoing.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_NOTIFICATION",
+      "target": "PROP_NOTIFY_UPPER_LAYER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving NOTIFICATION message establishes the behavior of notifying upper layer with notification indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    }
+  ]
+}

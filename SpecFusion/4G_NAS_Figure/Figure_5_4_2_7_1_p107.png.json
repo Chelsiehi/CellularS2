@@ -1,0 +1,59 @@
+{
+  "figure_id": "5.4.2.7.1",
+  "title": "Authentication failure procedure (EMM cause #20 \"MAC failure\" or #26 \"non-EPS authentication unacceptable\")",
+  "type": "PROCEDURE_FLOW",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [
+      "UE",
+      "MME"
+    ],
+    "messages": [
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "AUTHENTICATION REQUEST",
+        "notes": "Start T3460"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "AUTHENTICATION FAILURE (cause = \"MAC failure\")",
+        "notes": "Start T3418, Stop T3460"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "IDENTITY REQUEST",
+        "notes": "Start T3470"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "IDENTITY RESPONSE (IMSI)",
+        "notes": "Stop T3470"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "AUTHENTICATION REQUEST",
+        "notes": "Stop T3418, Start T3460"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "AUTHENTICATION RESPONSE",
+        "notes": "Stop T3460"
+      }
+    ],
+    "fields": [],
+    "notes": [
+      "Procedure shows authentication failure handling for EMM cause #20 \"MAC failure\" or #26 \"non-EPS authentication unacceptable\"",
+      "Timer T3418 started by UE upon sending AUTHENTICATION FAILURE",
+      "Timer T3460 managed by MME for authentication request",
+      "Timer T3470 managed by MME for identity request",
+      "Network may initiate identification procedure to obtain IMSI from UE"
+    ]
+  }
+}

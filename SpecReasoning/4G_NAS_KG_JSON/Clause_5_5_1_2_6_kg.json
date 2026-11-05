@@ -1,0 +1,338 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach Procedure",
+      "entity_type": "Procedure",
+      "description": "The EPS attach procedure performed by the UE to register with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to detach the UE from the network, either initiated by UE or network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept attach request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "ATTACH_COMPLETE",
+      "name": "ATTACH COMPLETE",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to complete attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message to initiate detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_INITIATED",
+      "name": "EMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state where UE has initiated registration but not yet completed.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "name": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "EMM state where UE is attempting to attach after previous failures.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-DEREGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "EMM state where no suitable cell is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer used during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when attach attempt counter is less than 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when attach attempt counter reaches 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer started when extended wait time is received from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "ATTACH_ATTEMPT_COUNTER",
+      "name": "Attach Attempt Counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of attach attempts, with maximum value of 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRING_CONDITION",
+      "name": "Access Barring Condition",
+      "entity_type": "Condition",
+      "description": "Condition where access is barred for originating signalling due to access class barring, EAB, ACDC.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE_CONDITION",
+      "name": "Lower Layer Failure Condition",
+      "entity_type": "Condition",
+      "description": "Condition where RRC connection establishment fails or NAS signalling connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "EXTENDED_WAIT_TIME_CONDITION",
+      "name": "Extended Wait Time Condition",
+      "entity_type": "Condition",
+      "description": "Condition where extended wait time is received from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_BARRING_CONDITION",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barring prevents starting of attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LOWER_LAYER_FAILURE_CONDITION",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Lower layer failure causes attach procedure to be aborted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EXTENDED_WAIT_TIME_CONDITION",
+      "target": "T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Extended wait time from lower layers starts timer T3346.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3346",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running prevents starting of attach procedure except in specific cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_PROCEDURE",
+      "target": "EMM_REGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attach procedure requires UE to be in EMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_PROCEDURE",
+      "target": "ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes sending ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ATTACH_PROCEDURE",
+      "target": "ATTACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes receiving ATTACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ATTACH_PROCEDURE",
+      "target": "ATTACH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes sending ATTACH COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DETACH_PROCEDURE",
+      "target": "DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Detach procedure includes sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ATTACH_ATTEMPT_COUNTER",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When attach attempt counter reaches 5, timer T3402 is started.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "ATTACH_ATTEMPT_COUNTER",
+      "target": "T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When attach attempt counter is less than 5, timer T3411 is started.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "T3411",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3411 expires, attach procedure is restarted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "T3346",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3346 expires, attach procedure is started if still necessary.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "DETACH_REQUEST",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DETACH REQUEST message in certain conditions causes attach procedure to be aborted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "ATTACH_PROCEDURE",
+      "target": "EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After attach procedure abortion, UE changes to EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "ATTACH_PROCEDURE",
+      "target": "EMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After S101 mode to S1 mode handover cancellation, UE enters EMM-DEREGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.6"
+      ]
+    }
+  ]
+}

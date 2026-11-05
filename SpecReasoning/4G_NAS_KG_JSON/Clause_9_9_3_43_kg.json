@@ -1,0 +1,108 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.43",
+  "title": "Generic message container",
+  "entities": [
+    {
+      "id": "IE_GENERIC_MESSAGE_CONTAINER",
+      "name": "Generic message container",
+      "entity_type": "Information Element",
+      "description": "A type 6 information element used to encapsulate application messages transferred between the UE and the network. It contains an IEI, length field, and the actual container contents.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "Generic message container IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier field occupying octet 1 of the generic message container.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "FIELD_LENGTH",
+      "name": "Length of generic message container contents",
+      "entity_type": "Property",
+      "description": "Length field occupying octets 2-4, indicating the length of the container contents in octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "FIELD_CONTENTS",
+      "name": "Generic message container contents",
+      "entity_type": "Property",
+      "description": "Container contents field occupying octets 4 to n, with a maximum size of 65535 octets. The coding is application-dependent.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1",
+        "Table 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "CONDITION_APPLICATION_DEPENDENT",
+      "name": "Application-dependent coding",
+      "entity_type": "Condition",
+      "description": "The coding of the generic message container contents depends on the particular application using the container.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Table 9.9.3.43.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_GENERIC_MESSAGE_CONTAINER",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The generic message container includes the IEI field as its first component.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_GENERIC_MESSAGE_CONTAINER",
+      "target": "FIELD_LENGTH",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The generic message container includes the length field to indicate the size of the contents.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_GENERIC_MESSAGE_CONTAINER",
+      "target": "FIELD_CONTENTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The generic message container includes the contents field which holds the application message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Figure 9.9.3.43.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_CONTENTS",
+      "target": "CONDITION_APPLICATION_DEPENDENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The coding of the container contents is guarded by the condition that it depends on the particular application.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.43",
+        "Table 9.9.3.43.1"
+      ]
+    }
+  ]
+}

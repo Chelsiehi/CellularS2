@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.3.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request release of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE_REJECT",
+      "name": "PDU SESSION RELEASE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to reject a PDU session release request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID",
+      "name": "PDU session identity",
+      "entity_type": "Information Element",
+      "description": "Identifier for a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE",
+      "entity_type": "State",
+      "description": "State of a PDU session when it is inactive.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "INVALID_PDU_SESSION_IDENTITY_CONDITION",
+      "name": "PDU session inactive for the received PDU session identity",
+      "entity_type": "Condition",
+      "description": "Condition where the PDU session ID in the request belongs to a PDU session in inactive state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "CAUSE_43",
+      "name": "5GSM cause #43",
+      "entity_type": "Information Element",
+      "description": "Cause value indicating invalid PDU session identity.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PDU_SESSION_RELEASE_REQUEST",
+      "target": "PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REQUEST message contains the PDU session identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDU_SESSION_RELEASE_REJECT",
+      "target": "CAUSE_43",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REJECT message contains the 5GSM cause #43 IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INVALID_PDU_SESSION_IDENTITY_CONDITION",
+      "target": "PDU_SESSION_RELEASE_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of inactive PDU session identity triggers sending of PDU SESSION RELEASE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INVALID_PDU_SESSION_IDENTITY_CONDITION",
+      "target": "PDU_SESSION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires the PDU session to be in INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.6"
+      ]
+    }
+  ]
+}

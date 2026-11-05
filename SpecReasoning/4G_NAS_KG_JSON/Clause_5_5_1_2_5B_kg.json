@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.5B",
+  "title": "Attach for initiating a PDN connection for emergency bearer services not accepted by the network",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE_EMERGENCY",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "UE procedure for establishing emergency bearer services when initial attach request with emergency PDN connectivity is not accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "ESM message included in ATTACH REQUEST to request PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Information element in PDN CONNECTIVITY REQUEST indicating the type of request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REQUEST",
+      "name": "Request type set to emergency",
+      "entity_type": "Condition",
+      "description": "Condition where PDN CONNECTIVITY REQUEST has request type set to 'emergency'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_EMERGENCY",
+      "name": "Request type set to handover of emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where PDN CONNECTIVITY REQUEST has request type set to 'handover of emergency bearer services'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in the same selected PLMN where last attach request was attempted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of failure",
+      "entity_type": "Property",
+      "description": "UE behavior to inform upper layers about procedure failure, which may trigger CS emergency call or other mechanisms.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "PROP_ATTEMPT_EPS_EMERGENCY_ATTACH",
+      "name": "Attempt EPS attach for emergency bearer services",
+      "entity_type": "Property",
+      "description": "UE behavior to retry attach procedure specifically for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_19",
+      "name": "EMM cause #19 ESM failure",
+      "entity_type": "Condition",
+      "description": "Specific EMM cause value that triggers different UE behavior when received.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_PROCEDURE_EMERGENCY",
+      "target": "ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Emergency attach procedure involves sending ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_REQUEST",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains request type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_REQUEST_TYPE",
+      "target": "COND_EMERGENCY_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Request type IE can have value 'emergency' which guards procedure behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_REQUEST_TYPE",
+      "target": "COND_HANDOVER_EMERGENCY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Request type IE can have value 'handover of emergency bearer services' which guards procedure behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SAME_PLMN",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it establishes the behavior to inform upper layers of failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SAME_PLMN",
+      "target": "PROP_ATTEMPT_EPS_EMERGENCY_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it establishes the behavior to attempt EPS emergency attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMM_CAUSE_19",
+      "target": "PROP_ATTEMPT_EPS_EMERGENCY_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of EMM cause #19 establishes the behavior to attempt EPS attach for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5B"
+      ]
+    }
+  ]
+}

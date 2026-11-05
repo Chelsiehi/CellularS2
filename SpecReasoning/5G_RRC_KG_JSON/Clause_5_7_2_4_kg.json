@@ -1,0 +1,160 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.2.4",
+  "title": "Failure to deliver ULInformationTransfer message",
+  "entities": [
+    {
+      "id": "PROC_UL_INFO_TRANSFER",
+      "name": "UL Information Transfer",
+      "entity_type": "Procedure",
+      "description": "Procedure for transferring uplink information from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "MSG_UL_INFORMATION_TRANSFER",
+      "name": "ULInformationTransfer",
+      "entity_type": "Message",
+      "description": "Message used to transfer uplink information from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "IE_DEDICATED_INFO_F1C",
+      "name": "dedicatedInfoF1c",
+      "entity_type": "Information Element",
+      "description": "Information element containing dedicated F1c information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_NOT_STARTED",
+      "name": "AS security not started",
+      "entity_type": "Condition",
+      "description": "Condition where AS security has not been initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "COND_RADIO_LINK_FAILURE",
+      "name": "Radio link failure",
+      "entity_type": "Condition",
+      "description": "Condition where radio link failure occurs before successful message delivery confirmation.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "COND_PDCP_REESTABLISHMENT",
+      "name": "PDCP re-establishment or release/addition",
+      "entity_type": "Condition",
+      "description": "Condition involving PDCP re-establishment or release/addition on SRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers about delivery failure",
+      "entity_type": "Property",
+      "description": "UE behavior to inform upper layers about possible failure to deliver information in ULInformationTransfer messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE is connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2a.2",
+        "TS 38.331, Clause 5.7.2b.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UL_INFO_TRANSFER",
+      "target": "MSG_UL_INFORMATION_TRANSFER",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UL Information Transfer procedure involves sending ULInformationTransfer message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UL_INFORMATION_TRANSFER",
+      "target": "IE_DEDICATED_INFO_F1C",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULInformationTransfer message may contain dedicatedInfoF1c IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_AS_SECURITY_NOT_STARTED",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition where AS security is not started guards the property of informing upper layers about delivery failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RADIO_LINK_FAILURE",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of radio link failure guards the property of informing upper layers about delivery failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PDCP_REESTABLISHMENT",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of PDCP re-establishment or release/addition guards the property of informing upper layers about delivery failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_INFORM_UPPER_LAYERS",
+      "target": "IE_DEDICATED_INFO_F1C",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Property of informing upper layers is guarded by whether messages only include dedicatedInfoF1c.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_UL_INFO_TRANSFER",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UL Information Transfer procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2a.2",
+        "TS 38.331, Clause 5.7.2b.2"
+      ]
+    }
+  ]
+}

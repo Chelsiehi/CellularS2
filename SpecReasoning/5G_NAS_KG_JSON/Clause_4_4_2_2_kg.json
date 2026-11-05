@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.2",
+  "title": "Establishment of a mapped 5G NAS security context during inter-system change from S1 mode to N1 mode in 5GMM-CONNECTED mode",
+  "entities": [
+    {
+      "id": "PROC_INTER_SYSTEM_CHANGE",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing from EPS (S1 mode) to 5GS (N1 mode) while maintaining 5GMM-CONNECTED mode, involving establishment of mapped 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "CTX_MAPPED_5G_NAS",
+      "name": "Mapped 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context derived from EPS security context during inter-system change, containing derived 5G NAS keys and security algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_S1_TO_N1_CONTAINER",
+      "name": "S1 mode to N1 mode NAS transparent container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing NAS algorithms, NCC, ngKSI, and message authentication code for inter-system change security context establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "KEY_KAMF_MAPPED",
+      "name": "Mapped K'AMF key",
+      "entity_type": "Property",
+      "description": "5G security key derived from KASME during inter-system change, used to derive 5G NAS encryption and integrity keys.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "ID_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Key set identifier for 5G security context, with type field indicating mapped security context and value derived from eKSI.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "ALG_5G_IA0",
+      "name": "5G-IA0 algorithm",
+      "entity_type": "Property",
+      "description": "Null integrity protection algorithm used for emergency bearer services when no EPS security context exists.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "ALG_5G_EA0",
+      "name": "5G-EA0 algorithm",
+      "entity_type": "Property",
+      "description": "Null encryption algorithm used for emergency bearer services when no EPS security context exists.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "NAS connection management state where the UE has an established signaling connection with the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "NAS connection management state where the UE does not have an established signaling connection with the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND message",
+      "entity_type": "Message",
+      "description": "NAS message used to activate security context on an access when different security contexts are used on 3GPP and non-3GPP accesses.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_NO_EPS_CTX",
+      "name": "Emergency bearer services with no EPS security context",
+      "entity_type": "Condition",
+      "description": "Condition where UE has PDN connection for emergency services but no current EPS security context, requiring use of null security algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "PROP_NAS_MAC_VERIFICATION",
+      "name": "NAS MAC verification",
+      "entity_type": "Condition",
+      "description": "Verification process where UE checks the message authentication code in the transparent container, discarding content if verification fails.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INTER_SYSTEM_CHANGE",
+      "target": "CTX_MAPPED_5G_NAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change procedure establishes a mapped 5G NAS security context from EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_S1_TO_N1_CONTAINER",
+      "target": "ALG_5G_IA0",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "S1 to N1 transparent container IE contains selected 5G NAS security algorithms including 5G-IA0.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_S1_TO_N1_CONTAINER",
+      "target": "ALG_5G_EA0",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "S1 to N1 transparent container IE contains selected 5G NAS security algorithms including 5G-EA0.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_S1_TO_N1_CONTAINER",
+      "target": "ID_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "S1 to N1 transparent container IE contains the ngKSI value for the mapped security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMERGENCY_NO_EPS_CTX",
+      "target": "ALG_5G_IA0",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services with no EPS context condition requires use of 5G-IA0 algorithm.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EMERGENCY_NO_EPS_CTX",
+      "target": "ALG_5G_EA0",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services with no EPS context condition requires use of 5G-EA0 algorithm.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_NAS_MAC_VERIFICATION",
+      "target": "IE_S1_TO_N1_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS MAC verification condition determines whether the transparent container content is accepted or discarded.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_5GMM_CONNECTED",
+      "target": "PROC_INTER_SYSTEM_CHANGE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change procedure requires UE to be in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "CTX_MAPPED_5G_NAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message activates the mapped 5G NAS security context on the target access.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "ID_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message includes ngKSI to identify the security context to be activated.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.2"
+      ]
+    }
+  ]
+}

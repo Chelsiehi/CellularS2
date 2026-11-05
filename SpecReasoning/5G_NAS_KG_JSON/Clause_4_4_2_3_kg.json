@@ -1,0 +1,239 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.3",
+  "title": "Establishment of a 5G NAS security context during N1 mode to N1 mode handover",
+  "entities": [
+    {
+      "id": "PROC_N1_HANDOVER_SECURITY",
+      "name": "N1 mode to N1 mode handover security context establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a new 5G NAS security context during N1 mode to N1 mode handover, which may use the same KAMF or a new KAMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_INTRA_N1_NAS_CONTAINER",
+      "name": "Intra N1 mode NAS transparent container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing security parameters including 8 LSBs of downlink NAS COUNT, ngKSI, message authentication code, and NAS algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3",
+        "TS 24.501, Clause 9.11.2.6"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND message",
+      "entity_type": "Message",
+      "description": "Message used to activate new security context over non-3GPP access when UE is in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message that triggers activation of new security context over non-3GPP access when UE is in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "CONTEXT_5G_NAS_SECURITY",
+      "name": "5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context containing KAMF, NAS COUNTs, ngKSI, and NAS algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "PARAM_NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter used for NAS security, with separate uplink and downlink values.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "PARAM_KAMF",
+      "name": "KAMF",
+      "entity_type": "Property",
+      "description": "Anchor key for AMF used in 5G NAS security context derivation.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "PARAM_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Key set identifier for 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "COND_NEW_KAMF_INDICATED",
+      "name": "New KAMF derivation indicated",
+      "entity_type": "Condition",
+      "description": "Condition where Intra N1 mode NAS transparent container IE indicates that a new KAMF needs to be derived.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "COND_VALID_NAS_COUNT",
+      "name": "Valid NAS COUNT",
+      "entity_type": "Condition",
+      "description": "Condition where received NAS COUNT in Intra N1 mode NAS transparent container IE is valid.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3",
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "COND_NAS_MAC_VERIFIED",
+      "name": "NAS MAC verified successfully",
+      "entity_type": "Condition",
+      "description": "Condition where message authentication code in Intra N1 mode NAS transparent container IE is verified successfully.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3",
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "NAS state where UE is registered but has no active signaling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "NAS state where UE has an active signaling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_N1_HANDOVER_SECURITY",
+      "target": "IE_INTRA_N1_NAS_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Handover procedure uses Intra N1 mode NAS transparent container IE to convey security parameters.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_INTRA_N1_NAS_CONTAINER",
+      "target": "COND_NEW_KAMF_INDICATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE indicates whether new KAMF derivation is required.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NEW_KAMF_INDICATED",
+      "target": "PARAM_NAS_COUNT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When new KAMF is indicated, NAS COUNTs are set to zero.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_VALID_NAS_COUNT",
+      "target": "CONTEXT_5G_NAS_SECURITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Valid NAS COUNT condition guards acceptance of new security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NAS_MAC_VERIFIED",
+      "target": "CONTEXT_5G_NAS_SECURITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Successful NAS MAC verification guards acceptance of new security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_5GMM_IDLE",
+      "target": "MSG_REGISTRATION_ACCEPT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "In 5GMM-IDLE mode, REGISTRATION ACCEPT message triggers security context activation.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_5GMM_CONNECTED",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "In 5GMM-CONNECTED mode, SECURITY MODE COMMAND message activates security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "PARAM_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message includes ngKSI to identify security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_INTRA_N1_NAS_CONTAINER",
+      "target": "PARAM_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Intra N1 mode NAS transparent container IE includes ngKSI.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_INTRA_N1_NAS_CONTAINER",
+      "target": "PARAM_NAS_COUNT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Intra N1 mode NAS transparent container IE includes 8 LSBs of downlink NAS COUNT.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.3"
+      ]
+    }
+  ]
+}

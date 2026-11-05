@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.13.2",
+  "title": "Authentication and authorization of UAV",
+  "entities": [
+    {
+      "id": "PROCEDURE_UUAA_SM",
+      "name": "UUAA-SM procedure",
+      "entity_type": "Procedure",
+      "description": "UAV authentication and authorization security management procedure performed by the network for UAS services.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REAUTH_REAUTH",
+      "name": "Re-authentication or re-authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure for re-authenticating or re-authorizing UE supporting UAS services as part of EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "IE_CAA_LEVEL_UAV_ID",
+      "name": "CAA-level UAV ID",
+      "entity_type": "Information Element",
+      "description": "UAV identifier provided by UE to network via protocol configuration options for USS communication PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "IE_USS_ADDRESS",
+      "name": "USS address",
+      "entity_type": "Information Element",
+      "description": "USS address provided by UE to network via protocol configuration options during attach and PDN connectivity procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTION_USS",
+      "name": "PDN connection for USS communication",
+      "entity_type": "Property",
+      "description": "PDN connection established for UAS service support communication with USS.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "CONDITION_UUAA_FAILURE",
+      "name": "UUAA-SM failure during re-authentication/re-authorization",
+      "entity_type": "Condition",
+      "description": "Condition when UUAA-SM procedure fails during re-authentication or re-authorization procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "CONDITION_UUAA_REVOCATION",
+      "name": "Revocation of UUAA initiated by network",
+      "entity_type": "Condition",
+      "description": "Condition when network initiates revocation of UAV authentication and authorization.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_CAA_LEVEL_UAV_ID",
+      "target": "PROCEDURE_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Provision of CAA-level UAV ID may trigger network to perform UUAA-SM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_USS_ADDRESS",
+      "target": "PROCEDURE_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Provision of USS address may be used by network for USS discovery in UUAA-SM context.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_UUAA_SM",
+      "target": "PROCEDURE_REAUTH_REAUTH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "After successful UUAA-SM, network may initiate re-authentication/re-authorization procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_UUAA_FAILURE",
+      "target": "PDN_CONNECTION_USS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UUAA-SM failure during re-authentication/re-authorization leads to release of PDN connection for USS communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_UUAA_REVOCATION",
+      "target": "PDN_CONNECTION_USS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Revocation of UUAA initiated by network leads to release of PDN connection for USS communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.2"
+      ]
+    }
+  ]
+}

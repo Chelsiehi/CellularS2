@@ -1,0 +1,136 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.4.4",
+  "title": "Updating a derived QoS rule by reflective QoS in the UE",
+  "entities": [
+    {
+      "id": "DERIVED_QOS_RULE",
+      "name": "Derived QoS Rule",
+      "entity_type": "Property",
+      "description": "A QoS rule derived by the UE for uplink traffic based on downlink user data packets with reflective QoS indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "DL_USER_DATA_PACKET",
+      "name": "Downlink User Data Packet",
+      "entity_type": "Property",
+      "description": "A packet received by the UE in the downlink direction that contains QFI and RQI parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "QFI",
+      "name": "QoS Flow Identifier",
+      "entity_type": "Identifier",
+      "description": "Identifies a specific QoS flow within a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "RQI",
+      "name": "Reflective QoS Indication",
+      "entity_type": "Identifier",
+      "description": "Indicates that reflective QoS is applied to the user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "T3583",
+      "name": "Timer T3583",
+      "entity_type": "Timer",
+      "description": "Timer associated with a derived QoS rule for managing reflective QoS validity.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "RQ_TIMER_VALUE",
+      "name": "RQ Timer Value",
+      "entity_type": "Property",
+      "description": "The timer value for reflective QoS, received during PDU session procedures or using a default standardized value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "PACKET_FILTER_MATCH_CONDITION",
+      "name": "Packet Filter Match Condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has a derived QoS rule with the same UL packet filter as derived from the DL user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "QFI_UPDATE_CONDITION",
+      "name": "QFI Update Condition",
+      "entity_type": "Condition",
+      "description": "Condition where the QFI value in the DL user data packet differs from the stored QFI value in the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DL_USER_DATA_PACKET",
+      "target": "PACKET_FILTER_MATCH_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DL user data packet triggers evaluation of packet filter match condition.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PACKET_FILTER_MATCH_CONDITION",
+      "target": "T3583",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When packet filter match condition is met, UE restarts timer T3583.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3583",
+      "target": "RQ_TIMER_VALUE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Timer T3583 uses the RQ timer value received during PDU session procedures or default value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "QFI_UPDATE_CONDITION",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When QFI update condition is met, UE updates the QFI value in the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DL_USER_DATA_PACKET",
+      "target": "QFI_UPDATE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DL user data packet provides the QFI value that triggers QFI update condition evaluation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.4"
+      ]
+    }
+  ]
+}

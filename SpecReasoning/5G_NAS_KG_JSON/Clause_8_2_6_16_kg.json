@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.16",
+  "title": "EPS NAS message container",
+  "entities": [
+    {
+      "id": "IE_EPS_NAS_MESSAGE_CONTAINER",
+      "name": "EPS NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element containing complete integrity protected EPS NAS messages for mobility and registration scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "PROCEDURE_MOBILITY_S1_TO_N1",
+      "name": "Mobility from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE moves from EPS to 5GS in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "PROCEDURE_INITIAL_REGISTRATION",
+      "name": "Initial registration",
+      "entity_type": "Procedure",
+      "description": "UE procedure for initial registration to 5G network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "EPS NAS message for tracking area update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "EPS NAS message for attach procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5G mobility management idle state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EPS mobility management deregistered state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "CONDITION_INTERWORKING_NO_N26",
+      "name": "Interworking without N26 interface not supported",
+      "entity_type": "Condition",
+      "description": "Network indication that interworking without N26 interface is not supported.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "CONDITION_EPS_SECURITY_CONTEXT_AVAILABLE",
+      "name": "EPS security context available",
+      "entity_type": "Condition",
+      "description": "Condition where valid EPS security context and 4G-GUTI are available.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "PROPERTY_INTEGRITY_PROTECTED",
+      "name": "Integrity protected",
+      "entity_type": "Property",
+      "description": "Property indicating message is integrity protected using EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_MOBILITY_S1_TO_N1",
+      "target": "IE_EPS_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mobility procedure includes EPS NAS message container IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_MOBILITY_S1_TO_N1",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Mobility procedure requires UE to be in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_NAS_MESSAGE_CONTAINER",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS NAS message container contains TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EPS_NAS_MESSAGE_CONTAINER",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS NAS message container contains ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_INITIAL_REGISTRATION",
+      "target": "IE_EPS_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Initial registration procedure includes EPS NAS message container IE when conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_INITIAL_REGISTRATION",
+      "target": "CONDITION_INTERWORKING_NO_N26",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration procedure is guarded by interworking without N26 interface condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_INITIAL_REGISTRATION",
+      "target": "CONDITION_EPS_SECURITY_CONTEXT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration procedure is guarded by EPS security context availability condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_INITIAL_REGISTRATION",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Initial registration procedure requires UE was previously in EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "PROPERTY_INTEGRITY_PROTECTED",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message requires integrity protection using EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "PROPERTY_INTEGRITY_PROTECTED",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "ATTACH REQUEST message requires integrity protection using EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.16"
+      ]
+    }
+  ]
+}

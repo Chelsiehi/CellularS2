@@ -1,0 +1,231 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "4.2.1",
+  "title": "UE states and state transitions including inter RAT",
+  "entities": [
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "UE state when no RRC connection is established. UE performs cell selection/reselection, monitors paging, and acquires system information.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "UE state when RRC connection is suspended. UE stores AS context, performs RAN-based notification area updates, and can use SDT for data transfer.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "UE state when RRC connection is established. UE can transfer unicast and MBS multicast data, performs network-controlled mobility, and provides channel feedback.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RRC_ESTABLISH",
+      "name": "RRC Connection Establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish RRC connection, transitioning UE from RRC_IDLE to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RRC_RELEASE",
+      "name": "RRC Connection Release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release RRC connection, transitioning UE from RRC_CONNECTED to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RRC_SUSPEND",
+      "name": "RRC Connection Suspend",
+      "entity_type": "Procedure",
+      "description": "Procedure to suspend RRC connection, transitioning UE from RRC_CONNECTED to RRC_INACTIVE state while storing AS context.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RRC_RESUME",
+      "name": "RRC Connection Resume",
+      "entity_type": "Procedure",
+      "description": "Procedure to resume suspended RRC connection, transitioning UE from RRC_INACTIVE to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SDT",
+      "name": "Small Data Transmission",
+      "entity_type": "Procedure",
+      "description": "Procedure for transferring unicast data and/or signalling over radio bearers while UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RNA_UPDATE",
+      "name": "RAN-based Notification Area Update",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE in RRC_INACTIVE state to update RAN-based notification area periodically or when moving outside configured area.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_RRC_CONNECTION",
+      "name": "No RRC Connection Established",
+      "entity_type": "Condition",
+      "description": "Condition where UE has no established RRC connection, placing it in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_RRC_CONNECTION_ESTABLISHED",
+      "name": "RRC Connection Established",
+      "entity_type": "Condition",
+      "description": "Condition where UE has established RRC connection, placing it in either RRC_CONNECTED or RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_NO_RRC_CONNECTION",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When no RRC connection is established, UE enters RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_RRC_CONNECTION_ESTABLISHED",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RRC connection is established, UE enters RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_RRC_ESTABLISH",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC Connection Establishment procedure transitions UE to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_RELEASE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC Connection Release procedure transitions UE to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_RRC_SUSPEND",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC Connection Suspend procedure transitions UE to RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_RRC_RESUME",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC Connection Resume procedure transitions UE to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "PROCEDURE_SDT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in RRC_INACTIVE state can perform Small Data Transmission procedure.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "PROCEDURE_RNA_UPDATE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in RRC_INACTIVE state performs RAN-based Notification Area Update procedure.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "PROCEDURE_RRC_SUSPEND",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC Connection Suspend procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "PROCEDURE_RRC_RESUME",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC Connection Resume procedure requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.1",
+        "Figure 4.2.1"
+      ]
+    }
+  ]
+}

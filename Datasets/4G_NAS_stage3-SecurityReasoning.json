@@ -1,0 +1,498 @@
+[
+  {
+    "id": "VD-01",
+    "label": "VULN",
+    "input": "TS 24.301 allows the UE to accept certain NAS signalling messages without integrity protection before security can be activated (NOTE: these messages are accepted by the UE without integrity protection in certain situations).",
+    "evidence": "TS 24.301, Clause 4.4.4.2, Integrity checking of NAS signalling messages in the UE",
+    "vuln_title": "Pre-security unauthenticated NAS downlink acceptance (IMSI catch / procedure abort DoS)",
+    "vuln_type": ["Privacy", "DoS", "Pre-authentication message abuse"],
+    "threat_model": "Attacker operates a rogue eNodeB / fake LTE cell and can send NAS messages to the UE before NAS security is activated.",
+    "preconditions": [
+      "NAS security not yet activated / secure exchange not established",
+      "UE accepts a defined list of EMM messages without integrity protection"
+    ],
+    "attack_story": [
+      "A fake cell sends IDENTITY REQUEST (requesting IMSI) to obtain the victim's IMSI (IMSI catcher behavior).",
+      "Or the fake cell sends AUTHENTICATION REJECT / ATTACH REJECT / TAU REJECT / SERVICE REJECT to keep the victim from registering (availability loss)."
+    ],
+    "impact": [
+      "IMSI disclosure → long-term subscriber tracking",
+      "Attach/TAU/Service denial → availability loss / deregistration loops"
+    ],
+    "root_cause_in_spec": [
+      "UE-side integrity checking defines explicit exceptions before security can be activated; NOTE states those messages may be accepted without integrity protection."
+    ],
+    "evidence_targets": ["TS 24.301 4.4.4.2"]
+  },
+  {
+    "id": "VD-02",
+    "label": "VULN",
+    "input": "The UE shall send the TRACKING AREA UPDATE REQUEST message always unciphered.",
+    "evidence": "TS 24.301, Clause 4.4.5, Ciphering of NAS signalling messages",
+    "vuln_title": "Plaintext TAU REQUEST (always unciphered) enables passive tracking / metadata leakage",
+    "vuln_type": ["Privacy", "Passive eavesdropping"],
+    "threat_model": "Passive radio sniffer near the UE, or a rogue cell observing plaintext NAS.",
+    "preconditions": [
+      "UE performs TAU",
+      "TAU REQUEST is mandated unciphered by the spec"
+    ],
+    "attack_story": [
+      "An attacker passively captures TAU REQUEST messages and correlates timing/metadata/identifiers to track mobility or link sessions."
+    ],
+    "impact": ["Mobility inference and session linkage"],
+    "root_cause_in_spec": ["Ciphering rule explicitly mandates TAU REQUEST always unciphered."],
+    "evidence_targets": ["TS 24.301 4.4.5"]
+  },
+  {
+    "id": "VD-03",
+    "label": "VULN",
+    "input": "Until secure exchange of NAS messages has been established, the MME shall process a defined set of NAS signalling messages even if the MAC fails integrity check or cannot be verified because an EPS security context is not available in the network (e.g., ATTACH REQUEST, IDENTITY RESPONSE (IMSI), AUTHENTICATION RESPONSE/FAILURE, SECURITY MODE REJECT, DETACH REQUEST/ACCEPT, TRACKING AREA UPDATE REQUEST, SERVICE/EXTENDED SERVICE REQUEST, CONTROL PLANE SERVICE REQUEST).",
+    "evidence": "TS 24.301, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the MME",
+    "vuln_title": "MME processes selected NAS messages even if MAC fails/cannot be verified (signaling DoS / state churn surface)",
+    "vuln_type": ["DoS", "Robustness gap", "Replay/Desynchronization risk"],
+    "threat_model": "Attacker can inject/replay NAS messages toward the network such that MAC verification fails or is unavailable.",
+    "preconditions": [
+      "Secure exchange not established, or EPS security context not available for verification",
+      "MME is mandated to process a defined set of messages even when MAC fails/cannot be verified"
+    ],
+    "attack_story": [
+      "Attacker injects/replays messages from the allowed list under MAC-failure/unknown-context conditions.",
+      "The MME still processes them, which can amplify signaling load and trigger repeated authentication/security-mode actions."
+    ],
+    "impact": ["Signaling storm / CPU load on MME", "Procedure churn / state instability"],
+    "root_cause_in_spec": [
+      "MME-side integrity checking defines a processing exception set even under MAC failure/unverifiable conditions."
+    ],
+    "evidence_targets": ["TS 24.301 4.4.4.3"]
+  },
+  {
+    "id": "VD-04",
+    "label": "VULN",
+    "input": "If the UE has no valid native EPS security context, the UE shall send an ATTACH REQUEST message without integrity protection and encryption.",
+    "evidence": "TS 24.301, Clause 4.4.2.2, Secure exchange of NAS messages",
+    "vuln_title": "Attach Request without integrity+encryption when no valid EPS security context (IMSI/capability exposure window)",
+    "vuln_type": ["Privacy", "Pre-authentication plaintext"],
+    "threat_model": "Rogue eNodeB or passive sniffer near the UE during initial attach.",
+    "preconditions": [
+      "UE has no valid native EPS security context",
+      "UE initiates attach"
+    ],
+    "attack_story": [
+      "The victim sends ATTACH REQUEST without integrity protection and encryption.",
+      "An attacker captures identifiers/capabilities; in some states IMSI may be included."
+    ],
+    "impact": ["Subscriber identity exposure", "Capability fingerprinting / linkability"],
+    "root_cause_in_spec": [
+      "The spec explicitly mandates unprotected ATTACH REQUEST when no valid EPS security context exists."
+    ],
+    "evidence_targets": ["TS 24.301 4.4.2.2", "TS 24.301 4.4.5 (Attach Request unciphered)"]
+  },
+  {
+    "id": "VD-05",
+    "label": "NON_VULN",
+    "input": "If the UE included the UE network capability IE or the MS network capability IE (or both) in the ATTACH REQUEST message, the MME shall store all octets received from the UE up to the maximum length defined for the respective information element.",
+    "evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+    "non_vuln_reason": "This is an implementation requirement (store up to the maximum specified length). It does not introduce a security exception (e.g., missing integrity/ciphering or 'accept despite failed checks') and is primarily for interoperability/state keeping.",
+    "how_to_use": [
+      "Use as contextual fact (MME stores capability IEs).",
+      "If you study implementation bugs, this can become a vulnerability only when implementations violate the length constraint (e.g., overflow/memory DoS), which is an implementation vulnerability rather than a standard vulnerability."
+    ],
+    "evidence_targets": ["TS 24.301 5.5.1.2.4"]
+  },
+  {
+    "id": "VD-06",
+    "label": "NON_VULN",
+    "input": "The purpose of the UE requested bearer resource allocation procedure is for a UE to request allocation of bearer resources for a traffic flow aggregate (requests a specific QoS demand/QCI and may send a GBR requirement); if accepted it results in dedicated bearer context activation or bearer context modification.",
+    "evidence": "TS 24.301, Clause 6.5.3.1, General",
+    "non_vuln_reason": "This is a functional description of a bearer/QoS procedure. It does not state a security exception (e.g., plaintext/unauthenticated acceptance) and should not be labeled as a vulnerability by itself.",
+    "how_to_use": ["Use as protocol background knowledge or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 6.5.3.1"]
+  },
+  {
+    "id": "VD-07",
+    "label": "NON_VULN",
+    "input": "To initiate the UE requested bearer resource modification procedure, the UE shall send a BEARER RESOURCE MODIFICATION REQUEST message to the MME, start timer T3481 and enter the state PROCEDURE TRANSACTION PENDING.",
+    "evidence": "TS 24.301, Clause 6.5.4.2, UE requested bearer resource modification procedure initiation",
+    "non_vuln_reason": "This is a normal state-machine/action rule (send message, start timer, enter state). It is not a security weakness by itself.",
+    "how_to_use": ["Use for SCA/state-transition extraction or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 6.5.4.2"]
+  },
+  {
+    "id": "VD-08",
+    "label": "NON_VULN",
+    "input": "If the UE finds that the SQN is out of range, the UE shall send an AUTHENTICATION FAILURE message with EMM cause #21 \"synch failure\" and include an AUTS parameter in the message.",
+    "evidence": "TS 24.301, Clause 5.4.2.6, Authentication not accepted by the UE",
+    "non_vuln_reason": "This is the standard AKA resynchronization mechanism (AUTS) for handling SQN desynchronization. It is part of the security design and typically improves robustness rather than weakens security.",
+    "how_to_use": ["Use as an authentication failure branch sample or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.4.2.6"]
+  },
+  {
+    "id": "VD-09",
+    "label": "NON_VULN",
+    "input": "In the UE requested bearer resource allocation procedure, the UE starts T3480 and sends BEARER RESOURCE ALLOCATION REQUEST; the network responds with ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST / MODIFY EPS BEARER CONTEXT REQUEST or BEARER RESOURCE ALLOCATION REJECT (stopping T3480).",
+    "evidence": "TS 24.301, Figure 6.5.3.2.1, UE requested bearer resource allocation procedure",
+    "non_vuln_reason": "This is a procedure flow/figure description (timer behavior and response branches). It does not state a security exception or weakness.",
+    "how_to_use": ["Use as structured protocol interaction evidence (figure-based) or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 Figure 6.5.3.2.1"]
+  },
+  {
+    "id": "VD-10",
+    "label": "NON_VULN",
+    "input": "On receipt of the PDN CONNECTIVITY REQUEST message sent by the UE, the network when allocating an IP address shall take into account the PDN type IE, the operator policies of the home and visited network, and the user's subscription data.",
+    "evidence": "TS 24.301, Clause 6.2.2, IP address allocation via NAS signalling",
+    "non_vuln_reason": "This is a policy/subscription-driven allocation rule. It does not indicate missing protection or exception handling that would constitute a vulnerability.",
+    "how_to_use": ["Use as a semantics/policy reasoning sample or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 6.2.2"]
+  },
+  {
+    "id": "VD-11",
+    "label": "NON_VULN",
+    "input": "The network initiates the identification procedure by sending an IDENTITY REQUEST message to the UE and starting timer T3470; the requested identification parameter is specified in the Identity type IE.",
+    "evidence": "TS 24.301, Clause 5.4.4.2, Identification initiation by the network",
+    "non_vuln_reason": "This is the normal initiation step of the identification procedure. Whether it becomes a privacy risk depends on separate clauses that permit pre-security handling or IMSI requests without protection (e.g., VD-01). This sentence alone is procedural, not a root-cause exception.",
+    "how_to_use": ["Use as context step in an IMSI-catcher/DoS chain, or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.4.4.2"]
+  },
+  {
+    "id": "VD-12",
+    "label": "NON_VULN",
+    "input": "A UE shall be ready to respond to an IDENTITY REQUEST message at any time whilst in EMM-CONNECTED mode; upon receipt it shall send an IDENTITY RESPONSE message containing the identification parameters as requested.",
+    "evidence": "TS 24.301, Clause 5.4.4.3, Identification response by the UE",
+    "non_vuln_reason": "This is the normal UE response behavior in the identification procedure. The actual vulnerability root cause is the standard's pre-security exception (VD-01) that allows such messages to be accepted without integrity protection in certain situations.",
+    "how_to_use": ["Use as context step in an IMSI-catcher chain, or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.4.4.3"]
+  },
+  {
+    "id": "VD-13",
+    "label": "VULN",
+    "input": "If the UE does not hold a valid GUTI, P-TMSI or RAI, the UE shall include the IMSI in the EPS mobile identity IE.",
+    "evidence": "TS 24.301, Clause 5.5.1.2.2, Attach procedure initiation",
+    "vuln_title": "IMSI fallback when no temporary identity exists (IMSI leak trigger condition)",
+    "vuln_type": ["Privacy"],
+    "threat_model": "Rogue eNodeB or passive sniffer observing initial attach/identity exchanges.",
+    "preconditions": ["UE lacks valid temporary identity (GUTI/P-TMSI/RAI)"],
+    "attack_story": [
+      "Attacker waits for or forces a state where the UE has no temporary identity.",
+      "The UE includes IMSI → attacker learns the permanent identifier."
+    ],
+    "impact": ["Permanent identifier disclosure → long-term tracking"],
+    "root_cause_in_spec": ["Normative requirement: include IMSI when no valid temporary identifiers exist."],
+    "evidence_targets": ["TS 24.301 5.5.1.2.2"]
+  },
+  {
+    "id": "VD-14",
+    "label": "NON_VULN",
+    "input": "The EMM information procedure may be invoked by the network at any time during an established EMM context and consists only of the EMM INFORMATION message (message implementation is optional in the network).",
+    "evidence": "TS 24.301, Clause 5.4.5.1, General",
+    "non_vuln_reason": "This describes an optional informational procedure. It does not introduce a security exception or a missing protection property.",
+    "how_to_use": ["Use as a message semantics example or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.4.5.1"]
+  },
+  {
+    "id": "VD-15",
+    "label": "VULN",
+    "input": "The use of the null integrity protection algorithm EIA0 in the current security context is only allowed for an unauthenticated UE for which establishment of emergency bearer services is allowed.",
+    "evidence": "TS 24.301, Clause 4.4.4.1, General",
+    "vuln_title": "EIA0 (null integrity) allowed in unauthenticated emergency context (integrity weakening exception)",
+    "vuln_type": ["Integrity downgrade", "Emergency-mode abuse surface"],
+    "threat_model": "Attacker targets emergency attach/service contexts where null integrity is permitted.",
+    "preconditions": ["Unauthenticated UE; emergency bearer services allowed"],
+    "attack_story": [
+      "Emergency-mode exception allows EIA0, meaning integrity protection can be effectively absent.",
+      "This creates a larger spoofing/tampering window than normal protected flows."
+    ],
+    "impact": ["Weakened integrity assurance during emergency/RLOS contexts"],
+    "root_cause_in_spec": ["EIA0 is explicitly allowed only under emergency conditions."],
+    "evidence_targets": ["TS 24.301 4.4.4.1"]
+  },
+  {
+    "id": "VD-16",
+    "label": "VULN",
+    "input": "For emergency bearer services, EIA0 and EEA0 can be selected as NAS security algorithms in a SECURITY MODE COMMAND under the conditions described in NAS security mode control initiation by the network (including KSI value \"000\").",
+    "evidence": "TS 24.301, Clause 5.4.3.2, NAS security mode control initiation by the network",
+    "vuln_title": "Emergency SMC may select EIA0+EEA0 with KSI=000 (security exception path)",
+    "vuln_type": ["Integrity/ciphering downgrade", "Emergency-mode special path"],
+    "threat_model": "Attacker abuses emergency/RLOS security-mode control paths where null algorithms may be selected.",
+    "preconditions": ["Emergency/RLOS conditions allow KSI=000 and EIA0/EEA0 selection"],
+    "attack_story": [
+      "Network selects EIA0/EEA0 + KSI=000, yielding reduced confidentiality and integrity compared to normal contexts."
+    ],
+    "impact": ["Reduced confidentiality/integrity during emergency-mode flows"],
+    "root_cause_in_spec": ["Normative conditions allow SECURITY MODE COMMAND to use KSI=000 and EIA0/EEA0."],
+    "evidence_targets": ["TS 24.301 5.4.3.2"]
+  },
+  {
+    "id": "VD-17",
+    "label": "NON_VULN",
+    "input": "If the AUTHENTICATION REJECT message is received by the UE, the UE shall abort any EMM signalling procedure, stop any retransmission timers that are running, and enter state EMM-DEREGISTERED.",
+    "evidence": "TS 24.301, Clause 5.4.2.3, Authentication not accepted by the network",
+    "non_vuln_reason": "This is the specified UE state-machine behavior after receiving AUTHENTICATION REJECT. Whether it can be abused for DoS depends on separate clauses that permit pre-security acceptance of such messages (e.g., VD-01). Alone, this is procedural, not a root-cause exception.",
+    "how_to_use": ["Use as a context step in a rejection-message DoS chain, or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.4.2.3"]
+  },
+  {
+    "id": "VD-18",
+    "label": "NON_VULN",
+    "input": "NOTE 1: A service request can only be rejected before the network has initiated any procedure which will be interpreted by the UE as successful completion of the service request procedure and which will trigger a transition from state EMM-SERVICE-REQUEST-INITIATED to EMM-REGISTERED.",
+    "evidence": "TS 24.301, Clause 5.6.1.5, Service request procedure not accepted by the network",
+    "non_vuln_reason": "This is a timing/consistency constraint on when the network can reject a service request, intended to avoid UE misinterpreting success. It is not a security exception.",
+    "how_to_use": ["Use as a protocol timing-constraint sample or as a non-vulnerability negative example."],
+    "evidence_targets": ["TS 24.301 5.6.1.5 (NOTE 1)"]
+  },
+  {
+    "id": "VD-19",
+    "label": "NON_VULN",
+    "input": "The UE shall enter state EMM-REGISTERED after successful completion of the attach procedure.",
+    "evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+    "non_vuln_reason": "This is a normal state transition after a successful attach and does not define any security exception.",
+    "evidence_targets": ["TS 24.301 5.5.1.2.4"]
+  },
+  {
+    "id": "VD-20",
+    "label": "NON_VULN",
+    "input": "The MME shall start timer T3413 when sending the ATTACH ACCEPT message.",
+    "evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+    "non_vuln_reason": "Timer management is a standard reliability mechanism and not a vulnerability.",
+    "evidence_targets": ["TS 24.301 5.5.1.2.4"]
+  },
+  {
+    "id": "VD-21",
+    "label": "NON_VULN",
+    "input": "If the UE receives an ATTACH ACCEPT message, it shall send an ATTACH COMPLETE message to the network.",
+    "evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+    "non_vuln_reason": "This is a normal attach completion handshake.",
+    "evidence_targets": ["TS 24.301 5.5.1.2.4"]
+  },
+  {
+    "id": "VD-22",
+    "label": "NON_VULN",
+    "input": "The UE shall start timer T3412 upon entering EMM-REGISTERED state.",
+    "evidence": "TS 24.301, Clause 5.3.5, Handling of the periodic tracking area update timer",
+    "non_vuln_reason": "Periodic update timer behavior is normal mobility management logic.",
+    "evidence_targets": ["TS 24.301 5.3.5"]
+  },
+  {
+    "id": "VD-23",
+    "label": "NON_VULN",
+    "input": "The network may initiate a GUTI reallocation procedure during an established EMM context.",
+    "evidence": "TS 24.301, Clause 5.4.1.1, GUTI reallocation procedure",
+    "non_vuln_reason": "GUTI reallocation is a privacy-enhancing procedure.",
+    "evidence_targets": ["TS 24.301 5.4.1.1"]
+  },
+  {
+    "id": "VD-24",
+    "label": "NON_VULN",
+    "input": "Upon receiving a GUTI REALLOCATION COMMAND, the UE shall store the new GUTI and send a GUTI REALLOCATION COMPLETE message.",
+    "evidence": "TS 24.301, Clause 5.4.1.3, GUTI reallocation completion by the UE",
+    "non_vuln_reason": "This procedure improves identity confidentiality.",
+    "evidence_targets": ["TS 24.301 5.4.1.3"]
+  },
+  {
+    "id": "VD-25",
+    "label": "NON_VULN",
+    "input": "The authentication procedure is used to authenticate the UE and establish a security context.",
+    "evidence": "TS 24.301, Clause 5.4.2.1, Authentication procedure",
+    "non_vuln_reason": "This describes the purpose of authentication, not a weakness.",
+    "evidence_targets": ["TS 24.301 5.4.2.1"]
+  },
+  {
+    "id": "VD-26",
+    "label": "NON_VULN",
+    "input": "The UE shall verify the authentication challenge and respond with an AUTHENTICATION RESPONSE message.",
+    "evidence": "TS 24.301, Clause 5.4.2.3, Authentication response by the UE",
+    "non_vuln_reason": "Standard AKA behavior.",
+    "evidence_targets": ["TS 24.301 5.4.2.3"]
+  },
+  {
+    "id": "VD-27",
+    "label": "NON_VULN",
+    "input": "The security mode control procedure is used to establish NAS security between the UE and the network.",
+    "evidence": "TS 24.301, Clause 5.4.3.1, General",
+    "non_vuln_reason": "This is a high-level description of a security-enabling procedure.",
+    "evidence_targets": ["TS 24.301 5.4.3.1"]
+  },
+  {
+    "id": "VD-28",
+    "label": "NON_VULN",
+    "input": "Upon successful completion of the security mode control procedure, NAS signalling messages shall be integrity protected.",
+    "evidence": "TS 24.301, Clause 4.4.4.1, General",
+    "non_vuln_reason": "This enforces security rather than weakening it.",
+    "evidence_targets": ["TS 24.301 4.4.4.1"]
+  },
+  {
+    "id": "VD-29",
+    "label": "NON_VULN",
+    "input": "The UE shall enter state EMM-SERVICE-REQUEST-INITIATED after sending a SERVICE REQUEST message.",
+    "evidence": "TS 24.301, Clause 5.6.1.2, Service request procedure initiation",
+    "non_vuln_reason": "Normal state transition logic.",
+    "evidence_targets": ["TS 24.301 5.6.1.2"]
+  },
+  {
+    "id": "VD-30",
+    "label": "NON_VULN",
+    "input": "The network shall respond to a SERVICE REQUEST with either SERVICE ACCEPT or SERVICE REJECT.",
+    "evidence": "TS 24.301, Clause 5.6.1.4, Service request procedure accepted by the network",
+    "non_vuln_reason": "Expected protocol branching behavior.",
+    "evidence_targets": ["TS 24.301 5.6.1.4"]
+  },
+  {
+    "id": "VD-31",
+    "label": "NON_VULN",
+    "input": "The UE shall stop timer T3417 upon receiving a SERVICE ACCEPT message.",
+    "evidence": "TS 24.301, Clause 5.6.1.4, Service request procedure accepted by the network",
+    "non_vuln_reason": "Timer control is not a vulnerability.",
+    "evidence_targets": ["TS 24.301 5.6.1.4"]
+  },
+  {
+    "id": "VD-32",
+    "label": "NON_VULN",
+    "input": "The tracking area updating procedure is used to inform the network of the UE's current tracking area.",
+    "evidence": "TS 24.301, Clause 5.5.3.1, General",
+    "non_vuln_reason": "This is a functional mobility management procedure.",
+    "evidence_targets": ["TS 24.301 5.5.3.1"]
+  },
+  {
+    "id": "VD-33",
+    "label": "NON_VULN",
+    "input": "Upon receiving a TRACKING AREA UPDATE ACCEPT message, the UE shall update the stored tracking area identity list.",
+    "evidence": "TS 24.301, Clause 5.5.3.2.4, Tracking area updating procedure accepted by the network",
+    "non_vuln_reason": "Normal state update behavior.",
+    "evidence_targets": ["TS 24.301 5.5.3.2.4"]
+  },
+  {
+    "id": "VD-34",
+    "label": "NON_VULN",
+    "input": "The UE shall enter state EMM-TRACKING-AREA-UPDATING-INITIATED after sending a TRACKING AREA UPDATE REQUEST.",
+    "evidence": "TS 24.301, Clause 5.5.3.2.2, Normal and periodic TAU initiation",
+    "non_vuln_reason": "State-machine description only.",
+    "evidence_targets": ["TS 24.301 5.5.3.2.2"]
+  },
+  {
+    "id": "VD-35",
+    "label": "NON_VULN",
+    "input": "The UE initiated detach procedure is used to explicitly deregister the UE from the network.",
+    "evidence": "TS 24.301, Clause 5.5.2.1, General",
+    "non_vuln_reason": "Detach is a legitimate lifecycle operation.",
+    "evidence_targets": ["TS 24.301 5.5.2.1"]
+  },
+  {
+    "id": "VD-36",
+    "label": "NON_VULN",
+    "input": "The UE shall send a DETACH REQUEST message to initiate the UE initiated detach procedure.",
+    "evidence": "TS 24.301, Clause 5.5.2.2.1, UE initiated detach procedure initiation",
+    "non_vuln_reason": "Procedural step without security exception.",
+    "evidence_targets": ["TS 24.301 5.5.2.2.1"]
+  },
+  {
+    "id": "VD-37",
+    "label": "NON_VULN",
+    "input": "Upon receiving a DETACH ACCEPT message, the UE shall enter state EMM-DEREGISTERED.",
+    "evidence": "TS 24.301, Clause 5.5.2.2.2, UE initiated detach procedure completion",
+    "non_vuln_reason": "Expected deregistration behavior.",
+    "evidence_targets": ["TS 24.301 5.5.2.2.2"]
+  },
+  {
+    "id": "VD-38",
+    "label": "NON_VULN",
+    "input": "The paging procedure is used by the network to notify the UE of incoming signalling or data.",
+    "evidence": "TS 24.301, Clause 5.6.2.1, General",
+    "non_vuln_reason": "High-level paging description only.",
+    "evidence_targets": ["TS 24.301 5.6.2.1"]
+  },
+  {
+    "id": "VD-39",
+    "label": "NON_VULN",
+    "input": "The UE shall monitor the paging channel in idle mode according to DRX parameters.",
+    "evidence": "TS 24.301, Clause 5.6.2.2, Paging for EPS services",
+    "non_vuln_reason": "Normal idle-mode behavior.",
+    "evidence_targets": ["TS 24.301 5.6.2.2"]
+  },
+  {
+    "id": "VD-40",
+    "label": "NON_VULN",
+    "input": "The transport of NAS messages procedure is used to convey NAS messages between the UE and the network.",
+    "evidence": "TS 24.301, Clause 5.6.3.1, General",
+    "non_vuln_reason": "Functional description only.",
+    "evidence_targets": ["TS 24.301 5.6.3.1"]
+  },
+  {
+    "id": "VD-41",
+    "label": "NON_VULN",
+    "input": "The UE shall send an UPLINK NAS TRANSPORT message to convey NAS information to the network.",
+    "evidence": "TS 24.301, Clause 5.6.3.2, UE initiated transport of NAS messages",
+    "non_vuln_reason": "Standard transport mechanism.",
+    "evidence_targets": ["TS 24.301 5.6.3.2"]
+  },
+  {
+    "id": "VD-42",
+    "label": "NON_VULN",
+    "input": "The EMM STATUS message is used to report protocol errors.",
+    "evidence": "TS 24.301, Clause 5.7, Reception of an EMM STATUS message",
+    "non_vuln_reason": "Error reporting improves robustness.",
+    "evidence_targets": ["TS 24.301 5.7"]
+  },
+  {
+    "id": "VD-43",
+    "label": "NON_VULN",
+    "input": "If an unknown message type is received, the receiving entity shall ignore the message.",
+    "evidence": "TS 24.301, Clause 7.4, Unknown or unforeseen message type",
+    "non_vuln_reason": "Defensive parsing rule.",
+    "evidence_targets": ["TS 24.301 7.4"]
+  },
+  {
+    "id": "VD-44",
+    "label": "NON_VULN",
+    "input": "If a mandatory information element is missing, the receiver shall handle the error according to defined rules.",
+    "evidence": "TS 24.301, Clause 7.5, Non-semantic mandatory IE errors",
+    "non_vuln_reason": "Error handling specification.",
+    "evidence_targets": ["TS 24.301 7.5"]
+  },
+  {
+    "id": "VD-45",
+    "label": "NON_VULN",
+    "input": "The EPS session management procedures control the establishment, modification, and release of bearer contexts.",
+    "evidence": "TS 24.301, Clause 6.1, Overview",
+    "non_vuln_reason": "High-level architectural description.",
+    "evidence_targets": ["TS 24.301 6.1"]
+  },
+  {
+    "id": "VD-46",
+    "label": "NON_VULN",
+    "input": "The UE shall start timer T3480 when initiating a bearer resource allocation procedure.",
+    "evidence": "TS 24.301, Clause 6.5.3.2, UE requested bearer resource allocation initiation",
+    "non_vuln_reason": "Timer usage for request reliability.",
+    "evidence_targets": ["TS 24.301 6.5.3.2"]
+  },
+  {
+    "id": "VD-47",
+    "label": "NON_VULN",
+    "input": "If the network accepts the bearer resource allocation request, it shall activate the dedicated bearer context.",
+    "evidence": "TS 24.301, Clause 6.5.3.3, UE requested bearer resource allocation accepted",
+    "non_vuln_reason": "Normal QoS handling.",
+    "evidence_targets": ["TS 24.301 6.5.3.3"]
+  },
+  {
+    "id": "VD-48",
+    "label": "NON_VULN",
+    "input": "The UE shall enter state BEARER CONTEXT ACTIVE after successful bearer activation.",
+    "evidence": "TS 24.301, Clause 6.1.3.2, ESM sublayer states in the UE",
+    "non_vuln_reason": "State-machine behavior.",
+    "evidence_targets": ["TS 24.301 6.1.3.2"]
+  },
+  {
+    "id": "VD-49",
+    "label": "NON_VULN",
+    "input": "The network may deactivate an EPS bearer context when it is no longer required.",
+    "evidence": "TS 24.301, Clause 6.4.4.1, General",
+    "non_vuln_reason": "Normal resource management.",
+    "evidence_targets": ["TS 24.301 6.4.4.1"]
+  },
+  {
+    "id": "VD-50",
+    "label": "NON_VULN",
+    "input": "Upon receiving a DEACTIVATE EPS BEARER CONTEXT REQUEST, the UE shall release the bearer resources.",
+    "evidence": "TS 24.301, Clause 6.4.4.3, EPS bearer context deactivation accepted by the UE",
+    "non_vuln_reason": "Standard bearer teardown behavior.",
+    "evidence_targets": ["TS 24.301 6.4.4.3"]
+  }
+]

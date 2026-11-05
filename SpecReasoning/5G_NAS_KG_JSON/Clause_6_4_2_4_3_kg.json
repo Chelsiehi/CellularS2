@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.4.3",
+  "title": "Handling of network rejection not due to congestion control",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_MODIFICATION",
+      "name": "PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for modifying an existing PDU session, initiated by the UE sending a PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject a PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "IE included in PDU SESSION MODIFICATION REJECT message indicating the timer value for back-off behavior.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether re-attempts are allowed in equivalent PLMNs or S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "IE indicating the reason for rejection in PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_BACK_OFF",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer started by UE upon receiving PDU SESSION MODIFICATION REJECT to prevent further modification requests for specific combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_CAUSE_NOT_CONGESTION",
+      "name": "5GSM cause not congestion-related",
+      "entity_type": "Condition",
+      "description": "Condition where 5GSM cause value is different from specified congestion-related causes.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "name": "Timer value neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates a non-zero, non-deactivated value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_DEACTIVATED",
+      "name": "Timer value deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates the timer is deactivated.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_ZERO",
+      "name": "Timer value zero",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates zero.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "PROP_NO_MODIFICATION_REQUEST",
+      "name": "UE shall not send PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Property",
+      "description": "Behavior where UE is prohibited from sending PDU SESSION MODIFICATION REQUEST for specific combinations until conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains the Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains the 5GSM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_CAUSE_NOT_CONGESTION",
+      "target": "PROP_NO_MODIFICATION_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If 5GSM cause is not congestion-related and Back-off timer value IE is included, UE establishes behavior to not send modification requests.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "target": "TIMER_BACK_OFF",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If timer value is neither zero nor deactivated, UE starts the back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TIMER_DEACTIVATED",
+      "target": "PROP_NO_MODIFICATION_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If timer value indicates deactivated, UE establishes behavior to not send modification requests indefinitely.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TIMER_ZERO",
+      "target": "PROC_PDU_SESSION_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If timer value indicates zero, UE may send another PDU SESSION MODIFICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards conditions for timer behavior (non-zero, deactivated, or zero).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_5GSM_CAUSE",
+      "target": "COND_CAUSE_NOT_CONGESTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GSM cause IE guards the condition for non-congestion-related causes.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.3"
+      ]
+    }
+  ]
+}

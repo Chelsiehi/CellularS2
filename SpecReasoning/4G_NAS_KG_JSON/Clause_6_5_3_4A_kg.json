@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.4A",
+  "title": "Handling the maximum number of active EPS bearer contexts",
+  "entities": [
+    {
+      "id": "PROC_BEARER_RESOURCE_REQUEST",
+      "name": "Bearer resource request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests allocation of additional bearer resources from the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept a bearer resource request when maximum active EPS bearer contexts is reached.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "COND_MAX_BEARERS_NETWORK",
+      "name": "Maximum active EPS bearer contexts reached at network",
+      "entity_type": "Condition",
+      "description": "Condition where network has reached its maximum number of active EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "COND_MAX_BEARERS_UE",
+      "name": "Maximum active EPS bearer contexts reached at UE",
+      "entity_type": "Condition",
+      "description": "Condition where UE has reached its maximum number of active EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "COND_GBR_REQUIREMENT",
+      "name": "GBR requirement in request",
+      "entity_type": "Condition",
+      "description": "Condition where UE request includes a Guaranteed Bit Rate requirement.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "PROP_REJECT_REQUEST",
+      "name": "Network rejects bearer resource request",
+      "entity_type": "Property",
+      "description": "Network behavior to reject UE request for additional bearer resources when maximum is reached.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "PROP_ACCEPT_REQUEST",
+      "name": "Network accepts bearer resource request",
+      "entity_type": "Property",
+      "description": "Network behavior to accept UE request by sending MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "PROP_DEACTIVATE_BEARER",
+      "name": "UE deactivates EPS bearer context",
+      "entity_type": "Property",
+      "description": "UE behavior to deactivate an active EPS bearer context when maximum is reached.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_DEFAULT_BEARER",
+      "name": "Default EPS bearer context for emergency",
+      "entity_type": "Condition",
+      "description": "Condition identifying a default EPS bearer context used for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_BEARER_RESOURCE_REQUEST",
+      "target": "COND_MAX_BEARERS_NETWORK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Bearer resource request procedure is guarded by condition of maximum active EPS bearer contexts reached at network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_MAX_BEARERS_NETWORK",
+      "target": "PROP_REJECT_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum bearers condition at network establishes rejection behavior when GBR requirement exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_MAX_BEARERS_NETWORK",
+      "target": "PROP_ACCEPT_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum bearers condition at network establishes acceptance behavior via MODIFY EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_ACCEPT_REQUEST",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Acceptance behavior triggers sending of MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_GBR_REQUIREMENT",
+      "target": "PROP_REJECT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "GBR requirement condition guards the rejection behavior when maximum bearers reached.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_MAX_BEARERS_UE",
+      "target": "PROP_DEACTIVATE_BEARER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum bearers condition at UE establishes deactivation behavior prior to sending request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMERGENCY_DEFAULT_BEARER",
+      "target": "PROP_DEACTIVATE_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency default bearer condition guards deactivation behavior - UE shall not deactivate emergency default bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4A"
+      ]
+    }
+  ]
+}

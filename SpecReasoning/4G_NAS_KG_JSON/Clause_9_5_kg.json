@@ -1,0 +1,89 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.5",
+  "title": "Message authentication code",
+  "entities": [
+    {
+      "id": "IE_MAC",
+      "name": "Message authentication code",
+      "entity_type": "Information Element",
+      "description": "Contains the integrity protection information for the message. It is included in security protected NAS messages when a valid EPS security context exists and security functions are started.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "SECURITY_PROTECTED_NAS_MESSAGE",
+      "name": "Security protected NAS message",
+      "entity_type": "Message",
+      "description": "A NAS message that includes integrity protection through the MAC IE when security conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT",
+      "name": "EPS security context",
+      "entity_type": "Condition",
+      "description": "A valid EPS security context must exist for the MAC IE to be included in security protected NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "SECURITY_FUNCTIONS_STARTED",
+      "name": "Security functions started",
+      "entity_type": "Condition",
+      "description": "Security functions must be started for the MAC IE to be included in security protected NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_PROTECTED_NAS_MESSAGE",
+      "target": "IE_MAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The security protected NAS message contains the MAC IE for integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_MAC",
+      "target": "EPS_SECURITY_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of MAC IE is guarded by the condition that a valid EPS security context exists.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MAC",
+      "target": "SECURITY_FUNCTIONS_STARTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of MAC IE is guarded by the condition that security functions are started.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MAC",
+      "target": "SECURITY_PROTECTED_NAS_MESSAGE",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "The MAC IE provides integrity protection for the security protected NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 9.5"
+      ]
+    }
+  ]
+}

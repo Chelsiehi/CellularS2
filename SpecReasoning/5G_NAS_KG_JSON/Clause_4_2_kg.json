@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.2",
+  "title": "Coordination between the protocols for 5GS mobility management and 5GS session management",
+  "entities": [
+    {
+      "id": "PROC_5GMM",
+      "name": "5GMM procedure",
+      "entity_type": "Procedure",
+      "description": "5GS Mobility Management procedure responsible for mobility and connection management.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROC_5GSM",
+      "name": "5GSM procedure",
+      "entity_type": "Procedure",
+      "description": "5GS Session Management procedure responsible for session establishment, modification, and release.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to carry 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "MSG_DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message used to carry 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "State where the UE has an established NAS signalling connection with the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_STATUS",
+      "name": "PDU session status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the status of PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating allowed PDU session status.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "COND_5GMM_CONTEXT_ESTABLISHED",
+      "name": "5GMM context established",
+      "entity_type": "Condition",
+      "description": "Condition where a 5GMM context is established at the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "COND_PIGGYBACKING_5GSM",
+      "name": "Piggybacking 5GSM messages",
+      "entity_type": "Condition",
+      "description": "Condition where 5GSM messages are included in 5GMM transport messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "COND_SERVICE_REQUEST_NO_STATUS_IE",
+      "name": "Service request without PDU session status IEs",
+      "entity_type": "Condition",
+      "description": "Condition where service request procedure is initiated without PDU session status IE or Allowed PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROP_SUSPEND_5GSM_TRANSMISSION",
+      "name": "Suspend 5GSM transmission",
+      "entity_type": "Property",
+      "description": "Behavior where transmission of 5GSM messages is suspended during 5GMM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROP_PARALLEL_EXECUTION",
+      "name": "Parallel execution of 5GMM and 5GSM procedures",
+      "entity_type": "Property",
+      "description": "Behavior where 5GMM and piggybacked 5GSM procedures are executed in parallel.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5GMM",
+      "target": "PROC_5GSM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM procedure can piggyback 5GSM messages in transport messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_5GSM",
+      "target": "COND_5GMM_CONTEXT_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE can only initiate 5GSM procedure when 5GMM context is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_SUSPEND_5GSM_TRANSMISSION",
+      "target": "COND_PIGGYBACKING_5GSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Suspension of 5GSM transmission is not applied when 5GMM procedure is piggybacking 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_SUSPEND_5GSM_TRANSMISSION",
+      "target": "COND_SERVICE_REQUEST_NO_STATUS_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Suspension of 5GSM transmission is not applied during service request procedure without PDU session status IEs.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "PROC_5GSM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message carries 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "PROC_5GSM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message carries 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_PARALLEL_EXECUTION",
+      "target": "PROC_5GMM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GMM and piggybacked 5GSM procedures are executed in parallel.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_PARALLEL_EXECUTION",
+      "target": "PROC_5GSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GMM and piggybacked 5GSM procedures are executed in parallel.",
+      "provenance": [
+        "TS 24.501, Clause 4.2"
+      ]
+    }
+  ]
+}

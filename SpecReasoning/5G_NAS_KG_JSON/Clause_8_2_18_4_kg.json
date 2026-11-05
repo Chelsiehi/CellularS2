@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.18.4",
+  "title": "EAP message",
+  "entities": [
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element used to convey EAP messages in NAS signaling.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message used to reject a service request from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    },
+    {
+      "id": "EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Message",
+      "description": "EAP message indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    },
+    {
+      "id": "COND_EAP_FAILURE_CONVEYED",
+      "name": "EAP-failure message conveyed",
+      "entity_type": "Condition",
+      "description": "Condition when SERVICE REJECT message is used to convey EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains EAP message IE when conveying EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_EAP_FAILURE_CONVEYED",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of EAP message IE is guarded by the condition that SERVICE REJECT conveys EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EAP_MESSAGE",
+      "target": "EAP_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP message IE contains the EAP-failure message content.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.18.4"
+      ]
+    }
+  ]
+}

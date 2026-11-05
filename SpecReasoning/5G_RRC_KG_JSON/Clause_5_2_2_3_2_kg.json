@@ -1,0 +1,185 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.2",
+  "title": "Acquisition of an SI message",
+  "entities": [
+    {
+      "id": "PROC_SI_ACQUISITION",
+      "name": "SI message acquisition",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to acquire System Information messages by monitoring PDCCH during SI-window using SI-RNTI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_SI_WINDOW",
+      "name": "SI-window",
+      "entity_type": "Information Element",
+      "description": "Time window during which UE monitors PDCCH for SI message acquisition. Length determined by si-WindowLength.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_SI_RNTI",
+      "name": "SI-RNTI",
+      "entity_type": "Identifier",
+      "description": "Radio Network Temporary Identifier used for scheduling System Information messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_PDCCH_MONITORING",
+      "name": "PDCCH monitoring occasion",
+      "entity_type": "Information Element",
+      "description": "Time occasions when UE monitors PDCCH for SI message acquisition, determined by searchSpaceOtherSystemInformation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_SEARCH_SPACE_OTHER_SI",
+      "name": "searchSpaceOtherSystemInformation",
+      "entity_type": "Information Element",
+      "description": "Parameter indicating search space for PDCCH monitoring occasions for SI messages. If zero, uses same as SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_SCHEDULING_INFO_LIST",
+      "name": "schedulingInfoList",
+      "entity_type": "Information Element",
+      "description": "List in SIB1 configuring SI messages and their scheduling parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_SCHEDULING_INFO_LIST2",
+      "name": "schedulingInfoList2",
+      "entity_type": "Information Element",
+      "description": "Alternative list for configuring SI messages in SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_POS_SCHEDULING_INFO_LIST",
+      "name": "posSchedulingInfoList",
+      "entity_type": "Information Element",
+      "description": "List in posSI-SchedulingInfo in SIB1 for positioning-related SI messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "COND_SSB_MAPPING",
+      "name": "SSB to PDCCH monitoring occasion mapping",
+      "entity_type": "Condition",
+      "description": "Mapping where [xN+K]th PDCCH monitoring occasion corresponds to Kth transmitted SSB.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "PROP_UE_SSB_SELECTION",
+      "name": "UE SSB selection implementation",
+      "entity_type": "Property",
+      "description": "UE implementation selects which SSB to use for SI message reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE may stop PDCCH monitoring during SI window after acquiring requested SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2, Note 4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SI_ACQUISITION",
+      "target": "IE_PDCCH_MONITORING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SI acquisition procedure involves monitoring PDCCH occasions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SI_ACQUISITION",
+      "target": "IE_SI_RNTI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure uses SI-RNTI to receive PDCCH scheduling information.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_PDCCH_MONITORING",
+      "target": "IE_SEARCH_SPACE_OTHER_SI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCCH monitoring occasions are determined by searchSpaceOtherSystemInformation parameter.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_PDCCH_MONITORING",
+      "target": "COND_SSB_MAPPING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCCH monitoring occasions are mapped to transmitted SSBs using [xN+K] formula.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SI_ACQUISITION",
+      "target": "IE_SI_WINDOW",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SI acquisition occurs during SI-window period.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SSB_MAPPING",
+      "target": "PROP_UE_SSB_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SSB to PDCCH mapping enables UE implementation to select SSB for reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "PROC_SI_ACQUISITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In RRC_CONNECTED state, UE may stop PDCCH monitoring during SI window after SIB acquisition.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.2, Note 4"
+      ]
+    }
+  ]
+}

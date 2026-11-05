@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.8",
+  "title": "Actions upon reception of SIB7",
+  "entities": [
+    {
+      "id": "SIB7",
+      "name": "System Information Block 7",
+      "entity_type": "Message",
+      "description": "System Information Block containing warning message segments for public warning systems.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "MESSAGE_IDENTIFIER",
+      "name": "messageIdentifier",
+      "entity_type": "Information Element",
+      "description": "Identifier for the warning message to distinguish different warning broadcasts.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "SERIAL_NUMBER",
+      "name": "serialNumber",
+      "entity_type": "Information Element",
+      "description": "Serial number for the warning message to track updates and versions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "WARNING_MESSAGE_SEGMENT",
+      "name": "warningMessageSegment",
+      "entity_type": "Information Element",
+      "description": "A segment of the complete warning message that needs to be assembled.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "DATA_CODING_SCHEME",
+      "name": "dataCodingScheme",
+      "entity_type": "Information Element",
+      "description": "Coding scheme used for the warning message data.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "WARNING_MESSAGE_ASSEMBLY",
+      "name": "Warning Message Assembly Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to assemble complete warning message from received segments and forward to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "SIB7_RECEPTION",
+      "name": "SIB7 Reception Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for receiving and processing SIB7 messages containing warning information.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_CHANGE_CONDITION",
+      "name": "Message Identifier or Serial Number Change Condition",
+      "entity_type": "Condition",
+      "description": "Condition where either messageIdentifier or serialNumber values are different from current stored values.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "ALL_SEGMENTS_RECEIVED_CONDITION",
+      "name": "All Segments Received Condition",
+      "entity_type": "Condition",
+      "description": "Condition where all segments of a warning message have been successfully received.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "BUFFER_DISCARD_PROPERTY",
+      "name": "Buffer Discard Property",
+      "entity_type": "Property",
+      "description": "Property where UE discards previously buffered warningMessageSegment when identifiers change.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "TIMEOUT_DISCARD_PROPERTY",
+      "name": "Timeout Discard Property",
+      "entity_type": "Property",
+      "description": "Property where UE discards stored segments and identifiers if warning message not assembled within 3 hours.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SIB7_RECEPTION",
+      "target": "IDENTIFIER_CHANGE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB7 reception procedure is guarded by identifier change condition",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIB7_RECEPTION",
+      "target": "ALL_SEGMENTS_RECEIVED_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB7 reception procedure is guarded by all segments received condition",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIB7",
+      "target": "MESSAGE_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB7 contains messageIdentifier information element",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIB7",
+      "target": "SERIAL_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB7 contains serialNumber information element",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SIB7",
+      "target": "WARNING_MESSAGE_SEGMENT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB7 contains warningMessageSegment information element",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIB7",
+      "target": "DATA_CODING_SCHEME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB7 contains dataCodingScheme information element",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IDENTIFIER_CHANGE_CONDITION",
+      "target": "BUFFER_DISCARD_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Identifier change condition establishes buffer discard property",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ALL_SEGMENTS_RECEIVED_CONDITION",
+      "target": "WARNING_MESSAGE_ASSEMBLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "All segments received condition establishes warning message assembly procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "WARNING_MESSAGE_ASSEMBLY",
+      "target": "SIB7_RECEPTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Warning message assembly is a step in SIB7 reception procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMEOUT_DISCARD_PROPERTY",
+      "target": "WARNING_MESSAGE_SEGMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timeout discard property establishes discarding of stored warning message segments",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.8"
+      ]
+    }
+  ]
+}

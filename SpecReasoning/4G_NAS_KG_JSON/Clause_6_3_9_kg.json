@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.9",
+  "title": "Handling of APN rate control",
+  "entities": [
+    {
+      "id": "APN_RATE_CONTROL",
+      "name": "APN rate control",
+      "entity_type": "Procedure",
+      "description": "Controls the maximum number of uplink user data messages including uplink exception data reporting sent by the UE in a time interval for the APN. The UE limits the rate at which it generates uplink user data messages to comply with the APN rate control policy.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "APN_RATE_CONTROL_PARAMETERS",
+      "name": "APN rate control parameters",
+      "entity_type": "Information Element",
+      "description": "Parameters provided by the network to the UE for enforcing APN rate control, including parameters for exception data reporting.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "APN_RATE_CONTROL_STATUS",
+      "name": "APN rate control status",
+      "entity_type": "Property",
+      "description": "Current status of APN rate control stored by the UE during inter-system changes, including validity period information.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "UE_SUPPORT_INDICATION",
+      "name": "UE support indication",
+      "entity_type": "Information Element",
+      "description": "Indication provided by the UE to the network regarding support for APN rate control and additional APN rate control for exception data reporting.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "EXCEPTION_DATA_REPORTING",
+      "name": "Exception data reporting",
+      "entity_type": "Procedure",
+      "description": "Uplink exception reports that can be sent even if the limit for APN rate control has been reached, under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE stores current APN rate control status for each APN associated with PDN connections being transferred.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE uses stored APN rate control status if PDN connections were transferred and validity period hasn't expired.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "PDU session release",
+      "entity_type": "Condition",
+      "description": "Condition where all PDU sessions associated with an APN are released after inter-system change from S1 to N1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "APN_RATE_CONTROL",
+      "target": "APN_RATE_CONTROL_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "APN rate control procedure uses APN rate control parameters provided by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_SUPPORT_INDICATION",
+      "target": "APN_RATE_CONTROL_PARAMETERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network provides APN rate control parameters for exception data only if UE indicates support for additional APN rate control for exception data reporting.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EXCEPTION_DATA_REPORTING",
+      "target": "APN_RATE_CONTROL_PARAMETERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Exception data reporting is allowed even if APN rate control limit is reached when specific conditions related to APN rate control parameters are met.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "target": "APN_RATE_CONTROL_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode triggers storage of current APN rate control status.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "target": "APN_RATE_CONTROL_STATUS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode requires use of stored APN rate control status if conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION_RELEASE",
+      "target": "APN_RATE_CONTROL_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Release of all PDU sessions associated with an APN triggers deletion of stored APN rate control status for that APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.9"
+      ]
+    }
+  ]
+}

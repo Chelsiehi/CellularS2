@@ -1,0 +1,88 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.3.2",
+  "title": "Network-requested PDU session release procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------------------------",
+    "In order to initiate the network-requested PDU session release procedure, the SMF shall create a PDU SESSION RELEASE COMMAND message",
+    "The SMF shall set the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message to indicate the reason for releasing the PDU session",
+    "The 5GSM cause IE typically indicates one of the following 5GSM cause values",
+    "#8 operator determined barring",
+    "#29 user authentication or authorization failed",
+    "#46 out of LADN service area",
+    "#67 insufficient resources for specific slice and DNN",
+    "#69 insufficient resources for specific slice",
+    "If the selected SSC mode of the PDU session is \"SSC mode 2\" and the SMF requests the relocation of SSC mode 2 PDU session anchor with different PDU sessions as specified in 3GPPTS23.502[9], the SMF shall include 5GSM cause #39\"reactivation requested\"",
+    "If the network-requested PDU session release procedure is triggered by a UE-requested PDU session release procedure, the SMF shall set the PTI IE of the PDU SESSION RELEASE COMMAND message to the PTI of the PDU SESSION RELEASE REQUEST message received as part of the UE-requested PDU session release procedure and shall not include the Access type IE in the PDU SESSION RELEASE COMMAND",
+    "If the network-requested PDU session release procedure is not triggered by a UE-requested PDU session release procedure, the SMF shall set the PTI IE of the PDU SESSION RELEASE COMMAND message to \"No procedure transaction identity assigned\"",
+    "If the PDU session ID included in PDU SESSION RELEASE COMMAND message is associated with one or more MBS sessions and either the Access type IE is not included or the Access type IE indicates \"3GPP access\", the SMF shall consider the UE as removed from the associated MBS sessions",
+    "Based on the local policy and user's subscription data, if the SMF decides to release the PDU session after determining",
+    "a) the UE has moved between a tracking area in NB-N1 mode and a tracking area in WB-N1 mode",
+    "b) the UE has moved between a tracking area in NB-S1 mode and a tracking area in WB-N1 mode",
+    "c) the UE has moved between a tracking area in WB-S1 mode and a tracking area in NB-N1 mode; or",
+    "d) a PDU session is not only for control plane CIoT 5GS optimization any more",
+    "a) include the 5GSM cause value #39 \"reactivation requested\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message; or",
+    "b) include a 5GSM cause value other than #39 \"reactivation requested\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message",
+    "NOTE: The included 5GSM cause value is up to the network implementation",
+    "If the SMF receives UE presence in LADN service area from the AMF indicating that the UE is out of the LADN service area and the SMF decides to release the PDU session, the SMF shall include the 5GSM cause value #46 \"out of LADN service area\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message. Upon receipt of the 5GSM cause value #46 \"out of LADN service area\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message, the UE shall release the PDU session",
+    "The SMF may include a Back-off timer value IE in the PDU SESSION RELEASE COMMAND message when the 5GSM cause value #26 \"insufficient resources\" is included in the PDU SESSION RELEASE COMMAND message. If the 5GSM cause value is #26 \"insufficient resources\" and the PDU SESSION RELEASE COMMAND message is sent to a UE configured for high priority access in selected PLMN or the request type was set to \"initial emergency request\" or \"existing emergency PDU session\" for the establishment of the PDU session, the network shall not include a Back-off timer value IE",
+    "The SMF may include a Back-off timer value IE in the PDU SESSION RELEASE COMMAND message when the 5GSM cause value #67 \"insufficient resources for specific slice and DNN\" is included in the PDU SESSION RELEASE COMMAND message. If the 5GSM cause value is #67 \"insufficient resources for specific slice and DNN\" and the PDU SESSION RELEASE COMMAND message is sent to a UE configured for high priority access in selected PLMN or the request type was set to \"initial emergency request\" or \"existing emergency PDU session\" for the establishment of the PDU session, the network shall not include a Back-off timer value IE",
+    "The SMF may include a Back-off timer value IE in the PDU SESSION RELEASE COMMAND message when the 5GSM cause #69 \"insufficient resources for specific slice\" is included in the PDU SESSION RELEASE COMMAND message. If the 5GSM cause value is #69 \"insufficient resources for specific slice\" and the PDU SESSION RELEASE COMMAND message is sent to a UE configured for high priority access in selected PLMN or the request type was set to \"initial emergency request\" or \"existing emergency PDU session\" for the establishment of the PDU session, the network shall not include a Back-off timer value IE",
+    "The SMF should include a Back-off timer value IE in the PDU SESSION RELEASE COMMAND message when the 5GSM cause value #29 \"user authentication or authorization failed\" is included in the PDU SESSION RELEASE COMMAND message",
+    "If the service-level-AA procedure is triggered for the established PDU session for UAS services with re-authentication purpose, and the SMF is informed by the UAS-NF that UUAA-SM is unsuccessful or if the SMF receives UUAA revocation notification message from the UAS-NF as described in 3GPPTS23.256[6AB], the SMF shall transmit the PDU SESSION RELEASE COMMAND message to the UE, including",
+    "a) the service-level-AA response in the Service-level-AA container IE, with the SLAR field set to the value of \"Service level authentication and authorization was not successful or service level authorization is revoked\"; and",
+    "b) the 5GSM cause value #29 \"user authentication or authorization failed\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message",
+    "If the PDU session was established for C2 communication and the SMF is informed by UAS-NF that C2 authorization is revoked, the SMF shall include",
+    "a) the service-level-AA response with the value of the C2AR field set to the \"C2 authorization was not successful or C2 authorization is revoked\" in the service-level-AA container IE of the PDU SESSION RELEASE COMMAND message, and",
+    "b) the 5GSM cause value #29 \"user authentication or authorization failed\" in the 5GSM cause IE of the PDU SESSION RELEASE COMMAND message",
+    "The SMF shall send",
+    "a) the PDU SESSION RELEASE COMMAND message; and",
+    "b) the N1 SM delivery skip allowed indication",
+    "1) if the SMF allows the AMF to skip sending the N1 SM container to the UE and the 5GSM cause IE is not set to #39\"reactivation requested\"; or",
+    "2) if the SMF allows the AMF to skip sending the N1 SM container to the UE and the Access type IE is not included",
+    "towards the AMF, and the SMF shall start timer T3592 (see example in figure6.3.3.2.1)",
+    "Figure6.3.3.2.1: Network-requested PDU session release procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.3.3.2.1",
+      "file": "Figure_6_3_3_2_1_p522.png.json",
+      "title": "Network-requested PDU session release procedure",
+      "content": {
+        "figure_id": "6.3.3.2.1",
+        "title": "Network-requested PDU session release procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "SMF"
+          ],
+          "messages": [
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION RELEASE COMMAND",
+              "notes": "Start T3592"
+            },
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "PDU SESSION RELEASE COMPLETE",
+              "notes": "Stop T3592"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

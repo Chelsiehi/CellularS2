@@ -1,0 +1,189 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.5.3",
+  "title": "Transmission of SLSS",
+  "entities": [
+    {
+      "id": "PROC_SLSS_TRANSMISSION",
+      "name": "SLSS Transmission Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to select SLSSID and transmission slot for Sidelink Synchronization Signal transmission in NR sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "IE_SLSSID",
+      "name": "SLSSID",
+      "entity_type": "Information Element",
+      "description": "Sidelink Synchronization Signal Identifier used for synchronization reference identification.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "IE_SLSS_TIME_ALLOCATION",
+      "name": "SL-SSB-TimeAllocation",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters defining slot allocation for SLSS transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "COND_GNSS_SYNC_REF",
+      "name": "GNSS as synchronization reference",
+      "entity_type": "Condition",
+      "description": "Condition where UE has selected GNSS as synchronization reference according to 5.8.6.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "COND_CELL_SYNC_REF",
+      "name": "Cell as synchronization reference",
+      "entity_type": "Condition",
+      "description": "Condition where UE has selected a cell as synchronization reference according to 5.8.6.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "COND_SYNCREF_UE_SELECTED",
+      "name": "SyncRef UE selected",
+      "entity_type": "Condition",
+      "description": "Condition where UE has selected a synchronization reference UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "COND_IN_COVERAGE",
+      "name": "In coverage condition",
+      "entity_type": "Condition",
+      "description": "Condition based on inCoverage field in MasterInformationBlockSidelink from SyncRef UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "MSG_MASTER_INFORMATION_BLOCK_SIDELINK",
+      "name": "MasterInformationBlockSidelink",
+      "entity_type": "Message",
+      "description": "Sidelink broadcast message containing synchronization information including inCoverage indicator.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "PROP_SLSS_SELECTION",
+      "name": "SLSS selection behavior",
+      "entity_type": "Property",
+      "description": "UE behavior for selecting SLSSID and transmission slot based on synchronization reference and coverage conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SLSS_TRANSMISSION",
+      "target": "IE_SLSSID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SLSS transmission procedure involves selection of SLSSID.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SLSS_TRANSMISSION",
+      "target": "IE_SLSS_TIME_ALLOCATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SLSS transmission procedure uses SL-SSB-TimeAllocation parameters for slot selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SLSS_TRANSMISSION",
+      "target": "COND_GNSS_SYNC_REF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by GNSS synchronization reference condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SLSS_TRANSMISSION",
+      "target": "COND_CELL_SYNC_REF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by cell synchronization reference condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SLSS_TRANSMISSION",
+      "target": "COND_SYNCREF_UE_SELECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by SyncRef UE selection condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_GNSS_SYNC_REF",
+      "target": "PROP_SLSS_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "GNSS synchronization reference condition establishes SLSSID 0 selection behavior.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CELL_SYNC_REF",
+      "target": "PROP_SLSS_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell synchronization reference condition establishes SLSSID selection from configured list.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SYNCREF_UE_SELECTED",
+      "target": "MSG_MASTER_INFORMATION_BLOCK_SIDELINK",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SyncRef UE selection condition requires reception of MasterInformationBlockSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_IN_COVERAGE",
+      "target": "PROP_SLSS_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "In coverage condition establishes same SLSSID selection as SyncRef UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.3"
+      ]
+    }
+  ]
+}

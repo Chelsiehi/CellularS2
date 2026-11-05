@@ -1,0 +1,227 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.13",
+  "title": "Actions upon reception of SIB12",
+  "entities": [
+    {
+      "id": "SIB12",
+      "name": "System Information Block 12",
+      "entity_type": "Message",
+      "description": "System Information Block containing sidelink configuration parameters for NR sidelink communication and discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SIB12_IE",
+      "name": "SIB12 Information Elements",
+      "entity_type": "Information Element",
+      "description": "Assembled information elements from SIB12 segments containing sidelink configuration parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "VALUE_TAG_CHANGED",
+      "name": "SIB12 value tag changed",
+      "entity_type": "Condition",
+      "description": "Condition where the value tag of SIB12 has changed since previous segments were stored.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "ALL_SEGMENTS_RECEIVED",
+      "name": "All SIB12 segments received",
+      "entity_type": "Condition",
+      "description": "Condition where all segments of SIB12 have been successfully received by the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_CONFIG_COMMON_NR",
+      "name": "sl-ConfigCommonNR",
+      "entity_type": "Information Element",
+      "description": "Sidelink configuration common parameters for NR, containing frequency information and resource pools.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_FREQ_INFO_LIST",
+      "name": "sl-FreqInfoList",
+      "entity_type": "Information Element",
+      "description": "List of frequencies for NR sidelink communication and discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_RADIO_BEARER_CONFIG_LIST",
+      "name": "sl-RadioBearerConfigList",
+      "entity_type": "Information Element",
+      "description": "Configuration list for sidelink radio bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_RLC_BEARER_CONFIG_LIST",
+      "name": "sl-RLC-BearerConfigList",
+      "entity_type": "Information Element",
+      "description": "Configuration list for sidelink RLC bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_MEAS_CONFIG_COMMON",
+      "name": "sl-MeasConfigCommon",
+      "entity_type": "Information Element",
+      "description": "Common measurement configuration for NR sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "SL_DRX_CONFIG_COMMON_GC_BC",
+      "name": "sl-DRX-ConfigCommon-GC-BC",
+      "entity_type": "Information Element",
+      "description": "DRX configuration common for groupcast and broadcast in NR sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "DISCARD_SEGMENTS",
+      "name": "Discard stored SIB12 segments",
+      "entity_type": "Property",
+      "description": "UE action to discard all stored SIB12 segments when value tag changes or during cell (re-)selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "STORE_SEGMENT",
+      "name": "Store SIB12 segment",
+      "entity_type": "Property",
+      "description": "UE action to store received SIB12 segments for later assembly.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SIB12",
+      "target": "SIB12_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 contains information elements that are assembled from received segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "VALUE_TAG_CHANGED",
+      "target": "DISCARD_SEGMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SIB12 value tag changes, UE discards all stored segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ALL_SEGMENTS_RECEIVED",
+      "target": "SIB12_IE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When all segments are received, UE assembles SIB12 information elements.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIB12_IE",
+      "target": "SL_CONFIG_COMMON_NR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 information elements contain sl-ConfigCommonNR configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SL_CONFIG_COMMON_NR",
+      "target": "SL_FREQ_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ConfigCommonNR contains sl-FreqInfoList for sidelink frequencies.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIB12_IE",
+      "target": "SL_RADIO_BEARER_CONFIG_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 information elements contain sl-RadioBearerConfigList for sidelink bearer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SIB12_IE",
+      "target": "SL_RLC_BEARER_CONFIG_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 information elements contain sl-RLC-BearerConfigList for sidelink RLC bearer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SIB12_IE",
+      "target": "SL_MEAS_CONFIG_COMMON",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 information elements contain sl-MeasConfigCommon for sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SIB12_IE",
+      "target": "SL_DRX_CONFIG_COMMON_GC_BC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 information elements contain sl-DRX-ConfigCommon-GC-BC for sidelink DRX configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STORE_SEGMENT",
+      "target": "SIB12",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE stores received SIB12 segments as part of SIB12 reception procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.13"
+      ]
+    }
+  ]
+}

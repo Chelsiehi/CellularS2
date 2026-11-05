@@ -1,0 +1,214 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.7",
+  "title": "SpCell Configuration",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE that performs SpCell configuration procedures according to the specified conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE",
+      "name": "L2 U2N Remote UE",
+      "entity_type": "Condition",
+      "description": "UE connected with a L2 U2N Relay UE via PC5-RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "SPCELL_CONFIG",
+      "name": "SpCell Configuration",
+      "entity_type": "Information Element",
+      "description": "Configuration information for the Special Cell including timer configurations and dedicated parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "RLF_TIMERS_CONSTANTS",
+      "name": "RLF Timers and Constants",
+      "entity_type": "Information Element",
+      "description": "Radio Link Failure timers and constants configuration for cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "DAPS_BEARER",
+      "name": "DAPS Bearer",
+      "entity_type": "Condition",
+      "description": "Condition where any DAPS bearer is configured in the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "SPCELL_CONFIG_DEDICATED",
+      "name": "SpCell Config Dedicated",
+      "entity_type": "Information Element",
+      "description": "Dedicated configuration parameters for the Special Cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "T300",
+      "name": "Timer T300",
+      "entity_type": "Timer",
+      "description": "Timer used for RRC connection establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "T301",
+      "name": "Timer T301",
+      "entity_type": "Timer",
+      "description": "Timer used for RRC connection re-establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer used for radio link failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer used for RRC connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer used for radio link monitoring.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "N310",
+      "name": "Counter N310",
+      "entity_type": "Property",
+      "description": "Counter for out-of-sync indications in radio link monitoring.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "N311",
+      "name": "Counter N311",
+      "entity_type": "Property",
+      "description": "Counter for in-sync indications in radio link monitoring.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "L2_U2N_REMOTE_UE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE behavior depends on whether it is a L2 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SPCELL_CONFIG",
+      "target": "RLF_TIMERS_CONSTANTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SpCellConfig may contain RLF timers and constants configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "DAPS_BEARER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE timer configuration depends on DAPS bearer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SPCELL_CONFIG",
+      "target": "SPCELL_CONFIG_DEDICATED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SpCellConfig may contain dedicated SpCell configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SPCELL_CONFIG_DEDICATED",
+      "target": "T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When reference signals for radio link monitoring are reconfigured, timer T310 is stopped.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SPCELL_CONFIG_DEDICATED",
+      "target": "T312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When reference signals for radio link monitoring are reconfigured, timer T312 is stopped.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SPCELL_CONFIG_DEDICATED",
+      "target": "N310",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When reference signals for radio link monitoring are reconfigured, counter N310 is reset.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SPCELL_CONFIG_DEDICATED",
+      "target": "N311",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When reference signals for radio link monitoring are reconfigured, counter N311 is reset.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.7"
+      ]
+    }
+  ]
+}

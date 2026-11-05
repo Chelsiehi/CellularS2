@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_IDENTIFICATION",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the network to request a UE to provide specific identification parameters such as IMSI or IMEI.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_IMSI",
+      "name": "International Mobile Subscriber Identity",
+      "entity_type": "Information Element",
+      "description": "Identification parameter that can be requested by the network during the identification procedure. Defined in 3GPP TS 23.003.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_IMEI",
+      "name": "International Mobile Equipment Identity",
+      "entity_type": "Information Element",
+      "description": "Identification parameter that can be requested by the network during the identification procedure. Defined in 3GPP TS 23.003. A single IMEI is used for devices supporting both 3GPP and cdma2000 access.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "CONDITION_MUSIM",
+      "name": "MUSIM UE condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is a MUSIM UE, requiring the use of separate IMEI for each USIM the UE operates.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_IDENTIFICATION",
+      "target": "IE_IMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The identification procedure can request the IMSI identification parameter from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_IDENTIFICATION",
+      "target": "IE_IMEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The identification procedure can request the IMEI identification parameter from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_MUSIM",
+      "target": "IE_IMEI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When the UE is a MUSIM UE, it uses separate IMEI for each USIM.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.1"
+      ]
+    }
+  ]
+}

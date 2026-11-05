@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.4A",
+  "title": "Attach successful for EPS services and not accepted for SMS services",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE_SMS_NOT_ACCEPTED",
+      "name": "Attach procedure with SMS services not accepted",
+      "entity_type": "Procedure",
+      "description": "Attach procedure where EPS services are successful but SMS services are not accepted by the network. The MME sets EPS attach result to 'EPS only' and provides SMS services status in ATTACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE indicating attach acceptance. Contains EPS attach result IE and SMS services status IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "EPS_ATTACH_RESULT_IE",
+      "name": "EPS attach result IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the result of EPS attach procedure. Set to 'EPS only' when SMS services are not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "SMS_SERVICES_STATUS_IE",
+      "name": "SMS services status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the status of SMS services. Contains values like 'SMS services not available' or 'SMS services not available in this PLMN'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer used during attach procedure. Stopped when ATTACH ACCEPT is received.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter is less than 5. Triggers tracking area updating procedure when expired.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter equals 5. Triggers tracking area updating procedure when expired.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state entered after successful attach for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "name": "Tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of tracking area updating attempts. Reset to zero or incremented based on SMS services status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "name": "EPS update status EU1 UPDATED",
+      "entity_type": "Property",
+      "description": "EPS update status set to updated after successful attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "SMS_SERVICES_NOT_AVAILABLE",
+      "name": "SMS services not available condition",
+      "entity_type": "Condition",
+      "description": "Condition when SMS services status IE indicates 'SMS services not available'. UE stops T3410, resets counter, and enters EMM-REGISTERED.NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "SMS_SERVICES_NOT_AVAILABLE_IN_PLMN",
+      "name": "SMS services not available in this PLMN condition",
+      "entity_type": "Condition",
+      "description": "Condition when SMS services status IE indicates 'SMS services not available in this PLMN'. UE stops T3410, resets counter, and enters EMM-REGISTERED.NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_PROCEDURE_SMS_NOT_ACCEPTED",
+      "target": "ATTACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure involves sending ATTACH ACCEPT message with specific IE settings",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_ACCEPT",
+      "target": "EPS_ATTACH_RESULT_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains EPS attach result IE set to 'EPS only'",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_ACCEPT",
+      "target": "SMS_SERVICES_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains SMS services status IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMS_SERVICES_STATUS_IE",
+      "target": "SMS_SERVICES_NOT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMS services status IE value 'SMS services not available' triggers specific UE behavior",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SMS_SERVICES_STATUS_IE",
+      "target": "SMS_SERVICES_NOT_AVAILABLE_IN_PLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMS services status IE value 'SMS services not available in this PLMN' triggers specific UE behavior",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SMS_SERVICES_NOT_AVAILABLE",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Condition stops timer T3410 if running",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SMS_SERVICES_NOT_AVAILABLE",
+      "target": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition resets the tracking area updating attempt counter",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SMS_SERVICES_NOT_AVAILABLE",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires UE to enter EMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SMS_SERVICES_NOT_AVAILABLE_IN_PLMN",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Condition stops timer T3410 if running",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SMS_SERVICES_NOT_AVAILABLE_IN_PLMN",
+      "target": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition resets the tracking area updating attempt counter",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "SMS_SERVICES_NOT_AVAILABLE_IN_PLMN",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires UE to enter EMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "ATTACH_PROCEDURE_SMS_NOT_ACCEPTED",
+      "target": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EPS update status as EU1 UPDATED",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.20.2",
+  "title": "Requirements for UE in a PLMN",
+  "entities": [
+    {
+      "id": "PLMN_ATTEMPT_COUNTERS_3GPP",
+      "name": "PLMN-specific attempt counters for 3GPP access",
+      "entity_type": "Property",
+      "description": "List of counters maintained by UE for access attempts via 3GPP access. Maximum number of entries is implementation dependent.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "PLMN_ATTEMPT_COUNTERS_NON3GPP",
+      "name": "PLMN-specific attempt counters for non-3GPP access",
+      "entity_type": "Property",
+      "description": "List of counters maintained by UE for access attempts via non-3GPP access. Only present if UE supports non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "N1_MODE_ATTEMPT_COUNTERS_3GPP",
+      "name": "PLMN-specific N1 mode attempt counters for 3GPP access",
+      "entity_type": "Property",
+      "description": "List of counters for N1 mode access attempts via 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "N1_MODE_ATTEMPT_COUNTERS_NON3GPP",
+      "name": "PLMN-specific N1 mode attempt counters for non-3GPP access",
+      "entity_type": "Property",
+      "description": "List of counters for N1 mode access attempts via non-3GPP access. Only present if UE supports non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "COUNTER_SIM_INVALID_GPRS",
+      "name": "Counter for SIM/USIM considered invalid for GPRS services",
+      "entity_type": "Property",
+      "description": "Event counter for when SIM/USIM is considered invalid for GPRS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "COUNTER_USIM_INVALID_NON3GPP",
+      "name": "Counter for USIM considered invalid for 5GS services over non-3GPP access",
+      "entity_type": "Property",
+      "description": "Event counter for when USIM is considered invalid for 5GS services over non-3GPP access. Only present if UE supports non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3247",
+      "name": "Timer T3247",
+      "entity_type": "Timer",
+      "description": "Timer started when UE receives unprotected REGISTRATION REJECT or SERVICE REJECT with certain 5GMM cause values. Duration is random between 30-60 minutes.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "name": "5GMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "UE state entered when certain unprotected reject messages are received with specific 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that can trigger UE actions when received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that can trigger UE actions when received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "CONDITION_UNPROTECTED_REJECT",
+      "name": "Unprotected REGISTRATION REJECT or SERVICE REJECT",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives REGISTRATION REJECT or SERVICE REJECT without integrity protection before secure NAS exchange established.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_STORE_NONVOLATILE",
+      "name": "Store counters in non-volatile memory",
+      "entity_type": "Property",
+      "description": "UE requirement to store attempt counters and event counters in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "TIMER_T3247",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3247 when receiving unprotected REGISTRATION REJECT or SERVICE REJECT with specified 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters 5GMM-DEREGISTERED.LIMITED-SERVICE state when receiving unprotected reject with certain 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Unprotected REGISTRATION REJECT message triggers UE actions including starting T3247 and state transition.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Unprotected SERVICE REJECT message triggers UE actions including starting T3247 and state transition.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_STORE_NONVOLATILE",
+      "target": "PLMN_ATTEMPT_COUNTERS_3GPP",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PLMN-specific attempt counters for 3GPP access are stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_STORE_NONVOLATILE",
+      "target": "PLMN_ATTEMPT_COUNTERS_NON3GPP",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PLMN-specific attempt counters for non-3GPP access are stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_T3247",
+      "target": "COUNTER_SIM_INVALID_GPRS",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Upon T3247 expiry, UE sets USIM to valid for 5GS services if counter value is below maximum.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3247",
+      "target": "COUNTER_USIM_INVALID_NON3GPP",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Upon T3247 expiry, UE sets USIM to valid for 5GS services over non-3GPP access if counter value is below maximum.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.15.3",
+  "title": "Time synchronization",
+  "entities": [
+    {
+      "id": "SYNC_5GS",
+      "name": "5GS synchronization",
+      "entity_type": "Procedure",
+      "description": "Synchronization process where lower layers provide the 5G internal system clock via NG-RAN, and the UE forwards this clock to DS-TT(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "SYNC_GPTP",
+      "name": "(g)PTP domain synchronization",
+      "entity_type": "Procedure",
+      "description": "Synchronization process where the UE forwards (g)PTP messages between the PDU session and DS-TT(s) associated with the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE forwards synchronization information (5G internal system clock or (g)PTP messages) between network elements and DS-TT(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "DS_TT",
+      "name": "DS-TT",
+      "entity_type": "Property",
+      "description": "Device-side time-sensitive networking translator that receives synchronization information (5G internal system clock or (g)PTP messages) from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "NG_RAN",
+      "name": "NG-RAN",
+      "entity_type": "Property",
+      "description": "Next Generation Radio Access Network that provides the 5G internal system clock for 5GS synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU session",
+      "entity_type": "Property",
+      "description": "Protocol Data Unit session used for forwarding (g)PTP messages between the UE and DS-TT(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "CLOCK_5G",
+      "name": "5G internal system clock",
+      "entity_type": "Property",
+      "description": "System clock provided by lower layers via NG-RAN and forwarded by the UE to DS-TT(s) for 5GS synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "MSG_GPTP",
+      "name": "(g)PTP messages",
+      "entity_type": "Message",
+      "description": "Precision Time Protocol messages used for (g)PTP domain synchronization, forwarded between PDU session and DS-TT(s) by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SYNC_5GS",
+      "target": "CLOCK_5G",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GS synchronization involves using the 5G internal system clock provided via NG-RAN.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SYNC_5GS",
+      "target": "UE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The UE forwards the 5G internal system clock to DS-TT(s) as part of 5GS synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SYNC_GPTP",
+      "target": "MSG_GPTP",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "(g)PTP domain synchronization involves forwarding (g)PTP messages between PDU session and DS-TT(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE",
+      "target": "DS_TT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The UE forwards synchronization information (clock or messages) to DS-TT(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NG_RAN",
+      "target": "CLOCK_5G",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NG-RAN provides the 5G internal system clock for 5GS synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION",
+      "target": "MSG_GPTP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "(g)PTP messages are transmitted via the PDU session for (g)PTP domain synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.3"
+      ]
+    }
+  ]
+}

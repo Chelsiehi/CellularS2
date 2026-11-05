@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.8",
+  "title": "Messages with semantically incorrect contents",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives messages with semantically incorrect contents and performs specified reactions.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network side that should follow the same procedure as UE for handling semantically incorrect messages, except without transmitting status messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "EMM_STATUS",
+      "name": "EMM STATUS",
+      "entity_type": "Message",
+      "description": "A status message sent by UE when no specific reactions are specified for a semantically incorrect EMM message.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "ESM_STATUS",
+      "name": "ESM STATUS",
+      "entity_type": "Message",
+      "description": "A status message sent by UE when no specific reactions are specified for a semantically incorrect ESM message.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "CAUSE_95",
+      "name": "Cause #95 semantically incorrect message",
+      "entity_type": "Condition",
+      "description": "The cause value included in status messages when UE receives semantically incorrect messages without specified reactions.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "PROCEDURAL_REACTIONS",
+      "name": "Procedural reactions",
+      "entity_type": "Procedure",
+      "description": "The foreseen reactions specified in clauses 4, 5 and 6 of TS 24.301 for handling messages with semantically incorrect contents.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "PROCEDURAL_REACTIONS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE shall perform procedural reactions from clauses 4, 5 and 6 when receiving semantically incorrect messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "EMM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends EMM STATUS message when no specific reactions are specified for semantically incorrect EMM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "ESM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends ESM STATUS message when no specific reactions are specified for semantically incorrect ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMM_STATUS",
+      "target": "CAUSE_95",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM STATUS message includes cause #95 for semantically incorrect messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ESM_STATUS",
+      "target": "CAUSE_95",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM STATUS message includes cause #95 for semantically incorrect messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NETWORK",
+      "target": "PROCEDURAL_REACTIONS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network should follow the same procedure as UE for handling semantically incorrect messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.8"
+      ]
+    }
+  ]
+}

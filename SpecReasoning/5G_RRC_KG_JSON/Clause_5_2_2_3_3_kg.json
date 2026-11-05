@@ -1,0 +1,167 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.3",
+  "title": "Request for on demand system information",
+  "entities": [
+    {
+      "id": "PROC_SI_REQUEST",
+      "name": "On-demand System Information Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request system information that is not currently broadcast, using random access and RRCSystemInfoRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T319a",
+      "name": "Timer T319a",
+      "entity_type": "Timer",
+      "description": "Timer that must not be running for the SI request procedure to be initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "IE_SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "Contains scheduling information and configuration for requesting other system information.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "IE_SI_REQUEST_CONFIG",
+      "name": "SI Request Configuration",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for requesting system information via random access.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "name": "RRCSystemInfoRequest Message",
+      "entity_type": "Message",
+      "description": "RRC message used to request system information from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_T319a_NOT_RUNNING",
+      "name": "T319a not running",
+      "entity_type": "Condition",
+      "description": "Precondition for initiating the SI request procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_SI_BROADCAST_STATUS",
+      "name": "SI broadcast status notBroadcasting",
+      "entity_type": "Condition",
+      "description": "Condition where the required SI message is not being broadcast by the cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "PROP_ACQUIRE_SI",
+      "name": "Acquire requested SI messages",
+      "entity_type": "Property",
+      "description": "Action to acquire the requested system information messages immediately after acknowledgement.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "PROP_RELEASE_SRB0_RLC",
+      "name": "Release RLC entity for SRB0",
+      "entity_type": "Property",
+      "description": "Action to release the RLC entity for Signaling Radio Bearer 0 during cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SI_REQUEST",
+      "target": "COND_T319a_NOT_RUNNING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SI request procedure requires that timer T319a is not running.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SI_REQUEST",
+      "target": "IE_SIB1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution depends on configuration parameters in SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SI_REQUEST",
+      "target": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of RRCSystemInfoRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SI_REQUEST",
+      "target": "PROP_ACQUIRE_SI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in acquisition of requested SI messages after acknowledgement.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SI_BROADCAST_STATUS",
+      "target": "PROC_SI_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SI request is only performed for messages with broadcast status set to notBroadcasting.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_SIB1",
+      "target": "IE_SI_REQUEST_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB1 contains SI request configuration parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SI_REQUEST",
+      "target": "PROP_RELEASE_SRB0_RLC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure may result in release of SRB0 RLC entity during cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.3"
+      ]
+    }
+  ]
+}

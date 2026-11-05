@@ -1,0 +1,271 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.2",
+  "title": "Mobility and periodic registration update initiation",
+  "entities": [
+    {
+      "id": "PROC_MOBILITY_PERIODIC_REG",
+      "name": "Mobility and Periodic Registration Update",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated by UE in 5GMM-REGISTERED state for mobility updates or periodic registration. UE sends REGISTRATION REQUEST message to AMF under various conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2",
+        "Figure 5.5.1.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to AMF to initiate mobility and periodic registration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2",
+        "Figure 5.5.1.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of registration update: mobility registration updating, periodic registration updating, or disaster roaming mobility registration updating.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability",
+      "entity_type": "Information Element",
+      "description": "IE containing UE's 5GMM capabilities including support for various features like S1 mode, LPP, LCS, RACS, 5G-SRVCC, etc.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3512",
+      "name": "T3512",
+      "entity_type": "Timer",
+      "description": "Periodic registration updating timer that triggers registration procedure when it expires in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3510",
+      "name": "T3510",
+      "entity_type": "Timer",
+      "description": "Timer started by UE after sending REGISTRATION REQUEST message to AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2",
+        "Figure 5.5.1.3.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state where UE is registered with the network and can initiate mobility and periodic registration update procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "UE state where UE is registered but has no active NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in registered TAI list",
+      "entity_type": "Condition",
+      "description": "Condition triggering registration procedure when UE detects current TAI is not in previously registered tracking area list.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_T3512_EXPIRES",
+      "name": "T3512 timer expires",
+      "entity_type": "Condition",
+      "description": "Condition triggering periodic registration update when T3512 timer expires in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing S-NSSAI(s) corresponding to network slices UE intends to register to.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_5GS_MOBILE_IDENTITY",
+      "name": "5GS mobile identity",
+      "entity_type": "Information Element",
+      "description": "IE containing UE identity such as 5G-GUTI or mapped 5G-GUTI from 4G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_MICO_INDICATION",
+      "name": "MICO indication",
+      "entity_type": "Information Element",
+      "description": "IE used by UE to request use of MICO mode or indicate support for strictly periodic registration timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status",
+      "entity_type": "Information Element",
+      "description": "IE indicating PDU sessions with pending user data to be sent over user plane.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MOBILITY_PERIODIC_REG",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure is initiated by sending REGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GMM capability IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Requested NSSAI IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS mobile identity IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_MICO_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain MICO indication IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Uplink data status IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_MOBILITY_PERIODIC_REG",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure requires UE to be in 5GMM-REGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROC_MOBILITY_PERIODIC_REG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggers registration procedure when current TAI not in registered list",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_T3512_EXPIRES",
+      "target": "PROC_MOBILITY_PERIODIC_REG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggers registration procedure when T3512 timer expires",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_MOBILITY_PERIODIC_REG",
+      "target": "TIMER_T3510",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Registration procedure starts timer T3510 after sending REGISTRATION REQUEST",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2",
+        "Figure 5.5.1.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_T3512_EXPIRES",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When T3512 expires is only reason, UE sets registration type to periodic registration updating",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.2"
+      ]
+    }
+  ]
+}

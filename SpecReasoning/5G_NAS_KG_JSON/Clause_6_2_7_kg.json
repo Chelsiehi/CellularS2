@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.7",
+  "title": "Handling of DNN based congestion control",
+  "entities": [
+    {
+      "id": "DNN_CONGESTION_CONTROL",
+      "name": "DNN based congestion control",
+      "entity_type": "Procedure",
+      "description": "Network procedure for detecting and performing congestion control based on DNN criteria as specified in 3GPP TS 23.501.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "5GS session management timer for DNN based congestion control, started and stopped on per DNN basis with special rules for LADN DNN and SNPN scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "DNN",
+      "name": "DNN",
+      "entity_type": "Identifier",
+      "description": "Data Network Name identifier provided by UE during PDU session establishment, used for congestion control association.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "LADN_DNN",
+      "name": "LADN DNN",
+      "entity_type": "Identifier",
+      "description": "Local Area Data Network DNN with special timer handling applied to registered PLMN and equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "SNPN",
+      "name": "SNPN",
+      "entity_type": "Identifier",
+      "description": "Standalone Non-Public Network identifier used for timer association in DNN congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "CONGESTION_DETECTED",
+      "name": "DNN congestion criteria met",
+      "entity_type": "Condition",
+      "description": "Condition when network detects one or more DNN congestion criteria as specified in 3GPP TS 23.501 are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "T3396_RUNNING_OR_DEACTIVATED",
+      "name": "T3396 running or deactivated",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3396 is either running or deactivated, restricting UE from initiating certain procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RESTRICTION",
+      "name": "Procedure restriction",
+      "entity_type": "Property",
+      "description": "UE is not allowed to initiate PDU session establishment, PDU session modification, or NAS transport for CIoT user data when T3396 is running/deactivated for respective DNN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "EMERGENCY_EXCEPTION",
+      "name": "Emergency PDU session exception",
+      "entity_type": "Property",
+      "description": "Timer T3396 associated with no DNN does not affect UE ability to request emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DNN_CONGESTION_CONTROL",
+      "target": "CONGESTION_DETECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network starts DNN based congestion control when DNN congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DNN_CONGESTION_CONTROL",
+      "target": "TIMER_T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network congestion control triggers starting of timer T3396 on per DNN basis.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3396",
+      "target": "DNN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 is associated with the DNN provided by UE during PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3396",
+      "target": "LADN_DNN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For LADN DNN, timer T3396 is applied to registered PLMN and equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3396",
+      "target": "SNPN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For SNPN, timer T3396 association depends on UE support for credentials holder access.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "T3396_RUNNING_OR_DEACTIVATED",
+      "target": "PROCEDURE_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When T3396 is running or deactivated, UE is restricted from initiating certain procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_T3396",
+      "target": "EMERGENCY_EXCEPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 associated with no DNN does not restrict emergency PDU session requests.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.7"
+      ]
+    }
+  ]
+}

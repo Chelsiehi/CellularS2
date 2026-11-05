@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.8",
+  "title": "Quantity configuration",
+  "entities": [
+    {
+      "id": "QUANTITY_CONFIG_PROCEDURE",
+      "name": "Quantity Configuration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE updates quantity configuration parameters and manages measurement reporting based on received quantityConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "QUANTITY_CONFIG",
+      "name": "quantityConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for measurement quantities received from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG",
+      "name": "VarMeasConfig",
+      "entity_type": "Information Element",
+      "description": "UE variable storing measurement configuration including quantityConfig parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "MEAS_ID",
+      "name": "measId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a measurement configuration entry in measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "MEAS_ID_LIST",
+      "name": "measIdList",
+      "entity_type": "Information Element",
+      "description": "List of measurement identifiers within VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST",
+      "name": "VarMeasReportList",
+      "entity_type": "Information Element",
+      "description": "UE variable storing measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer for periodical measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "timer T321",
+      "entity_type": "Timer",
+      "description": "Measurement reporting timer T321.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "timer T322",
+      "entity_type": "Timer",
+      "description": "Measurement reporting timer T322.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "TIME_TO_TRIGGER",
+      "name": "timeToTrigger",
+      "entity_type": "Property",
+      "description": "Associated information for measurement reporting that gets reset.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "QUANTITY_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to process received quantityConfig parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "VAR_MEAS_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure updates quantityConfig parameters in VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "MEAS_ID",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure processes each measId in measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "VAR_MEAS_REPORT_LIST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure removes measurement reporting entries from VarMeasReportList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops the periodical reporting timer for each measId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "TIMER_T321",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T321 for each measId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "TIMER_T322",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T322 for each measId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "QUANTITY_CONFIG_PROCEDURE",
+      "target": "TIME_TO_TRIGGER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Procedure resets associated information like timeToTrigger for each measId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "VAR_MEAS_CONFIG",
+      "target": "MEAS_ID_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfig contains measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.8"
+      ]
+    }
+  ]
+}

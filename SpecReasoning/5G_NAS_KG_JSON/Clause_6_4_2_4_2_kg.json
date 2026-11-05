@@ -1,0 +1,271 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.4.2",
+  "title": "Handling of network rejection due to congestion control",
+  "entities": [
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Back-off timer used for DNN-based congestion control. Controls when UE can reattempt PDU session establishment/modification requests for specific DNN combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "Timer T3584",
+      "entity_type": "Timer",
+      "description": "Back-off timer used for S-NSSAI and DNN based congestion control. Controls when UE can reattempt PDU session requests for specific S-NSSAI and DNN combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "Timer T3585",
+      "entity_type": "Timer",
+      "description": "Back-off timer used for S-NSSAI only based congestion control. Controls when UE can reattempt PDU session requests for specific S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "5GSM message sent by network to reject PDU session modification request, containing congestion control information.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer value for congestion control back-off timers T3396, T3584, or T3585.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for rejection, including congestion control causes #26, #67, and #69.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "CONGESTION_CONTROL_PROCEDURE",
+      "name": "Congestion control handling procedure",
+      "entity_type": "Procedure",
+      "description": "UE procedure for handling network rejection due to congestion control, involving back-off timers and request restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM mobility management state where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_ACTIVE",
+      "name": "Timer neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer value indicates an active timer duration (not zero or deactivated).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_DEACTIVATED",
+      "name": "Timer deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer value indicates timer is deactivated (permanent restriction until specific events).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_ZERO",
+      "name": "Timer value zero",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer value indicates zero, allowing immediate reattempt.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_REQUEST_RESTRICTION",
+      "name": "Request restriction during congestion",
+      "entity_type": "Property",
+      "description": "UE behavior property restricting PDU session establishment/modification requests while back-off timer is running or deactivated.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONGESTION_CONTROL_PROCEDURE",
+      "target": "TIMER_T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3396 when DNN-based congestion is detected",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONGESTION_CONTROL_PROCEDURE",
+      "target": "TIMER_T3584",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3584 when S-NSSAI and DNN based congestion is detected",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONGESTION_CONTROL_PROCEDURE",
+      "target": "TIMER_T3585",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3585 when S-NSSAI only based congestion is detected",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains Back-off timer value IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains 5GSM cause value IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_TIMER_ACTIVE",
+      "target": "PROPERTY_REQUEST_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Active timer condition establishes request restriction property",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_TIMER_DEACTIVATED",
+      "target": "PROPERTY_REQUEST_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Deactivated timer condition establishes permanent request restriction property",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_TIMER_ZERO",
+      "target": "PROPERTY_REQUEST_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Zero timer value condition removes request restriction property",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "TIMER_T3396",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3396 continues running when UE enters 5GMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "TIMER_T3584",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3584 continues running when UE enters 5GMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "TIMER_T3585",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3585 continues running when UE enters 5GMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "CONDITION_TIMER_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards by timer active condition",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "CONDITION_TIMER_DEACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards by timer deactivated condition",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "CONDITION_TIMER_ZERO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards by timer zero condition",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.2"
+      ]
+    }
+  ]
+}

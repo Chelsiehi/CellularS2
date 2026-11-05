@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.10",
+  "title": "Support of MUSIM features",
+  "entities": [
+    {
+      "id": "MUSIM_UE",
+      "name": "MUSIM UE",
+      "entity_type": "Property",
+      "description": "A UE that supports one or more MUSIM features including NAS signalling connection release, paging indication for voice services, reject paging request, paging restriction, and paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the UE indicates support for MUSIM features and the network may accept them.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "NORMAL_TAU_PROCEDURE",
+      "name": "Normal tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the UE to indicate support for MUSIM features and by the network to accept them. Also used when UE stops being a MUSIM UE to indicate feature withdrawal.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "NAS_SIGNALLING_CONNECTION_RELEASE",
+      "name": "NAS signalling connection release",
+      "entity_type": "Property",
+      "description": "A MUSIM feature that allows release of NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "PAGING_INDICATION_VOICE",
+      "name": "Paging indication for voice services",
+      "entity_type": "Property",
+      "description": "A MUSIM feature for paging indication specific to voice services. Not indicated in NB-S1 mode or WB-S1 mode CE mode B.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REJECT_PAGING_REQUEST",
+      "name": "Reject paging request",
+      "entity_type": "Property",
+      "description": "A MUSIM feature allowing the UE to reject paging requests.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Property",
+      "description": "A MUSIM feature for restricting paging. Indicated only if UE supports NAS signalling connection release or reject paging request.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "PAGING_TIMING_COLLISION_CONTROL",
+      "name": "Paging timing collision control",
+      "entity_type": "Property",
+      "description": "A MUSIM feature for controlling paging timing collisions.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "EMERGENCY_ATTACH",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Attach procedure for emergency services during which network does not indicate support for any MUSIM feature.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "CONDITION_MUSIM_UE",
+      "name": "Condition to be considered a MUSIM UE",
+      "entity_type": "Condition",
+      "description": "Condition defined in subclause 3.1. If UE stops fulfilling this condition, it must initiate normal TAU to withdraw MUSIM feature support.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MUSIM_UE",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MUSIM UE indicates support for MUSIM features during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MUSIM_UE",
+      "target": "NORMAL_TAU_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MUSIM UE indicates support for MUSIM features during normal tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAGING_RESTRICTION",
+      "target": "NAS_SIGNALLING_CONNECTION_RELEASE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE indicates support of paging restriction only if it supports NAS signalling connection release or reject paging request.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PAGING_RESTRICTION",
+      "target": "REJECT_PAGING_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE indicates support of paging restriction only if it supports NAS signalling connection release or reject paging request.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMERGENCY_ATTACH",
+      "target": "MUSIM_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network does not indicate support for any MUSIM feature during attach for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_MUSIM_UE",
+      "target": "NORMAL_TAU_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If UE stops fulfilling MUSIM UE condition, it initiates normal TAU to indicate MUSIM features are not supported.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MUSIM_UE",
+      "target": "PAGING_INDICATION_VOICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MUSIM UE in NB-S1 mode or WB-S1 mode CE mode B does not indicate support for paging indication for voice services.",
+      "provenance": [
+        "TS 24.301, Clause 4.10"
+      ]
+    }
+  ]
+}

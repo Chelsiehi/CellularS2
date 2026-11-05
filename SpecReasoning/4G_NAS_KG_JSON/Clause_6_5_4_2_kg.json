@@ -1,0 +1,242 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.2",
+  "title": "UE requested bearer resource modification procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_BEARER_RESOURCE_MODIFICATION",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify bearer resources for traffic flow aggregates, including GBR changes, packet filter modifications, header compression re-negotiation, and 3GPP PS data off status changes.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2",
+        "Figure 6.5.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to MME to request modification of bearer resources for traffic flow aggregates.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2",
+        "Figure 6.5.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_ID_FOR_PACKET_FILTER",
+      "name": "EPS bearer identity for packet filter",
+      "entity_type": "Information Element",
+      "description": "IE containing the EPS bearer identity of the EPS bearer associated with the traffic flow aggregate.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_TRAFFIC_FLOW_AGGREGATE",
+      "name": "Traffic flow aggregate",
+      "entity_type": "Information Element",
+      "description": "IE containing TFT operation code and packet filter information for modifying traffic flow aggregates.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_REQUIRED_TRAFFIC_FLOW_QOS",
+      "name": "Required traffic flow QoS",
+      "entity_type": "Information Element",
+      "description": "IE indicating the new GBR requested for the EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "name": "Header compression configuration",
+      "entity_type": "Information Element",
+      "description": "IE used for re-negotiation of header compression configuration associated to an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "IE used to indicate change of 3GPP PS data off UE status.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Extended protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "IE containing service-level-AA container for C2 communication authorization.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3481",
+      "name": "T3481",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends BEARER RESOURCE MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2",
+        "Figure 6.5.4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by UE after sending BEARER RESOURCE MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "COND_HEADER_COMPRESSION_SUPPORTED",
+      "name": "Header compression support condition",
+      "entity_type": "Condition",
+      "description": "Condition requiring network and UE to support control plane CIoT EPS optimization and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "COND_3GPP_PS_DATA_OFF_SUPPORTED",
+      "name": "3GPP PS data off support condition",
+      "entity_type": "Condition",
+      "description": "Condition requiring network to have indicated 3GPP PS data off support during PDN connection establishment.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_BEARER_RESOURCE_MODIFICATION",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending BEARER RESOURCE MODIFICATION REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_EPS_BEARER_ID_FOR_PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EPS bearer identity for packet filter IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_TRAFFIC_FLOW_AGGREGATE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains traffic flow aggregate IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_REQUIRED_TRAFFIC_FLOW_QOS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains required traffic flow QoS IE for GBR changes",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains header compression configuration IE when conditions met",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains protocol configuration options IE for 3GPP PS data off status changes",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains extended protocol configuration options IE for C2 communication authorization",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_BEARER_RESOURCE_MODIFICATION",
+      "target": "TIMER_T3481",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3481 when UE sends request message",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2",
+        "Figure 6.5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_BEARER_RESOURCE_MODIFICATION",
+      "target": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to enter PROCEDURE TRANSACTION PENDING state",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_HEADER_COMPRESSION_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of header compression configuration IE is guarded by header compression support condition",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "target": "COND_3GPP_PS_DATA_OFF_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of protocol configuration options IE for 3GPP PS data off is guarded by support condition",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.13",
+  "title": "Allowed PDU session status",
+  "entities": [
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status",
+      "entity_type": "Information Element",
+      "description": "Indicates the user-plane resources of PDU session(s) associated with non-3GPP access allowed to be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Registration request message sent by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    },
+    {
+      "id": "COND_PAGING_NON3GPP",
+      "name": "Response to paging with non-3GPP access type",
+      "entity_type": "Condition",
+      "description": "Condition where the REGISTRATION REQUEST message is sent as a response to paging with the access type indicating non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    },
+    {
+      "id": "COND_UE_WANTS_REESTABLISH",
+      "name": "UE wants to indicate allowed PDU session re-establishment",
+      "entity_type": "Condition",
+      "description": "Condition where the UE wants to indicate the user-plane resources of PDU session(s) associated with non-3GPP access allowed to be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the Allowed PDU session status IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "target": "COND_PAGING_NON3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Allowed PDU session status IE is guarded by the condition that the message is sent as a response to paging with non-3GPP access type.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "target": "COND_UE_WANTS_REESTABLISH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Allowed PDU session status IE is guarded by the condition that the UE wants to indicate allowed PDU session re-establishment.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.13"
+      ]
+    }
+  ]
+}

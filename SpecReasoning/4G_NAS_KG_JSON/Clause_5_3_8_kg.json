@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.8",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "EMM_UPLINK_MSG_TX_FAILURE",
+      "name": "EMM uplink message transmission failure",
+      "entity_type": "Condition",
+      "description": "Abnormal case where lower layers indicate failure in transmitting an EMM uplink message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "UE_IMPLEMENTATION_DECISION",
+      "name": "UE implementation decision",
+      "entity_type": "Condition",
+      "description": "Condition where the UE implementation decides whether to rerun the ongoing procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "RETRANSMISSION_MECHANISM",
+      "name": "Retransmission mechanism",
+      "entity_type": "Procedure",
+      "description": "Mechanism to re-initiate the procedure by retransmitting the uplink message with new sequence number and MAC.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "UPLINK_MESSAGE",
+      "name": "Uplink message",
+      "entity_type": "Message",
+      "description": "EMM message that failed transmission and may be retransmitted.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EMM_UPLINK_MSG_TX_FAILURE",
+      "target": "UE_IMPLEMENTATION_DECISION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM uplink message transmission failure triggers UE implementation decision on procedure rerun.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_IMPLEMENTATION_DECISION",
+      "target": "RETRANSMISSION_MECHANISM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE implementation decision may lead to using the retransmission mechanism.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RETRANSMISSION_MECHANISM",
+      "target": "UPLINK_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Retransmission mechanism involves retransmitting the uplink message with new sequence number and MAC.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.8"
+      ]
+    }
+  ]
+}

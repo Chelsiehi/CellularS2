@@ -1,0 +1,99 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.6.2",
+  "title": "Out of sequence IEs",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that processes messages and their information elements.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "Network entity that processes messages and their information elements.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "OUT_OF_SEQUENCE_IE",
+      "name": "Out of sequence IE",
+      "entity_type": "Information Element",
+      "description": "Information element that appears out of sequence in a message.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "COMPREHENSION_REQUIRED_IE",
+      "name": "Comprehension required IE",
+      "entity_type": "Information Element",
+      "description": "Information element encoded as comprehension required according to 3GPP TS 24.007.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2",
+        "3GPP TS 24.007[11]"
+      ]
+    },
+    {
+      "id": "IGNORE_CONDITION",
+      "name": "Ignore condition for out of sequence IEs",
+      "entity_type": "Condition",
+      "description": "Condition where out of sequence IEs that are not comprehension required should be ignored.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "IGNORE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE behavior is governed by the condition to ignore non-comprehension-required out of sequence IEs.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IGNORE_CONDITION",
+      "target": "OUT_OF_SEQUENCE_IE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The ignore condition applies to out of sequence IEs.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IGNORE_CONDITION",
+      "target": "COMPREHENSION_REQUIRED_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ignore condition does not apply to comprehension required IEs.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NETWORK",
+      "target": "IGNORE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network behavior should follow the same approach as UE for ignoring out of sequence IEs.",
+      "provenance": [
+        "TS 24.501, Clause 7.6.2"
+      ]
+    }
+  ]
+}

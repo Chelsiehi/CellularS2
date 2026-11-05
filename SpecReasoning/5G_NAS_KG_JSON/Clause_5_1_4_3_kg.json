@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.4.3",
+  "title": "Coordination between 5GMM for 3GPP access and EMM without N26 interface",
+  "entities": [
+    {
+      "id": "SINGLE_REG_MODE",
+      "name": "Single-registration mode",
+      "entity_type": "Condition",
+      "description": "UE operating mode where registration is coordinated between 5GMM and EMM without N26 interface",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "Evolved Packet System Mobility Management deregistered state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_3GPP",
+      "name": "5GMM-DEREGISTERED for 3GPP access",
+      "entity_type": "State",
+      "description": "5G Mobility Management deregistered state for 3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NORMAL",
+      "name": "5GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM registered state with normal service available",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NON_ALLOWED",
+      "name": "5GMM-REGISTERED.NON-ALLOWED-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM registered state with non-allowed service",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NO_CELL",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "EMM registered state with no cell available",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM registered state with normal service available",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration over 3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message used for registration procedure initiation",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "5GS_REG_TYPE_IE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating registration type in REGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_N1_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing between N1 mode and S1 mode in 5GMM-IDLE mode",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing between S1 mode and N1 mode in 5GMM-IDLE mode",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SINGLE_REG_MODE",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in single-registration mode not registered over 3GPP access must be in EMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SINGLE_REG_MODE",
+      "target": "5GMM_DEREGISTERED_3GPP",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in single-registration mode not registered over 3GPP access must be in 5GMM-DEREGISTERED for 3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "5GMM_REGISTERED_NORMAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful registration procedure in N1 mode establishes 5GMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "EMM_REGISTERED_NO_CELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful registration procedure in N1 mode establishes EMM-REGISTERED.NO-CELL-AVAILABLE state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTER_SYSTEM_CHANGE_S1_N1",
+      "target": "EMM_REGISTERED_NO_CELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode establishes EMM-REGISTERED.NO-CELL-AVAILABLE state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "INTER_SYSTEM_CHANGE_S1_N1",
+      "target": "5GMM_REGISTERED_NORMAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode establishes 5GMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "INTER_SYSTEM_CHANGE_S1_N1",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode includes initiating registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_REQUEST",
+      "target": "5GS_REG_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "5GS_REG_TYPE_IE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GS registration type IE indicates mobility registration updating for the registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.3"
+      ]
+    }
+  ]
+}

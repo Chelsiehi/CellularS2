@@ -1,0 +1,309 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.1",
+  "title": "UE-initiated de-registration procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_DEREG",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to de-register from 5G network, either due to switch off or other reasons.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQ",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "IE_DEREG_TYPE",
+      "name": "De-registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether de-registration is due to switch off or not.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether de-registration is for 3GPP access, non-3GPP access, or both.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GS_MOBILE_ID",
+      "name": "5GS mobile identity",
+      "entity_type": "Information Element",
+      "description": "IE containing either 5G-GUTI, SUCI, or PEI depending on UE conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Identifier",
+      "description": "5G Globally Unique Temporary Identifier used for UE identification.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_SUCI",
+      "name": "SUCI",
+      "entity_type": "Identifier",
+      "description": "Subscription Concealed Identifier used when 5G-GUTI is not available.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_PEI",
+      "name": "PEI",
+      "entity_type": "Identifier",
+      "description": "Permanent Equipment Identifier used as fallback when neither 5G-GUTI nor SUCI is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3519",
+      "name": "T3519",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends SUCI in DEREGISTRATION REQUEST to prevent frequent SUCI generation.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3521",
+      "name": "T3521",
+      "entity_type": "Timer",
+      "description": "Timer started after sending DEREGISTRATION REQUEST when de-registration is not due to switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state indicating it is registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_INITIATED",
+      "name": "5GMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "UE state indicating registration procedure has been initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_INITIATED",
+      "name": "5GMM-DEREGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "UE state entered after sending DEREGISTRATION REQUEST when not due to switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_SWITCH_OFF",
+      "name": "Switch off condition",
+      "entity_type": "Condition",
+      "description": "Condition indicating de-registration is due to UE switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_NO_VALID_5G_GUTI",
+      "name": "No valid 5G-GUTI condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE does not have a valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_T3519_RUNNING",
+      "name": "T3519 running condition",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3519 is currently running.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DEREG",
+      "target": "MSG_DEREG_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure begins with sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEREG_REQ",
+      "target": "IE_DEREG_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains De-registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DEREG_REQ",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains Access type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DEREG_REQ",
+      "target": "IE_5GS_MOBILE_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains 5GS mobile identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_5GS_MOBILE_ID",
+      "target": "ID_5G_GUTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GS mobile identity IE contains 5G-GUTI when UE has valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_5GS_MOBILE_ID",
+      "target": "ID_SUCI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GS mobile identity IE contains SUCI when UE has no valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_5GS_MOBILE_ID",
+      "target": "ID_PEI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GS mobile identity IE contains PEI when UE has neither valid 5G-GUTI nor valid SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NO_VALID_5G_GUTI",
+      "target": "TIMER_T3519",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When UE has no valid 5G-GUTI and T3519 is not running, UE starts T3519 after sending SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_T3519_RUNNING",
+      "target": "ID_SUCI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When T3519 is running, UE uses stored SUCI instead of generating new one.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_SWITCH_OFF",
+      "target": "TIMER_T3521",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When de-registration is not due to switch off, UE starts timer T3521.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_DEREG_REQ",
+      "target": "TIMER_T3521",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3521 after sending DEREGISTRATION REQUEST when not due to switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_DEREG_REQ",
+      "target": "STATE_5GMM_DEREGISTERED_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters 5GMM-DEREGISTERED-INITIATED state after sending DEREGISTRATION REQUEST when not due to switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PROC_UE_DEREG",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure can be performed when UE is in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "PROC_UE_DEREG",
+      "target": "STATE_5GMM_REGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure can be performed when UE is in 5GMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.1"
+      ]
+    }
+  ]
+}

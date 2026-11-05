@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.7.4",
+  "title": "Re-attempt indicator",
+  "entities": [
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "An information element that may be included by the network under specific conditions related to back-off timer and ESM cause.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "IE_BACKOFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "An information element containing timer value for back-off procedures.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_26",
+      "name": "ESM cause #26 insufficient resources",
+      "entity_type": "Condition",
+      "description": "ESM cause value indicating insufficient resources.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_INCLUSION",
+      "name": "Inclusion condition for re-attempt indicator",
+      "entity_type": "Condition",
+      "description": "Condition specifying that re-attempt indicator IE may only be included if back-off timer value IE is included and ESM cause is not #26.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_INCLUSION",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Specifies the condition under which the re-attempt indicator IE may be included.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_INCLUSION",
+      "target": "IE_BACKOFF_TIMER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires the presence of back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_INCLUSION",
+      "target": "ESM_CAUSE_26",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition requires that ESM cause is not #26 insufficient resources.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.7.4"
+      ]
+    }
+  ]
+}

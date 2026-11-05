@@ -1,0 +1,109 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.21",
+  "title": "Actions upon reception of SIB19",
+  "entities": [
+    {
+      "id": "SIB19",
+      "name": "System Information Block 19",
+      "entity_type": "Message",
+      "description": "System Information Block 19 containing NTN synchronization parameters including epochTime and ntn-UlSyncValidityDuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "NTN_SYNC_PROCEDURE",
+      "name": "NTN UL Synchronization Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE instructs lower layers to start or restart NTN uplink synchronization validity duration based on SIB19 parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "NTN_ULSYNC_VALIDITY_DURATION",
+      "name": "ntn-UlSyncValidityDuration",
+      "entity_type": "Timer",
+      "description": "Timer indicating the validity duration for NTN uplink synchronization, started or restarted from the subframe indicated by epochTime.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "EPOCH_TIME",
+      "name": "epochTime",
+      "entity_type": "Information Element",
+      "description": "Information element in SIB19 indicating the specific subframe from which ntn-UlSyncValidityDuration should be started.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "SIB19_RECEPTION_CONDITION",
+      "name": "SIB19 Reception Condition",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE receives SIB19, initiating the NTN UL synchronization procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SIB19_RECEPTION_CONDITION",
+      "target": "NTN_SYNC_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Reception of SIB19 triggers the NTN UL synchronization procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NTN_SYNC_PROCEDURE",
+      "target": "NTN_ULSYNC_VALIDITY_DURATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The NTN synchronization procedure starts the ntn-UlSyncValidityDuration timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NTN_SYNC_PROCEDURE",
+      "target": "NTN_ULSYNC_VALIDITY_DURATION",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "The NTN synchronization procedure can restart the ntn-UlSyncValidityDuration timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIB19",
+      "target": "EPOCH_TIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB19 contains the epochTime information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NTN_SYNC_PROCEDURE",
+      "target": "EPOCH_TIME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The NTN synchronization procedure uses epochTime to determine the starting subframe for ntn-UlSyncValidityDuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.21"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.5",
+  "title": "Initial registration not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE attempts to register with the network",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject initial registration request",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause value",
+      "entity_type": "Information Element",
+      "description": "Indicates reason for registration rejection",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI IE",
+      "entity_type": "Information Element",
+      "description": "Contains rejected network slice selection assistance information",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_REJECTED_NSSAI",
+      "name": "Extended rejected NSSAI IE",
+      "entity_type": "Information Element",
+      "description": "Extended version of rejected NSSAI for UEs supporting extended rejected NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "IE_T3346_VALUE",
+      "name": "T3346 value IE",
+      "entity_type": "Information Element",
+      "description": "Contains value for back-off timer T3346",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer for congestion control",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "name": "5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "State entered when registration procedure is aborted due to congestion",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "State entered when UE needs to perform PLMN/SNPN selection",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "name": "5GMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "State entered when limited service is available",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Message integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition where NAS message has been integrity protected",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "PROP_UE_STORES_FORBIDDEN_TAI",
+      "name": "UE stores TAI in forbidden list",
+      "entity_type": "Property",
+      "description": "UE behavior to store tracking area in forbidden list based on rejection cause",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes sending REGISTRATION REJECT message when not accepted",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message contains 5GMM cause value IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message may contain Rejected NSSAI IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_EXTENDED_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message may contain Extended rejected NSSAI IE for UEs supporting extended rejected NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_T3346_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message may contain T3346 value IE for congestion control",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_T3346_VALUE",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3346 value IE provides the timer value for T3346",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When REGISTRATION REJECT is integrity protected, UE starts timer T3346 with provided value",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_5GMM_CAUSE",
+      "target": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "5GMM cause #22 (congestion) requires UE to enter 5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_5GMM_CAUSE",
+      "target": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "5GMM cause #11 (PLMN not allowed) requires UE to enter 5GMM-DEREGISTERED.PLMN-SEARCH state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_5GMM_CAUSE",
+      "target": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "5GMM cause #12, #13, #15 require UE to enter 5GMM-DEREGISTERED.LIMITED-SERVICE state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_5GMM_CAUSE",
+      "target": "PROP_UE_STORES_FORBIDDEN_TAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific 5GMM cause values establish UE behavior to store TAI in forbidden lists",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "COND_INTEGRITY_PROTECTED",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "REGISTRATION REJECT message with certain cause values requires integrity protection",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.5"
+      ]
+    }
+  ]
+}

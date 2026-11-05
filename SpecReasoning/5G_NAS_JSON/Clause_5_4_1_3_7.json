@@ -1,0 +1,119 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.7",
+  "title": "Abnormal cases",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------",
+    "a) Lower layer failure",
+    "Upon detection of lower layer failure before the AUTHENTICATION RESPONSE message is received, the network shall abort the procedure",
+    "b) Expiry of timer T3560",
+    "The network shall, on the first expiry of the timer T3560, retransmit the AUTHENTICATION REQUEST message and shall reset and start timer T3560. This retransmission is repeated four times, i.e. on the fifth expiry of timer T3560, the network shall abort the 5G AKA based primary authentication and key agreement procedure and any ongoing 5GMM specific procedure and release the N1 NAS signalling connection",
+    "c) Authentication failure (5GMM cause #20 \"MAC failure\")",
+    "The UE shall send an AUTHENTICATION FAILURE message, with 5GMM cause #20 \"MAC failure\" according to subclause5.4.1.3.6, to the network and start timer T3520 (see example in figure5.4.1.3.7.1). Furthermore, the UE shall stop any of the retransmission timers that are running (e.g. T3510, T3517 or T3521). Upon the first receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #20 \"MAC failure\", the network may initiate the identification procedure described in subclause5.4.3. This is to allow the network to obtain the SUCI from the UE. The network may then check that the 5G-GUTI originally used in the 5G authentication challenge corresponded to the correct SUPI. Upon receipt of the IDENTITY REQUEST message from the network, the UE shall proceed as specified in subclause5.4.3.3",
+    "NOTE1: Upon receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #20 \"MAC failure\", the network may also terminate the 5G AKA based primary authentication and key agreement procedure (see subclause5.4.1.3.5)",
+    "If the mapping of 5G-GUTI to SUPI in the network was incorrect, the network should respond by sending a new AUTHENTICATION REQUEST message to the UE. Upon receiving the new AUTHENTICATION REQUEST message from the network, the UE shall stop the timer T3520, if running, and then process the 5G challenge information as normal. If the mapping of 5G-GUTI to SUPI in the network was correct, the network should terminate the 5G AKA based primary authentication and key agreement procedure by sending an AUTHENTICATION REJECT message (see subclause5.4.1.3.5)",
+    "If the network is validated successfully (an AUTHENTICATION REQUEST message that contains a valid SQN and MAC is received), the UE shall send the AUTHENTICATION RESPONSE message to the network and shall start any retransmission timers (e.g. T3510, T3517 or T3521) if they were running and stopped when the UE received the first failed AUTHENTICATION REQUEST message",
+    "If the UE receives the second AUTHENTICATION REQUEST message, and the MAC value cannot be resolved, the UE shall follow the procedure specified in this subclause, itemc, starting again from the beginning, or if the message contains a UMTS authentication challenge, the UE shall follow the procedure specified in itemd. If the SQN is invalid, the UE shall proceed as specified in itemf",
+    "Figure5.4.1.3.7.1: Authentication failure during 5G AKA based primary authentication and key agreement procedure",
+    "d) Authentication failure (5GMM cause #26 \"non-5G authentication unacceptable\")",
+    "The UE shall send an AUTHENTICATION FAILURE message, with 5GMM cause #26 \"non-5G authentication unacceptable\", to the network and start the timer T3520 (see example in figure 5.4.1.3.7.1). Furthermore, the UE shall stop any of the retransmission timers that are running (e.g. T3510, T3517 or T3521). Upon the first receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #26 \"non-5G authentication unacceptable\", the network may initiate the identification procedure described in subclause5.4.3. This is to allow the network to obtain the SUCI from the UE. The network may then check that the 5G-GUTI originally used in the 5G authentication challenge corresponded to the correct SUPI. Upon receipt of the IDENTITY REQUEST message from the network, the UE shall proceed as specified in subclause5.4.3.3",
+    "NOTE2: Upon receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #26 \"non-5G authentication unacceptable\", the network may also terminate the 5G AKA based primary authentication and key agreement procedure (see subclause5.4.1.3.5)",
+    "If the mapping of 5G-GUTI to SUPI in the network was incorrect, the network should respond by sending a new AUTHENTICATION REQUEST message to the UE. Upon receiving the new AUTHENTICATION REQUEST message from the network, the UE shall stop the timer T3520, if running, and then process the 5G challenge information as normal. If the mapping of 5G-GUTI to SUPI in the network was correct, the network should terminate the 5G AKA based primary authentication and key agreement authentication procedure by sending an AUTHENTICATION REJECT message (see subclause5.4.1.3.5)",
+    "If the network is validated successfully (an AUTHENTICATION REQUEST message that contains a valid 5G authentication challenge is received), the UE shall send the AUTHENTICATION RESPONSE message to the network and shall start any retransmission timers (e.g. T3510, T3517 or T3521) if they were running and stopped when the UE received the first failed AUTHENTICATION REQUEST message",
+    "e) Authentication failure (5GMM cause #71 \"ngKSI already in use\")",
+    "The UE shall send an AUTHENTICATION FAILURE message, with 5GMM cause #71 \"ngKSI already in use\", to the network and start the timer T3520 (see example in figure 5.4.1.3.7.1). Furthermore, the UE shall stop any of the retransmission timers that are running (e.g. T3510, T3517 or T3521). Upon the first receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #71 \"ngKSI already in use\", the network performs necessary actions to select a new ngKSI and send the same 5G authentication challenge to the UE",
+    "NOTE3: Upon receipt of an AUTHENTICATION FAILURE message from the UE with 5GMM cause #71 \"ngKSI already in use\", the network may also re-initiate the 5G AKA based primary authentication and key agreement procedure (see subclause5.4.1.3.2)",
+    "Upon receiving the new AUTHENTICATION REQUEST message from the network, the UE shall stop the timer T3520, if running, and then process the 5G challenge information as normal",
+    "If the network is validated successfully (an AUTHENTICATION REQUEST message that contains a valid ngKSI, SQN and MAC is received), the UE shall send the AUTHENTICATION RESPONSE message to the network and shall start any retransmission timers (e.g. T3510, T3517 or T3521) if they were running and stopped when the UE received the first failed AUTHENTICATION REQUEST message",
+    "f) Authentication failure (5GMM cause #21 \"synch failure\")",
+    "The UE shall send an AUTHENTICATION FAILURE message, with 5GMM cause #21 \"synch failure\", to the network and start the timer T3520 (see example in figure5.4.1.3.7.1). Furthermore, the UE shall stop any of the retransmission timers that are running (e.g. T3510, T3517 or T3521). Upon the first receipt of an AUTHENTICATION FAILURE message from the UE with the 5GMM cause #21 \"synch failure\", the network shall use the returned AUTS parameter from the authentication failure parameter IE in the AUTHENTICATION FAILURE message, to re-synchronise. The re-synchronisation procedure requires the AMF to delete all unused authentication vectors for that SUPI and obtain new vectors from the UDM/AUSF. When re-synchronisation is complete, the network shall initiate the 5G AKA based primary authentication and key agreement procedure. Upon receipt of the AUTHENTICATION REQUEST message, the UE shall stop the timer T3520, if running",
+    "NOTE4: Upon receipt of two consecutive AUTHENTICATION FAILURE messages from the UE with 5GMM cause #21 \"synch failure\", the network may terminate the 5G AKA based primary authentication and key agreement procedure by sending an AUTHENTICATION REJECT message",
+    "If the network is validated successfully (a new AUTHENTICATION REQUEST message is received which contains a valid SQN and MAC) while T3520 is running, the UE shall send the AUTHENTICATION RESPONSE message to the network and shall start any retransmission timers (e.g. T3510, T3517 or T3521), if they were running and stopped when the UE received the first failed AUTHENTICATION REQUEST message",
+    "Upon receipt of an AUTHENTICATION REJECT message, the UE shall perform the actions as specified in subclause5.4.1.3.5",
+    "g) Network failing the authentication check",
+    "If the UE deems that the network has failed the authentication check, then it shall request RRC to locally release the RRC connection and treat the active cell as barred (see 3GPPTS38.304[28] or 3GPPTS36.304[25C]). The UE shall start any retransmission timers (e.g. T3510, T3517 or T3521), if they were running and stopped when the UE received the first AUTHENTICATION REQUEST message containing an incorrect authentication challenge data causing authentication failure",
+    "h) Transmission failure of AUTHENTICATION RESPONSE message or AUTHENTICATION FAILURE message indication from lower layers (if the 5G AKA based primary authentication and key agreement procedure is triggered by a registration procedure)",
+    "The UE shall stop the timer T3520, if running, and re-initiate the registration procedure",
+    "i) Transmission failure of AUTHENTICATION RESPONSE message or AUTHENTICATION FAILURE message indication with change in the current TAI (if the 5G AKA based primary authentication and key agreement procedure is triggered by a service request procedure)",
+    "The UE shall stop the timer T3520, if running",
+    "If the current TAI is not in the TAI list, the 5G AKA based primary authentication and key agreement procedure shall be aborted and a registration procedure for mobility and periodic registration update shall be initiated",
+    "If the current TAI is still part of the TAI list, it is up to the UE implementation how to re-run the ongoing procedure that triggered the 5G AKA based primary authentication and key agreement procedure",
+    "j) Transmission failure of AUTHENTICATION RESPONSE message or AUTHENTICATION FAILURE message indication without change in the current TAI (if the authentication procedure is triggered by a service request procedure)",
+    "The UE shall stop the timer T3520, if running. It is up to the UE implementation how to re-run the ongoing procedure that triggered the 5G AKA based primary authentication and key agreement procedure",
+    "k) Lower layers indication of non-delivered NAS PDU due to handover",
+    "If the AUTHENTICATION REQUEST message could not be delivered due to an intra AMF handover and the target TA is included in the TAI list, then upon successful completion of the intra AMF handover the AMF shall retransmit the AUTHENTICATION REQUEST message. If a failure of handover procedure is reported by the lower layer and the N1 NAS signalling connection exists, the AMF shall retransmit the AUTHENTICATION REQUEST message",
+    "l) Change in the current TAI",
+    "If the current TAI is not in the TAI list before the AUTHENTICATION RESPONSE message is sent, the UE may discard sending the AUTHENTICATION RESPONSE message to the network and continue with the initiation of the registration procedure for mobility and periodic registration as described in subclause5.5.1.3.2",
+    "m) AUTHENTICATION REJECT message is received without integrity protection and neither timer T3516 nor T3520 is running",
+    "If an AUTHENTICATION REJECT message is received without integrity protection and if neither timer T3516 nor T3520 is running, then the UE shall discard the AUTHENTICATION REJECT message. Additionally, the UE may request RRC to locally release the RRC connection and treat the active cell as barred (see 3GPPTS38.304[28] or 3GPPTS36.304[25C])",
+    "For itemsc, d, e, and f if no emergency service is started or is ongoing",
+    "The UE shall stop timer T3520, if the timer is running and the UE enters 5GMM-IDLE mode, e.g. upon detection of a lower layer failure, release of the N1 NAS signalling connection, or as the result of an inter-system change in 5GMM-CONNECTED mode from N1 mode to S1 mode",
+    "The UE shall deem that the network has failed the authentication check or assume that the authentication is not genuine and proceed as described in itemg above if any of the following occurs",
+    "- the timer T3520 expires",
+    "- the UE detects any combination of the 5G authentication failures: 5GMM causes #20 \"MAC failure\", #21 \"synch failure\", #26 \"non-5G authentication unacceptable\" or #71 \"ngKSI already in use\", during three consecutive authentication challenges. The 5G authentication challenges shall be considered as consecutive only, if the 5G authentication challenges causing the second and third 5G authentication failure are received by the UE, while the timer T3520 started after the previous 5G authentication failure is running",
+    "For itemsc, d, e, and f if there is an emergency service started or is ongoing",
+    "The UE shall stop timer T3520, if the timer is running and the UE enters 5GMM-IDLE mode, e.g. upon detection of a lower layer failure, release of the N1 NAS signalling connection, or as the result of an inter-system change in 5GMM-CONNECTED mode from N1 mode to S1 mode",
+    "If there is an ongoing service request procedure for emergency services fallback the UE shall abort the service request procedure, stop timer T3517 and locally release any resources allocated for the service request procedure and enters state 5GMM-REGISTERED. The UE shall attempt to select an E-UTRA cell connected to EPC or 5GCN according to the domain priority and selection rules specified in 3GPPTS23.167[6]. If the UE finds a suitable E-UTRA cell, it then proceeds with the appropriate EMM or 5GMM procedures. If the UE operating in single-registration mode has changed to S1 mode, it shall disable the N1 mode capability for 3GPP access",
+    "Depending on local requirements or operator preference for emergency services, if the UE has an emergency PDU session established or is establishing an emergency PDU session, the AMF need not follow the procedures specified for the authentication failure specified in the present subclause. The AMF may respond to the AUTHENTICATION FAILURE message by initiating the security mode control procedure selecting the \"null integrity protection algorithm\" 5G-IA0, \"null ciphering algorithm\" 5G-EA0 or may abort the 5G AKA based primary authentication and key agreement procedure and continue using the current security context, if any. The AMF shall indicate to the SMF to perform the release of all non-emergency PDU sessions, if any. If there is an ongoing PDU session establishment procedure, the AMF shall indicate to the SMF to perform the release of all non-emergency PDU sessions upon completion of the PDU session establishment procedure. The network shall behave as if the UE is registered for emergency services",
+    "If a UE has an emergency PDU session established or is establishing an emergency PDU session and sends an AUTHENTICATION FAILURE message to the AMF with the 5GMM cause appropriate for these cases (#20, #21, #26, or #71 respectively) and receives the SECURITY MODE COMMAND message before the timeout of timer T3520, the UE shall deem that the network has passed the authentication check successfully, stop timer T3520, respectively, and execute the security mode control procedure",
+    "If a UE has an emergency PDU session established or is establishing an emergency PDU session when timer T3520 expires, the UE shall not deem that the network has failed the authentication check and not behave as described in item g. Instead the UE shall continue using the current security context, if any, release all non-emergency PDU sessions, if any, by initiating UE-requested PDU session release procedure. If there is an ongoing PDU session establishment procedure, the UE shall release all non-emergency PDU sessions upon completion of the PDU session establishment procedure",
+    "The UE shall start any retransmission timers (e.g. T3510, T3517 or T3521) if",
+    "- they were running and stopped when the UE received the AUTHENTICATION REQUEST message and detected an authentication failure; and",
+    "- the procedures associated with these timers have not yet been completed",
+    "The UE shall behave as if the UE is registered for emergency services",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.4.1.3.7.1",
+      "file": "Figure_5_4_1_3_7_1_p218.png.json",
+      "title": "Authentication failure during 5G AKA based primary authentication and key agreement procedure",
+      "content": {
+        "figure_id": "5.4.1.3.7.1",
+        "title": "Authentication failure during 5G AKA based primary authentication and key agreement procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION REQUEST",
+              "notes": "Start T3560"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "AUTHENTICATION FAILURE (cause = \"xxx\")",
+              "notes": "Start T3520, Stop T3560"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION REQUEST",
+              "notes": "Stop T3520, Start T3560"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION RESPONSE",
+              "notes": "Stop T3560"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

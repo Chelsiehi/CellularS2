@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.4",
+  "title": "PLMN-SEARCH",
+  "entities": [
+    {
+      "id": "STATE_PLMN_SEARCH",
+      "name": "PLMN-SEARCH substate",
+      "entity_type": "State",
+      "description": "A substate entered by the UE during automatic network selection mode when maximum allowed unsuccessful tracking area updates occur, or after tracking area update/service request rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update tracking area information with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "PROC_COMBINED_TRACKING_AREA_UPDATE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Combined procedure for tracking area update along with other operations.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH_EMERGENCY",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to attach for emergency services when selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH_RLOS",
+      "name": "Attach for access to RLOS",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to attach for RLOS access when selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_MAX_UNSUCCESSFUL_TAU",
+      "name": "Maximum allowed number of subsequently unsuccessful tracking area updating",
+      "entity_type": "Condition",
+      "description": "Condition where UE has performed maximum allowed unsuccessful tracking area updates.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_TAU_REJECTED",
+      "name": "Tracking area update rejected by network",
+      "entity_type": "Condition",
+      "description": "Condition where network rejects tracking area update request.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_SERVICE_REQUEST_REJECTED",
+      "name": "Service request rejected by network",
+      "entity_type": "Condition",
+      "description": "Condition where network rejects service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_CELL_NO_NORMAL_SERVICE",
+      "name": "Selected cell known not to be able to provide normal service",
+      "entity_type": "Condition",
+      "description": "Condition where selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "PROP_RESET_TAU_COUNTER",
+      "name": "Reset tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Action to reset the tracking area updating attempt counter when new PLMN is selected.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_MAX_UNSUCCESSFUL_TAU",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Maximum unsuccessful TAU condition allows UE to enter PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_TAU_REJECTED",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAU rejection condition allows UE to enter PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SERVICE_REQUEST_REJECTED",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request rejection condition allows UE to enter PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_PLMN_SEARCH",
+      "target": "PROP_RESET_TAU_COUNTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When new PLMN is selected in PLMN-SEARCH substate, UE resets TAU attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_PLMN_SEARCH",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE initiates tracking area updating procedure after new PLMN selection in PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_PLMN_SEARCH",
+      "target": "PROC_COMBINED_TRACKING_AREA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE initiates combined tracking area updating procedure after new PLMN selection in PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CELL_NO_NORMAL_SERVICE",
+      "target": "PROC_ATTACH_EMERGENCY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell unable to provide normal service condition may lead UE to detach locally and initiate attach for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_CELL_NO_NORMAL_SERVICE",
+      "target": "PROC_ATTACH_RLOS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell unable to provide normal service condition may lead UE to detach locally and initiate attach for RLOS access.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.4"
+      ]
+    }
+  ]
+}

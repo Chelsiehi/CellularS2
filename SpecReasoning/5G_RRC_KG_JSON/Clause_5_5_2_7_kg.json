@@ -1,0 +1,274 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.7",
+  "title": "Reporting configuration addition/modification",
+  "entities": [
+    {
+      "id": "PROCEDURE_REPORTING_CONFIG_MOD",
+      "name": "Reporting configuration addition/modification",
+      "entity_type": "Procedure",
+      "description": "Procedure for adding or modifying measurement reporting configurations in the UE based on received configuration lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "IE_REPORT_CONFIG_TO_ADD_MOD_LIST",
+      "name": "reportConfigToAddModList",
+      "entity_type": "Information Element",
+      "description": "List containing reporting configurations to be added or modified.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "IE_REPORT_CONFIG_ID",
+      "name": "reportConfigId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a specific reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "LIST_REPORT_CONFIG_LIST",
+      "name": "reportConfigList",
+      "entity_type": "Information Element",
+      "description": "List of configured reporting configurations stored in VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID",
+      "name": "measId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "LIST_MEAS_ID_LIST",
+      "name": "measIdList",
+      "entity_type": "Information Element",
+      "description": "List of measurement identifiers stored in VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "LIST_VAR_MEAS_REPORT_LIST",
+      "name": "VarMeasReportList",
+      "entity_type": "Information Element",
+      "description": "List containing active measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_PERIODICAL_REPORTING",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer used for periodic measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "timer T321",
+      "entity_type": "Timer",
+      "description": "Timer T321 used in measurement reporting procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "timer T322",
+      "entity_type": "Timer",
+      "description": "Timer T322 used in measurement reporting procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "CONFIG_VAR_MEAS_CONFIG",
+      "name": "VarMeasConfig",
+      "entity_type": "Information Element",
+      "description": "Variable containing the UE's measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "CONDITION_ENTRY_EXISTS",
+      "name": "entry with matching reportConfigId exists",
+      "entity_type": "Condition",
+      "description": "Condition checking if a reporting configuration with the given ID already exists in the configuration list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "ACTION_RECONFIGURE_ENTRY",
+      "name": "reconfigure the entry",
+      "entity_type": "Property",
+      "description": "Action to update an existing reporting configuration with new values.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "ACTION_REMOVE_REPORTING_ENTRY",
+      "name": "remove measurement reporting entry",
+      "entity_type": "Property",
+      "description": "Action to remove a measurement reporting entry from the reporting list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "ACTION_STOP_RESET_TIMERS",
+      "name": "stop and reset timers",
+      "entity_type": "Property",
+      "description": "Action to stop running timers and reset associated measurement information.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "ACTION_ADD_NEW_ENTRY",
+      "name": "add new entry to reportConfigList",
+      "entity_type": "Property",
+      "description": "Action to add a new reporting configuration to the configuration list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_REPORTING_CONFIG_MOD",
+      "target": "IE_REPORT_CONFIG_TO_ADD_MOD_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure uses the reportConfigToAddModList to determine which configurations to add or modify.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_REPORTING_CONFIG_MOD",
+      "target": "CONDITION_ENTRY_EXISTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure checks if an entry with matching reportConfigId exists before reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_ENTRY_EXISTS",
+      "target": "ACTION_RECONFIGURE_ENTRY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If an existing entry is found, it is reconfigured with the received values.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ENTRY_EXISTS",
+      "target": "ACTION_REMOVE_REPORTING_ENTRY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For each measId associated with the reportConfigId, remove the reporting entry from VarMeasReportList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_ENTRY_EXISTS",
+      "target": "ACTION_STOP_RESET_TIMERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For each measId associated with the reportConfigId, stop running timers and reset associated information.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACTION_STOP_RESET_TIMERS",
+      "target": "TIMER_PERIODICAL_REPORTING",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Stops the periodical reporting timer if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ACTION_STOP_RESET_TIMERS",
+      "target": "TIMER_T321",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Stops timer T321 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ACTION_STOP_RESET_TIMERS",
+      "target": "TIMER_T322",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Stops timer T322 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_REPORTING_CONFIG_MOD",
+      "target": "ACTION_ADD_NEW_ENTRY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure adds a new entry for the received reportConfig to the reportConfigList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_REPORT_CONFIG_ID",
+      "target": "LIST_REPORT_CONFIG_LIST",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "reportConfigId is used to identify entries within the reportConfigList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_MEAS_ID",
+      "target": "LIST_MEAS_ID_LIST",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "measId is used to identify entries within the measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.3.11",
+  "title": "Extended EPS QoS",
+  "entities": [
+    {
+      "id": "IE_EXTENDED_EPS_QOS",
+      "name": "Extended EPS QoS",
+      "entity_type": "Information Element",
+      "description": "Information element used to transmit maximum and guaranteed bit rate values to the UE when values exceed the maximum specified in the EPS QoS IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    },
+    {
+      "id": "IE_EPS_QOS",
+      "name": "EPS QoS",
+      "entity_type": "Information Element",
+      "description": "EPS quality of service information element defined in clause 9.9.4.3 that specifies maximum bit rate values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EXCEEDS_MAX",
+      "name": "Bit rate exceeds maximum",
+      "entity_type": "Condition",
+      "description": "Condition where at least one of the maximum or guaranteed bit rate values to be transmitted exceeds the maximum value specified in the EPS QoS IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    },
+    {
+      "id": "CONDITION_NETWORK_WISHES",
+      "name": "Network wishes to transmit",
+      "entity_type": "Condition",
+      "description": "Condition where the network wishes to transmit maximum and guaranteed bit rate values to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EXTENDED_EPS_QOS",
+      "target": "CONDITION_NETWORK_WISHES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended EPS QoS IE inclusion is guarded by the condition that network wishes to transmit bit rate values.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EXTENDED_EPS_QOS",
+      "target": "CONDITION_EXCEEDS_MAX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended EPS QoS IE inclusion is guarded by the condition that bit rate values exceed maximum specified in EPS QoS IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EXCEEDS_MAX",
+      "target": "IE_EPS_QOS",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The maximum value condition is defined relative to the EPS QoS IE specifications.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.3.11"
+      ]
+    }
+  ]
+}

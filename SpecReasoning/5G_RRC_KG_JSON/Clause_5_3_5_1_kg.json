@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_RRC_RECONFIGURATION",
+      "name": "RRC Reconfiguration",
+      "entity_type": "Procedure",
+      "description": "Procedure to modify an RRC connection, including establishing/modifying/releasing RBs/BH RLC channels, performing reconfiguration with sync, managing measurements, SCells, cell groups, conditional handover, and conditional PSCell configurations. May transfer NAS dedicated information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIGURATION",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "Message sent by Network to UE to initiate RRC reconfiguration procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIGURATION_COMPLETE",
+      "name": "RRCReconfigurationComplete",
+      "entity_type": "Message",
+      "description": "Message sent by UE to Network upon successful RRC reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "name": "RRC connection re-establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE in case of RRC reconfiguration failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_RECONFIG_WITH_SYNC_SECURITY_REFRESH",
+      "name": "Reconfiguration with sync and security key refresh",
+      "entity_type": "Condition",
+      "description": "Condition involving RA to PCell/PSCell, MAC reset, security refresh, and RLC/PDCP re-establishment triggered by explicit L2 indicators.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_RECONFIG_WITH_SYNC_NO_SECURITY_REFRESH",
+      "name": "Reconfiguration with sync without security key refresh",
+      "entity_type": "Condition",
+      "description": "Condition involving RA to PCell/PSCell, MAC reset, RLC re-establishment, and PDCP data recovery for AM DRB/MRB triggered by explicit L2 indicators.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_DAPS_SECURITY_REFRESH",
+      "name": "DAPS reconfiguration with sync and security key refresh",
+      "entity_type": "Condition",
+      "description": "Condition for DAPS involving RA to target PCell, target MAC establishment, security refresh, and RLC/PDCP handling for non-DAPS/DAPS bearers and SRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_DAPS_NO_SECURITY_REFRESH",
+      "name": "DAPS reconfiguration with sync without security key refresh",
+      "entity_type": "Condition",
+      "description": "Condition for DAPS involving RA to target PCell, target MAC establishment, and RLC/PDCP handling for non-DAPS/DAPS bearers and SRBs without security refresh.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "PROP_NAS_INFO_TRANSFER",
+      "name": "NAS dedicated information transfer",
+      "entity_type": "Property",
+      "description": "Property allowing transfer of NAS dedicated information from Network to UE during RRC reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "MSG_RRC_RECONFIGURATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration procedure includes sending RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "MSG_RRC_RECONFIGURATION_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Successful RRC reconfiguration includes sending RRCReconfigurationComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Failed RRC reconfiguration may trigger RRC connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1",
+        "Figure 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "PROP_NAS_INFO_TRANSFER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC reconfiguration procedure enables transfer of NAS dedicated information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "COND_RECONFIG_WITH_SYNC_SECURITY_REFRESH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration includes reconfiguration with sync and security key refresh as a case.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "COND_RECONFIG_WITH_SYNC_NO_SECURITY_REFRESH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration includes reconfiguration with sync without security key refresh as a case.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "COND_DAPS_SECURITY_REFRESH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration includes DAPS reconfiguration with sync and security key refresh as a case.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_RRC_RECONFIGURATION",
+      "target": "COND_DAPS_NO_SECURITY_REFRESH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration includes DAPS reconfiguration with sync without security key refresh as a case.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_RECONFIG_WITH_SYNC_SECURITY_REFRESH",
+      "target": "COND_DAPS_SECURITY_REFRESH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reconfiguration with sync and security key refresh includes DAPS-specific handling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_RECONFIG_WITH_SYNC_NO_SECURITY_REFRESH",
+      "target": "COND_DAPS_NO_SECURITY_REFRESH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reconfiguration with sync without security key refresh includes DAPS-specific handling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.1"
+      ]
+    }
+  ]
+}

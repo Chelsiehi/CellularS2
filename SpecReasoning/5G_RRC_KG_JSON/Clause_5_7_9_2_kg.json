@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.9.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that stores mobility history information and performs the procedures described in this clause.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "VarMobilityHistoryReport",
+      "name": "VarMobilityHistoryReport",
+      "entity_type": "Property",
+      "description": "A variable in the UE that stores mobility history information including visited cell lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "visitedPSCellInfoList",
+      "name": "visitedPSCellInfoList",
+      "entity_type": "Information Element",
+      "description": "A list in VarMobilityHistoryReport that stores information about visited PSCells including cell identity and time spent.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "visitedCellInfoList",
+      "name": "visitedCellInfoList",
+      "entity_type": "Information Element",
+      "description": "A list in VarMobilityHistoryReport that stores information about visited PCells/serving cells including cell identity and time spent.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "PSCell_Addition",
+      "name": "PSCell Addition",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when a PSCell is added to the UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "PSCell_Change_Release_Failure",
+      "name": "PSCell Change/Release/Failure",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when a PSCell is changed, released, or when SCG failure occurs.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "PCell_Change",
+      "name": "PCell Change",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when the UE changes PCell while in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "State_Transition_Camped_Normally",
+      "name": "Transition to Camped Normally State",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when UE enters camped normally state from RRC_CONNECTED or cell selection states.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where the UE is not actively connected but can perform cell selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where the UE is not actively transmitting but maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PSCell_Addition",
+      "target": "visitedPSCellInfoList",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PSCell addition procedure includes adding an entry to visitedPSCellInfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PSCell_Change_Release_Failure",
+      "target": "visitedPSCellInfoList",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PSCell change/release/failure procedure includes adding an entry to visitedPSCellInfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PCell_Change",
+      "target": "visitedCellInfoList",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PCell change procedure includes adding an entry to visitedCellInfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "State_Transition_Camped_Normally",
+      "target": "visitedPSCellInfoList",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Transition to camped normally state includes adding an entry to visitedPSCellInfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "visitedPSCellInfoList",
+      "target": "VarMobilityHistoryReport",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "visitedPSCellInfoList is contained within VarMobilityHistoryReport variable.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "visitedCellInfoList",
+      "target": "VarMobilityHistoryReport",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "visitedCellInfoList is contained within VarMobilityHistoryReport variable.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PSCell_Addition",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PSCell addition procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "State_Transition_Camped_Normally",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Transition to camped normally state requires UE to enter RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "State_Transition_Camped_Normally",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Transition to camped normally state requires UE to enter RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.9.2"
+      ]
+    }
+  ]
+}

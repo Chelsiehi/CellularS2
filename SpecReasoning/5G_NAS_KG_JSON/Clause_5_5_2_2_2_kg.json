@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.2",
+  "title": "UE-initiated de-registration procedure completion",
+  "entities": [
+    {
+      "id": "PROCEDURE_UE_INITIATED_DEREGISTRATION",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_ACCEPT",
+      "name": "DEREGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to accept de-registration request.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_DEREGISTRATION_TYPE",
+      "name": "De-registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of de-registration, e.g., switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NOT_SWITCH_OFF",
+      "name": "De-registration type not switch off",
+      "entity_type": "Condition",
+      "description": "Condition where De-registration type IE does not indicate switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3521",
+      "name": "T3521",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receiving DEREGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3519",
+      "name": "T3519",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE if running upon receiving DEREGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_SUCI",
+      "name": "SUCI",
+      "entity_type": "Identifier",
+      "description": "Subscription Concealed Identifier stored by UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_DELETE_SUCI",
+      "name": "Delete stored SUCI",
+      "entity_type": "Property",
+      "description": "UE deletes any stored SUCI upon receiving DEREGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UE_INITIATED_DEREGISTRATION",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "IE_DEREGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains De-registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_DEREGISTRATION_TYPE",
+      "target": "CONDITION_NOT_SWITCH_OFF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "De-registration type IE guards condition for sending DEREGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_NOT_SWITCH_OFF",
+      "target": "MSG_DEREGISTRATION_ACCEPT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes that AMF sends DEREGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DEREGISTRATION_ACCEPT",
+      "target": "TIMER_T3521",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DEREGISTRATION ACCEPT stops timer T3521.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DEREGISTRATION_ACCEPT",
+      "target": "TIMER_T3519",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DEREGISTRATION ACCEPT stops timer T3519 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_DEREGISTRATION_ACCEPT",
+      "target": "PROPERTY_DELETE_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving DEREGISTRATION ACCEPT establishes deletion of stored SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROPERTY_DELETE_SUCI",
+      "target": "IDENTIFIER_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Property establishes deletion of SUCI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.18",
+  "title": "Support of redundant PDU sessions",
+  "entities": [
+    {
+      "id": "PROCEDURE_REDUNDANT_PDU_SESSION_ESTABLISHMENT",
+      "name": "Redundant PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing redundant PDU sessions where the 5GSM sublayer may support establishment of redundant PDU sessions as specified in 3GPP TS 23.501.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used by UE to request establishment of a PDU session, which can include parameters for redundant PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_PAIR_ID",
+      "name": "PDU session pair ID",
+      "entity_type": "Information Element",
+      "description": "Information element that identifies a pair of redundant PDU sessions, included in PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "IE_RSN",
+      "name": "RSN",
+      "entity_type": "Information Element",
+      "description": "Redundancy Sequence Number information element included in PDU SESSION ESTABLISHMENT REQUEST message for redundant PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "ENTITY_UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that can establish redundant PDU sessions by including PDU session pair ID, RSN, or both in establishment requests.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "ENTITY_SMF",
+      "name": "SMF",
+      "entity_type": "Property",
+      "description": "Session Management Function that receives PDU session pair ID, RSN, or both and handles PDU sessions as redundant according to 3GPP TS 23.501.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "CONDITION_URSP_OR_LOCAL_CONFIG",
+      "name": "URSP or UE local configuration",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets PDU session pair ID, RSN, or both according to URSP (UE Route Selection Policy) or UE local configuration.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_IDENTIFIERS_PROVIDED",
+      "name": "Neither PDU session pair ID nor RSN provided",
+      "entity_type": "Condition",
+      "description": "Condition where UE provides neither PDU session pair ID nor RSN in PDU SESSION ESTABLISHMENT REQUEST message, but SMF can still handle sessions as redundant.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_REDUNDANT_PDU_SESSION_ESTABLISHMENT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Redundant PDU session establishment procedure involves sending PDU SESSION ESTABLISHMENT REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_PAIR_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message can contain PDU session pair ID information element.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_RSN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message can contain RSN information element.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ENTITY_UE",
+      "target": "CONDITION_URSP_OR_LOCAL_CONFIG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE sets PDU session pair ID, RSN, or both according to URSP or UE local configuration.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ENTITY_SMF",
+      "target": "IE_PDU_SESSION_PAIR_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF receiving PDU session pair ID operates as specified in 3GPP TS 23.501 for redundant PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ENTITY_SMF",
+      "target": "IE_RSN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF receiving RSN operates as specified in 3GPP TS 23.501 for redundant PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTITY_SMF",
+      "target": "CONDITION_NO_IDENTIFIERS_PROVIDED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF can handle two PDU sessions as redundant even if UE provides neither PDU session pair ID nor RSN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.18"
+      ]
+    }
+  ]
+}

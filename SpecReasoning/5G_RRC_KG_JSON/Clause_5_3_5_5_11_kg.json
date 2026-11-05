@@ -1,0 +1,231 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.11",
+  "title": "BH RLC channel addition/modification",
+  "entities": [
+    {
+      "id": "BH_RLC_CHANNEL_CONFIG",
+      "name": "BH RLC Channel Configuration",
+      "entity_type": "Procedure",
+      "description": "Procedure for adding or modifying Backhaul RLC channels in an IAB-node based on received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "BH_RLC_CHANNEL_TO_ADD_MOD_LIST_IE",
+      "name": "bh-RLC-ChannelToAddModList IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing configuration for BH RLC channels to be added or modified.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "BH_RLC_CHANNEL_ID",
+      "name": "bh-RLC-ChannelID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a specific BH RLC channel within a cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "RLC_ENTITY",
+      "name": "RLC Entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity that handles data transmission over the radio interface.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "LOGICAL_CHANNEL",
+      "name": "Logical Channel",
+      "entity_type": "Property",
+      "description": "MAC layer logical channel configured for data transport.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "RLC_CONFIG",
+      "name": "rlc-Config",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for RLC entity setup and reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "MAC_LOGICAL_CHANNEL_CONFIG",
+      "name": "mac-LogicalChannelConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for MAC logical channel setup and reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REESTABLISH_RLC",
+      "name": "reestablishRLC",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the RLC entity should be re-established.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "EXISTING_BH_RLC_CHANNEL",
+      "name": "Existing BH RLC Channel",
+      "entity_type": "Condition",
+      "description": "Condition where a BH RLC channel with the same ID already exists in the current configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "NEW_BH_RLC_CHANNEL",
+      "name": "New BH RLC Channel",
+      "entity_type": "Condition",
+      "description": "Condition where a BH RLC channel with the given ID was not previously configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BH_RLC_CHANNEL_CONFIG",
+      "target": "BH_RLC_CHANNEL_TO_ADD_MOD_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The BH RLC channel configuration procedure uses the bh-RLC-ChannelToAddModList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BH_RLC_CHANNEL_TO_ADD_MOD_LIST_IE",
+      "target": "BH_RLC_CHANNEL_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The bh-RLC-ChannelToAddModList IE contains bh-RLC-ChannelID identifiers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "BH_RLC_CHANNEL_CONFIG",
+      "target": "EXISTING_BH_RLC_CHANNEL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure behavior is guarded by whether an existing BH RLC channel with the same ID is present.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EXISTING_BH_RLC_CHANNEL",
+      "target": "REESTABLISH_RLC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For existing channels, the reestablishRLC condition determines if RLC re-establishment is needed.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REESTABLISH_RLC",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When reestablishRLC is received, the RLC entity is re-established as per TS 38.322.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EXISTING_BH_RLC_CHANNEL",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For existing channels, the RLC entity is reconfigured according to rlc-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EXISTING_BH_RLC_CHANNEL",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For existing channels, the logical channel is reconfigured according to mac-LogicalChannelConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "BH_RLC_CHANNEL_CONFIG",
+      "target": "NEW_BH_RLC_CHANNEL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure behavior is guarded by whether the BH RLC channel is new.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "NEW_BH_RLC_CHANNEL",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For new channels, an RLC entity is established according to rlc-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "NEW_BH_RLC_CHANNEL",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For new channels, a logical channel is configured according to mac-LogicalChannelConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "BH_RLC_CHANNEL_TO_ADD_MOD_LIST_IE",
+      "target": "RLC_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The bh-RLC-ChannelToAddModList IE contains rlc-Config parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "BH_RLC_CHANNEL_TO_ADD_MOD_LIST_IE",
+      "target": "MAC_LOGICAL_CHANNEL_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The bh-RLC-ChannelToAddModList IE contains mac-LogicalChannelConfig parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.11"
+      ]
+    }
+  ]
+}

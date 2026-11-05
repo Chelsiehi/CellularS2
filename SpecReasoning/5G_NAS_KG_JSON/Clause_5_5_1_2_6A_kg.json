@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.6A",
+  "title": "Initial registration for initiating an emergency PDU session not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_INITIAL_REG_EMERGENCY",
+      "name": "Initial registration for emergency services",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attempt initial registration specifically for emergency services when initial registration for emergency PDU session is not accepted by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "IE_5GS_REG_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of registration being requested, set to 'initial registration' for emergency PDU session initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_EST_REQ",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to establish a PDU session, with request type set to 'initial emergency request' for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same selected PLMN where the last initial registration request was attempted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "COND_EQUIVALENT_PLMN",
+      "name": "UE in same selected or equivalent PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same selected PLMN or equivalent PLMN where the last initial registration request was attempted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_EMERGENCY",
+      "name": "PDU session needed for handover of emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session needs to be established due to handover of an existing PDN connection for emergency bearer services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE behavior to inform upper layers about the failure of the registration procedure, which may trigger alternative emergency call mechanisms.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "PROC_5_5_1_2_5",
+      "name": "Procedures in subclause 5.5.1.2.5",
+      "entity_type": "Procedure",
+      "description": "Reference procedures that UE shall perform when initial registration for emergency PDU session is not accepted by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "PROC_5_5_1_2_7",
+      "name": "Actions in subclause 5.5.1.2.7",
+      "entity_type": "Procedure",
+      "description": "Reference actions that UE shall perform when initial registration fails due to abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INITIAL_REG_EMERGENCY",
+      "target": "IE_5GS_REG_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Initial registration for emergency services includes the 5GS registration type IE set to 'initial registration'.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INITIAL_REG_EMERGENCY",
+      "target": "MSG_PDU_SESSION_EST_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Initial registration for emergency services involves sending PDU SESSION ESTABLISHMENT REQUEST message with initial emergency request.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INITIAL_REG_EMERGENCY",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attempting initial registration for emergency services requires UE to be in same selected PLMN condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_INITIAL_REG_EMERGENCY",
+      "target": "COND_EQUIVALENT_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attempting initial registration for emergency services requires UE to be in same selected or equivalent PLMN condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_HANDOVER_EMERGENCY",
+      "target": "PROC_INITIAL_REG_EMERGENCY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of PDU session needed for handover of emergency bearer services establishes requirement to attempt initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SAME_PLMN",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of UE in same selected PLMN establishes the property of informing upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_5_5_1_2_5",
+      "target": "PROC_INITIAL_REG_EMERGENCY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedures in subclause 5.5.1.2.5 are performed as a step when initial registration for emergency PDU session is not accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_5_5_1_2_7",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Actions in subclause 5.5.1.2.7 include informing upper layers of failure to access network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6A"
+      ]
+    }
+  ]
+}

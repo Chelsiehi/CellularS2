@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.4.3",
+  "title": "Identification response by the UE",
+  "entities": [
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to request identification parameters from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the network containing the requested identification parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where the UE is connected to the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IDENTIFICATION_PARAMETERS",
+      "name": "identification parameters",
+      "entity_type": "Information Element",
+      "description": "Parameters containing UE identification information as requested by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTITY_REQUEST",
+      "target": "IDENTITY_RESPONSE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of IDENTITY REQUEST message triggers the UE to send IDENTITY RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTITY_RESPONSE",
+      "target": "IDENTIFICATION_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message contains the identification parameters requested by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDENTITY_REQUEST",
+      "target": "EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE must be in EMM-CONNECTED mode to respond to IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.3"
+      ]
+    }
+  ]
+}

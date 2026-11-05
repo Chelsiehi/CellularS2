@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.3",
+  "title": "Network initiated detach procedure completion by the network",
+  "entities": [
+    {
+      "id": "TIMER_T3422",
+      "name": "Timer T3422",
+      "entity_type": "Timer",
+      "description": "Timer used in network initiated detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element providing cause for EMM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is deregistered from network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_IMSI_DETACH",
+      "name": "IMSI detach condition",
+      "entity_type": "Condition",
+      "description": "Condition where Detach type IE indicates IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_NOT_REQUIRED",
+      "name": "Re-attach not required condition",
+      "entity_type": "Condition",
+      "description": "Condition where Detach type IE indicates re-attach not required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_IMSI_UNKNOWN",
+      "name": "IMSI unknown condition",
+      "entity_type": "Condition",
+      "description": "Condition where EMM cause value is #2 IMSI unknown in HSS.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "PROP_NO_STATE_CHANGE",
+      "name": "No state change",
+      "entity_type": "Property",
+      "description": "Network does not change current EMM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_DETACH_ACCEPT",
+      "target": "TIMER_T3422",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of DETACH ACCEPT message stops timer T3422.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_IMSI_DETACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE guards by IMSI detach condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_REATTACH_NOT_REQUIRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE guards by re-attach not required condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EMM_CAUSE",
+      "target": "COND_IMSI_UNKNOWN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause value guards by IMSI unknown condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_IMSI_DETACH",
+      "target": "PROP_NO_STATE_CHANGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "IMSI detach condition establishes no state change property.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REATTACH_NOT_REQUIRED",
+      "target": "COND_IMSI_UNKNOWN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-attach not required condition guards by IMSI unknown condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_IMSI_UNKNOWN",
+      "target": "PROP_NO_STATE_CHANGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "IMSI unknown condition establishes no state change property.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_NO_STATE_CHANGE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Otherwise condition establishes transition to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.3"
+      ]
+    }
+  ]
+}

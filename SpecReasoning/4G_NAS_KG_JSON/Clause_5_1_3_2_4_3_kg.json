@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.4.3",
+  "title": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+  "entities": [
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+      "entity_type": "State",
+      "description": "A substate of EMM-REGISTERED chosen by the UE when tracking area updating or combined tracking area updating procedure fails due to missing network response or specific failure circumstances. In this substate, no EMM procedure except tracking area updating procedures can be initiated, and no data can be sent or received.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TAU",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to update the tracking area of the UE in the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_TAU",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Combined procedure for tracking area updating along with other procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_TAU_FAILURE",
+      "name": "Tracking area updating procedure failure",
+      "entity_type": "Condition",
+      "description": "Condition when tracking area updating or combined tracking area updating procedure fails due to missing network response or specific failure circumstances described in referenced clauses.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_DATA_TRANSMISSION",
+      "name": "No data transmission",
+      "entity_type": "Property",
+      "description": "Property indicating that no data shall be sent or received by the UE while in EMM-REGISTERED.ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_TAU_FAILURE",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Tracking area updating procedure failure condition establishes the EMM-REGISTERED.ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "target": "PROCEDURE_TAU",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE state requires that only tracking area updating procedure can be initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "target": "PROCEDURE_COMBINED_TAU",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE state requires that only combined tracking area updating procedure can be initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "target": "PROPERTY_NO_DATA_TRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE state establishes the property that no data shall be sent or received.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.3"
+      ]
+    }
+  ]
+}

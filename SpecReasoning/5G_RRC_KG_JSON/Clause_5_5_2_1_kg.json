@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_MEAS_CONFIG",
+      "name": "Measurement Configuration Procedure",
+      "entity_type": "Procedure",
+      "description": "Network procedure for configuring UE measurements including measurement objects, reporting configurations, and identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_CONFIG",
+      "name": "measConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration container for measurement parameters including object lists, report configurations, and identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJECT",
+      "name": "Measurement Object",
+      "entity_type": "Information Element",
+      "description": "Defines frequency and timing parameters for measurements including SSB and CSI-RS configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "IE_REPORT_CONFIG",
+      "name": "Reporting Configuration",
+      "entity_type": "Information Element",
+      "description": "Specifies reporting criteria and types including reportCGI, reportSFTD, and delay configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID",
+      "name": "Measurement Identity",
+      "entity_type": "Information Element",
+      "description": "Links a measurement object with a reporting configuration to form a measurement task.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "COND_SSB_FREQ_MATCH",
+      "name": "Same SSB Frequency Condition",
+      "entity_type": "Condition",
+      "description": "Condition where multiple measurement objects share the same ssbFrequency, requiring consistent SMTC and subcarrier spacing.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "COND_RSSI_MEAS",
+      "name": "RSSI Measurement Condition",
+      "entity_type": "Condition",
+      "description": "Condition where measurement objects are used for RSSI measurements, requiring aligned measurementSlots and endSymbol.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "PROP_CSI_RS_LIMIT",
+      "name": "CSI-RS Resource Limit",
+      "entity_type": "Property",
+      "description": "Property ensuring total CSI-RS resources per measurement object do not exceed maximum specified in TS 38.214.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEAS_CONFIG",
+      "target": "IE_MEAS_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Measurement configuration procedure uses measConfig IE to configure UE measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains measurement objects defining frequency and timing parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_REPORT_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains reporting configurations specifying reporting criteria and types.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains measurement identities linking objects and reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SSB_FREQ_MATCH",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Same SSB frequency condition guards measurement object configuration requiring consistent SMTC and subcarrier spacing.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RSSI_MEAS",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RSSI measurement condition guards measurement object configuration requiring aligned measurementSlots and endSymbol.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_MEAS_CONFIG",
+      "target": "PROP_CSI_RS_LIMIT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Measurement configuration procedure establishes CSI-RS resource limit property per measurement object.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.1"
+      ]
+    }
+  ]
+}

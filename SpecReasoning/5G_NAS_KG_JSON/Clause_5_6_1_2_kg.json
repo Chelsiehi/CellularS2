@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.2",
+  "title": "Service request procedure initiation",
+  "entities": [
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to request establishment of a secure connection to the network for user data transfer or signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    },
+    {
+      "id": "MESSAGE_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by the UE to initiate the service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state where the UE is registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PENDING_DATA",
+      "name": "Pending user data or signaling",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has pending uplink user data or signaling to send.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "MESSAGE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_PENDING_DATA",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Service request procedure is triggered when UE has pending uplink user data or signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2"
+      ]
+    }
+  ]
+}

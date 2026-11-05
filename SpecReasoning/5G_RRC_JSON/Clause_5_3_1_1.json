@@ -1,0 +1,33 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.1.1",
+  "title": "RRC connection control",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "RRC connection establishment involves the establishment of SRB1. The network completes RRC connection establishment prior to completing the establishment of the NG connection, i.e. prior to receiving the UE context information from the 5GC. Consequently, AS security is not activated during the initial phase of the RRC connection.",
+    "",
+    "  During this initial phase of the RRC connection,   network may configure the UE to perform measurement reporting,   but the UE only sends the corresponding measurement reports after successful AS security activation.     However, the UE only accepts a re-configuration with sync message   AS security has been activated.",
+    "  Upon receiving the UE context from the 5GC,   the RAN activates AS security (both ciphering and integrity protection) using the initial AS security activation procedure.",
+    "  The RRC messages to activate AS security (command and successful response) are integrity protected,   while ciphering is started only after completion of the procedure.",
+    "  That is, the response to the message used to activate AS security is not ciphered,   while the subsequent messages (e.g. used to establish SRB2, DRBs and multicast MRBs) are both integrity protected and ciphered.",
+    "  After having initiated the initial AS security activation procedure,   the network may initiate the establishment of SRB2 and DRBs and/or multicast MRBs, i.e. the network may do this prior to receiving the confirmation of the initial AS security activation from the UE.",
+    "  In any case,   the network will apply both ciphering and integrity protection for the RRC reconfiguration messages used to establish SRB2, DRBs and multicast MRBs.     The network should release the RRC connection if the initial AS security activation  and/ or  the radio bearer establishment fails.",
+    "  A configuration with SRB2 without DRB or multicast MRB, or with DRB or multicast MRB without SRB2 is not supported (i.e., SRB2 and at least one DRB or multicast MRB must be configured in the same RRC Reconfiguration message, and it is not allowed to release all the DRBs without releasing the RRC Connection).",
+    "  For IAB-MT, a configuration with SRB2 without any DRB/MRB is supported.",
+    "The release of the RRC connection normally is initiated by the network. The procedure may be used to re-direct the UE to an NR frequency or an E-UTRA carrier frequency.",
+    "The suspension of the RRC connection is initiated by the network.",
+    "When the RRC connection is suspended, the UE stores the UE Inactive AS context and any configuration received from the network,  and transits to RRC_INACTIVE state. The RRC message to suspend the RRC connection is integrity protected and ciphered.",
+    "The resumption of a suspended RRC connection is initiated by upper layers when the UE needs to transit from RRC_INACTIVE state to RRC_CONNECTED state or by RRC layer to perform a RNA update or by RAN paging from NG-RAN or for SDT. When the RRC connection is resumed, network configures the UE according to the RRC connection resume procedure based on the stored UE Inactive AS context and any RRC configuration received from the network.",
+    "The RRC connection resume procedure re-activates AS security and re-establishes SRB(s) and DRB(s) and/or multicast MRB(s), if configured.",
+    "  Upon initiating the resume procedure for SDT,   security is re-activated for SRB1 and for the radio bearers configured with SDT.   Further, SRB1 and the radio bearers configured for SDT are re-established  and  resumed  whilst the UE remains in RRC_INACTIVE state.",
+    "  Transmission and reception of data and/or signalling messages over radio bearers configured for SDT can happen whilst the UE is in RRC_INACTIVE state and  T319a is running.",
+    "  In response to a request to resume the RRC connection,   the network may resume the suspended RRC connection  and  send UE to RRC_CONNECTED,  or  reject the request to resume and send UE to RRC_INACTIVE (with a wait timer),  or  directly re-suspend the RRC connection  and  send UE to RRC_INACTIVE,  or  directly release the RRC connection  and  send UE to RRC_IDLE,  or  instruct the UE to initiate NAS level recovery (in this case the network sends an RRC setup message).",
+    "  In response to a resume procedure initiated for SDT,   the network may resume the suspended RRC connection  and  send UE to RRC_CONNECTED,  or  reject the request to resume and send UE to RRC_INACTIVE (with a wait timer),  or  directly re-suspend the RRC connection and send UE to RRC_INACTIVE,  or  directly release the RRC connection and send UE to RRC_IDLE,  or  instruct the UE to initiate NAS level recovery (in this case the network sends an RRC setup message).",
+    "NOTE:   sIn case the UE receives the configurations for NR sidelink communication via the E-UTRA,  the configurations for NR sidelink communication in SIB12 and sl-ConfigDedicatedNR within RRCReconfiguration used in clause 5.3 are provided by the configurations in SystemInformationBlockType28 and sl-ConfigDedicatedForNR within RRCConnectionReconfiguration as specified in TS 36.331, respectively.",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

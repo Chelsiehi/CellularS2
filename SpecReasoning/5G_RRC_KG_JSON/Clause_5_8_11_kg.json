@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.11",
+  "title": "Zone identity calculation",
+  "entities": [
+    {
+      "id": "ZONE_ID_CALCULATION",
+      "name": "Zone identity calculation",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to determine zone identity using configured parameters and UE location coordinates.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "ZONE_ID",
+      "name": "Zone identity",
+      "entity_type": "Identifier",
+      "description": "Identity of the zone in which the UE is located, calculated using specific formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "SL_ZONE_CONFIG",
+      "name": "sl-ZoneConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration parameter that must be configured for zone identity calculation to occur.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "SL_ZONE_LENGTH",
+      "name": "sl-ZoneLength",
+      "entity_type": "Information Element",
+      "description": "Parameter L included in sl-ZoneConfig, used in zone identity calculation formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "LONGITUDE_DISTANCE",
+      "name": "Longitude distance (x)",
+      "entity_type": "Property",
+      "description": "Geodesic distance in longitude between UE's current location and geographical coordinates (0, 0) according to WGS84 model, expressed in meters.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "LATITUDE_DISTANCE",
+      "name": "Latitude distance (y)",
+      "entity_type": "Property",
+      "description": "Geodesic distance in latitude between UE's current location and geographical coordinates (0, 0) according to WGS84 model, expressed in meters.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "SL_ZONE_CONFIG_CONDITION",
+      "name": "sl-ZoneConfig configured",
+      "entity_type": "Condition",
+      "description": "Condition that sl-ZoneConfig is configured, which enables zone identity calculation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ZONE_ID_CALCULATION",
+      "target": "SL_ZONE_CONFIG_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Zone identity calculation procedure requires that sl-ZoneConfig is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ZONE_ID_CALCULATION",
+      "target": "ZONE_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Zone identity calculation procedure establishes the zone identity value.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_ZONE_CONFIG",
+      "target": "SL_ZONE_LENGTH",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ZoneConfig contains the sl-ZoneLength parameter.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ZONE_ID_CALCULATION",
+      "target": "SL_ZONE_LENGTH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Zone identity calculation uses sl-ZoneLength parameter in the calculation formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ZONE_ID_CALCULATION",
+      "target": "LONGITUDE_DISTANCE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Zone identity calculation uses longitude distance parameter in the calculation formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ZONE_ID_CALCULATION",
+      "target": "LATITUDE_DISTANCE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Zone identity calculation uses latitude distance parameter in the calculation formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.11"
+      ]
+    }
+  ]
+}

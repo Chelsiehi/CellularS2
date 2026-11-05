@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.6",
+  "title": "Attach request message (for N1 mode only)",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to construct an ATTACH REQUEST message for a UE performing registration for initial registration under specific conditions including previous S1 mode registration and interworking without N26 interface not supported indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message created by EMM for initial registration when specific conditions are met, containing only mandatory information elements and included in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "IE_EPS_ATTACH_TYPE",
+      "name": "EPS attach type",
+      "entity_type": "Information Element",
+      "description": "Information element in ATTACH REQUEST message that shall be set to 'EPS attach' by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "IE_NAS_KEY_SET_ID",
+      "name": "NAS Key Set Identifier",
+      "entity_type": "Information Element",
+      "description": "Information element containing eKSI (KSIASME) included by the UE in ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "IE_EPS_MOBILE_IDENTITY",
+      "name": "EPS mobile identity",
+      "entity_type": "Information Element",
+      "description": "Information element where the UE shall set the associated GUTI in the ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "IE_UE_NETWORK_CAPABILITY",
+      "name": "UE network capability",
+      "entity_type": "Information Element",
+      "description": "Information element set by the UE according to its capabilities in the ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "IE_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container",
+      "entity_type": "Information Element",
+      "description": "Information element where the UE shall include an ESM DUMMY MESSAGE in the ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "COND_INITIAL_REG",
+      "name": "Initial registration conditions",
+      "entity_type": "Condition",
+      "description": "Conditions for ATTACH REQUEST message construction: UE previously registered in S1 mode before EMM-DEREGISTERED, received 'interworking without N26 interface not supported' indication, and has EPS security context with valid 4G-GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "PROP_INTEGRITY_PROTECTION",
+      "name": "Integrity protection with EPS security context",
+      "entity_type": "Property",
+      "description": "Property where the UE shall integrity protect the ATTACH REQUEST message with current EPS security context and increase uplink NAS COUNT by one.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes construction of ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ATTACH",
+      "target": "COND_INITIAL_REG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Attach procedure is triggered when initial registration conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_EPS_ATTACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains EPS attach type IE set to 'EPS attach'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_NAS_KEY_SET_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains NAS Key Set Identifier IE with eKSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_EPS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains EPS mobile identity IE with associated GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_UE_NETWORK_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains UE network capability IE set according to UE capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains ESM message container IE with ESM DUMMY MESSAGE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "PROP_INTEGRITY_PROTECTION",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "ATTACH REQUEST message requires integrity protection with EPS security context and uplink NAS COUNT increment.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.3.3.5",
+  "title": "BEARER CONTEXT MODIFY PENDING",
+  "entities": [
+    {
+      "id": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "name": "BEARER CONTEXT MODIFY PENDING",
+      "entity_type": "State",
+      "description": "ESM sublayer state in the network indicating that an EPS bearer context modification has been initiated towards the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.5",
+        "Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "ESM sublayer state where the EPS bearer context is active.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE",
+      "name": "BEARER CONTEXT INACTIVE",
+      "entity_type": "State",
+      "description": "ESM sublayer state where the EPS bearer context is inactive.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Network-initiated message to modify an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT_REJECT",
+      "name": "MODIFY EPS BEARER CONTEXT ACCEPT/REJECT",
+      "entity_type": "Message",
+      "description": "UE response to MODIFY EPS BEARER CONTEXT REQUEST, including cause value #43.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "CONDITION_CAUSE_43",
+      "name": "Cause value #43",
+      "entity_type": "Condition",
+      "description": "Specific cause value used in MODIFY EPS BEARER CONTEXT ACCEPT/REJECT and other messages.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message transitions the network from BEARER CONTEXT ACTIVE to BEARER CONTEXT MODIFY PENDING state.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT_REJECT",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT ACCEPT/REJECT message with cause value #43 transitions the network from BEARER CONTEXT MODIFY PENDING to BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT_REJECT",
+      "target": "CONDITION_CAUSE_43",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT ACCEPT/REJECT message includes condition for cause value #43.",
+      "provenance": [
+        "TS 24.301, Figure 6.1.3.3.5.1"
+      ]
+    }
+  ]
+}

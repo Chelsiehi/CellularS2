@@ -1,0 +1,114 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.2.1",
+  "title": "General RRCReconfiguration (sent via other RAT) RRCReconfigurationComplete",
+  "entities": [
+    {
+      "id": "PROC_HANDOVER_TO_NR",
+      "name": "Handover to NR",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer a connection between UE and another Radio Access Network (e.g. E-UTRAN) to NR under network control. Applies when SRBs, possibly with DRBs, are established in another RAT.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIGURATION",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE via other RAT to initiate handover to NR.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1",
+        "Figure 5.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIGURATION_COMPLETE",
+      "name": "RRCReconfigurationComplete",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to confirm successful RRC reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1",
+        "Figure 5.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_ACTIVATED",
+      "name": "Integrity activated in E-UTRA",
+      "entity_type": "Condition",
+      "description": "Condition that handover from E-UTRA to NR applies only after integrity has been activated in E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_SRB_DRB_ESTABLISHED",
+      "name": "SRBs and DRBs established in other RAT",
+      "entity_type": "Condition",
+      "description": "Condition that handover to NR procedure applies when SRBs, possibly in combination with DRBs, are established in another RAT.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "MSG_RRC_RECONFIGURATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Handover procedure includes sending RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1",
+        "Figure 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "MSG_RRC_RECONFIGURATION_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Handover procedure includes receiving RRCReconfigurationComplete message",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1",
+        "Figure 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "COND_INTEGRITY_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Handover procedure requires integrity to be activated in E-UTRA",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "COND_SRB_DRB_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Handover procedure requires SRBs and DRBs to be established in another RAT",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_RRC_RECONFIGURATION",
+      "target": "MSG_RRC_RECONFIGURATION_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCReconfiguration message triggers RRCReconfigurationComplete response",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.1",
+        "Figure 5.4.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.1.2",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure to the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "PAGING_PROCEDURE",
+      "name": "Paging procedure",
+      "entity_type": "Procedure",
+      "description": "Network procedure to page a UE for incoming communication.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "EPS_AUTHENTICATION_PROCEDURE",
+      "name": "EPS authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure performed during attach for security establishment.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTED",
+      "name": "Integrity protected message",
+      "entity_type": "Condition",
+      "description": "Condition where message has integrity protection applied and verified.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_SUCCESS",
+      "name": "Integrity check successful",
+      "entity_type": "Condition",
+      "description": "Condition where network successfully verifies message integrity.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "PAGING_ABORT",
+      "name": "Paging procedure abort",
+      "entity_type": "Property",
+      "description": "Network behavior to abort ongoing paging procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "PAGING_PROGRESS",
+      "name": "Paging procedure progress",
+      "entity_type": "Property",
+      "description": "Network behavior to continue ongoing paging procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_REQUEST",
+      "target": "INTEGRITY_PROTECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH REQUEST message may have integrity protection condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTEGRITY_PROTECTED",
+      "target": "INTEGRITY_CHECK_SUCCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Integrity protected message requires successful integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INTEGRITY_CHECK_SUCCESS",
+      "target": "PAGING_ABORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful integrity check establishes paging procedure abort.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTEGRITY_PROTECTED",
+      "target": "PAGING_PROGRESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lack of integrity protection establishes paging procedure progress.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EPS_AUTHENTICATION_PROCEDURE",
+      "target": "PAGING_ABORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful EPS authentication establishes paging procedure abort.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_REQUEST",
+      "target": "INTEGRITY_PROTECTED",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ATTACH REQUEST message may require integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.2"
+      ]
+    }
+  ]
+}

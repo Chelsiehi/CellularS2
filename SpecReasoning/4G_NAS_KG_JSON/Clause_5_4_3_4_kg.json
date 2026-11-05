@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.4",
+  "title": "NAS security mode control completion by the network",
+  "entities": [
+    {
+      "id": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "name": "NAS security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing NAS security between UE and network",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete NAS security mode control procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3460",
+      "name": "Timer T3460",
+      "entity_type": "Timer",
+      "description": "Timer used during NAS security mode control procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "IE_REPLAYED_NAS_CONTAINER",
+      "name": "Replayed NAS container message IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing replayed NAS messages",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used to initiate attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used to initiate tracking area update procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "PROP_INTEGRITY_PROTECTION",
+      "name": "Integrity protection of signalling messages",
+      "entity_type": "Property",
+      "description": "MME shall integrity protect all signalling messages with selected NAS integrity algorithm",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "PROP_CIPHERING",
+      "name": "Ciphering of signalling messages",
+      "entity_type": "Property",
+      "description": "MME shall encipher all signalling messages with selected NAS ciphering algorithm",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS security mode control procedure includes receiving SECURITY MODE COMPLETE message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "TIMER_T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SECURITY MODE COMPLETE message stops timer T3460",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_REPLAYED_NAS_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE message may contain Replayed NAS container message IE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_REPLAYED_NAS_CONTAINER",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS container may contain ATTACH REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_REPLAYED_NAS_CONTAINER",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS container may contain TRACKING AREA UPDATE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "PROP_INTEGRITY_PROTECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Completion of NAS security mode control procedure establishes integrity protection",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "PROP_CIPHERING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Completion of NAS security mode control procedure establishes ciphering",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_INTEGRITY_PROTECTION",
+      "target": "PROP_CIPHERING",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "MME shall integrity protect and encipher all signalling messages after security mode completion",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.4"
+      ]
+    }
+  ]
+}

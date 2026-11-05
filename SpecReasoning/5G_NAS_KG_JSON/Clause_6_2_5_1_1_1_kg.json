@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU session",
+      "entity_type": "Procedure",
+      "description": "A protocol data unit session that enables user data transmission with different QoS treatments based on session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "QOS_FLOW",
+      "name": "QoS flow",
+      "entity_type": "Property",
+      "description": "A data flow with specific quality of service characteristics for user data packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "QOS_RULE",
+      "name": "QoS rule",
+      "entity_type": "Property",
+      "description": "A rule defining QoS treatment for user data packets, which can be signalled or derived.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "UNSTRUCTURED_PDU_SESSION",
+      "name": "Unstructured PDU session type",
+      "entity_type": "Condition",
+      "description": "A PDU session type where all uplink user data packets are associated with the same QoS flow.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "STRUCTURED_PDU_SESSION",
+      "name": "Structured PDU session type",
+      "entity_type": "Condition",
+      "description": "PDU session types (IPv4, IPv6, IPv4v6, Ethernet) that enable different QoS treatments for uplink user data packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PDU_SESSION",
+      "target": "QOS_FLOW",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session utilizes QoS flows for handling user data packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "QOS_FLOW",
+      "target": "QOS_RULE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "QoS flow treatment is determined by QoS rules (signalled, derived, or combination).",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UNSTRUCTURED_PDU_SESSION",
+      "target": "QOS_FLOW",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Unstructured PDU session type establishes that all uplink user data packets use the same QoS flow.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STRUCTURED_PDU_SESSION",
+      "target": "QOS_FLOW",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Structured PDU session types enable different QoS treatments across multiple QoS flows.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.1"
+      ]
+    }
+  ]
+}

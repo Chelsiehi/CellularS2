@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.21",
+  "title": "Authentication and Key Management for Applications (AKMA)",
+  "entities": [
+    {
+      "id": "AKMA_PROCEDURE",
+      "name": "AKMA Procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication and Key Management for Applications procedure that provides authentication and key management to applications based on 3GPP credentials used for 5GS access, allowing secure data exchange with AKMA application functions.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "KAKMA",
+      "name": "AKMA Anchor Key",
+      "entity_type": "Property",
+      "description": "AKMA Anchor Key derived from KAUSF, used for AKMA authentication and key management.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "A_KID",
+      "name": "AKMA Key Identifier",
+      "entity_type": "Property",
+      "description": "AKMA Key Identifier derived from A-TID, used to identify AKMA keys.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "KAUSF",
+      "name": "KAUSF Key",
+      "entity_type": "Property",
+      "description": "Key derived from primary authentication, used as basis for AKMA key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "A_TID",
+      "name": "AKMA Temporary Identifier",
+      "entity_type": "Property",
+      "description": "AKMA Temporary Identifier derived from KAUSF, used to derive A-KID.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "PRIMARY_AUTH_PROCEDURE",
+      "name": "Primary Authentication and Key Agreement Procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication procedure that establishes KAUSF key.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "EAP_SUCCESS",
+      "name": "EAP-Success Message",
+      "entity_type": "Message",
+      "description": "EAP-Success message that indicates successful authentication and triggers KAUSF change notification.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND Message",
+      "entity_type": "Message",
+      "description": "Security Mode Command message that triggers KAUSF change notification.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "KAUSF_AVAILABLE_CONDITION",
+      "name": "KAUSF Available Condition",
+      "entity_type": "Condition",
+      "description": "Condition that KAUSF key is available and valid for AKMA key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "PRIMARY_AUTH_COMPLETE_CONDITION",
+      "name": "Primary Authentication Complete Condition",
+      "entity_type": "Condition",
+      "description": "Condition that primary authentication procedure has completed.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AKMA_PROCEDURE",
+      "target": "KAKMA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AKMA procedure establishes AKMA Anchor Key (KAKMA).",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AKMA_PROCEDURE",
+      "target": "A_KID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AKMA procedure establishes AKMA Key Identifier (A-KID).",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "KAKMA",
+      "target": "KAUSF",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "KAKMA derivation requires valid KAUSF key.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "A_KID",
+      "target": "A_TID",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "A-KID derivation requires A-TID.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "A_TID",
+      "target": "KAUSF",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "A-TID derivation requires KAUSF key.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EAP_SUCCESS",
+      "target": "KAUSF_AVAILABLE_CONDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EAP-Success message establishes KAUSF availability condition.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "KAUSF_AVAILABLE_CONDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message establishes KAUSF availability condition.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PRIMARY_AUTH_PROCEDURE",
+      "target": "PRIMARY_AUTH_COMPLETE_CONDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Primary authentication procedure establishes completion condition.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AKMA_PROCEDURE",
+      "target": "PRIMARY_AUTH_COMPLETE_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "AKMA procedure during ongoing primary authentication requires completion condition.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "AKMA_PROCEDURE",
+      "target": "KAUSF_AVAILABLE_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "AKMA procedure requires KAUSF available condition for key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 4.21"
+      ]
+    }
+  ]
+}

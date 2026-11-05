@@ -1,0 +1,142 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.3.2",
+  "title": "UE-requested PDU session release procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to release a PDU session. The UE sends a PDU SESSION RELEASE REQUEST message and starts timer T3582.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate PDU session release. Contains PTI IE and optionally 5GSM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for PDU session release. Contains 5GSM cause values like #44, #45, #83, #84, #96.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Procedure transaction identifier IE set to an allocated PTI value not currently in use.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3582",
+      "name": "Timer T3582",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends PDU SESSION RELEASE REQUEST. Stopped upon network-initiated release procedure or PDU SESSION RELEASE REJECT.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "COND_RELEASE_DUE_TO_ERRORS",
+      "name": "Release due to errors or limits",
+      "entity_type": "Condition",
+      "description": "Condition where UE releases PDU session due to QoS/packet filter errors or reaching maximum supported QoS rules/packet filters/QoS flow descriptions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "PROC_NAS_TRANSPORT",
+      "name": "NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transport PDU SESSION RELEASE REQUEST message and PDU session ID as specified in subclause 5.4.5.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure includes sending PDU SESSION RELEASE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REQUEST message may contain 5GSM cause IE to indicate release reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REQUEST message contains PTI IE set to allocated PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "TIMER_T3582",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3582 when sending PDU SESSION RELEASE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RELEASE_DUE_TO_ERRORS",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of release due to errors or limits requires inclusion of 5GSM cause IE in PDU SESSION RELEASE REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "PROC_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure uses NAS transport procedure to send message and PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.5.1",
+  "title": "General MeasurementReportSidelink",
+  "entities": [
+    {
+      "id": "PROC_NR_SIDELINK_MEAS_REPORTING",
+      "name": "NR sidelink measurement reporting procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer measurement results from UE to peer UE. Triggered for specific sl-MeasId and involves setting measurement results, managing reporting counters and timers.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1",
+        "Figure 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "MSG_MEASUREMENT_REPORT_SIDELINK",
+      "name": "MeasurementReportSidelink",
+      "entity_type": "Message",
+      "description": "Message used to transfer measurement results from UE to peer UE in sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1",
+        "Figure 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "IE_SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Information Element",
+      "description": "Measurement identity that triggers the NR sidelink measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "IE_SL_MEAS_RESULTS",
+      "name": "sl-MeasResults",
+      "entity_type": "Information Element",
+      "description": "Contains measurement results including sl-ResultDMRS for NR sidelink DMRS based quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "IE_SL_RESULT_DMRS",
+      "name": "sl-ResultDMRS",
+      "entity_type": "Information Element",
+      "description": "NR sidelink DMRS based quantity indicated in sl-ReportQuantity within the concerned sl-ReportConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "IE_SL_NUMBER_OF_REPORTS_SENT",
+      "name": "sl-NumberOfReportsSent",
+      "entity_type": "Information Element",
+      "description": "Counter defined within VarMeasReportListSL that tracks number of reports sent for a sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "TIMER_PERIODICAL_REPORTING",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer used for periodical reporting with value set to sl-ReportInterval from sl-ReportConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "COND_REPORT_AMOUNT_NOT_REACHED",
+      "name": "sl-NumberOfReportsSent less than sl-ReportAmount",
+      "entity_type": "Condition",
+      "description": "Condition where number of reports sent is less than configured report amount, triggering timer start.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "COND_REPORT_TYPE_PERIODICAL",
+      "name": "sl-ReportType set to sl-Periodical",
+      "entity_type": "Condition",
+      "description": "Condition where report type is periodical, triggering cleanup of measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "PROP_REMOVE_MEAS_ENTRIES",
+      "name": "Remove measurement entries from lists",
+      "entity_type": "Property",
+      "description": "Property where UE removes entry from VarMeasReportListSL and sl-MeasId from sl-MeasIdList in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NR_SIDELINK_MEAS_REPORTING",
+      "target": "MSG_MEASUREMENT_REPORT_SIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes submitting MeasurementReportSidelink message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_MEASUREMENT_REPORT_SIDELINK",
+      "target": "IE_SL_MEAS_RESULTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportSidelink message contains sl-MeasResults information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SL_MEAS_RESULTS",
+      "target": "IE_SL_RESULT_DMRS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-MeasResults contains sl-ResultDMRS for NR sidelink DMRS based quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NR_SIDELINK_MEAS_REPORTING",
+      "target": "TIMER_PERIODICAL_REPORTING",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops the periodical reporting timer if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REPORT_AMOUNT_NOT_REACHED",
+      "target": "TIMER_PERIODICAL_REPORTING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When sl-NumberOfReportsSent is less than sl-ReportAmount, the periodical reporting timer is started.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REPORT_TYPE_PERIODICAL",
+      "target": "PROP_REMOVE_MEAS_ENTRIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When sl-ReportType is set to sl-Periodical, UE removes measurement entries from reporting lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NR_SIDELINK_MEAS_REPORTING",
+      "target": "IE_SL_NUMBER_OF_REPORTS_SENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes incrementing sl-NumberOfReportsSent counter for the sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.5.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.21",
+  "title": "NAS message container",
+  "entities": [
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "An information element that contains NAS messages, included when specific conditions are met for secure transmission of non-cleartext IEs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "A NAS message used by the UE to initiate registration with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "COND_INITIAL_NAS_MSG",
+      "name": "UE sending REGISTRATION REQUEST as initial NAS message",
+      "entity_type": "Condition",
+      "description": "Condition where the UE sends a REGISTRATION REQUEST message as the first NAS message in a communication session.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "COND_VALID_5G_NAS_SECURITY_CONTEXT",
+      "name": "UE has valid 5G NAS security context",
+      "entity_type": "Condition",
+      "description": "Condition indicating the UE possesses an active and valid 5G NAS security context for secure communications.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "COND_NEEDS_NON_CLEARTEXT_IES",
+      "name": "UE needs to send non-cleartext IEs",
+      "entity_type": "Condition",
+      "description": "Condition where the UE requires transmission of information elements that must not be sent in cleartext, necessitating protection.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REGISTRATION REQUEST message may contain the NAS message container IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "COND_INITIAL_NAS_MSG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of the NAS message container IE is guarded by the condition that the REGISTRATION REQUEST is sent as an initial NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "COND_VALID_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of the NAS message container IE is guarded by the condition that the UE has a valid 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "COND_NEEDS_NON_CLEARTEXT_IES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of the NAS message container IE is guarded by the condition that the UE needs to send non-cleartext IEs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.21"
+      ]
+    }
+  ]
+}

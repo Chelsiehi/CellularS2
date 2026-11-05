@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.4.3",
+  "title": "Creating a derived QoS rule by reflective QoS in the UE",
+  "entities": [
+    {
+      "id": "DERIVED_QOS_RULE_CREATION",
+      "name": "Derived QoS Rule Creation",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE creates a new derived QoS rule when receiving a DL user data packet with QFI and RQI, under specified conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "DL_USER_DATA_PACKET",
+      "name": "DL User Data Packet",
+      "entity_type": "Information Element",
+      "description": "Downlink user data packet marked with QFI and RQI that triggers the creation of a derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "QFI",
+      "name": "QoS Flow Identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier for the QoS flow, set in the derived QoS rule from the received QFI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "RQI",
+      "name": "Reflective QoS Indication",
+      "entity_type": "Identifier",
+      "description": "Indication in the DL packet that reflective QoS is applied.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "DERIVED_QOS_RULE",
+      "name": "Derived QoS Rule",
+      "entity_type": "Information Element",
+      "description": "QoS rule created by the UE with QFI, precedence value 80, and derived UL packet filter.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "PRECEDENCE_VALUE_80",
+      "name": "Precedence Value 80",
+      "entity_type": "Property",
+      "description": "Fixed precedence value set to 80 for the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "UL_PACKET_FILTER",
+      "name": "UL Packet Filter",
+      "entity_type": "Information Element",
+      "description": "Packet filter for uplink direction derived from the DL user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "T3583",
+      "name": "Timer T3583",
+      "entity_type": "Timer",
+      "description": "Timer associated with the derived QoS rule, started with the RQ timer value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "RQ_TIMER_VALUE",
+      "name": "RQ Timer Value",
+      "entity_type": "Property",
+      "description": "Timer value received during PDU session procedures or using default standardized value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "NO_EXISTING_DERIVED_QOS_RULE",
+      "name": "No Existing Derived QoS Rule Condition",
+      "entity_type": "Condition",
+      "description": "Condition that no derived QoS rule with the same UL packet filter exists.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_IP_ETHERNET",
+      "name": "PDU Session Type Condition",
+      "entity_type": "Condition",
+      "description": "Condition that the PDU session is of IPv4, IPv6, IPv4v6, or Ethernet type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DERIVED_QOS_RULE_CREATION",
+      "target": "DL_USER_DATA_PACKET",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Creation of derived QoS rule is triggered by receiving a DL user data packet with QFI and RQI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DERIVED_QOS_RULE_CREATION",
+      "target": "NO_EXISTING_DERIVED_QOS_RULE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure requires that no existing derived QoS rule with same UL packet filter is present.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DERIVED_QOS_RULE_CREATION",
+      "target": "PDU_SESSION_IP_ETHERNET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure requires the PDU session to be of IPv4, IPv6, IPv4v6, or Ethernet type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DERIVED_QOS_RULE_CREATION",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes a new derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DERIVED_QOS_RULE",
+      "target": "QFI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains the QFI set from the received QFI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DERIVED_QOS_RULE",
+      "target": "PRECEDENCE_VALUE_80",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains the precedence value set to 80.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DERIVED_QOS_RULE",
+      "target": "UL_PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains the derived UL packet filter.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DERIVED_QOS_RULE_CREATION",
+      "target": "T3583",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3583 associated with the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "T3583",
+      "target": "RQ_TIMER_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3583 uses the RQ timer value from PDU session procedures or default value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.3"
+      ]
+    }
+  ]
+}

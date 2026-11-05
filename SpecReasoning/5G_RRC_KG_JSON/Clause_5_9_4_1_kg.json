@@ -1,0 +1,101 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.4.1",
+  "title": "General SIBx1 acquisition MBSInterestIndication",
+  "entities": [
+    {
+      "id": "PROC_MBS_INTEREST_INDICATION",
+      "name": "MBS Interest Indication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to inform the network that the UE in RRC_CONNECTED state is receiving or is interested to receive MBS broadcast service(s) and to inform the network about the priority of MBS broadcast versus unicast reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1",
+        "Figure 5.9.4.1"
+      ]
+    },
+    {
+      "id": "MSG_MBS_INTEREST_INDICATION",
+      "name": "MBSInterestIndication",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network indicating MBS broadcast service interest and priority relative to unicast reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1",
+        "Figure 5.9.4.1"
+      ]
+    },
+    {
+      "id": "MSG_SIBX1_ACQUISITION",
+      "name": "SIBx1 acquisition",
+      "entity_type": "Message",
+      "description": "System information block acquisition message from network to UE.",
+      "provenance": [
+        "TS 38.331, Figure 5.9.4.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_ACTIVATED",
+      "name": "AS security activated",
+      "entity_type": "Condition",
+      "description": "Condition that Access Stratum security must be activated before MBS Interest Indication can be sent.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MBS_INTEREST_INDICATION",
+      "target": "MSG_MBS_INTEREST_INDICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The MBS Interest Indication procedure involves sending the MBSInterestIndication message.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1",
+        "Figure 5.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MBS_INTEREST_INDICATION",
+      "target": "MSG_SIBX1_ACQUISITION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes SIBx1 acquisition from the network.",
+      "provenance": [
+        "TS 38.331, Figure 5.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MBS_INTEREST_INDICATION",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires the UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MBS_INTEREST_INDICATION",
+      "target": "COND_AS_SECURITY_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MBSInterestIndication message can only be sent after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.1"
+      ]
+    }
+  ]
+}

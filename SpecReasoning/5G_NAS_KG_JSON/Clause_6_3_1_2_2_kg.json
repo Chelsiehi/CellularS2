@@ -1,0 +1,159 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.2.2",
+  "title": "PDU EAP message reliable transport procedure accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_PDU_EAP_TRANSPORT",
+      "name": "PDU EAP message reliable transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE creates and sends a PDU SESSION AUTHENTICATION COMPLETE message containing EAP-response or received EAP message from 5G ProSe remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "name": "PDU SESSION AUTHENTICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE containing EAP message and optionally remote UE handling information.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element containing EAP-response message or received EAP message from 5G ProSe remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_REMOTE_UE_HANDLING",
+      "name": "Remote UE handling information",
+      "entity_type": "Information Element",
+      "description": "Information element containing remote user identity when EAP message is received from 5G ProSe layer-3 remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "PROC_NAS_TRANSPORT",
+      "name": "NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transport PDU SESSION AUTHENTICATION COMPLETE message and PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2",
+        "TS 24.501, Subclause 5.4.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3590",
+      "name": "T3590",
+      "entity_type": "Timer",
+      "description": "Timer stopped by SMF upon receipt of PDU SESSION AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "COND_EAP_FROM_REMOTE_UE",
+      "name": "EAP message from 5G ProSe remote UE",
+      "entity_type": "Condition",
+      "description": "Condition where EAP message is received from 5G ProSe layer-3 remote UE as defined in TS 24.554.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "PROP_SMF_HANDLES_EAP",
+      "name": "SMF handles EAP message",
+      "entity_type": "Property",
+      "description": "SMF provides EAP message to DN or handles it locally after stopping timer T3590.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_EAP_TRANSPORT",
+      "target": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes creating and sending PDU SESSION AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EAP message information element.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "IE_REMOTE_UE_HANDLING",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains remote UE handling information element when condition is met.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_REMOTE_UE_HANDLING",
+      "target": "COND_EAP_FROM_REMOTE_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Remote UE handling IE inclusion is guarded by condition of EAP message from 5G ProSe remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PDU_EAP_TRANSPORT",
+      "target": "PROC_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure uses NAS transport procedure to send message and PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "TIMER_T3590",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of message stops timer T3590 at SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "PROP_SMF_HANDLES_EAP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of message establishes that SMF handles EAP message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.2"
+      ]
+    }
+  ]
+}

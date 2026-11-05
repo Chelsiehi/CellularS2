@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3480",
+      "name": "Timer T3480",
+      "entity_type": "Timer",
+      "description": "Timer used in the UE requested bearer resource allocation procedure. Controls retransmission of BEARER RESOURCE ALLOCATION REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_REQUESTED_BEARER_RESOURCE_ALLOCATION",
+      "name": "UE requested bearer resource allocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to request allocation of bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request bearer resource allocation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "name": "BEARER RESOURCE ALLOCATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent to reject a bearer resource allocation request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to initiate EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered when a procedure transaction is completed or aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_T3480_EXPIRY_FIFTH",
+      "name": "Fifth expiry of timer T3480",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3480 expires for the fifth time during the bearer resource allocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "name": "Unknown EPS bearer context",
+      "entity_type": "Condition",
+      "description": "Condition when BEARER RESOURCE ALLOCATION REJECT includes ESM cause #43 indicating invalid EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_PROCEDURE_COLLISION",
+      "name": "Collision of bearer resource allocation and deactivation procedures",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives DEACTIVATE EPS BEARER CONTEXT REQUEST for the default bearer context during bearer resource allocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_ABORT_PROCEDURE",
+      "name": "Abort procedure",
+      "entity_type": "Property",
+      "description": "Action to terminate the ongoing procedure and release associated resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_DEACTIVATE_DEFAULT_BEARER_LOCALLY",
+      "name": "Deactivate default EPS bearer context locally",
+      "entity_type": "Property",
+      "description": "Action to deactivate the default EPS bearer context without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UE_REQUESTED_BEARER_RESOURCE_ALLOCATION",
+      "target": "TIMER_T3480",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The UE requested bearer resource allocation procedure starts timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_UE_REQUESTED_BEARER_RESOURCE_ALLOCATION",
+      "target": "MESSAGE_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The UE requested bearer resource allocation procedure includes sending BEARER RESOURCE ALLOCATION REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_T3480_EXPIRY_FIFTH",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3480 causes the UE to abort the bearer resource allocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_T3480_EXPIRY_FIFTH",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3480 causes the UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "target": "PROPERTY_DEACTIVATE_DEFAULT_BEARER_LOCALLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of BEARER RESOURCE ALLOCATION REJECT with ESM cause #43 causes UE to deactivate default EPS bearer context locally.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "target": "TIMER_T3480",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of BEARER RESOURCE ALLOCATION REJECT with ESM cause #43 causes UE to stop timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with deactivation procedure causes UE to abort the bearer resource allocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "TIMER_T3480",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Collision with deactivation procedure causes UE to stop timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MESSAGE_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message with ESM cause #43 triggers the unknown EPS bearer context condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MESSAGE_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "CONDITION_PROCEDURE_COLLISION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DEACTIVATE EPS BEARER CONTEXT REQUEST message triggers the procedure collision condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.5"
+      ]
+    }
+  ]
+}

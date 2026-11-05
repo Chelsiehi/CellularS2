@@ -1,0 +1,136 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.19",
+  "title": "5GS mobility management in WB-N1 mode for IoT",
+  "entities": [
+    {
+      "id": "WB_N1_MODE",
+      "name": "WB-N1 mode",
+      "entity_type": "Property",
+      "description": "Operating mode for UEs in category CE, supporting either CE mode A or CE mode B.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "CE_MODE_B",
+      "name": "CE mode B",
+      "entity_type": "Property",
+      "description": "Enhanced coverage mode supported by UEs operating in WB-N1 mode, subject to network restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "ENHANCED_COVERAGE_RESTRICTION",
+      "name": "Enhanced coverage restriction",
+      "entity_type": "Condition",
+      "description": "Network indication whether use of enhanced coverage is restricted for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "CE_MODE_B_RESTRICTION",
+      "name": "CE mode B restriction",
+      "entity_type": "Condition",
+      "description": "Network indication whether CE mode B is restricted for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_WB_N1_CE_MODE",
+      "name": "NAS timer for WB-N1/CE mode",
+      "entity_type": "Timer",
+      "description": "Timer value from table 10.2.1 (UE) or table 10.2.2 (AMF), applied when enhanced coverage or CE mode B is not restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "UE_USAGE_SETTING",
+      "name": "UE usage setting",
+      "entity_type": "Property",
+      "description": "UE configuration indicating operational preference; must not be 'voice centric' for CE mode B applicability.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function; stores UE's CE mode B support and calculates NAS timer values when conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "Non-Access Stratum procedure during which NAS timer values are calculated at start and not re-calculated until completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_USAGE_SETTING",
+      "target": "CE_MODE_B",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CE mode B applicability requires UE usage setting not to be 'voice centric'.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ENHANCED_COVERAGE_RESTRICTION",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If enhanced coverage is not restricted, UE/AMF applies NAS timer value for WB-N1/CE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CE_MODE_B_RESTRICTION",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If CE mode B is not restricted, UE/AMF applies NAS timer value for WB-N1/CE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "NAS timer value is calculated at start of a NAS procedure and not re-calculated until procedure completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AMF",
+      "target": "CE_MODE_B",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF stores UE's CE mode B support indication from lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.19"
+      ]
+    }
+  ]
+}

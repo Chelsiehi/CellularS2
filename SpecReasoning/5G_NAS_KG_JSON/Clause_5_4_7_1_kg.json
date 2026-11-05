@@ -1,0 +1,259 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_NSSAA",
+      "name": "Network Slice-Specific Authentication and Authorization Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure enabling AAA-S via NSSAAF to (re-)authenticate or (re-)authorize UE upper layers for HPLMN S-NSSAI or SNPN S-NSSAI using EAP protocol.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_COMMAND",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message transporting EAP-request from network to UE as part of network slice-specific EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_COMPLETE",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message transporting EAP-response from UE to network as part of network slice-specific EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_RESULT",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT",
+      "entity_type": "Message",
+      "description": "Message transporting EAP-success or EAP-failure from network to UE as part of network slice-specific result message transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_REQUEST",
+      "name": "EAP-request message",
+      "entity_type": "Information Element",
+      "description": "EAP message type sent from network to UE containing authentication request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_RESPONSE",
+      "name": "EAP-response message",
+      "entity_type": "Information Element",
+      "description": "EAP message type sent from UE to network in response to EAP-request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_SUCCESS",
+      "name": "EAP-success message",
+      "entity_type": "Information Element",
+      "description": "EAP message type indicating successful authentication completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Information Element",
+      "description": "EAP message type indicating unsuccessful authentication completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3575",
+      "name": "T3575",
+      "entity_type": "Timer",
+      "description": "Timer used for reliable transport of EAP messages in network slice-specific authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "COND_AUTH_SUCCESS",
+      "name": "Authentication completes successfully",
+      "entity_type": "Condition",
+      "description": "Condition where UE (re-)authentication completes successfully, triggering EAP-success message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "COND_AUTH_FAILURE",
+      "name": "Authentication completes unsuccessfully",
+      "entity_type": "Condition",
+      "description": "Condition where UE (re-)authentication completes unsuccessfully, triggering EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "PROP_NO_EAP_RETRANSMISSION",
+      "name": "No EAP layer retransmissions in AMF",
+      "entity_type": "Property",
+      "description": "Property where authenticator retransmission timer is set to infinite value due to reliable transport of EAP messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NSSAA",
+      "target": "MSG_AUTH_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NSSAA",
+      "target": "MSG_AUTH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NSSAA",
+      "target": "MSG_AUTH_RESULT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTH_COMMAND",
+      "target": "IE_EAP_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION COMMAND message transports EAP-request message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTH_COMPLETE",
+      "target": "IE_EAP_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION COMPLETE message transports EAP-response message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_AUTH_RESULT",
+      "target": "IE_EAP_SUCCESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESULT message transports EAP-success message when authentication succeeds.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_AUTH_RESULT",
+      "target": "IE_EAP_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESULT message transports EAP-failure message when authentication fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_AUTH_COMMAND",
+      "target": "TIMER_T3575",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION COMMAND message starts timer T3575.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_AUTH_COMPLETE",
+      "target": "TIMER_T3575",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving AUTHENTICATION COMPLETE message stops timer T3575.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1",
+        "Figure 5.4.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_AUTH_SUCCESS",
+      "target": "IE_EAP_SUCCESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful authentication condition establishes EAP-success message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_AUTH_FAILURE",
+      "target": "IE_EAP_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Unsuccessful authentication condition establishes EAP-failure message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_NSSAA",
+      "target": "PROP_NO_EAP_RETRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes property of no EAP layer retransmissions due to reliable transport.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.1"
+      ]
+    }
+  ]
+}

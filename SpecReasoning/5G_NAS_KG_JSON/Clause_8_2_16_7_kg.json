@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.16.7",
+  "title": "Paging restriction",
+  "entities": [
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Information Element",
+      "description": "IE that the UE includes to request the network to restrict paging when specific conditions are met in the UE request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type",
+      "entity_type": "Information Element",
+      "description": "Information element containing the Request type field that indicates the type of UE request.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "COND_NAS_SIGNALLING_RELEASE",
+      "name": "Request type is NAS signalling connection release",
+      "entity_type": "Condition",
+      "description": "Condition where the Request type field in UE request type IE is set to NAS signalling connection release.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "COND_REJECTION_OF_PAGING",
+      "name": "Request type is Rejection of paging",
+      "entity_type": "Condition",
+      "description": "Condition where the Request type field in UE request type IE is set to Rejection of paging.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "PROP_PAGING_RESTRICTION_REQUESTED",
+      "name": "UE requests network to restrict paging",
+      "entity_type": "Property",
+      "description": "Property indicating that the UE is requesting the network to restrict paging.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_UE_REQUEST_TYPE",
+      "target": "COND_NAS_SIGNALLING_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UE request type IE can have its Request type field set to NAS signalling connection release.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UE_REQUEST_TYPE",
+      "target": "COND_REJECTION_OF_PAGING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UE request type IE can have its Request type field set to Rejection of paging.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NAS_SIGNALLING_RELEASE",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When Request type is NAS signalling connection release and UE requests paging restriction, the UE shall include the Paging restriction IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_REJECTION_OF_PAGING",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When Request type is Rejection of paging and UE requests paging restriction, the UE shall include the Paging restriction IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_PAGING_RESTRICTION_REQUESTED",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When the UE requests the network to restrict paging, the UE shall include the Paging restriction IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.7"
+      ]
+    }
+  ]
+}

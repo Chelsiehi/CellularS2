@@ -1,0 +1,147 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.6.3",
+  "title": "Reception of DLDedicatedMessageSegment by the UE",
+  "entities": [
+    {
+      "id": "DLDedicatedMessageSegment",
+      "name": "DL Dedicated Message Segment",
+      "entity_type": "Message",
+      "description": "A downlink message segment containing part of a larger RRC message that is segmented for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "rrc-MessageSegmentContainer",
+      "name": "RRC Message Segment Container",
+      "entity_type": "Information Element",
+      "description": "Contains the actual segment data of the DL Dedicated Message Segment.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "RRCReconfiguration",
+      "name": "RRC Reconfiguration Message",
+      "entity_type": "Message",
+      "description": "An RRC message used to modify RRC configuration, processed according to clause 5.3.5.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "RRCResume",
+      "name": "RRC Resume Message",
+      "entity_type": "Message",
+      "description": "An RRC message used to resume an RRC connection, processed according to clause 5.3.13.4.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "ALL_SEGMENTS_RECEIVED",
+      "name": "All segments received condition",
+      "entity_type": "Condition",
+      "description": "Condition that checks whether all segments of a segmented message have been received by the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "STORE_SEGMENT",
+      "name": "Store segment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE stores the segment contained in the rrc-MessageSegmentContainer.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "ASSEMBLE_MESSAGE",
+      "name": "Assemble message procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE assembles the complete message from all received segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "DISCARD_SEGMENTS",
+      "name": "Discard segments procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE discards all segments after successful message assembly.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DLDedicatedMessageSegment",
+      "target": "rrc-MessageSegmentContainer",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL Dedicated Message Segment contains the RRC Message Segment Container IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STORE_SEGMENT",
+      "target": "rrc-MessageSegmentContainer",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Store segment procedure involves storing the content from rrc-MessageSegmentContainer.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ALL_SEGMENTS_RECEIVED",
+      "target": "ASSEMBLE_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that all segments have been received guards the assembly procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ALL_SEGMENTS_RECEIVED",
+      "target": "DISCARD_SEGMENTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that all segments have been received guards the segment discard procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ASSEMBLE_MESSAGE",
+      "target": "RRCReconfiguration",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Assemble message procedure may result in processing an RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ASSEMBLE_MESSAGE",
+      "target": "RRCResume",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Assemble message procedure may result in processing an RRCResume message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.3"
+      ]
+    }
+  ]
+}

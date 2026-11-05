@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1A.4",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3594",
+      "name": "Timer T3594",
+      "entity_type": "Timer",
+      "description": "Timer used during service-level authentication procedure. On expiry, triggers retransmission of SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "name": "SERVICE-LEVEL AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by SMF for service-level authentication. Retransmitted on T3594 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_LEVEL_AUTH",
+      "name": "Service-level authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure performed at service level. Aborted after fifth T3594 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_EST_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent when service-level authentication fails, containing 5GSM cause #29.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "COND_FIFTH_T3594_EXPIRY",
+      "name": "Fifth T3594 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3594 expires for the fifth time, triggering procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "SMF behavior to abort the service-level authentication procedure after fifth T3594 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_LEVEL_AUTH",
+      "target": "TIMER_T3594",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Service-level authentication procedure starts timer T3594.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_LEVEL_AUTH",
+      "target": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3594",
+      "target": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On first four T3594 expiries, timer is reset and SERVICE-LEVEL AUTHENTICATION COMMAND is resent.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_FIFTH_T3594_EXPIRY",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3594 expiry establishes procedure abortion behavior.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_ABORT_PROCEDURE",
+      "target": "MSG_PDU_SESSION_EST_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure abortion includes sending PDU SESSION ESTABLISHMENT REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.4"
+      ]
+    }
+  ]
+}

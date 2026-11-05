@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3.2",
+  "title": "EPS bearer context modification initiated by the network",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_MOD_NETWORK",
+      "name": "EPS bearer context modification initiated by network",
+      "entity_type": "Procedure",
+      "description": "Procedure where the MME initiates modification of an EPS bearer context by sending a MODIFY EPS BEARER CONTEXT REQUEST message to the UE, starting timer T3486, and entering BEARER CONTEXT MODIFY PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE to initiate EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "MODIFY EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to accept bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "name": "MODIFY EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to reject bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the EPS bearer context to be modified.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_PROCEDURE_TRANSACTION_IDENTITY",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "PTI value included when procedure was initiated by UE requested bearer resource procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "name": "Header compression configuration",
+      "entity_type": "Information Element",
+      "description": "Optional IE for re-negotiating header compression configuration.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_UE_NETWORK_CAPABILITY",
+      "name": "UE network capability",
+      "entity_type": "Information Element",
+      "description": "Contains UE capability indicators for CIoT EPS optimizations.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3486",
+      "name": "T3486",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when initiating EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "name": "BEARER CONTEXT MODIFY PENDING",
+      "entity_type": "State",
+      "description": "State entered by MME when EPS bearer context modification is pending.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "COND_CIOT_OPTIMIZATIONS_SUPPORTED",
+      "name": "CIoT EPS optimization supported condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicated support for Control plane CIoT EPS optimization and Header compression for control plane CIoT EPS optimization in UE network capability IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_MOD_NETWORK",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_MOD_NETWORK",
+      "target": "TIMER_T3486",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3486.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EPS_BEARER_MOD_NETWORK",
+      "target": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires entering BEARER CONTEXT MODIFY PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROCEDURE_TRANSACTION_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain PTI IE when initiated by UE requested procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Header compression configuration IE under CIoT optimization conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_CIOT_OPTIMIZATIONS_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Header compression configuration IE is guarded by CIoT optimization support condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_CIOT_OPTIMIZATIONS_SUPPORTED",
+      "target": "IE_UE_NETWORK_CAPABILITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition depends on UE network capability IE values.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "TIMER_T3486",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT ACCEPT message stops timer T3486.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "TIMER_T3486",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REJECT message stops timer T3486.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.2",
+        "Figure 6.4.3.2.1"
+      ]
+    }
+  ]
+}

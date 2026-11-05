@@ -1,0 +1,141 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.2.2",
+  "title": "UE requested PDN disconnection procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_PDN_DISCONNECTION",
+      "name": "UE requested PDN disconnection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to disconnect from a PDN by sending a PDN DISCONNECT REQUEST message, starting timer T3492, and entering PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2",
+        "Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request PDN disconnection. Contains the linked EPS bearer identity of the default bearer associated with the PDN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2",
+        "Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network in response to PDN DISCONNECT REQUEST, leading to bearer deactivation.",
+      "provenance": [
+        "TS 24.301, Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REJECT",
+      "name": "PDN DISCONNECT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject the PDN disconnection request.",
+      "provenance": [
+        "TS 24.301, Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Information element included in PDN DISCONNECT REQUEST message identifying the default bearer associated with the PDN to disconnect from.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3492",
+      "name": "T3492",
+      "entity_type": "Timer",
+      "description": "Timer started by the UE when initiating PDN disconnection procedure and stopped upon receiving network response.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2",
+        "Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by the UE after sending PDN DISCONNECT REQUEST and starting T3492.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_DISCONNECTION",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_DISCONNECTION",
+      "target": "TIMER_T3492",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3492.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_PDN_DISCONNECTION",
+      "target": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires entering PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_DISCONNECT_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REQUEST message contains linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "TIMER_T3492",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "DEACTIVATE EPS BEARER CONTEXT REQUEST message stops timer T3492.",
+      "provenance": [
+        "TS 24.301, Figure 6.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDN_DISCONNECT_REJECT",
+      "target": "TIMER_T3492",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "PDN DISCONNECT REJECT message stops timer T3492.",
+      "provenance": [
+        "TS 24.301, Figure 6.5.2.2.1"
+      ]
+    }
+  ]
+}

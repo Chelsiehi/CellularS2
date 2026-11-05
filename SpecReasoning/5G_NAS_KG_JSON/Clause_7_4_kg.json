@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.4",
+  "title": "Unknown or unforeseen message type",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives and processes 5GMM/5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network infrastructure that receives and processes 5GMM/5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "STATUS_MSG",
+      "name": "5GMM STATUS or 5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Status message sent in response to unknown or incompatible messages, containing cause information.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "CAUSE_97",
+      "name": "Message type non-existent or not implemented",
+      "entity_type": "Condition",
+      "description": "Cause value #97 indicating the received message type is not defined for the EPD or not implemented by the receiver.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "CAUSE_98",
+      "name": "Message type not compatible with protocol state",
+      "entity_type": "Condition",
+      "description": "Cause value #98 indicating the received message is not compatible with the current protocol state.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "UNKNOWN_MSG_TYPE",
+      "name": "Unknown message type",
+      "entity_type": "Condition",
+      "description": "Condition where a received message has a type not defined for the extended protocol discriminator or not implemented.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "INCOMPATIBLE_PROTOCOL_STATE",
+      "name": "Incompatible protocol state",
+      "entity_type": "Condition",
+      "description": "Condition where a received message is not compatible with the current protocol state.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends STATUS message when receiving unknown message type.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATUS_MSG",
+      "target": "CAUSE_97",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "STATUS message contains cause #97 for unknown message types.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UNKNOWN_MSG_TYPE",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Unknown message type condition triggers STATUS message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NETWORK",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network sends STATUS message when receiving unknown message type in foreseen protocol state.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INCOMPATIBLE_PROTOCOL_STATE",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Incompatible protocol state condition triggers STATUS message transmission from UE.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATUS_MSG",
+      "target": "CAUSE_98",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "STATUS message contains cause #98 for protocol state incompatibility.",
+      "provenance": [
+        "TS 24.501, Clause 7.4"
+      ]
+    }
+  ]
+}

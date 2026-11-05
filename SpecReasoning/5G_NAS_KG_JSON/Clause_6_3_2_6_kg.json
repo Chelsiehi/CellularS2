@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MOD_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by the network to modify a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "MSG_5GSM_STATUS",
+      "name": "5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Message used to report error conditions in 5G session management.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to carry session management messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Identifies a specific PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the cause of a 5G session management event or error.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure transaction identity used to correlate session management procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE",
+      "entity_type": "State",
+      "description": "State indicating a PDU session is inactive.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_ACTIVE",
+      "name": "PDU SESSION ACTIVE",
+      "entity_type": "State",
+      "description": "State indicating a PDU session is active.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_INACTIVE",
+      "name": "PDU session inactive for the received PDU session ID",
+      "entity_type": "Condition",
+      "description": "Condition where the PDU session ID in the PDU SESSION MODIFICATION COMMAND belongs to a PDU session in inactive state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "COND_PROCEDURE_COLLISION",
+      "name": "Collision of network-requested and UE-requested PDU session modification procedures",
+      "entity_type": "Condition",
+      "description": "Condition where the UE receives a PDU SESSION MODIFICATION COMMAND during an ongoing UE-requested modification procedure for the same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_UE_PROCEDURE",
+      "name": "Abort UE-requested PDU session modification procedure",
+      "entity_type": "Property",
+      "description": "Behavior where the UE internally aborts its ongoing PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_PDU_SESSION_INACTIVE",
+      "target": "MSG_5GSM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDU session is inactive, UE sends 5GSM STATUS message with cause #43.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_5GSM_STATUS",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains 5GSM cause IE set to #43.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_5GSM_STATUS",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains PDU session ID IE set to received value.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_5GSM_STATUS",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "5GSM STATUS is sent via UL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "PROP_ABORT_UE_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition causes UE to abort its ongoing modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "STATE_PDU_SESSION_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition causes UE to enter PDU SESSION ACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition causes UE to proceed with network-requested modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND contains PDU session ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND contains PTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "IE_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure collision condition is guarded by PTI IE being set to 'No procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.6"
+      ]
+    }
+  ]
+}

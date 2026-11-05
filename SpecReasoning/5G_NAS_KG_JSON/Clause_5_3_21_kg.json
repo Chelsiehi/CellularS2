@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.21",
+  "title": "CIoT 5GS optimizations",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE indicates support and preference for CIoT 5GS optimizations and network indicates accepted optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "IE_5GS_UPDATE_TYPE",
+      "name": "5GS update type IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION REQUEST message containing SMS requested bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_RESULT",
+      "name": "5GS registration result IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION ACCEPT message containing SMS allowed bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "OPT_CP_CIOT",
+      "name": "Control plane CIoT 5GS optimization",
+      "entity_type": "Property",
+      "description": "Enables efficient transport of user data or SMS messages over control plane via AMF without triggering user-plane resources establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "OPT_UP_CIOT",
+      "name": "User plane CIoT 5GS optimization",
+      "entity_type": "Property",
+      "description": "Enables change from 5GMM-IDLE mode to 5GMM-CONNECTED mode over 3GPP access without using service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "FEATURE_N3_DATA_TRANSFER",
+      "name": "N3 data transfer",
+      "entity_type": "Property",
+      "description": "Feature that enables data transfer over N3 interface, required when supporting user plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "STATE_NB_N1_MODE",
+      "name": "NB-N1 mode",
+      "entity_type": "State",
+      "description": "UE operating mode where UE always indicates support for control plane CIoT 5GS optimization and has restrictions on emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "STATE_WB_N1_MODE",
+      "name": "WB-N1 mode",
+      "entity_type": "State",
+      "description": "UE operating mode with different support requirements for CIoT 5GS optimizations compared to NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "COND_UE_PREFERENCE",
+      "name": "UE preference indication",
+      "entity_type": "Condition",
+      "description": "UE separately indicates preference for control plane or user plane CIoT 5GS optimization, considered as request to use.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE during registration procedure containing CIoT optimization indications.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network indicating accepted CIoT 5GS optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REGISTRATION",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes sending REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_REGISTRATION",
+      "target": "MSG_REGISTRATION_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes receiving REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS update type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_5GS_REGISTRATION_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains 5GS registration result IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_NB_N1_MODE",
+      "target": "OPT_CP_CIOT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in NB-N1 mode always indicates support for control plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_UE_PREFERENCE",
+      "target": "OPT_UP_CIOT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE preference indication guards whether user plane CIoT 5GS optimization is requested.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "OPT_UP_CIOT",
+      "target": "FEATURE_N3_DATA_TRANSFER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "If UE supports user plane CIoT 5GS optimization, it shall also support N3 data transfer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_REGISTRATION",
+      "target": "COND_UE_PREFERENCE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes UE indicating preference for CIoT optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.21"
+      ]
+    }
+  ]
+}

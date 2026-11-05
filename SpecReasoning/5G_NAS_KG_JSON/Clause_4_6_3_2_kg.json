@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.3.2",
+  "title": "Support of network slice admission control and interworking with EPC",
+  "entities": [
+    {
+      "id": "PROCEDURE_NSAC",
+      "name": "Network Slice Admission Control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the network to monitor and control the number of UEs per network slice and number of PDU sessions per network slice during PDN connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PDN_CONNECTION_ESTABLISHMENT",
+      "name": "PDN Connection Establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a PDN connection, during which network slice admission control is performed.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information used to identify network slices.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_EPS_COUNTING_REQUIRED",
+      "name": "EPS counting required",
+      "entity_type": "Condition",
+      "description": "Condition where EPS counting is required for a network slice, triggering network slice admission control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_UE_REACHED",
+      "name": "Maximum number of UEs reached",
+      "entity_type": "Condition",
+      "description": "Condition where the maximum number of UEs on a network slice associated with an S-NSSAI has been reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "name": "Maximum number of PDU sessions reached",
+      "entity_type": "Condition",
+      "description": "Condition where the maximum number of PDU sessions on a network slice associated with an S-NSSAI has been reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_REJECT_PDN_REQUEST",
+      "name": "Reject PDN connectivity request",
+      "entity_type": "Property",
+      "description": "Network behavior to reject PDN connectivity request with ESM cause #26 'insufficient resources' when maximum UE or PDU session limits are reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_ESM_CAUSE_26",
+      "name": "ESM cause #26",
+      "entity_type": "Identifier",
+      "description": "ESM cause value indicating 'insufficient resources' used when rejecting PDN connectivity requests.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_EPS_COUNTING_REQUIRED",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EPS counting requirement triggers network slice admission control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_PDN_CONNECTION_ESTABLISHMENT",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network slice admission control is performed during PDN connection establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_NSAC",
+      "target": "IE_S_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control monitors and controls resources per S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_MAX_UE_REACHED",
+      "target": "PROPERTY_REJECT_PDN_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum UE limit condition leads to PDN connectivity request rejection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "PROPERTY_REJECT_PDN_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum PDU session limit condition leads to PDN connectivity request rejection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_REJECT_PDN_REQUEST",
+      "target": "IDENTIFIER_ESM_CAUSE_26",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN connectivity request rejection includes ESM cause #26 'insufficient resources'.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MESSAGE_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message may contain S-NSSAI information elements.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.2"
+      ]
+    }
+  ]
+}

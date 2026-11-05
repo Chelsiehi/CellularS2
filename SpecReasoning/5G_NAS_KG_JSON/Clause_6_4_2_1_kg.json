@@ -1,0 +1,287 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure enabling UE to request modification of PDU session parameters including QoS changes, 5GSM capabilities indication, MBS multicast session management, and other session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_REL",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request release of a PDU session, used when PDU session modification cannot be initiated due to timer constraints.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAPABILITIES",
+      "name": "5GSM capabilities",
+      "entity_type": "Information Element",
+      "description": "Information element conveying UE capabilities including support for more than 16 packet filters, maximum data rates for user-plane integrity protection, and always-on PDU session request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_PS_DATA_OFF_STATUS",
+      "name": "3GPP PS data off UE status",
+      "entity_type": "Information Element",
+      "description": "Information element indicating change in PS data off status for a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_REFLECTIVE_QOS_SUPPORT",
+      "name": "Reflective QoS support",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE support for reflective QoS, which can be revoked via PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_MBS_MULTICAST_SESSION",
+      "name": "MBS multicast session",
+      "entity_type": "Information Element",
+      "description": "Information element for UE to request joining or leaving multicast sessions associated with a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "T3396",
+      "entity_type": "Timer",
+      "description": "Timer that can prevent initiation of PDU session modification procedure in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "T3584",
+      "entity_type": "Timer",
+      "description": "Timer that can prevent initiation of PDU session modification procedure in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "T3585",
+      "entity_type": "Timer",
+      "description": "Timer that can prevent initiation of PDU session modification procedure in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_BACK_OFF",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Generic back-off timer that can prevent initiation of PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REG_NON_ALLOWED",
+      "name": "5GMM-REGISTERED.NON-ALLOWED-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM substate where UE cannot initiate PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REG_NORMAL",
+      "name": "5GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM substate where UE can initiate PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_PS_DATA_OFF_CHANGE",
+      "name": "PS data off status change condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE needs to indicate change in PS data off status, allowing procedure initiation regardless of timer or location constraints.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_REFLECTIVE_QOS_REVOKE",
+      "name": "Reflective QoS revoke condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE needs to revoke reflective QoS support but cannot initiate modification due to timer constraints.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_INTER_SYSTEM_CHANGE",
+      "name": "Inter-system change condition",
+      "entity_type": "Condition",
+      "description": "Condition occurring after inter-system change from S1 mode to N1 mode requiring capability indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "target": "IE_PS_DATA_OFF_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session modification procedure conveys PS data off status change information.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "target": "IE_5GSM_CAPABILITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session modification procedure conveys 5GSM capabilities information.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "target": "IE_REFLECTIVE_QOS_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session modification procedure conveys reflective QoS support revocation.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "target": "IE_MBS_MULTICAST_SESSION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session modification procedure conveys MBS multicast session join/leave requests.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PS_DATA_OFF_CHANGE",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PS data off status change condition allows procedure initiation regardless of timer constraints.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REFLECTIVE_QOS_REVOKE",
+      "target": "PROC_UE_REQ_PDU_SESSION_REL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reflective QoS revoke condition with running timers requires session release instead of modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inter-system change condition requires capability indication via PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_5GMM_REG_NON_ALLOWED",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure cannot be initiated while UE is in NON-ALLOWED-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_5GMM_REG_NORMAL",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be initiated when UE enters NORMAL-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3396",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Running T3396 timer prevents procedure initiation in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "TIMER_T3584",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Running T3584 timer prevents procedure initiation in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "TIMER_T3585",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Running T3585 timer prevents procedure initiation in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "TIMER_BACK_OFF",
+      "target": "PROC_UE_REQ_PDU_SESSION_MOD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Running back-off timer prevents procedure initiation in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.1"
+      ]
+    }
+  ]
+}

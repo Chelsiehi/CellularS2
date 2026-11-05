@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.1.5",
+  "title": "Suspend and resume of the N1 NAS signalling connection",
+  "entities": [
+    {
+      "id": "PROCEDURE_SUSPEND_RESUME",
+      "name": "Suspend and resume of N1 NAS signalling connection",
+      "entity_type": "Procedure",
+      "description": "Procedure for suspending and resuming the N1 NAS signalling connection when user plane CIoT 5GS optimization is used. Initiated by network for suspend and by UE for resume.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "State where UE has an active NAS signalling connection with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE_SUSPEND",
+      "name": "5GMM-IDLE mode with suspend indication",
+      "entity_type": "State",
+      "description": "State where UE is in idle mode but N1 NAS signalling connection is suspended rather than released.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE_NORMAL",
+      "name": "5GMM-IDLE mode without suspend indication",
+      "entity_type": "State",
+      "description": "Normal idle state where N1 NAS signalling connection is released.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for control plane service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "IE_5GS_UPDATE_TYPE",
+      "name": "5GS update type IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing update type information including NG-RAN-RCU bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing encapsulated NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "name": "CIoT small data container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing small data for CIoT optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_URC_UPDATE_NEEDED",
+      "name": "UE radio capability update needed",
+      "entity_type": "Condition",
+      "description": "Condition where NG-RAN-RCU bit of 5GS update type IE is set to indicate UE radio capability update is needed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_RRC_RESUMED",
+      "name": "RRC connection resumed",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate RRC connection has been successfully resumed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_RRC_RESUME_FAILED",
+      "name": "RRC connection resume failed",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate RRC connection resume has failed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_CIPHER_NAS",
+      "name": "Cipher NAS message",
+      "entity_type": "Property",
+      "description": "Property indicating NAS message should be ciphered before transmission as specified in subclause 4.4.5.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_SUSPEND_RESUME",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Suspend procedure requires UE to be in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_SUSPEND_RESUME",
+      "target": "STATE_5GMM_IDLE_SUSPEND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Suspend procedure establishes 5GMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS update type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_5GS_UPDATE_TYPE",
+      "target": "CONDITION_URC_UPDATE_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GS update type IE guards by NG-RAN-RCU bit condition for UE radio capability update.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_URC_UPDATE_NEEDED",
+      "target": "STATE_5GMM_IDLE_NORMAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE radio capability update needed condition establishes transition to 5GMM-IDLE mode without suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_RRC_RESUMED",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection resumed condition establishes transition to 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_RRC_RESUMED",
+      "target": "PROPERTY_CIPHER_NAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection resumed condition establishes requirement to cipher NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message may contain NAS message container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message may contain CIoT small data container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message may contain NAS message container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_RRC_RESUME_FAILED",
+      "target": "STATE_5GMM_IDLE_SUSPEND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection resume failed with suspension indication establishes 5GMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_RRC_RESUME_FAILED",
+      "target": "STATE_5GMM_IDLE_NORMAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection resume failed without suspension indication establishes 5GMM-IDLE mode without suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.13.4",
+  "title": "Conditional reconfiguration evaluation",
+  "entities": [
+    {
+      "id": "CONDITIONAL_RECONFIG_EVAL",
+      "name": "Conditional reconfiguration evaluation",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE evaluates conditional reconfiguration conditions to determine if reconfiguration should be triggered.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "VAR_CONDITIONAL_RECONFIG",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Information Element",
+      "description": "Stores conditional reconfiguration information including condReconfigId and associated configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "COND_RRC_RECONFIG",
+      "name": "condRRCReconfig",
+      "entity_type": "Information Element",
+      "description": "Contains the RRCReconfiguration that would be applied if conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "APPLICABLE_CELL",
+      "name": "Applicable cell",
+      "entity_type": "Condition",
+      "description": "Cell with physical cell identity matching the value in ServingCellConfigCommon within reconfigurationWithSync.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "COND_EXECUTION_COND",
+      "name": "condExecutionCond",
+      "entity_type": "Information Element",
+      "description": "Contains measurement conditions for conditional reconfiguration evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "COND_EXECUTION_COND_SCG",
+      "name": "condExecutionCondSCG",
+      "entity_type": "Information Element",
+      "description": "Contains measurement conditions for SCG in conditional reconfiguration evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "COND_EVENT_ID",
+      "name": "condEventId",
+      "entity_type": "Identifier",
+      "description": "Identifies the specific conditional event type (T1, D1, A3, A4, A5).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "COND_TRIGGER_CONFIG",
+      "name": "condTriggerConfig",
+      "entity_type": "Information Element",
+      "description": "Contains trigger configuration including event conditions and timeToTrigger parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "EVENT_FULFILLED",
+      "name": "Event fulfilled",
+      "entity_type": "Condition",
+      "description": "Condition where entry conditions for a measurement event are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "TRIGGERED_CELL",
+      "name": "Triggered cell",
+      "entity_type": "Condition",
+      "description": "Target candidate cell where all measurement events are fulfilled.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_RECONFIG_EXECUTION",
+      "name": "Conditional reconfiguration execution",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when conditional reconfiguration conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITIONAL_RECONFIG_EVAL",
+      "target": "VAR_CONDITIONAL_RECONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure iterates over each condReconfigId within VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_RRC_RECONFIG",
+      "target": "APPLICABLE_CELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRCReconfiguration defines which cells are considered applicable based on physical cell identity matching.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EXECUTION_COND",
+      "target": "COND_EVENT_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "condExecutionCond contains measId values that are associated with condEventId.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EVENT_ID",
+      "target": "COND_TRIGGER_CONFIG",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "condEventId is part of the condTriggerConfig within VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EVENT_ID",
+      "target": "EVENT_FULFILLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Event fulfillment depends on entry/leaving conditions associated with condEventId.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EVENT_FULFILLED",
+      "target": "TRIGGERED_CELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When all events for a target candidate cell are fulfilled, the cell becomes triggered.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TRIGGERED_CELL",
+      "target": "CONDITIONAL_RECONFIG_EXECUTION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Detection of triggered cell initiates conditional reconfiguration execution procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.4"
+      ]
+    }
+  ]
+}

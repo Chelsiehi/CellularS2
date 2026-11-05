@@ -1,0 +1,231 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.6",
+  "title": "RLF Timers &amp; Constants configuration",
+  "entities": [
+    {
+      "id": "RLF_TIMERS_AND_CONSTANTS",
+      "name": "RLF Timers and Constants",
+      "entity_type": "Property",
+      "description": "Configuration parameters for Radio Link Failure timers and constants that can be set to release or specific values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "DAPS_BEARER",
+      "name": "DAPS Bearer",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether any Dual Active Protocol Stack bearer is configured in the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "UE_TIMERS_AND_CONSTANTS",
+      "name": "UE Timers and Constants",
+      "entity_type": "Property",
+      "description": "Default timer and constant values received in SIB1 for timers T301, T310, T311 and constants N310, N311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "T301",
+      "name": "Timer T301",
+      "entity_type": "Timer",
+      "description": "Timer used in radio link failure procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer used in radio link failure detection procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer used in radio link failure recovery procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer used in radio link failure procedures for specific cell groups.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "N310",
+      "name": "Counter N310",
+      "entity_type": "Property",
+      "description": "Counter for radio link failure detection events.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "N311",
+      "name": "Counter N311",
+      "entity_type": "Property",
+      "description": "Counter for radio link failure recovery events.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "TARGET_CELL_GROUP",
+      "name": "Target Cell Group",
+      "entity_type": "Condition",
+      "description": "Condition referring to the specific cell group configuration in DAPS bearer scenarios.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RLF_TIMERS_AND_CONSTANTS",
+      "target": "DAPS_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLF Timers and Constants configuration depends on whether DAPS bearer is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DAPS_BEARER",
+      "target": "UE_TIMERS_AND_CONSTANTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When DAPS bearer is configured and RLF Timers and Constants is set to release, UE uses values from SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DAPS_BEARER",
+      "target": "TARGET_CELL_GROUP",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "DAPS bearer configuration requires consideration of target cell group for timer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RLF_TIMERS_AND_CONSTANTS",
+      "target": "T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RLF Timers and Constants configuration stops timer T310 for the cell group if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RLF_TIMERS_AND_CONSTANTS",
+      "target": "T312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RLF Timers and Constants configuration stops timer T312 for the cell group if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RLF_TIMERS_AND_CONSTANTS",
+      "target": "N310",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "RLF Timers and Constants configuration resets counter N310.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RLF_TIMERS_AND_CONSTANTS",
+      "target": "N311",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "RLF Timers and Constants configuration resets counter N311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_TIMERS_AND_CONSTANTS",
+      "target": "T301",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE Timers and Constants includes values for timer T301.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_TIMERS_AND_CONSTANTS",
+      "target": "T310",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE Timers and Constants includes values for timer T310.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "UE_TIMERS_AND_CONSTANTS",
+      "target": "T311",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE Timers and Constants includes values for timer T311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "UE_TIMERS_AND_CONSTANTS",
+      "target": "N310",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE Timers and Constants includes values for constant N310.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "UE_TIMERS_AND_CONSTANTS",
+      "target": "N311",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE Timers and Constants includes values for constant N311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.6"
+      ]
+    }
+  ]
+}

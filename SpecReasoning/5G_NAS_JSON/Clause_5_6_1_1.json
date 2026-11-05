@@ -1,0 +1,210 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 2,
+  "tables_count": 0,
+  "text": [
+    "---------------",
+    "The purpose of the service request procedure is to change the 5GMM mode from 5GMM-IDLE to 5GMM-CONNECTED mode. If the UE is not using 5GS services with control plane CIoT 5GS optimization, this procedure is used to request the establishment of user-plane resources for PDU sessions which are established without user-plane resources. In latter case, the 5GMM mode can be the 5GMM-IDLE mode or the 5GMM-CONNECTED mode if the UE requires to establish user-plane resources for PDU sessions. If the UE is using 5GS services with control plane CIoT 5GS optimization, this procedure can be used for UE initiated transfer of user data via the control plane from 5GMM-IDLE mode",
+    "NOTE1: The lower layer indicates when the user-plane resources for PDU sessions are successfully established or released",
+    "This procedure is used when",
+    "- the network has downlink signalling pending over 3GPP access and the UE is in 5GMM-IDLE mode over 3GPP access",
+    "- the network has downlink signalling pending over non-3GPP access, the UE is in 5GMM-IDLE mode over non-3GPP access and in 5GMM-IDLE or 5GMM-CONNECTED mode over 3GPP access",
+    "- the UE has uplink signalling pending over 3GPP access and the UE is in 5GMM-IDLE mode over 3GPP access",
+    "- the network has downlink user data pending over 3GPP access and the UE is in 5GMM-IDLE mode over 3GPP access",
+    "- the network has downlink user data pending over non-3GPP access, the UE is in 5GMM-IDLE mode over non-3GPP access and in 5GMM-IDLE or 5GMM-CONNECTED mode over 3GPP access",
+    "- the UE has user data pending over 3GPP access and the UE is in 5GMM-IDLE or 5GMM-CONNECTED mode over 3GPP access",
+    "- the UE has user data pending over non-3GPP access and the UE is in 5GMM-CONNECTED mode over non-3GPP access",
+    "- the UE in 5GMM-IDLE mode over non-3GPP access, receives an indication from the lower layers of non-3GPP access, that the access stratum connection is established between the UE and the network, if T3346 is not running",
+    "- the UE in 5GMM-IDLE or 5GMM-CONNECTED mode over 3GPP access receives a request from the upper layers to perform emergency services fallback and performs emergency services fallback as specified in subclause4.13.4.2 of 3GPPTS23.502[9]",
+    "- the UE has to request resources for V2X communication over PC5",
+    "- the UE has to request resources for 5G ProSe direct discovery over PC5 or 5G ProSe direct communication over PC5",
+    "- the MUSIM UE in 5GMM-IDLE mode requests the network to remove the paging restriction; or",
+    "- the MUSIM UE requests the release of the NAS signalling connection or rejects the paging request from the network",
+    "This procedure shall not be used for",
+    "a) initiating user data transfer; or",
+    "b) PDU session management related signalling other than for performing UE-requested PDU session release procedure related to a PDU session for LADN or for performing the UE-requested PDU session modification procedure to indicate a change of 3GPP PS data off UE status",
+    "when the UE is located outside the LADN service area",
+    "In NB-N1 mode, this procedure shall not be used to request the establishment of user-plane resources",
+    "a) for a number of PDU sessions that exceeds the UE' s maximum number of supported user-plane resources if there is currently",
+    "1) no user-plane resources established for the UE",
+    "2) user-plane resources established for",
+    "i) one PDU session and the Multiple user-plane resources support bit was set to \"Multiple user-plane resources not supported\" in the 5GMM capability IE; or",
+    "ii) two PDU sessions and the Multiple user-plane resources support bit was set to \"Multiple user-plane resources supported\" in the 5GMM capability IE; or",
+    "b) for additional PDU sessions, if the number of PDU sessions for which user-plane resources are currently established is equal to the UE's maximum number of supported user-plane resources",
+    "The service request procedure is initiated by the UE, however, it can be triggered by the network by means of",
+    "- the paging procedure (see subclause5.6.2) for the transfer of downlink signalling or user data pending over 3GPP access to a UE in 5GMM-IDLE mode over 3GPP access",
+    "- the paging procedure (see subclause5.6.2) for the transfer of downlink signalling or user data pending over non-3GPP access to a UE in 5GMM-IDLE mode over 3GPP access and in 5GMM-IDLE mode over non-3GPP access",
+    "- the notification procedure (see subclause5.6.3) for the transfer of downlink signalling or user data pending over non-3GPP access to a UE in 5GMM-CONNECTED mode over 3GPP access and in 5GMM-IDLE mode over non-3GPP access; or",
+    "- the notification procedure (see subclause5.6.3) for the transfer of downlink signalling or user data pending over 3GPP access to a UE in 5GMM-IDLE mode over 3GPP access and in 5GMM-CONNECTED mode over non-3GPP access",
+    "NOTE2: In case the UE is in 5GMM-IDLE mode over 3GPP access and in 5GMM-CONNECTED mode over non-3GPP access and downlink signalling or user data pending over 3GPP access needs to be transferred, the AMF can trigger either the notification procedure or the paging procedure based on implementation",
+    "The UE shall invoke the service request procedure when",
+    "a) the UE, in 5GMM-IDLE mode over 3GPP access, receives a paging request from the network",
+    "NOTE3: As an implementation option, the MUSIM UE is allowed to not invoke service request to respond to paging based on the information available in the paging message, e.g. voice service indication",
+    "b) the UE, in 5GMM-CONNECTED mode over 3GPP access, receives a notification from the network with access type indicating non-3GPP access",
+    "c) the UE, in 5GMM-IDLE mode over 3GPP access, has uplink signalling pending (except in casei)",
+    "d) the UE, in 5GMM-IDLE mode over 3GPP access, has uplink user data pending (except in casej)",
+    "e) the UE, in 5GMM-CONNECTED mode or in 5GMM-CONNECTED mode with RRC inactive indication, has user data pending due to no user-plane resources established for PDU session(s) used for user data transport",
+    "f) the UE in 5GMM-IDLE mode over non-3GPP access, with T3346 not active or upon expiry of T3346, receives or has already received an indication from the lower layers of non-3GPP access, that the access stratum connection is established between the UE and the network",
+    "g) the UE, in 5GMM-IDLE mode over 3GPP access, receives a notification from the network with access type indicating 3GPP access when the UE is in 5GMM-CONNECTED mode over non-3GPP access",
+    "h) the UE, in 5GMM-IDLE, 5GMM-CONNECTED mode over 3GPP access, or 5GMM-CONNECTED mode with RRC inactive indication, receives a request from the upper layers to perform emergency services fallback and performs emergency services fallback as specified in subclause4.13.4.2 of 3GPPTS23.502[9]",
+    "i) the UE, in 5GMM-CONNECTED mode over 3GPP access or in 5GMM-CONNECTED mode with RRC inactive indication, receives a fallback indication from the lower layers (see subclauses5.3.1.2 and 5.3.1.4) and the UE has a pending NAS procedure other than a registration, service request, or de-registration procedure",
+    "j) the UE, in 5GMM-CONNECTED mode over 3GPP access or in 5GMM-CONNECTED mode with RRC inactive indication, receives a fallback indication from the lower layers (see subclauses5.3.1.2 and5.3.1.4) and the UE has pending uplink user data for PDU session(s) with user-plane resources already established but no pending NAS procedure",
+    "k) the UE, in 5GMM-CONNECTED mode and has a NAS signalling connection only, is using 5GS services with control plane CIoT 5GS optimization and has pending user data to be sent via user-plane resources",
+    "l) the UE in 5GMM-IDLE mode over 3GPP access has to request resources for V2X communication over PC5 (see 3GPPTS23.287[6C])",
+    "m) the network supports the paging restriction, and the MUSIM UE in 5GMM-IDLE mode is requesting the network to remove the paging restriction",
+    "n) the UE in 5GMM-IDLE mode over 3GPP access",
+    "- has to request resources for 5G ProSe direct discovery over PC5 or 5G ProSe direct communication over PC5 (see 3GPPTS23.304[6E]); or",
+    "- acts as a 5G ProSe layer-2 UE-to-network relay UE and receives a trigger from lower layers to establish the NAS signalling connection (see 3GPPTS23.304[6E])",
+    "o) the network supports the N1 NAS signalling connection release, the MUSIM UE",
+    "- is in 5GMM-CONNECTED mode, requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restriction",
+    "- is in 5GMM-CONNECTED mode with RRC inactive indication, requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restriction; or",
+    "- is in 5GMM-CONNECTED mode with RRC inactive indication, rejects the RAN paging, requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restrictions; or",
+    "p) the network supports the reject paging request, the MUSIM UE in 5GMM-IDLE mode when responding to paging rejects the paging request from the network, requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restriction",
+    "If one of the above criteria to invoke the service request procedure is fulfilled, then the service request procedure shall only be initiated by the UE when the following conditions are fulfilled",
+    "- its 5GS update status is 5U1 UPDATED, and the TAI of the current serving cell is included in the TAI list; and",
+    "- no 5GMM specific procedure is ongoing",
+    "The UE shall not invoke the service request procedure when the UE is in the state 5GMM-SERVICE-REQUEST-INITIATED",
+    "The MUSIM UE shall not initiate service request procedure for requesting the network to release the N1 NAS signalling connection if the UE is registered for emergency services or if the UE has an emergency PDU session established. To enable the emergency call back, the UE shall not initiate service request procedure for requesting the network to release the NAS signalling connection for a UE implementation-specific duration of time after the completion of the emergency services",
+    "Figure5.6.1.1.1: Service Request procedure (Part 1)",
+    "Figure5.6.1.1.2: Service Request procedure (Part 2)",
+    "A service request attempt counter is used to limit the number of service request attempts and no response from the network. The service request attempt counter shall be incremented as specified in subclause5.6.1.7",
+    "The service request attempt counter shall be reset when",
+    "- a registration procedure for mobility and periodic registration update is successfully completed",
+    "- a service request procedure is successfully completed",
+    "- a service request procedure is rejected as specified in subclause5.6.1.5 or subclause5.3.20; or",
+    "- the UE moves to 5GMM-DEREGISTERED state",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.1.1.1",
+      "file": "Figure_5_6_1_1_1_p411.png.json",
+      "title": "Service Request procedure (Part 1)",
+      "content": {
+        "figure_id": "5.6.1.1.1",
+        "title": "Service Request procedure (Part 1)",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "SERVICE REQUEST",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE ACCEPT",
+              "notes": "Stop T3517"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "SERVICE REQUEST (for emergency services fallback)",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "AS indication",
+              "notes": "Stop T3517"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "SERVICE REQUEST",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE REJECT",
+              "notes": "Stop T3517"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "OR alternatives between SERVICE ACCEPT, emergency services fallback, and SERVICE REJECT flows"
+          ]
+        }
+      }
+    },
+    {
+      "figure_id": "5.6.1.1.2",
+      "file": "Figure_5_6_1_1_2_p411.png.json",
+      "title": "Service Request procedure (Part 2)",
+      "content": {
+        "figure_id": "5.6.1.1.2",
+        "title": "Service Request procedure (Part 2)",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE ACCEPT",
+              "notes": "Stop T3517"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AS indication about release of RRC connection",
+              "notes": "Stop T3517"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3517"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE REJECT",
+              "notes": "Stop T3517"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Three alternative flows are shown separated by OR",
+            "First flow: CONTROL PLANE SERVICE REQUEST followed by SERVICE ACCEPT",
+            "Second flow: CONTROL PLANE SERVICE REQUEST followed by AS indication about release of RRC connection",
+            "Third flow: CONTROL PLANE SERVICE REQUEST followed by SERVICE REJECT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

@@ -1,0 +1,234 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.5",
+  "title": "Exception handling and avoiding double barring",
+  "entities": [
+    {
+      "id": "ACCESS_CONTROL_EXCEPTION",
+      "name": "Access control exception for double barring avoidance",
+      "entity_type": "Condition",
+      "description": "Allows access attempts to proceed without further access control checking to avoid double barring, applicable during NAS signalling connection recovery or after fallback indication from lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICE",
+      "name": "Emergency service",
+      "entity_type": "Service",
+      "description": "Service triggered by upper layer request for emergency registration or PDU session establishment with emergency request types. Considered ongoing until the emergency PDU session is released.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "MMTEL_VOICE_CALL",
+      "name": "MMTEL voice call",
+      "entity_type": "Service",
+      "description": "Ongoing MMTEL voice call service that affects access category mapping and access control exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "MMTEL_VIDEO_CALL",
+      "name": "MMTEL video call",
+      "entity_type": "Service",
+      "description": "Ongoing MMTEL video call service that affects access category mapping and access control exceptions when no voice call is ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "SMS_OVER_NAS",
+      "name": "SMS over NAS",
+      "entity_type": "Service",
+      "description": "SMS service over NAS that affects access category mapping and access control exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "SMSoIP",
+      "name": "SMS over IP",
+      "entity_type": "Service",
+      "description": "SMS over IP service that affects access category mapping and access control exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "MO_IMS_REGISTRATION",
+      "name": "MO IMS registration related signalling",
+      "entity_type": "Service",
+      "description": "Mobile originated IMS registration signalling that affects access category mapping and access control exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY_2",
+      "name": "Access category 2",
+      "entity_type": "Property",
+      "description": "Emergency access category used for mapping access attempts during ongoing emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY_4",
+      "name": "Access category 4",
+      "entity_type": "Property",
+      "description": "Access category used for MMTEL voice call related access attempts.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY_5",
+      "name": "Access category 5",
+      "entity_type": "Property",
+      "description": "Access category used for MMTEL video call related access attempts when no voice call is ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY_6",
+      "name": "Access category 6",
+      "entity_type": "Property",
+      "description": "Access category used for SMSoIP related access attempts when no MMTEL calls are ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY_9",
+      "name": "Access category 9",
+      "entity_type": "Property",
+      "description": "Access category used for MO IMS registration related signalling when no other higher priority services are ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "NAS procedure initiated for service requests, which may be subject to access control exceptions and category mapping.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "NAS procedure for registration, which may be subject to access control exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_CONTROL_EXCEPTION",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedures are allowed without access control checking when double barring avoidance condition applies.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_CONTROL_EXCEPTION",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration procedures are allowed without access control checking when double barring avoidance condition applies.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMERGENCY_SERVICE",
+      "target": "ACCESS_CATEGORY_2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ongoing emergency service causes access attempts to be mapped to access category 2.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MMTEL_VOICE_CALL",
+      "target": "ACCESS_CATEGORY_4",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ongoing MMTEL voice call causes IMS-related access attempts to be mapped to access category 4.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MMTEL_VIDEO_CALL",
+      "target": "ACCESS_CATEGORY_5",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ongoing MMTEL video call (with no voice call) causes IMS-related access attempts to be mapped to access category 5.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SMSoIP",
+      "target": "ACCESS_CATEGORY_6",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ongoing SMSoIP (with no MMTEL calls) causes IMS-related access attempts to be mapped to access category 6.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MO_IMS_REGISTRATION",
+      "target": "ACCESS_CATEGORY_9",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ongoing MO IMS registration signalling (with no higher priority services) causes access attempts to be mapped to access category 9.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMERGENCY_SERVICE",
+      "target": "ACCESS_CONTROL_EXCEPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Ongoing emergency service triggers access control exception for related service requests and uplink data.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SMS_OVER_NAS",
+      "target": "ACCESS_CONTROL_EXCEPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Ongoing SMS over NAS service can trigger access control exceptions for certain access attempts.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.5"
+      ]
+    }
+  ]
+}

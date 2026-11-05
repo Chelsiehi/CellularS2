@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.2.3.1",
+  "title": "NORMAL-SERVICE",
+  "entities": [
+    {
+      "id": "INITIAL_REGISTRATION_PROCEDURE",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for registration with the network",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that controls when UE can initiate registration procedures",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_NOT_RUNNING",
+      "name": "T3346 not running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3346 is not active",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_RUNNING",
+      "name": "T3346 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3346 is currently active",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_EXPIRY",
+      "name": "T3346 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3346 expires",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES",
+      "name": "Emergency services",
+      "entity_type": "Condition",
+      "description": "Condition for emergency service registration",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T3346_NOT_RUNNING",
+      "target": "INITIAL_REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE shall initiate initial registration procedure when T3346 is not running",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T3346_EXPIRY",
+      "target": "INITIAL_REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE shall initiate initial registration procedure on expiry of T3346",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMERGENCY_SERVICES",
+      "target": "INITIAL_REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE may initiate initial registration procedure for emergency services even if T3346 is running",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3346_RUNNING",
+      "target": "EMERGENCY_SERVICES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services condition overrides T3346 running condition",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.1"
+      ]
+    }
+  ]
+}

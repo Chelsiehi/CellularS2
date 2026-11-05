@@ -1,0 +1,202 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.8",
+  "title": "Handling of S-NSSAI based congestion control",
+  "entities": [
+    {
+      "id": "S_NSSAI_CONGESTION_CONTROL",
+      "name": "S-NSSAI based congestion control",
+      "entity_type": "Procedure",
+      "description": "Network procedure for detecting and controlling congestion based on S-NSSAI criteria as specified in 3GPP TS 23.501. The network starts this control when congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "Timer T3584",
+      "entity_type": "Timer",
+      "description": "5GS session management timer for S-NSSAI based congestion control, started and stopped per S-NSSAI, DNN, and PLMN/SNPN basis. Prevents UE from initiating certain procedures when running.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "Timer T3585",
+      "entity_type": "Timer",
+      "description": "5GS session management timer for S-NSSAI based congestion control, started and stopped per S-NSSAI and PLMN/SNPN basis. Prevents UE from initiating certain procedures when running.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CONGESTION_REATTEMPT",
+      "name": "5GSM congestion re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates how back-off timers should be applied, including ABO bit for all PLMNs and CATBO bit for current access type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "COND_ABO_SET",
+      "name": "ABO bit set to 'The back-off timer is applied in all PLMNs'",
+      "entity_type": "Condition",
+      "description": "Condition where the ABO bit in the 5GSM congestion re-attempt indicator IE is set, causing timers T3584/T3585 to apply to all PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "COND_CATBO_SET",
+      "name": "CATBO bit set to 'The back-off timer is applied in the current access type'",
+      "entity_type": "Condition",
+      "description": "Condition where the CATBO bit in the 5GSM congestion re-attempt indicator IE is set, causing timer T3585 to apply only to the current access type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "PROP_BLOCKED_PROCEDURES",
+      "name": "Blocked procedures during timer running",
+      "entity_type": "Property",
+      "description": "Property describing that UE is not allowed to initiate PDU session establishment, modification, or NAS transport for CIoT user data when T3584/T3585 is running, unless high priority access or PS data off status change.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "PROP_TIMER_ASSOCIATION",
+      "name": "Timer association with S-NSSAI and DNN",
+      "entity_type": "Property",
+      "description": "Property describing how timers T3584 and T3585 are associated with S-NSSAI (including no S-NSSAI) and DNN (including no DNN) combinations based on UE-provided parameters during PDU session procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "S_NSSAI_CONGESTION_CONTROL",
+      "target": "TIMER_T3584",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "S-NSSAI based congestion control starts timer T3584 when congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "S_NSSAI_CONGESTION_CONTROL",
+      "target": "TIMER_T3585",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "S-NSSAI based congestion control starts timer T3585 when congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_5GSM_CONGESTION_REATTEMPT",
+      "target": "COND_ABO_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The 5GSM congestion re-attempt indicator IE includes the ABO bit condition that determines timer application scope.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_5GSM_CONGESTION_REATTEMPT",
+      "target": "COND_CATBO_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The 5GSM congestion re-attempt indicator IE includes the CATBO bit condition that determines access type scope for T3585.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ABO_SET",
+      "target": "TIMER_T3584",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ABO bit set condition establishes that timer T3584 applies to all PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ABO_SET",
+      "target": "TIMER_T3585",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ABO bit set condition establishes that timer T3585 applies to all PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CATBO_SET",
+      "target": "TIMER_T3585",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CATBO bit set condition establishes that timer T3585 applies only to the current access type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3584",
+      "target": "PROP_BLOCKED_PROCEDURES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer T3584 is running or deactivated, it establishes that UE is blocked from initiating certain procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T3585",
+      "target": "PROP_BLOCKED_PROCEDURES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer T3585 is running or deactivated, it establishes that UE is blocked from initiating certain procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_TIMER_ASSOCIATION",
+      "target": "TIMER_T3584",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Property defines how timer T3584 is associated with S-NSSAI and DNN combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_TIMER_ASSOCIATION",
+      "target": "TIMER_T3585",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Property defines how timer T3585 is associated with S-NSSAI combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.8"
+      ]
+    }
+  ]
+}

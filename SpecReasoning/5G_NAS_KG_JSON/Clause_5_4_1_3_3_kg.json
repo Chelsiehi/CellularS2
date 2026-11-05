@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.3",
+  "title": "Authentication response by the UE",
+  "entities": [
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to authentication challenge.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "T3516",
+      "name": "Timer T3516",
+      "entity_type": "Timer",
+      "description": "Timer used during authentication procedure to manage RAND/RES* storage.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "KAMF_DERIVATION",
+      "name": "KAMF derivation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE derives new KAMF from 5G authentication challenge data.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "RAND_STORAGE",
+      "name": "RAND storage condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE stores RAND and RES* in volatile memory to avoid synchronization failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_NULL",
+      "name": "5GMM-NULL",
+      "entity_type": "State",
+      "description": "Initial 5GMM state where no NAS signaling connection exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5GMM state where UE has no active NAS signaling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "RAND_DELETION",
+      "name": "RAND and RES* deletion",
+      "entity_type": "Property",
+      "description": "Property describing when stored RAND and RES* values are deleted from UE memory.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "AUTHENTICATION_RESPONSE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AUTHENTICATION REQUEST message triggers UE to send AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "KAMF_DERIVATION",
+      "target": "AUTHENTICATION_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "KAMF derivation is part of the authentication response procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RAND_STORAGE",
+      "target": "T3516",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "RAND storage condition starts timer T3516 when new RAND is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RAND_DELETION",
+      "target": "T3516",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RAND deletion property stops timer T3516 when triggered.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RAND_DELETION",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RAND deletion occurs when UE enters 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RAND_DELETION",
+      "target": "5GMM_NULL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RAND deletion occurs when UE enters 5GMM-NULL state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RAND_DELETION",
+      "target": "5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RAND deletion occurs when UE enters 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.3"
+      ]
+    }
+  ]
+}

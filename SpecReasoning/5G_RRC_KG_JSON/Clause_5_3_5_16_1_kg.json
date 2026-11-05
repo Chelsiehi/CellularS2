@@ -1,0 +1,178 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.16.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "L2_U2N_REMOTE_UE",
+      "name": "L2 U2N Remote UE",
+      "entity_type": "Property",
+      "description": "A UE configured for Layer 2 UE-to-Network relay operation that receives relay-related configurations from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SL_L2REMOTEUECONFIG",
+      "name": "sl-L2RemoteUEConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration information element for L2 remote UE containing relay operation parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SL_SRAP_CONFIG_REMOTE",
+      "name": "sl-SRAP-Config-Remote",
+      "entity_type": "Information Element",
+      "description": "SRAP configuration parameters for remote UE operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SL_SERVINGCELLINFO",
+      "name": "sl-ServingCellInfo",
+      "entity_type": "Information Element",
+      "description": "Serving cell information for remote UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SL_PHYSCELLID",
+      "name": "sl-PhysCellId",
+      "entity_type": "Identifier",
+      "description": "Physical cell identity parameter used as PCell identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SL_UEIDENTITYREMOTE",
+      "name": "sl-UEIdentityRemote",
+      "entity_type": "Identifier",
+      "description": "UE identity parameter used as C-RNTI in the PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "SRAP_ENTITY",
+      "name": "SRAP entity",
+      "entity_type": "Property",
+      "description": "SRAP protocol entity in the UE that handles relay operations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "PCONFIG_SRAP",
+      "name": "Configure SRAP parameters",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE configures SRAP entity parameters based on received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "PCONFIG_PCELL",
+      "name": "Configure PCell parameters",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE configures PCell identity and C-RNTI based on received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_L2REMOTEUECONFIG",
+      "target": "SL_SRAP_CONFIG_REMOTE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-L2RemoteUEConfig may contain sl-SRAP-Config-Remote IE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_L2REMOTEUECONFIG",
+      "target": "SL_SERVINGCELLINFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-L2RemoteUEConfig may contain sl-ServingCellInfo IE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_SERVINGCELLINFO",
+      "target": "SL_PHYSCELLID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ServingCellInfo contains sl-PhysCellId parameter",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_SERVINGCELLINFO",
+      "target": "SL_UEIDENTITYREMOTE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ServingCellInfo contains sl-UEIdentityRemote parameter",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PCONFIG_SRAP",
+      "target": "SRAP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE configures SRAP entity parameters when sl-SRAP-Config-Remote is present",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PCONFIG_PCELL",
+      "target": "SL_PHYSCELLID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE uses sl-PhysCellId as PCell physical identity",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PCONFIG_PCELL",
+      "target": "SL_UEIDENTITYREMOTE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE uses sl-UEIdentityRemote as C-RNTI in PCell",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "L2_U2N_REMOTE_UE",
+      "target": "SL_L2REMOTEUECONFIG",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "L2 U2N Remote UE is configured with sl-L2RemoteUEConfig",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.16.1"
+      ]
+    }
+  ]
+}

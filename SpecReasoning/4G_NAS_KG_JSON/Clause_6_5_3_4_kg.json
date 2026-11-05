@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.4",
+  "title": "UE requested bearer resource allocation procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "name": "UE requested bearer resource allocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request bearer resource allocation from the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request bearer resource allocation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_REJECTION",
+      "name": "Network rejection condition",
+      "entity_type": "Condition",
+      "description": "Condition where the network does not accept the UE's bearer resource allocation request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    },
+    {
+      "id": "PROP_PROCEDURE_FAILURE",
+      "name": "Procedure failure",
+      "entity_type": "Property",
+      "description": "Property indicating the bearer resource allocation procedure was not successful.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "target": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE requested bearer resource allocation procedure includes sending BEARER RESOURCE ALLOCATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NETWORK_REJECTION",
+      "target": "PROP_PROCEDURE_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network rejection condition leads to procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_BEARER_RESOURCE_ALLOCATION",
+      "target": "COND_NETWORK_REJECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE requested bearer resource allocation procedure is guarded by network rejection condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4"
+      ]
+    }
+  ]
+}

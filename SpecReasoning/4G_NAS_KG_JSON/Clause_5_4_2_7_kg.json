@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.7",
+  "title": "Abnormal cases",
+  "entities": [
+    {
+      "id": "PROC_AUTHENTICATION",
+      "name": "Authentication procedure",
+      "entity_type": "Procedure",
+      "description": "The authentication procedure between UE and network that can encounter various abnormal cases including lower layer failures, timer expiries, and authentication failures.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to initiate authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7",
+        "Figure 5.4.2.7.1",
+        "Figure 5.4.2.7.2"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network in response to successful authentication challenge.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7",
+        "Figure 5.4.2.7.2"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network indicating authentication failure with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7",
+        "Figure 5.4.2.7.1",
+        "Figure 5.4.2.7.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3460",
+      "name": "T3460",
+      "entity_type": "Timer",
+      "description": "Timer used by network for AUTHENTICATION REQUEST retransmission. Retransmitted four times before procedure abort.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3418",
+      "name": "T3418",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending AUTHENTICATION FAILURE with EMM cause #20 or #26.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7",
+        "Figure 5.4.2.7.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3420",
+      "name": "T3420",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending AUTHENTICATION FAILURE with EMM cause #21.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7",
+        "Figure 5.4.2.7.2"
+      ]
+    },
+    {
+      "id": "COND_MAC_FAILURE",
+      "name": "EMM cause #20 MAC failure",
+      "entity_type": "Condition",
+      "description": "Authentication failure condition where MAC validation fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "COND_SYNCH_FAILURE",
+      "name": "EMM cause #21 synch failure",
+      "entity_type": "Condition",
+      "description": "Authentication failure condition requiring re-synchronization with HSS.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "COND_NON_EPS_AUTH",
+      "name": "EMM cause #26 non-EPS authentication unacceptable",
+      "entity_type": "Condition",
+      "description": "Authentication failure condition where non-EPS authentication is not acceptable.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Network behavior to abort authentication procedure and release NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "PROP_REINITIATE_PROCEDURE",
+      "name": "Procedure re-initiation",
+      "entity_type": "Property",
+      "description": "UE behavior to re-initiate tracking area updating or attach procedure after transmission failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTHENTICATION",
+      "target": "MSG_AUTHENTICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes sending AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_AUTHENTICATION",
+      "target": "MSG_AUTHENTICATION_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes sending AUTHENTICATION RESPONSE message upon successful validation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_AUTHENTICATION",
+      "target": "MSG_AUTHENTICATION_FAILURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes sending AUTHENTICATION FAILURE message upon authentication failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTHENTICATION_REQUEST",
+      "target": "TIMER_T3460",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION REQUEST starts timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTHENTICATION_FAILURE",
+      "target": "TIMER_T3418",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE with EMM cause #20 or #26 starts timer T3418.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_AUTHENTICATION_FAILURE",
+      "target": "TIMER_T3420",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE with EMM cause #21 starts timer T3420.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_MAC_FAILURE",
+      "target": "MSG_AUTHENTICATION_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause #20 MAC failure condition triggers AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SYNCH_FAILURE",
+      "target": "MSG_AUTHENTICATION_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause #21 synch failure condition triggers AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NON_EPS_AUTH",
+      "target": "MSG_AUTHENTICATION_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause #26 non-EPS authentication unacceptable condition triggers AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3460",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3460 establishes procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_AUTHENTICATION_REQUEST",
+      "target": "TIMER_T3418",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving new AUTHENTICATION REQUEST stops timer T3418 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_AUTHENTICATION_REQUEST",
+      "target": "TIMER_T3420",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving new AUTHENTICATION REQUEST stops timer T3420 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_SYNCH_FAILURE",
+      "target": "PROP_REINITIATE_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Synch failure condition may establish procedure re-initiation after transmission failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.7"
+      ]
+    }
+  ]
+}

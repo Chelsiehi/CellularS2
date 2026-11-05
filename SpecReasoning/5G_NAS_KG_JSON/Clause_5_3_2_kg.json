@@ -1,0 +1,260 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.2",
+  "title": "Permanent identifiers",
+  "entities": [
+    {
+      "id": "SUPI",
+      "name": "5G Subscription Permanent Identifier",
+      "entity_type": "Identifier",
+      "description": "A globally unique permanent identity allocated to each subscriber for 5GS-based services. Valid types include IMSI, network specific identifier, GCI, and GLI. When containing network specific identifier, GCI or GLI, it takes the form of a Network Access Identifier (NAI).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "SUCI",
+      "name": "Subscription Concealed Identifier",
+      "entity_type": "Identifier",
+      "description": "A privacy preserving identifier containing the concealed SUPI. When SUPI contains network specific identifier, GCI or GLI, SUCI takes the form of a NAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "PEI",
+      "name": "Permanent Equipment Identifier",
+      "entity_type": "Identifier",
+      "description": "Permanent equipment identifier used by UE for accessing 5GS-based services. Supported formats include IMEI, IMEISV, MAC address with usage restriction indication, and EUI-64.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "NULL_SCHEME",
+      "name": "Null Scheme",
+      "entity_type": "Condition",
+      "description": "A scheme where SUCI contains the unconcealed SUPI. Used when home network hasn't provisioned public key, when configured to use null-scheme, or during emergency services registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "ANONYMOUS_SUCI",
+      "name": "Anonymous SUCI",
+      "entity_type": "Condition",
+      "description": "SUCI used when UE is configured with indication to use anonymous SUCI associated with list of subscriber data or default UE credentials, and not performing emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that can contain SUCI when UE attempts initial registration without valid 5G-GUTI, or PEI for emergency registration when neither SUPI nor valid 5G-GUTI is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "NAS message that contains SUCI when requested by network during identification procedure, or PEI when network requests PEI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that contains SUCI when UE initiates de-registration procedure without valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "NAS message that contains PEI when network requests IMEISV during security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "EMERGENCY_REGISTRATION",
+      "name": "Emergency Registration",
+      "entity_type": "Procedure",
+      "description": "Registration procedure for emergency services where UE may use null-scheme for SUCI or include PEI when neither SUPI nor valid 5G-GUTI is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where network can request SUCI or PEI from UE using IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_CONTROL",
+      "name": "Security Mode Control Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where network can request IMEISV from UE, and UE responds with PEI in SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SUCI",
+      "target": "SUPI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SUCI contains the concealed SUPI as a privacy preserving identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_REQUEST",
+      "target": "SUCI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains SUCI when UE attempts initial registration without valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDENTITY_RESPONSE",
+      "target": "SUCI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message contains SUCI when requested by network during identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "SUCI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains SUCI when UE initiates de-registration without valid 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REGISTRATION_REQUEST",
+      "target": "PEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains PEI for emergency registration when neither SUPI nor valid 5G-GUTI is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IDENTITY_RESPONSE",
+      "target": "PEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message contains PEI when network requests PEI during identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SECURITY_MODE_COMPLETE",
+      "target": "PEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE message contains PEI when network requests IMEISV during security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NULL_SCHEME",
+      "target": "SUCI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SUCI generation uses null-scheme under specific conditions including lack of public key, configuration, or emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ANONYMOUS_SUCI",
+      "target": "SUCI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SUCI generation uses anonymous SUCI when configured and not performing emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EMERGENCY_REGISTRATION",
+      "target": "NULL_SCHEME",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency registration procedure may require use of null-scheme for SUCI generation.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "SUCI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Identification procedure includes step where network can request SUCI from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "PEI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Identification procedure includes step where network can request PEI from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "SECURITY_MODE_CONTROL",
+      "target": "PEI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes step where network can request IMEISV and UE responds with PEI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.2"
+      ]
+    }
+  ]
+}

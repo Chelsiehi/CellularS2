@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.6",
+  "title": "Actions related to transmission of DedicatedSIBRequest message",
+  "entities": [
+    {
+      "id": "PROC_DEDICATED_SIB_REQUEST",
+      "name": "Dedicated SIB Request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE requests specific system information blocks (SIBs) or positioning SIBs (posSIBs) from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "MSG_DEDICATED_SIB_REQUEST",
+      "name": "DedicatedSIBRequest message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request specific system information blocks from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_SIB_LIST",
+      "name": "requestedSIB-List",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the requested SIB(s) in the onDemandSIB-RequestList.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_POS_SIB_LIST",
+      "name": "requestedPosSIB-List",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the requested positioning SIB(s) in the onDemandSIB-RequestList.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "IE_ON_DEMAND_SIB_REQUEST_LIST",
+      "name": "onDemandSIB-RequestList",
+      "entity_type": "Information Element",
+      "description": "Container information element that holds either requestedSIB-List or requestedPosSIB-List.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "COND_TRIGGERED_SIB_REQUEST",
+      "name": "Procedure triggered to request required SIB(s)",
+      "entity_type": "Condition",
+      "description": "Condition where the procedure is triggered to request regular system information blocks.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "COND_TRIGGERED_POS_SIB_REQUEST",
+      "name": "Procedure triggered to request required posSIB(s)",
+      "entity_type": "Condition",
+      "description": "Condition where the procedure is triggered to request positioning system information blocks.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "PROP_TRANSMIT_TO_LOWER_LAYERS",
+      "name": "Submit message to lower layers for transmission",
+      "entity_type": "Property",
+      "description": "Action where the UE submits the DedicatedSIBRequest message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEDICATED_SIB_REQUEST",
+      "target": "MSG_DEDICATED_SIB_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The Dedicated SIB Request procedure includes transmission of the DedicatedSIBRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEDICATED_SIB_REQUEST",
+      "target": "IE_ON_DEMAND_SIB_REQUEST_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DedicatedSIBRequest message contains the onDemandSIB-RequestList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ON_DEMAND_SIB_REQUEST_LIST",
+      "target": "IE_REQUESTED_SIB_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The onDemandSIB-RequestList contains requestedSIB-List when requesting regular SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_ON_DEMAND_SIB_REQUEST_LIST",
+      "target": "IE_REQUESTED_POS_SIB_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The onDemandSIB-RequestList contains requestedPosSIB-List when requesting positioning SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TRIGGERED_SIB_REQUEST",
+      "target": "IE_REQUESTED_SIB_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition of requesting regular SIBs guards the inclusion of requestedSIB-List.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TRIGGERED_POS_SIB_REQUEST",
+      "target": "IE_REQUESTED_POS_SIB_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition of requesting positioning SIBs guards the inclusion of requestedPosSIB-List.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_DEDICATED_SIB_REQUEST",
+      "target": "PROP_TRANSMIT_TO_LOWER_LAYERS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes submitting the message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.6"
+      ]
+    }
+  ]
+}

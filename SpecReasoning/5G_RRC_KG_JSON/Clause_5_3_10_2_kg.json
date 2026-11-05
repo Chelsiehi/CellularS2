@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.10.2",
+  "title": "Recovery of physical layer problems",
+  "entities": [
+    {
+      "id": "PHY_PROBLEM_RECOVERY",
+      "name": "Physical Layer Problem Recovery",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when UE receives N311 consecutive in-sync indications for SpCell while T310 is running. The UE stops timers and maintains RRC connection without explicit signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer running for SpCell physical layer problem detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "TIMER_T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer that may be running for SpCell physical layer problem detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "CONDITION_N311_IN_SYNC",
+      "name": "N311 consecutive in-sync indications",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives N311 consecutive in-sync indications from lower layers for SpCell while T310 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_MAINTAIN_RRC",
+      "name": "Maintain RRC connection",
+      "entity_type": "Property",
+      "description": "UE maintains RRC connection without explicit signaling and preserves entire radio resource configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PHY_PROBLEM_RECOVERY",
+      "target": "CONDITION_N311_IN_SYNC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is triggered by receiving N311 consecutive in-sync indications while T310 is running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PHY_PROBLEM_RECOVERY",
+      "target": "TIMER_T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T310 for the corresponding SpCell",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PHY_PROBLEM_RECOVERY",
+      "target": "TIMER_T312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T312 for the corresponding SpCell if running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PHY_PROBLEM_RECOVERY",
+      "target": "PROPERTY_MAINTAIN_RRC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in maintaining RRC connection without explicit signaling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.2"
+      ]
+    }
+  ]
+}

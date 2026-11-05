@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.1.5",
+  "title": "Coordination for interworking with ePDG connected to EPC",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transfer PDN connections from ePDG to N1 mode during inter-system change",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to initiate PDU session establishment for transferring PDN connections to N1 mode",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session identity",
+      "entity_type": "Information Element",
+      "description": "Identity allocated by UE for PDN connection when establishing via ePDG, used later for PDU session transfer",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Indicates whether the PDU session is for existing emergency session or existing regular session",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_TYPE",
+      "name": "PDU session type",
+      "entity_type": "Information Element",
+      "description": "Specifies the IP version support (IPv4, IPv6, or IPv4v6) based on previously allocated home address information",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "IE_DNN",
+      "name": "DNN",
+      "entity_type": "Information Element",
+      "description": "Data Network Name mapped from the APN of the PDN connection",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information provided by network and used for PDU session transfer",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN",
+      "name": "Emergency PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether the PDN connection is for emergency bearer services",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "COND_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI condition",
+      "entity_type": "Condition",
+      "description": "Condition requiring that associated S-NSSAI is included in allowed NSSAI for target access",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "PROP_PDN_TRANSFER",
+      "name": "PDN connection transfer to N1 mode",
+      "entity_type": "Property",
+      "description": "Property describing the transfer of PDN connections from ePDG to N1 mode during inter-system change",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session establishment procedure involves sending PDU SESSION ESTABLISHMENT REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains PDU session identity",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains request type",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains PDU session type",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_DNN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains DNN",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains S-NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMERGENCY_PDN",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDN connection condition determines the value of request type IE",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_ALLOWED_NSSAI",
+      "target": "PROP_PDN_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Allowed NSSAI condition guards the PDN connection transfer to N1 mode",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROP_PDN_TRANSFER",
+      "target": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDN connection transfer property is established through PDU session establishment procedure",
+      "provenance": [
+        "TS 24.501, Clause 6.1.5"
+      ]
+    }
+  ]
+}

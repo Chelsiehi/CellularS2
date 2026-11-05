@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.2.1",
+  "title": "PDU EAP message reliable transport procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_PDU_EAP_RELIABLE_TRANSPORT",
+      "name": "PDU EAP message reliable transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reliable transport of EAP messages between SMF and UE during PDU session authentication",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "name": "PDU SESSION AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message sent by SMF to initiate PDU session authentication with EAP message transport",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity information element set to 'No procedure transaction identity assigned'",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the EAP-request message provided by DN or generated locally",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_REMOTE_UE_HANDLING",
+      "name": "Remote UE handling information IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing remote user identity if received in Remote UE context connected IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3590",
+      "name": "Timer T3590",
+      "entity_type": "Timer",
+      "description": "Timer started by SMF when sending PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION AUTHENTICATION COMMAND message, associated with DNN",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "Timer T3584",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION AUTHENTICATION COMMAND message, associated with S-NSSAI and DNN combinations",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "Timer T3585",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION AUTHENTICATION COMMAND message, associated with S-NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "COND_DNN_PROVIDED",
+      "name": "DNN provided condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE provided a DNN during PDU session establishment",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "COND_SNSSAI_PROVIDED",
+      "name": "S-NSSAI provided condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE provided an S-NSSAI during PDU session establishment",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "PROP_EAP_TO_UPPER_LAYERS",
+      "name": "EAP message passed to upper layers",
+      "entity_type": "Property",
+      "description": "UE passes EAP message received in EAP message IE to upper layers using NAS transport procedure",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_EAP_RELIABLE_TRANSPORT",
+      "target": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiation involves creating and sending PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PTI IE set to 'No procedure transaction identity assigned'",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EAP message IE with EAP-request message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "IE_REMOTE_UE_HANDLING",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Remote UE handling information IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PDU_EAP_RELIABLE_TRANSPORT",
+      "target": "TIMER_T3590",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SMF starts timer T3590 when sending PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3396 upon receipt of PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "TIMER_T3584",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3584 upon receipt of PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "TIMER_T3585",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3585 upon receipt of PDU SESSION AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_DNN_PROVIDED",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 stopping is conditional on whether DNN was provided during PDU session establishment",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_SNSSAI_PROVIDED",
+      "target": "TIMER_T3585",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3585 stopping is conditional on whether S-NSSAI was provided during PDU session establishment",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "PROP_EAP_TO_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of message establishes that UE passes EAP message to upper layers",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.1"
+      ]
+    }
+  ]
+}

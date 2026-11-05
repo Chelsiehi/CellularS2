@@ -1,0 +1,338 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.2.2",
+  "title": "UE is using EPS services with control plane CIoT EPS optimization",
+  "entities": [
+    {
+      "id": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "Control Plane Service Request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends CONTROL PLANE SERVICE REQUEST message to initiate services using control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to request control plane services in CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "name": "Control plane service type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of service request (mobile originating/terminating request).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container IE",
+      "entity_type": "Information Element",
+      "description": "Container for ESM messages like ESM DATA TRANSPORT.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container IE",
+      "entity_type": "Information Element",
+      "description": "Container for NAS messages like SMS.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE request type (e.g., NAS signalling connection release, Rejection of paging).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction IE",
+      "entity_type": "Information Element",
+      "description": "Information element for UE to indicate paging restriction preference.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT",
+      "entity_type": "Message",
+      "description": "ESM message for transporting user data via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "T3417",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state entered after sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MT_REQUEST",
+      "name": "Mobile terminating request condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets Control plane service type to mobile terminating request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MO_REQUEST",
+      "name": "Mobile originating request condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets Control plane service type to mobile originating request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PENDING_USER_DATA_CONTROL_PLANE",
+      "name": "Pending user data via control plane condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has pending IP, non-IP or Ethernet user data to send via control plane radio bearers.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PENDING_USER_DATA_USER_PLANE",
+      "name": "Pending user data via user plane condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has pending IP, non-IP or Ethernet user data to send via user plane radio bearers.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SMS_SENDING",
+      "name": "SMS sending condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is sending SMS via CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NAS_SIGNALLING_RELEASE",
+      "name": "NAS signalling connection release condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE requests NAS signalling connection release.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PAGING_REJECTION",
+      "name": "Paging rejection condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE rejects paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires entering EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Control plane service type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain ESM message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain NAS message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain UE request type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Paging restriction IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_ESM_MESSAGE_CONTAINER",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM message container may contain ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "target": "CONDITION_MT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Control plane service type IE is set to mobile terminating request under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "target": "CONDITION_MO_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Control plane service type IE is set to mobile originating request under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_PENDING_USER_DATA_CONTROL_PLANE",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes inclusion of ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "CONDITION_PENDING_USER_DATA_USER_PLANE",
+      "target": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes setting of Control plane service type IE with active flag.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "CONDITION_SMS_SENDING",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes inclusion of NAS message container IE for SMS.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "CONDITION_NAS_SIGNALLING_RELEASE",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes setting of UE request type IE to NAS signalling connection release.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "CONDITION_PAGING_REJECTION",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes setting of UE request type IE to Rejection of paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.2"
+      ]
+    }
+  ]
+}

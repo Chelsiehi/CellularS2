@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.4.3",
+  "title": "Network initiated transport of NAS messages",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "name": "Network initiated transport of NAS messages",
+      "entity_type": "Procedure",
+      "description": "Procedure where the MME initiates transport of application messages encapsulated in NAS messages to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "MSG_DOWNLINK_GENERIC_NAS_TRANSPORT",
+      "name": "DOWNLINK GENERIC NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "NAS message sent by MME to transport application messages to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "IE_GENERIC_MESSAGE_CONTAINER",
+      "name": "Generic message container",
+      "entity_type": "Information Element",
+      "description": "IE containing the application message to be transported.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "IE_GENERIC_MESSAGE_CONTAINER_TYPE",
+      "name": "Generic message container type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the application protocol used in the generic transport.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_INFORMATION",
+      "name": "Additional information",
+      "entity_type": "Information Element",
+      "description": "Optional IE containing additional information requested by the application.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "ENTITY_MME_EMM",
+      "name": "EMM entity in MME",
+      "entity_type": "Property",
+      "description": "EMM entity in the MME that initiates the transport procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "ENTITY_UE_EMM",
+      "name": "EMM entity in UE",
+      "entity_type": "Property",
+      "description": "EMM entity in the UE that receives the transport message and provides contents to applications.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "APPLICATION",
+      "name": "Application",
+      "entity_type": "Property",
+      "description": "Application that requests message transport and may request additional information.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "target": "MSG_DOWNLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is initiated by sending DOWNLINK GENERIC NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DOWNLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message includes the generic message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DOWNLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message includes the generic message container type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DOWNLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_ADDITIONAL_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may include the Additional information IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ENTITY_MME_EMM",
+      "target": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EMM entity in MME initiates the procedure upon application request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ENTITY_UE_EMM",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM entity in UE provides contents of generic message container IE to application.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTITY_UE_EMM",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM entity in UE provides contents of generic message container type IE to application.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ENTITY_UE_EMM",
+      "target": "IE_ADDITIONAL_INFORMATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM entity in UE provides contents of Additional information IE to application if included.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.3"
+      ]
+    }
+  ]
+}

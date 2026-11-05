@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.5.3",
+  "title": "5GS session management",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_RELEASE",
+      "name": "PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to release a PDU session when encountering invalid mandatory IE in PDU SESSION ESTABLISHMENT ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+      "entity_type": "Message",
+      "description": "5GSM message from network accepting PDU session establishment request.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message initiated by UE to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "5GSM message from network commanding PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMPLETE",
+      "name": "PDU SESSION RELEASE COMPLETE",
+      "entity_type": "Message",
+      "description": "5GSM message sent by UE to complete PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message from UE requesting PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "5GSM message from network rejecting PDU session establishment request.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message from UE requesting PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "5GSM message from network rejecting PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "name": "PDU SESSION RELEASE REJECT",
+      "entity_type": "Message",
+      "description": "5GSM message from network rejecting PDU session release request.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE_96",
+      "name": "5GSM cause #96",
+      "entity_type": "Information Element",
+      "description": "5GSM cause value indicating 'invalid mandatory information'.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "COND_INVALID_MANDATORY_IE",
+      "name": "Error with mandatory information element",
+      "entity_type": "Condition",
+      "description": "Condition where a mandatory information element in a 5GSM message contains an error.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_INVALID_MANDATORY_IE",
+      "target": "PROC_PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error with mandatory IE in PDU SESSION ESTABLISHMENT ACCEPT triggers UE to initiate PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session release procedure includes sending PDU SESSION RELEASE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "IE_5GSM_CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REQUEST message contains 5GSM cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_INVALID_MANDATORY_IE",
+      "target": "MSG_PDU_SESSION_RELEASE_COMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error with mandatory IE in PDU SESSION RELEASE COMMAND triggers UE to send PDU SESSION RELEASE COMPLETE with cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_COMPLETE",
+      "target": "IE_5GSM_CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMPLETE message contains 5GSM cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_INVALID_MANDATORY_IE",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error with mandatory IE in PDU SESSION ESTABLISHMENT REQUEST triggers network to send PDU SESSION ESTABLISHMENT REJECT with cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "IE_5GSM_CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message contains 5GSM cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_INVALID_MANDATORY_IE",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error with mandatory IE in PDU SESSION MODIFICATION REQUEST triggers network to send PDU SESSION MODIFICATION REJECT with cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains 5GSM cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_INVALID_MANDATORY_IE",
+      "target": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Error with mandatory IE in PDU SESSION RELEASE REQUEST triggers network to send PDU SESSION RELEASE REJECT with cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "target": "IE_5GSM_CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REJECT message contains 5GSM cause #96.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.3"
+      ]
+    }
+  ]
+}

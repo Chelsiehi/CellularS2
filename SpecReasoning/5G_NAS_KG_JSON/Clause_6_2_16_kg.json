@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.16",
+  "title": "Handling of header compression for control plane CIoT optimizations",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that can support header compression for control plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "Session Management Function",
+      "entity_type": "Property",
+      "description": "Network function that negotiates header compression configuration with the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "Access and Mobility Management Function",
+      "entity_type": "Property",
+      "description": "Network function that indicates header compression support during registration procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "IP_HEADER_COMPRESSION",
+      "name": "IP Header Compression",
+      "entity_type": "Procedure",
+      "description": "Compression of IP headers using ROHC protocol for PDU sessions of IPv4, IPv6, or IPv4v6 type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "ETHERNET_HEADER_COMPRESSION",
+      "name": "Ethernet Header Compression",
+      "entity_type": "Procedure",
+      "description": "Compression of Ethernet headers using EHC protocol for PDU sessions of Ethernet type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "IE_IP_HC_CONFIG",
+      "name": "IP Header Compression Configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to negotiate IP header compression configuration between UE and SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "IE_ETHERNET_HC_CONFIG",
+      "name": "Ethernet Header Compression Configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to negotiate Ethernet header compression configuration between UE and SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE and AMF indicate header compression support.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU Session Establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where header compression configuration is negotiated.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION",
+      "name": "PDU Session Modification Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where header compression configuration is re-negotiated.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IP_HEADER_COMPRESSION",
+      "target": "IE_IP_HC_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IP header compression procedure uses the IP header compression configuration IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ETHERNET_HEADER_COMPRESSION",
+      "target": "IE_ETHERNET_HC_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Ethernet header compression procedure uses the Ethernet header compression configuration IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "UE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure requires UE to indicate header compression support.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "AMF",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure requires AMF to indicate header compression support.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_ESTABLISHMENT",
+      "target": "IP_HEADER_COMPRESSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session establishment procedure includes IP header compression negotiation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION_ESTABLISHMENT",
+      "target": "ETHERNET_HEADER_COMPRESSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session establishment procedure includes Ethernet header compression negotiation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PDU_SESSION_MODIFICATION",
+      "target": "IP_HEADER_COMPRESSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session modification procedure includes IP header compression re-negotiation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PDU_SESSION_MODIFICATION",
+      "target": "ETHERNET_HEADER_COMPRESSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session modification procedure includes Ethernet header compression re-negotiation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.16"
+      ]
+    }
+  ]
+}

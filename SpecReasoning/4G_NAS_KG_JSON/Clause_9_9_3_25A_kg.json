@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.25A",
+  "title": "Paging identity",
+  "entities": [
+    {
+      "id": "IE_PAGING_IDENTITY",
+      "name": "Paging identity",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the identity used for paging for non-EPS services. It is a type 3 information element with 2 octets length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "FIELD_PAGING_IDENTITY_IEI",
+      "name": "Paging identity IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier field with fixed value 0000.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "FIELD_PAGING_IDENTITY_VALUE",
+      "name": "Paging identity value",
+      "entity_type": "Property",
+      "description": "Bit field that indicates the identity type used for paging: 0 for IMSI, 1 for TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "IDENTITY_IMSI",
+      "name": "IMSI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Subscriber Identity used for paging when Paging identity value bit is 0.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "IDENTITY_TMSI",
+      "name": "TMSI",
+      "entity_type": "Identifier",
+      "description": "Temporary Mobile Subscriber Identity used for paging when Paging identity value bit is 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PAGING_IDENTITY",
+      "target": "FIELD_PAGING_IDENTITY_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Paging identity IE contains the IEI field as part of its structure.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PAGING_IDENTITY",
+      "target": "FIELD_PAGING_IDENTITY_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Paging identity IE contains the identity value field as part of its structure.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FIELD_PAGING_IDENTITY_VALUE",
+      "target": "IDENTITY_IMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When the Paging identity value bit is 0, IMSI is used as the paging identity.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_PAGING_IDENTITY_VALUE",
+      "target": "IDENTITY_TMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When the Paging identity value bit is 1, TMSI is used as the paging identity.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.25A",
+        "Figure 9.9.3.25A.1"
+      ]
+    }
+  ]
+}

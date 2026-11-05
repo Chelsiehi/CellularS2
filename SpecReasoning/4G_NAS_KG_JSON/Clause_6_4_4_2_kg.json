@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.2",
+  "title": "EPS bearer context deactivation initiated by the network",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_EPS_BEARER_DEACTIVATION",
+      "name": "Network-initiated EPS bearer context deactivation",
+      "entity_type": "Procedure",
+      "description": "Procedure where the MME initiates deactivation of EPS bearer contexts, either with NAS signaling when connection exists or locally when no connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE to initiate EPS bearer context deactivation. Contains ESM cause and may include PTI, EPS bearer identity, and other IEs.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network in response to DEACTIVATE EPS BEARER CONTEXT REQUEST, confirming deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3495",
+      "name": "T3495",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when sending DEACTIVATE EPS BEARER CONTEXT REQUEST, stopped upon receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE_PENDING",
+      "name": "BEARER CONTEXT INACTIVE PENDING",
+      "entity_type": "State",
+      "description": "State entered by MME after sending DEACTIVATE EPS BEARER CONTEXT REQUEST and starting T3495.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "IE included in DEACTIVATE EPS BEARER CONTEXT REQUEST indicating reason for deactivation. Common values: #8 (operator determined barring), #29 (user authentication/authorization failed), #112 (APN restriction incompatible), #113 (multiple accesses not allowed).",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "PTI value included in DEACTIVATE EPS BEARER CONTEXT REQUEST when deactivation is triggered by UE-initiated bearer resource modification or PDN disconnect procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE included in DEACTIVATE EPS BEARER CONTEXT REQUEST when deactivating all EPS bearer contexts of a PDN connection (identity of default bearer).",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_WLAN_OFFLOAD_INDICATION",
+      "name": "WLAN offload indication",
+      "entity_type": "Information Element",
+      "description": "IE that shall not be included when deactivating all EPS bearer contexts of a PDN connection. If received, UE shall ignore it.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "COND_NAS_SIGNALLING_CONNECTION_EXISTS",
+      "name": "NAS signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Condition determining whether MME initiates deactivation with NAS signaling (if true) or locally (if false).",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local deactivation without NAS signaling",
+      "entity_type": "Property",
+      "description": "Behavior where MME locally deactivates EPS bearer context towards UE when no NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_EPS_BEARER_DEACTIVATION",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending DEACTIVATE EPS BEARER CONTEXT REQUEST message when NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NETWORK_INITIATED_EPS_BEARER_DEACTIVATION",
+      "target": "TIMER_T3495",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3495 when sending DEACTIVATE EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NETWORK_INITIATED_EPS_BEARER_DEACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires entering BEARER CONTEXT INACTIVE PENDING state after sending request.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains ESM cause IE indicating deactivation reason.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PTI when triggered by UE-initiated procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EPS bearer identity when deactivating all bearers of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_WLAN_OFFLOAD_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message shall not contain WLAN offload indication when deactivating all bearers of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "TIMER_T3495",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT stops timer T3495.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2",
+        "Figure 6.4.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NAS_SIGNALLING_CONNECTION_EXISTS",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When NAS signalling connection does not exist, MME performs local deactivation without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_NAS_SIGNALLING_CONNECTION_EXISTS",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of NAS signalling connection determines whether DEACTIVATE EPS BEARER CONTEXT REQUEST is sent.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.2",
+  "title": "Lists of forbidden tracking areas",
+  "entities": [
+    {
+      "id": "LIST_FORBIDDEN_TA_ROAMING",
+      "name": "Forbidden tracking areas for roaming",
+      "entity_type": "Property",
+      "description": "A list stored in the UE containing tracking areas where roaming is not allowed. The list is erased when the UE is switched off, UICC is removed, or periodically every 12-24 hours.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "LIST_FORBIDDEN_TA_REGIONAL",
+      "name": "Forbidden tracking areas for regional provision of service",
+      "entity_type": "Property",
+      "description": "A list stored in the UE containing tracking areas where regional service is not allowed. The list is erased when the UE is switched off, UICC is removed, or periodically every 12-24 hours.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "COND_ERASE_LISTS",
+      "name": "List erase conditions",
+      "entity_type": "Condition",
+      "description": "Conditions triggering the erasure of forbidden tracking area lists: UE switch-off, UICC removal, or periodic timer expiration (12-24 hours).",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "COND_REMOVE_TA_FROM_LISTS",
+      "name": "TA removal condition",
+      "entity_type": "Condition",
+      "description": "Condition for removing tracking areas from forbidden lists: after successful attach, tracking area update, or GUTI reallocation procedure if the TA is received from the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ONLY",
+      "name": "Emergency PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has only one PDN connection for emergency bearer services, preventing removal of TAs from forbidden lists even if received from network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Network message that can trigger update of forbidden TA lists when received with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REJECT",
+      "name": "TRACKING AREA UPDATE REJECT",
+      "entity_type": "Message",
+      "description": "Network message that can trigger update of forbidden TA lists when received with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Network message that can trigger update of forbidden TA lists when received with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Network message that can trigger update of forbidden TA lists when received with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_12",
+      "name": "EMM cause #12 - tracking area not allowed",
+      "entity_type": "Condition",
+      "description": "EMM cause code indicating the tracking area is not allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_13",
+      "name": "EMM cause #13 - roaming not allowed in this tracking area",
+      "entity_type": "Condition",
+      "description": "EMM cause code indicating roaming is not allowed in the tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_15",
+      "name": "EMM cause #15 - no suitable cells in tracking area",
+      "entity_type": "Condition",
+      "description": "EMM cause code indicating no suitable cells are available in the tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "PROP_LIST_CAPACITY",
+      "name": "List capacity management",
+      "entity_type": "Property",
+      "description": "Property specifying that each forbidden TA list accommodates 40 or more TAIs, with oldest entry deleted when full and new entry needs insertion.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_ERASE_LISTS",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List erase conditions trigger erasure of forbidden tracking areas for roaming list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ERASE_LISTS",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List erase conditions trigger erasure of forbidden tracking areas for regional service list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_REMOVE_TA_FROM_LISTS",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TA removal condition enables removal of tracking areas from forbidden roaming list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_REMOVE_TA_FROM_LISTS",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TA removal condition enables removal of tracking areas from forbidden regional service list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMERGENCY_ONLY",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency-only condition prevents removal of TAs from forbidden roaming list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EMERGENCY_ONLY",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency-only condition prevents removal of TAs from forbidden regional service list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "EMM_CAUSE_12",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message can contain EMM cause #12 triggering list update.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_TAU_REJECT",
+      "target": "EMM_CAUSE_13",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT message can contain EMM cause #13 triggering list update.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "EMM_CAUSE_15",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message can contain EMM cause #15 triggering list update.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_LIST_CAPACITY",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "List capacity management property applies to forbidden roaming TA list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_LIST_CAPACITY",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "List capacity management property applies to forbidden regional service TA list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.2"
+      ]
+    }
+  ]
+}

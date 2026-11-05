@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.7.1",
+  "title": "PC5 Relay RLC channel release",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that performs the PC5 Relay RLC channel release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "name": "PC5 Relay RLC Channel Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE releases RLC entities and logical channels for specified PC5 sidelink RLC channels.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "SL_RLC_CHANNEL_TO_RELEASE_LIST_PC5",
+      "name": "sl-RLC-ChannelToReleaseList-PC5",
+      "entity_type": "Information Element",
+      "description": "List containing identifiers of PC5 sidelink RLC channels to be released.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "SL_RLC_CHANNEL_ID_PC5",
+      "name": "sl-RLC-ChannelID-PC5",
+      "entity_type": "Identifier",
+      "description": "Identifier for a specific PC5 sidelink RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "RLC_ENTITY",
+      "name": "RLC Entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity associated with a PC5 sidelink RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "LOGICAL_CHANNEL",
+      "name": "Logical Channel",
+      "entity_type": "Property",
+      "description": "Logical channel corresponding to a PC5 sidelink RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "CURRENT_UE_SIDELINK_CONFIG",
+      "name": "Current UE Sidelink Configuration",
+      "entity_type": "Condition",
+      "description": "Condition that the sl-RLC-ChannelID-PC5 must be part of the current UE sidelink configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "target": "UE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The UE performs the PC5 Relay RLC channel release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "target": "SL_RLC_CHANNEL_TO_RELEASE_LIST_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure uses the sl-RLC-ChannelToReleaseList-PC5 information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_RLC_CHANNEL_TO_RELEASE_LIST_PC5",
+      "target": "SL_RLC_CHANNEL_ID_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The list contains one or more sl-RLC-ChannelID-PC5 identifiers.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "target": "CURRENT_UE_SIDELINK_CONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires that the sl-RLC-ChannelID-PC5 is part of the current UE sidelink configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure releases the RLC entity associated with the sl-RLC-ChannelID-PC5.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SL_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure releases the logical channel corresponding to the sl-RLC-ChannelID-PC5.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.1"
+      ]
+    }
+  ]
+}

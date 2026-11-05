@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.7",
+  "title": "NAS message",
+  "entities": [
+    {
+      "id": "IE_NAS_MESSAGE",
+      "name": "NAS message",
+      "entity_type": "Information Element",
+      "description": "This IE includes a complete plain NAS message as specified in clause 8.2 and 8.3.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_PROTECTED_NAS_MESSAGE",
+      "name": "SECURITY PROTECTED NAS MESSAGE",
+      "entity_type": "Message",
+      "description": "A NAS message that is security protected and not considered a plain NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "A NAS message used for service requests that is not considered a plain NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    },
+    {
+      "id": "COND_PLAIN_NAS_MESSAGE",
+      "name": "Plain NAS message condition",
+      "entity_type": "Condition",
+      "description": "Condition specifying that only plain NAS messages as defined in clauses 8.2 and 8.3 can be included in the NAS message IE.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_NAS_MESSAGE",
+      "target": "COND_PLAIN_NAS_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The NAS message IE is constrained to only include plain NAS messages as specified in clauses 8.2 and 8.3.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PLAIN_NAS_MESSAGE",
+      "target": "MSG_SECURITY_PROTECTED_NAS_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The plain NAS message condition establishes that SECURITY PROTECTED NAS MESSAGE shall not be included in the NAS message IE.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PLAIN_NAS_MESSAGE",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The plain NAS message condition establishes that SERVICE REQUEST message shall not be included in the NAS message IE.",
+      "provenance": [
+        "TS 24.301, Clause 9.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.8.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_REMOTE_UE_INFO_SIDELINK",
+      "name": "RemoteUEInformationSidelink procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the L2 U2N Remote UE in RRC_IDLE/RRC_INACTIVE to inform about required SIB(s) and provide paging related information to the connected L2 U2N Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1",
+        "Figure 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_INFO_SIDELINK",
+      "name": "RemoteUEInformationSidelink message",
+      "entity_type": "Message",
+      "description": "Message sent from Remote UE to Relay UE containing required SIB information and paging related information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1",
+        "Figure 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where the Remote UE can initiate the RemoteUEInformationSidelink procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where the Remote UE can initiate the RemoteUEInformationSidelink procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "IE_REQUIRED_SIBS",
+      "name": "Required SIBs information",
+      "entity_type": "Information Element",
+      "description": "Information about the required System Information Blocks that the Remote UE needs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "IE_PAGING_INFO",
+      "name": "Paging related information",
+      "entity_type": "Information Element",
+      "description": "Paging related information provided by the Remote UE to the Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REMOTE_UE_INFO_SIDELINK",
+      "target": "MSG_REMOTE_UE_INFO_SIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the RemoteUEInformationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1",
+        "Figure 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_REMOTE_UE_INFO_SIDELINK",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure can be initiated when the Remote UE is in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_REMOTE_UE_INFO_SIDELINK",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure can be initiated when the Remote UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REMOTE_UE_INFO_SIDELINK",
+      "target": "IE_REQUIRED_SIBS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains information about required SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REMOTE_UE_INFO_SIDELINK",
+      "target": "IE_PAGING_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains paging related information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.1"
+      ]
+    }
+  ]
+}

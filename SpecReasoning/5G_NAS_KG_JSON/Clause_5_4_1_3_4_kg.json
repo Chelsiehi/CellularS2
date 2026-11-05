@@ -1,0 +1,145 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.4",
+  "title": "Authentication completion by the network",
+  "entities": [
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE containing authentication response parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by UE indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "T3560",
+      "name": "Timer T3560",
+      "entity_type": "Timer",
+      "description": "Timer used during authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "RES_CHECK",
+      "name": "RES* correctness check",
+      "entity_type": "Condition",
+      "description": "Network verifies the correctness of RES* parameter from authentication response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "NGKSI_STORED",
+      "name": "ngKSI stored in 5G NAS security context",
+      "entity_type": "Condition",
+      "description": "Condition where ngKSI is already stored in the network's 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "SYNCH_FAILURE",
+      "name": "5GMM cause #21 synch failure",
+      "entity_type": "Condition",
+      "description": "Authentication failure due to synchronization failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "NGKSI_PROPERTY",
+      "name": "Different ngKSI value included",
+      "entity_type": "Property",
+      "description": "Network includes a different ngKSI value in new authentication requests when ngKSI is already stored.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "RENEGOTIATE_AUTH",
+      "name": "Renegotiate authentication parameters",
+      "entity_type": "Property",
+      "description": "Network may renegotiate with UDM/AUSF to provide new authentication parameters upon synchronization failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3560 upon receipt of AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "RES_CHECK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message triggers RES* correctness check.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NGKSI_STORED",
+      "target": "NGKSI_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of ngKSI being stored establishes the requirement to include different ngKSI in new authentication requests.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_FAILURE",
+      "target": "T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3560 upon receipt of AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SYNCH_FAILURE",
+      "target": "RENEGOTIATE_AUTH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Synchronization failure condition establishes possibility for network to renegotiate authentication parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.4"
+      ]
+    }
+  ]
+}

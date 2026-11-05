@@ -1,0 +1,300 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.3.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "name": "SCG Failure Reporting Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to report Secondary Cell Group failures when neither MCG nor SCG transmission is suspended and specific failure conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "SCGFailureInformationNR",
+      "name": "SCGFailureInformationNR",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE to report SCG failures when in (NG)EN-DC mode.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "SCGFailureInformation",
+      "name": "SCGFailureInformation",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE to report SCG failures.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "T304",
+      "name": "T304",
+      "entity_type": "Timer",
+      "description": "Timer for SCG that is stopped upon SCG failure reporting initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_SUSPENSION",
+      "name": "Neither MCG nor SCG transmission suspended",
+      "entity_type": "Condition",
+      "description": "Precondition for initiating SCG failure reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_RLF_SCG",
+      "name": "Radio link failure for SCG",
+      "entity_type": "Condition",
+      "description": "Condition triggering SCG failure reporting when radio link failure is detected for SCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_BEAM_FAILURE_PSCELL",
+      "name": "Beam failure of PSCell while SCG deactivated",
+      "entity_type": "Condition",
+      "description": "Condition triggering SCG failure reporting when beam failure occurs on PSCell while SCG is deactivated.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_RECONFIG_SYNC_FAILURE",
+      "name": "Reconfiguration with sync failure of SCG",
+      "entity_type": "Condition",
+      "description": "Condition triggering SCG failure reporting when reconfiguration with synchronization fails for SCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SCG_CONFIG_FAILURE",
+      "name": "SCG configuration failure",
+      "entity_type": "Condition",
+      "description": "Condition triggering SCG failure reporting when SCG configuration fails.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_INTEGRITY_CHECK_FAILURE",
+      "name": "Integrity check failure indication from SCG lower layers",
+      "entity_type": "Condition",
+      "description": "Condition triggering SCG failure reporting when integrity check failure is indicated from SCG lower layers concerning SRB3.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_SUSPEND_SCG_TRANSMISSION",
+      "name": "Suspend SCG transmission",
+      "entity_type": "Property",
+      "description": "Action to suspend SCG transmission for all SRBs, DRBs, and BH RLC channels when procedure is not initiated due to beam failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_RESET_SCG_MAC",
+      "name": "Reset SCG MAC",
+      "entity_type": "Property",
+      "description": "Action to reset SCG MAC when procedure is not initiated due to beam failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_STOP_CPC_EVALUATION",
+      "name": "Stop conditional reconfiguration evaluation for CPC",
+      "entity_type": "Property",
+      "description": "Action to stop conditional reconfiguration evaluation for CPC if configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "STATE_NGEN_DC",
+      "name": "(NG)EN-DC state",
+      "entity_type": "State",
+      "description": "UE operating mode where UE initiates transmission of SCGFailureInformationNR or SCGFailureInformation messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_NO_SUSPENSION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SCG failure reporting procedure requires that neither MCG nor SCG transmission is suspended.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_RLF_SCG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by radio link failure for SCG condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_BEAM_FAILURE_PSCELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by beam failure of PSCell while SCG deactivated condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_RECONFIG_SYNC_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by reconfiguration with sync failure of SCG condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_SCG_CONFIG_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by SCG configuration failure condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "CONDITION_INTEGRITY_CHECK_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by integrity check failure indication from SCG lower layers condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "PROPERTY_SUSPEND_SCG_TRANSMISSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to suspend SCG transmission when not initiated due to beam failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "PROPERTY_RESET_SCG_MAC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to reset SCG MAC when not initiated due to beam failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "T304",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops T304 timer for SCG if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "PROPERTY_STOP_CPC_EVALUATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to stop conditional reconfiguration evaluation for CPC if configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "SCGFailureInformationNR",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to initiate transmission of SCGFailureInformationNR message when in (NG)EN-DC.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "SCGFailureInformation",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to initiate transmission of SCGFailureInformation message when in (NG)EN-DC.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "SCG_FAILURE_REPORTING_PROCEDURE",
+      "target": "STATE_NGEN_DC",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in (NG)EN-DC state for message transmission steps.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "CONDITION_BEAM_FAILURE_PSCELL",
+      "target": "PROPERTY_SUSPEND_SCG_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Beam failure condition guards whether SCG transmission suspension step is executed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "CONDITION_BEAM_FAILURE_PSCELL",
+      "target": "PROPERTY_RESET_SCG_MAC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Beam failure condition guards whether SCG MAC reset step is executed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.2"
+      ]
+    }
+  ]
+}

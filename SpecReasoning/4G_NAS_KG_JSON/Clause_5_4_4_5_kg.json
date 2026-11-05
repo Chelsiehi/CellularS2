@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.4.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network requests identity information from the UE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to identity request from network",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "IE_IDENTITY_TYPE",
+      "name": "Identity type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of identity being provided",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_NO_IDENTITY",
+      "name": "No identity available",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot encode requested identity due to no valid USIM",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROP_NO_IDENTITY_ENCODING",
+      "name": "Encode identity type as 'no identity'",
+      "entity_type": "Property",
+      "description": "UE behavior when requested identity is not available",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_TRANSMISSION_FAILURE",
+      "name": "Transmission failure indication from lower layers",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate transmission failure of IDENTITY RESPONSE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE's tracking area information",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attach to the network",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request services from network",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGE",
+      "name": "TAI change condition",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is not in TAI list",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_IDENTIFICATION",
+      "name": "Abort identification procedure",
+      "entity_type": "Property",
+      "description": "UE behavior to terminate the identification procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Identification procedure involves sending IDENTITY RESPONSE message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTITY_RESPONSE",
+      "target": "IE_IDENTITY_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message contains identity type information element",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_IDENTITY",
+      "target": "PROP_NO_IDENTITY_ENCODING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When no identity is available, UE encodes identity type as 'no identity'",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TRANSMISSION_FAILURE",
+      "target": "PROP_ABORT_IDENTIFICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Transmission failure causes UE to abort identification procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_ABORT_IDENTIFICATION",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "After aborting identification, UE re-initiates tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_ABORT_IDENTIFICATION",
+      "target": "PROC_ATTACH",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "After aborting identification, UE re-initiates attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_TAI_CHANGE",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "TAI change condition triggers tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Identification procedure can be triggered by service request procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Identification procedure can be triggered by tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "PROC_ATTACH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Identification procedure can be triggered by attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.5"
+      ]
+    }
+  ]
+}

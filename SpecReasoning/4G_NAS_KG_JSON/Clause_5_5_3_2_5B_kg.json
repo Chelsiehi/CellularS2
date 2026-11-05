@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.5B",
+  "title": "Tracking area updating for access to RLOS not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_TAU_RLOS_REJECTED",
+      "name": "Tracking area updating for access to RLOS not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when tracking area updating request for access to RLOS is rejected by the network, involving specific UE behaviors based on rejection conditions and EMM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "COND_SEARCH_EUTRAN",
+      "name": "Search for suitable cell in E-UTRAN",
+      "entity_type": "Condition",
+      "description": "Condition where rejection action involves searching for a suitable cell in E-UTRAN radio access technology.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "COND_SELECT_GERAN_UTRAN",
+      "name": "Select GERAN or UTRAN or disable E-UTRAN capability",
+      "entity_type": "Condition",
+      "description": "Condition where rejection action involves attempting to select GERAN or UTRAN radio access technology or disabling E-UTRAN capability.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "Same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in the same selected PLMN where the last tracking area updating procedure was attempted and rejected.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "COND_EMM_CAUSE_EXCLUDED",
+      "name": "EMM cause value other than #9, #10, #40",
+      "entity_type": "Condition",
+      "description": "Condition where tracking area updating procedure was rejected with an EMM cause value other than #9, #10, and #40.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that must not be running for certain UE actions after tracking area updating rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "PROP_DETACH_LOCALLY",
+      "name": "Detach locally",
+      "entity_type": "Property",
+      "description": "UE behavior to detach locally if not already detached, followed by PLMN selection to attempt EPS attach for access to RLOS via another PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "PROC_PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure to select a new PLMN according to 3GPP TS 23.122 to attempt EPS attach for access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "STATE_EMM",
+      "name": "EMM state",
+      "entity_type": "State",
+      "description": "EMM state of the UE, which influences whether tracking area updating or attach procedure is attempted after rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAU_RLOS_REJECTED",
+      "target": "COND_SEARCH_EUTRAN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition to search for suitable cell in E-UTRAN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU_RLOS_REJECTED",
+      "target": "COND_SELECT_GERAN_UTRAN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition to select GERAN/UTRAN or disable E-UTRAN capability.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SEARCH_EUTRAN",
+      "target": "STATE_EMM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition to search E-UTRAN requires consideration of EMM state for subsequent procedure selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_PLMN",
+      "target": "PROP_DETACH_LOCALLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of same PLMN establishes the property to detach locally and perform PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMM_CAUSE_EXCLUDED",
+      "target": "PROP_DETACH_LOCALLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of excluded EMM cause values establishes the property to detach locally and perform PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_T3346",
+      "target": "PROP_DETACH_LOCALLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Property to detach locally is guarded by timer T3346 not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_DETACH_LOCALLY",
+      "target": "PROC_PLMN_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Property to detach locally includes the step to perform PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5B"
+      ]
+    }
+  ]
+}

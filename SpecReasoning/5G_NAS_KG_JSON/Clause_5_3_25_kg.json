@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.25",
+  "title": "Paging Early Indication with Paging Subgrouping Assistance",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE indicates capability support and exchanges PEIPS assistance information with network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_PEIPS_ASSISTANCE",
+      "name": "Requested PEIPS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "IE included in REGISTRATION REQUEST message containing UE's paging probability information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "IE_NEGOTIATED_PEIPS_ASSISTANCE",
+      "name": "Negotiated PEIPS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "IE provided by network in REGISTRATION ACCEPT or CONFIGURATION UPDATE COMMAND containing Paging subgroup ID.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "IE_UPDATED_PEIPS_ASSISTANCE",
+      "name": "Updated PEIPS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "IE included in CONFIGURATION UPDATE COMMAND message to provide updated PEIPS assistance information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "ID_PAGING_SUBGROUP",
+      "name": "Paging subgroup ID",
+      "entity_type": "Identifier",
+      "description": "Identifier used to determine NR paging subgroup for paging the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "Message used by network to update UE configuration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_ACTIVE",
+      "name": "Emergency PDU session active",
+      "entity_type": "Condition",
+      "description": "Condition where UE has an active emergency PDU session over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "PROP_STORE_PAGING_SUBGROUP_ID",
+      "name": "Network stores Paging subgroup ID",
+      "entity_type": "Property",
+      "description": "Network stores the Paging subgroup ID in the 5GMM context of the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_PEIPS_INFO",
+      "name": "Delete PEIPS assistance information",
+      "entity_type": "Property",
+      "description": "UE or network deletes stored PEIPS assistance information under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_PEIPS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Requested PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_NEGOTIATED_PEIPS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain Negotiated PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_NEGOTIATED_PEIPS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Negotiated PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_UPDATED_PEIPS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Updated PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_NEGOTIATED_PEIPS_ASSISTANCE",
+      "target": "ID_PAGING_SUBGROUP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Negotiated PEIPS assistance information IE contains Paging subgroup ID.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_REGISTRATION",
+      "target": "COND_EMERGENCY_PDU_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration procedure capability indication is guarded by emergency PDU session active condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMERGENCY_PDU_ACTIVE",
+      "target": "PROP_DELETE_PEIPS_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency PDU session active condition establishes that UE shall not use PEIPS assistance information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_NEGOTIATED_PEIPS_ASSISTANCE",
+      "target": "PROP_STORE_PAGING_SUBGROUP_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of Negotiated PEIPS assistance information IE establishes that network stores Paging subgroup ID.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.25"
+      ]
+    }
+  ]
+}

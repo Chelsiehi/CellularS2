@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.13.1",
+  "title": "Relaxed measurement criterion for low mobility",
+  "entities": [
+    {
+      "id": "RELAXED_MEASUREMENT_CRITERION",
+      "name": "Relaxed measurement criterion for low mobility",
+      "entity_type": "Condition",
+      "description": "A measurement criterion that applies when the UE has low mobility, allowing relaxed measurement requirements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "SS_RSRP_CURRENT",
+      "name": "Current SS-RSRP",
+      "entity_type": "Property",
+      "description": "The current L3 RSRP measurement of the SpCell based on SSB, measured in dB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "SS_RSRP_REFERENCE",
+      "name": "Reference SS-RSRP",
+      "entity_type": "Property",
+      "description": "The reference L3 RSRP measurement of the SpCell based on SSB, set by the UE under specific conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "TIMER_SEARCHDELTAP_CONNECTED",
+      "name": "Timer SearchDeltaP-Connected",
+      "entity_type": "Timer",
+      "description": "A timer used to determine when the relaxed measurement criterion has not been met.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "UE_ACTION_SET_REFERENCE",
+      "name": "UE action to set reference SS-RSRP",
+      "entity_type": "Procedure",
+      "description": "The UE sets the reference SS-RSRP to the current SS-RSRP value of the SpCell when the relaxed measurement criterion has not been met for Timer SearchDeltaP-Connected.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RELAXED_MEASUREMENT_CRITERION",
+      "target": "TIMER_SEARCHDELTAP_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The relaxed measurement criterion is evaluated based on whether it has not been met for Timer SearchDeltaP-Connected.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_ACTION_SET_REFERENCE",
+      "target": "SS_RSRP_REFERENCE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The UE action sets the reference SS-RSRP value.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_ACTION_SET_REFERENCE",
+      "target": "SS_RSRP_CURRENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The UE action uses the current SS-RSRP value to set the reference SS-RSRP.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RELAXED_MEASUREMENT_CRITERION",
+      "target": "UE_ACTION_SET_REFERENCE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that the relaxed measurement criterion has not been met for Timer SearchDeltaP-Connected triggers the UE action to set the reference SS-RSRP.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.1"
+      ]
+    }
+  ]
+}

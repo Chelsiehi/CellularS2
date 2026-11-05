@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_UE_REQ_PDU_MOD",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject a PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "IE indicating the reason for session management related actions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Extended protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "IE containing protocol configuration options including PS data off status.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session is established for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_INACTIVE",
+      "name": "PDU session inactive",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session is in inactive state at SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_EXEMPTION_IND_DNN",
+      "name": "Message exempted from DNN based congestion",
+      "entity_type": "Condition",
+      "description": "Condition where AMF indicates message was exempted from DNN congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_EXEMPTION_IND_SNSSAI_DNN",
+      "name": "Message exempted from S-NSSAI and DNN based congestion",
+      "entity_type": "Condition",
+      "description": "Condition where AMF indicates message was exempted from S-NSSAI and DNN congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_EXEMPTION_IND_SNSSAI_ONLY",
+      "name": "Message exempted from S-NSSAI only based congestion",
+      "entity_type": "Condition",
+      "description": "Condition where AMF indicates message was exempted from S-NSSAI only congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_NO_PS_DATA_OFF",
+      "name": "No 3GPP PS data off UE status indicated",
+      "entity_type": "Condition",
+      "description": "Condition where Extended protocol configuration options IE does not indicate PS data off status.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "PROP_SMF_REJECTS_REQUEST",
+      "name": "SMF rejects PDU session modification request",
+      "entity_type": "Property",
+      "description": "Behavior where SMF rejects the UE-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQ_PDU_MOD",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session modification procedure involves sending PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REQUEST message may contain 5GSM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REQUEST message contains Extended protocol configuration options IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_PDU_SESSION",
+      "target": "PROP_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If PDU session is emergency and 5GSM cause IE is missing or invalid, SMF rejects request with cause #31.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PDU_SESSION_INACTIVE",
+      "target": "PROP_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If PDU session is inactive, SMF rejects request with cause #43.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EXEMPTION_IND_DNN",
+      "target": "PROP_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If AMF indicates DNN exemption but procedure is not exempt and no PS data off status, SMF rejects with cause #26.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EXEMPTION_IND_SNSSAI_DNN",
+      "target": "PROP_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If AMF indicates S-NSSAI and DNN exemption but procedure is not exempt and no PS data off status, SMF rejects with cause #67.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EXEMPTION_IND_SNSSAI_ONLY",
+      "target": "PROP_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If AMF indicates S-NSSAI only exemption but procedure is not exempt and no PS data off status, SMF rejects with cause #69.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NO_PS_DATA_OFF",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended protocol configuration options IE guards the condition of no PS data off status.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_SMF_REJECTS_REQUEST",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SMF rejection behavior involves sending PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains 5GSM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.6"
+      ]
+    }
+  ]
+}

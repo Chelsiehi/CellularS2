@@ -1,0 +1,189 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.19.2",
+  "title": "Redirection of the UE by the core network",
+  "entities": [
+    {
+      "id": "PROC_REDIRECTION_EPC_TO_5GCN",
+      "name": "Redirection from EPC to 5GCN",
+      "entity_type": "Procedure",
+      "description": "Network procedure to redirect a UE from EPC to 5GCN by rejecting certain NAS requests with EMM cause #31. The network considers UE capabilities and CIoT network behavior preferences.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "PROC_REDIRECTION_5GCN_TO_EPC",
+      "name": "Redirection from 5GCN to EPC",
+      "entity_type": "Procedure",
+      "description": "Network procedure to redirect a UE from 5GCN to EPC as specified in TS 24.501 for networks supporting CIoT optimizations.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that can be rejected by network to trigger redirection to 5GCN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that can be rejected by network to trigger redirection to 5GCN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that can be rejected by network to trigger redirection to 5GCN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE_31",
+      "name": "EMM cause #31",
+      "entity_type": "Information Element",
+      "description": "EMM cause value 'Redirection to 5GCN required' used in reject messages to trigger UE redirection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "COND_UE_CAPABILITIES",
+      "name": "UE capability considerations",
+      "entity_type": "Condition",
+      "description": "Network considers UE's N1 mode capability, S1 mode capability, and CIoT network behavior preferences when determining redirection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_EUTRA",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Property",
+      "description": "UE behavior to disable E-UTRA capability upon receiving redirection reject message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "PROP_ENABLE_N1_MODE",
+      "name": "Enable N1 mode capability",
+      "entity_type": "Property",
+      "description": "UE behavior to enable N1 mode capability if it was disabled, to facilitate movement to 5GCN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REDIRECTION_EPC_TO_5GCN",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Redirection procedure uses rejection of ATTACH REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_REDIRECTION_EPC_TO_5GCN",
+      "target": "MSG_TAU_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Redirection procedure uses rejection of TRACKING AREA UPDATE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_REDIRECTION_EPC_TO_5GCN",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Redirection procedure uses rejection of SERVICE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_EMM_CAUSE_31",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Reject message contains EMM cause #31 for redirection",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_EMM_CAUSE_31",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Reject message contains EMM cause #31 for redirection",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_EMM_CAUSE_31",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Reject message contains EMM cause #31 for redirection",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_REDIRECTION_EPC_TO_5GCN",
+      "target": "COND_UE_CAPABILITIES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Redirection procedure considers UE capabilities and CIoT network behavior",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_EMM_CAUSE_31",
+      "target": "PROP_DISABLE_EUTRA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of EMM cause #31 triggers UE to disable E-UTRA capability",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_EMM_CAUSE_31",
+      "target": "PROP_ENABLE_N1_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of EMM cause #31 triggers UE to enable N1 mode capability",
+      "provenance": [
+        "TS 24.301, Clause 5.3.19.2"
+      ]
+    }
+  ]
+}

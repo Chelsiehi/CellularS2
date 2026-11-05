@@ -1,0 +1,260 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "MEASUREMENT_REPORTING_PROCEDURE",
+      "name": "Measurement Reporting Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to report measurement results based on configured measurement configurations and trigger conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "VARMEASCONFIG",
+      "name": "VarMeasConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration container for measurement parameters including measIdList, reportConfig, and measObject configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "VARMEASREPORTLIST",
+      "name": "VarMeasReportList",
+      "entity_type": "Information Element",
+      "description": "List containing measurement reporting entries including cellsTriggeredList, numberOfReportsSent, and other reporting state information.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REPORTCONFIG",
+      "name": "reportConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration defining reporting criteria including reportType, event triggers, periodical settings, and measurement parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "MEASOBJECT",
+      "name": "measObject",
+      "entity_type": "Information Element",
+      "description": "Object defining the measurement target including frequency, cell parameters, and technology-specific configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer used in measurement reporting when useT312 is set to true and T310 is running for the corresponding SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "Timer T321",
+      "entity_type": "Timer",
+      "description": "Timer used for reportCGI measurements, stopped when SIB1 is acquired or cell is detected as not transmitting SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "Timer T322",
+      "entity_type": "Timer",
+      "description": "Timer used for SFTD measurements, stopped when quantity to be reported becomes available for each requested pair of PCell and NR cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "Periodical Reporting Timer",
+      "entity_type": "Timer",
+      "description": "Timer for periodic measurement reporting, stopped when cellsTriggeredList becomes empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "EVENT_ENTRY_CONDITION",
+      "name": "Event Entry Condition",
+      "entity_type": "Condition",
+      "description": "Condition that triggers measurement reporting when fulfilled for applicable cells, L2 U2N Relay UEs, or transmission resource pools.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "EVENT_LEAVING_CONDITION",
+      "name": "Event Leaving Condition",
+      "entity_type": "Condition",
+      "description": "Condition that removes cells from triggered list when fulfilled, potentially triggering reportOnLeave reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_ACTIVATED",
+      "name": "AS Security Activated",
+      "entity_type": "Condition",
+      "description": "Precondition that must be satisfied before UE performs measurement reporting procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "VARMEASCONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Measurement reporting procedure uses configuration from VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "VARMEASREPORTLIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure maintains and updates state in VarMeasReportList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "AS_SECURITY_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution requires AS security to be activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EVENT_ENTRY_CONDITION",
+      "target": "MEASUREMENT_REPORTING_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fulfillment of event entry condition triggers measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EVENT_LEAVING_CONDITION",
+      "target": "MEASUREMENT_REPORTING_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fulfillment of event leaving condition may trigger measurement reporting procedure when reportOnLeave is true.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "TIMER_T312",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T312 when useT312 is true and conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "TIMER_T321",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T321 when SIB1 is acquired or cell is detected as not transmitting SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "TIMER_T322",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T322 when quantity to be reported becomes available for each requested pair of PCell and NR cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MEASUREMENT_REPORTING_PROCEDURE",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops periodical reporting timer when cellsTriggeredList becomes empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "REPORTCONFIG",
+      "target": "EVENT_ENTRY_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "reportConfig defines the event entry conditions for measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "REPORTCONFIG",
+      "target": "EVENT_LEAVING_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "reportConfig defines the event leaving conditions for measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "VARMEASCONFIG",
+      "target": "REPORTCONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfig contains reportConfig configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "VARMEASCONFIG",
+      "target": "MEASOBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfig contains measObject configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.1"
+      ]
+    }
+  ]
+}

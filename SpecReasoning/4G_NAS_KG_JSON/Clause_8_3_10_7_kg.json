@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.10.7",
+  "title": "Header compression configuration",
+  "entities": [
+    {
+      "id": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "name": "Header compression configuration",
+      "entity_type": "Information Element",
+      "description": "Information element used to negotiate or re-negotiate header compression configuration associated with an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "CONDITION_A",
+      "name": "UE wishes to re-negotiate header compression with CIoT EPS optimization support",
+      "entity_type": "Condition",
+      "description": "Condition where UE wishes to re-negotiate header compression configuration and both UE and network support Control plane CIoT EPS optimization and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "CONDITION_B",
+      "name": "Inter-system change from N1 to S1 mode with CIoT EPS optimization",
+      "entity_type": "Condition",
+      "description": "Condition for negotiating header compression after inter-system change from N1 mode to S1 mode when both UE and network support control plane CIoT EPS optimization and header compression, with UE in single-registration mode and interworking without N26 interface not supported.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_CIOT_EPS_OPTIMIZATION",
+      "name": "Control plane CIoT EPS optimization and header compression support",
+      "entity_type": "Property",
+      "description": "Property indicating both UE and network support Control plane CIoT EPS optimization and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_SINGLE_REGISTRATION",
+      "name": "Single-registration mode operation",
+      "entity_type": "Property",
+      "description": "Property indicating UE is operating in single-registration mode.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_INTERWORKING_INDICATOR",
+      "name": "Interworking without N26 interface not supported",
+      "entity_type": "Property",
+      "description": "Property where UE has received interworking without N26 interface indicator set to 'interworking without N26 interface not supported' from the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "CONDITION_A",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Header compression configuration IE is included if condition A is met.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "CONDITION_B",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Header compression configuration IE is included if condition B is met.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_A",
+      "target": "PROPERTY_CIOT_EPS_OPTIMIZATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A requires both UE and network to support Control plane CIoT EPS optimization and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_B",
+      "target": "PROPERTY_CIOT_EPS_OPTIMIZATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition B requires both UE and network to support Control plane CIoT EPS optimization and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_B",
+      "target": "PROPERTY_SINGLE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition B requires UE to be operating in single-registration mode.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_B",
+      "target": "PROPERTY_INTERWORKING_INDICATOR",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition B requires UE to have received interworking without N26 interface indicator set to 'interworking without N26 interface not supported'.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.10.7"
+      ]
+    }
+  ]
+}

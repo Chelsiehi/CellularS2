@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.19.34",
+  "title": "NSAG information",
+  "entities": [
+    {
+      "id": "IE_NSAG_INFO",
+      "name": "NSAG information",
+      "entity_type": "Information Element",
+      "description": "Information element that provides NSAG (Network Slice Assistance Information Group) information to the UE when included by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the UE's 5GMM capabilities, including support for NSAG.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate registration procedure with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "COND_NSAG_SUPPORTED",
+      "name": "NSAG supported condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has set the NSAG bit to 'NSAG supported' in the 5GMM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "PROP_NSAG_BIT_SET",
+      "name": "NSAG bit set to supported",
+      "entity_type": "Property",
+      "description": "Property indicating the UE has configured the NSAG capability bit to indicate support.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the 5GMM capability information element.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_5GMM_CAPABILITY",
+      "target": "PROP_NSAG_BIT_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The 5GMM capability IE guards the NSAG supported condition through the NSAG bit setting.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NSAG_SUPPORTED",
+      "target": "IE_NSAG_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When the NSAG supported condition is met, the network may include the NSAG information IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.34"
+      ]
+    }
+  ]
+}

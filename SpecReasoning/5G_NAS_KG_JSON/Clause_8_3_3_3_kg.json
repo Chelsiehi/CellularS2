@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.3.3",
+  "title": "Allowed SSC mode",
+  "entities": [
+    {
+      "id": "IE_ALLOWED_SSC_MODE",
+      "name": "Allowed SSC mode",
+      "entity_type": "Information Element",
+      "description": "Information element included when the network rejects a PDU SESSION ESTABLISHMENT REQUEST with cause #68 'not supported SSC mode'.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request establishment of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.3"
+      ]
+    },
+    {
+      "id": "COND_CAUSE_68",
+      "name": "Cause #68 - not supported SSC mode",
+      "entity_type": "Condition",
+      "description": "Condition where the network rejects the PDU session establishment due to unsupported SSC mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_CAUSE_68",
+      "target": "IE_ALLOWED_SSC_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition of cause #68 triggers the inclusion of the Allowed SSC mode IE in the rejection.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "COND_CAUSE_68",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDU SESSION ESTABLISHMENT REQUEST message can be rejected with cause #68 when the SSC mode is not supported.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.3"
+      ]
+    }
+  ]
+}

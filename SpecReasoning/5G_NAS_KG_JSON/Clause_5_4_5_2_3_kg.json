@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.2.3",
+  "title": "UE-initiated NAS transport of messages accepted by the network",
+  "entities": [
+    {
+      "id": "UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message sent by UE to AMF containing payload container with various types of information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_TYPE_IE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload contained in the UL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ROUTING_CONTEXT",
+      "name": "PDU session routing context",
+      "entity_type": "Property",
+      "description": "Context stored by AMF containing routing information for PDU sessions including SMF ID, session type, and session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID_IE",
+      "name": "PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element identifying the PDU session in NAS transport messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REQUEST_TYPE_IE",
+      "name": "Request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of PDU session request (initial request, existing PDU session, emergency request, etc.).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "S_NSSAI_IE",
+      "name": "S-NSSAI IE",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information element used for network slice selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "DNN_IE",
+      "name": "DNN IE",
+      "entity_type": "Information Element",
+      "description": "Data Network Name information element identifying the data network for PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "OLD_PDU_SESSION_ID_IE",
+      "name": "Old PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the previous PDU session identifier during session reallocation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "ADDITIONAL_INFORMATION_IE",
+      "name": "Additional information IE",
+      "entity_type": "Information Element",
+      "description": "Optional information element providing supplementary routing or context information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "RELEASE_ASSISTANCE_INDICATION_IE",
+      "name": "Release assistance indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE's expectation about subsequent data transmission patterns.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "SMF_SELECTION_PROCEDURE",
+      "name": "SMF selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by AMF to select appropriate SMF based on PDU session parameters, subscription data, and network policies.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "N1_SM_INFORMATION_HANDLING",
+      "name": "N1 SM information handling",
+      "entity_type": "Procedure",
+      "description": "Procedure for handling N1 session management information in UL NAS TRANSPORT messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "PAYLOAD_CONTAINER_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Payload container type IE that determines how the payload is processed.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "PDU_SESSION_ID_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains PDU session ID IE for session identification.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "REQUEST_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message may contain Request type IE indicating the type of PDU session request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "N1_SM_INFORMATION_HANDLING",
+      "target": "PDU_SESSION_ROUTING_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "N1 SM information handling procedure establishes or updates PDU session routing context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "N1_SM_INFORMATION_HANDLING",
+      "target": "SMF_SELECTION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "N1 SM information handling procedure includes SMF selection as a key step when no routing context exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SMF_SELECTION_PROCEDURE",
+      "target": "S_NSSAI_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMF selection procedure uses S-NSSAI IE values and allowed NSSAI to determine appropriate SMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SMF_SELECTION_PROCEDURE",
+      "target": "DNN_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMF selection procedure uses DNN IE values and subscription data to determine appropriate SMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REQUEST_TYPE_IE",
+      "target": "N1_SM_INFORMATION_HANDLING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Request type IE values determine the specific handling procedure for N1 SM information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PAYLOAD_CONTAINER_TYPE_IE",
+      "target": "N1_SM_INFORMATION_HANDLING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container type IE set to 'N1 SM information' triggers N1 SM information handling procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "OLD_PDU_SESSION_ID_IE",
+      "target": "N1_SM_INFORMATION_HANDLING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of Old PDU session ID IE modifies the N1 SM information handling procedure for session reallocation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.3"
+      ]
+    }
+  ]
+}

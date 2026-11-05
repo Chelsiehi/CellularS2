@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.5",
+  "title": "UE-initiated de-registration procedure completion for 5GS services over both 3GPP access and non-3GPP access",
+  "entities": [
+    {
+      "id": "PROC_UE_DEREG_BOTH_ACCESS",
+      "name": "UE-initiated de-registration procedure completion for both 3GPP and non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when UE requests de-registration for both 3GPP and non-3GPP access types while registered in the same PLMN over both accesses.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type for de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "COND_BOTH_ACCESS_SAME_PLMN",
+      "name": "UE registered in same PLMN over both accesses",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registered in the same PLMN over both 3GPP and non-3GPP access types.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "PROC_DEREG_3GPP",
+      "name": "UE-initiated de-registration procedure completion for 3GPP access",
+      "entity_type": "Procedure",
+      "description": "De-registration procedure for 3GPP access as specified in subclause 5.5.2.2.3.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "PROC_DEREG_NON3GPP",
+      "name": "UE-initiated de-registration procedure completion for non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "De-registration procedure for non-3GPP access as specified in subclause 5.5.2.2.4.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DEREG_BOTH_ACCESS",
+      "target": "MSG_DEREG_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending DEREGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEREG_REQUEST",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains access type information element",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_DEREG_BOTH_ACCESS",
+      "target": "COND_BOTH_ACCESS_SAME_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires that UE is registered in same PLMN over both accesses",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_DEREG_BOTH_ACCESS",
+      "target": "PROC_DEREG_3GPP",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure follows de-registration completion steps for 3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_DEREG_BOTH_ACCESS",
+      "target": "PROC_DEREG_NON3GPP",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure follows de-registration completion steps for non-3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.5"
+      ]
+    }
+  ]
+}

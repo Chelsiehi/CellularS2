@@ -1,0 +1,212 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.7.2.2",
+  "title": "Establishment cause for non-3GPP access",
+  "entities": [
+    {
+      "id": "N1_NAS_SIG_CONN_EST",
+      "name": "N1 NAS signalling connection establishment",
+      "entity_type": "Procedure",
+      "description": "Establishment of an N1 NAS signalling connection over non-3GPP access initiated by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITIES",
+      "name": "Access identities",
+      "entity_type": "Identifier",
+      "description": "Identities used by the UE to determine priority and access type for NAS signalling connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "EST_CAUSE_NON3GPP",
+      "name": "Establishment cause for non-3GPP access",
+      "entity_type": "Information Element",
+      "description": "The cause value selected by the UE for initiating N1 NAS signalling connection over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "RULE_SELECTION",
+      "name": "Rule selection for establishment cause",
+      "entity_type": "Condition",
+      "description": "Condition where if multiple rules match, the establishment cause with the lowest rule number is selected.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SESSION",
+      "name": "Emergency session access attempt",
+      "entity_type": "Condition",
+      "description": "UE is attempting access for an emergency session, including specific 5GMM procedures and PDU session establishment for emergency.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "MO_SIGNALLING",
+      "name": "MO signalling access attempt",
+      "entity_type": "Condition",
+      "description": "Access attempt is for Mobile Originated signalling, triggered by UE NAS initiated 5GMM specific procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "MO_DATA",
+      "name": "MO data access attempt",
+      "entity_type": "Condition",
+      "description": "Access attempt is for Mobile Originated data, triggered by UE NAS initiated 5GMM connection management procedures or 5GMM NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "MO_SMS",
+      "name": "MO SMS over NAS or IP access attempt",
+      "entity_type": "Condition",
+      "description": "Access attempt is for Mobile Originated SMS over NAS or SMS over IP.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "MO_MMTEL_VOICE",
+      "name": "MO MMTel voice call access attempt",
+      "entity_type": "Condition",
+      "description": "Access attempt is for Mobile Originated MMTel voice call.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "MO_MMTEL_VIDEO",
+      "name": "MO MMTel video call access attempt",
+      "entity_type": "Condition",
+      "description": "Access attempt is for Mobile Originated MMTel video call.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "N1_NAS_SIG_CONN_EST",
+      "target": "ACCESS_IDENTITIES",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE determines access identities as part of N1 NAS signalling connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "N1_NAS_SIG_CONN_EST",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE selects and provides the establishment cause for non-3GPP access to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EST_CAUSE_NON3GPP",
+      "target": "RULE_SELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Establishment cause selection is guarded by the rule that the lowest rule number is used if multiple rules match.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMERGENCY_SESSION",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency session access attempt establishes the 'emergency' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MO_SIGNALLING",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MO signalling access attempt establishes the 'mo-Signalling' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MO_DATA",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MO data access attempt establishes the 'mo-Data' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MO_SMS",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MO SMS access attempt establishes the 'mo-SMS' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MO_MMTEL_VOICE",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MO MMTel voice call access attempt establishes the 'mo-VoiceCall' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MO_MMTEL_VIDEO",
+      "target": "EST_CAUSE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MO MMTel video call access attempt establishes the 'mo-Videocall' establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.2",
+        "Table 4.7.2.2.1"
+      ]
+    }
+  ]
+}

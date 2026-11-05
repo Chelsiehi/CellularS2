@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "ESM",
+      "name": "EPS Session Management",
+      "entity_type": "Procedure",
+      "description": "The ESM sublayer supports EPS bearer context handling in the UE and MME. It comprises procedures for activation, deactivation, and modification of EPS bearer contexts, resource requests, and user data transport via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT",
+      "name": "EPS Bearer Context",
+      "entity_type": "Property",
+      "description": "Represents an EPS bearer between UE and PDN. Can be default or dedicated type. Remains activated even if underlying radio/S1 bearers are temporarily released.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "DEFAULT_EPS_BEARER_CONTEXT",
+      "name": "Default EPS Bearer Context",
+      "entity_type": "Property",
+      "description": "Activated when UE requests connection to a PDN. Remains active throughout PDN connection lifetime. First default bearer can be activated during EPS attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "DEDICATED_EPS_BEARER_CONTEXT",
+      "name": "Dedicated EPS Bearer Context",
+      "entity_type": "Property",
+      "description": "Linked to a default EPS bearer context, providing additional bearer resources. Activated by network and released when default bearer is released.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "EMM_CONTEXT_ESTABLISHED",
+      "name": "EMM Context Established",
+      "entity_type": "Condition",
+      "description": "ESM procedures generally require an established EMM context between UE and MME with secure NAS message exchange initiated.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "EPS_ATTACH_PROCEDURE",
+      "name": "EPS Attach Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the first default EPS bearer context can be activated.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "NON_IP_PDN_TYPE",
+      "name": "Non-IP PDN Type",
+      "entity_type": "Condition",
+      "description": "Network shall not initiate dedicated bearer context activation for established PDN connections of non-IP type.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM",
+      "target": "EPS_BEARER_CONTEXT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "ESM procedures handle activation, deactivation, and modification of EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "DEFAULT_EPS_BEARER_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer context can be either default or dedicated type.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "DEDICATED_EPS_BEARER_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer context can be either default or dedicated type.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ESM",
+      "target": "EMM_CONTEXT_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ESM procedures generally require established EMM context and secure NAS message exchange.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EPS_ATTACH_PROCEDURE",
+      "target": "DEFAULT_EPS_BEARER_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First default EPS bearer context can be activated during EPS attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DEDICATED_EPS_BEARER_CONTEXT",
+      "target": "DEFAULT_EPS_BEARER_CONTEXT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Dedicated EPS bearer context is always linked to a default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NON_IP_PDN_TYPE",
+      "target": "DEDICATED_EPS_BEARER_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network shall not initiate dedicated bearer context activation for non-IP PDN type connections.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.1"
+      ]
+    }
+  ]
+}

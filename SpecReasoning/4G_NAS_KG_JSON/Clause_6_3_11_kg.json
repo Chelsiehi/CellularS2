@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.11",
+  "title": "Handling of Reliable Data Service",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Initial network attachment procedure where UE can request Reliable Data Service.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "UE-requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests establishment of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PCO",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to carry Reliable Data Service request and acceptance.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to activate default bearer, containing Reliable Data Service acceptance.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "COND_CP_ONLY_INDICATOR",
+      "name": "Control plane only indicator set",
+      "entity_type": "Condition",
+      "description": "Condition where PDN connection has control plane only indicator set.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "COND_CP_CIOT_NO_UP",
+      "name": "Control plane CIoT EPS optimization without user plane move",
+      "entity_type": "Condition",
+      "description": "Condition where PDN connection uses control plane CIoT EPS optimization and MME does not move to user plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "PROP_RDS_ACCEPTED",
+      "name": "Reliable Data Service accepted",
+      "entity_type": "Property",
+      "description": "Property indicating network has accepted UE's request for Reliable Data Service usage.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "PROP_RDS_EXCLUSIVE_USE",
+      "name": "PDN connection exclusive for Reliable Data Service",
+      "entity_type": "Property",
+      "description": "Property that UE shall use PDN connection exclusively for Reliable Data Service if accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE can request Reliable Data Service in extended PCO IE during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE can request Reliable Data Service in extended PCO IE during PDN connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_CP_ONLY_INDICATOR",
+      "target": "PROP_RDS_ACCEPTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reliable Data Service may only be used when control plane only indicator is set.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CP_CIOT_NO_UP",
+      "target": "PROP_RDS_ACCEPTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reliable Data Service may only be used with control plane CIoT EPS optimization without user plane move.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network informs UE about Reliable Data Service acceptance in extended PCO IE in this message.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_RDS_ACCEPTED",
+      "target": "PROP_RDS_EXCLUSIVE_USE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If Reliable Data Service is accepted, UE shall use PDN connection exclusively for RDS.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.11"
+      ]
+    }
+  ]
+}

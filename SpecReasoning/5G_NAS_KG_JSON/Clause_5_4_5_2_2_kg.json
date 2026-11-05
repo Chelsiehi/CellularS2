@@ -1,0 +1,181 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.2.2",
+  "title": "UE-initiated NAS transport procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NAS_TRANSPORT",
+      "name": "UE-initiated NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends UL NAS TRANSPORT message to AMF in connected mode to transport various payload types including PDU session information, SMS, LPP messages, SOR transparent container, UE policy container, UE parameters update, location services, CIoT user data, Service-level-AA container, or multiple payloads.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2",
+        "Figure 5.4.5.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message sent by UE to AMF to carry various payload types.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2",
+        "Figure 5.4.5.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload being transported, with values including N1 SM information, SMS, LPP message container, SOR transparent container, UE policy container, UE parameters update transparent container, Location services message container, CIoT user data container, Service-level-AA container, or Multiple payloads.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the actual payload data being transported, with contents depending on the payload container type.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_INFO",
+      "name": "PDU session information",
+      "entity_type": "Information Element",
+      "description": "Collection of IEs including PDU session ID, old PDU session ID, S-NSSAI, mapped S-NSSAI, DNN, and request type for PDU session related transport.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_INFO",
+      "name": "Additional information IE",
+      "entity_type": "Information Element",
+      "description": "Optional IE containing routing information for location services and LPP message transport.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "IE_MA_PDU_SESSION_INFO",
+      "name": "MA PDU session information IE",
+      "entity_type": "Information Element",
+      "description": "Information element for multi-access PDU session information, included only with PDU SESSION ESTABLISHMENT REQUEST and PDU SESSION MODIFICATION REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "COND_CONNECTED_MODE",
+      "name": "Connected mode",
+      "entity_type": "Condition",
+      "description": "UE must be in connected mode to initiate NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "PROP_SMS_ACCESS_SELECTION",
+      "name": "SMS over NAS access selection",
+      "entity_type": "Property",
+      "description": "UE behavior for selecting 3GPP or non-3GPP access for SMS over NAS transmission based on UE preferences and availability.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS transport procedure involves sending UL NAS TRANSPORT message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2",
+        "Figure 5.4.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "COND_CONNECTED_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure initiation requires UE to be in connected mode",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_PAYLOAD_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Payload container type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Payload container IE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_PDU_SESSION_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message may contain PDU session information IEs",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_ADDITIONAL_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message may contain Additional information IE for routing",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_MA_PDU_SESSION_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message may contain MA PDU session information IE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "PROP_SMS_ACCESS_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes SMS access selection behavior based on UE preferences",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.2"
+      ]
+    }
+  ]
+}

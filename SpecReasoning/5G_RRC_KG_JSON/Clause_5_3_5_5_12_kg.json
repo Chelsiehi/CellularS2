@@ -1,0 +1,120 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.12",
+  "title": "Uu Relay RLC channel release",
+  "entities": [
+    {
+      "id": "PROCEDURE_UU_RELAY_RLC_CHANNEL_RELEASE",
+      "name": "Uu Relay RLC channel release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by L2 U2N Relay UE to release RLC entities and logical channels for specified Uu-Relay-RLC-ChannelID values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "IE_UU_RELAY_RLC_CHANNEL_ID",
+      "name": "Uu-Relay-RLC-ChannelID",
+      "entity_type": "Information Element",
+      "description": "Identifier for Uu relay RLC channels used to specify which channels should be released.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "IE_UU_RELAY_RLC_CHANNEL_TO_RELEASE_LIST",
+      "name": "uu-Relay-RLC-ChannelToReleaseList",
+      "entity_type": "Information Element",
+      "description": "List containing Uu-Relay-RLC-ChannelID values that should be released from the current configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "ENTITY_RLC",
+      "name": "RLC entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity that handles segmentation and reassembly of data packets.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12",
+        "TS 38.322, Clause 5.1.3"
+      ]
+    },
+    {
+      "id": "ENTITY_LOGICAL_CHANNEL",
+      "name": "Logical channel",
+      "entity_type": "Property",
+      "description": "Logical communication channel corresponding to an RLC entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "CONDITION_IN_CURRENT_CONFIG",
+      "name": "In current configuration within same cell group",
+      "entity_type": "Condition",
+      "description": "Condition that the Uu-Relay-RLC-ChannelID value must be part of the current configuration within the same cell group for release to occur.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UU_RELAY_RLC_CHANNEL_RELEASE",
+      "target": "IE_UU_RELAY_RLC_CHANNEL_TO_RELEASE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure uses the uu-Relay-RLC-ChannelToReleaseList to determine which channels to release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UU_RELAY_RLC_CHANNEL_TO_RELEASE_LIST",
+      "target": "IE_UU_RELAY_RLC_CHANNEL_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The release list contains Uu-Relay-RLC-ChannelID values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_UU_RELAY_RLC_CHANNEL_ID",
+      "target": "CONDITION_IN_CURRENT_CONFIG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Release only occurs for Uu-Relay-RLC-ChannelID values that are part of the current configuration within the same cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_UU_RELAY_RLC_CHANNEL_RELEASE",
+      "target": "ENTITY_RLC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure results in the release of RLC entities as specified in TS 38.322.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12",
+        "TS 38.322, Clause 5.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_UU_RELAY_RLC_CHANNEL_RELEASE",
+      "target": "ENTITY_LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure results in the release of corresponding logical channels.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.12"
+      ]
+    }
+  ]
+}

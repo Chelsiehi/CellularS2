@@ -1,0 +1,236 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.10.4",
+  "title": "Actions upon successful completion of a random-access procedure or on successful or unsuccessful completion of a procedure for request of on- demand system information",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that performs random-access procedures and maintains RA report information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "VarRA_Report",
+      "name": "VarRA-Report",
+      "entity_type": "Property",
+      "description": "UE variable storing random access report information including RA-Report entries and PLMN identity lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "RA_Report_Entry",
+      "name": "RA-Report Entry",
+      "entity_type": "Information Element",
+      "description": "An entry in the RA report containing PLMN identities, cell identifiers, and RA purpose information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "PLMN_IdentityList",
+      "name": "plmn-IdentityList",
+      "entity_type": "Information Element",
+      "description": "List of PLMN identities stored in VarRA-Report, used for tracking PLMNs associated with RA procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "RPLMN",
+      "name": "Registered PLMN",
+      "entity_type": "Identifier",
+      "description": "The PLMN where the UE is currently registered.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "EPLMN",
+      "name": "Equivalent PLMN",
+      "entity_type": "Identifier",
+      "description": "List of PLMNs equivalent to the RPLMN for network selection purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "CellId",
+      "name": "cellId",
+      "entity_type": "Information Element",
+      "description": "Cell identifier information including global cell identity, tracking area code, or physical cell identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "spCellId",
+      "name": "spCellId",
+      "entity_type": "Information Element",
+      "description": "Special cell identifier for PCell or PSCell depending on where RA procedure was performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "raPurpose",
+      "name": "raPurpose",
+      "entity_type": "Information Element",
+      "description": "Purpose of triggering the random-access procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "ra_InformationCommon",
+      "name": "ra-InformationCommon",
+      "entity_type": "Information Element",
+      "description": "Common RA information as specified in clause 5.7.10.5.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "Condition_PLMN_Not_In_List",
+      "name": "RPLMN not in plmn-IdentityList",
+      "entity_type": "Condition",
+      "description": "Condition where the RPLMN or selected PLMN is not included in the stored plmn-IdentityList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "Condition_RA_Entries_Less_Than_Max",
+      "name": "RA-Report entries less than maxRAReport",
+      "entity_type": "Condition",
+      "description": "Condition where number of RA-Report entries is below the maximum limit.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "Condition_PLMN_Entries_Less_Than_Max",
+      "name": "PLMN entries less than maxPLMN",
+      "entity_type": "Condition",
+      "description": "Condition where number of PLMN entries is below the maximum limit.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "VarRA_Report",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE maintains and updates VarRA-Report variable based on RA procedure outcomes.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "Condition_PLMN_Not_In_List",
+      "target": "VarRA_Report",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RPLMN is not in stored plmn-IdentityList, UE clears VarRA-Report information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "Condition_RA_Entries_Less_Than_Max",
+      "target": "RA_Report_Entry",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RA-Report entries are below maximum, UE can append new RA report entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "Condition_PLMN_Entries_Less_Than_Max",
+      "target": "PLMN_IdentityList",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PLMN entries are below maximum, UE can update plmn-IdentityList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RA_Report_Entry",
+      "target": "PLMN_IdentityList",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RA report entry contains PLMN identity list information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RA_Report_Entry",
+      "target": "CellId",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RA report entry contains cell identifier information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RA_Report_Entry",
+      "target": "spCellId",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RA report entry contains special cell identifier for PCell/PSCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RA_Report_Entry",
+      "target": "raPurpose",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RA report entry contains the purpose of the random-access procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RA_Report_Entry",
+      "target": "ra_InformationCommon",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RA report entry contains common RA information as specified in clause 5.7.10.5.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PLMN_IdentityList",
+      "target": "EPLMN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PLMN identity list may include equivalent PLMNs when available.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.10.4"
+      ]
+    }
+  ]
+}

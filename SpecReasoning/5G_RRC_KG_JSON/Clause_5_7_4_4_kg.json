@@ -1,0 +1,127 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.4.4",
+  "title": "Relaxed measurement criterion for a stationary UE",
+  "entities": [
+    {
+      "id": "RELAXED_MEASUREMENT_CRITERION",
+      "name": "Relaxed measurement criterion",
+      "entity_type": "Condition",
+      "description": "Criterion that allows a stationary UE to relax measurement reporting requirements based on signal level stability.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "SRXLEV",
+      "name": "Srxlev",
+      "entity_type": "Property",
+      "description": "Current signal level value of the PCell in dB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "SRXLEV_REF_STATIONARY_CONNECTED",
+      "name": "Srxlev_RefStationaryConnected",
+      "entity_type": "Property",
+      "description": "Reference signal level value of the PCell used for relaxed measurement evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "RRC_RECONFIGURATION_PROCEDURE",
+      "name": "RRC reconfiguration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure specified in 5.3.5.3 where rrm-MeasRelaxationReportingConfig can be included.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "RRC_RECONFIGURATION_MESSAGE",
+      "name": "RRCReconfiguration message",
+      "entity_type": "Message",
+      "description": "RRC message that may contain rrm-MeasRelaxationReportingConfig configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "RRM_MEAS_RELAXATION_REPORTING_CONFIG",
+      "name": "rrm-MeasRelaxationReportingConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration information element for measurement relaxation reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "T_SEARCH_DELTA_P_STATIONARY_CONNECTED",
+      "name": "T_SearchDeltaP-StationaryConnected",
+      "entity_type": "Timer",
+      "description": "Timer used to evaluate when relaxed measurement criterion has not been met.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRC_RECONFIGURATION_MESSAGE",
+      "target": "RRM_MEAS_RELAXATION_REPORTING_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfiguration message contains the rrm-MeasRelaxationReportingConfig IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRC_RECONFIGURATION_PROCEDURE",
+      "target": "RRC_RECONFIGURATION_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reconfiguration procedure involves sending RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RELAXED_MEASUREMENT_CRITERION",
+      "target": "SRXLEV_REF_STATIONARY_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Relaxed measurement criterion is evaluated using the reference Srxlev value.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RELAXED_MEASUREMENT_CRITERION",
+      "target": "T_SEARCH_DELTA_P_STATIONARY_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Relaxed measurement criterion evaluation considers timer T_SearchDeltaP-StationaryConnected.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RELAXED_MEASUREMENT_CRITERION",
+      "target": "SRXLEV",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Relaxed measurement criterion is evaluated by comparing current Srxlev with reference value.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.4"
+      ]
+    }
+  ]
+}

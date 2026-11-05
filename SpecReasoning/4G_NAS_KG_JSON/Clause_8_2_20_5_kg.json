@@ -1,0 +1,160 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.20.5",
+  "title": "HashMME",
+  "entities": [
+    {
+      "id": "IE_HASHMME",
+      "name": "HashMME",
+      "entity_type": "Information Element",
+      "description": "Information element included by MME when initiating SECURITY MODE COMMAND during attach or tracking area updating procedure under specific security conditions.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by MME to initiate security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attach to the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to update its tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "COND_NO_INTEGRITY_PROTECTION",
+      "name": "No integrity protection or failed integrity check",
+      "entity_type": "Condition",
+      "description": "Condition where ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message was received without integrity protection or did not pass integrity check at MME.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains HashMME information element under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_HASHMME",
+      "target": "COND_NO_INTEGRITY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of HashMME IE is guarded by the condition that ATTACH REQUEST or TRACKING AREA UPDATE REQUEST was received without integrity protection or failed integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_INTEGRITY_PROTECTION",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition applies to ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NO_INTEGRITY_PROTECTION",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition applies to TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_ATTACH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_TRACKING_AREA_UPDATE",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Tracking area updating procedure includes TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "PROC_ATTACH",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND is initiated during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND is initiated during tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.5"
+      ]
+    }
+  ]
+}

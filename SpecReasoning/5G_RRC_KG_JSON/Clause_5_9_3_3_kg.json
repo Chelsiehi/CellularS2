@@ -1,0 +1,178 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.3.3",
+  "title": "Broadcast MRB establishment",
+  "entities": [
+    {
+      "id": "BROADCAST_MRB_ESTABLISHMENT",
+      "name": "Broadcast MRB establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a broadcast Multicast Radio Bearer (MRB) in the UE, involving establishment of PDCP, RLC, and SDAP entities, configuration of physical layer, and reception of DL-SCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "MBSBROADCASTCONFIGURATION",
+      "name": "MBSBroadcastConfiguration message",
+      "entity_type": "Message",
+      "description": "Message containing configuration information for broadcast MRB establishment, including MRB-InfoBroadcast, mbs-SessionInfoList, searchSpaceMTCH, pdsch-ConfigMTCH, g-RNTI, and mtch-SchedulingInfo.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "MRB_INFO_BROADCAST",
+      "name": "MRB-InfoBroadcast",
+      "entity_type": "Information Element",
+      "description": "Information element included in MBSBroadcastConfiguration message specifying configuration for broadcast MRB establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "TMGI",
+      "name": "Temporary Mobile Group Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier used to identify the MBS broadcast service and establish corresponding SDAP entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "G_RNTI",
+      "name": "Group Radio Network Temporary Identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier used for receiving DL-SCH for the MBS broadcast service.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "PDCP_ENTITY",
+      "name": "PDCP entity",
+      "entity_type": "Property",
+      "description": "Packet Data Convergence Protocol entity established for the broadcast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "RLC_ENTITY",
+      "name": "RLC entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity established for the broadcast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "SDAP_ENTITY",
+      "name": "SDAP entity",
+      "entity_type": "Property",
+      "description": "Service Data Adaptation Protocol entity established for the broadcast MRB when no existing entity with the same TMGI exists.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "NO_SDAP_EXISTS",
+      "name": "SDAP entity with TMGI does not exist",
+      "entity_type": "Condition",
+      "description": "Condition that triggers establishment of a new SDAP entity for the broadcast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "MBSBROADCASTCONFIGURATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Broadcast MRB establishment procedure uses configuration information from MBSBroadcastConfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MBSBROADCASTCONFIGURATION",
+      "target": "MRB_INFO_BROADCAST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MBSBroadcastConfiguration message contains MRB-InfoBroadcast IE for broadcast MRB configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "PDCP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes PDCP entity for the broadcast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes RLC entity for the broadcast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "TMGI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses TMGI to identify the MBS broadcast service and inform upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "G_RNTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses g-RNTI for receiving DL-SCH for the MBS broadcast service.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NO_SDAP_EXISTS",
+      "target": "SDAP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition that no SDAP entity exists with the received TMGI triggers establishment of new SDAP entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "BROADCAST_MRB_ESTABLISHMENT",
+      "target": "NO_SDAP_EXISTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure checks condition whether SDAP entity with TMGI exists before establishing new SDAP entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.3"
+      ]
+    }
+  ]
+}

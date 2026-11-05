@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.1.10",
+  "title": "EPS network feature support",
+  "entities": [
+    {
+      "id": "IE_EPS_NETWORK_FEATURE_SUPPORT",
+      "name": "EPS network feature support",
+      "entity_type": "Information Element",
+      "description": "Information element used by the network to inform the UE about supported features. When not included, UE interprets it as all bits zero except for S1-u data transfer bit.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.10"
+      ]
+    },
+    {
+      "id": "FEATURE_S1_U_DATA_TRANSFER",
+      "name": "S1-u data transfer",
+      "entity_type": "Property",
+      "description": "Network feature indicating support for S1-u data transfer. When EPS network feature support IE is absent, UE assumes this feature is supported.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.10"
+      ]
+    },
+    {
+      "id": "CONDITION_IE_ABSENT",
+      "name": "EPS network feature support IE absent",
+      "entity_type": "Condition",
+      "description": "Condition when the EPS network feature support IE is not included in the message from network to UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_IE_ABSENT",
+      "target": "FEATURE_S1_U_DATA_TRANSFER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EPS network feature support IE is absent, UE establishes that S1-u data transfer feature is supported.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_NETWORK_FEATURE_SUPPORT",
+      "target": "FEATURE_S1_U_DATA_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS network feature support IE guards the S1-u data transfer feature support indication through its bit encoding.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.10"
+      ]
+    }
+  ]
+}

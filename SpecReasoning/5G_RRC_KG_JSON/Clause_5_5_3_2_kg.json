@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.3.2",
+  "title": "Layer 3 filtering",
+  "entities": [
+    {
+      "id": "LAYER3_FILTERING",
+      "name": "Layer 3 filtering",
+      "entity_type": "Procedure",
+      "description": "Filtering procedure applied to measurement results from physical layer before using them for evaluation of reporting criteria or measurement reporting. Uses an exponential smoothing filter formula.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "MEASUREMENT_RESULT",
+      "name": "Measurement result",
+      "entity_type": "Property",
+      "description": "Latest received measurement result from the physical layer, denoted as M_n in the filtering formula.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "FILTERED_RESULT",
+      "name": "Filtered measurement result",
+      "entity_type": "Property",
+      "description": "Updated filtered measurement result (F_n) used for evaluation of reporting criteria or measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "FILTER_COEFFICIENT",
+      "name": "filterCoefficient",
+      "entity_type": "Property",
+      "description": "Parameter k that determines the filtering characteristics, with a = 1/2^(k/4) in the filtering formula.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "FILTER_ADAPTATION",
+      "name": "Filter adaptation",
+      "entity_type": "Procedure",
+      "description": "Adaptation of the filter to preserve time characteristics at different input rates, observing that filterCoefficient k assumes a sample rate equal to X ms.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "COND_K_EQUALS_ZERO",
+      "name": "k = 0 condition",
+      "entity_type": "Condition",
+      "description": "If filterCoefficient k is set to 0, no layer 3 filtering is applicable.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "COND_LOGARITHMIC_FILTERING",
+      "name": "Logarithmic filtering condition",
+      "entity_type": "Condition",
+      "description": "Filtering is performed in the same domain as used for evaluation of reporting criteria or measurement reporting, i.e., logarithmic filtering for logarithmic measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LAYER3_FILTERING",
+      "target": "MEASUREMENT_RESULT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Layer 3 filtering procedure uses the latest measurement result from physical layer as input",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LAYER3_FILTERING",
+      "target": "FILTERED_RESULT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Layer 3 filtering procedure produces the filtered measurement result used for reporting evaluation",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LAYER3_FILTERING",
+      "target": "FILTER_COEFFICIENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Layer 3 filtering procedure uses filterCoefficient parameter to determine filtering characteristics",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "LAYER3_FILTERING",
+      "target": "FILTER_ADAPTATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Layer 3 filtering procedure includes adaptation of filter to preserve time characteristics",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_K_EQUALS_ZERO",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When k = 0, no layer 3 filtering is applicable",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_LOGARITHMIC_FILTERING",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Filtering is performed in the same domain as used for reporting criteria evaluation",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.2"
+      ]
+    }
+  ]
+}

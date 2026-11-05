@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.5",
+  "title": "Ciphering of NAS signalling messages",
+  "entities": [
+    {
+      "id": "PROC_CIPHERING_START",
+      "name": "Ciphering start procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for starting ciphering and deciphering of NAS messages after secure exchange is established for a NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message that may be partially ciphered when including ESM message container or NAS message container.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message that is always sent unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message that is always sent unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message sent unciphered by MME even after ciphering has started.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "IE_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container",
+      "entity_type": "Information Element",
+      "description": "Information element whose value part is ciphered in CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element whose value part is ciphered in CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "ALG_EEA0",
+      "name": "Null ciphering algorithm EEA0",
+      "entity_type": "Property",
+      "description": "Ciphering algorithm that may be configured when network operates without ciphering. NAS messages with security header indicating ciphering are regarded as ciphered even when EEA0 is used.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange established",
+      "entity_type": "Condition",
+      "description": "Condition indicating that secure exchange of NAS messages has been established for a NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "PROP_DISCARD_UNPROTECTED",
+      "name": "Discard unprotected messages",
+      "entity_type": "Property",
+      "description": "Behavior where receiver discards unciphered NAS messages that should have been ciphered according to specification rules.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains ESM message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains NAS message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "ALG_EEA0",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "CONTROL PLANE SERVICE REQUEST message may be partially ciphered using current ciphering algorithm.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "ALG_EEA0",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "ATTACH REQUEST message is always sent unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "ALG_EEA0",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message is always sent unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "ALG_EEA0",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message is sent unciphered by MME even after ciphering has started.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_CIPHERING_START",
+      "target": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Ciphering start procedure requires that secure exchange of NAS messages has been established.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "target": "PROP_DISCARD_UNPROTECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Once secure exchange is established, receiver discards unciphered messages that should have been ciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ALG_EEA0",
+      "target": "PROP_DISCARD_UNPROTECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Even with null ciphering algorithm EEA0, NAS messages with security header indicating ciphering are regarded as ciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.5"
+      ]
+    }
+  ]
+}

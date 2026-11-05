@@ -1,0 +1,84 @@
+{
+  "figure_id": "5.1.3.4.4.1",
+  "title": "EMM main states in the MME",
+  "type": "STATE_TRANSITION",
+  "content": {
+    "states": [
+      "EMM-DEREGISTERED-INITIATED",
+      "EMM-DEREGISTERED",
+      "EMM-REGISTERED",
+      "EMM-COMMON-PROCEDURE-INITIATED"
+    ],
+    "transitions": [
+      {
+        "from": "EMM-DEREGISTERED-INITIATED",
+        "to": "EMM-DEREGISTERED",
+        "conditions": [
+          "DETACH accepted",
+          "Lower layer failure"
+        ]
+      },
+      {
+        "from": "EMM-REGISTERED",
+        "to": "EMM-DEREGISTERED-INITIATED",
+        "conditions": [
+          "Network initiated DETACH requested"
+        ]
+      },
+      {
+        "from": "EMM-REGISTERED",
+        "to": "EMM-DEREGISTERED",
+        "conditions": [
+          "UE initiated DETACH requested",
+          "TAU rejected",
+          "implicit DETACH"
+        ]
+      },
+      {
+        "from": "EMM-DEREGISTERED",
+        "to": "EMM-REGISTERED",
+        "conditions": [
+          "ATTACH procedure successful"
+        ]
+      },
+      {
+        "from": "EMM-DEREGISTERED",
+        "to": "EMM-COMMON-PROCEDURE-INITIATED",
+        "conditions": [
+          "COMMON procedure requested"
+        ]
+      },
+      {
+        "from": "EMM-REGISTERED",
+        "to": "EMM-COMMON-PROCEDURE-INITIATED",
+        "conditions": [
+          "COMMON procedure requested"
+        ]
+      },
+      {
+        "from": "EMM-COMMON-PROCEDURE-INITIATED",
+        "to": "EMM-DEREGISTERED",
+        "conditions": [
+          "COMMON procedure failed",
+          "Lower layer failure"
+        ]
+      },
+      {
+        "from": "EMM-COMMON-PROCEDURE-INITIATED",
+        "to": "EMM-REGISTERED",
+        "conditions": [
+          "COMMON procedure successful",
+          "ATTACH procedure successful"
+        ]
+      }
+    ],
+    "entities": [],
+    "messages": [],
+    "fields": [],
+    "notes": [
+      "EMM-DEREGISTERED-INITIATED is a transient state",
+      "Transitions follow the arrow head direction strictly",
+      "This is the MME view of the EMM state machine"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.15.1",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROCEDURE_INITIATION",
+      "name": "Procedure Initiation",
+      "entity_type": "Procedure",
+      "description": "The UE initiates a procedure when certain conditions are met, specifically when the access attempt is considered as barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_BARRED",
+      "name": "Access Attempt Barred",
+      "entity_type": "Condition",
+      "description": "Condition where the UE's access attempt is considered as barred, triggering procedure initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    },
+    {
+      "id": "MESSAGE_RRCREJECT",
+      "name": "RRCReject",
+      "entity_type": "Message",
+      "description": "Message received by the UE that indicates rejection of RRC connection establishment or resume attempt.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE entity that performs the procedure initiation when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_INITIATION",
+      "target": "CONDITION_ACCESS_BARRED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure initiation requires the condition that the access attempt is considered as barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_ACCESS_BARRED",
+      "target": "MESSAGE_RRCREJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The access barred condition is guarded by the reception of RRCReject message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "PROCEDURE_INITIATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The UE initiates the procedure when triggered by the barred access condition and RRCReject reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.1"
+      ]
+    }
+  ]
+}

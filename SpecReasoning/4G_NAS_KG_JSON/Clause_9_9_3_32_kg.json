@@ -1,0 +1,201 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.32",
+  "title": "Tracking area identity",
+  "entities": [
+    {
+      "id": "IE_TAI",
+      "name": "Tracking area identity",
+      "entity_type": "Information Element",
+      "description": "Information element providing unambiguous identification of tracking areas within the 3GPP system coverage area. It is a type 3 IE with 6 octets length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "FIELD_MCC",
+      "name": "Mobile Country Code",
+      "entity_type": "Property",
+      "description": "Mobile Country Code field coded according to ITU-T Rec. E212, annex A. Contains 3 digits stored in octets 2-3.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "FIELD_MNC",
+      "name": "Mobile Network Code",
+      "entity_type": "Property",
+      "description": "Mobile Network Code field using BCD coding, consisting of 2 or 3 digits. For 2-digit MNC, bits 5-8 of octet 3 are coded as '1111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "FIELD_TAC",
+      "name": "Tracking Area Code",
+      "entity_type": "Property",
+      "description": "Tracking Area Code consisting of 2 octets where bit 8 of octet 5 is MSB and bit 1 of octet 6 is LSB. Used to mark TAI as deleted when set to specific values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_MCC",
+      "name": "Abnormal MCC condition",
+      "entity_type": "Condition",
+      "description": "Condition where MCC stored in UE contains elements not in {0,1...9}. UE transmits using full hexadecimal encoding and network treats TAI as deleted.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_MNC",
+      "name": "Abnormal MNC condition",
+      "entity_type": "Condition",
+      "description": "Condition where MNC stored in UE has digit 1/2 not in {0,1...9} or digit 3 not in {0,1...9,F}. UE transmits using full hexadecimal encoding and network treats TAI as deleted.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "COND_TAI_DELETED",
+      "name": "TAI deleted condition",
+      "entity_type": "Condition",
+      "description": "Condition where TAI is marked as deleted. All TAC bits set to one except least significant bit set to zero, or TAC containing all zeros.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "BEH_TAI_DELETED_HANDLING",
+      "name": "TAI deleted handling",
+      "entity_type": "Property",
+      "description": "Behavior where MCC and MNC take values from deleted TAI, and network treats TAI as deleted when receiving abnormal MCC/MNC values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_TAI",
+      "target": "FIELD_MCC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area identity IE contains Mobile Country Code field",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_TAI",
+      "target": "FIELD_MNC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area identity IE contains Mobile Network Code field",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_TAI",
+      "target": "FIELD_TAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area identity IE contains Tracking Area Code field",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Figure 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ABNORMAL_MCC",
+      "target": "BEH_TAI_DELETED_HANDLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal MCC condition establishes TAI deleted handling behavior",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ABNORMAL_MNC",
+      "target": "BEH_TAI_DELETED_HANDLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal MNC condition establishes TAI deleted handling behavior",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TAI_DELETED",
+      "target": "BEH_TAI_DELETED_HANDLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI deleted condition establishes TAI deleted handling behavior",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "FIELD_MCC",
+      "target": "COND_ABNORMAL_MCC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MCC field is guarded by abnormal MCC condition",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "FIELD_MNC",
+      "target": "COND_ABNORMAL_MNC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MNC field is guarded by abnormal MNC condition",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "FIELD_TAC",
+      "target": "COND_TAI_DELETED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAC field is guarded by TAI deleted condition",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.32",
+        "Table 9.9.3.32.1"
+      ]
+    }
+  ]
+}

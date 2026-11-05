@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for initial registration, mobility registration update, or periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ATTEMPT_COUNTER",
+      "name": "Registration Attempt Counter",
+      "entity_type": "Property",
+      "description": "Counter used to limit the number of subsequently rejected registration attempts. Incremented during registration rejection and reset under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_INITIATED",
+      "name": "5GMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "State where UE has initiated registration procedure but not yet completed it.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "name": "5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "Substate where UE is attempting registration while in deregistered state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_ATTEMPTING_REGISTRATION_UPDATE",
+      "name": "5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+      "entity_type": "State",
+      "description": "Substate where UE is attempting registration update while in registered state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3519",
+      "name": "Timer T3519",
+      "entity_type": "Timer",
+      "description": "Timer stopped when registration attempt counter is reset.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer whose expiration triggers reset of registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer whose start triggers reset of registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "IE_SUCI",
+      "name": "SUCI",
+      "entity_type": "Information Element",
+      "description": "Subscription Concealed Identifier, deleted when registration attempt counter is reset.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_RESTRICTION",
+      "name": "Access Restriction Condition",
+      "entity_type": "Condition",
+      "description": "Condition preventing UE from initiating registration over one access when in 5GMM-REGISTERED-INITIATED state over the other access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "CONDITION_COUNTER_RESET",
+      "name": "Counter Reset Condition",
+      "entity_type": "Condition",
+      "description": "Various conditions that trigger reset of registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "REGISTRATION_ATTEMPT_COUNTER",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure uses registration attempt counter to track failed attempts.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_ACCESS_RESTRICTION",
+      "target": "STATE_5GMM_REGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access restriction condition applies when UE is in 5GMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_COUNTER_RESET",
+      "target": "REGISTRATION_ATTEMPT_COUNTER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Counter reset conditions trigger reset of registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_COUNTER_RESET",
+      "target": "TIMER_T3519",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Counter reset condition stops timer T3519 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_COUNTER_RESET",
+      "target": "IE_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Counter reset condition causes deletion of stored SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "target": "CONDITION_COUNTER_RESET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Counter reset conditions apply when UE is in 5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_5GMM_REGISTERED_ATTEMPTING_REGISTRATION_UPDATE",
+      "target": "CONDITION_COUNTER_RESET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Counter reset conditions apply when UE is in 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3502",
+      "target": "CONDITION_COUNTER_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Expiration of timer T3502 establishes counter reset condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T3346",
+      "target": "CONDITION_COUNTER_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Start of timer T3346 establishes counter reset condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.1"
+      ]
+    }
+  ]
+}

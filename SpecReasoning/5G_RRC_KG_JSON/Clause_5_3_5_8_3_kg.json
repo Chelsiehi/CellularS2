@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.8.3",
+  "title": "T304 expiry (Reconfiguration with sync Failure) or T420 expiry (Path switch failure)",
+  "entities": [
+    {
+      "id": "T304",
+      "name": "T304 timer",
+      "entity_type": "Timer",
+      "description": "Timer that expires upon reconfiguration with sync failure or path switch failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "T420",
+      "name": "T420 timer",
+      "entity_type": "Timer",
+      "description": "Timer that expires upon path switch failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "name": "Reconfiguration with sync failure",
+      "entity_type": "Condition",
+      "description": "Condition triggered when T304 expires or path switch fails",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "CONNECTION_REESTABLISHMENT_PROCEDURE",
+      "name": "Connection re-establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated after reconfiguration with sync failure to re-establish RRC connection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "FAILURE_INFORMATION_PROCEDURE",
+      "name": "Failure information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to report handover failure information",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "SCG_FAILURE_INFORMATION_PROCEDURE",
+      "name": "SCG failure information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to report SCG reconfiguration with sync failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "DAPS_HANDOVER_FAILURE",
+      "name": "DAPS handover failure",
+      "entity_type": "Condition",
+      "description": "Condition when DAPS bearer handover fails",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "VARRLF_REPORT",
+      "name": "VarRLF-Report",
+      "entity_type": "Property",
+      "description": "Storage for handover failure information",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "SOURCE_PCELL",
+      "name": "Source PCell",
+      "entity_type": "Property",
+      "description": "The original primary cell before handover attempt",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "TARGET_PCELL",
+      "name": "Target PCell",
+      "entity_type": "Property",
+      "description": "The target primary cell for handover",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T304",
+      "target": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T304 expiry triggers reconfiguration with sync failure condition",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T420",
+      "target": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T420 expiry triggers path switch failure condition",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "CONNECTION_REESTABLISHMENT_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Reconfiguration with sync failure initiates connection re-establishment procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "FAILURE_INFORMATION_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Reconfiguration with sync failure initiates failure information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "SCG_FAILURE_INFORMATION_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Reconfiguration with sync failure initiates SCG failure information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DAPS_HANDOVER_FAILURE",
+      "target": "FAILURE_INFORMATION_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "DAPS handover failure triggers failure information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "VARRLF_REPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reconfiguration with sync failure causes storage of handover failure information in VarRLF-Report",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "SOURCE_PCELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reconfiguration with sync failure causes UE to revert back to source PCell configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RECONFIGURATION_WITH_SYNC_FAILURE",
+      "target": "TARGET_PCELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reconfiguration with sync failure causes release of target PCell resources",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.3"
+      ]
+    }
+  ]
+}

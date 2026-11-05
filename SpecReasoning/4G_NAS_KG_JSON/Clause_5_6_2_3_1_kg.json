@@ -1,0 +1,161 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_CS_FALLBACK_PAGING",
+      "name": "Paging procedure for CS fallback",
+      "entity_type": "Procedure",
+      "description": "Network-initiated paging procedure for CS fallback when UE is IMSI attached for non-EPS services. Used to notify UE about incoming mobile terminating CS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1",
+        "Figure 5.6.2.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CS_SERVICE_NOTIFICATION",
+      "name": "CS SERVICE NOTIFICATION",
+      "entity_type": "Message",
+      "description": "Message sent by network to notify UE about incoming mobile terminating CS service when NAS signalling connection exists. May include CS service related parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "MSG_EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to paging for CS fallback. Contains CSFB response information element indicating accept or reject decision.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1",
+        "Figure 5.6.2.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_CSFB_RESPONSE",
+      "name": "CSFB response information element",
+      "entity_type": "Information Element",
+      "description": "Information element in EXTENDED SERVICE REQUEST message that indicates UE's response (accept or reject) to CS fallback paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "COND_PAGING_RESTRICTION",
+      "name": "Paging restriction conditions",
+      "entity_type": "Condition",
+      "description": "Conditions where network should not initiate paging for CS fallback: when MME has stored paging restriction set to 'All paging is restricted' or 'All paging is restricted except for specified PDN connection(s)'.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM state where UE responds immediately to paging for CS fallback.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where UE may request upper layers input before responding to CS SERVICE NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "PROP_CSG_ID_LIST",
+      "name": "CSG ID list provision",
+      "entity_type": "Property",
+      "description": "Network EMM entity may provide lower layer with list of CSG IDs during paging, except when PDN connection for emergency bearer services is established.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "MSG_CS_SERVICE_NOTIFICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "CS SERVICE NOTIFICATION message is sent as part of paging procedure when NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE responds to paging with EXTENDED SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1",
+        "Figure 5.6.2.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_CSFB_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST message contains CSFB response information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "COND_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging procedure is guarded by paging restriction conditions that prevent initiation in certain cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure requires UE to be in EMM-IDLE state for immediate response.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure requires UE to be in EMM-CONNECTED state for CS SERVICE NOTIFICATION delivery.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_CS_FALLBACK_PAGING",
+      "target": "PROP_CSG_ID_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Paging procedure establishes the property of CSG ID list provision to lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.1"
+      ]
+    }
+  ]
+}

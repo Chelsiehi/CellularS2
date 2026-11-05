@@ -1,0 +1,28 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.6",
+  "title": "Authentication not accepted by the UE",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------",
+    "In the 5G authentication challenge, the UE shall check the 5G authentication challenge data (RAND, AUTN and ngKSI) received in the AUTHENTICATION REQUEST message to verify authenticity of the 5G core network",
+    "The ME shall check that ngKSI received in the AUTHENTICATION REQUEST message is not already in use. The ME shall forward the RAND and AUTN to the USIM to check",
+    "The UE may reject the core network due to an incorrect AUTN or ngKSI parameter. If the UE has to reject the 5G authentication challenge, the UE shall return AUTHENTICATION FAILURE message to the network with a cause value indicating the reason for the failure (see 3GPPTS33.501[24])",
+    "Incorrect 5G authentication challenge data contains four possible causes for authentication failure",
+    "a) MAC code failure",
+    "If the UE finds the MAC code (supplied by the core network in the AUTN parameter) to be invalid, the UE shall send an AUTHENTICATION FAILURE message to the network, with the 5GMM cause #20 \"MAC failure\". The UE shall then follow the procedure described in subclause5.4.1.3.7, item c",
+    "b) Non-5G authentication unacceptable",
+    "If the UE finds that the \"separation bit\" in the AMF field of AUTN supplied by the core network is set to 0, the UE shall send an AUTHENTICATION FAILURE message to the network, with the 5GMM cause #26 \"non-5G authentication unacceptable\" (see subclause6.1.3 in 3GPPTS33.501[24]). The UE shall then follow the procedure described in subclause5.4.1.3.7, item d",
+    "c) ngKSI already in use",
+    "If the UE detects that ngKSI received in the AUTHENTICATION REQUEST message is already in use in the UE shall send an AUTHENTICATION FAILURE message to the network, with the 5GMM cause #71 \"ngKSI already in use\". The UE shall then follow the procedure described in subclause5.4.1.3.7, item e",
+    "If the UE finds the sequence number SQN (supplied by the core network in the AUTN parameter) to be out of range, the UE shall send an AUTHENTICATION FAILURE message to the network, with the 5GMM cause #21 \"synch failure\" and a re-synchronization token AUTS provided by the USIM (see 3GPPTS33.102[23]). The UE shall then follow the procedure described in subclause5.4.1.3.7, item f",
+    "If the UE returns an AUTHENTICATION FAILURE message to the network, the UE shall delete any previously stored RAND and RES* and shall stop timer T3516, if running",
+    "If the UE has an emergency PDU session established or is establishing such a PDU session, additional UE requirements are specified in subclause5.4.1.3.7, under \"for items c, d, e and f\"",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

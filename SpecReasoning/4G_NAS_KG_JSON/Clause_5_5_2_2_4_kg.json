@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_DETACH",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated detach procedure for EPS/IMSI detach types including switch off, EPS detach, IMSI detach, and combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate detach procedure. Contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message expected from network to complete detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating detach cause: switch off, EPS detach, IMSI detach, combined EPS/IMSI detach, or re-attach required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3421",
+      "name": "T3421",
+      "entity_type": "Timer",
+      "description": "Timer used in detach procedure for retransmission of DETACH REQUEST. Stopped on procedure completion or abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_NULL",
+      "name": "EMM-NULL",
+      "entity_type": "State",
+      "description": "State entered when detach is due to disabling of EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State entered after EPS detach or combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "State entered after IMSI detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_MM_NULL",
+      "name": "MM-NULL",
+      "entity_type": "State",
+      "description": "State entered after IMSI detach or combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access barred for originating signalling",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate access barring for originating signalling, preventing detach procedure start.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure or NAS signalling connection release",
+      "entity_type": "Condition",
+      "description": "Condition where NAS signalling connection fails or is released before DETACH ACCEPT reception.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGE",
+      "name": "TAI change during detach",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects current TAI not in stored TAI list during detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DETACH",
+      "name": "Local detach",
+      "entity_type": "Property",
+      "description": "UE behavior to locally detach without network signaling, e.g., when access barred or TAI change occurs for switch off/USIM removal.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Detach procedure includes sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_DETACH",
+      "target": "TIMER_T3421",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Detach procedure starts timer T3421 for retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_DETACH",
+      "target": "TIMER_T3421",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Detach procedure resets and restarts T3421 on first four expiries.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_DETACH",
+      "target": "TIMER_T3421",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Detach procedure stops T3421 on completion or abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROC_DETACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barred condition prevents detach procedure start.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "STATE_EMM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure with detach due to disabling EPS services establishes EMM-NULL state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure with EPS detach establishes EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure with IMSI detach establishes EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_TAI_CHANGE",
+      "target": "PROP_LOCAL_DETACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change with USIM removal or switch off establishes local detach behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_TAI_CHANGE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change with USIM removal or switch off establishes EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.3.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to release a PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "T3582",
+      "name": "Timer T3582",
+      "entity_type": "Timer",
+      "description": "Timer used in UE-requested PDU session release procedure for retransmission control",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message sent by UE to request PDU session release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "5GSM message sent by network to command PDU session release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "5GSM message sent by network to modify PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Registration message sent by UE for mobility and periodic registration update",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PTI_IE",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity Information Element",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID_IE",
+      "name": "PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "PDU session identifier Information Element",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_STATUS_IE",
+      "name": "PDU session status IE",
+      "entity_type": "Information Element",
+      "description": "PDU session status Information Element included in registration request",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "ACCESS_TYPE_IE",
+      "name": "Access type IE",
+      "entity_type": "Information Element",
+      "description": "Access type Information Element indicating the access type",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "T3582_EXPIRY",
+      "name": "T3582 expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3582 expires",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "ROUTING_FAILURE",
+      "name": "Routing failure indication",
+      "entity_type": "Condition",
+      "description": "Condition when 5GSM message is not forwarded due to routing failure",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PLMN_NOT_ALLOWED",
+      "name": "PLMN not allowed at location",
+      "entity_type": "Condition",
+      "description": "Condition when PLMN is not allowed to operate at present UE location",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "LOCAL_PDU_SESSION_RELEASE",
+      "name": "Local PDU session release",
+      "entity_type": "Property",
+      "description": "UE locally releases PDU session without network interaction",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "T3582",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure starts timer T3582",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure includes sending PDU SESSION RELEASE REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3582_EXPIRY",
+      "target": "PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3582 expiry triggers retransmission of PDU SESSION RELEASE REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3582_EXPIRY",
+      "target": "T3582",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On T3582 expiry, UE resets and starts timer T3582 again",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "T3582_EXPIRY",
+      "target": "LOCAL_PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3582 expiry establishes local PDU session release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION_RELEASE_REQUEST",
+      "target": "PDU_SESSION_ID_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE REQUEST message contains PDU session ID IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ROUTING_FAILURE",
+      "target": "T3582",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Routing failure indication stops timer T3582",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ROUTING_FAILURE",
+      "target": "LOCAL_PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Routing failure establishes local PDU session release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PLMN_NOT_ALLOWED",
+      "target": "T3582",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "PLMN not allowed condition stops timer T3582",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PLMN_NOT_ALLOWED",
+      "target": "LOCAL_PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PLMN not allowed condition establishes local PDU session release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PDU_SESSION_RELEASE_COMMAND",
+      "target": "PTI_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message contains PTI IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PDU_SESSION_RELEASE_COMMAND",
+      "target": "ACCESS_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message may contain Access type IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "REGISTRATION_REQUEST",
+      "target": "PDU_SESSION_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message includes PDU session status IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.5"
+      ]
+    }
+  ]
+}

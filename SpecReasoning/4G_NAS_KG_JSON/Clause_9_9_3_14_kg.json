@@ -1,0 +1,220 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.14",
+  "title": "EPS update type",
+  "entities": [
+    {
+      "id": "IE_EPS_UPDATE_TYPE",
+      "name": "EPS update type",
+      "entity_type": "Information Element",
+      "description": "Specifies the area the updating procedure is associated with and indicates whether bearer establishment is requested.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "IEI_EPS_UPDATE_TYPE",
+      "name": "EPS update type IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for EPS update type, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "ACTIVE_FLAG",
+      "name": "Active flag",
+      "entity_type": "Property",
+      "description": "Indicates whether bearer establishment is requested (1) or not (0). Located in bit 4 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "EPS_UPDATE_TYPE_VALUE",
+      "name": "EPS update type Value",
+      "entity_type": "Property",
+      "description": "Encodes the type of update procedure: TA updating, combined TA/LA updating, combined TA/LA updating with IMSI attach, periodic updating, or unused values interpreted as TA updating.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_TA_UPDATING",
+      "name": "TA updating",
+      "entity_type": "Condition",
+      "description": "Update procedure associated with Tracking Area.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_TA_LA_UPDATING",
+      "name": "combined TA/LA updating",
+      "entity_type": "Condition",
+      "description": "Update procedure associated with both Tracking Area and Location Area.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_TA_LA_UPDATING_IMSI_ATTACH",
+      "name": "combined TA/LA updating with IMSI attach",
+      "entity_type": "Condition",
+      "description": "Update procedure for combined TA/LA updating with IMSI attach.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_PERIODIC_UPDATING",
+      "name": "periodic updating",
+      "entity_type": "Condition",
+      "description": "Update procedure for periodic registration.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_NO_BEARER_ESTABLISHMENT",
+      "name": "No bearer establishment requested",
+      "entity_type": "Condition",
+      "description": "Condition when Active flag is 0, indicating no bearer establishment is requested.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "COND_BEARER_ESTABLISHMENT_REQUESTED",
+      "name": "Bearer establishment requested",
+      "entity_type": "Condition",
+      "description": "Condition when Active flag is 1, indicating bearer establishment is requested.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EPS_UPDATE_TYPE",
+      "target": "IEI_EPS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update type IE contains the IEI identifier.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_UPDATE_TYPE",
+      "target": "ACTIVE_FLAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update type IE contains the Active flag field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_UPDATE_TYPE",
+      "target": "EPS_UPDATE_TYPE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update type IE contains the EPS update type value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Figure 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_UPDATE_TYPE_VALUE",
+      "target": "COND_TA_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS update type value field is guarded by the TA updating condition when bits 3-1 are 000.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EPS_UPDATE_TYPE_VALUE",
+      "target": "COND_COMBINED_TA_LA_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS update type value field is guarded by the combined TA/LA updating condition when bits 3-1 are 001.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EPS_UPDATE_TYPE_VALUE",
+      "target": "COND_COMBINED_TA_LA_UPDATING_IMSI_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS update type value field is guarded by the combined TA/LA updating with IMSI attach condition when bits 3-1 are 010.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_UPDATE_TYPE_VALUE",
+      "target": "COND_PERIODIC_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS update type value field is guarded by the periodic updating condition when bits 3-1 are 011.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ACTIVE_FLAG",
+      "target": "COND_NO_BEARER_ESTABLISHMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Active flag field is guarded by the no bearer establishment condition when bit 4 is 0.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ACTIVE_FLAG",
+      "target": "COND_BEARER_ESTABLISHMENT_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Active flag field is guarded by the bearer establishment requested condition when bit 4 is 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.14",
+        "Table 9.9.3.14.1"
+      ]
+    }
+  ]
+}

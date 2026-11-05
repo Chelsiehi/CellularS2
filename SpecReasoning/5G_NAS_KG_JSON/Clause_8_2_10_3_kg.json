@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.10.3",
+  "title": "Old PDU session ID",
+  "entities": [
+    {
+      "id": "IE_OLD_PDU_SESSION_ID",
+      "name": "Old PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Information element included by UE in UL NAS TRANSPORT message when transporting PDU SESSION ESTABLISHMENT REQUEST after receiving PDU SESSION MODIFICATION COMMAND with specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to transport PDU session establishment request.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST message",
+      "entity_type": "Message",
+      "description": "5GSM message transported within UL NAS TRANSPORT message for PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND message",
+      "entity_type": "Message",
+      "description": "Downlink message that triggers the UE to send PDU SESSION ESTABLISHMENT REQUEST with old PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE_39",
+      "name": "5GSM cause IE set to #39",
+      "entity_type": "Condition",
+      "description": "Condition where 5GSM cause information element is set to value #39 indicating 'reactivation requested'.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE_N1",
+      "name": "Payload container type IE set to N1 SM information",
+      "entity_type": "Condition",
+      "description": "Condition where payload container type information element is set to 'N1 SM information'.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_OLD_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Old PDU session ID IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message transports PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_OLD_PDU_SESSION_ID",
+      "target": "IE_5GSM_CAUSE_39",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Old PDU session ID IE is guarded by condition that PDU SESSION MODIFICATION COMMAND had 5GSM cause IE set to #39.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_OLD_PDU_SESSION_ID",
+      "target": "IE_PAYLOAD_CONTAINER_TYPE_N1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Old PDU session ID IE is guarded by condition that payload container type IE is set to 'N1 SM information'.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.13.5",
+  "title": "Conditional reconfiguration execution",
+  "entities": [
+    {
+      "id": "PROC_COND_RECONFIG_EXEC",
+      "name": "Conditional reconfiguration execution",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a triggered cell and applies the stored conditional RRC reconfiguration for that cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.5"
+      ]
+    },
+    {
+      "id": "IE_COND_RECONFIG",
+      "name": "condRRCReconfig",
+      "entity_type": "Information Element",
+      "description": "Stored conditional RRC reconfiguration information for a cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.5"
+      ]
+    },
+    {
+      "id": "COND_MULTIPLE_TRIGGERED_CELLS",
+      "name": "more than one triggered cell exists",
+      "entity_type": "Condition",
+      "description": "Condition where multiple cells have met the triggering conditions for conditional reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.5"
+      ]
+    },
+    {
+      "id": "PROC_SCG_ACTIVATION",
+      "name": "SCG activation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE activates the Secondary Cell Group, resumes radio link monitoring, and indicates activation to lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13a"
+      ]
+    },
+    {
+      "id": "PROC_SCG_DEACTIVATION",
+      "name": "SCG deactivation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE deactivates the Secondary Cell Group, resets SCG MAC, stops timers, and indicates deactivation to lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13b"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "T310",
+      "entity_type": "Timer",
+      "description": "Timer for radio link failure detection in a cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13b"
+      ]
+    },
+    {
+      "id": "TIMER_T312",
+      "name": "T312",
+      "entity_type": "Timer",
+      "description": "Timer for connection re-establishment procedure in a cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13b"
+      ]
+    },
+    {
+      "id": "PROC_FR2_UL_GAP_CONFIG",
+      "name": "FR2 UL gap configuration",
+      "entity_type": "Procedure",
+      "description": "Procedure for setting up or releasing FR2 uplink gap configuration based on ul-GapFR2-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13c"
+      ]
+    },
+    {
+      "id": "IE_UL_GAP_FR2_CONFIG",
+      "name": "ul-GapFR2-Config",
+      "entity_type": "Information Element",
+      "description": "Information element controlling FR2 uplink gap configuration setup or release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13c"
+      ]
+    },
+    {
+      "id": "PROC_APP_LAYER_MEAS_CONFIG",
+      "name": "Application layer measurement configuration",
+      "entity_type": "Procedure",
+      "description": "Procedure for configuring, releasing, pausing, and resuming application layer measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13d"
+      ]
+    },
+    {
+      "id": "IE_MEAS_CONFIG_APP_LAYER_ID",
+      "name": "measConfigAppLayerId",
+      "entity_type": "Information Element",
+      "description": "Identifier for application layer measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13d"
+      ]
+    },
+    {
+      "id": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "name": "MeasurementReportAppLayer",
+      "entity_type": "Message",
+      "description": "Message containing application layer measurement reports.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13d"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COND_RECONFIG_EXEC",
+      "target": "COND_MULTIPLE_TRIGGERED_CELLS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by the condition of multiple triggered cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_COND_RECONFIG_EXEC",
+      "target": "IE_COND_RECONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure applies the stored condRRCReconfig IE for the selected cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SCG_DEACTIVATION",
+      "target": "TIMER_T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG deactivation procedure stops timer T310 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13b"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SCG_DEACTIVATION",
+      "target": "TIMER_T312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG deactivation procedure stops timer T312 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13b"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_FR2_UL_GAP_CONFIG",
+      "target": "IE_UL_GAP_FR2_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "FR2 UL gap configuration procedure uses ul-GapFR2-Config IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13c"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_APP_LAYER_MEAS_CONFIG",
+      "target": "IE_MEAS_CONFIG_APP_LAYER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Application layer measurement configuration procedure uses measConfigAppLayerId IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13d"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_APP_LAYER_MEAS_CONFIG",
+      "target": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure handles MeasurementReportAppLayer messages for application layer measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13d"
+      ]
+    }
+  ]
+}

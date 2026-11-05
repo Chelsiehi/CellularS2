@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.7",
+  "title": "ATTEMPTING-TO-UPDATE-MM",
+  "entities": [
+    {
+      "id": "STATE_ATTEMPTING_TO_UPDATE_MM",
+      "name": "ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "UE state where it attempts to update mobility management, performs cell selection/reselection, and can initiate tracking area updating procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_TA_UPDATE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE indicating 'combined TA/LA updating with IMSI attach' when specific timers expire or tracking area conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "T3411",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers initiation of combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "T3402",
+      "entity_type": "Timer",
+      "description": "Timer related to congestion control; when running, restricts certain non-EPS service requests unless for emergency calls.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "T3444",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "T3445",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "CONDITION_TA_NOT_IN_LIST",
+      "name": "UE enters tracking area not in registered list and not forbidden",
+      "entity_type": "Condition",
+      "description": "Condition triggering combined tracking area updating procedure when UE moves to an unregistered and non-forbidden tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_CALL",
+      "name": "Emergency call request",
+      "entity_type": "Condition",
+      "description": "Condition allowing non-EPS service requests for emergency calls even when T3402 is running due to congestion.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "CONDITION_ECALL_ONLY_MODE",
+      "name": "eCall only mode configured",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for eCall only mode, enabling eCall inactivity procedure on timer expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed at expiry of T3444 or T3445 when UE is in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_RESPOND_TO_PAGING",
+      "name": "Respond to paging with IMSI or S-TMSI",
+      "entity_type": "Property",
+      "description": "UE behavior to respond to paging for PS domain using IMSI or S-TMSI, with optional MUSIM implementation exceptions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_NON_EPS_SERVICE_REQUEST",
+      "name": "Handle non-EPS service requests",
+      "entity_type": "Property",
+      "description": "UE behavior to use requests for non-EPS services to select GERAN/UTRAN and proceed with MM/CC procedures, unless restricted by T3402 running for congestion.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ATTEMPTING_TO_UPDATE_MM",
+      "target": "PROCEDURE_COMBINED_TA_UPDATE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-UPDATE-MM state initiates combined tracking area updating procedure under specified conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_ATTEMPTING_TO_UPDATE_MM",
+      "target": "PROPERTY_RESPOND_TO_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-UPDATE-MM state shall respond to paging with IMSI or S-TMSI for PS domain.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_ATTEMPTING_TO_UPDATE_MM",
+      "target": "PROPERTY_NON_EPS_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-UPDATE-MM state handles non-EPS service requests to select GERAN/UTRAN and proceed with MM/CC procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_TA_NOT_IN_LIST",
+      "target": "PROCEDURE_COMBINED_TA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of entering unregistered and non-forbidden tracking area guards initiation of combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3411",
+      "target": "PROCEDURE_COMBINED_TA_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3411 starts combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_T3402",
+      "target": "PROCEDURE_COMBINED_TA_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3402 starts combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_EMERGENCY_CALL",
+      "target": "PROPERTY_NON_EPS_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency call condition guards non-EPS service request behavior, allowing it even when T3402 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_ECALL_ONLY_MODE",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "eCall only mode condition guards execution of eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T3444",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3444 starts eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3445",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3445 starts eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.7"
+      ]
+    }
+  ]
+}

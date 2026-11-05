@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.2.7",
+  "title": "Sidelink reporting configuration addition/modification",
+  "entities": [
+    {
+      "id": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "name": "Sidelink Reporting Configuration Addition/Modification Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE processes sidelink reporting configuration additions and modifications based on received configuration lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_REPORT_CONFIG_ID",
+      "name": "sl-ReportConfigId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_REPORT_CONFIG_TO_ADD_MOD_LIST",
+      "name": "sl-ReportConfigToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of sidelink reporting configurations to be added or modified.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_REPORT_CONFIG_LIST",
+      "name": "sl-ReportConfigList",
+      "entity_type": "Information Element",
+      "description": "List of configured sidelink reporting configurations stored in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG_SL",
+      "name": "VarMeasConfigSL",
+      "entity_type": "Information Element",
+      "description": "Variable storing the sidelink measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID_LIST",
+      "name": "sl-MeasIdList",
+      "entity_type": "Information Element",
+      "description": "List of sidelink measurement identifiers stored in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Information Element",
+      "description": "Variable storing the sidelink measurement reporting list.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer used for periodical sidelink measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "SL_TIME_TO_TRIGGER",
+      "name": "sl-TimeToTrigger",
+      "entity_type": "Property",
+      "description": "Time to trigger parameter associated with sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "CONFIG_EXISTS_CONDITION",
+      "name": "Configuration exists condition",
+      "entity_type": "Condition",
+      "description": "Condition where an entry with matching sl-ReportConfigId exists in sl-ReportConfigList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "SL_REPORT_CONFIG_TO_ADD_MOD_LIST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure processes each sl-ReportConfigId in sl-ReportConfigToAddModList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "CONFIG_EXISTS_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure checks if configuration exists before reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "SL_REPORT_CONFIG_LIST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure adds new entry to sl-ReportConfigList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "VAR_MEAS_REPORT_LIST_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure removes measurement reporting entry from VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops the periodical reporting timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SL_REPORT_CONFIG_ADD_MOD_PROCEDURE",
+      "target": "SL_TIME_TO_TRIGGER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure resets associated information like sl-TimeToTrigger.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SL_MEAS_ID",
+      "target": "SL_REPORT_CONFIG_ID",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "sl-MeasId is associated with sl-ReportConfigId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SL_MEAS_ID_LIST",
+      "target": "SL_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-MeasIdList contains sl-MeasId entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "VAR_MEAS_CONFIG_SL",
+      "target": "SL_REPORT_CONFIG_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfigSL contains sl-ReportConfigList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "VAR_MEAS_CONFIG_SL",
+      "target": "SL_MEAS_ID_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfigSL contains sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.7"
+      ]
+    }
+  ]
+}

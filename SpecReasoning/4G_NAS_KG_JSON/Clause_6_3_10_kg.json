@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.10",
+  "title": "Handling of 3GPP PS data off",
+  "entities": [
+    {
+      "id": "PS_DATA_OFF_FEATURE",
+      "name": "3GPP PS data off",
+      "entity_type": "Property",
+      "description": "A feature allowing UE to restrict uplink data transmission except for exempt services. UE can be configured with exempt service lists for HPLMN/EHPLMN and VPLMN.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "PCO_IE",
+      "name": "Protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to carry 3GPP PS data off UE status during various procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "ATTACH_PROC",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE provides 3GPP PS data off UE status in PCO IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "PDN_CONNECT_PROC",
+      "name": "UE-requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE provides 3GPP PS data off UE status in PCO IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "BEARER_MOD_PROC",
+      "name": "UE-requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE to indicate change of 3GPP PS data off UE status for PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEFAULT_BEARER_MSG",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used by network to indicate support of 3GPP PS data off during default bearer activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "PS_DATA_OFF_STATUS",
+      "name": "3GPP PS data off UE status",
+      "entity_type": "Property",
+      "description": "UE status indicating whether 3GPP PS data off is activated or deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "EXEMPT_SERVICES_HPLMN",
+      "name": "3GPP PS data off exempt services for HPLMN/EHPLMN",
+      "entity_type": "Property",
+      "description": "List of services exempt from 3GPP PS data off restrictions when UE is in HPLMN or EHPLMN.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "EXEMPT_SERVICES_VPLMN",
+      "name": "3GPP PS data off exempt services for VPLMN",
+      "entity_type": "Property",
+      "description": "List of services exempt from 3GPP PS data off restrictions when UE is in VPLMN.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "ACTIVATED_CONDITION",
+      "name": "3GPP PS data off UE status is activated",
+      "entity_type": "Condition",
+      "description": "Condition where UE restricts uplink data transmission to exempt services only.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_PROC",
+      "target": "PCO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides 3GPP PS data off UE status in PCO IE during attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDN_CONNECT_PROC",
+      "target": "PCO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides 3GPP PS data off UE status in PCO IE during PDN connectivity procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "BEARER_MOD_PROC",
+      "target": "PCO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides 3GPP PS data off UE status in PCO IE during bearer resource modification procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACTIVATE_DEFAULT_BEARER_MSG",
+      "target": "PCO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network indicates 3GPP PS data off support in PCO IE during default bearer activation",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACTIVATED_CONDITION",
+      "target": "EXEMPT_SERVICES_HPLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When PS data off is activated, UE allows uplink packets only for exempt services in HPLMN/EHPLMN",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACTIVATED_CONDITION",
+      "target": "EXEMPT_SERVICES_VPLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When PS data off is activated, UE allows uplink packets only for exempt services in VPLMN",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PS_DATA_OFF_STATUS",
+      "target": "BEARER_MOD_PROC",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Change in 3GPP PS data off UE status triggers UE-requested bearer resource modification procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.3.10"
+      ]
+    }
+  ]
+}

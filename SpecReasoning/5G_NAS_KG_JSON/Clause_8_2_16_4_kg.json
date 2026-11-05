@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.16.4",
+  "title": "Allowed PDU session status",
+  "entities": [
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status",
+      "entity_type": "Information Element",
+      "description": "Information element indicating PDU sessions associated with non-3GPP access for which user-plane resources are allowed to be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to request establishment of services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "COND_PAGING_RESPONSE",
+      "name": "Response to paging or notification via 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition where SERVICE REQUEST is sent as response to paging or notification for PDU sessions associated with non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "COND_NO_ALLOWED_SESSIONS",
+      "name": "No PDU sessions allowed for re-establishment",
+      "entity_type": "Condition",
+      "description": "Condition where there are no PDU sessions for which UE allows user-plane resources to be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "PROP_REESTABLISH_USER_PLANE",
+      "name": "User-plane resources re-established over 3GPP access",
+      "entity_type": "Property",
+      "description": "Property indicating user-plane resources of PDU sessions associated with non-3GPP access can be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains the Allowed PDU session status IE under specified conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PAGING_RESPONSE",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Allowed PDU session status IE is guarded by the condition of responding to paging/notification for non-3GPP PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_ALLOWED_SESSIONS",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Allowed PDU session status IE is guarded by the condition of having no PDU sessions allowed for re-establishment.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "target": "PROP_REESTABLISH_USER_PLANE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Allowed PDU session status IE establishes which PDU sessions have user-plane resources allowed to be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.4"
+      ]
+    }
+  ]
+}

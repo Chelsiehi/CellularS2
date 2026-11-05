@@ -1,0 +1,238 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.15.2",
+  "title": "Reception of the RRCReject by the UE",
+  "entities": [
+    {
+      "id": "RRCReject",
+      "name": "RRCReject",
+      "entity_type": "Message",
+      "description": "RRC message sent by the network to reject connection establishment or resumption requests from the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "T300",
+      "name": "Timer T300",
+      "entity_type": "Timer",
+      "description": "Timer used during RRC connection establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "T319",
+      "name": "Timer T319",
+      "entity_type": "Timer",
+      "description": "Timer used during RRC connection procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "T319a",
+      "name": "Timer T319a",
+      "entity_type": "Timer",
+      "description": "Timer used during RRC connection procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "T302",
+      "name": "Timer T302",
+      "entity_type": "Timer",
+      "description": "Timer started with waitTime value when RRCReject contains waitTime, during which access barring is applied.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where UE maintains some connection context but is not actively communicating.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "waitTime",
+      "name": "waitTime",
+      "entity_type": "Information Element",
+      "description": "Time value provided in RRCReject message indicating how long access barring should be applied.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "RRCSetupRequest",
+      "name": "RRCSetupRequest",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE to request establishment of RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "RRCResumeRequest",
+      "name": "RRCResumeRequest",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE to request resumption of RRC connection from RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "RRCResumeRequest1",
+      "name": "RRCResumeRequest1",
+      "entity_type": "Message",
+      "description": "Alternative RRC message for connection resumption request.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "pendingRNA_Update",
+      "name": "pendingRNA-Update",
+      "entity_type": "Property",
+      "description": "Variable set to true when RNA update is pending after RRCReject reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "SDT_Radio_Bearers",
+      "name": "SDT Radio Bearers",
+      "entity_type": "Property",
+      "description": "Radio bearers configured for Small Data Transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCReject",
+      "target": "T300",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCReject stops timer T300 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCReject",
+      "target": "T319",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCReject stops timer T319 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRCReject",
+      "target": "T319a",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCReject stops timer T319a if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRCReject",
+      "target": "T302",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCReject stops timer T302 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRCReject",
+      "target": "T302",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Reception of RRCReject starts timer T302 with waitTime value if waitTime is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRCReject",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in RRC_INACTIVE state continues to monitor paging while T302 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRCReject",
+      "target": "pendingRNA_Update",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCReject in response to RNA update or SDT resume sets pendingRNA-Update to true.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RRCReject",
+      "target": "SDT_Radio_Bearers",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCReject causes suspension of SRB1 and radio bearers configured for SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RRCReject",
+      "target": "RRCSetupRequest",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCReject received in response to RRCSetupRequest triggers connection setup failure indication to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RRCReject",
+      "target": "RRCResumeRequest",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCReject received in response to RRCResumeRequest triggers connection resume failure procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RRCReject",
+      "target": "RRCResumeRequest1",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCReject received in response to RRCResumeRequest1 triggers connection resume failure procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15.2"
+      ]
+    }
+  ]
+}

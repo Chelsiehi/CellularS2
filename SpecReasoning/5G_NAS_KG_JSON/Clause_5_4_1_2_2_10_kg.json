@@ -1,0 +1,174 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.10",
+  "title": "Network sending EAP-failure message",
+  "entities": [
+    {
+      "id": "EAP_FAILURE_MESSAGE",
+      "name": "EAP-failure message",
+      "entity_type": "Message",
+      "description": "Message sent by network when EAP authentication procedures are unsuccessful, indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESULT_MESSAGE",
+      "name": "AUTHENTICATION RESULT message",
+      "entity_type": "Message",
+      "description": "NAS message used to transport EAP result messages including EAP-failure in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REJECT_MESSAGE",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message used to transport EAP-failure message when authentication fails with SUCI or when identification procedure is not initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "EAP_RESULT_MESSAGE_TRANSPORT_PROCEDURE",
+      "name": "EAP result message transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for transporting EAP result messages including EAP-failure in NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to retrieve SUCI from UE after failed authentication with 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "EAP_BASED_PRIMARY_AUTHENTICATION_PROCEDURE",
+      "name": "EAP based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication procedure using EAP method that can be restarted with retrieved SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE_EMERGENCY",
+      "name": "Registration procedure with emergency registration",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated by UE with 5GS registration type set to emergency registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "CONDITION_5G_GUTI_USED",
+      "name": "5G-GUTI used for identification",
+      "entity_type": "Condition",
+      "description": "Condition where UE used 5G-GUTI as identity in initial NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "CONDITION_SUCI_USED",
+      "name": "SUCI used for identification",
+      "entity_type": "Condition",
+      "description": "Condition where UE used SUCI as identity in initial NAS message or restarted authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_REGISTRATION",
+      "name": "Emergency registration without user identity",
+      "entity_type": "Condition",
+      "description": "Condition where UE initiates emergency registration and AMF is configured to allow it without user identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of registration procedure, including emergency registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_RESULT_MESSAGE_TRANSPORT_PROCEDURE",
+      "target": "AUTHENTICATION_RESULT_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP result message transport procedure uses AUTHENTICATION RESULT message to transport EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_RESULT_MESSAGE_TRANSPORT_PROCEDURE",
+      "target": "AUTHENTICATION_REJECT_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP result message transport procedure uses AUTHENTICATION REJECT message to transport EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_5G_GUTI_USED",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When 5G-GUTI was used and authentication fails, network initiates identification procedure to retrieve SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_SUCI_USED",
+      "target": "AUTHENTICATION_REJECT_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When SUCI was used or network decides not to initiate identification procedure, EAP-failure is transported in AUTHENTICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EMERGENCY_REGISTRATION",
+      "target": "EAP_RESULT_MESSAGE_TRANSPORT_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "During emergency registration without user identity, AMF may not follow standard EAP-failure transport procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "REGISTRATION_PROCEDURE_EMERGENCY",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure with emergency registration includes 5GS registration type IE set to emergency registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.10"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.2.4",
+  "title": "Sidelink measurement object removal",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that performs sidelink measurement object removal procedures as specified in TS 38.331.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "SL_MEAS_OBJECT_TO_REMOVE_LIST",
+      "name": "sl-MeasObjectToRemoveList",
+      "entity_type": "Information Element",
+      "description": "List containing sl-MeasObjectId values to be removed from the UE's sidelink measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "SL_MEAS_OBJECT_ID",
+      "name": "sl-MeasObjectId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement object in the UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG_SL",
+      "name": "VarMeasConfigSL",
+      "entity_type": "Property",
+      "description": "UE variable storing the sidelink measurement configuration including sl-MeasObjectList and sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement entry that links measurement objects to reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer controlling periodic measurement reporting for a specific sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "SL_TIME_TO_TRIGGER",
+      "name": "sl-TimeToTrigger",
+      "entity_type": "Property",
+      "description": "Time-to-trigger parameter associated with sidelink measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Property",
+      "description": "UE variable storing the list of active sidelink measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_MEAS_OBJECT_TO_REMOVE_LIST",
+      "target": "SL_MEAS_OBJECT_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-MeasObjectToRemoveList contains sl-MeasObjectId values to be removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "SL_MEAS_OBJECT_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE removes the entry with matching sl-MeasObjectId from sl-MeasObjectList in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "SL_MEAS_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE removes all sl-MeasId associated with the removed sl-MeasObjectId from sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_MEAS_OBJECT_ID",
+      "target": "SL_MEAS_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "sl-MeasId removal is triggered by the removal of its associated sl-MeasObjectId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "VAR_MEAS_REPORT_LIST_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE removes measurement reporting entry for removed sl-MeasId from VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops the periodical reporting timer when sl-MeasId is removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE",
+      "target": "SL_TIME_TO_TRIGGER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE resets associated information including sl-TimeToTrigger when sl-MeasId is removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.4"
+      ]
+    }
+  ]
+}

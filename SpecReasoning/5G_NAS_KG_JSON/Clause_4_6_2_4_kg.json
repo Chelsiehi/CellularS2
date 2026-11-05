@@ -1,0 +1,223 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.4",
+  "title": "Network slice-specific authentication and authorization",
+  "entities": [
+    {
+      "id": "NSSAA_PROCEDURE",
+      "name": "Network slice-specific authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication and authorization procedure performed for specific network slices (S-NSSAIs) using EAP framework after primary authentication completes.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "RE_NSSAA_PROCEDURE",
+      "name": "Network slice-specific re-authentication and re-authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Re-authentication and re-authorization procedure for network slices that can be invoked by the network at any time.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "AUTHORIZATION_REVOCATION_PROCEDURE",
+      "name": "Network slice-specific authorization revocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to revoke authorization for specific network slices.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "GENERIC_UE_CONFIG_UPDATE_PROCEDURE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by AMF to update UE configuration including allowed NSSAI and rejected NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by AMF during registration procedure containing NSSAI information.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM Capability IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE capabilities including NSSAA support.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Identifier",
+      "description": "Single Network Slice Selection Assistance Information identifying network slices.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Property",
+      "description": "Set of S-NSSAIs that are allowed for the UE after successful NSSAA.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "PENDING_NSSAI",
+      "name": "Pending NSSAI",
+      "entity_type": "Property",
+      "description": "Set of S-NSSAIs for which NSSAA procedure will be performed or is ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Property",
+      "description": "Set of S-NSSAIs for which NSSAA procedure failed or was revoked.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Property",
+      "description": "Set of S-NSSAIs requested by the UE during registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "PRIMARY_AUTH_CONDITION",
+      "name": "Primary authentication completion condition",
+      "entity_type": "Condition",
+      "description": "Condition that primary authentication and key agreement procedure must be successfully completed before NSSAA.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "PDU session release",
+      "entity_type": "Property",
+      "description": "Action to release all PDU sessions associated with S-NSSAIs for which NSSAA failed or was revoked.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GMM Capability IE indicating NSSAA support",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NSSAA_PROCEDURE",
+      "target": "PRIMARY_AUTH_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NSSAA procedure requires successful completion of primary authentication",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "PENDING_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains pending NSSAI with S-NSSAIs for which NSSAA will be performed",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains allowed NSSAI with S-NSSAIs that don't require NSSAA",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NSSAA_PROCEDURE",
+      "target": "GENERIC_UE_CONFIG_UPDATE_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "After NSSAA completion, AMF updates allowed and rejected NSSAI using generic UE configuration update procedure",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RE_NSSAA_PROCEDURE",
+      "target": "PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When NSSAA fails or authorization is revoked, AMF informs SMF to release associated PDU sessions",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AUTHORIZATION_REVOCATION_PROCEDURE",
+      "target": "GENERIC_UE_CONFIG_UPDATE_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "After authorization revocation, AMF updates allowed and rejected NSSAI using generic UE configuration update procedure",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE",
+      "target": "REQUESTED_NSSAI",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "UE includes requested NSSAI during registration procedure excluding S-NSSAIs from pending NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.4"
+      ]
+    }
+  ]
+}

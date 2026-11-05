@@ -1,0 +1,26 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.3",
+  "title": "Establishment of a 5G NAS security context during N1 mode to N1 mode handover",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "-------------------------------------------------------------------------------------",
+    "During an N1 mode to N1 mode handover, the target AMF may derive a new 5G NAS security context for which the target AMF creates a new 5G NAS security context as indicated in 3GPPTS33.501[24]",
+    "When a new 5G NAS security context is derived using the same KAMF, the target AMF includes the 8 least significant bits of the downlink NAS COUNT in the Intra N1 mode NAS transparent container IE, and indicates that a new KAMF shall not be derived (see subclause9.11.2.6). The AMF shall increment the downlink NAS COUNT by one after creating the Intra N1 mode NAS transparent container IE",
+    "When a new 5G NAS security context is created from a new KAMF, the target AMF includes the 8 least significant bits of the downlink NAS COUNT in the Intra N1 mode NAS transparent container IE and indicates that a new KAMF shall be derived (see subclause9.11.2.6). The AMF shall then set both the uplink and downlink NAS COUNT counters of this 5G NAS security context to zero. The AMF shall increment the downlink NAS COUNT by one after creating the Intra N1 mode NAS transparent container IE",
+    "The target AMF also includes the ngKSI with the same value as the ngKSI currently being used with the UE, the message authentication code, and the selected NAS algorithms in the Intra N1 mode NAS transparent container IE",
+    "When the UE receives a command to perform handover to NG-RAN including an Intra N1 mode NAS transparent container IE (see subclause9.11.2.6), the UE derives a new 5G NAS security context as described in 3GPPTS33.501[24]. When the Intra N1 mode NAS transparent container IE indicates that a new KAMF needs to be derived, the UE shall set both the downlink NAS COUNT and uplink NAS COUNT to zero after creating the new 5G NAS security context",
+    "If the received Intra N1 mode NAS transparent container IE does not have a valid NAS COUNT (see subclause4.4.3.2) or the received NAS MAC is not verified successfully (see subclause4.4.3.3) the UE shall discard the content of the received Intra N1 mode NAS transparent container IE, continue to use the current 5G NAS security context, and inform the lower layers that the received Intra N1 mode NAS transparent container is invalid",
+    "NOTE1: During N1 mode to N1 mode handover, the Intra N1 mode NAS transparent container IE (see subclause9.11.2.6) is equivalent to sending a SECURITY MODE COMMAND message to the UE in order to derive and use a new 5G NAS security context, optionally created with a new KAMF. The UE maintains the Selected EPS NAS security algorithms until the UE receives a new Selected EPS NAS security algorithms",
+    "After the new 5G NAS security context is taken into use for 3GPP access following a successful N1 mode to N1 mode handover and the UE is registered with the same PLMN over the 3GPP access and non-3GPP access",
+    "a) the UE is in 5GMM-IDLE mode over non-3GPP access, the AMF and the UE shall activate and take into use the new 5G NAS security context over the non-3GPP access as described in 3GPPTS33.501[24] after the AMF sends or the UE receives the REGISTRATION ACCEPT message respectively. If the new 5G NAS security context is created from a new KAMF, the AMF and the UE shall set the downlink NAS COUNT and uplink NAS COUNT to zero also for the non-3GPP access, otherwise the downlink NAS COUNT and uplink NAS COUNT for the non-3GPP access are not changed; or",
+    "b) the UE is in 5GMM-CONNECTED mode over non-3GPP access, in order to activate the new 5G NAS security context over the non-3GPP access that has been activated for the 3GPP access the AMF shall send the SECURITY MODE COMMAND message over the non-3GPP access as described in 3GPPTS33.501[24]. The SECURITY MODE COMMAND message shall include the same ngKSI to identify the new 5G NAS security context that was activated over the 3GPP access and shall include the horizontal derivation parameter indicating \"KAMF derivation is not required\". Otherwise, if the new 5G NAS security context is created from a new KAMF, the AMF and the UE shall set the downlink NAS COUNT and uplink NAS COUNT to zero for the non-3GPP access",
+    "NOTE2: Explicit indication \"KAMF derivation is not required\" for the non-3GPP access is to align security contexts within the UE without a subsequent derivation of a new KAMF in the non-3GPP access",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

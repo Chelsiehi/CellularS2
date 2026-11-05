@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.8",
+  "title": "Messages with semantically incorrect contents",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives messages and performs reactions according to 3GPP specifications.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network infrastructure that sends messages and follows specified procedures.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "SEMANTICALLY_INCORRECT_MESSAGE",
+      "name": "Semantically incorrect message",
+      "entity_type": "Condition",
+      "description": "A received message that contains semantically incorrect contents as defined in the specification.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "PROCEDURAL_REACTIONS",
+      "name": "Procedural reactions",
+      "entity_type": "Procedure",
+      "description": "Reactions specified in clauses 5 and 6 of TS 24.501 for handling various message scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "STATUS_MESSAGE",
+      "name": "Status message",
+      "entity_type": "Message",
+      "description": "A message returned by the UE indicating status, either 5GMM STATUS or 5GSM STATUS depending on the EPD.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "CAUSE_95",
+      "name": "Cause #95 semantically incorrect message",
+      "entity_type": "Identifier",
+      "description": "A cause value indicating that the received message was semantically incorrect.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "PROCEDURAL_REACTIONS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE performs procedural reactions when receiving a semantically incorrect message.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SEMANTICALLY_INCORRECT_MESSAGE",
+      "target": "PROCEDURAL_REACTIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Semantically incorrect message triggers procedural reactions if specified.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "STATUS_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends status message when no procedural reactions are specified for semantically incorrect message.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATUS_MESSAGE",
+      "target": "CAUSE_95",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Status message includes cause #95 indicating semantically incorrect message.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NETWORK",
+      "target": "PROCEDURAL_REACTIONS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network follows same procedure as UE but typically does not transmit status message.",
+      "provenance": [
+        "TS 24.501, Clause 7.8"
+      ]
+    }
+  ]
+}

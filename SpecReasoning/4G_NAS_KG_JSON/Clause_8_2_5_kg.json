@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.5",
+  "title": "Authentication failure",
+  "entities": [
+    {
+      "id": "PROC_AUTH_FAILURE",
+      "name": "Authentication failure procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE when authentication fails.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to indicate authentication failure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "IE_AUTH_FAIL_PARAM",
+      "name": "Authentication failure parameter",
+      "entity_type": "Information Element",
+      "description": "IE included in AUTHENTICATION FAILURE message containing failure details.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "COND_AUTH_REJECT",
+      "name": "Authentication rejected",
+      "entity_type": "Condition",
+      "description": "Condition when network authentication is rejected by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "PROP_AUTH_FAIL_HANDLING",
+      "name": "Authentication failure handling",
+      "entity_type": "Property",
+      "description": "Behavior where UE aborts the authentication procedure and may initiate new authentication.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTH_FAILURE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication failure procedure includes sending AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_AUTH_FAILURE",
+      "target": "IE_AUTH_FAIL_PARAM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION FAILURE message contains authentication failure parameter IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_AUTH_REJECT",
+      "target": "PROC_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Authentication rejected condition triggers authentication failure procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_AUTH_REJECT",
+      "target": "PROP_AUTH_FAIL_HANDLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Authentication rejected condition leads to authentication failure handling behavior.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.5"
+      ]
+    }
+  ]
+}

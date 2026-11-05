@@ -1,0 +1,245 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.20",
+  "title": "UE radio capability signalling optimisation",
+  "entities": [
+    {
+      "id": "RACS",
+      "name": "UE radio capability signalling optimisation",
+      "entity_type": "Procedure",
+      "description": "Optional feature that optimizes transmission of UE radio capability over the radio interface by using UE radio capability IDs as alternatives to full capability containers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID",
+      "entity_type": "Identifier",
+      "description": "Identifier representing a set of UE radio capabilities, which can be manufacturer-assigned or network-assigned.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "IE_RACS_BIT",
+      "name": "RACS bit",
+      "entity_type": "Information Element",
+      "description": "Bit in UE network capability IE indicating UE support for RACS, set to 'RACS supported' in ATTACH REQUEST and TRACKING AREA UPDATE REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "IE_URC_ID_AVAIL",
+      "name": "UE radio capability ID availability IE",
+      "entity_type": "Information Element",
+      "description": "Information element included in ATTACH REQUEST and TRACKING AREA UPDATE REQUEST messages to indicate availability of UE radio capability ID.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "IE_URC_UPDATE_NEEDED",
+      "name": "UE radio capability information update needed IE",
+      "entity_type": "Information Element",
+      "description": "Information element included in TRACKING AREA UPDATE REQUEST message when UE radio configuration changes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "IE_URC_ID_DELETION",
+      "name": "UE radio capability ID deletion indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element set to 'Network-assigned UE radio capability IDs deletion requested' to trigger deletion of stored network-assigned IDs.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used in attach procedure that may contain RACS-related information elements.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used in tracking area updating procedure that may contain RACS-related information elements.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "NAS message that may contain UE radio capability ID IE when requested by network during security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to retrieve UE radio capability ID from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE when radio configuration changes or when triggered by network for UE radio capability ID management.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "COND_URC_CHANGE",
+      "name": "UE radio configuration change",
+      "entity_type": "Condition",
+      "description": "Condition where UE radio configuration changes (e.g., disabling specific radio capability) triggering tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "PROP_STORE_URC_ID",
+      "name": "Store network-assigned UE radio capability ID",
+      "entity_type": "Property",
+      "description": "UE stores network-assigned UE radio capability ID, PLMN ID, and mapping to current UE radio configuration in non-volatile memory.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_URC_IDS",
+      "name": "Delete network-assigned UE radio capability IDs",
+      "entity_type": "Property",
+      "description": "UE deletes all network-assigned UE radio capability IDs stored for serving network when triggered by network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_RACS_BIT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains RACS bit in UE network capability IE to indicate RACS support.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_URC_ID_AVAIL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains UE radio capability ID availability IE when UE has applicable UE radio capability ID.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_URC_ID_AVAIL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains UE radio capability ID availability IE when UE has applicable UE radio capability ID.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_URC_UPDATE_NEEDED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains UE radio capability information update needed IE when UE radio configuration changes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE message contains UE radio capability ID IE when requested by network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_URC_CHANGE",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE radio configuration change condition triggers initiation of tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes sending SECURITY MODE COMPLETE message with UE radio capability ID.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_URC_ID_DELETION",
+      "target": "PROP_DELETE_URC_IDS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE radio capability ID deletion indication IE set to deletion requested establishes deletion of stored network-assigned IDs.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_URC_ID_AVAIL",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of UE radio capability ID availability IE in messages guards initiation of security mode control procedure by network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_DELETE_URC_IDS",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Deletion of network-assigned UE radio capability IDs establishes initiation of tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.20"
+      ]
+    }
+  ]
+}

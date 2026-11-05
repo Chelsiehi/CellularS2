@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "PDN Connectivity Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDN connectivity initiated by UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REJECT",
+      "name": "PDN CONNECTIVITY REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to reject PDN connectivity request from UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identifier included in PDN CONNECTIVITY REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for rejecting PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "Optional IE included in PDN CONNECTIVITY REJECT message to indicate back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "Optional IE indicating whether UE is allowed to re-attempt connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3482",
+      "name": "T3482",
+      "entity_type": "Timer",
+      "description": "Timer associated with PDN connectivity procedure that is stopped upon receipt of PDN CONNECTIVITY REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after receiving PDN CONNECTIVITY REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "COND_ESM_CAUSE_26",
+      "name": "ESM cause #26 insufficient resources",
+      "entity_type": "Condition",
+      "description": "Condition when ESM cause value is #26 and specific access conditions apply.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REQUEST",
+      "name": "Emergency request type",
+      "entity_type": "Condition",
+      "description": "Condition when request type is set to emergency or handover of emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message contains PTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message contains ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message may contain Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message may contain Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "TIMER_T3482",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of PDN CONNECTIVITY REJECT message stops timer T3482.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of PDN CONNECTIVITY REJECT causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ESM_CAUSE_26",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause #26 with specific access conditions prevents inclusion of Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EMERGENCY_REQUEST",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency request type prevents inclusion of Back-off timer value IE when ESM cause is #26.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.1"
+      ]
+    }
+  ]
+}

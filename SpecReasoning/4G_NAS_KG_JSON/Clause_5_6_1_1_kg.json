@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transfer EMM mode from EMM-IDLE to EMM-CONNECTED mode, establish radio and S1 bearers for user data or signalling, invoke CS fallback procedures, and handle various UE-initiated requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure, starting timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "MSG_EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used for 1xCS fallback in service request procedure, starting timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject service request, stopping timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM mode where UE is not actively connected, requiring service request to transition to EMM-CONNECTED.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM mode where UE has active NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "T3417",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends CONTROL PLANE SERVICE REQUEST or EXTENDED SERVICE REQUEST, stopped upon receiving response or AS indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "COND_EMM_IDLE_PENDING_DATA",
+      "name": "UE in EMM-IDLE mode has pending user data",
+      "entity_type": "Condition",
+      "description": "Condition triggering service request when UE in EMM-IDLE mode has uplink user data pending.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "COND_PAGING_PS",
+      "name": "Paging request with CN domain indicator PS",
+      "entity_type": "Condition",
+      "description": "Condition where UE in EMM-IDLE mode receives paging request with CN domain indicator set to PS, triggering service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "COND_CS_FALLBACK_REQUEST",
+      "name": "Mobile originating CS fallback request",
+      "entity_type": "Condition",
+      "description": "Condition where UE configured for CS fallback receives request from upper layer, triggering service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "PROP_EMM_MODE_TRANSITION",
+      "name": "EMM mode transition to EMM-CONNECTED",
+      "entity_type": "Property",
+      "description": "System behavior where service request procedure transitions UE from EMM-IDLE to EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "PROP_BEARER_ESTABLISHMENT",
+      "name": "Radio and S1 bearer establishment",
+      "entity_type": "Property",
+      "description": "System behavior where service request procedure establishes radio and S1 bearers for user data or signalling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending EXTENDED SERVICE REQUEST for 1xCS fallback.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending CONTROL PLANE SERVICE REQUEST starts timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending EXTENDED SERVICE REQUEST starts timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3417",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SERVICE REJECT stops timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in EMM-IDLE mode for certain triggers.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMM_IDLE_PENDING_DATA",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of pending user data in EMM-IDLE mode guards invocation of service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_PAGING_PS",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of paging with CN domain indicator PS guards invocation of service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_CS_FALLBACK_REQUEST",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of CS fallback request guards invocation of service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "PROP_EMM_MODE_TRANSITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request procedure establishes transition from EMM-IDLE to EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "PROP_BEARER_ESTABLISHMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request procedure establishes radio and S1 bearers for data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.1"
+      ]
+    }
+  ]
+}

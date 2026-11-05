@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_TRANSPORT_USER_DATA_CP",
+      "name": "Transport of user data via control plane procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer user data via the control plane in an encapsulated form between the UE and the MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "EMM state where the UE has an established NAS signaling connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "EMM state where the UE does not have an established NAS signaling connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message used by the UE to request establishment of a control plane service.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT message",
+      "entity_type": "Message",
+      "description": "ESM message used to transport user data via the control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "COND_UE_INITIATED_EMM_CONNECTED",
+      "name": "UE-initiated in EMM-CONNECTED mode",
+      "entity_type": "Condition",
+      "description": "Condition where the UE initiates the procedure while in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_INITIATED_EMM_CONNECTED",
+      "name": "Network-initiated in EMM-CONNECTED mode",
+      "entity_type": "Condition",
+      "description": "Condition where the network initiates the procedure while the UE is in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "COND_UE_INITIATED_EMM_IDLE",
+      "name": "UE-initiated in EMM-IDLE mode",
+      "entity_type": "Condition",
+      "description": "Condition where the UE initiates the procedure in EMM-IDLE mode by including ESM DATA TRANSPORT in CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TRANSPORT_USER_DATA_CP",
+      "target": "COND_UE_INITIATED_EMM_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure can be initiated by the UE when in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TRANSPORT_USER_DATA_CP",
+      "target": "COND_NETWORK_INITIATED_EMM_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure can be initiated by the network when the UE is in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_TRANSPORT_USER_DATA_CP",
+      "target": "COND_UE_INITIATED_EMM_IDLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure can be initiated by the UE in EMM-IDLE mode using CONTROL PLANE SERVICE REQUEST with ESM DATA TRANSPORT.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_INITIATED_EMM_IDLE",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes ESM DATA TRANSPORT message in CONTROL PLANE SERVICE REQUEST when initiating procedure in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains ESM DATA TRANSPORT message as an information element.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_UE_INITIATED_EMM_CONNECTED",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-initiated procedure in EMM-CONNECTED mode requires the UE to be in EMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NETWORK_INITIATED_EMM_CONNECTED",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network-initiated procedure requires the UE to be in EMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_UE_INITIATED_EMM_IDLE",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-initiated procedure in EMM-IDLE mode requires the UE to be in EMM-IDLE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.1"
+      ]
+    }
+  ]
+}

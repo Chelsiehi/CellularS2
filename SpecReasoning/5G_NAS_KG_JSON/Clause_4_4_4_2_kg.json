@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.4.2",
+  "title": "Integrity checking of NAS signalling messages in the UE",
+  "entities": [
+    {
+      "id": "UE_5GMM_ENTITY",
+      "name": "UE 5GMM entity",
+      "entity_type": "State",
+      "description": "The 5G Mobility Management entity in the UE responsible for processing NAS signaling messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange of NAS messages established",
+      "entity_type": "Condition",
+      "description": "Condition where the network has established secure exchange of 5GS NAS messages for the NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "IDENTITY_REQUEST_SUCI",
+      "name": "IDENTITY REQUEST (SUCI)",
+      "entity_type": "Message",
+      "description": "IDENTITY REQUEST message when the requested identification parameter is SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REJECT_EXCEPT",
+      "name": "REGISTRATION REJECT (except cause #76 or #78)",
+      "entity_type": "Message",
+      "description": "REGISTRATION REJECT message when the 5GMM cause is not #76 or #78.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_ACCEPT_NON_SWITCH_OFF",
+      "name": "DEREGISTRATION ACCEPT (non switch off)",
+      "entity_type": "Message",
+      "description": "DEREGISTRATION ACCEPT message for non switch off scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT_EXCEPT",
+      "name": "SERVICE REJECT (except cause #76 or #78)",
+      "entity_type": "Message",
+      "description": "SERVICE REJECT message when the 5GMM cause is not #76 or #78.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "SECURITY MODE COMMAND message used for security activation.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_FAILED",
+      "name": "Integrity check failed",
+      "entity_type": "Condition",
+      "description": "Condition where a NAS signalling message has not successfully passed integrity checking.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MESSAGE_DISCARD",
+      "name": "Message discard",
+      "entity_type": "Property",
+      "description": "Behavior where the NAS in the UE discards a message that fails integrity check or is not integrity protected when secure exchange is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_5GMM_ENTITY",
+      "target": "SECURE_EXCHANGE_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE 5GMM entity requires secure exchange to be established before processing most NAS signalling messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTITY_REQUEST_SUCI",
+      "target": "UE_5GMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "IDENTITY REQUEST (SUCI) can be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_REJECT_EXCEPT",
+      "target": "UE_5GMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "REGISTRATION REJECT (except cause #76 or #78) can be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DEREGISTRATION_ACCEPT_NON_SWITCH_OFF",
+      "target": "UE_5GMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "DEREGISTRATION ACCEPT (non switch off) can be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_REJECT_EXCEPT",
+      "target": "UE_5GMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SERVICE REJECT (except cause #76 or #78) can be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SECURE_EXCHANGE_ESTABLISHED",
+      "target": "INTEGRITY_CHECK_FAILED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When secure exchange is established, integrity check failure guards message processing.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "INTEGRITY_CHECK_FAILED",
+      "target": "MESSAGE_DISCARD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Integrity check failure establishes message discard behavior.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "INTEGRITY_CHECK_FAILED",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND with integrity check failure triggers special processing as specified in subclause 5.4.2.5.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.15",
+  "title": "ESM message container",
+  "entities": [
+    {
+      "id": "IE_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container",
+      "entity_type": "Information Element",
+      "description": "An information element that enables piggybacked transfer of a single ESM message within an EMM message. It is a type 6 information element and contains an ESM message coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1",
+        "Table 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "IEI_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for the ESM message container, located in octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "LENGTH_ESM_MESSAGE_CONTAINER",
+      "name": "Length of ESM message container contents",
+      "entity_type": "Property",
+      "description": "Length field spanning octets 2-4, indicating the size of the ESM message container contents.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "CONTENTS_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container contents",
+      "entity_type": "Information Element",
+      "description": "Contains the actual ESM message container contents, which can be any ESM PDU as defined in clause 8.3, with a maximum size of 65535 octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1",
+        "Table 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "ESM_MESSAGE",
+      "name": "ESM message",
+      "entity_type": "Message",
+      "description": "A single ESM message that is piggybacked within an EMM message via the ESM message container. It is coded without NAS security header as specified in clause 8.3.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Table 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "EMM_MESSAGE",
+      "name": "EMM message",
+      "entity_type": "Message",
+      "description": "An EMM message that can carry the ESM message container information element to enable piggybacked transfer of an ESM message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15"
+      ]
+    },
+    {
+      "id": "CODING_WITHOUT_SECURITY_HEADER",
+      "name": "Coding without NAS security header",
+      "entity_type": "Condition",
+      "description": "Specifies that the ESM message included in the ESM message container must be coded as per clause 8.3, without a NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_ESM_MESSAGE_CONTAINER",
+      "target": "IEI_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ESM message container information element includes the IEI identifier in octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_ESM_MESSAGE_CONTAINER",
+      "target": "LENGTH_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ESM message container information element includes a length field spanning octets 2-4.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ESM_MESSAGE_CONTAINER",
+      "target": "CONTENTS_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ESM message container information element includes the contents field which holds the ESM message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Figure 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONTENTS_ESM_MESSAGE_CONTAINER",
+      "target": "ESM_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ESM message container contents field contains a single ESM message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15",
+        "Table 9.9.3.15.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMM_MESSAGE",
+      "target": "IE_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "An EMM message can contain the ESM message container information element for piggybacked transfer.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CODING_WITHOUT_SECURITY_HEADER",
+      "target": "ESM_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that the ESM message must be coded without NAS security header applies to the ESM message contained in the ESM message container.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.15"
+      ]
+    }
+  ]
+}

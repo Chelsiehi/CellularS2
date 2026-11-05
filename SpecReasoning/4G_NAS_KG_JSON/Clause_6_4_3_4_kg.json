@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3.4",
+  "title": "EPS bearer context modification not accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_MOD_REJECT",
+      "name": "EPS bearer context modification rejection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE rejects EPS bearer context modification by sending MODIFY EPS BEARER CONTEXT REJECT message with ESM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "name": "MODIFY EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject EPS bearer context modification request from MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to request EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the EPS bearer context being modified.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Indicates reason for rejecting EPS bearer context modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template",
+      "entity_type": "Information Element",
+      "description": "Contains packet filters and TFT operations for EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "COND_SEMANTIC_TFT_ERROR",
+      "name": "Semantic error in TFT operation",
+      "entity_type": "Condition",
+      "description": "Condition where TFT operation has semantic inconsistencies.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "COND_SYNTACTIC_TFT_ERROR",
+      "name": "Syntactical error in TFT operation",
+      "entity_type": "Condition",
+      "description": "Condition where TFT operation has syntactical errors.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "COND_SEMANTIC_PF_ERROR",
+      "name": "Semantic error in packet filter",
+      "entity_type": "Condition",
+      "description": "Condition where packet filter has semantic errors.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "COND_SYNTACTIC_PF_ERROR",
+      "name": "Syntactical error in packet filter",
+      "entity_type": "Condition",
+      "description": "Condition where packet filter has syntactical errors.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "name": "BEARER CONTEXT MODIFY PENDING",
+      "entity_type": "State",
+      "description": "State where MME is waiting for response to EPS bearer context modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "State where EPS bearer context is active.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3486",
+      "name": "T3486",
+      "entity_type": "Timer",
+      "description": "Timer used during EPS bearer context modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_MOD_REJECT",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending MODIFY EPS BEARER CONTEXT REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_TFT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Request message contains TFT IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_SEMANTIC_TFT_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #41 indicates semantic error in TFT operation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_SYNTACTIC_TFT_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #42 indicates syntactical error in TFT operation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_SEMANTIC_PF_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #44 indicates semantic error in packet filter.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_SYNTACTIC_PF_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #45 indicates syntactical error in packet filter.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_EPS_BEARER_MOD_REJECT",
+      "target": "STATE_BEARER_CONTEXT_MODIFY_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure occurs when MME is in BEARER CONTEXT MODIFY PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "TIMER_T3486",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of REJECT message stops timer T3486.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of REJECT message causes transition to BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROCEDURE_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "PROCEDURE_EPS_BEARER_CONTEXT_MODIFICATION",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to modify EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "name": "BEARER RESOURCE MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to reject bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY_FOR_PACKET_FILTER",
+      "name": "EPS bearer identity for packet filter",
+      "entity_type": "Information Element",
+      "description": "IE containing EPS bearer identity used in bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "name": "Unknown EPS bearer context",
+      "entity_type": "Condition",
+      "description": "Condition where EPS bearer identity does not belong to any activated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_PDN_CONNECTION",
+      "name": "PDN connection established for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where bearer resource modification is requested for emergency PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_PROCEDURE_COLLISION",
+      "name": "Collision of UE requested bearer resource modification and EPS bearer context modification",
+      "entity_type": "Condition",
+      "description": "Condition where both UE-initiated and network-initiated bearer modification procedures occur simultaneously.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_MME_REJECTS_WITH_CAUSE_43",
+      "name": "MME rejects with ESM cause #43",
+      "entity_type": "Property",
+      "description": "MME behavior to reject request with cause #43 'invalid EPS bearer identity'.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_MME_REJECTS_WITH_CAUSE_30",
+      "name": "MME rejects with ESM cause #30",
+      "entity_type": "Property",
+      "description": "MME behavior to reject request with cause #30 'request rejected by Serving GW or PDN GW'.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_HANDLING_AS_IN_CLAUSE_6_4_3_6",
+      "name": "Handling as described in clause 6.4.3.6",
+      "entity_type": "Property",
+      "description": "Procedure collision handling follows the same rules as specified in clause 6.4.3.6.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY_FOR_PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REQUEST message contains EPS bearer identity for packet filter IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_UNKNOWN_EPS_BEARER_CONTEXT",
+      "target": "PROPERTY_MME_REJECTS_WITH_CAUSE_43",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Unknown EPS bearer context condition leads to MME rejecting with cause #43.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EMERGENCY_PDN_CONNECTION",
+      "target": "PROPERTY_MME_REJECTS_WITH_CAUSE_30",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency PDN connection condition leads to MME rejecting with cause #30.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "PROPERTY_HANDLING_AS_IN_CLAUSE_6_4_3_6",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition leads to handling as specified in clause 6.4.3.6.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_MME_REJECTS_WITH_CAUSE_43",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME rejection with cause #43 is implemented by sending BEARER RESOURCE MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_MME_REJECTS_WITH_CAUSE_30",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME rejection with cause #30 is implemented by sending BEARER RESOURCE MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.3",
+  "title": "5GMM common procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_5GMM_COMMON",
+      "name": "5GMM common procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures initiated by AMF during registration, including identification, authentication, and security procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration with the network, including mobility and periodic registration updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "PROC_AUTHENTICATION",
+      "name": "5GMM authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure part of 5GMM common procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "PROC_SECURITY_MODE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing security context, specified in subclause 5.4.2.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "IE_5GS_MOBILE_IDENTITY",
+      "name": "5GS mobile identity IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing UE identity such as 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_GUTI",
+      "name": "Additional GUTI IE",
+      "entity_type": "Information Element",
+      "description": "Information element for providing additional GUTI in registration request.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "IDENT_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identifier for 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "IDENT_PLMN",
+      "name": "PLMN identity",
+      "entity_type": "Identifier",
+      "description": "Public Land Mobile Network identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "5GMM connection state where UE has an active connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU",
+      "name": "UE has only an emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where UE is limited to emergency services only.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "COND_SHARED_NETWORK_CELL",
+      "name": "Target cell is a shared network cell",
+      "entity_type": "Condition",
+      "description": "Condition indicating the target cell is shared between multiple PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "COND_PLMN_MISMATCH",
+      "name": "PLMN identity mismatch",
+      "entity_type": "Condition",
+      "description": "Condition where PLMN in GUTI differs from selected PLMN of target cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REGISTRATION",
+      "target": "PROC_5GMM_COMMON",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes initiation of 5GMM common procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "PROC_5GMM_COMMON",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF initiates 5GMM common procedures based on information in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EMERGENCY_PDU",
+      "target": "PROC_SECURITY_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of UE having only emergency PDU session allows skipping authentication and proceeding to security mode control.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_AUTHENTICATION",
+      "target": "COND_PLMN_MISMATCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Authentication procedure initiation is guarded by PLMN identity mismatch condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_AUTHENTICATION",
+      "target": "COND_SHARED_NETWORK_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Authentication procedure initiation is guarded by target cell being a shared network cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_AUTHENTICATION",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Authentication procedure initiation requires UE to be in 5GMM-CONNECTED mode after handover or inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS mobile identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ADDITIONAL_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Additional GUTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_5GS_MOBILE_IDENTITY",
+      "target": "IDENT_5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GS mobile identity IE contains 5G-GUTI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IDENT_5G_GUTI",
+      "target": "IDENT_PLMN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5G-GUTI contains PLMN identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.3.2",
+  "title": "UE initiated transport of NAS messages",
+  "entities": [
+    {
+      "id": "PROC_UE_INIT_NAS_TRANSPORT",
+      "name": "UE initiated uplink transport of NAS messages",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the EMM entity in the UE upon request from the SMS entity to send an SMS message. The UE sends an UPLINK NAS TRANSPORT message containing the SMS message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "MSG_UPLINK_NAS_TRANSPORT",
+      "name": "UPLINK NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "NAS message sent by the UE to transport SMS messages or other NAS messages in the uplink direction.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "IE_NAS_MSG_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element that carries the actual SMS message or other NAS messages being transported.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "COND_CIOT_EPS_OPTIMIZATION",
+      "name": "UE using EPS services with control plane CIoT EPS optimization",
+      "entity_type": "Condition",
+      "description": "Condition where the UE can initiate uplink transport of NAS messages even without established PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "ENTITY_SMS",
+      "name": "SMS entity",
+      "entity_type": "Property",
+      "description": "Entity in the UE that requests the EMM entity to send SMS messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_INIT_NAS_TRANSPORT",
+      "target": "MSG_UPLINK_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the UPLINK NAS TRANSPORT message as a step.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UPLINK_NAS_TRANSPORT",
+      "target": "IE_NAS_MSG_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The UPLINK NAS TRANSPORT message contains the NAS message container IE carrying the SMS message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ENTITY_SMS",
+      "target": "PROC_UE_INIT_NAS_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The SMS entity triggers the initiation of the uplink NAS transport procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_INIT_NAS_TRANSPORT",
+      "target": "COND_CIOT_EPS_OPTIMIZATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure can be initiated under the condition of UE using control plane CIoT EPS optimization, even without PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.2"
+      ]
+    }
+  ]
+}

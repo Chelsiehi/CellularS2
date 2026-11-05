@@ -1,0 +1,115 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.28",
+  "title": "Short MAC",
+  "entities": [
+    {
+      "id": "IE_SHORT_MAC",
+      "name": "Short MAC",
+      "entity_type": "Information Element",
+      "description": "A type 3 information element with length of 3 octets that protects the integrity of a SERVICE REQUEST message by including the 2 least significant octets of the message authentication code.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28",
+        "Figure 9.9.3.28.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "The message whose integrity is protected by the Short MAC information element. The integrity protection includes octet 1 and 2 of this message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28"
+      ]
+    },
+    {
+      "id": "FIELD_SHORT_MAC_IEI",
+      "name": "Short MAC IEI",
+      "entity_type": "Identifier",
+      "description": "Short MAC information element identifier field occupying bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28",
+        "Figure 9.9.3.28.1"
+      ]
+    },
+    {
+      "id": "FIELD_SHORT_MAC_VALUE",
+      "name": "Short MAC value",
+      "entity_type": "Property",
+      "description": "Contains the 2 least significant octets of the message authentication code calculated for the SERVICE REQUEST message. Bits 4-1 of octet 1 and bits 8-1 of octet 2-3 contain this value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28",
+        "Figure 9.9.3.28.1",
+        "Table 9.9.3.28.1"
+      ]
+    },
+    {
+      "id": "ALGORITHM_INTEGRITY",
+      "name": "Integrity protection algorithm",
+      "entity_type": "Property",
+      "description": "The algorithm used to calculate the message authentication code for integrity protection of the SERVICE REQUEST message, as specified in clause 9.5.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_SHORT_MAC",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "The Short MAC information element provides integrity protection for the SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_SHORT_MAC",
+      "target": "FIELD_SHORT_MAC_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Short MAC information element contains the Short MAC IEI identifier field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28",
+        "Figure 9.9.3.28.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SHORT_MAC",
+      "target": "FIELD_SHORT_MAC_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Short MAC information element contains the Short MAC value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28",
+        "Figure 9.9.3.28.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_SHORT_MAC_VALUE",
+      "target": "ALGORITHM_INTEGRITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Short MAC value is calculated using the integrity protection algorithm specified in clause 9.5.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_SHORT_MAC",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The Short MAC information element is defined for use in the SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.28"
+      ]
+    }
+  ]
+}

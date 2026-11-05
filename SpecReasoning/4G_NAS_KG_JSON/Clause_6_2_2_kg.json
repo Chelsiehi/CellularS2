@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.2.2",
+  "title": "IP address allocation via NAS signalling",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "name": "UE requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to establish PDN connectivity, involving sending PDN CONNECTIVITY REQUEST and receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by the UE to request PDN connectivity, containing PDN type IE and Protocol Configuration Options IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by the network to activate the default EPS bearer context, containing PDN type and PDN address information.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "IE_PDN_TYPE",
+      "name": "PDN type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the requested PDN type (IPv4, IPv6, IPv4v6, non-IP, Ethernet). Set by UE in PDN CONNECTIVITY REQUEST and by network in ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Protocol Configuration Options",
+      "entity_type": "Information Element",
+      "description": "IE used by the UE to indicate the use of DHCPv4 for IPv4 address assignment in PDN CONNECTIVITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "IE_PDN_ADDRESS",
+      "name": "PDN address",
+      "entity_type": "Information Element",
+      "description": "IE containing PDN type and PDN address information, included by network in ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "COND_UE_IP_CAPABILITY",
+      "name": "UE IP capability condition",
+      "entity_type": "Condition",
+      "description": "Condition based on UE's IP stack capability (IPv4-only, IPv6-only, IPv4v6, unknown) determining PDN type IE setting in PDN CONNECTIVITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "COND_SUBSCRIPTION_LIMITATION",
+      "name": "Subscription limitation condition",
+      "entity_type": "Condition",
+      "description": "Condition where subscription limits PDN type to IPv4-only or IPv6-only, causing network to override UE's requested PDN type.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "COND_PDN_GW_CONFIGURATION",
+      "name": "PDN GW configuration condition",
+      "entity_type": "Condition",
+      "description": "Condition where PDN GW configuration dictates single IP version addressing, causing network to override UE's requested PDN type.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "COND_SINGLE_ADDRESS_BEARERS",
+      "name": "Single address bearers condition",
+      "entity_type": "Condition",
+      "description": "Condition where operator uses single addressing per bearer, causing network to override PDN type and set ESM cause #52.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "PROP_NETWORK_OVERRIDE_PDN_TYPE",
+      "name": "Network overrides PDN type",
+      "entity_type": "Property",
+      "description": "Network behavior to override UE's requested PDN type based on subscription, PDN GW configuration, or single address bearer policy.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "PROP_UE_RESTRICTION_ON_RECONNECTION",
+      "name": "UE restriction on reconnection",
+      "entity_type": "Property",
+      "description": "UE shall not initiate another PDN connectivity procedure to same APN for different PDN type until PLMN change, switch off, or USIM removal.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE requested PDN connectivity procedure includes sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE requested PDN connectivity procedure includes receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_PDN_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains PDN type IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains Protocol Configuration Options IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PDN_ADDRESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message contains PDN address IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_PDN_TYPE",
+      "target": "COND_UE_IP_CAPABILITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDN type IE setting is guarded by UE IP capability condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SUBSCRIPTION_LIMITATION",
+      "target": "PROP_NETWORK_OVERRIDE_PDN_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Subscription limitation condition establishes network override of PDN type.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_PDN_GW_CONFIGURATION",
+      "target": "PROP_NETWORK_OVERRIDE_PDN_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDN GW configuration condition establishes network override of PDN type.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_SINGLE_ADDRESS_BEARERS",
+      "target": "PROP_NETWORK_OVERRIDE_PDN_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Single address bearers condition establishes network override of PDN type.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_NETWORK_OVERRIDE_PDN_TYPE",
+      "target": "PROP_UE_RESTRICTION_ON_RECONNECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network override of PDN type establishes UE restriction on reconnection to same APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.9A",
+  "title": "Handling of congestion control for transport of user data via the control plane",
+  "entities": [
+    {
+      "id": "CONGESTION_CONTROL_ACTIVE",
+      "name": "Congestion control for transport of user data via control plane active",
+      "entity_type": "Condition",
+      "description": "Network-activated congestion control state for user data transport via control plane as specified in 3GPP TS 23.401.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Control plane data back-off timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer started by UE with value provided by network in ATTACH ACCEPT, TRACKING AREA UPDATE ACCEPT, SERVICE ACCEPT or SERVICE REJECT messages to defer user data transport via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "UE_SUPPORT_CP_DATA_BACKOFF",
+      "name": "UE support for control plane data back-off timer",
+      "entity_type": "Condition",
+      "description": "UE capability indication for supporting control plane data back-off timer functionality.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Network to UE message that may contain T3448 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "MSG_TAU_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Network to UE message that may contain or omit T3448 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_ACCEPT",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "Network to UE message that may contain or omit T3448 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Network to UE message that may contain T3448 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "IE_T3448_VALUE",
+      "name": "T3448 value IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying the control plane data back-off timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state where UE restrictions apply for user data transport via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management deregistered state that stops T3448 timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "PROCEDURE_USER_DATA_CP_TRANSPORT",
+      "name": "Transport of user data via the control plane",
+      "entity_type": "Procedure",
+      "description": "Procedure for transporting user data via control plane that is restricted when T3448 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "CONDITION_EXCEPTION_DATA_ALLOWED",
+      "name": "Exception data reporting allowed",
+      "entity_type": "Condition",
+      "description": "Condition where UE is allowed to send user data via control plane even when T3448 is running, for exceptional events.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONGESTION_CONTROL_ACTIVE",
+      "target": "MSG_ATTACH_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When congestion control is active, network includes T3448 value in ATTACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains T3448 value IE when congestion control is active.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message without T3448 value IE stops T3448 timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SERVICE ACCEPT message without T3448 value IE stops T3448 timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_IDLE",
+      "target": "PROCEDURE_USER_DATA_CP_TRANSPORT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in EMM-IDLE mode shall not initiate user data transport via control plane when T3448 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_EXCEPTION_DATA_ALLOWED",
+      "target": "PROCEDURE_USER_DATA_CP_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Exception data reporting allowed condition permits user data transport via control plane even when T3448 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_EMM_DEREGISTERED",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Entering EMM-DEREGISTERED state stops T3448 timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9A"
+      ]
+    }
+  ]
+}

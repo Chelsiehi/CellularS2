@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.2.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3591",
+      "name": "Timer T3591",
+      "entity_type": "Timer",
+      "description": "Timer used during network-requested PDU session modification procedure. On expiry, SMF resends PDU SESSION MODIFICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to modify PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to UE during network-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_ACTIVE",
+      "name": "PDU SESSION ACTIVE",
+      "entity_type": "State",
+      "description": "State entered by SMF when PDU session modification procedure is aborted.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_MODIFICATION_PENDING",
+      "name": "PDU SESSION MODIFICATION PENDING",
+      "entity_type": "State",
+      "description": "State during which network ignores received PDU SESSION MODIFICATION REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to release PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQ_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "PROC_USER_PLANE_REESTABLISHMENT",
+      "name": "Re-establishment of user-plane resources",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-establish user-plane resources for PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_COMPLETED",
+      "name": "Handover completed successfully",
+      "entity_type": "Condition",
+      "description": "Condition when handover is completed successfully, allowing SMF to re-initiate PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "target": "TIMER_T3591",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network-requested PDU session modification procedure starts timer T3591.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "target": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure includes sending PDU SESSION MODIFICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3591",
+      "target": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On T3591 expiry, SMF resends PDU SESSION MODIFICATION COMMAND and resets timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3591",
+      "target": "STATE_PDU_SESSION_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "On fifth T3591 expiry, SMF aborts procedure and enters PDU SESSION ACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "PROC_UE_REQ_PDU_SESSION_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of PDU SESSION RELEASE REQUEST triggers UE-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of PDU SESSION RELEASE REQUEST during network-requested modification procedure causes abortion of modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_PDU_SESSION_MODIFICATION_PENDING",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In PDU SESSION MODIFICATION PENDING state, network ignores received PDU SESSION MODIFICATION REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of PDU SESSION ESTABLISHMENT REQUEST during network-requested modification procedure causes abortion of modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_USER_PLANE_REESTABLISHMENT",
+      "target": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Indication to re-establish user-plane resources causes abortion of network-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_HANDOVER_COMPLETED",
+      "target": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When handover is completed successfully, SMF may re-initiate network-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.5"
+      ]
+    }
+  ]
+}

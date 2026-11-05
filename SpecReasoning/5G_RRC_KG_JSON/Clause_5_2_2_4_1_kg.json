@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.1",
+  "title": "Actions upon reception of the MIB",
+  "entities": [
+    {
+      "id": "MIB",
+      "name": "Master Information Block",
+      "entity_type": "Information Element",
+      "description": "System information block containing essential cell parameters including cellBarred indication and ssb-SubcarrierOffset.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "System information block containing cell access parameters and scheduling information for other SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is not connected to the network but can perform cell selection/reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where UE maintains connection context but is not actively communicating.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED_T311_RUNNING",
+      "name": "RRC_CONNECTED with T311 running",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in RRC_CONNECTED state while timer T311 is active.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "CELL_BARRED_CONDITION",
+      "name": "cellBarred set to barred",
+      "entity_type": "Condition",
+      "description": "Condition where the cellBarred field in MIB indicates the cell is barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REDCAP_UE_CONDITION",
+      "name": "UE is a RedCap UE",
+      "entity_type": "Condition",
+      "description": "Condition identifying the UE as a Reduced Capability device.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "SIB1_TRANSMITTED_CONDITION",
+      "name": "SIB1 is transmitted in the cell",
+      "entity_type": "Condition",
+      "description": "Condition determined by ssb-SubcarrierOffset indicating SIB1 transmission availability.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "CELL_BARRED_ACTION",
+      "name": "Consider cell as barred",
+      "entity_type": "Property",
+      "description": "Action to treat the cell as barred according to TS 38.304 specifications.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION_ACTION",
+      "name": "Perform cell re-selection",
+      "entity_type": "Property",
+      "description": "Action to perform cell re-selection to other cells on the same frequency as specified in TS 38.304.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "SIB1_ACQUISITION_ACTION",
+      "name": "Acquire SIB1",
+      "entity_type": "Property",
+      "description": "Action to acquire System Information Block 1 when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MIB",
+      "target": "CELL_BARRED_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MIB contains cellBarred field that determines if cell is barred",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MIB",
+      "target": "SIB1_TRANSMITTED_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MIB contains ssb-SubcarrierOffset that indicates SIB1 transmission availability",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CELL_BARRED_CONDITION",
+      "target": "CELL_BARRED_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When cellBarred is set to barred, UE considers the cell as barred",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CELL_BARRED_CONDITION",
+      "target": "CELL_RESELECTION_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When cellBarred is set to barred, UE performs cell re-selection",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REDCAP_UE_CONDITION",
+      "target": "SIB1_ACQUISITION_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For RedCap UEs when SIB1 is transmitted, UE acquires SIB1",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIB1_TRANSMITTED_CONDITION",
+      "target": "SIB1_ACQUISITION_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SIB1 is transmitted in the cell, UE acquires SIB1",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRC_IDLE",
+      "target": "CELL_BARRED_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barred evaluation applies when UE is in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RRC_INACTIVE",
+      "target": "CELL_BARRED_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barred evaluation applies when UE is in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RRC_CONNECTED_T311_RUNNING",
+      "target": "CELL_BARRED_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barred evaluation applies when UE is in RRC_CONNECTED with T311 running",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.1"
+      ]
+    }
+  ]
+}

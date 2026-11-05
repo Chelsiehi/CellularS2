@@ -1,0 +1,33 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.5",
+  "title": "Abnormal cases on the network side",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "---------------------------------------------",
+    "The following abnormal cases can be identified",
+    "On the first expiry of the timer, the network shall retransmit the DETACH REQUEST message and shall start timer T3422. This retransmission is repeated four times, i.e. on the fifth expiry of timer T3422, the detach procedure shall be aborted. If the detach type is \"IMSI detach\", or \"re-attach not required\" and the EMM cause value is #2 \"IMSI unknown in HSS\", the network shall not change the current EMM state; otherwise the network shall change to state EMM-DEREGISTERED",
+    "b) Lower layer failure",
+    "The detach procedure is aborted. If the detach type indicates \"IMSI detach\", or \"re-attach not required\" and the EMM cause value is #2 \"IMSI unknown in HSS\", the network shall not change the current EMM state; otherwise the network shall change to state EMM-DEREGISTERED",
+    "c) Detach procedure collision",
+    "If the network receives a DETACH REQUEST message with \"switch off\" indication, before the network initiated detach procedure has been completed, both procedures shall be considered completed",
+    "If the network receives a DETACH REQUEST message without \"switch off\" indication, before the network initiated detach procedure has been completed, the network shall send a DETACH ACCEPT message to the UE",
+    "d) Detach and attach procedure collision",
+    "If the network receives an ATTACH REQUEST message before the network initiated detach procedure with detach type \"re-attach not required\" with no EMM cause IE, or \"re-attach not required\" and the EMM cause value not #2 \"IMSI unknown in HSS\", has been completed, the network shall ignore the ATTACH REQUEST message. If the Detach type IE, sent in the DETACH REQUEST message, indicates \"re-attach required\" the detach procedure is aborted and the attach procedure shall be progressed after the EPS bearer context(s) have been deleted. If the Detach type IE, sent in DETACH REQUEST message, indicates \"IMSI detach\", or \"re-attach not required\" and the EMM cause value is #2 \"IMSI unknown in HSS\", the detach procedure is aborted and the attach procedure shall be progressed",
+    "e) Detach and tracking area updating procedure collision",
+    "If the Detach type IE, sent in DETACH REQUEST message, indicates \"re-attach not required\" with no EMM cause IE, or \"re-attach not required\" with EMM cause other than #2 \"IMSI unknown in HSS\" or indicates \"re-attach required\", and the network receives a TRACKING AREA UPDATE REQUEST message before the network initiated detach procedure has been completed, the detach procedure shall be progressed, i.e. the TRACKING AREA UPDATE REQUEST message shall be ignored",
+    "If the Detach type IE, sent in DETACH REQUEST message, indicates \"re-attach not required\" with EMM cause #2 \"IMSI unknown in HSS\" or indicates \"IMSI detach\" and the network receives a TRACKING AREA UPDATE REQUEST message before the network initiated detach procedure has been completed, the network shall abort the detach procedure, shall stop T3422 and shall progress the tracking area updating procedure",
+    "f) Detach and service request procedure collision",
+    "If the network receives a SERVICE REQUEST message or an EXTENDED SERVICE REQUEST message for packet services before the network initiated detach procedure has been completed (e.g. the DETACH REQUEST message is pending to be sent to the UE) and the DETACH REQUEST contains detach type \"re-attach not required\" with EMM cause #2 \"IMSI unknown in HSS\" or detach type \"IMSI detach\", the network shall progress both procedures. If the DETACH REQUEST message contains detach type \"re-attach not required\" with no EMM cause IE, or \"re-attach not required\" with EMM cause other than #2 \"IMSI unknown in HSS\" or detach type \"re-attach required\", the network shall progress the detach procedure",
+    "If the network receives an EXTENDED SERVICE REQUEST message for CS fallback, but not for CS fallback for emergency call, before the network initiated detach procedure has been completed (e.g. the DETACH REQUEST message is pending to be sent to the UE) and the DETACH REQUEST contains detach type \"re-attach not required\" with EMM cause #2 \"IMSI unknown in HSS\" or detach type \"IMSI detach\", the network shall ignore the EXTENDED SERVICE REQUEST message and progress the detach procedure",
+    "If the network receives an EXTENDED SERVICE REQUEST message for CS fallback for emergency call before the network initiated detach procedure has been completed (e.g. the DETACH REQUEST message is pending to be sent to the UE) and the DETACH REQUEST contains detach type \"re-attach not required\" with EMM cause #2 \"IMSI unknown in HSS\" or detach type \"IMSI detach\", the network shall progress both procedures",
+    "g) Lower layers indication of non-delivered NAS PDU due to handover",
+    "If the DETACH REQUEST message could not be delivered due to an intra MME handover and the target TA is included in the TAI list, then upon successful completion of the intra MME handover the MME shall retransmit the DETACH REQUEST message. If a failure of the handover procedure is reported by the lower layer and the S1 signalling connection exists, the MME shall retransmit the DETACH REQUEST message",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

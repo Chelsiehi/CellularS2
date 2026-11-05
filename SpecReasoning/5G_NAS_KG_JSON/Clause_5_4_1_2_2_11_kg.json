@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.11",
+  "title": "UE handling EAP-failure message",
+  "entities": [
+    {
+      "id": "EAP_FAILURE_MSG",
+      "name": "EAP-failure message",
+      "entity_type": "Message",
+      "description": "EAP authentication failure message received by the UE, which may be contained within an AUTHENTICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REJECT_MSG",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message that may contain EAP-failure and triggers authentication failure handling procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "UE_EAP_FAILURE_HANDLING",
+      "name": "UE EAP-failure handling procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE upon receiving EAP-failure message, involving security context deletion, state transitions, and counter management.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "PARTIAL_NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "name": "Partial native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Temporary security context created during authentication that gets deleted upon EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "KAUSF_KSEAF",
+      "name": "KAUSF and KSEAF keys",
+      "entity_type": "Property",
+      "description": "Authentication and security anchor function keys that are deleted if created during the authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "UPDATE_STATUS_5U3",
+      "name": "Update status 5U3 ROAMING NOT ALLOWED",
+      "entity_type": "State",
+      "description": "Registration status indicating roaming is not allowed, set when authentication fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "UE state entered after authentication failure, where UE searches for available PLMNs/SNPNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "USIM_INVALID_CONDITION",
+      "name": "USIM considered invalid condition",
+      "entity_type": "Condition",
+      "description": "Condition where USIM is considered invalid until UE is switched off or UICC is removed, triggered by authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "COUNTER_MAX_SET_CONDITION",
+      "name": "Counter set to maximum value condition",
+      "entity_type": "Condition",
+      "description": "Condition where various service invalidity counters are set to UE implementation-specific maximum values.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "TIMERS_T3510_T3517_T3519_T3521",
+      "name": "Timers T3510, T3517, T3519, T3521",
+      "entity_type": "Timer",
+      "description": "NAS timers that are stopped when AUTHENTICATION REJECT message is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "STORED_SUCI",
+      "name": "Stored SUCI",
+      "entity_type": "Property",
+      "description": "Subscription Concealed Identifier that gets deleted upon authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "EAP_FAILURE_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE EAP-failure handling procedure is triggered by receiving EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_REJECT_MSG",
+      "target": "EAP_FAILURE_MSG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message may contain EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "PARTIAL_NATIVE_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure deletes the partial native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "KAUSF_KSEAF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure deletes KAUSF and KSEAF keys if they were created.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "UPDATE_STATUS_5U3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure sets update status to 5U3 ROAMING NOT ALLOWED.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "5GMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Procedure causes UE to enter 5GMM-DEREGISTERED.PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "USIM_INVALID_CONDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes condition where USIM is considered invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "COUNTER_MAX_SET_CONDITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure sets various service invalidity counters to maximum values.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "TIMERS_T3510_T3517_T3519_T3521",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timers T3510, T3517, T3519, T3521 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "UE_EAP_FAILURE_HANDLING",
+      "target": "STORED_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure deletes any stored SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.11"
+      ]
+    }
+  ]
+}

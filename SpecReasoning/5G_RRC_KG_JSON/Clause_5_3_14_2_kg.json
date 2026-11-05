@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.14.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_UAC_BARRING_CHECK",
+      "name": "Unified Access Control Barring Check Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for determining if a UE access attempt is barred based on access category, timers, and system information parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "TIMER_T390",
+      "name": "Timer T390",
+      "entity_type": "Timer",
+      "description": "Timer running for specific access categories that can cause access attempts to be barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "TIMER_T302",
+      "name": "Timer T302",
+      "entity_type": "Timer",
+      "description": "General access barring timer that affects access attempts for categories other than 0 and 2.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY",
+      "name": "Access Category",
+      "entity_type": "Identifier",
+      "description": "Numerical identifier (0, 2, etc.) that determines access control treatment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "System information block containing access control parameters including uac-BarringPerPLMN-List and uac-BarringForCommon.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "UAC_BARRING_PER_PLMN",
+      "name": "UAC-BarringPerPLMN",
+      "entity_type": "Information Element",
+      "description": "PLMN-specific access barring parameters contained in SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "UAC_BARRING_FOR_COMMON",
+      "name": "uac-BarringForCommon",
+      "entity_type": "Information Element",
+      "description": "Common access barring parameters included in SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "UAC_BARRING_INFO_SET",
+      "name": "UAC-BarringInfoSet",
+      "entity_type": "Information Element",
+      "description": "Set of barring parameters used for access barring checks.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access Attempt Barred",
+      "entity_type": "Condition",
+      "description": "Condition where UE determines access attempt is not allowed based on timers or barring parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_ALLOWED",
+      "name": "Access Attempt Allowed",
+      "entity_type": "Condition",
+      "description": "Condition where UE determines access attempt is permitted.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform Upper Layers",
+      "entity_type": "Property",
+      "description": "Action of notifying upper layers about access barring status (barred or allowed).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UAC_BARRING_CHECK",
+      "target": "TIMER_T390",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure checks if timer T390 is running for the access category to determine if access is barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UAC_BARRING_CHECK",
+      "target": "TIMER_T302",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure checks if timer T302 is running to determine if access is barred for certain categories.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UAC_BARRING_CHECK",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure uses access category value to determine barring treatment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UAC_BARRING_CHECK",
+      "target": "SIB1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure uses parameters from SIB1 to determine access barring configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SIB1",
+      "target": "UAC_BARRING_PER_PLMN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB1 may contain UAC-BarringPerPLMN list for PLMN-specific barring parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIB1",
+      "target": "UAC_BARRING_FOR_COMMON",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB1 may contain uac-BarringForCommon for common barring parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When access is barred, UE informs upper layers about the barring status.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_ACCESS_ALLOWED",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When access is allowed, UE informs upper layers about the allowed status.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_UAC_BARRING_CHECK",
+      "target": "UAC_BARRING_INFO_SET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses UAC-BarringInfoSet for performing access barring checks.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.2"
+      ]
+    }
+  ]
+}

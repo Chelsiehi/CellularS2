@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.19.4",
+  "title": "Re-attempt indicator",
+  "entities": [
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "An information element that may be included by the network under specific ESM cause conditions to indicate re-attempt behavior.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "An information element carrying cause values for ESM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "IE_BACKOFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "An information element that carries back-off timer values for network congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "COND_ESM_CAUSE_VALUES",
+      "name": "ESM cause values condition",
+      "entity_type": "Condition",
+      "description": "Condition specifying allowed ESM cause values for including the Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "COND_BACKOFF_TIMER_PRESENT",
+      "name": "Back-off timer present condition",
+      "entity_type": "Condition",
+      "description": "Condition specifying that Back-off timer value IE is present and ESM cause is not #26.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_REATTEMPT_INDICATOR",
+      "target": "COND_ESM_CAUSE_VALUES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-attempt indicator IE inclusion is guarded by specific ESM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REATTEMPT_INDICATOR",
+      "target": "COND_BACKOFF_TIMER_PRESENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-attempt indicator IE inclusion is guarded by Back-off timer value IE presence and ESM cause not being #26.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ESM_CAUSE_VALUES",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause values condition depends on the ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_BACKOFF_TIMER_PRESENT",
+      "target": "IE_BACKOFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer present condition depends on the Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_BACKOFF_TIMER_PRESENT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer present condition also depends on ESM cause IE not having value #26.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.19.4"
+      ]
+    }
+  ]
+}

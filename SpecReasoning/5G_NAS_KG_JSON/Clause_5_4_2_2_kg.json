@@ -1,0 +1,275 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2.2",
+  "title": "NAS security mode control initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_NAS_SEC_MODE_CTRL",
+      "name": "NAS Security Mode Control Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to establish NAS security context with UE. Involves sending SECURITY MODE COMMAND message and starting timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_CMD",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE to initiate NAS security mode control procedure. Contains security algorithms, ngKSI, and other security parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF to confirm successful security mode control procedure completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF to indicate security mode control procedure failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3560",
+      "name": "T3560",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when sending SECURITY MODE COMMAND. Stopped upon receiving SECURITY MODE COMPLETE or SECURITY MODE REJECT.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Information Element",
+      "description": "Information element indicating NAS key set identifier. Can indicate native security context, mapped security context, or null context (000).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_SEC_ALG",
+      "name": "Selected NAS security algorithms",
+      "entity_type": "Information Element",
+      "description": "Information element containing selected 5G NAS security algorithms (5G-IA0, 5G-EA0) and optionally EPS NAS security algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_ADD_SEC_INFO",
+      "name": "Additional 5G security information",
+      "entity_type": "Information Element",
+      "description": "Information element containing RINMR bit to request retransmission of initial NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_SEC_ALG",
+      "name": "Selected EPS NAS security algorithms",
+      "entity_type": "Information Element",
+      "description": "Information element containing selected EPS NAS security algorithms (EIA0, EEA0) for interworking.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_EAP_MSG",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element containing EAP-success message for EAP-based authentication scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_HORIZ_DERIV_PARAM",
+      "name": "Horizontal derivation parameter",
+      "entity_type": "Information Element",
+      "description": "Information element for horizontal key derivation during mobility and registration updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_NO_SEC_CTX",
+      "name": "Emergency services without valid security context",
+      "entity_type": "Condition",
+      "description": "Condition where security mode control is initiated for emergency services when no valid 5G NAS security context is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_N26_S1_SUPPORTED",
+      "name": "N26 interface and S1 mode supported",
+      "entity_type": "Condition",
+      "description": "Condition where AMF supports N26 interface and UE indicates S1 mode support in 5GMM capability.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "PROP_INTEG_PROT_NEW_CTX",
+      "name": "Integrity protected with new 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Property indicating SECURITY MODE COMMAND message is integrity protected with new security context but sent unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_SEC_MODE_CTRL",
+      "target": "MSG_SEC_MODE_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS security mode control procedure includes sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NAS_SEC_MODE_CTRL",
+      "target": "TIMER_T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts timer T3560 when initiating security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SEC_MODE_COMPLETE",
+      "target": "TIMER_T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SECURITY MODE COMPLETE stops timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SEC_MODE_REJECT",
+      "target": "TIMER_T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SECURITY MODE REJECT stops timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2",
+        "Figure 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains ngKSI IE to indicate security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_SEC_ALG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains selected NAS security algorithms IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "PROP_INTEG_PROT_NEW_CTX",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND is integrity protected with new 5G NAS security context but sent unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EMERGENCY_NO_SEC_CTX",
+      "target": "IE_SEC_ALG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services without valid security context condition requires setting 5G-IA0 and 5G-EA0 as selected algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_N26_S1_SUPPORTED",
+      "target": "IE_EPS_SEC_ALG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "N26 interface and S1 mode supported condition requires including Selected EPS NAS security algorithms IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_ADD_SEC_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains Additional 5G security information IE when integrity check fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_EAP_MSG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains EAP message IE for EAP-based authentication scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_HORIZ_DERIV_PARAM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains horizontal derivation parameter for key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.2"
+      ]
+    }
+  ]
+}

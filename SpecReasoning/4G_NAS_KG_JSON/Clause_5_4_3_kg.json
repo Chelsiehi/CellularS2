@@ -1,0 +1,180 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3",
+  "title": "Security mode control procedure",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the network to establish security between the UE and the network, including integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by the network to the UE to initiate security mode control, specifying the security algorithms to be used.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the network to confirm successful activation of security mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the network to indicate failure of security mode activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "IE_SELECTED_INTEGRITY_ALGORITHM",
+      "name": "Selected integrity algorithm",
+      "entity_type": "Information Element",
+      "description": "IE in SECURITY MODE COMMAND indicating the integrity protection algorithm to be used.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "IE_SELECTED_CIPHERING_ALGORITHM",
+      "name": "Selected ciphering algorithm",
+      "entity_type": "Information Element",
+      "description": "IE in SECURITY MODE COMMAND indicating the ciphering algorithm to be used.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_ACTIVATION_SUCCESSFUL",
+      "name": "Security activation successful",
+      "entity_type": "Condition",
+      "description": "Condition where the UE successfully activates the security algorithms and sends SECURITY MODE COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_ACTIVATION_FAILED",
+      "name": "Security activation failed",
+      "entity_type": "Condition",
+      "description": "Condition where the UE fails to activate the security algorithms and sends SECURITY MODE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The security mode control procedure includes sending the SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The security mode control procedure includes receiving the SECURITY MODE COMPLETE message upon successful activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The security mode control procedure includes receiving the SECURITY MODE REJECT message upon activation failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_INTEGRITY_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains the selected integrity algorithm IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_CIPHERING_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains the selected ciphering algorithm IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SECURITY_ACTIVATION_SUCCESSFUL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Successful security activation triggers sending SECURITY MODE COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SECURITY_ACTIVATION_FAILED",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Failed security activation triggers sending SECURITY MODE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_INTEGRITY_ALGORITHM",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND requires integrity protection for the selected integrity algorithm IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_CIPHERING_ALGORITHM",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND requires integrity protection for the selected ciphering algorithm IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.11.2",
+  "title": "PDU session ID",
+  "entities": [
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Information element that identifies a PDU session",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type",
+      "entity_type": "Information Element",
+      "description": "Information element that specifies the type of payload container",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "COND_N1_SM_INFO",
+      "name": "Payload container type is N1 SM information",
+      "entity_type": "Condition",
+      "description": "Condition where payload container type IE is set to N1 SM information",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "COND_CIOT_USER_DATA",
+      "name": "Payload container type is CIoT user data container",
+      "entity_type": "Condition",
+      "description": "Condition where payload container type IE is set to CIoT user data container",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that includes the PDU session ID IE",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PAYLOAD_CONTAINER_TYPE",
+      "target": "COND_N1_SM_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container type IE can be set to N1 SM information value",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PAYLOAD_CONTAINER_TYPE",
+      "target": "COND_CIOT_USER_DATA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container type IE can be set to CIoT user data container value",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_N1_SM_INFO",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When payload container type is N1 SM information, AMF shall include PDU session ID IE",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CIOT_USER_DATA",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When payload container type is CIoT user data container, AMF shall include PDU session ID IE",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AMF",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF includes the PDU session ID IE under specified conditions",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.2"
+      ]
+    }
+  ]
+}

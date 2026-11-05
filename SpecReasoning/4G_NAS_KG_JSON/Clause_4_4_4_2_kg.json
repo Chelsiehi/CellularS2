@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.4.2",
+  "title": "Integrity checking of NAS signalling messages in the UE",
+  "entities": [
+    {
+      "id": "UE_EMM_ENTITY",
+      "name": "UE EMM entity",
+      "entity_type": "State",
+      "description": "The EMM entity in the UE that processes NAS signaling messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "UE_ESM_ENTITY",
+      "name": "UE ESM entity",
+      "entity_type": "State",
+      "description": "The ESM entity in the UE that processes ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange of NAS messages established",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the network has established secure exchange of NAS messages for the NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_SUCCESS",
+      "name": "Integrity check successful",
+      "entity_type": "Condition",
+      "description": "Condition indicating that a NAS signalling message has successfully passed integrity checking.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_IDENTITY_REQUEST_IMSI",
+      "name": "IDENTITY REQUEST (IMSI)",
+      "entity_type": "Message",
+      "description": "IDENTITY REQUEST message when the requested identification parameter is IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT_NON25",
+      "name": "ATTACH REJECT (non-EMM cause #25)",
+      "entity_type": "Message",
+      "description": "ATTACH REJECT message when the EMM cause is not #25.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT_NON_SWITCH_OFF",
+      "name": "DETACH ACCEPT (non switch off)",
+      "entity_type": "Message",
+      "description": "DETACH ACCEPT message for non switch off detach.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REJECT_NON25",
+      "name": "TRACKING AREA UPDATE REJECT (non-EMM cause #25)",
+      "entity_type": "Message",
+      "description": "TRACKING AREA UPDATE REJECT message when the EMM cause is not #25.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT_NON25",
+      "name": "SERVICE REJECT (non-EMM cause #25)",
+      "entity_type": "Message",
+      "description": "SERVICE REJECT message when the EMM cause is not #25.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "SECURITY MODE COMMAND message used for security activation.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "PROP_DISCARD_MESSAGE",
+      "name": "Discard message",
+      "entity_type": "Property",
+      "description": "Property indicating that the NAS in the UE shall discard a message that fails integrity check or is not integrity protected when secure exchange is established.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "PROC_INTEGRITY_CHECKING",
+      "name": "Integrity checking of NAS signalling messages",
+      "entity_type": "Procedure",
+      "description": "Procedure for integrity checking of NAS signalling messages in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "SECURE_EXCHANGE_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Integrity checking procedure requires that secure exchange of NAS messages has been established.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "INTEGRITY_CHECK_SUCCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Integrity checking procedure is guarded by successful integrity check condition.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_IDENTITY_REQUEST_IMSI",
+      "target": "UE_EMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "IDENTITY REQUEST (IMSI) message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_REJECT_NON25",
+      "target": "UE_EMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "ATTACH REJECT (non-EMM cause #25) message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DETACH_ACCEPT_NON_SWITCH_OFF",
+      "target": "UE_EMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "DETACH ACCEPT (non switch off) message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TAU_REJECT_NON25",
+      "target": "UE_EMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REJECT (non-EMM cause #25) message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SERVICE_REJECT_NON25",
+      "target": "UE_EMM_ENTITY",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SERVICE REJECT (non-EMM cause #25) message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_ESM_ENTITY",
+      "target": "INTEGRITY_CHECK_SUCCESS",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "All ESM messages are integrity protected and require successful integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "INTEGRITY_CHECK_SUCCESS",
+      "target": "PROP_DISCARD_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Failure of integrity check establishes the property to discard the message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SECURE_EXCHANGE_ESTABLISHED",
+      "target": "PROP_DISCARD_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of non-integrity protected message when secure exchange is established establishes the property to discard the message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "PROP_DISCARD_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message that fails integrity check triggers specific discard behavior as specified in clause 5.4.3.5.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.2"
+      ]
+    }
+  ]
+}

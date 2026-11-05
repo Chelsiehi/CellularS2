@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.2",
+  "title": "Message too short or too long",
+  "entities": [
+    {
+      "id": "MESSAGE_LENGTH_ERROR",
+      "name": "Message length error",
+      "entity_type": "Condition",
+      "description": "Condition where a received NAS message is either shorter or longer than expected based on the protocol specification.",
+      "provenance": [
+        "TS 24.501, Clause 7.2"
+      ]
+    },
+    {
+      "id": "NAS_MESSAGE",
+      "name": "NAS message",
+      "entity_type": "Message",
+      "description": "A Non-Access Stratum message exchanged between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 7.2"
+      ]
+    },
+    {
+      "id": "MESSAGE_DISCARD_PROCEDURE",
+      "name": "Message discard procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to discard a received NAS message that does not conform to length requirements.",
+      "provenance": [
+        "TS 24.501, Clause 7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MESSAGE_LENGTH_ERROR",
+      "target": "NAS_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The message length error condition applies to NAS messages that are too short or too long.",
+      "provenance": [
+        "TS 24.501, Clause 7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MESSAGE_LENGTH_ERROR",
+      "target": "MESSAGE_DISCARD_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Detection of a message length error triggers the message discard procedure.",
+      "provenance": [
+        "TS 24.501, Clause 7.2"
+      ]
+    }
+  ]
+}

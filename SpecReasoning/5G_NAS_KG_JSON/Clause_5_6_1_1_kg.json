@@ -1,0 +1,265 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to transition from 5GMM-IDLE to 5GMM-CONNECTED mode, establish user-plane resources for PDU sessions, or transfer user data via control plane in CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_MSG",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "CONTROL_PLANE_SERVICE_REQUEST_MSG",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message variant used for control plane service requests.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "SERVICE_ACCEPT_MSG",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by AMF to accept service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT_MSG",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message sent by AMF to reject service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "T3517",
+      "name": "T3517",
+      "entity_type": "Timer",
+      "description": "Timer started when SERVICE REQUEST or CONTROL PLANE SERVICE REQUEST is sent, stopped upon receiving SERVICE ACCEPT, SERVICE REJECT, or AS indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5GMM state where UE is not connected to the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5GMM state where UE has an active connection to the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "5GMM_SERVICE_REQUEST_INITIATED",
+      "name": "5GMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "State indicating that a service request procedure is already ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_ATTEMPT_COUNTER",
+      "name": "Service Request Attempt Counter",
+      "entity_type": "Property",
+      "description": "Counter that limits the number of service request attempts when no response is received from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "CONDITION_5U1_UPDATED_TAI_IN_LIST",
+      "name": "5U1 UPDATED and TAI in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition requiring UE's 5GS update status to be 5U1 UPDATED and current TAI to be in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_ONGOING_5GMM_PROCEDURE",
+      "name": "No ongoing 5GMM specific procedure",
+      "entity_type": "Condition",
+      "description": "Condition requiring no other 5GMM specific procedure to be ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "SERVICE_REQUEST_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves sending SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "CONTROL_PLANE_SERVICE_REQUEST_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SERVICE_REQUEST_MSG",
+      "target": "T3517",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending SERVICE REQUEST message starts timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONTROL_PLANE_SERVICE_REQUEST_MSG",
+      "target": "T3517",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending CONTROL PLANE SERVICE REQUEST message starts timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_ACCEPT_MSG",
+      "target": "T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SERVICE ACCEPT message stops timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SERVICE_REJECT_MSG",
+      "target": "T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SERVICE REJECT message stops timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1",
+        "Figure 5.6.1.1.1",
+        "Figure 5.6.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in 5GMM-IDLE state for initiation in many scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "5GMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful service request procedure establishes 5GMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "CONDITION_5U1_UPDATED_TAI_IN_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedure initiation is guarded by condition that 5GS update status is 5U1 UPDATED and TAI is in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "CONDITION_NO_ONGOING_5GMM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedure initiation is guarded by condition that no other 5GMM specific procedure is ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "5GMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure cannot be initiated if UE is already in 5GMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "SERVICE_REQUEST_ATTEMPT_COUNTER",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Service request procedure uses service request attempt counter to limit attempts.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.1"
+      ]
+    }
+  ]
+}

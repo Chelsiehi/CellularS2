@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.9.7",
+  "title": "Extended rejected NSSAI",
+  "entities": [
+    {
+      "id": "IE_EXTENDED_REJECTED_NSSAI",
+      "name": "Extended rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element that informs the UE about S-NSSAIs that were included in the requested NSSAI but were rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "UE_EXTENDED_REJECTED_NSSAI_SUPPORT",
+      "name": "UE support for Extended rejected NSSAI",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the UE supports the Extended rejected NSSAI information element.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information that was included in the requested NSSAI but rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information requested by the UE in the REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Registration request message sent by the UE containing the requested NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the requested NSSAI information element.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REQUESTED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Requested NSSAI contains one or more S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EXTENDED_REJECTED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended rejected NSSAI contains rejected S-NSSAIs from the requested NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EXTENDED_REJECTED_NSSAI",
+      "target": "UE_EXTENDED_REJECTED_NSSAI_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Extended rejected NSSAI is conditional on UE support for this IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9.7"
+      ]
+    }
+  ]
+}

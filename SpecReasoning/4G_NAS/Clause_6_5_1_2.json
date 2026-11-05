@@ -1,0 +1,110 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.2",
+  "title": "UE requested PDN connectivity procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------------------",
+    "In order to request connectivity to a PDN, the UE shall send a PDN CONNECTIVITY REQUEST message to the MME, start timer T3482 and enter the state PROCEDURE TRANSACTION PENDING (see example in figure 6.5.1.2.1)",
+    "When the PDN CONNECTIVITY REQUEST message is sent together with an ATTACH REQUEST message, the UE shall not start timer T3482 and shall not include the APN",
+    "NOTE 1: If the UE needs to provide protocol configuration options which require ciphering or provide an APN, or both, during the attach procedure, the ESM information transfer flag is included in the PDN CONNECTIVITY REQUEST. The MME then at a later stage in the PDN connectivity procedure initiates the ESM information request procedure in which the UE can provide the MME with protocol configuration options or APN or both",
+    "In order to request a PDN connection for emergency bearer services or for access to RLOS, the UE shall not include an APN in the PDN CONNECTIVITY REQUEST message or, when applicable, in the ESM INFORMATION RESPONSE message",
+    "In order to request connectivity to a PDN using the default APN, the UE includes the access point name IE in the PDN CONNECTIVITY REQUEST message or, when applicable, in the ESM INFORMATION RESPONSE message, according to the following conditions",
+    "- if use of a PDN using the default APN requires PAP/CHAP, then the UE should include the Access point name IE; and",
+    "- in all other conditions, the UE need not include the Access point name IE",
+    "In order to request connectivity to an additional PDN using a specific APN, the UE shall include the requested APN in the PDN CONNECTIVITY REQUEST message or, when applicable, in the ESM INFORMATION RESPONSE message",
+    "NOTE 2: The requested APN in the PDN CONNECTIVITY REQUEST or ESM INFORMATION RESPONSE message is for UAS services when the request to establish a PDN connection for UAS services is requested by the upper layers",
+    "NOTE 3: By configuration provided by the operator, the UE supporting UAS services knows that an APN is for UAS services when the request to establish a PDN connection for UAS services is requested by the upper layers and how this UE configuration is achieved is implementation specific",
+    "In the PDN type IE the UE shall either indicate the IP version capability of the IP stack associated with the UE or non IP or Ethernet as specified in clause 6.2.2",
+    "If the PDN type value of the PDN type IE is set to IPv4 or IPv6 or IPv4v6 and the UE indicates \"Control plane CIoT EPS optimization supported\" in the UE network capability IE of the ATTACH REQUEST message, the UE may include the Header compression configuration IE in the PDN CONNECTIVITY REQUEST message",
+    "When the connectivity to a PDN is to be transferred from a non-3GPP access network to the 3GPP access network, the UE shall set the PDN type value of the PDN type IE to",
+    "- IPv4, if the previously allocated home address information consists of an IPv4 address only",
+    "- IPv6, if the previously allocated home address information consists of an IPv6 prefix only; or",
+    "- IPv4v6, if the previously allocated home address information consists of both an IPv4 address and an IPv6 prefix",
+    "The UE shall set the request type to \"initial request\" when the UE is establishing a new PDN connectivity to a PDN in an attach procedure or in a stand-alone PDN connectivity procedure or when the UE requests establishment of a PDN connection as a user-plane resource of an MA PDU session to be established. The UE shall set the request type to \"emergency\" when the UE is requesting a new PDN connectivity for emergency bearer services. The UE shall set the request type to \"handover\" when the connectivity to a PDN is to be transferred from a non-3GPP access network to the 3GPP access network, when the UE initiates the procedure to add 3GPP access to the PDN connection which is already established over WLAN, when the UE supporting N1 mode requests transfer of an existing non-emergency PDU session in 5GS or when the UE requests establishment of a PDN connection as a user-plane resource of an already established MA PDU session. The UE shall set the request type to \"handover of emergency bearer services\" when a PDN connection for emergency bearer services is to be transferred from a WLAN to the 3GPP access network or when the UE supporting N1 mode requests transfer of an existing emergency PDU session in 5GS. The UE shall set the request type to \"RLOS\" when the UE is requesting a new PDN connection for RLOS",
+    "If the UE supports DSMIPv6, the UE may include a request for obtaining the IPv6 address and optionally the IPv4 address of the home agent in the Protocol configuration options IE in the PDN CONNECTIVITY REQUEST message. The UE may also include a request for obtaining the IPv6 Home Network Prefix. The UE shall request the IPv6 Home Network Prefix only if the UE has requested the home agent IPv6 address. The requested home agent address(es) and the Home Network Prefix are related to the APN the UE requested connectivity for",
+    "The UE may set the ESM information transfer flag in the PDN CONNECTIVITY REQUEST message to indicate that it has ESM information, i.e. protocol configuration options, APN, or both, that needs to be sent after the NAS signalling security has been activated between the UE and the MME",
+    "If the UE supports A/Gb mode or Iu mode or both, the UE shall indicate the support of the network requested bearer control procedures (see 3GPP S 24.008 [13]) in A/Gb mode or Iu mode in the protocol configuration options IE",
+    "If the UE supports N1 mode and the request type is",
+    "a) \"initial request\" or \"emergency\", the UE shall generate a PDU session ID, associate the PDU session ID with the PDN connection that is being established, and include the PDU session ID in the protocol configuration options IE or the extended protocol configuration options IE",
+    "b) \"handover\" or \"handover of emergency bearer services\", and the UE requests",
+    "1) transfer of an existing PDU session in 5GS or establishment of a PDN connection as a user-plane resource of an already established MA PDU session, the UE shall associate the PDU session ID of the PDU session with the PDN connection that is being established for the existing PDU session and include the PDU session ID in the protocol configuration options IE or the extended protocol configuration options IE; or",
+    "2) transfer of an existing PDN connection in a non-3GPP access connected to the EPC and a PDU session ID is associated with the existing PDN connection, the UE shall include the PDU session ID in the protocol configuration options IE or the extended protocol configuration options IE and associate the PDU session ID with the PDN connection that is being established. If the existing PDN connection is a non-emergency PDN connection and an S-NSSAI and a related PLMN ID are associated with the existing PDN connection, the UE shall in addition associate the S-NSSAI and the related PLMN ID with the PDN connection that is being established",
+    "NOTE 4: The UE can also have an S-NSSAI and the related PLMN ID associated with the PDN connection, if the S-NSSAI and the related PLMN ID was associated with the existing PDN connection in a non-3GPP access connected to the EPC as specified in 3GPP S 24.302 [48]. The UE stores this S-NSSAI and the related PLMN ID for later use during inter-system change from S1 mode to N1 mode",
+    "If the N1 mode capability is disabled, the UE may apply a) and b.2) above for service continuity support at inter-system change from S1 mode to N1 mode once its N1 mode capability is enabled again",
+    "If the UE supporting N1 mode supports receiving QoS rules with the length of two octets or QoS flow descriptions with the length of two octets via the extended protocol configuration options IE, the UE shall include the QoS rules with the length of two octets support indicator or the QoS flow descriptions with the length of two octets support indicator, respectively, in the protocol configuration options IE or the extended protocol configuration options IE",
+    "If the UE supports providing PDU session ID in the protocol configuration options IE or the extended protocol configuration option IE when its N1 mode capability is disabled, the UE shall include the QoS rules with the length of two octets support indicator or the QoS flow descriptions with the length of two octets support indicator, respectively, in the protocol configuration options IE or the extended protocol configuration options IE",
+    "Protocol configuration options provided in the ESM INFORMATION RESPONSE message replace any protocol configuration options provided in the PDN CONNECTIVITY REQUEST message",
+    "When the UE initiates the procedure to add 3GPP access to the PDN connection that is already established over WLAN, the UE shall provide the same APN as that of the PDN connection established over WLAN in the PDN connectivity procedure as specified in the clause 6.2.2 of 3GPP S 23.161 [34]",
+    "If the UE supports APN rate control, the UE shall include an APN rate control support indicator and an additional APN rate control for exception data support indicator in the protocol configuration options IE or extended protocol configuration options IE",
+    "If the UE supports DNS over (D)TLS (see 3GPP S 33.501 [24]), the UE shall include the Protocol configuration options IE or the Extended protocol configuration options IE in the PDN CONNECTIVITY REQUEST or ESM INFORMATION RESPONSE message and include the DNS server security information indicator and optionally, if the UE wishes to indicate which security protocol type(s) are supported by the UE, it may include the DNS server security protocol support",
+    "NOTE 5: Support of DNS over (D)TLS is based on the informative requirements as specified in 3GPP S 33.501 [24]",
+    "When the UE supporting UAS services initiates a UE requested PDN connectivity procedure for UAS services during an attach procedure, the UE",
+    "a) shall create the service-level-AA container with the length of two octets. In the service-level-AA container with the length of two octets, the UE",
+    "1) shall include the service-level device ID parameter set to the UE 's CAA-level UAV ID",
+    "2) shall include the service-level-AA server address parameter set to the USS address, if it is provided by the upper layers",
+    "3) shall include the service-level-AA payload parameter set to the UUAA payload and the service-level-AA payload type parameter set to \"UUAA payload\", if the UUAA payload is provided by the upper layer; and",
+    "4) shall include the service-level-AA payload parameter set to the C2 authorization payload and the service-level-AA payload type parameter set to \"C2 authorization payload\", if the C2 authorization procedure is requested; and",
+    "NOTE 6: The C2 authorization payload in the service-level-AA payload parameter can include the pairing information for C2 communication and the flight authorization information",
+    "b) shall include the created service-level-AA container with the length of two octets in the extended protocol configuration options IE of the PDN CONNECTIVITY REQUEST or ESM INFORMATION RESPONSE message",
+    "When the UE supporting UAS services initiates a UE requested PDN connectivity procedure for C2 communication after the completion of the attach procedure, the UE",
+    "a) shall create the service-level-AA container with the length of two octets. In the service-level-AA container with the length of two octets, the UE",
+    "1) shall include the service-level device ID parameter set to the UE 's CAA-level UAV ID; and",
+    "2) shall include the service-level-AA payload parameter set to the C2 authorization payload and the service-level-AA payload type parameter set to \"C2 authorization payload\"; and",
+    "NOTE 7: The C2 authorization payload in the service-level-AA payload parameter can include the pairing information for C2 communication and the flight authorization information",
+    "b) shall include the created service-level-AA container with the length of two octets in the extended protocol configuration options IE of the PDN CONNECTIVITY REQUEST message",
+    "If the UE supports provisioning of ECS configuration information to the EEC in the UE, then the UE may include the ECS configuration information provisioning support indicator in the Protocol configuration options IE or the Extended protocol configuration options IE in the PDN CONNECTIVITY REQUEST message",
+    "Figure 6.5.1.2.1: UE requested PDN connectivity procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.5.1.2.1",
+      "file": "Figure_6_5_1_2_1_p305.png.json",
+      "title": "UE requested PDN connectivity procedure",
+      "content": {
+        "figure_id": "6.5.1.2.1",
+        "title": "UE requested PDN connectivity procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "PDN CONNECTIVITY REQUEST",
+              "notes": "Start T3482"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3482"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "PDN CONNECTIVITY REJECT",
+              "notes": "Stop T3482, OR alternative to ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Timer T3482 is started when UE sends PDN CONNECTIVITY REQUEST",
+            "Timer T3482 is stopped upon receiving either ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST or PDN CONNECTIVITY REJECT",
+            "Network responds with either ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST or PDN CONNECTIVITY REJECT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

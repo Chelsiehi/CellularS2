@@ -1,0 +1,280 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.3",
+  "title": "EPS bearer context deactivation accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deactivating EPS bearer contexts initiated by the network and accepted by the UE. The UE deletes the identified EPS bearer context and responds with DEACTIVATE EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Network-initiated message requesting deactivation of an EPS bearer context. Contains EPS bearer identity and may include ESM cause, PTI, and T3396 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_ACCEPT",
+      "name": "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "UE response message confirming acceptance of EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the EPS bearer context to be deactivated. If it identifies the default bearer, all EPS bearer contexts for that PDN are deleted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the reason for deactivation. Value #39 indicates 'reactivation requested', #26 indicates 'insufficient resources'.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the UE-initiated procedure (bearer resource modification or PDN disconnect) to which the deactivation is related.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_T3396",
+      "name": "T3396 timer value",
+      "entity_type": "Information Element",
+      "description": "Timer value included when ESM cause is #26 'insufficient resources'. Controls when UE can re-initiate requests for the same APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer that restricts UE from sending PDN connectivity, bearer resource modification, or bearer resource allocation requests for a specific APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3495",
+      "name": "Timer T3495",
+      "entity_type": "Timer",
+      "description": "Timer stopped by MME upon receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE",
+      "name": "BEARER CONTEXT INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE and MME after successful EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "COND_REACTIVATION_REQUESTED",
+      "name": "ESM cause #39 reactivation requested",
+      "entity_type": "Condition",
+      "description": "Condition where DEACTIVATE EPS BEARER CONTEXT REQUEST includes ESM cause #39, indicating the UE should re-initiate PDN connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "COND_INSUFFICIENT_RESOURCES",
+      "name": "ESM cause #26 insufficient resources",
+      "entity_type": "Condition",
+      "description": "Condition where network indicates insufficient resources and may include T3396 timer value to control UE behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_EPS_BEARER",
+      "name": "Delete EPS bearer context",
+      "entity_type": "Property",
+      "description": "UE action to delete the identified EPS bearer context. If default bearer is deactivated, all EPS bearer contexts for that PDN are deleted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receipt of DEACTIVATE EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending DEACTIVATE EPS BEARER CONTEXT ACCEPT message after deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains EPS bearer identity to identify which bearer context to deactivate.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain ESM cause indicating reason for deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain PTI to identify related UE-initiated procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_T3396",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain T3396 timer value when ESM cause is #26.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REACTIVATION_REQUESTED",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When ESM cause #39 is present, UE stops timer T3396 if running.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_INSUFFICIENT_RESOURCES",
+      "target": "TIMER_T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When ESM cause #26 with non-zero timer value, UE starts timer T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_INSUFFICIENT_RESOURCES",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When ESM cause #26 with zero timer value, UE stops timer T3396 if running.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "PROP_DELETE_EPS_BEARER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in deletion of EPS bearer context(s).",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure leads to BEARER CONTEXT INACTIVE state for both UE and MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_ACCEPT",
+      "target": "TIMER_T3495",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME stops timer T3495 upon receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_REACTIVATION_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #39 guards the reactivation requested condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_INSUFFICIENT_RESOURCES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause value #26 guards the insufficient resources condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.3"
+      ]
+    }
+  ]
+}

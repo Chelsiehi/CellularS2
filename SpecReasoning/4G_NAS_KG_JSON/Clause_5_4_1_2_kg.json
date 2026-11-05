@@ -1,0 +1,182 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.1.2",
+  "title": "GUTI reallocation initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_GUTI_REALLOCATION",
+      "name": "GUTI reallocation procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure where the MME assigns a new GUTI to the UE. The MME sends a GUTI REALLOCATION COMMAND message and starts timer T3450.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2",
+        "Figure 5.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_GUTI_REALLOCATION_COMMAND",
+      "name": "GUTI REALLOCATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by the MME to initiate GUTI reallocation. Contains the new GUTI and optional elements like TAI list, DCN-ID, or UE radio capability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2",
+        "Figure 5.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "name": "GUTI REALLOCATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the MME to confirm successful GUTI reallocation.",
+      "provenance": [
+        "Figure 5.4.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Information Element",
+      "description": "Globally Unique Temporary Identity assigned to the UE. Mandatory IE in GUTI REALLOCATION COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list. Optional IE in GUTI REALLOCATION COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_DCN_ID",
+      "name": "DCN-ID",
+      "entity_type": "Information Element",
+      "description": "Dedicated Core Network Identifier. Optional IE in GUTI REALLOCATION COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "name": "UE radio capability ID deletion indication",
+      "entity_type": "Information Element",
+      "description": "Indication to delete stored UE radio capability ID. Optional IE in GUTI REALLOCATION COMMAND message for WB-S1 mode when UE supports RACS.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID",
+      "entity_type": "Information Element",
+      "description": "UE radio capability identifier. Optional IE in GUTI REALLOCATION COMMAND message for WB-S1 mode when UE supports RACS.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3450",
+      "name": "T3450",
+      "entity_type": "Timer",
+      "description": "Timer started by the MME when sending GUTI REALLOCATION COMMAND. Stopped upon receipt of GUTI REALLOCATION COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2",
+        "Figure 5.4.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_GUTI_REALLOCATION",
+      "target": "MSG_GUTI_REALLOCATION_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "GUTI reallocation procedure includes sending GUTI REALLOCATION COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message contains the GUTI information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain the TAI list information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_DCN_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain the DCN-ID information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain UE radio capability ID deletion indication in WB-S1 mode with RACS support.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain UE radio capability ID in WB-S1 mode with RACS support.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_GUTI_REALLOCATION",
+      "target": "TIMER_T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "GUTI reallocation procedure starts timer T3450 when initiating the procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.2",
+        "Figure 5.4.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "target": "TIMER_T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of GUTI REALLOCATION COMPLETE message stops timer T3450.",
+      "provenance": [
+        "Figure 5.4.1.2.1"
+      ]
+    }
+  ]
+}

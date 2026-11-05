@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.4.2",
+  "title": "Combined attach successful",
+  "entities": [
+    {
+      "id": "PROC_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for attaching to both EPS and non-EPS services or SMS only",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Network response message indicating successful attach",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_COMPLETE",
+      "name": "ATTACH COMPLETE message",
+      "entity_type": "Message",
+      "description": "UE response to ATTACH ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_UPDATE_RESULT",
+      "name": "Additional update result IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating network decision for non-EPS services",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_LAI",
+      "name": "Location area identification",
+      "entity_type": "Information Element",
+      "description": "Location area identification included in ATTACH ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_TMSI",
+      "name": "Temporary mobile subscriber identity",
+      "entity_type": "Information Element",
+      "description": "Temporary identity allocated to UE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer used during attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3450",
+      "name": "Timer T3450",
+      "entity_type": "Timer",
+      "description": "Timer started by MME during TMSI reallocation",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is registered with network",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "name": "EMM-COMMON-PROCEDURE-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state during common procedure execution",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "COND_SMS_ONLY",
+      "name": "SMS only condition",
+      "entity_type": "Condition",
+      "description": "Condition where network accepts attach for SMS services only",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "PROP_UPDATE_STATUS_U1",
+      "name": "Update status U1 UPDATED",
+      "entity_type": "Property",
+      "description": "Location update status set to UPDATED after successful attach",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "MSG_ATTACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Combined attach procedure includes sending ATTACH ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "IE_ADDITIONAL_UPDATE_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains Additional update result IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "IE_LAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains location area identification",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "IE_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message may contain TMSI allocation",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "COND_SMS_ONLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH ACCEPT message may indicate SMS only condition",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "MSG_ATTACH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Combined attach procedure includes sending ATTACH COMPLETE message",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "TIMER_T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3410 upon receiving ATTACH ACCEPT",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "TIMER_T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME starts timer T3450 when TMSI is allocated",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_ATTACH_COMPLETE",
+      "target": "TIMER_T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME stops timer T3450 upon receiving ATTACH COMPLETE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_ATTACH_COMPLETE",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters EMM-REGISTERED state after sending ATTACH COMPLETE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME enters EMM-COMMON-PROCEDURE-INITIATED state when TMSI is allocated",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "PROP_UPDATE_STATUS_U1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE sets update status to U1 UPDATED upon receiving ATTACH ACCEPT",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.2"
+      ]
+    }
+  ]
+}

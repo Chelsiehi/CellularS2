@@ -1,0 +1,234 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.12A",
+  "title": "Handling of local emergency numbers received via 3GPP access and non-3GPP access",
+  "entities": [
+    {
+      "id": "PROC_ATTACH_3GPP",
+      "name": "Attach procedures via 3GPP access",
+      "entity_type": "Procedure",
+      "description": "UE procedures for attaching to the network via 3GPP access as defined in TS 24.301.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION_3GPP",
+      "name": "Registration procedures via 3GPP access",
+      "entity_type": "Procedure",
+      "description": "UE procedures for registering to the network via 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION_NON3GPP",
+      "name": "Registration procedures via non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "UE procedures for registering to the network via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Network message that may contain local emergency numbers lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "IE_LOCAL_EMERGENCY_NUMBERS",
+      "name": "Local emergency numbers list",
+      "entity_type": "Information Element",
+      "description": "List of local emergency numbers that may be included in REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_LOCAL_EMERGENCY_NUMBERS",
+      "name": "Extended local emergency numbers list",
+      "entity_type": "Information Element",
+      "description": "Extended list of local emergency numbers that may be included in REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_NULL",
+      "name": "EMM-NULL state",
+      "entity_type": "State",
+      "description": "EMM sublayer state indicating no EMM context exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "EMM sublayer state indicating UE is deregistered from EPC.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED_INITIATED",
+      "name": "EMM-DEREGISTERED-INITIATED state",
+      "entity_type": "State",
+      "description": "EMM sublayer state indicating deregistration procedure has been initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_NULL",
+      "name": "5GMM-NULL state",
+      "entity_type": "State",
+      "description": "5GMM sublayer state indicating no 5GMM context exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "5GMM sublayer state indicating UE is deregistered from 5GC.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_INITIATED",
+      "name": "5GMM-DEREGISTERED-INITIATED state",
+      "entity_type": "State",
+      "description": "5GMM sublayer state indicating deregistration procedure has been initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "COND_NOT_REGISTERED_3GPP",
+      "name": "UE not registered or attached over 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition where UE is considered neither registered nor attached over 3GPP access based on EMM/5GMM states.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_EMERGENCY_NUMBERS",
+      "name": "Ignore local emergency numbers in non-3GPP REGISTRATION ACCEPT",
+      "entity_type": "Property",
+      "description": "UE behavior to ignore presence or absence of local emergency numbers lists in REGISTRATION ACCEPT via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_LOCAL_EMERGENCY_NUMBERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain local emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_EXTENDED_LOCAL_EMERGENCY_NUMBERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain extended local emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_IGNORE_EMERGENCY_NUMBERS",
+      "target": "COND_NOT_REGISTERED_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE ignores emergency numbers in non-3GPP REGISTRATION ACCEPT unless specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_EMM_NULL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires EMM-NULL state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_EMM_DEREGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires EMM-DEREGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_5GMM_NULL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires 5GMM-NULL state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NOT_REGISTERED_3GPP",
+      "target": "STATE_5GMM_DEREGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition for UE not registered over 3GPP access requires 5GMM-DEREGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "UE_MODE_CSPS1",
+      "name": "CS/PS mode 1",
+      "entity_type": "State",
+      "description": "UE mode of operation supporting both Circuit Switched and Packet Switched domains.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "UE_MODE_PS1",
+      "name": "PS mode 1",
+      "entity_type": "State",
+      "description": "UE mode of operation supporting only Packet Switched domain.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "UE_MODE_CSPS2",
+      "name": "CS/PS mode 2",
+      "entity_type": "State",
+      "description": "UE mode of operation supporting both Circuit Switched and Packet Switched domains with different configuration.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "UE_MODE_PS2",
+      "name": "PS mode 2",
+      "entity_type": "State",
+      "description": "UE mode of operation supporting only Packet Switched domain with different configuration.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_VDP_IMS_ONLY",
+      "name": "Voice Domain Preference for E-UTRAN changed to IMS PS voice only",
+      "entity_type": "Condition",
+      "description": "Condition where UE's voice domain preference changes to IMS PS voice only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_SMS_IP_PREFERRED",
+      "name": "SMS configuration changed to prefer SMS over IP networks",
+      "entity_type": "Condition",
+      "description": "Condition where UE's SMS configuration changes to prefer SMS over IP networks.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_IMS_REGISTERED",
+      "name": "UE is IMS registered",
+      "entity_type": "Condition",
+      "description": "Condition indicating successful IMS registration.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_CS_DOMAIN_NOT_AVAILABLE",
+      "name": "CS domain not available",
+      "entity_type": "Condition",
+      "description": "Condition indicating CS domain is not available.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Note 1"
+      ]
+    },
+    {
+      "id": "COND_USAGE_SETTING_CHANGE",
+      "name": "UE's usage setting change",
+      "entity_type": "Condition",
+      "description": "Condition where UE's usage setting changes between voice centric and data centric.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_MODE_CSPS1",
+      "target": "UE_MODE_PS1",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Transition from CS/PS mode 1 to PS mode 1 when Voice Domain Preference changes to IMS PS voice only and SMS over IP is preferred with IMS registered.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_VDP_IMS_ONLY",
+      "target": "REL_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Voice Domain Preference change to IMS PS voice only guards the transition from CS/PS mode 1 to PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SMS_IP_PREFERRED",
+      "target": "REL_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMS configuration change to prefer SMS over IP networks guards the transition from CS/PS mode 1 to PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_IMS_REGISTERED",
+      "target": "REL_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IMS registered condition guards the transition from CS/PS mode 1 to PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CS_DOMAIN_NOT_AVAILABLE",
+      "target": "UE_MODE_PS1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CS domain not available condition establishes transition to PS mode 1 from CS/PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Note 1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_USAGE_SETTING_CHANGE",
+      "target": "UE_MODE_CSPS1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE's usage setting change establishes self-transition within CS/PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.1",
+        "Figure 4.3.2.1.1"
+      ]
+    }
+  ]
+}

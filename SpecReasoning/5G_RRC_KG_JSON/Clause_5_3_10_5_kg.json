@@ -1,0 +1,238 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.10.5",
+  "title": "RLF report content determination",
+  "entities": [
+    {
+      "id": "VarRLF_Report",
+      "name": "VarRLF-Report",
+      "entity_type": "Information Element",
+      "description": "UE variable storing radio link failure and handover failure information for reporting purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "RLF_Report_Procedure",
+      "name": "RLF Report Content Determination",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE determines and populates the content of VarRLF-Report after detecting radio link failure or handover failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "measResultLastServCell",
+      "name": "measResultLastServCell",
+      "entity_type": "Information Element",
+      "description": "Contains measurement results (RSRP, RSRQ, SINR) for the source PCell (HO failure) or PCell (RLF) collected up to failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "measResultNeighCells",
+      "name": "measResultNeighCells",
+      "entity_type": "Information Element",
+      "description": "Contains measurement results for neighboring cells, ordered by best measurement quantities (RSRP/RSRQ/SINR).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "connectionFailureType",
+      "name": "connectionFailureType",
+      "entity_type": "Information Element",
+      "description": "Indicates the type of connection failure: 'rlf' for radio link failure or 'hof' for handover failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "VarConditionalReconfig",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Information Element",
+      "description": "UE variable storing conditional reconfiguration information, including candidate cells for conditional handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "failedPCellId",
+      "name": "failedPCellId",
+      "entity_type": "Information Element",
+      "description": "Identifies the failed PCell using global cell identity, tracking area code, or physical cell identity and carrier frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "previousPCellId",
+      "name": "previousPCellId",
+      "entity_type": "Information Element",
+      "description": "Identifies the previous PCell where the last reconfigurationWithSync or MobilityFromNRCommand was received.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "timeConnFailure",
+      "name": "timeConnFailure",
+      "entity_type": "Information Element",
+      "description": "Elapsed time since the last relevant reconfiguration message or handover initialization until failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "choCandidateCellList",
+      "name": "choCandidateCellList",
+      "entity_type": "Information Element",
+      "description": "List of candidate target cells for conditional handover from VarConditionalReconfig, excluding those in measResultNeighCells.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "RLF_Condition",
+      "name": "Radio Link Failure Detected",
+      "entity_type": "Condition",
+      "description": "Condition where the UE detects radio link failure as described in clause 5.3.10.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "HOF_Condition",
+      "name": "Handover Failure Detected",
+      "entity_type": "Condition",
+      "description": "Condition where the UE detects handover failure (reconfiguration with sync failure) as described in clause 5.3.5.8.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RLF_Report_Procedure",
+      "target": "VarRLF_Report",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure populates and sets fields in VarRLF-Report based on failure type and available measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "VarRLF_Report",
+      "target": "measResultLastServCell",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes measResultLastServCell to store serving cell measurements at failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "VarRLF_Report",
+      "target": "measResultNeighCells",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes measResultNeighCells to store neighboring cell measurements ordered by best quality.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "VarRLF_Report",
+      "target": "connectionFailureType",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes connectionFailureType to indicate whether failure is RLF or HOF.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RLF_Condition",
+      "target": "connectionFailureType",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RLF is detected, connectionFailureType is set to 'rlf'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "HOF_Condition",
+      "target": "connectionFailureType",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When handover failure is detected, connectionFailureType is set to 'hof'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "VarRLF_Report",
+      "target": "failedPCellId",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes failedPCellId to identify the cell where failure occurred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "VarRLF_Report",
+      "target": "previousPCellId",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes previousPCellId to identify the cell where last reconfiguration was received.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "VarRLF_Report",
+      "target": "timeConnFailure",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes timeConnFailure to record elapsed time since last reconfiguration/handover start.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "VarConditionalReconfig",
+      "target": "choCandidateCellList",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarConditionalReconfig provides candidate cells for choCandidateCellList in VarRLF-Report.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "VarRLF_Report",
+      "target": "choCandidateCellList",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarRLF-Report includes choCandidateCellList from VarConditionalReconfig at failure time.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.5"
+      ]
+    }
+  ]
+}

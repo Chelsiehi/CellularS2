@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_BRM",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_CONTEXT_MOD",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for modifying EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used to initiate EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "IE_PROCEDURE_TRANSACTION_ID",
+      "name": "Procedure transaction identity IE",
+      "entity_type": "Information Element",
+      "description": "Information element identifying procedure transaction.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "State indicating bearer context is active.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "COND_PTI_NO_ASSIGNED",
+      "name": "Procedure transaction identity set to No procedure transaction identity assigned",
+      "entity_type": "Condition",
+      "description": "Condition where PTI IE indicates no procedure transaction identity assigned.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "COND_SAME_EPS_BEARER",
+      "name": "Same EPS bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition where EPS bearer in MODIFY EPS BEARER CONTEXT REQUEST matches the bearer UE requested to modify.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROCEDURE_TRANSACTION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains Procedure transaction identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PROCEDURE_TRANSACTION_ID",
+      "target": "COND_PTI_NO_ASSIGNED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure transaction identity IE condition guards the collision scenario.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PTI_NO_ASSIGNED",
+      "target": "PROC_UE_REQUESTED_BRM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PTI condition establishes UE shall abort UE requested bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_EPS_BEARER",
+      "target": "PROC_UE_REQUESTED_BRM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Same EPS bearer condition establishes UE shall abort UE requested bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_REQUESTED_BRM",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE enters BEARER CONTEXT ACTIVE state after aborting UE requested bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_BEARER_CONTEXT_ACTIVE",
+      "target": "PROC_EPS_BEARER_CONTEXT_MOD",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE proceeds with EPS bearer context modification procedure after entering BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.5"
+      ]
+    }
+  ]
+}

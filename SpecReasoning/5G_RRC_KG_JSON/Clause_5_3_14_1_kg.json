@@ -1,0 +1,127 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.14.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "ACCESS_BARRING_CHECK_PROCEDURE",
+      "name": "Access Barring Check Procedure",
+      "entity_type": "Procedure",
+      "description": "Performs access barring check for an access attempt associated with a given Access Category and one or more Access Identities upon request from upper layers or RRC layer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY",
+      "name": "Access Category",
+      "entity_type": "Identifier",
+      "description": "Identifies the category of access attempt for which barring check is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITIES",
+      "name": "Access Identities",
+      "entity_type": "Identifier",
+      "description": "One or more identities associated with the access attempt for barring check.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE is connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "PCell_CHANGE",
+      "name": "PCell Change",
+      "entity_type": "Condition",
+      "description": "Condition where the UE changes its primary cell in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "DEFER_ACCESS_BARRING",
+      "name": "Defer Access Barring Checks",
+      "entity_type": "Property",
+      "description": "UE behavior to postpone access barring checks until SIB1 is obtained from target cell after PCell change.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "System information block containing essential cell access parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_BARRING_CHECK_PROCEDURE",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access barring check procedure is performed for a specific Access Category.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_BARRING_CHECK_PROCEDURE",
+      "target": "ACCESS_IDENTITIES",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access barring check procedure is performed for one or more Access Identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PCell_CHANGE",
+      "target": "DEFER_ACCESS_BARRING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PCell change in RRC_CONNECTED state establishes the requirement to defer access barring checks.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DEFER_ACCESS_BARRING",
+      "target": "SIB1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Deferring access barring checks requires obtaining SIB1 from the target cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PCell_CHANGE",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PCell change occurs when UE is in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.1"
+      ]
+    }
+  ]
+}

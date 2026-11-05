@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.19.16",
+  "title": "Rejected NSSAI",
+  "entities": [
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element used by the network to inform the UE of one or more S-NSSAIs that were previously sent in allowed NSSAI or pending NSSAI but are now rejected.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information, representing a network slice.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information that is currently allowed for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "PENDING_NSSAI",
+      "name": "Pending NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information that is pending network approval.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "CONDITION_PREVIOUSLY_SENT",
+      "name": "Previously sent in allowed or pending NSSAI",
+      "entity_type": "Condition",
+      "description": "Condition that S-NSSAIs were previously provided to the UE in allowed NSSAI or pending NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "PROPERTY_REJECTED_BY_NETWORK",
+      "name": "Rejected by network",
+      "entity_type": "Property",
+      "description": "Property indicating that the S-NSSAIs are now considered rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_REJECTED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Rejected NSSAI IE contains one or more S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REJECTED_NSSAI",
+      "target": "CONDITION_PREVIOUSLY_SENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Rejected NSSAI applies to S-NSSAIs that were previously sent in allowed or pending NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_PREVIOUSLY_SENT",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Condition references S-NSSAIs from allowed NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_PREVIOUSLY_SENT",
+      "target": "PENDING_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Condition references S-NSSAIs from pending NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_PREVIOUSLY_SENT",
+      "target": "PROPERTY_REJECTED_BY_NETWORK",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of previously sent S-NSSAIs establishes the property that they are now rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.16"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of bearers for user data or signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used for CS fallback or 1xCS fallback service requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used for control plane service requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject a service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM state where no NAS signaling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition when lower layer indicates failure before service request completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "COND_PROTOCOL_ERROR",
+      "name": "Protocol error in service request message",
+      "entity_type": "Condition",
+      "description": "Condition when SERVICE REQUEST, EXTENDED SERVICE REQUEST or CONTROL PLANE SERVICE REQUEST contains protocol errors.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "COND_DIFFERENT_IE",
+      "name": "Different information elements in subsequent service requests",
+      "entity_type": "Condition",
+      "description": "Condition when information elements differ between subsequent service request messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "COND_SAME_IE",
+      "name": "Same information elements in subsequent service requests",
+      "entity_type": "Condition",
+      "description": "Condition when information elements are identical between subsequent service request messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_SERVICE_REQUEST",
+      "name": "Abort service request procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to terminate ongoing service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "PROP_CONTINUE_SERVICE_REQUEST",
+      "name": "Continue service request procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to continue with existing service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes network to enter/stay in EMM-IDLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PROTOCOL_ERROR",
+      "target": "MSG_SERVICE_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Protocol error in service request message triggers SERVICE REJECT response.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_DIFFERENT_IE",
+      "target": "PROP_ABORT_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Different IEs in subsequent service requests cause abortion of previous procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_IE",
+      "target": "PROP_CONTINUE_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Same IEs in subsequent service requests cause continuation of existing procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "PROP_ABORT_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ATTACH REQUEST received during service request procedure may cause abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TAU_REQUEST",
+      "target": "PROP_ABORT_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST received during service request procedure may cause abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.7"
+      ]
+    }
+  ]
+}

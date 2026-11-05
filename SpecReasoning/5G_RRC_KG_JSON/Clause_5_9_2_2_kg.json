@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.2.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "name": "MCCH information acquisition procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure applied by UE to acquire MCCH information for receiving MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "INTERESTED_IN_MBS_BROADCAST",
+      "name": "UE interested to receive MBS broadcast services",
+      "entity_type": "Condition",
+      "description": "Condition where UE becomes interested in receiving MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "ENTER_CELL_WITH_SIB20",
+      "name": "UE entering cell providing SIB20",
+      "entity_type": "Condition",
+      "description": "Condition triggered by UE mobility events like power on or cell change.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "MCCH_INFO_CHANGE_NOTIFICATION_NEW_SERVICE",
+      "name": "Notification of MCCH information change due to new MBS service start",
+      "entity_type": "Condition",
+      "description": "Notification received by UE indicating MCCH information changed due to new MBS service initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "RECEIVING_BROADCAST_MRB",
+      "name": "UE receiving data via broadcast MRB",
+      "entity_type": "Condition",
+      "description": "Condition where UE is actively receiving data through broadcast Multicast Radio Bearer.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "MCCH_INFO_CHANGE_NOTIFICATION_MODIFICATION",
+      "name": "Notification of MCCH information modification",
+      "entity_type": "Condition",
+      "description": "Notification received by UE indicating MCCH information changed due to modifications other than new MBS session start.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "OVERWRITE_STORED_MCCH_INFO",
+      "name": "Overwrite stored MCCH information",
+      "entity_type": "Property",
+      "description": "Property where MCCH information acquisition procedure overwrites any previously stored MCCH information without delta configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "DISCONTINUE_ABSENT_FIELD",
+      "name": "Discontinue using absent field",
+      "entity_type": "Property",
+      "description": "Property where UE discontinues using a field if it is absent in the newly acquired MCCH information.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTERESTED_IN_MBS_BROADCAST",
+      "target": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE applies MCCH information acquisition procedure when becoming interested in MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ENTER_CELL_WITH_SIB20",
+      "target": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE applies MCCH information acquisition procedure upon entering a cell providing SIB20.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MCCH_INFO_CHANGE_NOTIFICATION_NEW_SERVICE",
+      "target": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE applies MCCH information acquisition procedure upon notification of MCCH change due to new MBS service start.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RECEIVING_BROADCAST_MRB",
+      "target": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE receiving broadcast MRB applies MCCH information acquisition procedure upon MCCH change notification.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MCCH_INFO_CHANGE_NOTIFICATION_MODIFICATION",
+      "target": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE applies MCCH information acquisition procedure upon notification of MCCH modification other than new session start.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "target": "OVERWRITE_STORED_MCCH_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MCCH information acquisition procedure overwrites stored MCCH information without delta configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MCCH_INFO_ACQUISITION_PROCEDURE",
+      "target": "DISCONTINUE_ABSENT_FIELD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE discontinues using a field if it is absent in the acquired MCCH information.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.2"
+      ]
+    }
+  ]
+}

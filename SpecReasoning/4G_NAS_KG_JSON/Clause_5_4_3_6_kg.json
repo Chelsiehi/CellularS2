@@ -1,0 +1,174 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing security between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE location in tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Initial procedure for UE registration to network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing user plane connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message confirming successful security mode activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT message",
+      "entity_type": "Message",
+      "description": "Message rejecting security mode activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "COND_TRANSMISSION_FAILURE",
+      "name": "Transmission failure indication from lower layers",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate message transmission failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGE",
+      "name": "TAI change indication",
+      "entity_type": "Condition",
+      "description": "Condition where tracking area identity changes during transmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current tracking area identity is not in stored TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Behavior where UE aborts ongoing procedure due to abnormal conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROP_REINITIATE_PROCEDURE",
+      "name": "Procedure re-initiation",
+      "entity_type": "Property",
+      "description": "Behavior where UE re-initiates a procedure after abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_TRANSMISSION_FAILURE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Transmission failure of security mode messages causes procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROP_ABORT_PROCEDURE",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Security mode control procedure is aborted due to transmission failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_REINITIATE_PROCEDURE",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE re-initiates tracking area updating procedure after security mode abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_REINITIATE_PROCEDURE",
+      "target": "PROC_ATTACH",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE re-initiates attach procedure after security mode abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROP_REINITIATE_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When current TAI is not in TAI list, UE re-initiates tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TAI_CHANGE",
+      "target": "COND_TAI_NOT_IN_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI change condition may lead to TAI not in list condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.6"
+      ]
+    }
+  ]
+}

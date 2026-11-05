@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.12",
+  "title": "Handling of network rejection not due to congestion control",
+  "entities": [
+    {
+      "id": "MSG_5GS_SESSION_MANAGEMENT_REJECT",
+      "name": "5GS session management reject message",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject a 5GS session management procedure, containing back-off timer and re-attempt indicator.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "Timer value included in 5GS session management reject message to regulate UE retry intervals for specific 5GSM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "Indicator included in 5GS session management reject message to specify whether UE can re-attempt procedure in S1 mode after inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "5GS session management procedure for establishing a PDU session, subject to back-off timer restrictions when rejected.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "PROC_PDU_SESSION_MODIFICATION",
+      "name": "PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "5GS session management procedure for modifying an existing PDU session, subject to back-off timer restrictions when rejected.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "COND_5GSM_CAUSE_NON_CONGESTION",
+      "name": "5GSM cause values triggering back-off timer",
+      "entity_type": "Condition",
+      "description": "Specific 5GSM cause values (excluding congestion-related causes) that trigger network to include back-off timer in reject message.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "COND_REATTEMPT_ALLOWED",
+      "name": "Re-attempt in S1 mode allowed condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is allowed to re-attempt session management procedure in S1 mode after inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "PROP_UE_BLOCKED_FROM_RETRY",
+      "name": "UE blocked from sending 5GSM requests",
+      "entity_type": "Property",
+      "description": "Behavior where UE is prevented from sending 5GSM requests for specific combinations during back-off timer duration.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "PROP_HIGH_PRIORITY_ACCESS_EXEMPTION",
+      "name": "High priority access exemption",
+      "entity_type": "Property",
+      "description": "Exception allowing UE configured for high priority access to initiate 5GSM procedures even when back-off timer is running.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "PROP_EMERGENCY_SESSION_EXEMPTION",
+      "name": "Emergency PDU session exemption",
+      "entity_type": "Property",
+      "description": "Exception where back-off timer does not affect UE's ability to request emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_5GS_SESSION_MANAGEMENT_REJECT",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GS session management reject message contains back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_5GS_SESSION_MANAGEMENT_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GS session management reject message contains re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_5GSM_CAUSE_NON_CONGESTION",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer inclusion is guarded by specific 5GSM cause values (excluding congestion causes).",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_BACK_OFF_TIMER",
+      "target": "PROP_UE_BLOCKED_FROM_RETRY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Active back-off timer establishes that UE is blocked from sending 5GSM requests for specific combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REATTEMPT_ALLOWED",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer applicability scope is guarded by re-attempt indicator condition.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_HIGH_PRIORITY_ACCESS_EXEMPTION",
+      "target": "PROP_UE_BLOCKED_FROM_RETRY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "High priority access exemption establishes that UE can bypass blocking from back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_EMERGENCY_SESSION_EXEMPTION",
+      "target": "PROP_UE_BLOCKED_FROM_RETRY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency PDU session exemption establishes that UE can request emergency sessions despite back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "MSG_5GS_SESSION_MANAGEMENT_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "PDU session establishment procedure can be rejected by 5GS session management reject message.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_PDU_SESSION_MODIFICATION",
+      "target": "MSG_5GS_SESSION_MANAGEMENT_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "PDU session modification procedure can be rejected by 5GS session management reject message.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.12"
+      ]
+    }
+  ]
+}

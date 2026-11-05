@@ -1,0 +1,136 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_TRANSPORT_NAS_MESSAGES",
+      "name": "Transport of NAS messages procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to carry SMS messages in an encapsulated form between the MME and the UE. Can be initiated by UE or network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to encapsulate SMS messages for transport.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "Control Plane Service Request message",
+      "entity_type": "Message",
+      "description": "Message used to transport first SMS message when UE is in EMM-IDLE mode with control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management connected state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "COND_ATTACHED_EPS_NON_EPS_SMS_ONLY",
+      "name": "UE attached for EPS and non-EPS services or EPS and SMS only",
+      "entity_type": "Condition",
+      "description": "Condition requiring UE to be attached for EPS services and non-EPS services or for EPS services and SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "COND_CIOT_EPS_OPTIMIZATION",
+      "name": "Control plane CIoT EPS optimization",
+      "entity_type": "Condition",
+      "description": "Condition when UE is using EPS services with control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "PROP_NO_PDN_CONNECTIONS",
+      "name": "No PDN connections established",
+      "entity_type": "Property",
+      "description": "Property where UE does not have any PDN connections established.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TRANSPORT_NAS_MESSAGES",
+      "target": "COND_ATTACHED_EPS_NON_EPS_SMS_ONLY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Transport of NAS messages procedure requires UE to be attached for EPS and non-EPS services or EPS and SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TRANSPORT_NAS_MESSAGES",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Transport of NAS messages procedure requires UE to be in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Control Plane Service Request message contains NAS message container IE for SMS transport.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CIOT_EPS_OPTIMIZATION",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When UE is using control plane CIoT EPS optimization, first SMS message is transported via Control Plane Service Request message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CIOT_EPS_OPTIMIZATION",
+      "target": "PROP_NO_PDN_CONNECTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is using control plane CIoT EPS optimization, network can initiate downlink transport even if UE has no PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.1"
+      ]
+    }
+  ]
+}

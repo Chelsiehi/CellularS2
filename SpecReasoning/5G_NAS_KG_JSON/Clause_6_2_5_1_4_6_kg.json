@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.4.6",
+  "title": "Ignoring RQI in the UE",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The user equipment that receives downlink user data packets and processes them according to 3GPP specifications.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "DL_USER_DATA_PACKET",
+      "name": "Downlink User Data Packet",
+      "entity_type": "Property",
+      "description": "A data packet transmitted from the network to the UE, marked with QFI and RQI parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "QFI",
+      "name": "QoS Flow Identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier for a QoS flow in 5G systems, used to classify and manage quality of service for data packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "RQI",
+      "name": "Reflective QoS Indication",
+      "entity_type": "Identifier",
+      "description": "Indication used in reflective QoS to signal that uplink packet filters should be derived from downlink packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "PACKET_FILTER_DERIVATION_CONDITION",
+      "name": "Packet Filter Derivation Condition",
+      "entity_type": "Condition",
+      "description": "Condition where it is not possible to derive an uplink packet filter from the received downlink user data packet as specified in subclause 6.2.5.1.4.2.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "RQI_IGNORE_BEHAVIOR",
+      "name": "RQI Ignore Behavior",
+      "entity_type": "Property",
+      "description": "UE behavior where the RQI is ignored and the downlink user data packet is handled normally when packet filter derivation is not possible.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DL_USER_DATA_PACKET",
+      "target": "QFI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The downlink user data packet is marked with a QFI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DL_USER_DATA_PACKET",
+      "target": "RQI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The downlink user data packet is marked with an RQI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "PACKET_FILTER_DERIVATION_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE behavior is guarded by the condition that packet filter derivation is not possible.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PACKET_FILTER_DERIVATION_CONDITION",
+      "target": "RQI_IGNORE_BEHAVIOR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When packet filter derivation is not possible, the UE establishes the behavior of ignoring RQI and handling the downlink packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.10",
+  "title": "Handling of 3GPP PS data off",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a PDU session. UE provides 3GPP PS data off UE status in Extended protocol configuration options IE during this procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify an existing PDU session. Used to indicate changes in 3GPP PS data off UE status.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PCO",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to carry 3GPP PS data off UE status during PDU session establishment and modification procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "STATUS_PS_DATA_OFF_ACTIVATED",
+      "name": "3GPP PS data off UE status activated",
+      "entity_type": "State",
+      "description": "State where UE restricts uplink data transmission via 3GPP access except for exempt services.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "CONFIG_HPLMN_EXEMPT_LIST",
+      "name": "3GPP PS data off exempt services list for HPLMN/EHPLMN",
+      "entity_type": "Property",
+      "description": "Configured list of services exempt from PS data off restrictions when UE is in HPLMN or EHPLMN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "CONFIG_VPLMN_EXEMPT_LIST",
+      "name": "3GPP PS data off exempt services list for VPLMN",
+      "entity_type": "Property",
+      "description": "Configured list of services exempt from PS data off restrictions when UE is in VPLMN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "CONFIG_SUBSCRIBED_SNPN_EXEMPT_LIST",
+      "name": "3GPP PS data off exempt services list for subscribed SNPN",
+      "entity_type": "Property",
+      "description": "Configured list of services exempt from PS data off restrictions when UE is in subscribed SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "CONFIG_NON_SUBSCRIBED_SNPN_EXEMPT_LIST",
+      "name": "3GPP PS data off exempt services list for non-subscribed SNPN",
+      "entity_type": "Property",
+      "description": "Configured list of services exempt from PS data off restrictions when UE is in non-subscribed SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "CONDITION_STATUS_CHANGED",
+      "name": "3GPP PS data off UE status changed since last providing",
+      "entity_type": "Condition",
+      "description": "Condition where UE's PS data off status has changed since last reported to network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_RESTRICT_UPLINK",
+      "name": "Restrict uplink data transmission",
+      "entity_type": "Property",
+      "description": "UE behavior to restrict uplink IP, Ethernet, and Unstructured user data packets via 3GPP access when PS data off is activated.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides 3GPP PS data off UE status in Extended protocol configuration options IE during PDU session establishment",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_PDU_SESSION_MODIFICATION",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides 3GPP PS data off UE status in Extended protocol configuration options IE during PDU session modification",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_STATUS_CHANGED",
+      "target": "IE_EXTENDED_PCO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE must provide PS data off status in Extended PCO IE if the status has changed since last providing",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATUS_PS_DATA_OFF_ACTIVATED",
+      "target": "BEHAVIOR_RESTRICT_UPLINK",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PS data off status is activated, UE restricts uplink data transmission via 3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "BEHAVIOR_RESTRICT_UPLINK",
+      "target": "CONFIG_HPLMN_EXEMPT_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Uplink restriction does not apply to services in HPLMN/EHPLMN exempt list",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "BEHAVIOR_RESTRICT_UPLINK",
+      "target": "CONFIG_VPLMN_EXEMPT_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Uplink restriction does not apply to services in VPLMN exempt list",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "BEHAVIOR_RESTRICT_UPLINK",
+      "target": "CONFIG_SUBSCRIBED_SNPN_EXEMPT_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Uplink restriction does not apply to services in subscribed SNPN exempt list",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "BEHAVIOR_RESTRICT_UPLINK",
+      "target": "CONFIG_NON_SUBSCRIBED_SNPN_EXEMPT_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Uplink restriction does not apply to services in non-subscribed SNPN exempt list",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_PDU_SESSION_MODIFICATION",
+      "target": "CONDITION_STATUS_CHANGED",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE uses PDU session modification procedure to indicate changes in PS data off status",
+      "provenance": [
+        "TS 24.501, Clause 6.2.10"
+      ]
+    }
+  ]
+}

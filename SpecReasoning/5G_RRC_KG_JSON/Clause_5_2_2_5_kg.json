@@ -1,0 +1,187 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.5",
+  "title": "Essential system information missing",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that performs system information acquisition and cell barring procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "Radio Resource Control idle state where UE is not actively connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "Radio Resource Control inactive state where UE maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "Radio Resource Control connected state where UE has an active connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer running during connection establishment or recovery procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "MIB",
+      "name": "Master Information Block",
+      "entity_type": "Information Element",
+      "description": "Essential system information block containing basic cell parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "Essential system information block containing cell access parameters and scheduling information.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "CELL_BARRING",
+      "name": "Cell barring procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE considers a cell as barred and performs appropriate actions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REDCAP_UE",
+      "name": "RedCap UE",
+      "entity_type": "Property",
+      "description": "Reduced Capability User Equipment with specific barring procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION",
+      "name": "Cell re-selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects and moves to another cell on the same frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_BARRING",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barring procedure is performed when UE is in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_BARRING",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barring procedure is performed when UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CELL_BARRING",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barring procedure is performed when UE is in RRC_CONNECTED state while T311 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CELL_BARRING",
+      "target": "T311",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell barring procedure requires T311 timer to be running in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CELL_BARRING",
+      "target": "MIB",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell barring is triggered when UE is unable to acquire MIB.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CELL_BARRING",
+      "target": "SIB1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell barring is triggered when UE is unable to acquire SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CELL_BARRING",
+      "target": "REDCAP_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Specific barring procedure applies when UE is a RedCap UE unable to acquire SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CELL_BARRING",
+      "target": "CELL_RESELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Cell barring procedure includes cell re-selection to other cells on the same frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.5"
+      ]
+    }
+  ]
+}

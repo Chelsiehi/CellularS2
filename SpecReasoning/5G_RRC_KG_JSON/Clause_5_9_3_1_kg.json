@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_BROADCAST_MRB_CONFIG",
+      "name": "Broadcast MRB Configuration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the UE to configure PDCP, RLC, MAC and the physical layer for broadcast MRB reception on MTCH. It handles starting, stopping, or modifying configuration of broadcast MRB reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC idle state where UE can receive broadcast MRB configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC inactive state where UE can receive broadcast MRB configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC connected state where UE can receive broadcast MRB configuration when specific conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "COND_ACTIVE_BWP_COMMON_SS",
+      "name": "Active BWP with common search space configured by searchSpaceMTCH",
+      "entity_type": "Condition",
+      "description": "Condition for RRC_CONNECTED UEs to apply broadcast MRB configuration procedure - requires active BWP with common search space configured by searchSpaceMTCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "PROP_MBS_CAPABLE",
+      "name": "MBS Capable UE",
+      "entity_type": "Property",
+      "description": "Property indicating UE supports MBS (Multicast Broadcast Service) and is interested in or receiving MBS broadcast service.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "CHANNEL_MTCH",
+      "name": "MTCH",
+      "entity_type": "Property",
+      "description": "Multicast Traffic Channel used for broadcast MRB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_BROADCAST_MRB_CONFIG",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Broadcast MRB configuration procedure applies to UEs in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_BROADCAST_MRB_CONFIG",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Broadcast MRB configuration procedure applies to UEs in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_BROADCAST_MRB_CONFIG",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Broadcast MRB configuration procedure applies to UEs in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "COND_ACTIVE_BWP_COMMON_SS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC_CONNECTED state requires active BWP with common search space configured by searchSpaceMTCH for broadcast MRB configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_BROADCAST_MRB_CONFIG",
+      "target": "PROP_MBS_CAPABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Broadcast MRB configuration procedure applies to MBS capable UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_BROADCAST_MRB_CONFIG",
+      "target": "CHANNEL_MTCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Broadcast MRB configuration procedure configures layers for receiving broadcast MRB transmitted on MTCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.3.1"
+      ]
+    }
+  ]
+}

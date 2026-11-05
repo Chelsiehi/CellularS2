@@ -1,0 +1,285 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.3B",
+  "title": "Procedures related to EAP methods used for primary authentication of an N5GC device",
+  "entities": [
+    {
+      "id": "EAP_Primary_Auth_Procedure",
+      "name": "EAP-based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP methods supporting mutual authentication (other than EAP-AKA') for N5GC devices, involving W-AGF, AMF, and AUSF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "AUSF",
+      "name": "AUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function supporting authentication of N5GC device and acting as EAP server for at least one EAP method.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "N5GC_Device",
+      "name": "N5GC device",
+      "entity_type": "Property",
+      "description": "Device acting as EAP peer for at least one EAP method supported by AUSF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "W_AGF",
+      "name": "W-AGF acting on behalf of N5GC device",
+      "entity_type": "Property",
+      "description": "Wireline Access Gateway Function relaying EAP messages between N5GC device and network, handling timers and state transitions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "EAP_Request",
+      "name": "EAP-request message",
+      "entity_type": "Message",
+      "description": "EAP message sent from network to N5GC device via W-AGF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "EAP_Response",
+      "name": "EAP-response message",
+      "entity_type": "Message",
+      "description": "EAP message sent from N5GC device to network via W-AGF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "EAP_Success",
+      "name": "EAP-success message",
+      "entity_type": "Message",
+      "description": "EAP message indicating successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "EAP_Failure",
+      "name": "EAP-failure message",
+      "entity_type": "Message",
+      "description": "EAP message indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message containing EAP-request, ngKSI, and ABBA values.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "NAS message containing EAP-response message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REJECT",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message transporting EAP-failure message in EAP result message transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "T3520",
+      "name": "Timer T3520",
+      "entity_type": "Timer",
+      "description": "Timer started by W-AGF when AUTHENTICATION RESPONSE with EAP-response is sent if N5GC device fails to authenticate network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "T3247",
+      "name": "Timer T3247",
+      "entity_type": "Timer",
+      "description": "Timer started by W-AGF upon receiving AUTHENTICATION REJECT with EAP-failure, with random value between 30-60 minutes.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "State entered by W-AGF upon receiving AUTHENTICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "Network_Auth_Failure",
+      "name": "Network authentication failure",
+      "entity_type": "Condition",
+      "description": "Condition when N5GC device fails to authenticate the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "Device_Auth_Failure",
+      "name": "N5GC device authentication failure",
+      "entity_type": "Condition",
+      "description": "Condition when network fails to authenticate the N5GC device.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_Primary_Auth_Procedure",
+      "target": "AUSF",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires AUSF to act as EAP server.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_Primary_Auth_Procedure",
+      "target": "N5GC_Device",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires N5GC device to act as EAP peer.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EAP_Primary_Auth_Procedure",
+      "target": "W_AGF",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires W-AGF to relay EAP messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "EAP_Request",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains EAP-request message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "EAP_Response",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains EAP-response message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "EAP_Failure",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message contains EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "Network_Auth_Failure",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network authentication failure condition starts timer T3520.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving AUTHENTICATION REQUEST with EAP-request stops timer T3520 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "T3247",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving AUTHENTICATION REJECT with EAP-failure starts timer T3247.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving AUTHENTICATION REJECT establishes 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EAP_Success",
+      "target": "EAP_Primary_Auth_Procedure",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving EAP-success message completes the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "EAP_Failure",
+      "target": "EAP_Primary_Auth_Procedure",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving EAP-failure message completes the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3B"
+      ]
+    }
+  ]
+}

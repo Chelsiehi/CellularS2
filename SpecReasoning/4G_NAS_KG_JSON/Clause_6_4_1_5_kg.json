@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to request activation of a default EPS bearer context",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifier for EPS bearer contexts",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "DEFAULT_EPS_BEARER_CONTEXT_ACTIVATED",
+      "name": "Default EPS bearer context activated",
+      "entity_type": "Condition",
+      "description": "Condition where a default EPS bearer context is already active",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "DEDICATED_EPS_BEARER_CONTEXT_ACTIVATED",
+      "name": "Dedicated EPS bearer context activated",
+      "entity_type": "Condition",
+      "description": "Condition where a dedicated EPS bearer context is already active",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "LOCAL_DEACTIVATION_DEFAULT",
+      "name": "Local deactivation of default EPS bearer context",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE locally deactivates existing default EPS bearer context and associated dedicated EPS bearer contexts",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "LOCAL_DEACTIVATION_DEDICATED",
+      "name": "Local deactivation of dedicated EPS bearer context",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE locally deactivates existing dedicated EPS bearer context",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "DEFAULT_EPS_BEARER_ACTIVATION",
+      "name": "Default EPS bearer context activation",
+      "entity_type": "Procedure",
+      "description": "Procedure to activate a default EPS bearer context",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message contains EPS bearer identity IE",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DEFAULT_EPS_BEARER_CONTEXT_ACTIVATED",
+      "target": "LOCAL_DEACTIVATION_DEFAULT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of already activated default EPS bearer context triggers local deactivation procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOCAL_DEACTIVATION_DEFAULT",
+      "target": "DEFAULT_EPS_BEARER_ACTIVATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Local deactivation procedure is followed by default EPS bearer context activation",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DEDICATED_EPS_BEARER_CONTEXT_ACTIVATED",
+      "target": "LOCAL_DEACTIVATION_DEDICATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of already activated dedicated EPS bearer context triggers local deactivation procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "LOCAL_DEACTIVATION_DEDICATED",
+      "target": "DEFAULT_EPS_BEARER_ACTIVATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Local deactivation procedure is followed by default EPS bearer context activation",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.5"
+      ]
+    }
+  ]
+}

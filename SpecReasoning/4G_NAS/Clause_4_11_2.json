@@ -1,0 +1,33 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.11.2",
+  "title": "Handling list of \"PLMNs not allowed to operate at the present UE location\"",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "----------------------------------------------------------------------------------",
+    "The UE may be rejected with EMM cause #78 in ATTACH REJECT message, TRACKING AREA UPDATE REJECT message or DETACH REQUEST message. The EMM cause #78 is applicable for the UE only when the UE is accessing a PLMN using a satellite E-UTRAN access",
+    "For the satellite E-UTRAN access the UE shall store a list of \"PLMN not allowed to operate at the present UE location\". Each entry in the list consists of",
+    "a) PLMN identity of the PLMN which sent a message including EMM cause value #78 \"PLMN not allowed to operate at the present UE location\" via the satellite E-UTRAN access technology",
+    "b) geographical location, if known by the UE, where the EMM cause value #78 was received over the satellite E-UTRAN access technology; and",
+    "c) if the geographical location exists, a UE implementation specific distance value",
+    "Before storing a new entry in the list, the UE shall delete any existing entry with the same PLMN identity. Upon storing a new entry, the UE starts a timer instance associated with the entry with an implementation specific value that shall not be set to a value smaller than the timer value indicated by the network, if any",
+    "Editor 's note: A minimum value for the timer can be optionally provided by the network in the same message as cause value #78, but IE naming and definition is FFS",
+    "The UE shall not attempt to access a PLMN via the satellite E-UTRAN access technology which is part of the list of \"PLMNs not allowed to operate at the present UE location\" if",
+    "a) the current UE location is known, a geographical location is stored for the entry of this PLMN, and the distance from location where EMM cause value #78 was received to the current UE location is smaller than a UE implementation specific value",
+    "b) the timer associated with the entry of this PLMN has expired; or",
+    "c) the access is for emergency services (see 3GPP S 23.122 [5] for further details)",
+    "NOTE: If the current location is not known or the geographic location is not stored for the entry of this PLMN, condition a) is ignored",
+    "The list shall accommodate three or more entries. The maximum number of entries is an implementation decision. When the list is full and a new entry has to be inserted, the oldest entry shall be deleted",
+    "Each entry shall be removed if for the entry",
+    "a) the UE successfully registers via the satellite E-UTRAN access technology to the PLMN stored in the entry; or",
+    "b) the timer instance associated with the entry expires",
+    "The UE may remove an entry in the list, if the UE 's current location is known, a geographical is stored for the entry of this PLMN, and the distance from location where EMM cause value #78 was received to the current UE location is larger than the UE implementation specific value",
+    "When the UE is switched off, the UE shall keep the list of \"PLMNs not allowed to operate at the present UE location\" in its non-volatile memory together with the SUPI from the USIM. The UE shall delete the list of \"PLMNs not allowed to operate at the present UE location\" if the USIM is removed",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.3.7",
+  "title": "EMM-DEREGISTERED.ATTACH-NEEDED",
+  "entities": [
+    {
+      "id": "STATE_EMM_DEREGISTERED_ATTACH_NEEDED",
+      "name": "EMM-DEREGISTERED.ATTACH-NEEDED",
+      "entity_type": "State",
+      "description": "A substate of EMM-DEREGISTERED where valid subscriber data are available for the UE and an attach must be performed as soon as possible.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_CLASS_BLOCKED",
+      "name": "Access class blocked due to access class control",
+      "entity_type": "Condition",
+      "description": "Condition where the UE's access class is blocked preventing network access.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_NAS_CONNECTION_REJECTED",
+      "name": "NAS signalling connection establishment rejected",
+      "entity_type": "Condition",
+      "description": "Condition where the network rejects the establishment of a NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    },
+    {
+      "id": "PROP_ATTACH_REQUIRED",
+      "name": "Attach must be performed as soon as possible",
+      "entity_type": "Property",
+      "description": "System behavior requiring immediate attach procedure execution when valid subscriber data is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_ACCESS_CLASS_BLOCKED",
+      "target": "STATE_EMM_DEREGISTERED_ATTACH_NEEDED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access class blocking condition can lead to entering the ATTACH-NEEDED substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NAS_CONNECTION_REJECTED",
+      "target": "STATE_EMM_DEREGISTERED_ATTACH_NEEDED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NAS connection rejection condition can lead to entering the ATTACH-NEEDED substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_EMM_DEREGISTERED_ATTACH_NEEDED",
+      "target": "PROP_ATTACH_REQUIRED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in ATTACH-NEEDED state establishes the requirement to perform attach as soon as possible.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.7"
+      ]
+    }
+  ]
+}

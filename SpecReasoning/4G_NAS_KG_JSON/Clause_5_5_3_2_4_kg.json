@@ -1,0 +1,256 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.4",
+  "title": "Normal and periodic tracking area updating procedure accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_TAU_ACCEPTED",
+      "name": "Tracking Area Update Accepted Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when the network accepts a tracking area update request from the UE. The MME sends a TRACKING AREA UPDATE ACCEPT message and may assign new GUTI, start timer T3450, and enter state EMM-COMMON-PROCEDURE-INITIATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "MSG_TAU_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the MME to the UE when the tracking area update request is accepted. May contain GUTI, TAI list, EPS bearer context status, and various IEs.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate tracking area updating procedure. Contains various IEs like UE network capability, EPS update type, and DRX parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "MSG_TAU_COMPLETE",
+      "name": "TRACKING AREA UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to acknowledge receipt of GUTI or Negotiated IMSI offset in TRACKING AREA UPDATE ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Information Element",
+      "description": "Globally Unique Temporary Identity assigned to the UE. Included in TRACKING AREA UPDATE ACCEPT when MME assigns new GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list provided to the UE in TRACKING AREA UPDATE ACCEPT. MME may include new TAI list for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "name": "EPS bearer context status",
+      "entity_type": "Information Element",
+      "description": "IE indicating which EPS bearer contexts are active. Included in TRACKING AREA UPDATE ACCEPT to inform UE about locally deactivated bearers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_UPDATE_NEEDED",
+      "name": "UE radio capability information update needed",
+      "entity_type": "Information Element",
+      "description": "IE that triggers MME to delete stored UE radio capability information when included in TRACKING AREA UPDATE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3450",
+      "name": "T3450",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when GUTI is included in TRACKING AREA UPDATE ACCEPT. Stopped upon receiving TRACKING AREA UPDATE COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "T3430",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receiving TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "name": "EMM-COMMON-PROCEDURE-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by MME when starting timer T3450 after including GUTI in TRACKING AREA UPDATE ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE upon receiving TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_GUTI_INCLUDED",
+      "name": "GUTI included condition",
+      "entity_type": "Condition",
+      "description": "Condition where MME includes GUTI IE in TRACKING AREA UPDATE ACCEPT message, triggering timer T3450 start and state transition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_UE_RADIO_CAPABILITY",
+      "name": "Delete stored UE radio capability information",
+      "entity_type": "Property",
+      "description": "MME behavior to delete stored UE radio capability information or UE radio capability ID when UE radio capability information update needed IE is included in TRACKING AREA UPDATE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAU_ACCEPTED",
+      "target": "MSG_TAU_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending TRACKING AREA UPDATE ACCEPT message to UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain GUTI IE when MME assigns new GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_GUTI_INCLUDED",
+      "target": "TIMER_T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When GUTI is included in TRACKING AREA UPDATE ACCEPT, MME starts timer T3450.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_GUTI_INCLUDED",
+      "target": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When GUTI is included, MME enters state EMM-COMMON-PROCEDURE-INITIATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may include TAI list for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_UE_RADIO_CAPABILITY_UPDATE_NEEDED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST may contain UE radio capability information update needed IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_UE_RADIO_CAPABILITY_UPDATE_NEEDED",
+      "target": "PROP_DELETE_UE_RADIO_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Presence of UE radio capability information update needed IE in TRACKING AREA UPDATE REQUEST establishes MME behavior to delete stored UE radio capability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may include EPS bearer context status IE to inform UE about active/inactive bearers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_TAU_COMPLETE",
+      "target": "TIMER_T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of TRACKING AREA UPDATE COMPLETE message stops timer T3450.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3430 upon receiving TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_TAU_ACCEPT",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters state EMM-REGISTERED upon receiving TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.3.5",
+  "title": "NAS COUNT wrap around",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter used in NAS security procedures to prevent replay attacks. It increments with each NAS message and wraps around after reaching its maximum value.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function, responsible for NAS security context management and NAS COUNT monitoring.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment, maintains NAS COUNT and follows procedures for NAS COUNT wrap around handling.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "PRIMARY_AUTH_AKA",
+      "name": "Primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure that establishes a new 5G NAS security context and resets NAS COUNT to 0.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_CONTEXT",
+      "name": "5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context containing keys and parameters for NAS message protection, including NAS COUNT.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "NAS_CONN_RELEASE",
+      "name": "NAS signalling connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release the NAS signalling connection when NAS COUNT wraps around without new security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "NGKSI_DELETION",
+      "name": "ngKSI deletion",
+      "entity_type": "Property",
+      "description": "UE action to delete the ngKSI indicating the current 5G NAS security context before sending next uplink NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_5G_IA0",
+      "name": "5G-IA0 used as NAS integrity algorithm",
+      "entity_type": "Condition",
+      "description": "Condition where null integrity algorithm 5G-IA0 is used, allowing NAS COUNT wrap around without security context change.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "PRIMARY_AUTH_AKA",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF initiates primary authentication when NAS COUNT is close to wrap around and no suitable non-current security context exists.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PRIMARY_AUTH_AKA",
+      "target": "NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Primary authentication establishes a new 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PRIMARY_AUTH_AKA",
+      "target": "NAS_COUNT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "New security context activation resets NAS COUNT to 0 in both UE and AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE",
+      "target": "NAS_CONN_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE releases NAS signalling connection if NAS COUNT wraps around without new KAMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "NGKSI_DELETION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE deletes ngKSI before sending next uplink NAS message after NAS COUNT wrap around.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_5G_IA0",
+      "target": "NAS_SECURITY_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When 5G-IA0 is used, current NAS security context continues to be used after NAS COUNT wrap around.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_5G_IA0",
+      "target": "PRIMARY_AUTH_AKA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF shall not initiate primary authentication when 5G-IA0 is used and NAS COUNT wraps around.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_5G_IA0",
+      "target": "NAS_CONN_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS signalling connection shall not be released when 5G-IA0 is used and NAS COUNT wraps around.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.5"
+      ]
+    }
+  ]
+}

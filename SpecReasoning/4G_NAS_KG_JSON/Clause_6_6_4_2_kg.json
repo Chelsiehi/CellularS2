@@ -1,0 +1,221 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.4.2",
+  "title": "UE initiated transport of user data via the control plane",
+  "entities": [
+    {
+      "id": "PROC_UPLINK_DATA_CTRL_PLANE",
+      "name": "UE initiated transport of user data via the control plane",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to send user data via NAS control plane. Initiated when UE receives request to transfer user data via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2",
+        "Figure 6.6.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT",
+      "entity_type": "Message",
+      "description": "ESM message used to transport user data via control plane. Contains user data in User data container IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2",
+        "Figure 6.6.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to carry ESM DATA TRANSPORT when UE is in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "IE_USER_DATA_CONTAINER",
+      "name": "User data container",
+      "entity_type": "Information Element",
+      "description": "IE containing the user data to be transported. Length should not exceed link MTU size.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "IE_RELEASE_ASSISTANCE_INDICATION",
+      "name": "Release assistance indication",
+      "entity_type": "Information Element",
+      "description": "Optional IE indicating whether further data transmission is expected after current uplink data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "UE state where NAS signalling connection is established.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "UE state where no NAS signalling connection is established.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "COND_NO_FURTHER_DATA",
+      "name": "No further uplink or downlink data expected",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers indicate data exchanges complete with current UL data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "COND_SINGLE_DOWNLINK_DATA",
+      "name": "Only single downlink data expected",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers indicate data exchanges complete with next downlink data transmission.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "PROP_MME_FORWARD_DATA",
+      "name": "MME forwards user data to PDN connection",
+      "entity_type": "Property",
+      "description": "MME identifies PDN connection based on EPS bearer identity and forwards User data container contents.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "PROP_INITIATE_CONNECTION_RELEASE",
+      "name": "Initiate NAS signalling connection release",
+      "entity_type": "Property",
+      "description": "ESM layer indicates to EMM layer to initiate release of NAS signalling connection when release assistance indication is present.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UPLINK_DATA_CTRL_PLANE",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending ESM DATA TRANSPORT message",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2",
+        "Figure 6.6.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UPLINK_DATA_CTRL_PLANE",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be initiated when UE is in EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UPLINK_DATA_CTRL_PLANE",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be initiated when UE is in EMM-IDLE mode using CONTROL PLANE SERVICE REQUEST",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ESM_DATA_TRANSPORT",
+      "target": "IE_USER_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains User data container IE with user data",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ESM_DATA_TRANSPORT",
+      "target": "IE_RELEASE_ASSISTANCE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may optionally contain Release assistance indication IE",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_RELEASE_ASSISTANCE_INDICATION",
+      "target": "COND_NO_FURTHER_DATA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE value can indicate no further uplink or downlink data expected",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_RELEASE_ASSISTANCE_INDICATION",
+      "target": "COND_SINGLE_DOWNLINK_DATA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE value can indicate only single downlink data expected",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NO_FURTHER_DATA",
+      "target": "PROP_INITIATE_CONNECTION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers immediate NAS signalling connection release",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_SINGLE_DOWNLINK_DATA",
+      "target": "PROP_INITIATE_CONNECTION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers NAS signalling connection release after next downlink data delivery",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message includes ESM DATA TRANSPORT message when UE is in EMM-IDLE",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.2"
+      ]
+    }
+  ]
+}

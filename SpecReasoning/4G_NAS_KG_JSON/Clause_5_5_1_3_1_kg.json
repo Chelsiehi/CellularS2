@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_COMBINED_ATTACH",
+      "name": "Combined Attach Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by a UE in CS/PS mode 1 or CS/PS mode 2 to attach for both EPS and non-EPS services, or both EPS services and SMS only. Also used when UE is already IMSI attached for non-EPS services and attaches for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_ATTACH_TYPE",
+      "name": "EPS Attach Type IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of attach procedure. For combined attach, it carries the value 'combined EPS/IMSI attach'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_COMBINED_EPS_IMSI_ATTACH",
+      "name": "Combined EPS/IMSI Attach Indication",
+      "entity_type": "Condition",
+      "description": "Condition where the UE indicates 'combined EPS/IMSI attach' in the EPS attach type IE when initiating a combined attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_EPS_ATTACH",
+      "name": "EPS Attach Procedure",
+      "entity_type": "Procedure",
+      "description": "Base attach procedure for EPS services described in clause 5.5.1.2, which the combined attach procedure follows with exceptions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_COMBINED_ATTACH",
+      "target": "IE_EPS_ATTACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The combined attach procedure includes the EPS attach type IE with specific indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_ATTACH_TYPE",
+      "target": "CONDITION_COMBINED_EPS_IMSI_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS attach type IE is guarded by the condition that it must indicate 'combined EPS/IMSI attach' for combined attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_COMBINED_ATTACH",
+      "target": "PROCEDURE_EPS_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The combined attach procedure follows the steps of the EPS attach procedure with exceptions for specific clauses.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.1"
+      ]
+    }
+  ]
+}

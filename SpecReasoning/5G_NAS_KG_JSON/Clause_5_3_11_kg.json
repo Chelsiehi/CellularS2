@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.11",
+  "title": "Handling of S-NSSAI based congestion control",
+  "entities": [
+    {
+      "id": "SNS_CC_PROCEDURE",
+      "name": "S-NSSAI based congestion control",
+      "entity_type": "Procedure",
+      "description": "Congestion control procedure performed by AMF and UE when S-NSSAI congestion criteria are met. The AMF detects congestion and activates control, while both AMF and UE perform specified congestion control actions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that detects S-NSSAI congestion and activates congestion control procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that performs congestion control procedures when S-NSSAI based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "SNS_CRITERIA",
+      "name": "S-NSSAI congestion criteria",
+      "entity_type": "Condition",
+      "description": "One or more criteria specified in 3GPP TS 23.501 that trigger the AMF to start S-NSSAI based congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "DNN_SELECTION",
+      "name": "DNN selection for non-emergency PDU session",
+      "entity_type": "Condition",
+      "description": "When UE does not provide a DNN for non-emergency PDU session, AMF uses selected DNN or DNN associated with the PDU session corresponding to 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "SNS_SELECTION",
+      "name": "S-NSSAI selection for non-emergency PDU session",
+      "entity_type": "Condition",
+      "description": "When UE does not provide an S-NSSAI for non-emergency PDU session, AMF uses selected S-NSSAI or S-NSSAI associated with the PDU session corresponding to 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts performing S-NSSAI based congestion control when congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SNS_CRITERIA",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S-NSSAI congestion criteria trigger the activation of S-NSSAI based congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AMF",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "AMF performs congestion control as specified in subclause 5.4.5.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs congestion control as specified in subclause 5.4.5 and subclause 6.2.8.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DNN_SELECTION",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DNN selection condition applies during S-NSSAI based congestion control for non-emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SNS_SELECTION",
+      "target": "SNS_CC_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S-NSSAI selection condition applies during S-NSSAI based congestion control for non-emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.11"
+      ]
+    }
+  ]
+}

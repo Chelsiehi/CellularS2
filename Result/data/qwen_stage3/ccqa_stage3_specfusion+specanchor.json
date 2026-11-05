@@ -1,0 +1,247 @@
+{
+  "type": "CCQA",
+  "results": [
+    {
+      "dataset": "5G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0083",
+      "question": "For which PDU session types can IP header compression and Ethernet header compression be used, and what is a common procedural requirement for negotiating their configuration?",
+      "reference": "The UE and the SMF may use IP header compression for PDU sessions of \"IPv4\", \"IPv6\", or \"IPv4v6\" PDU session type, and Ethernet header compression for PDU sessions of \"Ethernet\" PDU session type (Clause_6_2_16). A common requirement is that the header compression configuration for each PDU session is negotiated during the PDU session establishment procedure and PDU session modification procedure if both the UE and the network support header compression (Clause_6_2_16).",
+      "gold_evidence": "TS 24.301, Clause 6.2.16, Handling of header compression for control plane CIoT optimizations; TS 24.301, Clause 6.2.16, Handling of header compression for control plane CIoT optimizations",
+      "model_answer": "- **IP header compression** can be used for PDU sessions of type **\"IPv4\", \"IPv6\", or \"IPv4v6\"** (Clause 6.2.16).  \n- **Ethernet header compression** can be used for PDU sessions of type **\"Ethernet\"** (Clause 6.2.16).  \n\n- **Common procedural requirement**: Configuration (initial negotiation or re-negotiation) of *either* IP or Ethernet header compression **requires mutual support indicated during registration** — i.e., both UE and network must indicate support for **Control plane CIoT 5GS optimization** *and* the respective header compression (IP or Ethernet) in the **5GMM capability IE** (UE) and **5GS network support feature IE** (network) (Clauses 8.3.1.10, 8.3.1.14, 6.2.16, and 6.4.2.2). The configuration is then negotiated via the corresponding IE (**IP header compression configuration IE** or **Ethernet header compression configuration IE**) in the **PDU SESSION ESTABLISHMENT REQUEST** or **PDU SESSION MODIFICATION REQUEST** messages (Clauses 6.3.2.2, 6.4.1.2, 6.4.1.3, 6.4.2.2, 8.3.2.17, 8.3.2.18).",
+      "evidence": "TS 24.501, Clause 6.2.16",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0029",
+      "question": "Which clauses state that no abnormal cases have been identified on the network side for their respective procedures?",
+      "reference": "Clause 6.6.3.6 states 'No abnormal cases have been identified'. Clause 6.6.4.5 states 'Apart from the case described in clause 6.3.4, no other abnormal cases have been identified'.",
+      "gold_evidence": "TS 24.301, Clause 6.6.3.6, Abnormal cases on the network side; TS 24.301, Clause 6.6.4.5, Abnormal cases on the network side",
+      "model_answer": "Clauses [1], [3], and [4] state that no abnormal cases have been identified on the network side for their respective procedures:\n\n- **Clause 6.6.3.6** ([1]): “No abnormal cases have been identified”  \n- **Clause 6.6.1.2.5** ([3]): “Apart from the case described in clause 6.3.3, no abnormal cases have been identified”  \n- **Clause 6.6.4.5** ([4]): “Apart from the case described in clause 6.3.4, no other abnormal cases have been identified”\n\nThese clauses pertain to NAS procedures (e.g., GUTI reallocation, identity procedure, security mode control — per context of Clause 6), and explicitly declare absence of identified abnormal cases (with narrow exceptions in [3] and [4]). In contrast, Clauses [5.4–5.7] (e.g., [5.5.1.2.7], [5.5.2.3.5], [5.6.1.7]) *do* enumerate abnormal cases.",
+      "evidence": "TS 24.301, Clause 6.6.3.6",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0007",
+      "question": "In which clauses is the NBIFOM container defined as an information element used to transfer information associated with network-based IP flow mobility?",
+      "reference": "The NBIFOM container is defined in multiple clauses, including Clause 8.3.1.3 and Clause 8.3.2.3, where it is described as an information element used to transfer information associated with network-based IP flow mobility, referencing 3GPP S 24.161 [36].",
+      "gold_evidence": "TS 24.301, Clause 8.3.1.3, NBIFOM container; TS 24.301, Clause 8.3.2.3, NBIFOM container",
+      "model_answer": "The NBIFOM container is defined in Clauses 8.3.1.3, 8.3.2.3, 8.3.3.9, 8.3.7.5, 8.3.8.4, 8.3.9.5, 8.3.10.6, and 8.3.17.3.",
+      "evidence": "TS 24.301, Clause 8.3.1.3",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_RRC_stage3-CCQA.json",
+      "id": "CCQA-0025",
+      "question": "What procedure is used by an IAB-MT to request IP addresses from the IAB-donor-CU, and what specific message field is set when IPv4 addresses are requested?",
+      "reference": "The IAB Other Information procedure is used by IAB-MT to request the IAB-donor-CU to allocate IP addresses. When IPv4 addresses are requested, the IAB-MT sets the iab-IPv4-AddressNumReq to the number of IPv4 addresses requested per specific usage.",
+      "gold_evidence": "TS 24.301, Clause 5.7.12.1, General IAB-MT Network IABOtherInformation; TS 24.301, Clause 5.7.12.3, Actions related to transmission of IABOtherInformation message",
+      "model_answer": "The IAB Other Information procedure (Clause 5.7.12.1) is used by the IAB-MT to request IP addresses from the IAB-donor-CU.  \nWhen IPv4 addresses are requested, the IAB-MT sets **`iab-IPv4-AddressNumReq`** to the number of IPv4 addresses requested per specific usage (Clause 5.7.12.3, 1>2>3>).",
+      "evidence": "TS 38.331, Clause 5.7.12.1",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0071",
+      "question": "What are the conditions for the network to include the Negotiated WUS assistance information IE, and what is the corresponding condition for the UE to include the Requested WUS assistance information IE?",
+      "reference": "The network shall include the Negotiated WUS assistance information IE (Clause_8_2_1_24) if the UE supports WUS assistance, the MME supports and accepts its use, and the UE is not attaching for emergency bearer services. Correspondingly, the UE may include the Requested WUS assistance information IE (Clause_8_2_4_26) if it supports WUS assistance and is not attaching for emergency bearer services.",
+      "gold_evidence": "TS 24.301, Clause 8.2.1.24, Negotiated WUS assistance information; TS 24.301, Clause 8.2.4.26, Requested WUS assistance information",
+      "model_answer": "Per 3GPP TS 24.301:\n\n**Network includes Negotiated WUS assistance information IE** (Cl. 8.2.1.24, 8.2.26.27, and 5.5.1.2.4):  \n- The UE supports WUS assistance;  \n- The MME supports and accepts the use of WUS assistance; **and**  \n- The UE is **not attaching for emergency bearer services**.\n\n**UE includes Requested WUS assistance information IE** (Cl. 5.3.21, 8.2.4.26, 8.2.29.33, and 5.5.3.2.2):  \n- The UE supports WUS assistance; **and**  \n- The UE is **not attaching for emergency bearer services** (for Attach or TAU);  \n- *Note*: The inclusion is **optional** (“may include”) — not mandatory — and applies only in non-emergency attach/TAU procedures (Cl. 5.3.21 explicitly prohibits inclusion during attach for emergency bearer services or TAU for emergency-attached UEs).",
+      "evidence": "TS 24.301, Clause 8.2.1.24",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0063",
+      "question": "What is a key procedural similarity when a service request for initiating a PDN connection for emergency bearer services is not accepted by the network and when a tracking area updating request for the same purpose is not accepted?",
+      "reference": "In both cases, if the procedure cannot be accepted by the network, the UE shall perform the procedures as described in the relevant general failure clause (5.6.1.5 for service request, 5.5.3.2.5 for tracking area updating). Then, if the UE is in the same selected PLMN where the last request was attempted, the UE has the option to either inform the upper layers of the failure or detach locally and attempt an EPS attach for emergency bearer services.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.5A, Service request procedure for initiating a PDN connection for emergency bearer services not accepted by the network; TS 24.301, Clause 5.5.3.2.5A, Tracking area updating procedure for initiating a PDN connection for emergency bearer services not accepted by the network",
+      "model_answer": "Both procedures require the UE to **inform the upper layers of the failure** and, if in the same selected PLMN, optionally **detach locally and attempt EPS attach for emergency bearer services**, as specified in clauses 5.6.1.5A and 5.5.3.2.5A respectively.",
+      "evidence": "TS 24.301, Clause 5.6.1.5A",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0058",
+      "question": "During which procedure can the MME initiate EMM common procedures, and what state does the MME enter when it starts such a procedure?",
+      "reference": "During the combined tracking area updating procedure, the MME may initiate EMM common procedures. The MME enters the state EMM-COMMON-PROCEDURE-INITIATED after it has started a common EMM procedure and is waiting for a response from the UE.",
+      "gold_evidence": "TS 24.301, Clause 5.5.3.3.3, EMM common procedure initiation; TS 24.301, Clause 5.1.3.4.2, EMM-COMMON-PROCEDURE-INITIATED",
+      "model_answer": "The MME can initiate EMM common procedures during the **attach procedure**, **tracking area updating procedure**, and **service request procedure**, as specified in:\n\n- Clause 5.5.1.2.3: *“The network may initiate EMM common procedures, e.g. the identification, authentication and security mode control procedures during the attach procedure…”*  \n- Clause 5.5.3.3.3: *“During the combined tracking area updating procedure, the MME may initiate EMM common procedures…”*  \n- Clause 5.6.1.4.2: *“Upon receipt of the CONTROL PLANE SERVICE REQUEST message… after completion of the EMM common procedures according to clause 5.6.1.3”* — implying EMM common procedures (e.g., security mode control) may be initiated *as part of* the service request procedure.\n\nWhen the MME **starts** an EMM common procedure (e.g., authentication or security mode control), it **remains in its current EMM state**, *not* transitioning to a new state solely due to initiation. Specifically:\n\n- During attach: the MME is in **EMM-DEREGISTERED** until ATTACH COMPLETE is received (Clause 5.5.1.2.7, item a); initiating EMM common procedures does not change that state.\n- During tracking area updating: the MME remains in **EMM-REGISTERED**, as the procedure is performed while registered (Clause 5.5.3.2.3, 5.5.3.3.3).\n- During service request: the MME remains in **EMM-REGISTERED**, since service request is only initiated from EMM-REGISTERED (Clause 5.6.1.1).\n\nThus, the MME **does not enter a new EMM state upon initiation** of EMM common procedures; it continues in the **pre-existing EMM state** (EMM-DEREGISTERED for attach, EMM-REGISTERED for TA update and service request), and transitions occur only upon successful completion (e.g., to EMM-REGISTERED after attach) or failure (e.g., to EMM-DEREGISTERED on attach abort).",
+      "evidence": "TS 24.301, Clause 5.5.3.3.3",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0036",
+      "question": "Compare the conditions for a UE including an Extended EPS QoS IE to the network (Clause_8_3_8_6) with the conditions for the network including an Extended EPS QoS IE to the UE (Clause_8_3_3_11).",
+      "reference": "Both IEs are included under a similar primary condition: when the sender wishes to transmit maximum and guaranteed bit rate values to the receiver. The specific trigger for using the 'Extended' version is identical in both directions: it is only included if at least one of the values to be transmitted exceeds the maximum value specified in the standard EPS quality of service information element.",
+      "gold_evidence": "TS 24.301, Clause 8.3.8.6, Extended EPS QoS; TS 24.301, Clause 8.3.3.11, Extended EPS QoS",
+      "model_answer": "The referenced clauses **Clause_8_3_8_6** and **Clause_8_3_3_11** do **not exist** in the provided context (clauses [1]–[8] above).  \n\nThe provided text contains **only Clauses 5.3.12, 5.5.3.3.2, 6.4.3.1, 6.4.3.3, 6.5.1.2, 6.5.3.1, 6.5.4.2, and 8.1**, and **no clause numbered 8.3.8.6 or 8.3.3.11** is included.\n\nFurthermore, **TS 24.301 does not define “Extended EPS QoS IE”** — it defines:\n- **EPS QoS IE** (Clause 9.9.3.8), used in messages like `ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST`, `BEARER RESOURCE ALLOCATION REQUEST`, etc.,  \n- **Extended Protocol Configuration Options IE** (Clause 9.9.4.27), which may carry extended QoS-related parameters (e.g., QoS rules with 2-octet length indicator — see Clause 6.5.1.2),  \n- But **no standardized IE named “Extended EPS QoS IE”** exists in TS 24.301.\n\n✅ Therefore, per the provided context:  \n→ **The comparison cannot be performed**, as the cited clauses are **not present**, and the IE name **“Extended EPS QoS IE” is not defined** in TS 24.301.\n\n(If referring to **EPS QoS IE**, its usage conditions are specified in Clause 9.9.3.8 and applied contextually — e.g., UE includes it in `BEARER RESOURCE ALLOCATION REQUEST` per Clause 6.5.3.1; network includes it in `ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST` per Clause 6.4.2.1 — but that is outside the scope of the given excerpts.)",
+      "evidence": "TS 24.301, Clause 6.5.1.2",
+      "score": 2,
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-CCQA.json",
+      "id": "CCQA-0024",
+      "question": "What are two types of information that a UE can report to the network using the SidelinkUEInformationNR procedure, specifically related to interactions with a peer UE?",
+      "reference": "The UE can report the sidelink UE capability information of the associated peer UE for unicast communication (Clause_5_8_3_1). It can also report the RLC mode information of the sidelink data radio bearer(s) received from the associated peer UE for unicast communication (Clause_5_8_3_1).",
+      "gold_evidence": "TS 24.301, Clause 5.8.3.1, General SIB12 acquisition SidelinkUEInformationNR; TS 24.301, Clause 5.8.3.1, General SIB12 acquisition SidelinkUEInformationNR",
+      "model_answer": "Based on clauses 5.8.3.1, 5.8.3.3, and 5.8.9.6.2:\n\n1. **Sidelink DRX configuration received from the associated peer UE** (for NR sidelink unicast communication) — per clause 5.8.3.1(g) and 5.8.3.3(3>4>6), reported via `sl-DRX-ConfigFromTx` in `sl-RxDRX-ReportList`.\n\n2. **Sidelink DRX assistance information received from the associated peer UE** (for NR sidelink unicast communication) — per clause 5.8.3.1(h), 5.8.9.6.2, and 5.8.3.3(3>4>6), reported via `sl-DRX-InfoFromRx` when `sl-ScheduledConfig` is configured and `sl-DRX-ConfigCommon-GC-BC` is present in SIB12.",
+      "evidence": "TS 38.331, Clause 5.8.3.1",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0027",
+      "question": "Under what specific condition must the 'Last visited registered TAI' IE be included, and in which two messages can this IE appear?",
+      "reference": "The 'Last visited registered TAI' IE shall be included if the UE holds a valid last visited registered TAI. This IE can appear in the messages described in Clause_8_2_4_4 and Clause_8_2_29_8.",
+      "gold_evidence": "TS 24.301, Clause 8.2.4.4, Last visited registered TAI; TS 24.301, Clause 8.2.29.8, Last visited registered TAI",
+      "model_answer": "The 'Last visited registered TAI' IE shall be included **if the UE holds a valid last visited registered TAI**.\n\nIt can appear in the following two messages:  \n- **ATTACH ACCEPT** (Clause 8.2.4.4)  \n- **TRACKING AREA UPDATE ACCEPT** (Clause 8.2.29.8)",
+      "evidence": "TS 24.301, Clause 8.2.4.4",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_RRC_stage3-CCQA.json",
+      "id": "CCQA-0009",
+      "question": "What actions does the UE perform upon receiving SIB6?",
+      "reference": "Upon receiving the SIB6, the UE shall perform the actions as specified in 5.2.2.4.7.",
+      "gold_evidence": "TS 24.301, Clause 5.2.2.4.7, Actions upon reception of SIB6",
+      "model_answer": "Upon receiving SIB6, the UE shall forward the received `warningType`, `messageIdentifier`, and `serialNumber` to upper layers (Clause 5.2.2.4.7).",
+      "evidence": "TS 38.331, Clause 5.2.2.4.7",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_RRC_stage3-CCQA.json",
+      "id": "CCQA-0054",
+      "question": "In which RRC states does the SI acquisition procedure apply, and what is one of the main RRC functions related to broadcasting that supports this procedure?",
+      "reference": "The SI acquisition procedure applies to UEs in RRC_IDLE, in RRC_INACTIVE, and in RRC_CONNECTED (Clause 5.2.2.1). One of the main RRC functions that supports this is the 'Broadcast of system information' (Clause 4.4).",
+      "gold_evidence": "TS 24.301, Clause 5.2.2.1, General UE requirements MIB SIB1 SystemInformationRequest SystemInformation messages; TS 24.301, Clause 4.4, Functions",
+      "model_answer": "The SI acquisition procedure applies in **RRC_IDLE, RRC_INACTIVE, and RRC_CONNECTED** (Clause 5.2.2.1).\n\nOne of the main RRC functions related to broadcasting that supports this procedure is **monitoring for SI change indication via PDCCH using P-RNTI in paging occasions**, as specified in Clause 5.2.2.2.2 — enabling the UE to detect modifications and trigger timely SI acquisition.",
+      "evidence": "TS 38.331, Clause 5.2.2.1",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0059",
+      "question": "Which two messages are sent by the UE to the AMF to complete a registration procedure and a configuration update procedure, respectively?",
+      "reference": "To complete a registration procedure, the UE sends the REGISTRATION COMPLETE message to the AMF. To complete a configuration update procedure, the UE sends the CONFIGURATION UPDATE COMPLETE message to the AMF.",
+      "gold_evidence": "TS 24.301, Clause 8.2.8.1, Message definition; TS 24.301, Clause 8.2.20.1, Message definition",
+      "model_answer": "- **Registration procedure**: `REGISTRATION COMPLETE` (per Clauses 5.5.1.2.8, 5.5.1.3.8).  \n- **Configuration update procedure**: `CONFIGURATION UPDATE COMPLETE` (per Clause 5.4.4.1 — implied by the generic UE configuration update procedure’s completion message; explicitly defined in TS 24.501 as the UE’s response to `CONFIGURATION UPDATE COMMAND`, and referenced in Figure 5.4.4.1.1 and subclause 5.4.4.2 context where acknowledgement is requested).  \n\n✅ Confirmed:  \n- `REGISTRATION COMPLETE` is the mandatory UE response to `REGISTRATION ACCEPT` to complete registration (Cl. 5.5.1.2.8, 5.5.1.3.8).  \n- `CONFIGURATION UPDATE COMPLETE` is the UE’s response when acknowledgement is requested in `CONFIGURATION UPDATE COMMAND` (Cl. 5.4.4.2: “If an acknowledgement from the UE is requested, the AMF shall indicate ‘acknowledgement requested’ … and shall start timer T3555”; the corresponding UE message is `CONFIGURATION UPDATE COMPLETE`, per TS 24.501 normative procedure flow and message table).",
+      "evidence": "TS 24.501, Clause 4.4.2.5",
+      "score": 2,
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0023",
+      "question": "If a UE in the EMM-DEREGISTERED.eCALL-INACTIVE substate has its USIM removed, what is the resulting substate? Conversely, what condition would cause a UE in EMM-DEREGISTERED.NORMAL-SERVICE to transition to EMM-DEREGISTERED.ATTACH-NEEDED?",
+      "reference": "If the USIM is removed from a UE in EMM-DEREGISTERED.eCALL-INACTIVE, the UE enters substate EMM-DEREGISTERED.NO-IMSI. A UE in EMM-DEREGISTERED.NORMAL-SERVICE would transition to EMM-DEREGISTERED.ATTACH-NEEDED if valid subscriber data are available but an attach must be performed as soon as possible, for example, if the access class is blocked due to access class control or if the network rejects the NAS signalling connection establishment.",
+      "gold_evidence": "TS 24.301, Clause 5.2.2.3.8, eCALL-INACTIVE; TS 24.301, Clause 5.1.3.2.3.7, EMM-DEREGISTERED.ATTACH-NEEDED",
+      "model_answer": "- If a UE in **EMM-DEREGISTERED.eCALL-INACTIVE** has its USIM removed, it enters **EMM-DEREGISTERED.NO-IMSI**, per Clause 5.2.2.3.7 (“if the USIM is removed, the UE enters substate EMM-DEREGISTERED.NO-IMSI”).\n\n- A UE in **EMM-DEREGISTERED.NORMAL-SERVICE** transitions to **EMM-DEREGISTERED.ATTACH-NEEDED** (note: correct substate name per TS 24.301 is **ATTEMPTING-TO-ATTACH**, not “ATTACH-NEEDED”) when **an attach shall be performed (e.g., network-requested re-attach)** — as specified in Clause 5.2.2.4. This includes cases such as receiving an EPS update request requiring re-attach, or upper-layer initiation of eCall/non-emergency test call (Clause 5.2.2.3.7), or expiry of T3444/T3445 triggering eCall inactivity procedure followed by attach initiation (Clause 5.5.4).",
+      "evidence": "TS 24.301, Clause 5.2.2.4",
+      "score": 0,
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0071",
+      "question": "What actions should a UE take if a service request for initiating an emergency PDU session is not accepted by the network and the UE remains in the same PLMN?",
+      "reference": "As per Clause_5_6_1_6, if the service request for initiating an emergency PDU session cannot be accepted by the network and the UE is in the same selected PLMN where the last service request was attempted, the UE shall either a) inform the upper layers of the failure of the procedure, or b) de-register locally (if not already) and attempt initial registration for emergency services. This aligns with the UE's capability in the 5GMM-REGISTERED.LIMITED-SERVICE substate (Clause_5_2_3_2_4), where it may perform de-registration locally and initiate an initial registration for emergency services.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.6, Service request procedure for initiating an emergency PDU session not accepted by the network; TS 24.301, Clause 5.2.3.2.4, LIMITED-SERVICE",
+      "model_answer": "Per Clause 5.6.1.6:  \nIf the service request for initiating an emergency PDU session cannot be accepted by the network and the UE is in the **same selected PLMN** where the last service request was attempted, the UE shall:  \na) **Inform the upper layers of the failure** of the procedure; **or**  \nb) **De-register locally** (if not already de-registered) and **attempt initial registration for emergency services**.  \n\nNote: This applies *after* performing the procedures in subclause 5.6.1.5 (for normal rejection) or 5.6.1.7 (for abnormal cases). Emergency PDU session establishment is explicitly exempt from back-off timers T3396/T3584/T3585 (Cl. 6.4.1.4.2, 6.3.3.3, 6.4.2.4.2), and emergency procedures are permitted even when timers like T3346 are running (Cl. 5.3.9).",
+      "evidence": "TS 24.501, Clause 5.6.1.6",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0028",
+      "question": "Under what conditions must a UE include the Service-level-AA container IE in a message, and which specific messages require it?",
+      "reference": "The UE shall include the Service-level-AA container IE if the UE supporting UAS services requests a registration for UAS services (Clause_8_2_6_35). Furthermore, this IE shall be included in the message when the UE needs to establish a PDU session for the UAS services (Clause_8_3_1_16).",
+      "gold_evidence": "TS 24.301, Clause 8.2.6.35, Service-level-AA container; TS 24.301, Clause 8.3.1.16, Service-level-AA container",
+      "model_answer": "Per 3GPP TS 24.501:\n\n1.  **UE-requested PDU session establishment for UAS services (C2 communication):**  \n    The UE **shall include** the `Service-level-AA container IE` in the `PDU SESSION ESTABLISHMENT REQUEST` message if it is requesting a PDU session for C2 communication (Clause 6.4.1.2). Within this IE, it must include:\n    *   The `service-level device ID` set to the CAA-level UAV ID (Clause 6.4.1.2).\n    *   If available, the `service-level-AA payload` set to the C2 authorization payload and the `service-level-AA payload type` set to \"C2 authorization payload\" (Clause 6.4.1.2).\n\n2.  **UE-requested PDU session establishment for UAS services (UUAA):**  \n    The UE **shall include** the `Service-level-AA container IE` in the `PDU SESSION ESTABLISHMENT REQUEST` message if it is requesting a PDU session for UAS services and the upper layers provide the necessary information (Clause 6.4.1.2). Within this IE, it must include:\n    *   The `service-level device ID` set to the CAA-level UAV ID (Clause 6.4.1.2).\n    *   If provided by the upper layers, the `service-level-AA server address` set to the USS address (Clause 6.4.1.2).\n    *   If provided by the upper layers, the `service-level-AA payload type` set to \"UUAA payload\" and the `service-level-AA payload` set to the UUAA payload (Clause 6.4.1.2).\n\n3.  **Service-level authentication and authorization procedure (response):**  \n    Upon receiving a `SERVICE-LEVEL AUTHENTICATION COMMAND` message from the network, the UE **shall create** a `SERVICE-LEVEL AUTHENTICATION COMPLETE` message and **shall include** the `Service-level-AA container IE` containing the service-level-AA payload received from the upper layers (Clause 6.3.1A).\n\n**Therefore, the specific messages that require the UE to include the `Service-level-AA container IE` are:**\n*   `PDU SESSION ESTABLISHMENT REQUEST` (for UAS services/C2 or UUAA)\n*   `SERVICE-LEVEL AUTHENTICATION COMPLETE`",
+      "evidence": "TS 24.501, Clause 5.4.4.2",
+      "score": 0,
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0009",
+      "question": "According to Clause 8.3.18.11 and Clause 8.3.20.6, what is the function of the NBIFOM container and which specification does it reference?",
+      "reference": "Both Clause 8.3.18.11 and Clause 8.3.20.6 state that the NBIFOM container is an information element used to transfer information associated with network-based IP flow mobility, referencing 3GPP S 24.161 [36].",
+      "gold_evidence": "TS 24.301, Clause 8.3.18.11, NBIFOM container; TS 24.301, Clause 8.3.20.6, NBIFOM container",
+      "model_answer": "Clause 8.3.18.11 and Clause 8.3.20.6 are **not provided in the given context**. Therefore, based on the supplied excerpts, the function of the NBIFOM container and its referenced specification **cannot be determined**.\n\nThe provided clauses do not mention “NBIFOM container”, “Clause 8.3.18.11”, or “Clause 8.3.20.6”.",
+      "evidence": "TS 24.301, Clause 9.9.1",
+      "score": 0,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0008",
+      "question": "What is the common purpose of the NBIFOM container as described in Clause 8.3.6.12 and Clause 8.3.7.5?",
+      "reference": "In both Clause 8.3.6.12 and Clause 8.3.7.5, the NBIFOM container is described as an information element used to transfer information associated with network-based IP flow mobility, as specified in 3GPP S 24.161 [36].",
+      "gold_evidence": "TS 24.301, Clause 8.3.6.12, NBIFOM container; TS 24.301, Clause 8.3.7.5, NBIFOM container",
+      "model_answer": "The NBIFOM container is not described in the provided clauses. Neither Clause 8.3.6.12 nor Clause 8.3.7.5 is included in the given context. Therefore, based on the supplied material, the common purpose of the NBIFOM container cannot be determined.",
+      "evidence": "TS 24.301, Clause 9.9.3.51",
+      "score": 0,
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0024",
+      "question": "Describe the scenario and outcome when a UE transitions from the EMM-DEREGISTERED.PLMN-SEARCH substate to the EMM-DEREGISTERED.NO-CELL-AVAILABLE substate. What action must the UE take while in NO-CELL-AVAILABLE?",
+      "reference": "A UE transitions from EMM-DEREGISTERED.PLMN-SEARCH to EMM-DEREGISTERED.NO-CELL-AVAILABLE when it concludes that no E-UTRAN cell is available at the moment after a first intensive search. While in the NO-CELL-AVAILABLE substate, the UE shall perform cell selection according to 3GPP TS 36.304 and choose an appropriate substate when a cell is found.",
+      "gold_evidence": "TS 24.301, Clause 5.1.3.2.3.5, EMM-DEREGISTERED.PLMN-SEARCH; TS 24.301, Clause 5.2.2.3.7, NO-CELL-AVAILABLE",
+      "model_answer": "Per Clause 5.1.3.2.3.5 and Clause 5.1.3.2.3.8:  \nThe UE transitions from **EMM-DEREGISTERED.PLMN-SEARCH** to **EMM-DEREGISTERED.NO-CELL-AVAILABLE** when, after an initial intensive PLMN/cell search (e.g., during power-on or coverage loss), **no suitable or acceptable cell is found**, and the UE concludes — at that moment — that no cell is available. This substate is entered *after the first intensive search fails*, and the UE then searches for cells **at a low rhythm** (Clause 5.1.3.2.3.8).  \n\nWhile in **NO-CELL-AVAILABLE**, the UE **offers no EPS services** (Clause 5.1.3.2.3.8) and continues periodic low-rhythm cell search until a cell is selected (triggering transition to NORMAL-SERVICE or LIMITED-SERVICE per Clause 5.1.3.2.3.5) or another condition (e.g., USIM removal) applies.",
+      "evidence": "TS 24.301, Clause 5.1.3.2.3.5",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0056",
+      "question": "What is the purpose of the EPS authentication and key agreement (AKA) procedure, and what key is established as a result?",
+      "reference": "The purpose of the EPS authentication and key agreement (AKA) procedure is to provide mutual authentication between the user and the network and to agree on a key KASME. A partial native EPS security context is established in the UE and the network when an EPS authentication is successfully performed, and KASME is stored as the root for the EPS integrity protection and ciphering key hierarchy.",
+      "gold_evidence": "TS 24.301, Clause 5.4.2.1, General; TS 24.301, Clause 5.4.2.3, Authentication response by the UE",
+      "model_answer": "Per Clause 5.4.2.1:  \nThe purpose of the EPS authentication and key agreement (AKA) procedure is to provide **mutual authentication between the user and the network** and to **agree on a key K<sub>ASME</sub>**.  \nK<sub>ASME</sub> is the root key for the EPS integrity protection and ciphering key hierarchy.",
+      "evidence": "TS 24.301, Clause 5.4.2.1",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0060",
+      "question": "What is the general purpose of the states described in clause 5.1.3.2, and what is the main characteristic of the UE in the EMM-DEREGISTERED state?",
+      "reference": "Clause 5.1.3.2 describes the possible EMM states of an EMM entity in the UE. In the state EMM-DEREGISTERED, no EMM context has been established and the UE location is unknown to an MME and hence it is unreachable by an MME.",
+      "gold_evidence": "TS 24.301, Clause 5.1.3.2.1, General; TS 24.301, Clause 5.1.3.2.2.2, EMM-DEREGISTERED",
+      "model_answer": "- **General purpose of the states in clause 5.1.3.2**: They describe the possible EMM states of the EMM entity in the UE, defining its mobility management context and governing its NAS-level behaviour (e.g., attach, detach, service request) — as stated in Clause 5.1.3.2.1 and Clause 5.1.3.1.\n\n- **Main characteristic of the UE in the EMM-DEREGISTERED state**: The UE is not registered with the network for EPS services; it has no valid GUTI, TAI list, or eKSI, and its EPS update status is not EU1 UPDATED (i.e., registration is not established) — per Clause 5.1.3.2.3.1 (substates exist only when *valid subscriber data are available*, except in EMM-DEREGISTERED.NO-IMSI), and supported by the actions mandated upon entering EMM-DEREGISTERED (e.g., deletion of GUTI, TAI list, eKSI) across multiple attach reject causes in Clause 5.5.1.2.5.",
+      "evidence": "TS 24.301, Clause 5.1.3.2.1",
+      "score": 2,
+      "evidence_correct": true
+    },
+    {
+      "dataset": "5G_NAS_stage3-CCQA.json",
+      "id": "CCQA-0049",
+      "question": "What action does the UE take upon receiving a SERVICE-LEVEL AUTHENTICATION COMMAND message, and what is the purpose of the overall procedure?",
+      "reference": "Upon receipt of a SERVICE-LEVEL AUTHENTICATION COMMAND message, the UE passes to the upper layers the service-level-AA payload received in the Service-level-AA container IE. The purpose of the service-level authentication and authorization procedure is to enable the DN to authenticate and/or authorize the upper layers of the UE when establishing or after establishing a PDU session.",
+      "gold_evidence": "TS 24.301, Clause 6.3.1A.2, Service-level authentication and authorization procedure initiation; TS 24.301, Clause 6.3.1A, Service-level authentication and authorization procedure",
+      "model_answer": "Upon receiving a **SERVICE-LEVEL AUTHENTICATION COMMAND** message (Cl. 6.3.1A), the UE:  \n- Passes the **service-level-AA payload** received in the *Service-level-AA container IE* to the upper layers;  \n- Treats the procedure as **transparent to the 5GSM layer**, i.e., no 5GSM-layer processing beyond forwarding.  \n\nThe **purpose** of the service-level authentication and authorization (service-level-AA) procedure is to enable the DN (via NEF/UAS-NF) to:  \n- **Authenticate and/or authorize the upper layers of the UE** — either **during PDU session establishment** (for non-emergency sessions) or **after establishment** (for re-authentication);  \n- It is used for **UUAA** (UE Upper-layer Authentication and Authorization), as specified in TS 23.256.  \n\n*(Ref: Cl. 6.3.1A, first paragraph and NOTE1)*",
+      "evidence": "TS 24.501, Clause 6.3.1A",
+      "score": 2,
+      "evidence_correct": true
+    }
+  ]
+}

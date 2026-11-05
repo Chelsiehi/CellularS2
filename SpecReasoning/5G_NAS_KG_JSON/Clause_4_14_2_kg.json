@@ -1,0 +1,165 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.14.2",
+  "title": "Stand-alone non-public network",
+  "entities": [
+    {
+      "id": "SNPN_ENABLED_UE",
+      "name": "SNPN enabled UE",
+      "entity_type": "Property",
+      "description": "A UE that is capable of operating in SNPN access operation mode. Activation and deactivation of SNPN access operation mode is implementation-specific.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "SNPN_ACCESS_OPERATION_MODE",
+      "name": "SNPN access operation mode",
+      "entity_type": "State",
+      "description": "Operational mode where the UE performs SNPN selection and uses SNPN-specific procedures and parameters.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "SNPN_SELECTION_PROCEDURE",
+      "name": "SNPN selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by a UE operating in SNPN access operation mode instead of PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "PERMANENTLY_FORBIDDEN_SNPNS_LIST",
+      "name": "Permanently forbidden SNPNs list",
+      "entity_type": "Property",
+      "description": "List maintained per access type and per subscriber data entry for SNPNs that are permanently forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "TEMPORARILY_FORBIDDEN_SNPNS_LIST",
+      "name": "Temporarily forbidden SNPNs list",
+      "entity_type": "Property",
+      "description": "List maintained per access type and per subscriber data entry for SNPNs that are temporarily forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_74",
+      "name": "5GMM cause #74",
+      "entity_type": "Identifier",
+      "description": "Temporarily not authorized for this SNPN - supported in SNPN but not in PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_75",
+      "name": "5GMM cause #75",
+      "entity_type": "Identifier",
+      "description": "Permanently not authorized for this SNPN - supported in SNPN but not in PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "SNPN_ONBOARDING_REGISTRATION",
+      "name": "SNPN onboarding registration",
+      "entity_type": "Procedure",
+      "description": "Initial registration for onboarding services in SNPN where UE sets 5GS registration type to 'SNPN onboarding registration'.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "LIST_OF_SUBSCRIBER_DATA",
+      "name": "List of subscriber data",
+      "entity_type": "Property",
+      "description": "Storage for subscriber credentials used when accessing SNPN using credentials from a credentials holder.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "MUSIM_UE_PROCEDURES",
+      "name": "MUSIM UE procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures that may be used by UEs with multiple valid entries of list of subscriber data, even without multiple USIMs.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SNPN_ENABLED_UE",
+      "target": "SNPN_ACCESS_OPERATION_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SNPN enabled UE can operate in SNPN access operation mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SNPN_ACCESS_OPERATION_MODE",
+      "target": "SNPN_SELECTION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE operating in SNPN access operation mode performs SNPN selection procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SNPN_ACCESS_OPERATION_MODE",
+      "target": "PERMANENTLY_FORBIDDEN_SNPNS_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in SNPN access operation mode maintains permanently forbidden SNPNs list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SNPN_ACCESS_OPERATION_MODE",
+      "target": "TEMPORARILY_FORBIDDEN_SNPNS_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in SNPN access operation mode maintains temporarily forbidden SNPNs list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SNPN_ONBOARDING_REGISTRATION",
+      "target": "LIST_OF_SUBSCRIBER_DATA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SNPN onboarding registration allows UE to be configured with entries in list of subscriber data.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "LIST_OF_SUBSCRIBER_DATA",
+      "target": "MUSIM_UE_PROCEDURES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UEs with multiple valid entries in list of subscriber data may use MUSIM UE procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.2"
+      ]
+    }
+  ]
+}

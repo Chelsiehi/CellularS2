@@ -1,0 +1,94 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------",
+    "The purpose of this procedure is to resume a suspended RRC connection, including resuming SRB(s), DRB(s) and multicast MRB(s) or perform an RNA update. This procedure is also used to initiate SDT in RRC_INACTIVE.",
+    "",
+    "5.3.13.1a Conditions for resuming RRC Connection for NR sidelink communication/discovery/V2X sidelink communication",
+    "---------",
+    "  For NR sidelink communication/discovery an RRC connection is resumed only in the following cases:",
+    " 1 &gt;  if configured by upper layers to transmit NR sidelink communication/discovery and related data is available for transmission:",
+    " 2 &gt;  if the frequency on which the UE is configured to transmit NR sidelink communication is included in sl- FreqInfoList within SIB12 provided by the cell on which the UE camps; and if the valid version of SIB12 does not include sl-TxPoolSelectedNormal for the concerned frequency;   or",
+    " 2 &gt;  if the frequency on which the UE is configured to transmit NR sidelink discovery is included in sl- FreqInfoList within SIB12 provided by the cell on which the UE camps;  and  if the valid version of SIB12 does not include sl-DiscTxPoolSelected or sl-TxPoolSelectedNormal for the concerned frequency; For L2 U2N Relay UE in RRC_INACTIVE, an RRC connection establishment is resumed in the following cases:",
+    " 1 &gt;  if any message is received from the L2 U2N Remote UE via SL-RLC0 as specified in 9.1.1.4 or SL-RLC1 as specified in 9.2.4;   For V2X sidelink communication an RRC connection resume is initiated   only when the conditions specified for V2X sidelink communication in clause 5.3.3.1a of TS 36.331 are met.",
+    "NOTE: Upper layers initiate an RRC connection resume. The interaction with NAS is left to UE implementation.",
+    "",
+    "5.3.13.1b Conditions for initiating SDT",
+    "---------",
+    "A UE in RRC_INACTIVE initiates the resume procedure for SDT   when all of the following conditions are fulfilled:",
+    " 1 &gt;  the upper layers request resumption of RRC connection;   and",
+    " 1 &gt;  sdt-Config is configured;   and",
+    " 1 &gt;  all the pending data in UL is mapped to the radio bearers configured for SDT;   and",
+    " 1 &gt;  lower layers indicate that conditions for initiating SDT as specified in TS 38.321 are fulfilled.",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.3.13.1",
+      "file": "Figure_5_3_13_1_p141.png.json",
+      "title": "RRC connection resume",
+      "content": {
+        "figure_id": "5.3.13.1",
+        "title": "RRC connection resume",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "RRCResumeRequest/RRCResumeRequest1",
+              "notes": ""
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "RRCResume",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "RRCResumeComplete",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "RRCResumeRequest/RRCResumeRequest1",
+              "notes": "Figure 5.3.13.1-2: RRC connection resume fallback to RRC connection establishment, successful"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "RRCSetup",
+              "notes": "Figure 5.3.13.1-2: RRC connection resume fallback to RRC connection establishment, successful"
+            },
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "RRCSetupComplete",
+              "notes": "Figure 5.3.13.1-2: RRC connection resume fallback to RRC connection establishment, successful"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Figure 5.3.13.1-1: RRC connection resume, successful",
+            "Figure 5.3.13.1-2: RRC connection resume fallback to RRC connection establishment, successful"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

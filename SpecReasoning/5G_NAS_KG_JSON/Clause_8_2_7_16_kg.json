@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.16",
+  "title": "T3512 value",
+  "entities": [
+    {
+      "id": "IE_T3512_VALUE",
+      "name": "T3512 value",
+      "entity_type": "Information Element",
+      "description": "Timer value IE used in registration procedures to indicate the periodic registration timer duration.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Initial registration procedure over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "PROC_MOBILITY_PERIODIC_REGISTRATION_UPDATE",
+      "name": "Mobility and periodic registration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for mobility updates and periodic registration updates over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "COND_NOT_PERIODIC",
+      "name": "Registration type not periodic",
+      "entity_type": "Condition",
+      "description": "Condition when 5GS registration type IE does not indicate periodic registration updating.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "COND_IS_PERIODIC",
+      "name": "Registration type is periodic",
+      "entity_type": "Condition",
+      "description": "Condition when 5GS registration type IE indicates periodic registration updating.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REGISTRATION",
+      "target": "IE_T3512_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes T3512 value IE when registration type is not periodic.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MOBILITY_PERIODIC_REGISTRATION_UPDATE",
+      "target": "IE_T3512_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mobility and periodic registration update procedure may include T3512 value IE when registration type is periodic.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NOT_PERIODIC",
+      "target": "IE_T3512_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that registration type is not periodic guards the inclusion of T3512 value IE in registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_IS_PERIODIC",
+      "target": "IE_T3512_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that registration type is periodic guards the optional inclusion of T3512 value IE in mobility and periodic registration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_5GS_REGISTRATION_TYPE",
+      "target": "COND_NOT_PERIODIC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GS registration type IE establishes the condition when registration type is not periodic.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_5GS_REGISTRATION_TYPE",
+      "target": "COND_IS_PERIODIC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GS registration type IE establishes the condition when registration type is periodic.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.16"
+      ]
+    }
+  ]
+}

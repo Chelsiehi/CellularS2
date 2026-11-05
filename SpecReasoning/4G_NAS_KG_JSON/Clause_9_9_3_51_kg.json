@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.51",
+  "title": "Replayed NAS message container",
+  "entities": [
+    {
+      "id": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "name": "Replayed NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element used to re-send ATTACH REQUEST or TRACKING AREA UPDATE REQUEST messages during ongoing attach or tracking area updating procedures when HASHMME mismatch occurs. Contains the original message without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51",
+        "Figure 9.9.3.51.1",
+        "Table 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate attach procedure. When included in Replayed NAS message container, it is coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51",
+        "Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate tracking area updating procedure. When included in Replayed NAS message container, it is coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51",
+        "Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message that may contain HASHMME, triggering the need for replayed NAS message container when hash mismatch occurs.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "IE_HASHMME",
+      "name": "HASHMME",
+      "entity_type": "Information Element",
+      "description": "Hash value included in SECURITY MODE COMMAND message, compared against UE's locally calculated hash value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "COND_HASHMME_MISMATCH",
+      "name": "HASHMME mismatch condition",
+      "entity_type": "Condition",
+      "description": "Condition where HASHMME in SECURITY MODE COMMAND differs from UE's locally calculated hash value, triggering replay of NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "PROP_NO_SECURITY_HEADER",
+      "name": "No NAS security header",
+      "entity_type": "Property",
+      "description": "Property indicating that replayed ATTACH REQUEST or TRACKING AREA UPDATE REQUEST messages are coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "Replayed NAS message container IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for Replayed NAS message container, located in bits 8-4 of octet 1.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "FIELD_LENGTH",
+      "name": "Length of Replayed NAS message container contents",
+      "entity_type": "Property",
+      "description": "Length indicator for Replayed NAS message container contents, located in bits 8-1 of octets 2-3.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "FIELD_CONTENTS",
+      "name": "Replayed NAS message container contents",
+      "entity_type": "Property",
+      "description": "Actual content of the replayed NAS message, spanning octets 4 to n with maximum length of 65535 octets.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1",
+        "Table 9.9.3.51.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS message container can contain ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51",
+        "Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS message container can contain TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51",
+        "Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_HASHMME_MISMATCH",
+      "target": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "HASHMME mismatch condition establishes the need for Replayed NAS message container.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains HASHMME information element.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_HASHMME",
+      "target": "COND_HASHMME_MISMATCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "HASHMME value guards the HASHMME mismatch condition.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "PROP_NO_SECURITY_HEADER",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ATTACH REQUEST message in Replayed NAS message container is coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "PROP_NO_SECURITY_HEADER",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message in Replayed NAS message container is coded without NAS security header.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.51"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS message container contains IEI field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_LENGTH",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS message container contains length field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_CONTENTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Replayed NAS message container contains the actual message contents field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.51.1"
+      ]
+    }
+  ]
+}

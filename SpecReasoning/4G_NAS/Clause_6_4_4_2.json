@@ -1,0 +1,64 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.2",
+  "title": "EPS bearer context deactivation initiated by the network",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------------------------",
+    "If a NAS signalling connection exists when the MME initiates the EPS bearer context deactivation procedure, the MME shall initiate the EPS bearer context deactivation procedure by sending a DEACTIVATE EPS BEARER CONTEXT REQUEST message to the UE, start the timer T3495, and enter the state BEARER CONTEXT INACTIVE PENDING (see example in figure 6.4.4.2.1). The DEACTIVATE EPS BEARER CONTEXT REQUEST message contains an ESM cause typically indicating one of the following",
+    "#8: operator determined barring",
+    "#29: user authentication or authorization failed",
+    "#112: APN restriction value incompatible with active EPS bearer context; or",
+    "#113: Multiple accesses to a PDN connection not allowed",
+    "If the deactivation is triggered by a UE initiated bearer resource modification procedure or UE requested PDN disconnect procedure, the DEACTIVATE EPS BEARER CONTEXT REQUEST message shall contain the procedure transaction identity (PTI) value received by the MME in the BEARER RESOURCE MODIFICATION REQUEST or PDN DISCONNECT REQUEST respectively",
+    "When the MME wants to deactivate all EPS bearer contexts of a PDN connection and thus disconnect the UE from the PDN, the MME shall include the EPS bearer identity of the default bearer associated to the PDN in the DEACTIVATE EPS BEARER CONTEXT REQUEST message. In this case, the MME shall not include the WLAN offload indication in the DEACTIVATE EPS BEARER CONTEXT REQUEST message, and if the UE receives the WLAN offload indication, the UE shall ignore the indication",
+    "NOTE 1: If the DEACTIVATE EPS BEARER CONTEXT REQUEST message contains the UAS services not allowed indication in the extended protocol configuration options IE, then the ESM cause value #29 \"user authentication or authorization failed\" is included in the DEACTIVATE EPS BEARER CONTEXT REQUEST message",
+    "If no NAS signalling connection exists when the MME initiates the EPS bearer context deactivation, the ESM entity in the MME shall locally deactivate the EPS bearer context towards the UE without any peer-to-peer ESM signalling between the MME and the UE",
+    "NOTE 2: The EPS bearer context state(s) can be synchronized between the UE and the MME at the next EMM-IDLE to EMM-CONNECTED transition, e.g. during a service request or tracking area updating procedure",
+    "Figure 6.4.4.2.1: EPS bearer context deactivation procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.4.4.2.1",
+      "file": "Figure_6_4_4_2_1_p296.png.json",
+      "title": "EPS bearer context deactivation procedure",
+      "content": {
+        "figure_id": "6.4.4.2.1",
+        "title": "EPS bearer context deactivation procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+              "notes": "Start T3495"
+            },
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+              "notes": "Stop T3495"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Network initiates EPS bearer context deactivation by sending DEACTIVATE EPS BEARER CONTEXT REQUEST and starts timer T3495",
+            "UE responds with DEACTIVATE EPS BEARER CONTEXT ACCEPT which causes Network to stop timer T3495"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

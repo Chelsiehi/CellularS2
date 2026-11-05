@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "name": "NAS security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to take a 5G NAS security context into use, initialize and start NAS signalling security between UE and AMF with corresponding 5G NAS keys and security algorithms. Can also be used to change security algorithms, update uplink NAS COUNT, or provide Selected EPS NAS security algorithms.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "CONTEXT_5G_NAS_SECURITY",
+      "name": "5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context containing 5G NAS keys and security algorithms used for NAS signalling protection between UE and AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "KEY_KAUSF",
+      "name": "KAUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function key used in 5G security. During security mode control, old KAUSF is deleted and new KAUSF becomes valid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "KEY_KSEAF",
+      "name": "KSEAF",
+      "entity_type": "Property",
+      "description": "Security Anchor Function key used in 5G security. During security mode control, old KSEAF is deleted and new KSEAF becomes valid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "COUNTER_SOR",
+      "name": "SOR counter",
+      "entity_type": "Property",
+      "description": "Steering of Roaming counter that is reset to zero when new security context is established during security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "COUNTER_UE_PARAM_UPDATE",
+      "name": "UE parameter update counter",
+      "entity_type": "Property",
+      "description": "Counter for UE parameter updates that is reset to zero when new security context is established during security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication procedure that creates partial native 5G NAS security context, which can be brought into use by security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE message",
+      "entity_type": "Message",
+      "description": "NAS message that contains uplink NAS COUNT value, which can be updated through security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "CONTEXT_5G_NAS_SECURITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Security mode control procedure brings 5G NAS security context into use",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "KEY_KAUSF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes new valid KAUSF and deletes old KAUSF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "KEY_KSEAF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes new valid KSEAF and deletes old KSEAF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "COUNTER_SOR",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Procedure resets SOR counter to zero",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "COUNTER_UE_PARAM_UPDATE",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Procedure resets UE parameter update counter to zero",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Security mode control procedure can be initiated after successful 5G AKA authentication",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NAS_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Security mode control procedure can change uplink NAS COUNT used in SECURITY MODE COMPLETE message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.6",
+  "title": "Provision of NSAG information to lower layers",
+  "entities": [
+    {
+      "id": "NSAG_INFORMATION",
+      "name": "NSAG information",
+      "entity_type": "Information Element",
+      "description": "Contains a list of NSAG IDs each associated with S-NSSAIs from configured NSSAI, an NSAG area with TAIs, and a priority value. Used for NSAG-aware cell reselection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "NSAG_ID",
+      "name": "NSAG ID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a Network Slice Assistance Group, associated with specific S-NSSAIs and valid in a defined NSAG area.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "S_NSSAI_LIST",
+      "name": "List of S-NSSAIs",
+      "entity_type": "Information Element",
+      "description": "S-NSSAIs included in the configured NSSAI, associated with an NSAG ID.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "NSAG_AREA",
+      "name": "NSAG area",
+      "entity_type": "Information Element",
+      "description": "Area defined by a list of TAIs where the mapping between S-NSSAIs and NSAG ID is valid.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "PRIORITY_VALUE",
+      "name": "Priority value",
+      "entity_type": "Property",
+      "description": "Value associated with each NSAG ID in the NSAG information, indicating priority for NSAG-aware operations.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "UE_NAS_LAYER",
+      "name": "UE NAS layer",
+      "entity_type": "Property",
+      "description": "Non-Access Stratum layer in the UE responsible for managing NAS procedures and providing NSAG information to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "LOWER_LAYERS",
+      "name": "Lower layers",
+      "entity_type": "Property",
+      "description": "Protocol layers below NAS in the UE, such as AS layers, which receive NSAG information for NSAG-aware cell reselection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information allowed for the UE, provided to lower layers along with NSAG information.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information requested by the UE, provided to lower layers along with NSAG information.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NSAG_INFORMATION",
+      "target": "NSAG_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NSAG information includes a list of NSAG IDs.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NSAG_ID",
+      "target": "S_NSSAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each NSAG ID is associated with a list of S-NSSAIs from the configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NSAG_ID",
+      "target": "NSAG_AREA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each NSAG ID is associated with an NSAG area defined by TAIs.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NSAG_ID",
+      "target": "PRIORITY_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each NSAG ID has an associated priority value in the NSAG information.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_NAS_LAYER",
+      "target": "LOWER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE NAS layer provides the most recent NSAG information to lower layers when available.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_NAS_LAYER",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides allowed NSSAI to lower layers along with NSAG information for NSAG-aware cell reselection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_NAS_LAYER",
+      "target": "REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE provides requested NSSAI to lower layers along with NSAG information for NSAG-aware cell reselection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.6"
+      ]
+    }
+  ]
+}

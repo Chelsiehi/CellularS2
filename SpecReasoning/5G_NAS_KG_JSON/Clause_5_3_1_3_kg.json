@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.1.3",
+  "title": "Release of the N1 NAS signalling connection",
+  "entities": [
+    {
+      "id": "PROCEDURE_N1_RELEASE",
+      "name": "Release of N1 NAS signalling connection",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing the N1 NAS signalling connection, initiated by the network or locally by the UE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3540",
+      "name": "Timer T3540",
+      "entity_type": "Timer",
+      "description": "Timer used to control the local release of the N1 NAS signalling connection after specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer started when N1 NAS signalling connection for eCall over IMS is released in eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer started when N1 NAS signalling connection for call to HPLMN designated non-emergency MSISDN/URI is released in eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "State entered by UE upon release of access stratum connection, indicating N1 NAS signalling connection is released.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of request in REGISTRATION REQUEST or SERVICE REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "IE_FOLLOW_ON_REQUEST_INDICATOR",
+      "name": "Follow-on request indicator",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether follow-on request is pending in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "CONDITION_ECALL_ONLY_MODE",
+      "name": "eCall only mode condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for eCall only mode as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "CONDITION_5GMM_CAUSE_VALUES",
+      "name": "5GMM cause values condition",
+      "entity_type": "Condition",
+      "description": "Condition based on specific 5GMM cause values received in messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "PROPERTY_LOCAL_RELEASE",
+      "name": "Local release of N1 NAS signalling connection",
+      "entity_type": "Property",
+      "description": "Action where UE locally releases the N1 NAS signalling connection upon timer expiry or specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_N1_RELEASE",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Release of N1 NAS signalling connection causes UE to enter 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_ECALL_ONLY_MODE",
+      "target": "TIMER_T3444",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "In eCall only mode, if N1 connection for eCall over IMS is released, UE starts T3444.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_ECALL_ONLY_MODE",
+      "target": "TIMER_T3445",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "In eCall only mode, if N1 connection for call to HPLMN non-emergency MSISDN/URI is released, UE starts T3445.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_5GMM_CAUSE_VALUES",
+      "target": "TIMER_T3540",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts T3540 upon receiving specific 5GMM cause values in messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_UE_REQUEST_TYPE",
+      "target": "TIMER_T3540",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Setting Request type to specific values influences starting of T3540.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_FOLLOW_ON_REQUEST_INDICATOR",
+      "target": "PROPERTY_LOCAL_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Follow-on request indicator setting affects whether UE may locally release N1 connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_T3540",
+      "target": "PROPERTY_LOCAL_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Upon T3540 expiry, UE locally releases the N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_N1_RELEASE",
+      "target": "TIMER_T3540",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3540 upon specific events like user-plane resource setup or receipt of certain messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.7.1",
+  "title": "General ULDedicatedMessageSegment",
+  "entities": [
+    {
+      "id": "PROC_UL_SEGMENT_TRANSFER",
+      "name": "UL Dedicated Message Segment Transfer",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer segments of UL DCCH messages from UE to NG-RAN in RRC_CONNECTED state. Segmentation is only applicable to UECapabilityInformation and MeasurementReportAppLayer in this release.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1",
+        "Figure 5.7.7.1"
+      ]
+    },
+    {
+      "id": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "name": "ULDedicatedMessageSegment",
+      "entity_type": "Message",
+      "description": "Message used to transfer segments of UL DCCH messages from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1",
+        "Figure 5.7.7.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE is connected to NG-RAN.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    },
+    {
+      "id": "IE_UECAPABILITYINFORMATION",
+      "name": "UECapabilityInformation",
+      "entity_type": "Information Element",
+      "description": "UL DCCH message that can be segmented using the UL dedicated message segment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    },
+    {
+      "id": "IE_MEASUREMENTREPORTAPPLAYER",
+      "name": "MeasurementReportAppLayer",
+      "entity_type": "Information Element",
+      "description": "UL DCCH message that can be segmented using the UL dedicated message segment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UL_SEGMENT_TRANSFER",
+      "target": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The UL dedicated message segment transfer procedure involves sending the ULDedicatedMessageSegment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1",
+        "Figure 5.7.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UL_SEGMENT_TRANSFER",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The UL dedicated message segment transfer procedure requires the UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "target": "IE_UECAPABILITYINFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULDedicatedMessageSegment can contain segments of UECapabilityInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "target": "IE_MEASUREMENTREPORTAPPLAYER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULDedicatedMessageSegment can contain segments of MeasurementReportAppLayer message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.1"
+      ]
+    }
+  ]
+}

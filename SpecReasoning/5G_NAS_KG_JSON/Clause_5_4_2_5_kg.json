@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2.5",
+  "title": "NAS security mode command not accepted by the UE",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE when security mode command cannot be accepted. Contains 5GMM cause indicating rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element containing cause value indicating reason for security mode rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "IE_REPLAYED_UE_SECURITY_CAPABILITIES",
+      "name": "Replayed UE security capabilities",
+      "entity_type": "Information Element",
+      "description": "IE containing replayed UE security capabilities that UE compares against its latest sent values.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "CAUSE_23",
+      "name": "UE security capabilities mismatch",
+      "entity_type": "Condition",
+      "description": "Cause value #23 set when UE detects altered replayed UE security capabilities IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "CAUSE_24",
+      "name": "security mode rejected, unspecified",
+      "entity_type": "Condition",
+      "description": "Cause value #24 used for unspecified security mode rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "T3560",
+      "name": "T3560",
+      "entity_type": "Timer",
+      "description": "Timer running during NAS security mode control procedure that AMF stops upon receiving SECURITY MODE REJECT.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "NAS security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing NAS security that is aborted when SECURITY MODE REJECT is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "PREVIOUS_5G_NAS_SECURITY_CONTEXT",
+      "name": "5G NAS security context in use before security mode control",
+      "entity_type": "Property",
+      "description": "Security context that both UE and AMF revert to after security mode rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE REJECT message contains 5GMM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REPLAYED_UE_SECURITY_CAPABILITIES",
+      "target": "CAUSE_23",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Altered replayed UE security capabilities IE triggers setting cause value to #23.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SECURITY MODE REJECT message causes AMF to stop timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "NAS_SECURITY_MODE_CONTROL_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of SECURITY MODE REJECT causes AMF to abort the ongoing NAS security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "PREVIOUS_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After SECURITY MODE REJECT, both UE and AMF revert to using previous 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "PREVIOUS_5G_NAS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE REJECT message and subsequent messages are protected using previous 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.5"
+      ]
+    }
+  ]
+}

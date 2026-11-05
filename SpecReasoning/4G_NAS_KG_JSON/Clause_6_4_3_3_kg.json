@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3.3",
+  "title": "EPS bearer context modification accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "name": "EPS bearer context modification accepted by the UE",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE processes MODIFY EPS BEARER CONTEXT REQUEST message, stops timer T3396 under certain conditions, checks received TFT, and sends MODIFY EPS BEARER CONTEXT ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to modify EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "MODIFY EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer related to APN-specific procedures that UE stops upon receiving MODIFY EPS BEARER CONTEXT REQUEST under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template",
+      "entity_type": "Information Element",
+      "description": "Information element containing packet filters for mapping uplink traffic flows to radio bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Information Element",
+      "description": "Identifier used to associate EPS bearer context modification with UE requested bearer resource procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Protocol Configuration Options",
+      "entity_type": "Information Element",
+      "description": "Container IE that can include various parameters like APN rate control, WLAN offload indication, service-level-AA container, etc.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Extended Protocol Configuration Options",
+      "entity_type": "Information Element",
+      "description": "Extended container IE that can include additional parameters like service-level-AA container, ATSSS response, ECS configuration information.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "Container for service-level authentication and authorization parameters, including C2 authorization results and UAV IDs.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN",
+      "name": "Emergency PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition where MODIFY EPS BEARER CONTEXT REQUEST is received for an emergency PDN connection, affecting T3396 timer behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_STORES_RATE_CONTROL_PARAMS",
+      "name": "UE stores rate control parameters",
+      "entity_type": "Property",
+      "description": "UE behavior of storing and using various rate control parameters received in protocol configuration options.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_FORWARDS_TO_UPPER_LAYERS",
+      "name": "UE forwards to upper layers",
+      "entity_type": "Property",
+      "description": "UE behavior of forwarding received parameters like service-level-AA container contents to upper layers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receipt of MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3396 upon receiving MODIFY EPS BEARER CONTEXT REQUEST under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "IE_TFT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE checks received TFT before taking it into use.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE sends MODIFY EPS BEARER CONTEXT ACCEPT message to MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message may contain PTI value.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message may contain Protocol Configuration Options IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message may contain Extended Protocol Configuration Options IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended Protocol Configuration Options IE may contain service-level-AA container.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMERGENCY_PDN",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If MODIFY EPS BEARER CONTEXT REQUEST is for emergency PDN connection, UE does not stop timer T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "PROP_UE_STORES_RATE_CONTROL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE stores and uses various rate control parameters received in protocol configuration options.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_EPS_BEARER_MOD_ACCEPT",
+      "target": "PROP_UE_FORWARDS_TO_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE forwards service-level-AA container contents and other parameters to upper layers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes Extended Protocol Configuration Options IE in MODIFY EPS BEARER CONTEXT ACCEPT message when forwarding service-level-AA payload.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.3"
+      ]
+    }
+  ]
+}

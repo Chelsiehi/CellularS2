@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.1.2",
+  "title": "Signalled QoS rules",
+  "entities": [
+    {
+      "id": "SIGNALLED_QOS_RULE",
+      "name": "Signalled QoS rule",
+      "entity_type": "Information Element",
+      "description": "A QoS rule provided by the network to the UE associated with a PDU session. Contains components like default QoS rule indication, QoS rule identifier, QoS flow identifier, packet filters, and precedence value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "DEFAULT_QOS_RULE_INDICATION",
+      "name": "Default QoS rule indication",
+      "entity_type": "Property",
+      "description": "Indicates whether the QoS rule is the default QoS rule for the PDU session. This indication cannot be changed.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "QOS_RULE_IDENTIFIER",
+      "name": "QoS rule identifier",
+      "entity_type": "Identifier",
+      "description": "Unique identifier for a signalled QoS rule within a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "QOS_FLOW_IDENTIFIER",
+      "name": "QoS flow identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier for the QoS flow associated with the QoS rule. Multiple QoS rules can be associated with the same QFI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "PACKET_FILTER_SET",
+      "name": "Set of packet filters",
+      "entity_type": "Information Element",
+      "description": "Optional set of packet filters in a QoS rule, which can include filters for UL, DL, or both directions. For default QoS rules in certain PDU session types, it must not be empty.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "PRECEDENCE_VALUE",
+      "name": "Precedence value",
+      "entity_type": "Property",
+      "description": "Value indicating the precedence of the QoS rule. For UE-requested QoS rules, the precedence value must not be in the range 70 to 99.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "DEFAULT_QOS_RULE",
+      "name": "Default QoS rule",
+      "entity_type": "Property",
+      "description": "The default QoS rule for a PDU session. In NB-N1 mode, there is only one QoS rule per PDU session, which is the default QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION_PROCEDURE",
+      "name": "PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by SMF to modify PDU session parameters, such as deleting non-default QoS rules when UE moves to NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "NB_N1_MODE_CONDITION",
+      "name": "NB-N1 mode condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE moves into NB-N1 mode, triggering deletion of non-default QoS rules via PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "DEFAULT_QOS_RULE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "A signalled QoS rule contains a default QoS rule indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "QOS_RULE_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "A signalled QoS rule contains a QoS rule identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "QOS_FLOW_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "A signalled QoS rule contains a QoS flow identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "PACKET_FILTER_SET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "A signalled QoS rule optionally contains a set of packet filters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "PRECEDENCE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "A signalled QoS rule contains a precedence value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DEFAULT_QOS_RULE",
+      "target": "PACKET_FILTER_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The default QoS rule requires that the set of packet filters is not empty.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NB_N1_MODE_CONDITION",
+      "target": "PDU_SESSION_MODIFICATION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "When UE moves into NB-N1 mode, the SMF initiates PDU session modification to delete non-default QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PDU_SESSION_MODIFICATION_PROCEDURE",
+      "target": "DEFAULT_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session modification procedure ensures only the default QoS rule remains in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.2"
+      ]
+    }
+  ]
+}

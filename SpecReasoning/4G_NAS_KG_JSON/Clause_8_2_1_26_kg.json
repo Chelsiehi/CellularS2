@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.1.26",
+  "title": "Negotiated IMSI offset",
+  "entities": [
+    {
+      "id": "IE_NEGOTIATED_IMSI_OFFSET",
+      "name": "Negotiated IMSI offset",
+      "entity_type": "Information Element",
+      "description": "Information element included by the network when paging timing collision control is supported and the MUSIM UE has requested IMSI offset.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_IMSI_OFFSET",
+      "name": "Requested IMSI offset",
+      "entity_type": "Information Element",
+      "description": "Information element included by MUSIM UE in ATTACH REQUEST message to request IMSI offset for paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure to the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_PAGING_COLLISION_CONTROL",
+      "name": "Network supports paging timing collision control",
+      "entity_type": "Condition",
+      "description": "Condition indicating the network has capability for paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "COND_UE_REQUESTED_IMSI_OFFSET",
+      "name": "MUSIM UE included Requested IMSI offset IE",
+      "entity_type": "Condition",
+      "description": "Condition where MUSIM UE has included Requested IMSI offset IE in ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_REQUESTED_IMSI_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains the Requested IMSI offset IE when sent by MUSIM UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_NEGOTIATED_IMSI_OFFSET",
+      "target": "COND_NETWORK_SUPPORTS_PAGING_COLLISION_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Negotiated IMSI offset IE is guarded by network support for paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_NEGOTIATED_IMSI_OFFSET",
+      "target": "COND_UE_REQUESTED_IMSI_OFFSET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Negotiated IMSI offset IE is guarded by MUSIM UE having included Requested IMSI offset IE in ATTACH REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.1.26"
+      ]
+    }
+  ]
+}

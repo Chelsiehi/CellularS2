@@ -1,0 +1,190 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.33",
+  "title": "Tracking area identity list",
+  "entities": [
+    {
+      "id": "IE_TAI_LIST",
+      "name": "Tracking area identity list",
+      "entity_type": "Information Element",
+      "description": "Information element that transfers a list of tracking areas from the network to the UE. It is a type 4 information element with minimum length of 8 octets and maximum length of 98 octets, capable of containing up to 16 different tracking area identities.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.1"
+      ]
+    },
+    {
+      "id": "PARTIAL_TAI_LIST",
+      "name": "Partial tracking area identity list",
+      "entity_type": "Information Element",
+      "description": "Component of the tracking area identity list that contains one or more tracking area identities with shared PLMN identity for compact encoding.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "TAC",
+      "name": "Tracking area code",
+      "entity_type": "Identifier",
+      "description": "2-octet identifier that uniquely identifies a tracking area within a PLMN. Coding responsibility lies with each administration and may use full hexadecimal representation.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33"
+      ]
+    },
+    {
+      "id": "TYPE_OF_LIST",
+      "name": "Type of list",
+      "entity_type": "Identifier",
+      "description": "2-bit field in the first octet of partial tracking area identity list that indicates the encoding type (00, 01, or 10) for compact representation.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "NUMBER_OF_ELEMENTS",
+      "name": "Number of elements",
+      "entity_type": "Identifier",
+      "description": "5-bit field in the first octet of partial tracking area identity list that indicates how many tracking area identities are contained in the partial list.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "MCC",
+      "name": "Mobile Country Code",
+      "entity_type": "Identifier",
+      "description": "3-digit code identifying the mobile country, encoded across multiple octets in the partial tracking area identity list.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "MNC",
+      "name": "Mobile Network Code",
+      "entity_type": "Identifier",
+      "description": "2 or 3-digit code identifying the mobile network, encoded across multiple octets in the partial tracking area identity list.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "UE_STORE_TAI_LIST",
+      "name": "UE stores TAI list",
+      "entity_type": "Property",
+      "description": "UE behavior where the complete tracking area identity list received from the network is stored. If more than 16 TAIs are included, the UE stores the first 16 and ignores the remaining octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_TAI_LIST",
+      "target": "PARTIAL_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The tracking area identity list information element consists of one or several partial tracking area identity lists.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PARTIAL_TAI_LIST",
+      "target": "TYPE_OF_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each partial tracking area identity list contains a type of list field in its first octet.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PARTIAL_TAI_LIST",
+      "target": "NUMBER_OF_ELEMENTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each partial tracking area identity list contains a number of elements field in its first octet that determines the list length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PARTIAL_TAI_LIST",
+      "target": "MCC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Partial tracking area identity lists contain Mobile Country Code information.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PARTIAL_TAI_LIST",
+      "target": "MNC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Partial tracking area identity lists contain Mobile Network Code information.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PARTIAL_TAI_LIST",
+      "target": "TAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Partial tracking area identity lists contain one or more Tracking Area Code fields, each consisting of 2 octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33",
+        "Figure 9.9.3.33.2",
+        "Figure 9.9.3.33.3",
+        "Figure 9.9.3.33.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_TAI_LIST",
+      "target": "UE_STORE_TAI_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of the tracking area identity list information element establishes the UE behavior to store the complete list.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.33"
+      ]
+    }
+  ]
+}

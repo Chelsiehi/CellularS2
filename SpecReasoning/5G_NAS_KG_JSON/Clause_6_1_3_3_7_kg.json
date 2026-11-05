@@ -1,0 +1,97 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.1.3.3.7",
+  "title": "PROCEDURE TRANSACTION PENDING",
+  "entities": [
+    {
+      "id": "STATE_PROC_TX_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "Initial state where no procedure transaction is active between network and UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TX_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State where network has initiated a procedure transaction towards the UE and is awaiting response.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_INITIATED",
+      "name": "network initiated 5GSM procedure command",
+      "entity_type": "Condition",
+      "description": "Condition triggered when network sends a 5GSM procedure command to initiate transaction.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_UE_RESPONSE",
+      "name": "5GSM procedure response by the UE",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE sends a response to complete the procedure transaction.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NETWORK_INITIATED",
+      "target": "STATE_PROC_TX_PENDING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network initiated 5GSM procedure command transitions state from INACTIVE to PENDING.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_UE_RESPONSE",
+      "target": "STATE_PROC_TX_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE response to 5GSM procedure transitions state from PENDING back to INACTIVE.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_PROC_TX_INACTIVE",
+      "target": "STATE_PROC_TX_PENDING",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "State transition from INACTIVE to PENDING triggered by network initiation.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_PROC_TX_PENDING",
+      "target": "STATE_PROC_TX_INACTIVE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "State transition from PENDING to INACTIVE triggered by UE response.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    }
+  ]
+}

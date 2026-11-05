@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.9.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "name": "RRC Connection Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE when upper layers request release of RRC connection as specified in TS 24.501. Not initiated for power saving purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "UPPER_LAYERS",
+      "name": "Upper Layers",
+      "entity_type": "Condition",
+      "description": "Protocol layers above RRC that can request RRC connection release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "PCELL_BARRING_INDICATION",
+      "name": "PCell Barring Indication",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers indicate barring of the PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "PCELL_BARRED_TREATMENT",
+      "name": "PCell Barred Treatment",
+      "entity_type": "Property",
+      "description": "UE treats the PCell used prior to entering RRC_IDLE as barred according to TS 38.304.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_ENTRY_ACTIONS",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Actions performed when transitioning to RRC_IDLE state with release cause 'other' as specified in clause 5.3.11.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE is not connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "UPPER_LAYERS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure is initiated when upper layers request RRC connection release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "PCELL_BARRING_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by condition of PCell barring indication from upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PCELL_BARRING_INDICATION",
+      "target": "PCELL_BARRED_TREATMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PCell barring indication condition establishes that UE treats PCell as barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_IDLE_ENTRY_ACTIONS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes performing actions upon going to RRC_IDLE as a step.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_IDLE_ENTRY_ACTIONS",
+      "target": "RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Performing RRC_IDLE entry actions establishes transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.9.2"
+      ]
+    }
+  ]
+}

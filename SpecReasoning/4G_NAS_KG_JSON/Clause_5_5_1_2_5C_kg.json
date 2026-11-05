@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.5C",
+  "title": "Attach for access to RLOS not accepted by the network",
+  "entities": [
+    {
+      "id": "ATTACH_PROC_RLOS",
+      "name": "Attach for access to RLOS",
+      "entity_type": "Procedure",
+      "description": "UE-initiated attach procedure specifically for accessing RLOS (Restricted Local Operator Services).",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "ATTACH_REJECT",
+      "name": "ATTACH REJECT message",
+      "entity_type": "Message",
+      "description": "Network-to-UE message rejecting an attach request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_35",
+      "name": "EMM cause #35",
+      "entity_type": "Information Element",
+      "description": "EMM cause value indicating 'Requested service option not authorized in this PLMN'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "EMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "UE state entered when attach is rejected with EMM cause #35, triggering PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "COND_RLOS_NEEDED",
+      "name": "Access to RLOS still needed",
+      "entity_type": "Condition",
+      "description": "Condition where UE continues to require RLOS access, affecting subsequent actions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that, if not running, allows PLMN selection after attach rejection in the same PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "PROP_SKIP_GERAN_UTRAN",
+      "name": "Skip GERAN/UTRAN selection and E-UTRA disable",
+      "entity_type": "Property",
+      "description": "UE behavior to skip actions involving GERAN/UTRAN selection or disabling E-UTRA capability while RLOS access is needed.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_35",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message includes EMM cause #35 when RLOS attach is not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_PROC_RLOS",
+      "target": "ATTACH_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure for RLOS may result in ATTACH REJECT message from network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMM_CAUSE_35",
+      "target": "EMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving EMM cause #35 in ATTACH REJECT causes UE to enter EMM-DEREGISTERED.PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RLOS_NEEDED",
+      "target": "PROP_SKIP_GERAN_UTRAN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition 'access to RLOS still needed' guards UE behavior to skip GERAN/UTRAN selection and E-UTRA disable actions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3346",
+      "target": "COND_RLOS_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 not running is a condition for PLMN selection when RLOS access is still needed in the same PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5C"
+      ]
+    }
+  ]
+}

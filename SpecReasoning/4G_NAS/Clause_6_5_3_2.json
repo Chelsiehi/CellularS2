@@ -1,0 +1,75 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.2",
+  "title": "UE requested bearer resource allocation procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------------------------------------------------------------",
+    "In order to request the allocation of bearer resources for one traffic flow aggregate, the UE shall send a BEARER RESOURCE ALLOCATION REQUEST message to the MME, start timer T3480 and enter the state PROCEDURE TRANSACTION PENDING (see example in figure 6.5.3.2.1)",
+    "The UE shall include the EPS bearer identity of the default EPS bearer associated with the requested bearer resource in the Linked EPS bearer identity IE. The UE shall set the TFT operation code in the Traffic flow aggregate IE to \"Create new TFT\". The packet filters in the Traffic flow aggregate IE shall include at least one packet filter applicable for the uplink direction. In the Required traffic flow QoS IE, the UE shall indicate a QCI and, if the UE also includes a GBR, the additional GBR required for the traffic flow aggregate",
+    "Figure 6.5.3.2.1: UE requested bearer resource allocation procedure",
+    "For the NBIFOM procedures as defined in 3GPP S 24.161 [36], the UE may send a BEARER RESOURCE ALLOCATION REQUEST message to the MME. If the traffic flow aggregate IE is not needed in those procedures, the UE shall set",
+    "- the length indicator of the Traffic flow aggregate IE to the value 1",
+    "- the TFT operation code to \"000\"",
+    "- the E bit to zero; and",
+    "- the number of packet filters to zero",
+    "and in the Required traffic flow QoS IE",
+    "- the length indicator to the value 1; and",
+    "- the QCI to zero",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.5.3.2.1",
+      "file": "Figure_6_5_3_2_1_p322.png.json",
+      "title": "UE requested bearer resource allocation procedure",
+      "content": {
+        "figure_id": "6.5.3.2.1",
+        "title": "UE requested bearer resource allocation procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "BEARER RESOURCE ALLOCATION REQUEST",
+              "notes": "Start T3480"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3480"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3480"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "BEARER RESOURCE ALLOCATION REJECT",
+              "notes": "Stop T3480"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Network may respond with ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST OR MODIFY EPS BEARER CONTEXT REQUEST OR BEARER RESOURCE ALLOCATION REJECT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

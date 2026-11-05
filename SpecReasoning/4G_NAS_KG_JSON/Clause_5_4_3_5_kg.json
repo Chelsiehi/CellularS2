@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.5",
+  "title": "NAS security mode command not accepted by the UE",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE when it cannot accept the security mode command. Contains an EMM cause indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element in SECURITY MODE REJECT message indicating rejection reason. Common values include #23 (UE security capabilities mismatch) and #24 (security mode rejected, unspecified).",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "T3460",
+      "name": "Timer T3460",
+      "entity_type": "Timer",
+      "description": "Timer running in MME during NAS security mode control procedure. Stopped upon receipt of SECURITY MODE REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_MODE_CONTROL",
+      "name": "NAS security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered to establish NAS security. Aborted by MME upon receiving SECURITY MODE REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT_PREVIOUS",
+      "name": "EPS security context in use before initiation",
+      "entity_type": "Property",
+      "description": "Security context that was active before NAS security mode control procedure started. Reapplied by both UE and MME after procedure abort.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "UE_SECURITY_CAPABILITIES_MISMATCH",
+      "name": "UE security capabilities mismatch",
+      "entity_type": "Condition",
+      "description": "Condition where UE security capabilities do not match network requirements, indicated by EMM cause #23.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_REJECTED_UNSPECIFIED",
+      "name": "Security mode rejected, unspecified",
+      "entity_type": "Condition",
+      "description": "Unspecified rejection reason for security mode command, indicated by EMM cause #24.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE REJECT message contains EMM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EMM_CAUSE",
+      "target": "UE_SECURITY_CAPABILITIES_MISMATCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause value #23 indicates UE security capabilities mismatch condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMM_CAUSE",
+      "target": "SECURITY_MODE_REJECTED_UNSPECIFIED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause value #24 indicates unspecified security mode rejection condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SECURITY MODE REJECT message stops timer T3460 in MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "NAS_SECURITY_MODE_CONTROL",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of SECURITY MODE REJECT message triggers MME to abort the NAS security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "EPS_SECURITY_CONTEXT_PREVIOUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After SECURITY MODE REJECT, both UE and MME reapply the EPS security context in use before procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SECURITY_MODE_REJECT",
+      "target": "EPS_SECURITY_CONTEXT_PREVIOUS",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE REJECT message is protected using the EPS security context in use before procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.5"
+      ]
+    }
+  ]
+}

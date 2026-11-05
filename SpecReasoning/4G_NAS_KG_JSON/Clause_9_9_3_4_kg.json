@@ -1,0 +1,128 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.4",
+  "title": "Authentication response parameter",
+  "entities": [
+    {
+      "id": "IE_AUTH_RESPONSE_PARAM",
+      "name": "Authentication response parameter",
+      "entity_type": "Information Element",
+      "description": "Provides the network with the authentication response calculated in the USIM. It is a type 4 information element with minimum length of 6 octets and maximum length of 18 octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1",
+        "Table 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "Authentication response parameter IEI",
+      "entity_type": "Identifier",
+      "description": "Information element identifier for authentication response parameter, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "FIELD_LENGTH",
+      "name": "Length of Authentication response parameter contents",
+      "entity_type": "Property",
+      "description": "Length indicator of the authentication response parameter contents, located in bits 8-1 of octet 2.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "FIELD_RES",
+      "name": "RES or RES*",
+      "entity_type": "Property",
+      "description": "Contains the RES or RES* value, located in octets 3-18. RES is minimum 4 octets and up to 16 octets in EPS authentication challenge. RES* is 16 octets in 5G AKA authentication challenge.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1",
+        "Table 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "PROC_EPS_AUTH",
+      "name": "EPS authentication challenge",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure where the response calculated in the USIM (RES) is minimum 4 octets and may be up to 16 octets in length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4"
+      ]
+    },
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA authentication challenge",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure where the response calculated in the ME (RES*) is 16 octets in length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_AUTH_RESPONSE_PARAM",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Authentication response parameter information element contains the IEI field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_AUTH_RESPONSE_PARAM",
+      "target": "FIELD_LENGTH",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Authentication response parameter information element contains the length field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_AUTH_RESPONSE_PARAM",
+      "target": "FIELD_RES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Authentication response parameter information element contains the RES/RES* field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4",
+        "Figure 9.9.3.4.1",
+        "Table 9.9.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_EPS_AUTH",
+      "target": "FIELD_RES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS authentication challenge uses RES field with minimum 4 octets and up to 16 octets length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "FIELD_RES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5G AKA authentication challenge uses RES* field with fixed 16 octets length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.4"
+      ]
+    }
+  ]
+}

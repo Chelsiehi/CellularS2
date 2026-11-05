@@ -1,0 +1,191 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.9.2",
+  "title": "Actions related to transmission of UuMessageTransferSidelink message",
+  "entities": [
+    {
+      "id": "PROCEDURE_UU_MESSAGE_TRANSFER",
+      "name": "Uu message transfer procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by L2 U2N Relay UE to transfer messages between network and L2 U2N Remote UE via sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "MSG_UUMESSAGETRANSFERSIDELINK",
+      "name": "UuMessageTransferSidelink message",
+      "entity_type": "Message",
+      "description": "Sidelink message used by L2 U2N Relay UE to transfer network information to L2 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "IE_SL_PAGING_DELIVERY",
+      "name": "sl-PagingDelivery",
+      "entity_type": "Information Element",
+      "description": "Information element included in UuMessageTransferSidelink when Paging message is received for the Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "IE_SL_SYSTEM_INFORMATION_DELIVERY",
+      "name": "sl-SystemInformationDelivery",
+      "entity_type": "Information Element",
+      "description": "Information element included in UuMessageTransferSidelink when System Information needs to be delivered to Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "COND_PAGING_RECEIVED",
+      "name": "Paging message received for Remote UE",
+      "entity_type": "Condition",
+      "description": "Condition where L2 U2N Relay UE receives Paging message from network containing ue-Identity of connected L2 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "COND_SIB_REQUESTED",
+      "name": "SIBs requested by Remote UE",
+      "entity_type": "Condition",
+      "description": "Condition where L2 U2N Relay UE acquires SIBs requested by connected L2 U2N Remote UE as indicated in sl-Requested-SI-List.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "COND_SIB1_UPDATED",
+      "name": "Updated SIB1 received",
+      "entity_type": "Condition",
+      "description": "Condition where L2 U2N Relay UE receives updated SIB1 and SIBs have been requested by connected L2 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "PROP_FORWARD_SIB1",
+      "name": "Always forward SIB1 to Remote UE",
+      "entity_type": "Property",
+      "description": "Behavior where L2 U2N Relay UE always forwards SIB1 to the L2 U2N Remote UE regardless of other conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UU_MESSAGE_TRANSFER",
+      "target": "MSG_UUMESSAGETRANSFERSIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Uu message transfer procedure involves transmission of UuMessageTransferSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UUMESSAGETRANSFERSIDELINK",
+      "target": "IE_SL_PAGING_DELIVERY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UuMessageTransferSidelink message includes sl-PagingDelivery IE when Paging message is received for Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UUMESSAGETRANSFERSIDELINK",
+      "target": "IE_SL_SYSTEM_INFORMATION_DELIVERY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UuMessageTransferSidelink message includes sl-SystemInformationDelivery IE when System Information delivery conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_PAGING_RECEIVED",
+      "target": "PROCEDURE_UU_MESSAGE_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receipt of Paging message for Remote UE triggers initiation of Uu message transfer procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SIB_REQUESTED",
+      "target": "PROCEDURE_UU_MESSAGE_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Acquisition of requested SIBs triggers initiation of Uu message transfer procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SIB1_UPDATED",
+      "target": "PROCEDURE_UU_MESSAGE_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receipt of updated SIB1 triggers initiation of Uu message transfer procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_PAGING_RECEIVED",
+      "target": "IE_SL_PAGING_DELIVERY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receipt of Paging message for Remote UE requires inclusion of sl-PagingDelivery IE in the message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SIB_REQUESTED",
+      "target": "IE_SL_SYSTEM_INFORMATION_DELIVERY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Acquisition of requested SIBs requires inclusion of sl-SystemInformationDelivery IE in the message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_SIB1_UPDATED",
+      "target": "IE_SL_SYSTEM_INFORMATION_DELIVERY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receipt of updated SIB1 requires inclusion of sl-SystemInformationDelivery IE in the message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_FORWARD_SIB1",
+      "target": "IE_SL_SYSTEM_INFORMATION_DELIVERY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Property that L2 U2N Relay UE always forwards SIB1 establishes requirement for sl-SystemInformationDelivery IE inclusion.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.2"
+      ]
+    }
+  ]
+}

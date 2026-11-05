@@ -1,0 +1,127 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.2.8",
+  "title": "Sidelink quantity configuration",
+  "entities": [
+    {
+      "id": "SL_QUANTITY_CONFIG",
+      "name": "sl-QuantityConfig",
+      "entity_type": "Information Element",
+      "description": "Sidelink quantity configuration parameters received by the UE that configure measurement quantities for sidelink operations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG_SL",
+      "name": "VarMeasConfigSL",
+      "entity_type": "Property",
+      "description": "UE variable storing the sidelink measurement configuration including sl-QuantityConfig parameters and sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a sidelink measurement configuration entry in the sl-MeasIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID_LIST",
+      "name": "sl-MeasIdList",
+      "entity_type": "Information Element",
+      "description": "List of sidelink measurement identifiers configured in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Property",
+      "description": "UE variable storing active sidelink measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer controlling periodic reporting for sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "SL_TIME_TO_TRIGGER",
+      "name": "sl-TimeToTrigger",
+      "entity_type": "Property",
+      "description": "Time-to-trigger parameter associated with sidelink measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_QUANTITY_CONFIG",
+      "target": "VAR_MEAS_CONFIG_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Received sl-QuantityConfig parameters are stored in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_MEAS_ID_LIST",
+      "target": "SL_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-MeasIdList contains individual sl-MeasId entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_MEAS_ID",
+      "target": "VAR_MEAS_REPORT_LIST_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Measurement reporting entry for sl-MeasId is removed from VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_MEAS_ID",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Periodical reporting timer is stopped for the sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SL_MEAS_ID",
+      "target": "SL_TIME_TO_TRIGGER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Associated information like sl-TimeToTrigger is reset for the sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.8"
+      ]
+    }
+  ]
+}

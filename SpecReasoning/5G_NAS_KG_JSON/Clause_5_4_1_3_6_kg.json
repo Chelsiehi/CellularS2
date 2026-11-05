@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.6",
+  "title": "Authentication not accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_AUTH_CHALLENGE",
+      "name": "5G Authentication Challenge",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE verifies the 5G core network authenticity using authentication challenge data (RAND, AUTN, ngKSI) received in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network containing 5G authentication challenge data (RAND, AUTN, ngKSI).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network when authentication challenge is rejected, containing cause value indicating failure reason.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "IE_RAND",
+      "name": "RAND",
+      "entity_type": "Information Element",
+      "description": "Random challenge parameter in authentication challenge data.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "IE_AUTN",
+      "name": "AUTN",
+      "entity_type": "Information Element",
+      "description": "Authentication token parameter containing MAC code, sequence number SQN, and AMF field with separation bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Information Element",
+      "description": "Key set identifier for 5G security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "IE_AUTS",
+      "name": "AUTS",
+      "entity_type": "Information Element",
+      "description": "Re-synchronization token sent in AUTHENTICATION FAILURE message for synch failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_MAC_FAILURE",
+      "name": "MAC code failure",
+      "entity_type": "Condition",
+      "description": "Condition where MAC code in AUTN parameter is invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_NON5G_AUTH",
+      "name": "Non-5G authentication unacceptable",
+      "entity_type": "Condition",
+      "description": "Condition where separation bit in AMF field of AUTN is set to 0.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_NGKSI_IN_USE",
+      "name": "ngKSI already in use",
+      "entity_type": "Condition",
+      "description": "Condition where ngKSI received in AUTHENTICATION REQUEST is already in use in UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_SQN_OUT_OF_RANGE",
+      "name": "SQN out of range",
+      "entity_type": "Condition",
+      "description": "Condition where sequence number SQN in AUTN parameter is out of range.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3516",
+      "name": "T3516",
+      "entity_type": "Timer",
+      "description": "Timer stopped when UE returns AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_RAND_RES",
+      "name": "Delete stored RAND and RES*",
+      "entity_type": "Property",
+      "description": "UE behavior to delete any previously stored RAND and RES* when returning AUTHENTICATION FAILURE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTH_CHALLENGE",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication challenge procedure involves receiving AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_RAND",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains RAND parameter.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_AUTN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains AUTN parameter.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains ngKSI parameter.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_MAC_FAILURE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MAC code failure condition leads to sending AUTHENTICATION FAILURE message with cause #20.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NON5G_AUTH",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-5G authentication unacceptable condition leads to sending AUTHENTICATION FAILURE message with cause #26.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NGKSI_IN_USE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ngKSI already in use condition leads to sending AUTHENTICATION FAILURE message with cause #71.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SQN_OUT_OF_RANGE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SQN out of range condition leads to sending AUTHENTICATION FAILURE message with cause #21 and AUTS token.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_AUTH_FAILURE",
+      "target": "IE_AUTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION FAILURE message contains AUTS token for synch failure case.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_AUTH_FAILURE",
+      "target": "PROP_DELETE_RAND_RES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message triggers deletion of stored RAND and RES*.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_AUTH_FAILURE",
+      "target": "TIMER_T3516",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message stops timer T3516 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.6"
+      ]
+    }
+  ]
+}

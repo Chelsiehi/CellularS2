@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.2.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_HANDOVER_TO_NR",
+      "name": "Handover to NR procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by RAN using another RAT to handover to NR, involving sending RRCReconfiguration message and applying security and bearer re-establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "MSG_RRCRECONFIGURATION",
+      "name": "RRCReconfiguration message",
+      "entity_type": "Message",
+      "description": "Message sent via the radio access technology from which the inter-RAT handover is performed to initiate handover to NR.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "ACTION_ACTIVATE_CIPHERING",
+      "name": "Activate ciphering",
+      "entity_type": "Property",
+      "description": "Network action to activate ciphering, possibly using NULL algorithm, if not yet activated in the other RAT.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "ACTION_REESTABLISH_SRBS_DRBS",
+      "name": "Re-establish SRBs and DRBs",
+      "entity_type": "Property",
+      "description": "Network action to re-establish Signaling Radio Bearers and one or more Data Radio Bearers during handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_CIPHERING_NOT_ACTIVATED",
+      "name": "Ciphering not activated in other RAT",
+      "entity_type": "Condition",
+      "description": "Condition where ciphering is not yet activated in the other RAT, triggering activation during handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "MSG_RRCRECONFIGURATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Handover to NR procedure involves sending RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "ACTION_ACTIVATE_CIPHERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Handover to NR procedure includes activating ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_HANDOVER_TO_NR",
+      "target": "ACTION_REESTABLISH_SRBS_DRBS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Handover to NR procedure includes re-establishing SRBs and DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CIPHERING_NOT_ACTIVATED",
+      "target": "ACTION_ACTIVATE_CIPHERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that ciphering is not activated in other RAT triggers the activation of ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.2"
+      ]
+    }
+  ]
+}

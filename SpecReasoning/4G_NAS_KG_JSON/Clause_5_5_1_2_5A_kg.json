@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.5A",
+  "title": "Attach for emergency bearer services not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_ATTACH_EMERGENCY",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attach for emergency bearer services. When rejected by network, specific UE behaviors are triggered.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE when attach request cannot be accepted. Contains EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for attach rejection. Values include #5 'IMEI not accepted' and others.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREG_NO_IMSI",
+      "name": "EMM-DEREGISTERED.NO-IMSI",
+      "entity_type": "State",
+      "description": "UE state entered when ATTACH REJECT with EMM cause #5 is received.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "COND_CAUSE_5",
+      "name": "EMM cause #5 received",
+      "entity_type": "Condition",
+      "description": "Condition when ATTACH REJECT includes EMM cause #5 'IMEI not accepted'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "COND_OTHER_CAUSE",
+      "name": "Other EMM cause received",
+      "entity_type": "Condition",
+      "description": "Condition when ATTACH REJECT includes EMM cause values other than #5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE behavior to notify upper layers about attach procedure failure, potentially triggering CS emergency call or other mechanisms.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "PROP_PLMN_SELECTION_SHARED",
+      "name": "PLMN selection in shared network",
+      "entity_type": "Property",
+      "description": "UE behavior in shared network to select alternative PLMN and potentially re-initiate attach for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "COND_SHARED_NETWORK",
+      "name": "In shared network",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE is operating in a shared network environment.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH_EMERGENCY",
+      "target": "MSG_ATTACH_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes network sending ATTACH REJECT message when attach cannot be accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_CAUSE_5",
+      "target": "STATE_EMM_DEREG_NO_IMSI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving EMM cause #5 establishes UE state EMM-DEREGISTERED.NO-IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_OTHER_CAUSE",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving other EMM cause values establishes UE behavior to inform upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SHARED_NETWORK",
+      "target": "PROP_PLMN_SELECTION_SHARED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in shared network establishes UE behavior to perform PLMN selection and potentially re-initiate attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_EMM_CAUSE",
+      "target": "COND_CAUSE_5",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause IE guards condition for EMM cause #5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_EMM_CAUSE",
+      "target": "COND_OTHER_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause IE guards condition for other EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.5A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.5.3",
+  "title": "EMM information procedure in the UE",
+  "entities": [
+    {
+      "id": "PROC_EMM_INFO_UE",
+      "name": "EMM information procedure in the UE",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the UE when receiving an EMM INFORMATION message. The UE accepts the message and optionally uses its contents to update stored information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "MSG_EMM_INFORMATION",
+      "name": "EMM INFORMATION",
+      "entity_type": "Message",
+      "description": "Message sent to the UE containing information that may be used to update stored UE information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "MSG_EMM_STATUS",
+      "name": "EMM STATUS",
+      "entity_type": "Message",
+      "description": "Message returned by the UE when it does not support the received EMM INFORMATION message, indicating the message type is not implemented.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_EMM_INFO",
+      "name": "UE supports EMM INFORMATION message",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether the UE has implemented support for the EMM INFORMATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "PROP_UPDATE_UE_INFO",
+      "name": "Update UE stored information",
+      "entity_type": "Property",
+      "description": "Optional behavior where the UE uses the contents of the EMM INFORMATION message to update appropriate information stored within the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE_97",
+      "name": "EMM cause #97",
+      "entity_type": "Information Element",
+      "description": "EMM cause value indicating 'message type non-existent or not implemented'.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EMM_INFO_UE",
+      "target": "MSG_EMM_INFORMATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The EMM information procedure in the UE is triggered by receiving an EMM INFORMATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EMM_INFO_UE",
+      "target": "COND_UE_SUPPORTS_EMM_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure behavior is guarded by whether the UE supports the EMM INFORMATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_UE_SUPPORTS_EMM_INFO",
+      "target": "PROP_UPDATE_UE_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE supports the EMM INFORMATION message, it optionally updates stored information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_SUPPORTS_EMM_INFO",
+      "target": "MSG_EMM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE does not support the EMM INFORMATION message, it returns an EMM STATUS message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_EMM_STATUS",
+      "target": "IE_EMM_CAUSE_97",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EMM STATUS message contains EMM cause #97 when the message type is not implemented.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.3"
+      ]
+    }
+  ]
+}

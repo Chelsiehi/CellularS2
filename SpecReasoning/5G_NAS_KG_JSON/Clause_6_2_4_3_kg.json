@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.4.3",
+  "title": "Additional RG related requirements for IP address allocation",
+  "entities": [
+    {
+      "id": "IPV6_PDU_SESSION_TYPES",
+      "name": "IPv6 PDU session types",
+      "entity_type": "Condition",
+      "description": "IPv6 PDU session type or IPv4v6 PDU session type selected for IP address allocation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "ROUTER_ADVERTISEMENT_MANAGED_ZERO",
+      "name": "Router Advertisement with Managed flag zero",
+      "entity_type": "Condition",
+      "description": "Router Advertisement Message with Managed address configuration flag set to zero, triggering stateless address autoconfiguration.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "ROUTER_ADVERTISEMENT_MANAGED_ONE",
+      "name": "Router Advertisement with Managed flag one",
+      "entity_type": "Condition",
+      "description": "Router Advertisement Message with Managed address configuration flag set to one, triggering DHCPv6 address acquisition.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "STATELESS_AUTOCONFIG",
+      "name": "IPv6 stateless address autoconfiguration",
+      "entity_type": "Procedure",
+      "description": "Procedure where 5G-RG/W-AGF obtains /64 IPv6 prefix via stateless address autoconfiguration as per RFC 4862.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "DHCPV6_STATELESS",
+      "name": "Stateless DHCPv6",
+      "entity_type": "Procedure",
+      "description": "Procedure for obtaining IPv6 configuration parameters via stateless DHCPv6 as per RFC 8415.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "DHCPV6_STATEFUL",
+      "name": "Stateful DHCPv6",
+      "entity_type": "Procedure",
+      "description": "Procedure for obtaining IPv6 address via DHCPv6 Identity association for non-temporary addresses option as per RFC 8415.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "DHCPV6_PREFIX_DELEGATION",
+      "name": "DHCPv6 prefix delegation",
+      "entity_type": "Procedure",
+      "description": "Procedure where 5G-RG/W-AGF acts as Requesting Router to obtain IPv6 prefixes using DHCPv6 Identity association for prefix delegation option.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "DHCP_OPTIONS",
+      "name": "DHCP options",
+      "entity_type": "Information Element",
+      "description": "DHCPv6 options including Rapid commit option and OPTION_ORO with OPTION_PD_EXCLUDE option code.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "ACS_INFO_DHCP",
+      "name": "ACS information via DHCP",
+      "entity_type": "Procedure",
+      "description": "Procedure for 5G-RG to obtain ACS information via DHCP as specified in BBF TR-069 or TR-369.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IPV6_PDU_SESSION_TYPES",
+      "target": "ROUTER_ADVERTISEMENT_MANAGED_ZERO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IPv6 PDU session types condition the reception of Router Advertisement with Managed flag zero.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ROUTER_ADVERTISEMENT_MANAGED_ZERO",
+      "target": "STATELESS_AUTOCONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Router Advertisement with Managed flag zero establishes IPv6 stateless address autoconfiguration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ROUTER_ADVERTISEMENT_MANAGED_ZERO",
+      "target": "DHCPV6_STATELESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Router Advertisement with Managed flag zero may establish stateless DHCPv6 procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ROUTER_ADVERTISEMENT_MANAGED_ZERO",
+      "target": "DHCPV6_PREFIX_DELEGATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Router Advertisement with Managed flag zero may establish DHCPv6 prefix delegation procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ROUTER_ADVERTISEMENT_MANAGED_ONE",
+      "target": "DHCPV6_STATEFUL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Router Advertisement with Managed flag one establishes stateful DHCPv6 procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ROUTER_ADVERTISEMENT_MANAGED_ONE",
+      "target": "DHCPV6_PREFIX_DELEGATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Router Advertisement with Managed flag one may establish DHCPv6 prefix delegation procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DHCPV6_PREFIX_DELEGATION",
+      "target": "DHCP_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DHCPv6 prefix delegation procedure may include DHCP options like Rapid commit and OPTION_ORO.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ACS_INFO_DHCP",
+      "target": "DHCP_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACS information via DHCP procedure involves DHCP options as per BBF specifications.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.3"
+      ]
+    }
+  ]
+}

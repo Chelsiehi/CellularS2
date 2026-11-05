@@ -1,0 +1,174 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.3.8",
+  "title": "eCALL-INACTIVE",
+  "entities": [
+    {
+      "id": "STATE_ECALL_INACTIVE",
+      "name": "EMM-DEREGISTERED.eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Substate where UE camps on a suitable/acceptable cell but initiates no EMM signalling and ignores paging requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "STATE_NO_IMSI",
+      "name": "EMM-DEREGISTERED.NO-IMSI",
+      "entity_type": "State",
+      "description": "Substate entered when USIM is removed from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "STATE_PLMN_SEARCH",
+      "name": "EMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Substate entered when UE loses coverage.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "STATE_NULL",
+      "name": "EMM-NULL",
+      "entity_type": "State",
+      "description": "State entered when UE is deactivated (e.g., powered off).",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "STATE_ATTEMPTING_ATTACH",
+      "name": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "Substate entered when UE receives request to establish eCall over IMS or non-emergency call.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_USIM_REMOVED",
+      "name": "USIM removed",
+      "entity_type": "Condition",
+      "description": "Event where USIM is physically removed from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_COVERAGE_LOST",
+      "name": "Coverage lost",
+      "entity_type": "Condition",
+      "description": "Event where UE loses radio coverage.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_UE_DEACTIVATED",
+      "name": "UE deactivated",
+      "entity_type": "Condition",
+      "description": "Event where UE is powered off or deactivated by user.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_ECALL_IMS_REQUEST",
+      "name": "eCall over IMS request",
+      "entity_type": "Condition",
+      "description": "Request from upper layers to establish eCall over IMS.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_NON_EMERGENCY_REQUEST",
+      "name": "Non-emergency call request",
+      "entity_type": "Condition",
+      "description": "Request from upper layers to establish call to HPLMN designated non-emergency MSISDN/URI.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "PROP_NO_EMM_SIGNALLING",
+      "name": "No EMM signalling",
+      "entity_type": "Property",
+      "description": "UE behavior in eCALL-INACTIVE state: initiates no EMM signalling and ignores paging requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_USIM_REMOVED",
+      "target": "STATE_NO_IMSI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "USIM removal causes transition to NO-IMSI substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_COVERAGE_LOST",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Coverage loss causes transition to PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_UE_DEACTIVATED",
+      "target": "STATE_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE deactivation causes transition to EMM-NULL state.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ECALL_IMS_REQUEST",
+      "target": "STATE_ATTEMPTING_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "eCall over IMS request causes transition to ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NON_EMERGENCY_REQUEST",
+      "target": "STATE_ATTEMPTING_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-emergency call request causes transition to ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_ECALL_INACTIVE",
+      "target": "PROP_NO_EMM_SIGNALLING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "eCALL-INACTIVE state requires UE to initiate no EMM signalling and ignore paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.8"
+      ]
+    }
+  ]
+}

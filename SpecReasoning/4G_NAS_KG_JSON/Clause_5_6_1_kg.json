@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1",
+  "title": "Service request procedure",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to request the establishment of bearers for user data transfer or to respond to paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate the service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state indicating it is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "IE_KSI",
+      "name": "Key set identifier",
+      "entity_type": "Information Element",
+      "description": "Identifies the security key set to be used.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_TYPE",
+      "name": "Service type",
+      "entity_type": "Information Element",
+      "description": "Indicates the type of service being requested.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending the SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires the UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_KSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains the Key set identifier IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains the Service type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Service request procedure is triggered by sending the SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1"
+      ]
+    }
+  ]
+}

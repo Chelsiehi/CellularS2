@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_AUTH_AUTH",
+      "name": "PDU session authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to enable the DN to authenticate and/or authorize the upper layers of the UE when establishing a PDU session, re-authenticate after establishment, or authenticate 5G ProSe layer-3 remote UE upon REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTH_COMMAND",
+      "name": "PDU SESSION AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-request message from network to UE as part of PDU EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "name": "PDU SESSION AUTHENTICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-response message from UE to network as part of PDU EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISH_ACCEPT",
+      "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-success message when authentication succeeds during UE-requested PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISH_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-failure message when authentication fails during UE-requested PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTH_RESULT",
+      "name": "PDU SESSION AUTHENTICATION RESULT",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-success message when authentication succeeds after PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_CMD",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP-failure message when authentication fails after PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_REQUEST",
+      "name": "EAP-request message",
+      "entity_type": "Information Element",
+      "description": "EAP message type sent from network to UE to initiate authentication challenge.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_RESPONSE",
+      "name": "EAP-response message",
+      "entity_type": "Information Element",
+      "description": "EAP message type sent from UE to network in response to EAP-request.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_SUCCESS",
+      "name": "EAP-success message",
+      "entity_type": "Information Element",
+      "description": "EAP message type indicating successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Information Element",
+      "description": "EAP message type indicating failed authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3590",
+      "name": "T3590",
+      "entity_type": "Timer",
+      "description": "Timer started when PDU SESSION AUTHENTICATION COMMAND is sent and stopped when corresponding PDU SESSION AUTHENTICATION COMPLETE is received.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "COND_NON_EMERGENCY_PDU_SESSION",
+      "name": "Non-emergency PDU session condition",
+      "entity_type": "Condition",
+      "description": "Condition that PDU session authentication and authorization procedure can only be performed during or after UE-requested PDU session procedure establishing a non-emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_SESSION_AUTH_AUTH",
+      "target": "MSG_PDU_SESSION_AUTH_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending PDU SESSION AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDU_SESSION_AUTH_AUTH",
+      "target": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes receiving PDU SESSION AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_AUTH_COMMAND",
+      "target": "IE_EAP_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION COMMAND message carries EAP-request message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "IE_EAP_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION COMPLETE message carries EAP-response message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_ESTABLISH_ACCEPT",
+      "target": "IE_EAP_SUCCESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT ACCEPT message carries EAP-success message during establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_ESTABLISH_REJECT",
+      "target": "IE_EAP_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message carries EAP-failure message during establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_AUTH_RESULT",
+      "target": "IE_EAP_SUCCESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION RESULT message carries EAP-success message after establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_RELEASE_CMD",
+      "target": "IE_EAP_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message carries EAP-failure message after establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_AUTH_COMMAND",
+      "target": "TIMER_T3590",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending PDU SESSION AUTHENTICATION COMMAND starts timer T3590.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_PDU_SESSION_AUTH_COMPLETE",
+      "target": "TIMER_T3590",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving PDU SESSION AUTHENTICATION COMPLETE stops timer T3590.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1",
+        "Figure 6.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_PDU_SESSION_AUTH_AUTH",
+      "target": "COND_NON_EMERGENCY_PDU_SESSION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires non-emergency PDU session condition to be satisfied.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.1"
+      ]
+    }
+  ]
+}

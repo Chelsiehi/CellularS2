@@ -1,0 +1,110 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.2",
+  "title": "NAS security mode control initiation by the network",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------------------",
+    "The MME initiates the NAS security mode control procedure by sending a SECURITY MODE COMMAND message to the UE and starting timer T3460 (see example in figure 5.4.3.2.1)",
+    "The MME shall reset the downlink NAS COUNT counter and use it to integrity protect the initial SECURITY MODE COMMAND message if the security mode control procedure is initiated",
+    "- to take into use the EPS security context created after a successful execution of the EPS authentication procedure",
+    "- upon receipt of TRACKING AREA UPDATE REQUEST message including a GPRS ciphering key sequence number IE, if the MME wishes to create a mapped EPS security context (i.e. the type of security context flag is set to \"mapped security context\" in the NAS key set identifier IE included in the SECURITY MODE COMMAND message)",
+    "The MME shall send the SECURITY MODE COMMAND message unciphered, but shall integrity protect the message with the NAS integrity key based on KASME or mapped K 'ASME indicated by the eKSI included in the message. The MME shall set the security header type of the message to \"integrity protected with new EPS security context\"",
+    "The MME shall create a locally generated KASME and send the SECURITY MODE COMMAND message including a KSI value in the NAS key set identifier IE set to \"000\" and EIA0 and EEA0 as the selected NAS security algorithms only when the security mode control procedure is initiated",
+    "- during an attach procedure for emergency bearer services if no shared EPS security context is available",
+    "- during an attach procedure for access to RLOS if no valid EPS security context is available",
+    "- during a tracking area updating procedure for a UE that has a PDN connection for emergency bearer services if no shared EPS security context is available",
+    "- during a tracking area updating procedure for a UE that has a PDN connection for access to RLOS if no valid EPS security context is available",
+    "- during a service request procedure for a UE that has a PDN connection for emergency bearer services if no shared EPS security context is available",
+    "- during a service request procedure for a UE that has a PDN connection for access to RLOS if no valid EPS security context is available",
+    "- after a failed authentication procedure for a UE that has a PDN connection for emergency bearer services or that is establishing a PDN connection for emergency bearer services, if continued usage of a shared security context is not possible; or",
+    "- after a failed authentication procedure for a UE that has a PDN connection for access to RLOS or that is establishing a PDN connection for access to RLOS, if continued usage of a valid security context is not possible",
+    "The UE shall process a SECURITY MODE COMMAND message including a KSI value in the NAS key set identifier IE set to \"000\" and EIA0 and EEA0 as the selected NAS security algorithms and, if accepted, create a locally generated KASME when the security mode control procedure is initiated",
+    "- during an attach procedure for emergency bearer services",
+    "- during an attach procedure for access to RLOS",
+    "- during a tracking area updating procedure when the UE has a PDN connection for emergency bearer services",
+    "- during a tracking area updating procedure when the UE has a PDN connection for access to RLOS",
+    "- during a service request procedure when the UE has a PDN connection for emergency bearer services",
+    "- during a service request procedure when the UE has a PDN connection for access to RLOS",
+    "- after an authentication procedure when the UE has a PDN connection for emergency bearer services or is establishing a PDN connection for emergency bearer services; or",
+    "- after an authentication procedure when the UE has a PDN connection for access to RLOS or is establishing a PDN connection for access to RLOS",
+    "NOTE 1: The process for creation of the locally generated KASME by the MME and the UE is implementation dependent",
+    "Upon receipt of a TRACKING AREA UPDATE REQUEST message including a GPRS ciphering key sequence number IE, if the MME does not have the valid current EPS security context indicated by the UE, the MME shall either",
+    "- indicate the use of the new mapped EPS security context to the UE by setting the type of security context flag in the NAS key set identifier IE to \"mapped security context\" and the KSI value related to the security context of the source system; or",
+    "- set the KSI value \"000\" in the NAS key set identifier IE if the MME sets EIA0 and EEA0 as the selected NAS security algorithms for a UE that has a PDN connection for emergency bearer services",
+    "While having a current mapped EPS security context with the UE, if the MME wants to take the native EPS security context into use, the MME shall include the eKSI that indicates the native EPS security context in the SECURITY MODE COMMAND message",
+    "The MME shall include the replayed security capabilities of the UE (including the security capabilities with regard to NAS, RRC and UP (user plane) ciphering as well as NAS and RRC integrity, and other possible target network security capabilities, i.e. UTRAN/GERAN if the UE included them in the message to network), the replayed nonceUE when creating a mapped EPS security context and if the UE included it in the message to the network, the selected NAS ciphering and integrity algorithms and the Key Set Identifier (eKSI). If the MME supports handling of UE additional security capabilities and the UE included a UE additional security capability IE in the message to the network, the MME shall include the replayed additional security capabilities of the UE",
+    "The MME shall include both the nonceMME and the nonceUE when creating a mapped EPS security context during inter-system change from A/Gb mode to S1 mode or Iu mode to S1 mode in EMM-IDLE mode",
+    "The MME may initiate a SECURITY MODE COMMAND in order to change the NAS security algorithms for a current EPS security context already in use. The MME re-derives the NAS keys from KASME with the new NAS algorithm identities as input and provides the new NAS algorithm identities within the SECURITY MODE COMMAND message. The MME shall set the security header type of the message to \"integrity protected with new EPS security context\"",
+    "If, during an ongoing attach or tracking area updating procedure, the MME is initiating a SECURITY MODE COMMAND (i.e. after receiving the ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message, but before sending a response to that message) and the ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message is received without integrity protection or does not successfully pass the integrity check at the MME, the MME shall calculate the HASHMME of the entire plain ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message as described in 3GPP S 33.401 [19] and shall include the HASHMME in the SECURITY MODE COMMAND message",
+    "Additionally, the MME may request the UE to include its IMEISV in the SECURITY MODE COMPLETE message",
+    "NOTE 2: The AS and NAS security capabilities will be the same, i.e. if the UE supports one algorithm for NAS, the same algorithm is also supported for AS",
+    "- the NAS security mode control procedure is initiated during an ongoing attach procedure in WB-S1 mode",
+    "- the network supports RACS",
+    "- the UE has set the RACS bit to \"RACS supported\" in the UE network capability IE of the ATTACH REQUEST message; and",
+    "- the UE has set the URCIDA bit to \"UE radio capability ID available\" in the UE radio capability ID availability IE of the ATTACH REQUEST message",
+    "then the MME shall request the UE to include its UE radio capability ID in the SECURITY MODE COMPLETE message",
+    "- the NAS security mode control procedure is initiated during an ongoing tracking area updating procedure in WB-S1 mode",
+    "- the network supports RACS",
+    "- the UE has set the RACS bit to \"RACS supported\" in the UE network capability IE of the TRACKING AREA UPDATE REQUEST message; and",
+    "- the UE has set the URCIDA bit to \"UE radio capability ID available\" in the UE radio capability ID availability IE of the TRACKING AREA UPDATE REQUEST message",
+    "then the MME may request the UE to include its UE radio capability ID in the SECURITY MODE COMPLETE message",
+    "- the NAS security mode control procedure is initiated during an ongoing tracking area updating procedure in WB-S1 mode",
+    "- the network supports RACS",
+    "- the UE has set the RACS bit to \"RACS supported\" in the UE network capability IE of the TRACKING AREA UPDATE REQUEST message",
+    "- the UE has set the URCIDA bit to \"UE radio capability ID available\" in the UE radio capability ID availability IE of the TRACKING AREA UPDATE REQUEST message; and",
+    "- no UE radio capability ID is available in the UE context in the MME",
+    "then the MME shall request the UE to include its UE radio capability ID in the SECURITY MODE COMPLETE message",
+    "Figure 5.4.3.2.1: Security mode control procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.4.3.2.1",
+      "file": "Figure_5_4_3_2_1_p113.png.json",
+      "title": "Security mode control procedure",
+      "content": {
+        "figure_id": "5.4.3.2.1",
+        "title": "Security mode control procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "UE",
+              "name": "SECURITY MODE COMMAND",
+              "notes": "Start T3460"
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "SECURITY MODE COMPLETE",
+              "notes": "Stop T3460"
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "SECURITY MODE REJECT",
+              "notes": "Stop T3460 (OR alternative)"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "MME starts timer T3460 when sending SECURITY MODE COMMAND",
+            "MME stops timer T3460 upon receiving SECURITY MODE COMPLETE or SECURITY MODE REJECT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

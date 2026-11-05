@@ -1,0 +1,309 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.4",
+  "title": "Initial registration accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE initiates registration with the network and receives REGISTRATION ACCEPT message upon acceptance.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE when initial registration request is accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_COMPLETE",
+      "name": "REGISTRATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF to acknowledge reception of certain IEs in REGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE's 5GMM capabilities, stored by AMF from REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "IE containing tracking area identities assigned as registration area, included in REGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Information Element",
+      "description": "Globally Unique Temporary Identifier assigned to UE during registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing network slice selection assistance information allowed for UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing S-NSSAIs that are rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_RESULT",
+      "name": "5GS registration result",
+      "entity_type": "Information Element",
+      "description": "IE indicating registration result, including access type and NSSAA indicators.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3550",
+      "name": "T3550",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when certain IEs are included in REGISTRATION ACCEPT, stopped upon REGISTRATION COMPLETE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_COMMON_PROCEDURE_INITIATED",
+      "name": "5GMM-COMMON-PROCEDURE-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by AMF when timer T3550 is started during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE upon receipt of REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REGISTRATION",
+      "name": "Emergency registration condition",
+      "entity_type": "Condition",
+      "description": "Condition where 5GS registration type IE is set to emergency registration, affecting restriction checks.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "PROP_STORE_UE_CAPABILITIES",
+      "name": "Store UE capabilities",
+      "entity_type": "Property",
+      "description": "AMF stores UE capabilities (5GMM capability, S1 UE network capability, UE security capability) from REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Initial registration procedure begins with UE sending REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "AMF sends REGISTRATION ACCEPT if initial registration request is accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT contains TAI list assigned as registration area.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT may contain a new 5G-GUTI assigned to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT contains allowed NSSAI if UE included requested NSSAI and AMF allows it.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT may contain rejected NSSAI with S-NSSAIs not allowed by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_5GS_REGISTRATION_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT contains 5GS registration result IE indicating access type and NSSAA indicators.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST contains 5GMM capability IE indicating UE capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "PROP_STORE_UE_CAPABILITIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "During initial registration, AMF stores UE capabilities from REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_REGISTRATION",
+      "target": "PROC_INITIAL_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency registration condition affects how AMF processes REGISTRATION REQUEST (e.g., no restriction checks).",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "TIMER_T3550",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts timer T3550 when certain IEs (e.g., 5G-GUTI, SOR transparent container) are included in REGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_REGISTRATION_COMPLETE",
+      "target": "TIMER_T3550",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "AMF stops timer T3550 upon receiving REGISTRATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "TIMER_T3550",
+      "target": "STATE_5GMM_COMMON_PROCEDURE_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When timer T3550 is started, AMF enters state 5GMM-COMMON-PROCEDURE-INITIATED.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters state 5GMM-REGISTERED upon receipt of REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "MSG_REGISTRATION_COMPLETE",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF changes to state 5GMM-REGISTERED upon receiving REGISTRATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.4"
+      ]
+    }
+  ]
+}

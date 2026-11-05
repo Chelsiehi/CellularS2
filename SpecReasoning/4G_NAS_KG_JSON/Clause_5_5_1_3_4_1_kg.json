@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to indicate successful attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_ATTACH_RESULT",
+      "name": "EPS attach result",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of attach result.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_ATTACH",
+      "name": "Combined EPS/IMSI attach successful",
+      "entity_type": "Condition",
+      "description": "Condition when EPS attach result IE indicates combined EPS/IMSI attach, meaning attach for EPS and non-EPS services or EPS services and SMS only were successful.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_EPS_ONLY_ATTACH",
+      "name": "EPS only attach successful",
+      "entity_type": "Condition",
+      "description": "Condition when EPS attach result IE indicates EPS only, meaning attach for EPS services was successful but attach for non-EPS services or SMS only failed.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "IE_EPS_ATTACH_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains the EPS attach result IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "COND_COMBINED_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS attach result IE value guards the condition for combined EPS/IMSI attach success.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "COND_EPS_ONLY_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS attach result IE value guards the condition for EPS only attach success.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.1"
+      ]
+    }
+  ]
+}

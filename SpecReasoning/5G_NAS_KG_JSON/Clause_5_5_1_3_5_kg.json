@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.5",
+  "title": "Mobility and periodic registration update not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_MOBILITY_PERIODIC_REG_UPDATE",
+      "name": "Mobility and periodic registration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for mobility or periodic registration update, which can be rejected by the network with various 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject a mobility and periodic registration update request, containing a 5GMM cause value and optional IEs.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause value",
+      "entity_type": "Information Element",
+      "description": "IE included in REGISTRATION REJECT message indicating the reason for rejection (e.g., #22 congestion, #62 no network slices available).",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "IE_T3346_VALUE",
+      "name": "T3346 value IE",
+      "entity_type": "Information Element",
+      "description": "IE containing the value for back-off timer T3346, used in congestion control scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer started by UE when registration is rejected due to congestion, preventing further registration attempts until expiry.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "5GMM state entered by UE after registration rejection, with substates like PLMN-SEARCH or LIMITED-SERVICE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Message integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether the REGISTRATION REJECT message was integrity protected, affecting UE behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "PROP_UE_STORES_FORBIDDEN_TAI",
+      "name": "UE stores forbidden TAI",
+      "entity_type": "Property",
+      "description": "Behavior where UE stores TAI in forbidden lists (e.g., for roaming or regional service) after registration rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MOBILITY_PERIODIC_REG_UPDATE",
+      "target": "MSG_REGISTRATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The mobility and periodic registration update procedure includes the network sending a REGISTRATION REJECT message when not accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message contains the 5GMM cause value IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_T3346_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message may contain T3346 value IE for congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3346 upon receiving REGISTRATION REJECT with T3346 value IE, if integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Receipt of REGISTRATION REJECT causes UE to transition to 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "PROP_UE_STORES_FORBIDDEN_TAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE behavior of storing forbidden TAI is guarded by whether the REGISTRATION REJECT message was integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "COND_INTEGRITY_PROTECTED",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "For certain 5GMM cause values (e.g., #76, #78), REGISTRATION REJECT requires integrity protection; if not, UE discards the message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.7",
+  "title": "Handling of the Local Emergency Numbers List and the Extended Local Emergency Numbers List",
+  "entities": [
+    {
+      "id": "LOCAL_EMERGENCY_NUMBERS_LIST",
+      "name": "Local Emergency Numbers List",
+      "entity_type": "Property",
+      "description": "Contains additional local emergency numbers used by the serving network. Can be downloaded to UE at successful registration and subsequent registration updates. Stored in UE and used for emergency number detection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "name": "Extended Local Emergency Numbers List",
+      "entity_type": "Property",
+      "description": "Contains additional local emergency numbers with extended validity scope. Can be downloaded to UE and used for emergency number detection, with validity determined by EENLV field.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EMERGENCY_NUMBER_LIST_IE",
+      "name": "Emergency number list IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the Local Emergency Numbers List, sent in ATTACH ACCEPT or TRACKING AREA UPDATE ACCEPT messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EXTENDED_EMERGENCY_NUMBER_LIST_IE",
+      "name": "Extended emergency number list IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the Extended Local Emergency Numbers List, sent in ATTACH ACCEPT or TRACKING AREA UPDATE ACCEPT messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EENLV_FIELD",
+      "name": "Extended Emergency Number List Validity field",
+      "entity_type": "Property",
+      "description": "Field within Extended emergency number list IE that indicates whether the list is valid only in the PLMN or in the country of the PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EMERGENCY_NUMBER_DETECTION",
+      "name": "Emergency number detection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE uses stored emergency number lists (Local, Extended, USIM, ME) to detect if dialled number is an emergency number.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "DOMAIN_SELECTION",
+      "name": "Domain selection for emergency session",
+      "entity_type": "Procedure",
+      "description": "Procedure to select PS or CS domain for emergency session attempt based on dialled emergency number detection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "CS_FALLBACK_EMERGENCY",
+      "name": "CS fallback for emergency call",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends EXTENDED SERVICE REQUEST message for CS fallback emergency call when CS domain is selected for emergency session.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE for CS fallback indicating mobile originating CS fallback emergency call.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SETUP",
+      "name": "EMERGENCY SETUP message",
+      "entity_type": "Message",
+      "description": "Message sent by call control entity to network for emergency call setup in CS domain.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "EMERGENCY_NUMBER_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains Emergency number list IE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "EMERGENCY_NUMBER_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains Emergency number list IE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_ACCEPT",
+      "target": "EXTENDED_EMERGENCY_NUMBER_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains Extended emergency number list IE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "EXTENDED_EMERGENCY_NUMBER_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains Extended emergency number list IE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMERGENCY_NUMBER_DETECTION",
+      "target": "LOCAL_EMERGENCY_NUMBERS_LIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency number detection procedure uses Local Emergency Numbers List",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMERGENCY_NUMBER_DETECTION",
+      "target": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency number detection procedure uses Extended Local Emergency Numbers List",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DOMAIN_SELECTION",
+      "target": "EMERGENCY_NUMBER_DETECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Domain selection procedure follows emergency number detection",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CS_FALLBACK_EMERGENCY",
+      "target": "EXTENDED_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "CS fallback for emergency call procedure involves sending EXTENDED SERVICE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CS_FALLBACK_EMERGENCY",
+      "target": "EMERGENCY_SETUP",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "CS fallback for emergency call procedure involves sending EMERGENCY SETUP message",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EXTENDED_EMERGENCY_NUMBER_LIST_IE",
+      "target": "EENLV_FIELD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended emergency number list IE contains EENLV field",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EENLV_FIELD",
+      "target": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EENLV field determines validity scope of Extended Local Emergency Numbers List",
+      "provenance": [
+        "TS 24.301, Clause 5.3.7"
+      ]
+    }
+  ]
+}

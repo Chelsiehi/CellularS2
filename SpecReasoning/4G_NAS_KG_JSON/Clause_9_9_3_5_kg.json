@@ -1,0 +1,101 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.5",
+  "title": "CSFB response",
+  "entities": [
+    {
+      "id": "IE_CSFB_RESPONSE",
+      "name": "CSFB response",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates whether the UE accepts or rejects a paging for CS fallback. It is a type 1 information element with a specific bit layout.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.5",
+        "Figure 9.9.3.5.1",
+        "Table 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "FIELD_CSFB_RESPONSE_IEI",
+      "name": "CSFB response IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for the CSFB response information element, located in bits 5-8 of octet 1.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "FIELD_CSFB_RESPONSE_VALUE",
+      "name": "CSFB response value",
+      "entity_type": "Property",
+      "description": "Value field in bits 1-2 of octet 1 that indicates the CS fallback response: 001 = CS fallback accepted by the UE, 000 = CS fallback rejected by the UE. All other values are reserved.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.5.1",
+        "Table 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_CSFB_ACCEPTED",
+      "name": "CS fallback accepted by the UE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE accepts CS fallback, indicated by CSFB response value bits set to 001.",
+      "provenance": [
+        "TS 24.301, Table 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "COND_CSFB_REJECTED",
+      "name": "CS fallback rejected by the UE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE rejects CS fallback, indicated by CSFB response value bits set to 000.",
+      "provenance": [
+        "TS 24.301, Table 9.9.3.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_CSFB_RESPONSE",
+      "target": "FIELD_CSFB_RESPONSE_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The CSFB response information element contains the IEI identifier field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_CSFB_RESPONSE",
+      "target": "FIELD_CSFB_RESPONSE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The CSFB response information element contains the response value field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FIELD_CSFB_RESPONSE_VALUE",
+      "target": "COND_CSFB_ACCEPTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The CSFB response value field is guarded by the condition where CS fallback is accepted (value 001).",
+      "provenance": [
+        "TS 24.301, Table 9.9.3.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_CSFB_RESPONSE_VALUE",
+      "target": "COND_CSFB_REJECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The CSFB response value field is guarded by the condition where CS fallback is rejected (value 000).",
+      "provenance": [
+        "TS 24.301, Table 9.9.3.5.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.3.3",
+  "title": "ATTEMPTING-TO-ATTACH",
+  "entities": [
+    {
+      "id": "STATE_ATTEMPTING_TO_ATTACH",
+      "name": "ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "UE state where attach procedures can be initiated under various conditions including timer expirations, PLMN changes, and upper layer requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration to the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration to both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers attach procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers attach procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that may prevent attach procedures except for emergency services or specific UE configurations.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that may be running but does not prevent attach for UEs configured with AC11-15.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_SERVICES",
+      "name": "Emergency services condition",
+      "entity_type": "Condition",
+      "description": "Condition allowing attach procedure even when T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_UE_AC11_15",
+      "name": "UE configured with AC11-15 condition",
+      "entity_type": "Condition",
+      "description": "Condition allowing attach procedure even when T3402, T3346, or T3447 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_PLMN_CHANGE",
+      "name": "PLMN change condition",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ],
+      "entity_type": "Condition",
+      "description": "Condition triggering attach when entering new PLMN with specific constraints on forbidden lists."
+    },
+    {
+      "id": "CONDITION_TRACKING_AREA_CHANGE",
+      "name": "Tracking area change condition",
+      "entity_type": "Condition",
+      "description": "Condition triggering attach when tracking area changes with specific constraints on forbidden lists.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_NON_EPS_SERVICES",
+      "name": "Non-EPS services condition",
+      "entity_type": "Condition",
+      "description": "Condition where CM layer requests trigger combined attach or radio access technology selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EXCEPTION_DATA",
+      "name": "Exception data reporting condition",
+      "entity_type": "Condition",
+      "description": "Condition allowing attach for exceptional event data transmission when permitted by configuration.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_PDN",
+      "name": "Emergency PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition where upper layer request for emergency bearer services triggers attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_RLOS_PDN",
+      "name": "RLOS PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition where upper layer request for RLOS PDN connection triggers attach if T3346 not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ATTEMPTING_TO_ATTACH",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-ATTACH state initiates attach procedure under various conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_ATTEMPTING_TO_ATTACH",
+      "target": "PROCEDURE_COMBINED_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-ATTACH state initiates combined attach procedure under various conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3411",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3411 timer starts attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3402",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3402 timer starts attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EMERGENCY_SERVICES",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services condition allows attach procedure even when T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_UE_AC11_15",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE AC11-15 configuration condition allows attach procedure even when T3402, T3346, or T3447 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_PLMN_CHANGE",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN change condition triggers attach procedure with specific constraints.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_TRACKING_AREA_CHANGE",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Tracking area change condition triggers attach procedure with specific constraints.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_NON_EPS_SERVICES",
+      "target": "PROCEDURE_COMBINED_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-EPS services condition triggers combined attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_EXCEPTION_DATA",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Exception data reporting condition allows attach procedure for exceptional events.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_EMERGENCY_PDN",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDN connection condition triggers attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_RLOS_PDN",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLOS PDN connection condition triggers attach procedure if T3346 not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.3"
+      ]
+    }
+  ]
+}

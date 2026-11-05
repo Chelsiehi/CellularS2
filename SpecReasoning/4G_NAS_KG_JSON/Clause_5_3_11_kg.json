@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.11",
+  "title": "Power saving mode",
+  "entities": [
+    {
+      "id": "PSM",
+      "name": "Power Saving Mode",
+      "entity_type": "Procedure",
+      "description": "A power saving mode where the UE deactivates the AS layer and enters EMM-REGISTERED.NO-CELL-AVAILABLE state to conserve power. All NAS timers except specific ones are stopped and associated procedures aborted.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "T3324",
+      "name": "Timer T3324",
+      "entity_type": "Timer",
+      "description": "Timer provided by the network to control when the UE may activate PSM. Expiry or zero value allows PSM activation under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "State entered by the UE when PSM is activated, indicating the UE is registered but no cell is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "Normal service state in EMM-REGISTERED. UE may activate PSM when returning to this state if T3324 expired.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "COND_PSM_ACTIVATION",
+      "name": "PSM Activation Conditions",
+      "entity_type": "Condition",
+      "description": "Conditions for PSM activation: UE not attached for emergency bearer services, no PDN connection for emergency bearer services, in EMM-IDLE mode, in EMM-REGISTERED.NORMAL-SERVICE state, and not attached for access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "EXTENDED_WAIT_TIME",
+      "name": "Extended wait time",
+      "entity_type": "Condition",
+      "description": "Signal from lower layers that allows UE to activate PSM if T3324 was allocated and expired.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "PROP_AS_DEACTIVATION",
+      "name": "AS layer deactivation",
+      "entity_type": "Property",
+      "description": "UE deactivates the AS layer when activating PSM.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "PROP_NAS_TIMERS_STOPPED",
+      "name": "NAS timers stopped",
+      "entity_type": "Property",
+      "description": "All NAS timers except T3412, T3346, T3396, T3447, backoff timers, and timer T for PLMN search are stopped when PSM is activated.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T3324",
+      "target": "PSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3324 expiry or zero value allows PSM activation under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PSM_ACTIVATION",
+      "target": "PSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PSM activation is guarded by conditions including no emergency services, EMM-IDLE mode, and EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PSM",
+      "target": "EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Activating PSM establishes the EMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PSM",
+      "target": "PROP_AS_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PSM activation establishes AS layer deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PSM",
+      "target": "PROP_NAS_TIMERS_STOPPED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PSM activation establishes stopping of most NAS timers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EXTENDED_WAIT_TIME",
+      "target": "PSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended wait time from lower layers allows PSM activation if T3324 was allocated and expired.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMM_REGISTERED_NORMAL_SERVICE",
+      "target": "PSM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PSM activation requires the UE to be in EMM-REGISTERED.NORMAL-SERVICE state when T3324 expires, or return to it for activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.11"
+      ]
+    }
+  ]
+}

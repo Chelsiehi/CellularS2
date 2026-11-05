@@ -1,0 +1,90 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.3.2",
+  "title": "Notification procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------",
+    "The network shall initiate the notification procedure by sending the NOTIFICATION message to the UE and start timer T3565 (see example in figure5.6.3.2.1)",
+    "For case a) in subclause5.6.3.1, the NOTIFICATION message is sent from the network to the UE via 3GPP access with access type indicating non-3GPP access",
+    "For case b) in subclause5.6.3.1, the NOTIFICATION message is sent from the network to the UE via non-3GPP access with access type indicating 3GPP access when the UE is not in MICO mode",
+    "Upon reception of a NOTIFICATION message, the UE shall stop the timer T3346, if running",
+    "For case a) in subclause5.6.3.1, upon reception of NOTIFICATION message, the UE shall initiate a service request procedure over 3GPP access as specified in subclauses5.6.1",
+    "NOTE: For a UE in NB-NI mode, if there is DL user data pending for a PDU session associated with non-3GPP access then the AMF notifies the SMF that reactivation of user plane resources cannot be performed if the number of PDU sessions that currently has user-plane resources established equals to the UE's maximum number of supported user-plane resources",
+    "For case b) in subclause5.6.3.1, upon reception of NOTIFICATION message",
+    "a) if control plane CIoT 5GS optimization is not used by the UE, the UE shall",
+    "1) initiate a service request procedure over 3GPP access as specified in subclause5.6.1.2.1, if the UE is in 5GMM-REGISTERED.NORMAL-SERVICE or 5GMM-REGISTERED.NON-ALLOWED-SERVICE (as described in subclause5.3.5.2) state over 3GPP access or 5GMM-REGISTERED.NON-ALLOWED-SERVICE state (see subclause5.3.5.2), and the UE is in the 5GMM-IDLE mode without suspend indication",
+    "2) initiate a registration procedure for mobility and periodic registration update over 3GPP access as specified in subclause5.5.1.3.2, if the UE is in 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE state over 3GPP access; or",
+    "3) proceed as specified in subclause5.3.1.5 if the UE is in the 5GMM-IDLE mode with suspend indication",
+    "b) if control plane CIoT 5GS optimization is used by the UE, the UE shall",
+    "1) initiate a service request procedure over 3GPP access as specified in subclause5.6.1.2.2, if the UE is in 5GMM-REGISTERED.NORMAL-SERVICE or 5GMM-REGISTERED.NON-ALLOWED-SERVICE (as described in subclause5.3.5.2) state and the UE is in the 5GMM-IDLE mode without suspend indication",
+    "2) initiate a registration procedure for mobility and periodic registration update over 3GPP access as specified in subclause5.5.1.3.2, if the UE is in 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE state; or",
+    "3) proceed as specified in subclause5.3.1.5 if the UE is in the 5GMM-IDLE mode with suspend indication; or",
+    "1) the UE is in 5GMM-REGISTERED.NO-CELL-AVAILABLE state, 5GMM-REGISTERED.PLMN-SEARCH state, 5GMM-REGISTERED.LIMITED-SERVICE state or 5GMM-REGISTERED.UPDATE-NEEDED state over 3GPP access; or",
+    "2) the MUSIM UE is not able to respond the NOTIFICATION message as specified in case a) and b) above, e.g., due to UE implementation constraints",
+    "the UE shall respond with NOTIFICATION RESPONSE message over non-3GPP access indicating inability of the UE to initiate a service request procedure or a registration procedure over 3GPP access and may include the PDU session status information element to indicate",
+    "1) the single access PDU session(s) not in 5GSM state PDU SESSION INACTIVE in the UE associated with the 3GPP access type; and",
+    "2) the MA PDU session(s) not in 5GSM state PDU SESSION INACTIVE in the UE and having user plane resources established associated with the 3GPP access type",
+    "Upon reception of NOTIFICATION message",
+    "For case b) in subclause5.6.3.1, if the UE is in 5GMM-REGISTERED.NO-CELL-AVAILABLE state or 5GMM-REGISTERED.PLMN-SEARCH state and a local release was performed in the UE for the single access PDU sessions associated with the 3GPP access or for user plane resources on the 3GPP access of MA PDU sessions",
+    "then the UE shall respond with NOTIFICATION RESPONSE message over non-3GPP access indicating with the PDU session status information element that",
+    "- the local release of its single access PDU sessions associated with the 3GPP access was performed; and",
+    "- the local release of its 3GPP access user plane resources of MA PDU sessions was performed",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.3.2.1",
+      "file": "Figure_5_6_3_2_1_p447.png.json",
+      "title": "Notification procedure",
+      "content": {
+        "figure_id": "5.6.3.2.1",
+        "title": "Notification procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NOTIFICATION",
+              "notes": "Start T3565"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "SERVICE REQUEST or CONTROL PLANE SERVICE REQUEST or REGISTRATION REQUEST",
+              "notes": "Stop T3565"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NOTIFICATION",
+              "notes": "Start T3565"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "NOTIFICATION RESPONSE",
+              "notes": "Stop T3565"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Upon reception of a NOTIFICATION message, the UE shall stop the timer T3346, if running.",
+            "OR indicates alternative flows between the first two messages and the last two messages"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

@@ -1,0 +1,262 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.2.2",
+  "title": "Network-requested PDU session modification procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_MOD",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to modify an existing PDU session. The SMF creates and sends a PDU SESSION MODIFICATION COMMAND message to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2",
+        "Figure 6.3.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to UE to initiate network-requested PDU session modification. Contains various IEs based on modification requirements.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2",
+        "Figure 6.3.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_RULES",
+      "name": "Authorized QoS rules",
+      "entity_type": "Information Element",
+      "description": "IE containing authorized QoS rules for the PDU session. Included when QoS rules are modified or need synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "name": "Authorized QoS flow descriptions",
+      "entity_type": "Information Element",
+      "description": "IE containing authorized QoS flow descriptions. Included when QoS flow descriptions are modified or new QoS flows are created.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_SESSION_AMBR",
+      "name": "Selected Session-AMBR",
+      "entity_type": "Information Element",
+      "description": "IE containing the session-AMBR value. Included when session-AMBR is modified.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure transaction identity IE. Set to PTI from UE request or 'No procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_RQ_TIMER",
+      "name": "RQ timer",
+      "entity_type": "Information Element",
+      "description": "IE containing reflective QoS timer value. Included when reflective QoS is supported.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_ALWAYS_ON_PDU_SESSION_INDICATION",
+      "name": "Always-on PDU session indication",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether PDU session should be always-on. Values: 'Always-on PDU session required' or 'Always-on PDU session not allowed'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_RECEIVED_MBS_CONTAINER",
+      "name": "Received MBS container",
+      "entity_type": "Information Element",
+      "description": "IE containing MBS session information including TMGI, MBS decision, security container, and service area details.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3591",
+      "name": "T3591",
+      "entity_type": "Timer",
+      "description": "Timer started by SMF when sending PDU SESSION MODIFICATION COMMAND. Stopped upon receiving response from UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2",
+        "Figure 6.3.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_UE_REQ_TRIGGERED",
+      "name": "Triggered by UE-requested procedure",
+      "entity_type": "Condition",
+      "description": "Condition where network-requested modification is triggered by a preceding UE-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "PROP_QOS_RULE_MODIFIED",
+      "name": "QoS rules modified",
+      "entity_type": "Property",
+      "description": "Property indicating authorized QoS rules of the PDU session have been modified or marked for synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "PROP_SESSION_AMBR_MODIFIED",
+      "name": "Session-AMBR modified",
+      "entity_type": "Property",
+      "description": "Property indicating session-AMBR of the PDU session has been modified.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NW_REQ_PDU_MOD",
+      "target": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDU SESSION MODIFICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_RULES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Authorized QoS rules IE when QoS rules are modified",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Authorized QoS flow descriptions IE when QoS flows are modified",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_SESSION_AMBR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Selected Session-AMBR IE when session-AMBR is modified",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PTI IE set based on triggering condition",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_RQ_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains RQ timer IE when reflective QoS is supported",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_ALWAYS_ON_PDU_SESSION_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Always-on PDU session indication IE based on network policy",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_RECEIVED_MBS_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Received MBS container IE for MBS session management",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_NW_REQ_PDU_MOD",
+      "target": "TIMER_T3591",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3591 when sending modification command",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2",
+        "Figure 6.3.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_QOS_RULE_MODIFIED",
+      "target": "IE_AUTHORIZED_QOS_RULES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "QoS rules modification establishes inclusion of Authorized QoS rules IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_SESSION_AMBR_MODIFIED",
+      "target": "IE_SESSION_AMBR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Session-AMBR modification establishes inclusion of Selected Session-AMBR IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_UE_REQ_TRIGGERED",
+      "target": "IE_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE-requested trigger condition guards PTI IE value assignment",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.2"
+      ]
+    }
+  ]
+}

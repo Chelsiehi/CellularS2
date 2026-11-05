@@ -1,0 +1,194 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.1.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_NAS_CONN_RELEASE",
+      "name": "NAS signalling connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing the NAS signalling connection initiated by the network. UE enters EMM-IDLE mode when RRC connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3440",
+      "name": "Timer T3440",
+      "entity_type": "Timer",
+      "description": "Timer started by UE in various conditions to manage NAS signalling connection release. Upon expiry, UE locally releases NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when NAS signalling connection for eCall over IMS is released in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when NAS signalling connection for HPLMN designated non-emergency MSISDN/URI is released in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "SGC timer started by UE with service gap time value when NAS signalling connection for mobile originated uplink data transfer is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "UE state entered when RRC connection is released. NAS signalling connection is considered released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "UE state where NAS signalling connection is active.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "UE state entered upon receipt of CS SERVICE NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "COND_ECALL_ONLY_MODE",
+      "name": "eCall only mode",
+      "entity_type": "Condition",
+      "description": "UE configuration for eCall only mode as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "COND_SGC_SUPPORT",
+      "name": "SGC feature support",
+      "entity_type": "Condition",
+      "description": "Condition where UE supports SGC feature and service gap timer value is available and non-zero.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_RELEASE",
+      "name": "Local release of NAS signalling connection",
+      "entity_type": "Property",
+      "description": "UE behavior to locally release NAS signalling connection upon T3440 expiry or specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_CS_SERVICE_NOTIFICATION",
+      "name": "CS SERVICE NOTIFICATION",
+      "entity_type": "Message",
+      "description": "Message that triggers UE to enter EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_CONN_RELEASE",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NAS signalling connection release procedure causes UE to enter EMM-IDLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "TIMER_T3444",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "eCall only mode condition starts timer T3444 when eCall over IMS connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "TIMER_T3445",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "eCall only mode condition starts timer T3445 when HPLMN non-emergency connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SGC_SUPPORT",
+      "target": "TIMER_T3447",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SGC feature support condition starts timer T3447 when mobile originated uplink data connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3440",
+      "target": "PROP_LOCAL_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer T3440 expiry establishes local release of NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CS_SERVICE_NOTIFICATION",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "CS SERVICE NOTIFICATION message requires UE to enter EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "target": "TIMER_T3440",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Entering EMM-SERVICE-REQUEST-INITIATED state stops timer T3440.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.1"
+      ]
+    }
+  ]
+}

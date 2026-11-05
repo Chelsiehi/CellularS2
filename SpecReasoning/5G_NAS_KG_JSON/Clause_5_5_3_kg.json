@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.3",
+  "title": "eCall inactivity procedure",
+  "entities": [
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed only in 3GPP access for UEs configured for eCall only mode. Triggered by timer expirations and results in de-registration and transition to eCALL-INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer that when expired triggers the eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer that when expired triggers the eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED state",
+      "entity_type": "State",
+      "description": "Registered state where the procedure can be initiated, excluding PLMN-SEARCH and NO-CELL-AVAILABLE substates.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "Idle mode condition required for procedure initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_ECALL_INACTIVE",
+      "name": "5GMM-DEREGISTERED.eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Final state entered after procedure completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_DEREGISTRATION",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed if UE is currently registered to the network for 5GS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_EXPIRY",
+      "name": "Timer expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition where T3444 expires and T3445 not running, T3445 expires and T3444 not running, or both timers expire.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "PROPERTY_DELETE_PARAMETERS",
+      "name": "Delete parameters",
+      "entity_type": "Property",
+      "description": "Action to delete 5G-GUTI, TAI list, last visited registered TAI, list of equivalent PLMNs, and ngKSI.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "CONDITION_TIMER_EXPIRY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is triggered by timer expiry conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in 5GMM-REGISTERED state (excluding certain substates).",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "PROCEDURE_DEREGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes performing de-registration if UE is registered.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "PROPERTY_DELETE_PARAMETERS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes deleting security and location parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_5GMM_DEREGISTERED_ECALL_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in entering 5GMM-DEREGISTERED.eCALL-INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_TIMER_EXPIRY",
+      "target": "TIMER_T3444",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiry condition involves T3444 expiration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_TIMER_EXPIRY",
+      "target": "TIMER_T3445",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiry condition involves T3445 expiration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for detaching from the network, handling abnormal cases in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DETACH_ACCEPT",
+      "name": "DETACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to accept detach request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DETACH_REQUEST",
+      "name": "DETACH REQUEST message",
+      "entity_type": "Message",
+      "description": "Message initiating detach procedure, may contain EMM cause IE and Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_IE",
+      "name": "EMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the cause for EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DETACH_TYPE_IE",
+      "name": "Detach type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether re-attach is required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity, deleted in certain abnormal detach cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started by the UE in abnormal detach cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "EMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "State entered by UE to perform PLMN selection after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "name": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "State entered by UE to attempt attachment after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "GMM_DEREGISTERED",
+      "name": "GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE supporting A/Gb or Iu mode after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_NOT_REQUIRED",
+      "name": "Re-attach not required condition",
+      "entity_type": "Condition",
+      "description": "Condition when Detach type IE indicates re-attach is not required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_PARAMS",
+      "name": "Delete parameters property",
+      "entity_type": "Property",
+      "description": "UE deletes GUTI, TAI list, last visited registered TAI, list of equivalent PLMNs, KSI, and sets update status to EU2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DETACH_PROCEDURE",
+      "target": "DETACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Detach procedure includes sending DETACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DETACH_REQUEST",
+      "target": "EMM_CAUSE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message may contain EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DETACH_REQUEST",
+      "target": "DETACH_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_REATTACH_NOT_REQUIRED",
+      "target": "PROP_DELETE_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of re-attach not required leads to deletion of parameters and starting T3402.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REATTACH_NOT_REQUIRED",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Condition of re-attach not required starts timer T3402.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DETACH_PROCEDURE",
+      "target": "EMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Detach procedure may require entering EMM-DEREGISTERED.PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DETACH_PROCEDURE",
+      "target": "EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Detach procedure may require entering EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DETACH_PROCEDURE",
+      "target": "GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Detach procedure requires entering GMM-DEREGISTERED state if A/Gb or Iu mode supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.4"
+      ]
+    }
+  ]
+}

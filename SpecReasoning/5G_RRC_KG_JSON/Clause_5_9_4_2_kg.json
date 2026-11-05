@@ -1,0 +1,236 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.4.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "MBS_INTEREST_INDICATION_PROCEDURE",
+      "name": "MBS Interest Indication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by an MBS capable UE in RRC_CONNECTED state to indicate its interest in MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "MBS_INTEREST_INDICATION_MSG",
+      "name": "MBSInterestIndication message",
+      "entity_type": "Message",
+      "description": "RRC message transmitted by UE to indicate MBS broadcast frequencies/services of interest and prioritization.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED_STATE",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "SIB21",
+      "name": "System Information Block 21",
+      "entity_type": "Information Element",
+      "description": "System information block containing MBS broadcast configuration information.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "SIB20",
+      "name": "System Information Block 20",
+      "entity_type": "Information Element",
+      "description": "System information block containing MBS service configuration information.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "MBS_FREQ_LIST",
+      "name": "mbs-FreqList",
+      "entity_type": "Information Element",
+      "description": "List of MBS broadcast frequencies of interest included in MBS Interest Indication.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "MBS_SERVICE_LIST",
+      "name": "mbs-ServiceList",
+      "entity_type": "Information Element",
+      "description": "List of MBS broadcast services of interest included in MBS Interest Indication.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SIB21_PROVIDED",
+      "name": "SIB21 provided by PCell",
+      "entity_type": "Condition",
+      "description": "Condition where the serving PCell broadcasts SIB21.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SIB20_PROVIDED",
+      "name": "SIB20 provided by PCell",
+      "entity_type": "Condition",
+      "description": "Condition where the serving PCell broadcasts SIB20.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_FREQ_LIST_NOT_EMPTY",
+      "name": "MBS broadcast frequencies of interest not empty",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has at least one MBS broadcast frequency of interest.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_FREQ_LIST_CHANGED",
+      "name": "MBS broadcast frequencies of interest changed",
+      "entity_type": "Condition",
+      "description": "Condition where the set of MBS broadcast frequencies differs from previous indication.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PRIORITIZATION_CHANGED",
+      "name": "Prioritization of MBS broadcast reception changed",
+      "entity_type": "Condition",
+      "description": "Condition where prioritization between MBS broadcast and unicast reception has changed.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SERVICE_LIST_CHANGED",
+      "name": "MBS broadcast services of interest changed",
+      "entity_type": "Condition",
+      "description": "Condition where the set of MBS broadcast services differs from previous indication.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MBS_INTEREST_INDICATION_PROCEDURE",
+      "target": "RRC_CONNECTED_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be initiated when UE is in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MBS_INTEREST_INDICATION_PROCEDURE",
+      "target": "MBS_INTEREST_INDICATION_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of MBSInterestIndication message.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MBS_INTEREST_INDICATION_MSG",
+      "target": "MBS_FREQ_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains mbs-FreqList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MBS_INTEREST_INDICATION_MSG",
+      "target": "MBS_SERVICE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains mbs-ServiceList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_SIB21_PROVIDED",
+      "target": "MBS_INTEREST_INDICATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by SIB21 availability condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_SIB20_PROVIDED",
+      "target": "MBS_INTEREST_INDICATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by SIB20 availability condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_FREQ_LIST_NOT_EMPTY",
+      "target": "MBS_INTEREST_INDICATION_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-empty frequency list condition establishes message transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_FREQ_LIST_CHANGED",
+      "target": "MBS_INTEREST_INDICATION_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Changed frequency list condition establishes message transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_PRIORITIZATION_CHANGED",
+      "target": "MBS_INTEREST_INDICATION_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Changed prioritization condition establishes message transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_SERVICE_LIST_CHANGED",
+      "target": "MBS_INTEREST_INDICATION_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Changed service list condition establishes message transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.12",
+  "title": "Access traffic steering, switching and splitting (ATSSS)",
+  "entities": [
+    {
+      "id": "ATSSS_FEATURE",
+      "name": "ATSSS feature",
+      "entity_type": "Procedure",
+      "description": "Optional feature enabling multi-access PDU connectivity service using both 3GPP and non-3GPP access networks simultaneously. Provides traffic steering, switching and splitting capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "MA_PDU_SESSION",
+      "name": "Multi-access PDU session",
+      "entity_type": "Procedure",
+      "description": "PDU session that can have user-plane resources on two access networks (3GPP and non-3GPP), enabling multi-access PDU connectivity service.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "MULTI_ACCESS_PDU_CONNECTIVITY",
+      "name": "Multi-access PDU connectivity service",
+      "entity_type": "Procedure",
+      "description": "Service that exchanges PDUs between UE and data network by simultaneously using one 3GPP access network and one non-3GPP access network.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "UE_ATSSS_CAPABILITY",
+      "name": "UE ATSSS capability",
+      "entity_type": "Property",
+      "description": "UE's ability to support the optional ATSSS feature for multi-access connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "CIOT_5GS_OPTIMIZATION_EXCLUSION",
+      "name": "CIoT 5GS optimization exclusion",
+      "entity_type": "Condition",
+      "description": "MA PDU session is not applicable for CIoT 5GS optimization in this release of specification.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "DUAL_ACCESS_REGISTRATION",
+      "name": "Dual access registration",
+      "entity_type": "Condition",
+      "description": "UE registered via both 3GPP and non-3GPP accesses, enabling MA PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "SINGLE_ACCESS_REGISTRATION",
+      "name": "Single access registration",
+      "entity_type": "Condition",
+      "description": "UE registered via one access only, still allowing MA PDU session request.",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATSSS_FEATURE",
+      "target": "MULTI_ACCESS_PDU_CONNECTIVITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ATSSS feature enables the multi-access PDU connectivity service",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MULTI_ACCESS_PDU_CONNECTIVITY",
+      "target": "MA_PDU_SESSION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Multi-access PDU connectivity service is realized by establishing a multi-access PDU session",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MA_PDU_SESSION",
+      "target": "CIOT_5GS_OPTIMIZATION_EXCLUSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MA PDU session is not applicable for CIoT 5GS optimization",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MA_PDU_SESSION",
+      "target": "DUAL_ACCESS_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE can request MA PDU session when registered via both accesses",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MA_PDU_SESSION",
+      "target": "SINGLE_ACCESS_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE can request MA PDU session when registered via one access only",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATSSS_FEATURE",
+      "target": "UE_ATSSS_CAPABILITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ATSSS feature may be supported by the UE and the 5GCN",
+      "provenance": [
+        "TS 24.501, Clause 4.12"
+      ]
+    }
+  ]
+}

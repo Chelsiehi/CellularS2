@@ -1,0 +1,202 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.2.5",
+  "title": "Change of configuration regarding the use of SMS.",
+  "entities": [
+    {
+      "id": "CONFIG_CHANGE_SMS_NOT_PREFERRED_IP",
+      "name": "SMS service not preferred over IP networks",
+      "entity_type": "Condition",
+      "description": "Configuration change where SMS service is not preferred to be invoked over IP networks or UE is unable to use SMS using IMS.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.1"
+      ]
+    },
+    {
+      "id": "CONFIG_CHANGE_SMS_PREFERRED_IP_NO_CS_VOICE",
+      "name": "SMS preferred over IP networks with no CS voice capability",
+      "entity_type": "Condition",
+      "description": "Configuration change where SMS service is preferred over IP networks, UE can use SMS via IMS, and UE has no CS voice capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "CONFIG_CHANGE_SMS_PREFERRED_IP_IMS_VOICE_ONLY",
+      "name": "SMS preferred over IP networks with IMS PS voice only",
+      "entity_type": "Condition",
+      "description": "Configuration change where SMS service is preferred over IP networks, UE can use SMS via IMS, and voice domain preference is IMS PS voice only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "PROC_TRANSIT_PS_TO_CSPS",
+      "name": "Transit from PS mode to CS/PS mode",
+      "entity_type": "Procedure",
+      "description": "Procedure to transit from PS mode 1 to CS/PS mode 1 or from PS mode 2 to CS/PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.1"
+      ]
+    },
+    {
+      "id": "PROC_COMBINED_TAU_IMSI_ATTACH",
+      "name": "Combined tracking area update with IMSI attach",
+      "entity_type": "Procedure",
+      "description": "Procedure performing combined tracking area update with IMSI attach, with or without SMS only indication.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.1"
+      ]
+    },
+    {
+      "id": "PROC_TRANSIT_CSPS_TO_PS",
+      "name": "Transit from CS/PS mode to PS mode",
+      "entity_type": "Procedure",
+      "description": "Procedure to transit from CS/PS mode 1 to PS mode 1 or from CS/PS mode 2 to PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "PROC_DETACH_NON_EPS",
+      "name": "Detach for non-EPS services",
+      "entity_type": "Procedure",
+      "description": "Procedure to detach from non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "UE_PS_MODE_1_2",
+      "name": "UE operating in PS mode 1 or PS mode 2",
+      "entity_type": "State",
+      "description": "UE operating in PS mode 1 or PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5"
+      ]
+    },
+    {
+      "id": "UE_CSPS_MODE_1_2",
+      "name": "UE operating in CS/PS mode 1 or CS/PS mode 2",
+      "entity_type": "State",
+      "description": "UE operating in CS/PS mode 1 or CS/PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONFIG_CHANGE_SMS_NOT_PREFERRED_IP",
+      "target": "PROC_TRANSIT_PS_TO_CSPS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS not preferred over IP networks establishes transit from PS to CS/PS mode procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONFIG_CHANGE_SMS_NOT_PREFERRED_IP",
+      "target": "PROC_COMBINED_TAU_IMSI_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS not preferred over IP networks establishes combined TAU with IMSI attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONFIG_CHANGE_SMS_PREFERRED_IP_NO_CS_VOICE",
+      "target": "PROC_TRANSIT_CSPS_TO_PS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS preferred over IP networks with no CS voice capability establishes transit from CS/PS to PS mode procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONFIG_CHANGE_SMS_PREFERRED_IP_NO_CS_VOICE",
+      "target": "PROC_DETACH_NON_EPS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS preferred over IP networks with no CS voice capability establishes detach for non-EPS services procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONFIG_CHANGE_SMS_PREFERRED_IP_IMS_VOICE_ONLY",
+      "target": "PROC_TRANSIT_CSPS_TO_PS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS preferred over IP networks with IMS PS voice only establishes transit from CS/PS to PS mode procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONFIG_CHANGE_SMS_PREFERRED_IP_IMS_VOICE_ONLY",
+      "target": "PROC_DETACH_NON_EPS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Configuration change to SMS preferred over IP networks with IMS PS voice only establishes detach for non-EPS services procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5",
+        "Table 4.3.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_PS_MODE_1_2",
+      "target": "CONFIG_CHANGE_SMS_NOT_PREFERRED_IP",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE operating in PS mode 1 or 2 is required for configuration change to SMS not preferred over IP networks.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_CSPS_MODE_1_2",
+      "target": "CONFIG_CHANGE_SMS_PREFERRED_IP_NO_CS_VOICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE operating in CS/PS mode 1 or 2 is required for configuration change to SMS preferred over IP networks with no CS voice capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_CSPS_MODE_1_2",
+      "target": "CONFIG_CHANGE_SMS_PREFERRED_IP_IMS_VOICE_ONLY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE operating in CS/PS mode 1 or 2 is required for configuration change to SMS preferred over IP networks with IMS PS voice only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.8.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "name": "RRC connection release procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to transition UE between RRC states or release and redirect UE to another frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE is not actively connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE maintains some context but is not actively transmitting.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SRB2_DRB_SETUP",
+      "name": "SRB2 and at least one DRB or multicast MRB setup condition",
+      "entity_type": "Condition",
+      "description": "Condition required for transitioning from RRC_CONNECTED to RRC_INACTIVE, requiring SRB2 and at least one DRB or multicast MRB to be setup.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_RELEASE_REDIRECT",
+      "name": "Release and redirect to another frequency",
+      "entity_type": "Property",
+      "description": "Procedure behavior that releases the current connection and redirects UE to another frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_CONNECTED state for transition to RRC_IDLE or RRC_INACTIVE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes transition from RRC_CONNECTED to RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes transition from RRC_CONNECTED to RRC_INACTIVE when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "CONDITION_SRB2_DRB_SETUP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transition to RRC_INACTIVE from RRC_CONNECTED is guarded by SRB2 and DRB setup condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "PROPERTY_RELEASE_REDIRECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure can establish release and redirect behavior to another frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes transition from RRC_INACTIVE back to RRC_INACTIVE during resume attempt.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRC_CONNECTION_RELEASE_PROCEDURE",
+      "target": "RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes transition from RRC_INACTIVE to RRC_IDLE during resume attempt.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.2"
+      ]
+    }
+  ]
+}

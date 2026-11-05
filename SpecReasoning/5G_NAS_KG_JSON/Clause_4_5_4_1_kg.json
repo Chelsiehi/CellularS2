@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.4.1",
+  "title": "Access control and checking in 5GMM-IDLE mode and in 5GMM-IDLE mode with suspend indication",
+  "entities": [
+    {
+      "id": "UE_5GMM_IDLE",
+      "name": "UE in 5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where it is registered but has no active NAS signaling connection. Includes both 5GMM-IDLE mode and 5GMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "ACCESS_ATTEMPT",
+      "name": "Access attempt",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when UE receives request from upper layers for network access while in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY",
+      "name": "Access category",
+      "entity_type": "Property",
+      "description": "Classification of access attempt type determined by NAS based on tables 4.5.2.1/4.5.2.2 or 4.5.2A.1/4.5.2A.2.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITIES",
+      "name": "Access identities",
+      "entity_type": "Property",
+      "description": "Identifiers assigned to the access attempt for access control purposes.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "RRC_ESTABLISHMENT_CAUSE",
+      "name": "RRC establishment cause",
+      "entity_type": "Property",
+      "description": "Cause value provided to lower layers for RRC connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "INITIAL_NAS_MESSAGE",
+      "name": "Initial NAS message",
+      "entity_type": "Message",
+      "description": "First NAS message sent for an access attempt, such as REGISTRATION REQUEST, SERVICE REQUEST, or CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "UPLINK_DATA_STATUS_IE",
+      "name": "Uplink data status IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates PDU sessions with pending uplink user data.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRING_CHECK",
+      "name": "Access barring check",
+      "entity_type": "Condition",
+      "description": "Check performed by lower layers to determine if access attempt is allowed or barred.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "BARRING_TIMERS",
+      "name": "Barring timers",
+      "entity_type": "Timer",
+      "description": "Timers run by lower layers on per access category basis to control access barring duration.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "BARRING_ALLEVIATION",
+      "name": "Barring alleviation",
+      "entity_type": "Condition",
+      "description": "Condition where access barring is lifted for a specific access category.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_ATTEMPT",
+      "target": "UE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access attempt procedure requires UE to be in 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access attempt procedure establishes access category classification.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_IDENTITIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access attempt procedure establishes access identities.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACCESS_ATTEMPT",
+      "target": "RRC_ESTABLISHMENT_CAUSE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access attempt procedure may establish RRC establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INITIAL_NAS_MESSAGE",
+      "target": "UPLINK_DATA_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Initial NAS message contains Uplink data status IE when UE has uplink user data pending.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "ACCESS_ATTEMPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barring check condition guards whether access attempt procedure proceeds.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "BARRING_TIMERS",
+      "target": "BARRING_ALLEVIATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Barring timers establish barring alleviation condition upon expiry.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "BARRING_ALLEVIATION",
+      "target": "ACCESS_ATTEMPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Barring alleviation condition guards whether access attempt can be initiated.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.1"
+      ]
+    }
+  ]
+}

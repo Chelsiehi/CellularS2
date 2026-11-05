@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_TAU",
+      "name": "Tracking Area Updating Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE tracking area information with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "MSG_TAU_COMPLETE",
+      "name": "TRACKING AREA UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "IE_LOW_PRIORITY_INDICATOR",
+      "name": "Low priority indicator",
+      "entity_type": "Information Element",
+      "description": "IE indicating if UE is configured for NAS signalling low priority.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer started when Extended wait time is received from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer started when Extended wait time CP data is received in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer controlling periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter reaches 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+      "entity_type": "State",
+      "description": "EMM state when UE is attempting to update tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state when UE is registered with normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access barred condition",
+      "entity_type": "Condition",
+      "description": "Condition when access is barred due to access class barring, EAB, ACDC or NAS signalling connection rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "COND_EXTENDED_WAIT_TIME",
+      "name": "Extended wait time condition",
+      "entity_type": "Condition",
+      "description": "Condition when Extended wait time is received from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "PROP_EPS_UPDATE_STATUS_EU2",
+      "name": "EPS update status EU2 NOT UPDATED",
+      "entity_type": "Property",
+      "description": "EPS update status set to NOT UPDATED when tracking area updating fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAU",
+      "target": "MSG_TAU_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Tracking area updating procedure involves sending TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU",
+      "target": "MSG_TAU_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Tracking area updating procedure involves sending TRACKING AREA UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_LOW_PRIORITY_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message may contain low priority indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EXTENDED_WAIT_TIME",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Extended wait time condition starts timer T3346.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROC_TAU",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barred condition prevents starting tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_TAU",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure requires EMM-REGISTERED.ATTEMPTING-TO-UPDATE state in abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_TAU",
+      "target": "PROP_EPS_UPDATE_STATUS_EU2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Failed tracking area updating procedure establishes EPS update status EU2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3411",
+      "target": "PROC_TAU",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3411 expiration triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T3402",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3402 requires EMM-REGISTERED.ATTEMPTING-TO-UPDATE state when started.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3448",
+      "target": "PROC_TAU",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3448 running prevents starting tracking area updating procedure with signalling active flag.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6"
+      ]
+    }
+  ]
+}

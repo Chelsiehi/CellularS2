@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.5",
+  "title": "Disabling and re-enabling of UE's E-UTRA capability",
+  "entities": [
+    {
+      "id": "PROC_DISABLE_EUTRA",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE disables its E-UTRA capability, typically when in EMM-IDLE mode, to prevent unwanted handover or cell reselection to E-UTRAN or due to specific reject causes.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "PROC_REENABLE_EUTRA",
+      "name": "Re-enable E-UTRA capability",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE re-enables its E-UTRA capability, typically during PLMN selection or under specific conditions like power cycle, mode change, or timer expiry.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state; the UE shall only disable E-UTRA capability when in this state.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_LIMITED_SERVICE",
+      "name": "EMM-REGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "A substate of EMM-REGISTERED indicating limited service availability; entered when disabling E-UTRA capability due to redirection to 5GCN and no suitable cell found.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "COND_REDIRECTION_5GCN_REQUIRED",
+      "name": "Redirection to 5GCN required",
+      "entity_type": "Condition",
+      "description": "Condition triggered by receiving reject cause #31, leading to specific procedures for disabling E-UTRA capability and searching for 5GCN-connected cells.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "COND_EMM_CAUSE_15",
+      "name": "EMM cause #15 with Extended EMM cause IE",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives ATTACH REJECT or TRACKING AREA UPDATE REJECT with EMM cause #15 and Extended EMM cause IE value 'E-UTRAN not allowed', leading to E-UTRA capability disabling if configured.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_EMM_CAUSE",
+      "name": "Extended EMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information Element carrying extended cause values, such as 'E-UTRAN not allowed', used in reject messages to trigger E-UTRA capability disabling.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_EUTRA_CAPABILITY",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Property",
+      "description": "Property where the UE disables E-UTRA capability, affecting RAT selection and NAS signaling, e.g., by not setting E-UTRA support bits in relevant IEs.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "name": "Implementation-specific timer",
+      "entity_type": "Timer",
+      "description": "A timer started by the UE when disabling E-UTRA capability due to redirection to 5GCN; on expiry, the UE may re-enable E-UTRA capability and proceed with EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "TIMER_ENABLE_EUTRA",
+      "name": "Timer for enabling E-UTRA",
+      "entity_type": "Timer",
+      "description": "An optional timer started when attach or tracking area updating attempt counter reaches 5; on expiry, the UE enables E-UTRA capability under specific mode conditions.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DISABLE_EUTRA",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Disabling E-UTRA capability is only permitted when the UE is in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_REDIRECTION_5GCN_REQUIRED",
+      "target": "PROC_DISABLE_EUTRA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receiving reject cause #31 triggers the procedure to disable E-UTRA capability and search for 5GCN-connected cells.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EMM_CAUSE_15",
+      "target": "PROC_DISABLE_EUTRA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If configured, receiving EMM cause #15 with Extended EMM cause IE value 'E-UTRAN not allowed' triggers E-UTRA capability disabling.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMM_CAUSE_15",
+      "target": "IE_EXTENDED_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The condition for E-UTRA disabling includes the presence of the Extended EMM cause IE with specific value.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_DISABLE_EUTRA",
+      "target": "PROP_DISABLE_EUTRA_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Executing the disable procedure results in the property of E-UTRA capability being disabled, affecting RAT selection and IE settings.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_DISABLE_EUTRA",
+      "target": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When disabling due to redirection to 5GCN and no suitable cell found, the UE starts an implementation-specific timer.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "target": "STATE_EMM_REGISTERED_LIMITED_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "After starting the timer, the UE enters EMM-REGISTERED.LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_IMPLEMENTATION_SPECIFIC",
+      "target": "PROC_REENABLE_EUTRA",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "At expiry of the implementation-specific timer, the UE may re-enable E-UTRA capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_ENABLE_EUTRA",
+      "target": "PROC_REENABLE_EUTRA",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "On expiry of the timer for enabling E-UTRA, the UE should enable E-UTRA capability under specific mode conditions.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_REENABLE_EUTRA",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Re-enabling E-UTRA capability may require the UE to be in EMM-IDLE mode or specific conditions like PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 4.5"
+      ]
+    }
+  ]
+}

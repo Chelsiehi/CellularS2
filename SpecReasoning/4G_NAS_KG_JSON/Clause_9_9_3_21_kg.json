@@ -1,0 +1,125 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.21",
+  "title": "NAS key set identifier",
+  "entities": [
+    {
+      "id": "IE_NAS_KEY_SET_IDENTIFIER",
+      "name": "NAS key set identifier",
+      "entity_type": "Information Element",
+      "description": "A type 1 information element allocated by the network that identifies the NAS security key set. It contains a TSC flag indicating security context type and a NAS key set identifier value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "NAS key set identifier IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for the NAS key set identifier, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "FIELD_TSC",
+      "name": "TSC",
+      "entity_type": "Property",
+      "description": "Type of security context flag in bit 4 of octet 1. Value 0 indicates native security context (for KSIasme or KSIamf), value 1 indicates mapped security context (for KSIsgsn or KSIamf). Does not apply when NAS key set identifier value is '111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "FIELD_NAS_KSI_VALUE",
+      "name": "NAS key set identifier",
+      "entity_type": "Identifier",
+      "description": "NAS key set identifier value in bits 3-1 of octet 1. Values 000-110 are possible identifiers; 111 means no key available (UE to network) or reserved (network to UE).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "COND_TSC_APPLIES",
+      "name": "TSC applies condition",
+      "entity_type": "Condition",
+      "description": "TSC flag does not apply when NAS key set identifier value is '111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_NAS_KEY_SET_IDENTIFIER",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS key set identifier IE contains the IEI field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_NAS_KEY_SET_IDENTIFIER",
+      "target": "FIELD_TSC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS key set identifier IE contains the TSC field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_NAS_KEY_SET_IDENTIFIER",
+      "target": "FIELD_NAS_KSI_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS key set identifier IE contains the NAS key set identifier value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_TSC",
+      "target": "COND_TSC_APPLIES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TSC field is guarded by the condition that it does not apply when NAS key set identifier value is '111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_NAS_KSI_VALUE",
+      "target": "COND_TSC_APPLIES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS key set identifier value field is guarded by the condition that TSC does not apply when value is '111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.21",
+        "Figure 9.9.3.21.1",
+        "Table 9.9.3.21.1"
+      ]
+    }
+  ]
+}

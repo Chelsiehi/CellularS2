@@ -1,0 +1,159 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.2.7",
+  "title": "EMM-SERVICE-REQUEST-INITIATED",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------",
+    "A UE enters the state EMM-SERVICE-REQUEST-INITIATED after it has started the service request procedure and is waiting for a response from the MME (see clause 5.6.1)",
+    "NOTE: Not all possible transitions are shown in this figure",
+    "Figure 5.1.3.2.2.7.1: EMM main states in the UE",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.1.3.2.2.7.1",
+      "file": "Figure_5_1_3_2_2_7_1_p64.png.json",
+      "title": "EMM main states in the UE",
+      "content": {
+        "figure_id": "5.1.3.2.2.7.1",
+        "title": "EMM main states in the UE",
+        "type": "STATE_TRANSITION",
+        "content": {
+          "states": [
+            "EMM-NULL",
+            "EMM-DEREGISTERED",
+            "EMM-REGISTERED",
+            "EMM-DEREGISTERED-INITIATED",
+            "EMM-TRACKING-AREA-UPDATING-INITIATED",
+            "EMM-REGISTERED-INITIATED",
+            "EMM-SERVICE-REQUEST-INITIATED",
+            "Any state"
+          ],
+          "transitions": [
+            {
+              "from": "EMM-NULL",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "enable S1 mode",
+                "enable S1 and S101 mode"
+              ]
+            },
+            {
+              "from": "EMM-DEREGISTERED",
+              "to": "EMM-NULL",
+              "conditions": [
+                "disable S1 mode",
+                "disable S1 and S101 mode"
+              ]
+            },
+            {
+              "from": "EMM-DEREGISTERED-INITIATED",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "DETACH accepted",
+                "Lower layer failure"
+              ]
+            },
+            {
+              "from": "EMM-DEREGISTERED",
+              "to": "EMM-REGISTERED-INITIATED",
+              "conditions": [
+                "ATTACH requested"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED",
+              "to": "EMM-DEREGISTERED-INITIATED",
+              "conditions": [
+                "DETACH requested (not power off)"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "Network init. DETACH requested",
+                "local DETACH",
+                "intersystem change to cdma2000",
+                "HRPD completed"
+              ]
+            },
+            {
+              "from": "Any state",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "DETACH requested (power off)"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED-INITIATED",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "ATTACH rejected",
+                "Network init. DETACH requested",
+                "Lower layer failure"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED-INITIATED",
+              "to": "EMM-REGISTERED",
+              "conditions": [
+                "ATTACH accepted"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED",
+              "to": "EMM-SERVICE-REQUEST-INITIATED",
+              "conditions": [
+                "SR initiated"
+              ]
+            },
+            {
+              "from": "EMM-SERVICE-REQUEST-INITIATED",
+              "to": "EMM-REGISTERED",
+              "conditions": [
+                "SR accepted",
+                "SR failed",
+                "SR rejected (#13, #15, #18, #25, #39)"
+              ]
+            },
+            {
+              "from": "EMM-REGISTERED",
+              "to": "EMM-TRACKING-AREA-UPDATING-INITIATED",
+              "conditions": [
+                "TAU requested"
+              ]
+            },
+            {
+              "from": "EMM-TRACKING-AREA-UPDATING-INITIATED",
+              "to": "EMM-REGISTERED",
+              "conditions": [
+                "TAU accepted",
+                "TAU failed",
+                "TAU rejected (#13, #15, #25)"
+              ]
+            },
+            {
+              "from": "EMM-TRACKING-AREA-UPDATING-INITIATED",
+              "to": "EMM-DEREGISTERED",
+              "conditions": [
+                "TAU rejected (other causes)"
+              ]
+            }
+          ],
+          "entities": [],
+          "messages": [],
+          "fields": [],
+          "notes": [
+            "Not all possible transitions are shown in this figure."
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

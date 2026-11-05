@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.1.2.2",
+  "title": "UE is using EPS services with control plane CIoT EPS optimization",
+  "entities": [
+    {
+      "id": "ESM_LAYER",
+      "name": "ESM layer",
+      "entity_type": "Procedure",
+      "description": "EPS Session Management layer that provides indication to release NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    },
+    {
+      "id": "MME",
+      "name": "MME",
+      "entity_type": "Property",
+      "description": "Mobility Management Entity that receives indication from ESM layer and initiates NAS signalling connection release.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    },
+    {
+      "id": "NAS_SIG_CONN_RELEASE",
+      "name": "NAS signalling connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release the NAS signalling connection initiated by MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    },
+    {
+      "id": "COND_NO_PENDING_DATA",
+      "name": "No additional downlink user data or signalling pending",
+      "entity_type": "Condition",
+      "description": "Condition that must be satisfied for MME to initiate NAS signalling connection release.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM_LAYER",
+      "target": "MME",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MME receives indication from ESM layer to release NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MME",
+      "target": "NAS_SIG_CONN_RELEASE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME initiates release of NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_PENDING_DATA",
+      "target": "MME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME initiates NAS signalling connection release only if no additional downlink user data or signalling is pending.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.2.2"
+      ]
+    }
+  ]
+}

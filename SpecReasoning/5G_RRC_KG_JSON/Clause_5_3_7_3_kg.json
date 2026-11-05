@@ -1,0 +1,196 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.3",
+  "title": "Actions following cell selection while T311 is running",
+  "entities": [
+    {
+      "id": "T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer running during cell selection procedure after connection failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "T390",
+      "name": "Timer T390",
+      "entity_type": "Timer",
+      "description": "Timer for access barring categories.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "T301",
+      "name": "Timer T301",
+      "entity_type": "Timer",
+      "description": "Timer started when initiating RRC reestablishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION",
+      "name": "Cell Selection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a suitable NR cell while T311 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "RRC_REESTABLISHMENT",
+      "name": "RRC Reestablishment",
+      "entity_type": "Procedure",
+      "description": "Procedure to reestablish RRC connection after failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "RRCReestablishmentRequest",
+      "name": "RRCReestablishmentRequest",
+      "entity_type": "Message",
+      "description": "Message transmitted to initiate RRC connection reestablishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_RECONFIG",
+      "name": "Conditional Reconfiguration Condition",
+      "entity_type": "Condition",
+      "description": "Condition where attemptCondReconfig is configured and selected cell is in candidate list.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "VarConditionalReconfig",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Property",
+      "description": "Variable storing conditional reconfiguration information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "VarRLF_Report",
+      "name": "VarRLF-Report",
+      "entity_type": "Property",
+      "description": "Variable storing radio link failure report information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "condRRCReconfig",
+      "name": "condRRCReconfig",
+      "entity_type": "Property",
+      "description": "Stored conditional RRC reconfiguration associated with selected cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "INTER_RAT_SELECTION",
+      "name": "Inter-RAT Cell Selection",
+      "entity_type": "Procedure",
+      "description": "Procedure when UE selects an inter-RAT cell while T311 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_SELECTION",
+      "target": "T311",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Cell selection procedure stops timer T311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_SELECTION",
+      "target": "T390",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Cell selection procedure stops timer T390 for all access categories.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CELL_SELECTION",
+      "target": "T301",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Cell selection procedure starts timer T301.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CELL_SELECTION",
+      "target": "RRCReestablishmentRequest",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Cell selection triggers transmission of RRCReestablishmentRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITIONAL_RECONFIG",
+      "target": "condRRCReconfig",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Conditional reconfiguration condition leads to applying stored condRRCReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITIONAL_RECONFIG",
+      "target": "VarRLF_Report",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Conditional reconfiguration condition leads to setting choCellId in VarRLF-Report.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "INTER_RAT_SELECTION",
+      "target": "T311",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Inter-RAT cell selection stops timer T311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RRC_REESTABLISHMENT",
+      "target": "RRCReestablishmentRequest",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC reestablishment procedure includes transmission of RRCReestablishmentRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.3"
+      ]
+    }
+  ]
+}

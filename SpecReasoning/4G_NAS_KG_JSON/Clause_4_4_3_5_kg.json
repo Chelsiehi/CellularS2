@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.3.5",
+  "title": "NAS COUNT wrap around",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter used in NAS security procedures that can wrap around when approaching its maximum value (close to 2^24).",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "MME",
+      "name": "MME",
+      "entity_type": "Property",
+      "description": "Mobility Management Entity responsible for detecting NAS COUNT wrap around conditions and initiating appropriate security procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that handles NAS COUNT wrap around conditions and performs corresponding security actions.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "EPS_AKA_PROCEDURE",
+      "name": "EPS AKA procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication and Key Agreement procedure used to establish a new EPS security context and reset NAS COUNT to 0.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT",
+      "name": "EPS security context",
+      "entity_type": "Property",
+      "description": "Security context containing cryptographic keys and parameters for NAS protection, which can be current or non-current.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "NAS_SIGNALLING_CONNECTION_RELEASE",
+      "name": "NAS signalling connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release the NAS signalling connection when NAS COUNT wraps around without new KASME establishment.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "EIA0_CONDITION",
+      "name": "EIA0 used as NAS integrity algorithm",
+      "entity_type": "Condition",
+      "description": "Condition where EIA0 (null integrity algorithm) is used, allowing NAS COUNT wrap around without security context changes.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "KASME",
+      "name": "KASME",
+      "entity_type": "Property",
+      "description": "Key used in EPS security context that must be established before NAS COUNT wrap around to avoid connection release.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "EKSI",
+      "name": "eKSI",
+      "entity_type": "Identifier",
+      "description": "EPS Key Set Identifier indicating the current EPS security context, which the UE deletes before sending next uplink NAS message if NAS COUNT wraps without new KASME.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MME",
+      "target": "EPS_AKA_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME initiates EPS AKA procedure when NAS COUNT is close to wrap around and no suitable non-current security context exists.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EPS_AKA_PROCEDURE",
+      "target": "NAS_COUNT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "EPS AKA procedure resets NAS COUNT to 0 in both UE and MME when new EPS security context is activated.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MME",
+      "target": "EPS_SECURITY_CONTEXT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MME can activate non-current native EPS security context with low NAS COUNT values when wrap around is detected.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE",
+      "target": "NAS_SIGNALLING_CONNECTION_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE releases NAS signalling connection if NAS COUNT wraps around without new KASME establishment.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "EKSI",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE deletes eKSI indicating current EPS security context before sending next uplink NAS message if NAS COUNT wraps without new KASME.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EIA0_CONDITION",
+      "target": "EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EIA0 is used, UE and MME continue using current security context even after NAS COUNT wrap around.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EIA0_CONDITION",
+      "target": "EPS_AKA_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME shall not initiate EPS AKA procedure when EIA0 is used and NAS COUNT wrap around occurs.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EIA0_CONDITION",
+      "target": "NAS_SIGNALLING_CONNECTION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME and UE shall not release NAS signalling connection when EIA0 is used and NAS COUNT wrap around occurs.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.5"
+      ]
+    }
+  ]
+}

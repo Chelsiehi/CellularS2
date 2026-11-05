@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.15",
+  "title": "Transmission failure abnormal case in the UE",
+  "entities": [
+    {
+      "id": "TRANSMISSION_FAILURE_INDICATION",
+      "name": "5GMM uplink message transmission failure indication",
+      "entity_type": "Condition",
+      "description": "Abnormal case identified by lower layers when 5GMM uplink message transmission fails. Can occur due to TAI change where lower layer delay in reading system information may cause delayed notification to NAS layer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "RETRANSMISSION_PROCEDURE",
+      "name": "Retransmission procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE re-initiates transmission of previously failed uplink message with new sequence number and message authentication code, avoiding restart of entire procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "UPLINK_MESSAGE",
+      "name": "Uplink message",
+      "entity_type": "Message",
+      "description": "5GMM message that failed transmission and may be retransmitted with new sequence number and MAC.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE",
+      "name": "TAI change",
+      "entity_type": "Condition",
+      "description": "Tracking Area Identity change that can cause transmission failure and delayed notification to NAS layer due to lower layer system information reading.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "UE_IMPLEMENTATION",
+      "name": "UE implementation decision",
+      "entity_type": "Property",
+      "description": "UE implementation determines whether to re-run ongoing procedure and how to handle retransmission with possible delayed TAI change information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TRANSMISSION_FAILURE_INDICATION",
+      "target": "RETRANSMISSION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Transmission failure indication from lower layers triggers UE implementation decision to initiate retransmission procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RETRANSMISSION_PROCEDURE",
+      "target": "UPLINK_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Retransmission procedure involves retransmitting the previously failed uplink message with new sequence number and MAC.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TAI_CHANGE",
+      "target": "TRANSMISSION_FAILURE_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI change condition can cause transmission failure indication, with possible delayed notification to NAS layer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_IMPLEMENTATION",
+      "target": "RETRANSMISSION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE implementation decision establishes whether and how to perform retransmission procedure, including handling delayed TAI change information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.15"
+      ]
+    }
+  ]
+}

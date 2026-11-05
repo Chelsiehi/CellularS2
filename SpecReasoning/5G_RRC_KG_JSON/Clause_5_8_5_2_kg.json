@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.5.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "UE_NR_SIDELINK_CAPABLE",
+      "name": "NR Sidelink Capable UE",
+      "entity_type": "Condition",
+      "description": "A UE capable of NR sidelink communication and SLSS/PSBCH transmission that meets conditions for NR sidelink communication operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_IN_COVERAGE",
+      "name": "In Coverage Condition",
+      "entity_type": "Condition",
+      "description": "UE is in coverage on the frequency used for NR sidelink communication as defined in TS 38.304 and has selected GNSS or cell as synchronization reference.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_OUT_OF_COVERAGE",
+      "name": "Out of Coverage Condition",
+      "entity_type": "Condition",
+      "description": "UE is out of coverage on the frequency used for NR sidelink communication, frequency is included in sl-FreqInfoToAddModList or sl-FreqInfoList, and has selected GNSS or cell as synchronization reference.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_RRC_CONNECTED_NETWORK_CONTROLLED",
+      "name": "RRC_CONNECTED Network Controlled Condition",
+      "entity_type": "Condition",
+      "description": "UE is in RRC_CONNECTED state and networkControlledSyncTx is configured and set to on.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_SYNCTXTHRESHIC",
+      "name": "syncTxThreshIC Condition",
+      "entity_type": "Condition",
+      "description": "networkControlledSyncTx is not configured, syncTxThreshIC is configured, and RSRP measurement of reference cell is below syncTxThreshIC value.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_SYNCTXTHRESHOOC",
+      "name": "syncTxThreshOoC Condition",
+      "entity_type": "Condition",
+      "description": "syncTxThreshOoC is included in SidelinkPreconfigNR, UE is not directly synchronized to GNSS, and UE has no selected SyncRef UE or PSBCH-RSRP measurement is below syncTxThreshOoC.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "COND_GNSS_SELECTED",
+      "name": "GNSS Selected Condition",
+      "entity_type": "Condition",
+      "description": "UE selects GNSS as the synchronization reference source.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "name": "Sidelink SSB Transmission",
+      "entity_type": "Procedure",
+      "description": "Procedure for transmitting sidelink SSB on the frequency used for NR sidelink communication, including transmission of SLSS and MasterInformationBlockSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "IE_SLSS",
+      "name": "SLSS",
+      "entity_type": "Information Element",
+      "description": "Sidelink Synchronization Signal transmitted as part of sidelink SSB.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "IE_MASTERINFORMATIONBLOCKSIDELINK",
+      "name": "MasterInformationBlockSidelink",
+      "entity_type": "Information Element",
+      "description": "Master Information Block for Sidelink transmitted as part of sidelink SSB.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NR_SIDELINK_CAPABLE",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR sidelink capable UE initiates sidelink SSB transmission when specified conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_IN_COVERAGE",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In coverage condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_OUT_OF_COVERAGE",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Out of coverage condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RRC_CONNECTED_NETWORK_CONTROLLED",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC_CONNECTED network controlled condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SYNCTXTHRESHIC",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "syncTxThreshIC condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SYNCTXTHRESHOOC",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "syncTxThreshOoC condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_GNSS_SELECTED",
+      "target": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "GNSS selected condition guards initiation of sidelink SSB transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "target": "IE_SLSS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Sidelink SSB transmission procedure includes transmission of SLSS.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_SIDELINK_SSB_TRANSMISSION",
+      "target": "IE_MASTERINFORMATIONBLOCKSIDELINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Sidelink SSB transmission procedure includes transmission of MasterInformationBlockSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.5.2"
+      ]
+    }
+  ]
+}

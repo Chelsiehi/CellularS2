@@ -1,0 +1,262 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.5.3",
+  "title": "Wireline access service area restrictions",
+  "entities": [
+    {
+      "id": "SERVICE_REJECT",
+      "name": "SERVICE REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message that can trigger wireline access service area restrictions when received with 5GMM cause #28.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message that can trigger wireline access service area restrictions when received with 5GMM cause #28.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Registration accept message that can trigger wireline access service area restrictions when received with PDU session reactivation result error cause IE containing 5GMM cause #28.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_28",
+      "name": "5GMM cause #28",
+      "entity_type": "Condition",
+      "description": "Restricted service area cause code that triggers enforcement of wireline access service area restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "name": "5GMM-REGISTERED.NON-ALLOWED-SERVICE",
+      "entity_type": "State",
+      "description": "State entered when wireline access service area restrictions are enforced, restricting most procedures except for emergency services and high priority access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "WIRELINE_RESTRICTIONS_ENFORCEMENT",
+      "name": "Wireline access service area restrictions enforcement",
+      "entity_type": "Property",
+      "description": "Behavior where 5G-RG or W-AGF restricts registration, service request, and 5GSM procedures over wireline access except for emergency services and high priority access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for mobility and periodic registration update that is restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that is restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state except for emergency services fallback and high priority access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "5GSM_PROCEDURE",
+      "name": "5GSM procedure",
+      "entity_type": "Procedure",
+      "description": "5G session management procedures that are restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state except for emergency services and high priority access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES",
+      "name": "Emergency services",
+      "entity_type": "Condition",
+      "description": "Exception condition that allows restricted procedures to be performed in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "HIGH_PRIORITY_ACCESS",
+      "name": "High priority access",
+      "entity_type": "Condition",
+      "description": "Exception condition that allows restricted procedures to be performed in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SERVICE_REJECT",
+      "target": "5GMM_CAUSE_28",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains 5GMM cause #28 IE that triggers restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "5GMM_CAUSE_28",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains 5GMM cause #28 IE that triggers restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "5GMM_CAUSE_28",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains PDU session reactivation result error cause IE with 5GMM cause #28 that triggers restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5GMM_CAUSE_28",
+      "target": "WIRELINE_RESTRICTIONS_ENFORCEMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of 5GMM cause #28 establishes enforcement of wireline access service area restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "WIRELINE_RESTRICTIONS_ENFORCEMENT",
+      "target": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Enforcement of wireline access service area restrictions requires entering 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration procedure is restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedure is restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "target": "5GSM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GSM procedures are restricted in 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EMERGENCY_SERVICES",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services condition allows registration procedure in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "HIGH_PRIORITY_ACCESS",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "High priority access condition allows registration procedure in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EMERGENCY_SERVICES",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services condition allows service request procedure in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "HIGH_PRIORITY_ACCESS",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "High priority access condition allows service request procedure in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "EMERGENCY_SERVICES",
+      "target": "5GSM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services condition allows 5GSM procedures in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "HIGH_PRIORITY_ACCESS",
+      "target": "5GSM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "High priority access condition allows 5GSM procedures in restricted state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.3"
+      ]
+    }
+  ]
+}

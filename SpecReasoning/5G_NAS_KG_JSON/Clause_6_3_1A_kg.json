@@ -1,0 +1,280 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1A",
+  "title": "Service-level authentication and authorization procedure",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_LEVEL_AA",
+      "name": "Service-level authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to authenticate and/or authorize UE upper layers using NEF services, performed during or after PDU session establishment for non-emergency sessions. Supports initial authentication/authorization and re-authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_LEVEL_AUTH_COMMAND",
+      "name": "SERVICE-LEVEL AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent from SMF to UE containing service-level-AA payload, starts timer T3594.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_LEVEL_AUTH_COMPLETE",
+      "name": "SERVICE-LEVEL AUTHENTICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent from UE to SMF containing service-level-AA payload, stops timer T3594.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message carrying successful service-level-AA response during UE-requested PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "Message carrying unsuccessful service-level-AA response during UE-requested PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message carrying successful service-level-AA response during network-requested PDU session modification for re-authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message carrying unsuccessful service-level-AA response during network-requested PDU session release for re-authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_PAYLOAD",
+      "name": "Service-level-AA payload",
+      "entity_type": "Information Element",
+      "description": "Payload exchanged between UE and SMF for service-level authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_RESPONSE",
+      "name": "Service-level-AA response",
+      "entity_type": "Information Element",
+      "description": "Response indicating success or failure of service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3594",
+      "name": "T3594",
+      "entity_type": "Timer",
+      "description": "Timer started when SERVICE-LEVEL AUTHENTICATION COMMAND is sent, stopped when SERVICE-LEVEL AUTHENTICATION COMPLETE is received.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "COND_NON_EMERGENCY_PDU_SESSION",
+      "name": "Non-emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition that service-level AA procedure can only be performed for non-emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A"
+      ]
+    },
+    {
+      "id": "PROP_UE_PASSES_RESPONSE_TO_UPPER_LAYER",
+      "name": "UE passes service-level-AA response to upper layer",
+      "entity_type": "Property",
+      "description": "Behavior where UE passes received service-level-AA response to upper layers when received in PDU SESSION ESTABLISHMENT ACCEPT or REJECT messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_LEVEL_AA",
+      "target": "MSG_SERVICE_LEVEL_AUTH_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service-level AA procedure involves sending SERVICE-LEVEL AUTHENTICATION COMMAND messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_LEVEL_AA",
+      "target": "MSG_SERVICE_LEVEL_AUTH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service-level AA procedure involves receiving SERVICE-LEVEL AUTHENTICATION COMPLETE messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_LEVEL_AUTH_COMMAND",
+      "target": "IE_SERVICE_LEVEL_AA_PAYLOAD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE-LEVEL AUTHENTICATION COMMAND contains service-level-AA payload.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_LEVEL_AUTH_COMPLETE",
+      "target": "IE_SERVICE_LEVEL_AA_PAYLOAD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE-LEVEL AUTHENTICATION COMPLETE contains service-level-AA payload.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_LEVEL_AUTH_COMMAND",
+      "target": "TIMER_T3594",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending SERVICE-LEVEL AUTHENTICATION COMMAND starts timer T3594.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_LEVEL_AUTH_COMPLETE",
+      "target": "TIMER_T3594",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SERVICE-LEVEL AUTHENTICATION COMPLETE stops timer T3594.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "target": "IE_SERVICE_LEVEL_AA_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT ACCEPT contains service-level-AA response for successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "IE_SERVICE_LEVEL_AA_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT contains service-level-AA response for unsuccessful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_SERVICE_LEVEL_AA_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND contains service-level-AA response for successful re-authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_SERVICE_LEVEL_AA_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND contains service-level-AA response for unsuccessful re-authentication.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A",
+        "Figure 6.3.1A.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_SERVICE_LEVEL_AA",
+      "target": "COND_NON_EMERGENCY_PDU_SESSION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service-level AA procedure requires non-emergency PDU session condition.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "target": "PROP_UE_PASSES_RESPONSE_TO_UPPER_LAYER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving service-level-AA response in PDU SESSION ESTABLISHMENT ACCEPT establishes UE behavior to pass response to upper layer.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "PROP_UE_PASSES_RESPONSE_TO_UPPER_LAYER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving service-level-AA response in PDU SESSION ESTABLISHMENT REJECT establishes UE behavior to pass response to upper layer.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.1.1",
+  "title": "General DLInformationTransfer",
+  "entities": [
+    {
+      "id": "PROC_DL_INFO_TRANSFER",
+      "name": "DL Information Transfer Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer NAS dedicated information from NG-RAN to UE in RRC_CONNECTED or RRC_INACTIVE during SDT, or to transfer F1-C related information from IAB Donor-CU to IAB-DU via IAB-MT in RRC_CONNECTED.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1",
+        "Figure 5.7.1.1"
+      ]
+    },
+    {
+      "id": "MSG_DL_INFORMATION_TRANSFER",
+      "name": "DLInformationTransfer",
+      "entity_type": "Message",
+      "description": "RRC message used to transfer NAS dedicated information or F1-C related information from network to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1",
+        "Figure 5.7.1.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE is inactive but maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "COND_SDT",
+      "name": "During SDT",
+      "entity_type": "Condition",
+      "description": "Condition indicating the procedure occurs during Small Data Transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "IE_NAS_DEDICATED_INFO",
+      "name": "NAS dedicated information",
+      "entity_type": "Information Element",
+      "description": "NAS layer information transferred from NG-RAN to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "IE_F1_C_INFO",
+      "name": "F1-C related information",
+      "entity_type": "Information Element",
+      "description": "F1 control plane information transferred from IAB Donor-CU to IAB-DU via IAB-MT.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DL_INFO_TRANSFER",
+      "target": "MSG_DL_INFORMATION_TRANSFER",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The DL Information Transfer procedure uses the DLInformationTransfer message as its main signaling step.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1",
+        "Figure 5.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DL_INFO_TRANSFER",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure can be performed when UE is in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_DL_INFO_TRANSFER",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure can be performed when UE is in RRC_INACTIVE state during SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_DL_INFO_TRANSFER",
+      "target": "COND_SDT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure execution for RRC_INACTIVE UE is guarded by the SDT condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DL_INFORMATION_TRANSFER",
+      "target": "IE_NAS_DEDICATED_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DLInformationTransfer message carries NAS dedicated information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DL_INFORMATION_TRANSFER",
+      "target": "IE_F1_C_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DLInformationTransfer message carries F1-C related information for IAB scenarios.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.1.1"
+      ]
+    }
+  ]
+}

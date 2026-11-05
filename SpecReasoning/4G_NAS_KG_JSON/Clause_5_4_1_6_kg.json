@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.1.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_GUTI_REALLOCATION",
+      "name": "GUTI reallocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reallocating GUTI and optionally TAI list to UE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "MSG_GUTI_REALLOCATION_COMMAND",
+      "name": "GUTI REALLOCATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate GUTI reallocation",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "name": "GUTI REALLOCATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete GUTI reallocation",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity used to identify UE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list defining UE's registration area",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "IE_S_TMSI",
+      "name": "S-TMSI",
+      "entity_type": "Identifier",
+      "description": "Shortened Temporary Mobile Subscriber Identity used for paging",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3450",
+      "name": "T3450",
+      "entity_type": "Timer",
+      "description": "Timer supervising GUTI reallocation procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3415",
+      "name": "T3415",
+      "entity_type": "Timer",
+      "description": "Timer for paging attempts during eDRX operation",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition when lower layer failure is detected before GUTI REALLOCATION COMPLETE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "COND_TIMER_T3450_EXPIRY",
+      "name": "Timer T3450 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3450 expires during GUTI reallocation",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "PROP_GUTI_VALIDITY",
+      "name": "GUTI validity management",
+      "entity_type": "Property",
+      "description": "Network behavior for managing old and new GUTI validity during abnormal cases",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "PROC_PAGING",
+      "name": "Paging procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for paging UE using S-TMSI or IMSI",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_GUTI_REALLOCATION",
+      "target": "MSG_GUTI_REALLOCATION_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "GUTI reallocation procedure includes sending GUTI REALLOCATION COMMAND message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_GUTI_REALLOCATION",
+      "target": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "GUTI reallocation procedure expects reception of GUTI REALLOCATION COMPLETE message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message contains GUTI information element",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_GUTI_REALLOCATION_COMMAND",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain TAI list information element",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_GUTI_REALLOCATION",
+      "target": "TIMER_T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "GUTI reallocation procedure starts timer T3450 for supervision",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TIMER_T3450_EXPIRY",
+      "target": "MSG_GUTI_REALLOCATION_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "On T3450 expiry, network retransmits GUTI REALLOCATION COMMAND message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "PROP_GUTI_VALIDITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure establishes GUTI validity management behavior",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PAGING",
+      "target": "IE_S_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging procedure uses S-TMSI for identifying UE",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_PAGING",
+      "target": "TIMER_T3415",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Paging procedure during eDRX starts timer T3415 for paging attempts",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_TIMER_T3450_EXPIRY",
+      "target": "PROC_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After fifth T3450 expiry, network follows paging procedure as in lower layer failure case",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.6"
+      ]
+    }
+  ]
+}

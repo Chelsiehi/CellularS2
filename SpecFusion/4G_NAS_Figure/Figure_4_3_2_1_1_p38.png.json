@@ -1,0 +1,92 @@
+{
+  "figure_id": "4.3.2.1.1",
+  "title": "Change of UE mode of operation for a CS voice capable UE",
+  "type": "STATE_TRANSITION",
+  "content": {
+    "states": [
+      "CS/PS mode 1",
+      "PS mode 1",
+      "CS/PS mode 2",
+      "PS mode 2"
+    ],
+    "transitions": [
+      {
+        "from": "CS/PS mode 1",
+        "to": "PS mode 1",
+        "conditions": [
+          "Voice Domain Preference for E-UTRAN changed from any configuration to \"IMS PS voice only\", UE is configured to prefer SMS over IP networks and is IMS registered",
+          "SMS configuration changed to prefer to use SMS over IP networks, UE is IMS registered and Voice Domain Preference is \"IMS PS voice only\""
+        ]
+      },
+      {
+        "from": "PS mode 1",
+        "to": "CS/PS mode 1",
+        "conditions": []
+      },
+      {
+        "from": "CS/PS mode 1",
+        "to": "CS/PS mode 1",
+        "conditions": [
+          "UE's usage setting change (voice <-> data centric)"
+        ]
+      },
+      {
+        "from": "PS mode 1",
+        "to": "PS mode 1",
+        "conditions": [
+          "UE's usage setting change (voice <-> data centric)"
+        ]
+      },
+      {
+        "from": "CS/PS mode 1",
+        "to": "CS/PS mode 2",
+        "conditions": [
+          "Voice Domain Preference for E-UTRAN changed from any configuration to \"IMS PS voice only\", UE is configured to prefer to use SMS over IP networks and the UE is IMS registered",
+          "SMS configuration changed to prefer to use SMS over IP networks, UE is IMS registered and Voice Domain Preference for E-UTRAN is \"IMS PS voice only\""
+        ]
+      },
+      {
+        "from": "PS mode 1",
+        "to": "PS mode 2",
+        "conditions": [
+          "Voice Domain Preference for E-UTRAN changed from any configuration to \"IMS PS voice only\", UE is configured to prefer to use SMS over IP networks and the UE is IMS registered",
+          "SMS configuration changed to prefer to use SMS over IP networks, UE is IMS registered and Voice Domain Preference for E-UTRAN is \"IMS PS voice only\""
+        ]
+      },
+      {
+        "from": "CS/PS mode 2",
+        "to": "PS mode 2",
+        "conditions": [
+          "Voice Domain Preference for E-UTRAN changed from \"IMS PS voice only\" to \"CS voice only\"",
+          "from \"IMS PS voice only\" to \"CS voice preferred, IMS PS Voice as secondary\"",
+          "from \"IMS PS voice preferred, CS Voice as secondary\" to \"CS voice only\"",
+          "from \"IMS PS voice preferred, CS Voice as secondary\" to \"CS voice preferred, IMS PS Voice as secondary\"",
+          "Unsuccessful IMS registration indication from upper layers and Voice Domain Preference for E-UTRAN is \"IMS PS voice preferred, CS Voice as secondary\" or SMS configuration is set to prefer to use SMS over IP networks",
+          "SMS configuration changed to not to use SMS over IP networks"
+        ]
+      },
+      {
+        "from": "PS mode 2",
+        "to": "CS/PS mode 2",
+        "conditions": []
+      },
+      {
+        "from": "CS/PS mode 2",
+        "to": "CS/PS mode 2",
+        "conditions": []
+      },
+      {
+        "from": "PS mode 2",
+        "to": "PS mode 2",
+        "conditions": []
+      }
+    ],
+    "entities": [],
+    "messages": [],
+    "fields": [],
+    "notes": [
+      "NOTE 1: The UE may transit from CS/PS mode 1 to PS mode 1 or from CS/PS mode 2 to PS mode 2 if \"CS domain not available\" is received. After the transition to PS mode 1 or PS mode 2 due to \"CS domain not available\", the UE can transit back to CS/PS mode 1 or CS/PS mode 2, e.g. due to change of PLMN which is not in the list of the equivalent PLMNs.",
+      "NOTE 2: Not all possible transitions are shown in this figure."
+    ]
+  }
+}

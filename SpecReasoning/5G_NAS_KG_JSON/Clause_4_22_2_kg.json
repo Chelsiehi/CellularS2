@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.22.2",
+  "title": "Authentication and authorization of UAV",
+  "entities": [
+    {
+      "id": "PROC_UUAA_MM",
+      "name": "UUAA-MM procedure",
+      "entity_type": "Procedure",
+      "description": "UAV Authorization and Authentication procedure performed by UE and AMF during registration procedure for UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "PROC_UUAA_SM",
+      "name": "UUAA-SM procedure",
+      "entity_type": "Procedure",
+      "description": "UAV Authorization and Authentication procedure performed by UE and SMF during PDU session establishment for UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "IE_CAA_LEVEL_UAV_ID",
+      "name": "CAA-level UAV ID",
+      "entity_type": "Information Element",
+      "description": "Identification parameter provided by UE supporting UAS services for authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "IE_USS_ADDRESS",
+      "name": "USS address",
+      "entity_type": "Information Element",
+      "description": "Address information provided by UE to enable network discovery of USS for UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container IE",
+      "entity_type": "Information Element",
+      "description": "Container IE that includes UAS service parameters like CAA-level UAV ID and USS address, implemented as a non-cleartext IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "COND_UAS_SERVICES_ALLOWED",
+      "name": "UE allowed for UAS services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is authorized to access UAS services after successful UUAA procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "COND_NON_3GPP_ACCESS",
+      "name": "Non-3GPP access restriction",
+      "entity_type": "Condition",
+      "description": "Condition where UUAA procedure is not performed and UAS services are not allowed over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "PROP_UAS_CONNECTIVITY_ESTABLISHED",
+      "name": "UAS connectivity established",
+      "entity_type": "Property",
+      "description": "Property indicating successful establishment of connectivity for UAS services after UUAA procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "PROC_REAUTHENTICATION",
+      "name": "Re-authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF or SMF for UAV re-authentication when required by USS.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "PROP_UUAA_REVOKED",
+      "name": "UUAA revoked",
+      "entity_type": "Property",
+      "description": "Property indicating that UAV authorization has been revoked, requiring release of UAS-related PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UUAA_MM",
+      "target": "IE_CAA_LEVEL_UAV_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UUAA-MM procedure requires CAA-level UAV ID from UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UUAA_SM",
+      "target": "IE_CAA_LEVEL_UAV_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UUAA-SM procedure requires CAA-level UAV ID from UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "target": "IE_CAA_LEVEL_UAV_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Service-level-AA container IE includes CAA-level UAV ID.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "target": "IE_USS_ADDRESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Service-level-AA container IE includes USS address.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UAS_SERVICES_ALLOWED",
+      "target": "PROP_UAS_CONNECTIVITY_ESTABLISHED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful UUAA procedure establishes UAS connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NON_3GPP_ACCESS",
+      "target": "PROC_UUAA_MM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-3GPP access restricts UUAA procedure execution.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NON_3GPP_ACCESS",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-3GPP access restricts UUAA procedure execution.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_REAUTHENTICATION",
+      "target": "PROC_UUAA_MM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Re-authentication may involve UUAA-MM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_REAUTHENTICATION",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Re-authentication may involve UUAA-SM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_UUAA_REVOKED",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UUAA revocation triggers PDU session release by SMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.2"
+      ]
+    }
+  ]
+}

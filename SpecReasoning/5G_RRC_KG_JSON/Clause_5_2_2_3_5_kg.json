@@ -1,0 +1,216 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.5",
+  "title": "Acquisition of SIB(s) or posSIB(s) in RRC_CONNECTED",
+  "entities": [
+    {
+      "id": "PROCEDURE_SIB_ACQUISITION_CONNECTED",
+      "name": "SIB/posSIB Acquisition in RRC_CONNECTED",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE in RRC_CONNECTED state to acquire required System Information Blocks (SIBs) or positioning SIBs (posSIBs) either via broadcast or on-demand request.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_COMMON_SEARCH_SPACE",
+      "name": "Active BWP without common search space for other SI",
+      "entity_type": "Condition",
+      "description": "Condition where UE's active BWP is not configured with common search space containing searchSpaceOtherSystemInformation field.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_COMMON_SEARCH_SPACE_PRESENT",
+      "name": "Active BWP with common search space for other SI",
+      "entity_type": "Condition",
+      "description": "Condition where UE's active BWP is configured with common search space containing searchSpaceOtherSystemInformation field.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_SIB_BROADCASTING",
+      "name": "si-BroadcastStatus set to broadcasting",
+      "entity_type": "Condition",
+      "description": "Condition where System Information broadcast status indicates the SI is being broadcast.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_SIB_NOT_BROADCASTING",
+      "name": "si-BroadcastStatus set to notBroadcasting",
+      "entity_type": "Condition",
+      "description": "Condition where System Information broadcast status indicates the SI is not being broadcast.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_POSSI_BROADCASTING",
+      "name": "posSI-BroadcastStatus set to broadcasting",
+      "entity_type": "Condition",
+      "description": "Condition where positioning System Information broadcast status indicates the posSI is being broadcast.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_POSSI_NOT_BROADCASTING",
+      "name": "posSI-BroadcastStatus set to notBroadcasting",
+      "entity_type": "Condition",
+      "description": "Condition where positioning System Information broadcast status indicates the posSI is not being broadcast.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_ONDEMAND_CONFIGURED_T350_NOT_RUNNING",
+      "name": "onDemandSIB-Request configured and T350 not running",
+      "entity_type": "Condition",
+      "description": "Condition where on-demand SIB request is configured and timer T350 is not currently running.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_DEDICATED_SIB_REQUEST",
+      "name": "DedicatedSIBRequest",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request on-demand System Information Blocks.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T350",
+      "name": "T350",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent on-demand SIB requests, set to onDemandSIB-RequestProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_ACQUIRE_SI_MESSAGE",
+      "name": "Acquire SI message",
+      "entity_type": "Property",
+      "description": "Action where UE acquires System Information messages as defined in the specification.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_SIB_ACQUISITION_CONNECTED",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The SIB acquisition procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_SIB_ACQUISITION_CONNECTED",
+      "target": "CONDITION_NO_COMMON_SEARCH_SPACE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition of no common search space for other SI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_SIB_ACQUISITION_CONNECTED",
+      "target": "CONDITION_COMMON_SEARCH_SPACE_PRESENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition of common search space presence for other SI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ONDEMAND_CONFIGURED_T350_NOT_RUNNING",
+      "target": "MESSAGE_DEDICATED_SIB_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When on-demand is configured and T350 not running, UE initiates DedicatedSIBRequest transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_ONDEMAND_CONFIGURED_T350_NOT_RUNNING",
+      "target": "TIMER_T350",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When on-demand is configured and T350 not running, UE starts timer T350.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_SIB_BROADCASTING",
+      "target": "PROPERTY_ACQUIRE_SI_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SI broadcast status is broadcasting, UE acquires the SI message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_SIB_NOT_BROADCASTING",
+      "target": "CONDITION_ONDEMAND_CONFIGURED_T350_NOT_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When SI is not broadcasting, procedure is further guarded by on-demand configuration and T350 status.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_POSSI_BROADCASTING",
+      "target": "PROPERTY_ACQUIRE_SI_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When positioning SI broadcast status is broadcasting, UE acquires the SI message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_POSSI_NOT_BROADCASTING",
+      "target": "CONDITION_ONDEMAND_CONFIGURED_T350_NOT_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When positioning SI is not broadcasting, procedure is further guarded by on-demand configuration and T350 status.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.5"
+      ]
+    }
+  ]
+}

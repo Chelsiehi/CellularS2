@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.4.3",
+  "title": "Handling of network rejection not due to congestion control",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU Session Establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a PDU session with the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject PDU session establishment request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer value for back-off mechanism.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether re-attempt is allowed in equivalent PLMNs or different RAT.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for session establishment rejection.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_BACK_OFF",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer used to prevent UE from sending PDU SESSION ESTABLISHMENT REQUEST for specific combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_IE_BACK_OFF_TIMER_INCLUDED",
+      "name": "Back-off timer value IE included",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE is present in PDU SESSION ESTABLISHMENT REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_VALUE_NOT_ZERO_NOT_DEACTIVATED",
+      "name": "Timer value neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where timer value indicates neither zero nor deactivated state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_VALUE_DEACTIVATED",
+      "name": "Timer value indicates deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where timer value indicates timer is deactivated.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_TIMER_VALUE_ZERO",
+      "name": "Timer value indicates zero",
+      "entity_type": "Condition",
+      "description": "Condition where timer value indicates zero.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_STARTS_BACK_OFF_TIMER",
+      "name": "UE starts back-off timer",
+      "entity_type": "Property",
+      "description": "Behavior where UE starts the back-off timer with provided value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_PREVENTS_SESSION_REQUEST",
+      "name": "UE prevents PDU session establishment request",
+      "entity_type": "Property",
+      "description": "Behavior where UE is prevented from sending PDU SESSION ESTABLISHMENT REQUEST for specific combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message contains Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message contains Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message contains 5GSM cause value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_IE_BACK_OFF_TIMER_INCLUDED",
+      "target": "PROP_UE_STARTS_BACK_OFF_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When Back-off timer value IE is included, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TIMER_VALUE_NOT_ZERO_NOT_DEACTIVATED",
+      "target": "PROP_UE_STARTS_BACK_OFF_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer value is neither zero nor deactivated, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TIMER_VALUE_NOT_ZERO_NOT_DEACTIVATED",
+      "target": "PROP_UE_PREVENTS_SESSION_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer value is neither zero nor deactivated, UE prevents sending PDU SESSION ESTABLISHMENT REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_TIMER_VALUE_DEACTIVATED",
+      "target": "PROP_UE_PREVENTS_SESSION_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer value indicates deactivated, UE prevents sending PDU SESSION ESTABLISHMENT REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_TIMER_VALUE_ZERO",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When timer value indicates zero, UE may send another PDU SESSION ESTABLISHMENT REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROP_UE_STARTS_BACK_OFF_TIMER",
+      "target": "TIMER_BACK_OFF",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE behavior starts the back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.4.3"
+      ]
+    }
+  ]
+}

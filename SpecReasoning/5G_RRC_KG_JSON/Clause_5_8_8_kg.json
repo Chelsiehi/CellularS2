@@ -1,0 +1,234 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.8",
+  "title": "Sidelink communication transmission",
+  "entities": [
+    {
+      "id": "PROC_SL_COMM_TX",
+      "name": "Sidelink Communication Transmission",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to transmit NR sidelink communication when configured by upper layers and has data to transmit",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC connected state where UE has active connection with network",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "IE_SL_CONFIG_DEDICATED_NR",
+      "name": "sl-ConfigDedicatedNR",
+      "entity_type": "Information Element",
+      "description": "Dedicated sidelink configuration provided in RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "IE_SL_CONFIG_COMMON_NR",
+      "name": "sl-ConfigCommonNR",
+      "entity_type": "Information Element",
+      "description": "Common sidelink configuration provided in SIB12",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "IE_SL_TX_POOL_EXCEPTIONAL",
+      "name": "sl-TxPoolExceptional",
+      "entity_type": "Information Element",
+      "description": "Exceptional transmission pool used during connection failures or re-establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "IE_SL_TX_POOL_SELECTED_NORMAL",
+      "name": "sl-TxPoolSelectedNormal",
+      "entity_type": "Information Element",
+      "description": "Normal selected transmission pool for sidelink communication",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "T310",
+      "entity_type": "Timer",
+      "description": "Timer running during radio link failure detection in MCG",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "TIMER_T311",
+      "name": "T311",
+      "entity_type": "Timer",
+      "description": "Timer running during RRC connection re-establishment procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "TIMER_T301",
+      "name": "T301",
+      "entity_type": "Timer",
+      "description": "Timer running during RRC connection re-establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "TIMER_T304",
+      "name": "T304",
+      "entity_type": "Timer",
+      "description": "Timer running during RRC reconfiguration with sync procedure in MCG",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "COND_SL_OPERATION_MET",
+      "name": "NR sidelink communication operation conditions met",
+      "entity_type": "Condition",
+      "description": "Conditions for NR sidelink communication operation as defined in clause 5.8.2",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_ALLOC_MODE1",
+      "name": "Sidelink resource allocation mode 1",
+      "entity_type": "Property",
+      "description": "Network scheduled resource allocation mode for sidelink communication",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_ALLOC_MODE2_SENSING",
+      "name": "Sidelink resource allocation mode 2 based on sensing",
+      "entity_type": "Property",
+      "description": "UE autonomous resource allocation using sensing mechanism",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_ALLOC_MODE2_RANDOM",
+      "name": "Sidelink resource allocation mode 2 based on random selection",
+      "entity_type": "Property",
+      "description": "UE autonomous resource allocation using random selection",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SL_COMM_TX",
+      "target": "COND_SL_OPERATION_MET",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink transmission procedure requires NR sidelink communication operation conditions to be met",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SL_COMM_TX",
+      "target": "IE_SL_CONFIG_DEDICATED_NR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses dedicated sidelink configuration from RRCReconfiguration",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SL_COMM_TX",
+      "target": "IE_SL_CONFIG_COMMON_NR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses common sidelink configuration from SIB12",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T310",
+      "target": "IE_SL_TX_POOL_EXCEPTIONAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When T310 is running, UE uses exceptional transmission pool if available",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T311",
+      "target": "PROP_RESOURCE_ALLOC_MODE2_RANDOM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When T311 is running, UE releases configured grants and may use random selection",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "PROP_RESOURCE_ALLOC_MODE1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in RRC_CONNECTED and uses dedicated frequency, it uses mode 1 allocation",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_SL_TX_POOL_EXCEPTIONAL",
+      "target": "PROP_RESOURCE_ALLOC_MODE2_RANDOM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Exceptional transmission pool enables random selection resource allocation",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_SL_TX_POOL_SELECTED_NORMAL",
+      "target": "PROP_RESOURCE_ALLOC_MODE2_SENSING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Normal selected transmission pool enables sensing-based resource allocation",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T304",
+      "target": "IE_SL_TX_POOL_EXCEPTIONAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When T304 is running, UE uses exceptional transmission pool if configured",
+      "provenance": [
+        "TS 38.331, Clause 5.8.8"
+      ]
+    }
+  ]
+}

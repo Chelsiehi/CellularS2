@@ -1,0 +1,240 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.8.4",
+  "title": "Cell re-selection or cell selection while T331 is running",
+  "entities": [
+    {
+      "id": "T331",
+      "name": "Timer T331",
+      "entity_type": "Timer",
+      "description": "Timer used during idle mode measurements configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION_RESELECTION",
+      "name": "Cell selection or reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects or reselects a cell while T331 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "VALIDITY_AREA_LIST",
+      "name": "validityAreaList",
+      "entity_type": "Information Element",
+      "description": "Configuration parameter in VarMeasIdleConfig defining valid areas for measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "CARRIER_FREQ",
+      "name": "carrierFreq",
+      "entity_type": "Property",
+      "description": "Frequency parameter in validityAreaList entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "VALIDITY_CELL_LIST",
+      "name": "validityCellList",
+      "entity_type": "Information Element",
+      "description": "List of valid cells within a validityAreaList entry.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "SERVING_FREQUENCY",
+      "name": "Serving frequency",
+      "entity_type": "Property",
+      "description": "Current serving cell frequency of the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "PHYSICAL_CELL_IDENTITY",
+      "name": "Physical cell identity",
+      "entity_type": "Identifier",
+      "description": "Identifier of the serving cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "CONDITION_INTRA_RAT",
+      "name": "Intra-RAT cell selection/reselection condition",
+      "entity_type": "Condition",
+      "description": "Condition where cell selection/reselection occurs within the same RAT while T331 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "CONDITION_INTER_RAT",
+      "name": "Inter-RAT cell selection/reselection condition",
+      "entity_type": "Condition",
+      "description": "Condition where cell selection/reselection occurs to a different RAT while T331 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "CONDITION_VALIDITY_CHECK",
+      "name": "Validity area check condition",
+      "entity_type": "Condition",
+      "description": "Condition where serving frequency doesn't match validityAreaList or serving cell PCI doesn't match validityCellList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "ACTIONS_5_7_8_3",
+      "name": "Actions specified in 5.7.8.3",
+      "entity_type": "Procedure",
+      "description": "Procedure actions to be performed when T331 is stopped due to cell selection/reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_SELECTION_RESELECTION",
+      "target": "CONDITION_INTRA_RAT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell selection/reselection procedure is guarded by intra-RAT condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_SELECTION_RESELECTION",
+      "target": "CONDITION_INTER_RAT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell selection/reselection procedure is guarded by inter-RAT condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_INTRA_RAT",
+      "target": "CONDITION_VALIDITY_CHECK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Intra-RAT condition is further guarded by validity area check condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_VALIDITY_CHECK",
+      "target": "VALIDITY_AREA_LIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Validity check condition requires validityAreaList configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_VALIDITY_CHECK",
+      "target": "SERVING_FREQUENCY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Validity check condition requires serving frequency comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_VALIDITY_CHECK",
+      "target": "PHYSICAL_CELL_IDENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Validity check condition requires physical cell identity comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_VALIDITY_CHECK",
+      "target": "T331",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When validity check condition is met, timer T331 is stopped.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_INTER_RAT",
+      "target": "T331",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When inter-RAT condition is met, timer T331 is stopped.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_VALIDITY_CHECK",
+      "target": "ACTIONS_5_7_8_3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When validity check condition is met, actions in 5.7.8.3 are performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_INTER_RAT",
+      "target": "ACTIONS_5_7_8_3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When inter-RAT condition is met, actions in 5.7.8.3 are performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "VALIDITY_AREA_LIST",
+      "target": "CARRIER_FREQ",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "validityAreaList contains carrierFreq entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "VALIDITY_AREA_LIST",
+      "target": "VALIDITY_CELL_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "validityAreaList entries may contain validityCellList.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.4"
+      ]
+    }
+  ]
+}

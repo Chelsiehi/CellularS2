@@ -1,0 +1,136 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.3.3",
+  "title": "Actions related to transmission of RRCSetupRequest message",
+  "entities": [
+    {
+      "id": "RRCSetupRequest",
+      "name": "RRC Setup Request",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate RRC connection establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "UE_IDENTITY",
+      "name": "ue-Identity",
+      "entity_type": "Information Element",
+      "description": "Identity field in RRCSetupRequest message containing either ng-5G-S-TMSI-Part1 or random value",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "ESTABLISHMENT_CAUSE",
+      "name": "establishmentCause",
+      "entity_type": "Information Element",
+      "description": "Cause field in RRCSetupRequest indicating reason for connection establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "COND_5G_S_TMSI_PROVIDED",
+      "name": "5G-S-TMSI provided by upper layers",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers provide a 5G-S-TMSI, typically when UE is registered in current TA",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "COND_RELEASE_REDIRECT_MPS",
+      "name": "Release with redirect with mpsPriorityIndication",
+      "entity_type": "Condition",
+      "description": "Condition where RRC connection establishment results from release with redirect containing mpsPriorityIndication",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "COND_CELL_RESELECTION",
+      "name": "Cell re-selection conditions fulfilled",
+      "entity_type": "Condition",
+      "description": "Conditions where cell re-selection evaluation determines re-selection is needed",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "PROP_CONTINUE_MEASUREMENTS",
+      "name": "Continue cell re-selection measurements",
+      "entity_type": "Property",
+      "description": "UE behavior to continue performing measurements and evaluation for cell re-selection during RRC connection establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "PROP_PERFORM_CELL_RESELECTION",
+      "name": "Perform cell re-selection",
+      "entity_type": "Property",
+      "description": "UE behavior to execute cell re-selection procedure when conditions are met",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCSetupRequest",
+      "target": "UE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCSetupRequest message contains ue-Identity information element",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCSetupRequest",
+      "target": "ESTABLISHMENT_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCSetupRequest message contains establishmentCause information element",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_5G_S_TMSI_PROVIDED",
+      "target": "UE_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of 5G-S-TMSI availability determines how ue-Identity is set",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RELEASE_REDIRECT_MPS",
+      "target": "ESTABLISHMENT_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of release with redirect with mpsPriorityIndication determines establishmentCause value",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CELL_RESELECTION",
+      "target": "PROP_PERFORM_CELL_RESELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fulfillment of cell re-selection conditions establishes the need to perform cell re-selection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.3"
+      ]
+    }
+  ]
+}

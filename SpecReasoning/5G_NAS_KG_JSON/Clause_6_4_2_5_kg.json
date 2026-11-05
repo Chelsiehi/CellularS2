@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to request PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "T3581",
+      "name": "Timer T3581",
+      "entity_type": "Timer",
+      "description": "Timer used for PDU session modification procedure retransmissions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier allocated for PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID_IE",
+      "name": "PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element identifying the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "INVALID_PDU_SESSION_IDENTITY",
+      "name": "Invalid PDU session identity condition",
+      "entity_type": "Condition",
+      "description": "Condition when network rejects with cause #43 invalid PDU session identity.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "RQI_REVOCATION",
+      "name": "RQI revocation condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE has revoked reflective QoS usage but receives DL packet with RQI.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COLLISION",
+      "name": "Procedure collision condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE-requested modification collides with network-requested release.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "SERVICE_AREA_RESTRICTION",
+      "name": "Service area restriction condition",
+      "entity_type": "Condition",
+      "description": "Condition when 5GSM message not forwarded due to service area restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "ROUTING_FAILURE",
+      "name": "Routing failure condition",
+      "entity_type": "Condition",
+      "description": "Condition when 5GSM message not forwarded due to routing failure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "SATELLITE_PLMN_RESTRICTION",
+      "name": "Satellite PLMN restriction condition",
+      "entity_type": "Condition",
+      "description": "Condition when satellite NG-RAN cell indicates PLMN not allowed at current location.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "N1_CONNECTION_RELEASE",
+      "name": "N1 NAS signalling connection release condition",
+      "entity_type": "Condition",
+      "description": "Condition when N1 NAS signalling connection is released during procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session modification procedure involves sending PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "T3581",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3581 for retransmission control.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3581_EXPIRY",
+      "target": "PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "T3581 expiry triggers retransmission of PDU SESSION MODIFICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3581_EXPIRY",
+      "target": "T3581",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On T3581 expiry, UE resets and restarts timer T3581 for retransmissions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INVALID_PDU_SESSION_IDENTITY",
+      "target": "T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Invalid PDU session identity condition stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_COLLISION",
+      "target": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure collision condition causes UE to abort modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RQI_REVOCATION",
+      "target": "RQI_IGNORE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RQI revocation condition establishes that UE ignores RQI in DL packets.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SERVICE_AREA_RESTRICTION",
+      "target": "T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Service area restriction condition stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ROUTING_FAILURE",
+      "target": "T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Routing failure condition stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SATELLITE_PLMN_RESTRICTION",
+      "target": "T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Satellite PLMN restriction condition stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "N1_CONNECTION_RELEASE",
+      "target": "T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "N1 connection release condition stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "N1_CONNECTION_RELEASE",
+      "target": "PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "N1 connection release condition may trigger immediate retransmission of PDU SESSION MODIFICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.5"
+      ]
+    }
+  ]
+}

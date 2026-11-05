@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.2",
+  "title": "NSSAI storage",
+  "entities": [
+    {
+      "id": "CONFIGURED_NSSAI",
+      "name": "Configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information configured for the UE. Stored in non-volatile memory and composed of at most 16 S-NSSAIs. Associated with PLMN/SNPN identity and subscriber data.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information allowed for the UE. Stored in non-volatile memory and composed of at most 8 S-NSSAIs. Associated with PLMN/SNPN identity, access type, and subscriber data.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information rejected for the UE. Includes different types: for current PLMN/SNPN, current registration area, failed/revoked NSSAA, and maximum number of UEs reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "PENDING_NSSAI",
+      "name": "Pending NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information pending authorization. Composed of at most 16 S-NSSAIs. Associated with PLMN/SNPN identity and subscriber data.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "DEFAULT_CONFIGURED_NSSAI",
+      "name": "Default configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Default network slice selection assistance information configured for the UE. Not deleted when network slicing subscription changes.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single network slice selection assistance information. The basic building block of NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "NSAG_INFORMATION",
+      "name": "NSAG information",
+      "entity_type": "Information Element",
+      "description": "Network slice assistance group information. Optional information associated with configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "NSSRG_INFORMATION",
+      "name": "NSSRG information",
+      "entity_type": "Information Element",
+      "description": "Network slice selection routing group information. Optional information associated with configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "T3526",
+      "name": "Timer T3526",
+      "entity_type": "Timer",
+      "description": "Timer associated with rejected S-NSSAI for maximum number of UEs reached. Stopped when rejected NSSAI is deleted or updated.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message that can trigger updates to NSSAI storage, including deletion of allowed NSSAI and rejected NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message that can provide new allowed NSSAI, pending NSSAI, or trigger deletion of stored NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "NON_VOLATILE_STORAGE",
+      "name": "Non-volatile memory storage",
+      "entity_type": "Property",
+      "description": "Requirement to store configured NSSAI, allowed NSSAI, and associated information in non-volatile memory in the ME.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONFIGURED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Configured NSSAI is composed of S-NSSAIs (maximum 16).",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ALLOWED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Allowed NSSAI is composed of S-NSSAIs (maximum 8).",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PENDING_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Pending NSSAI is composed of S-NSSAIs (maximum 16).",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONFIGURED_NSSAI",
+      "target": "NON_VOLATILE_STORAGE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Configured NSSAI shall be stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ALLOWED_NSSAI",
+      "target": "NON_VOLATILE_STORAGE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Allowed NSSAI should be stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONFIGURATION_UPDATE_COMMAND",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND with Registration requested bit can delete stored allowed NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONFIGURATION_UPDATE_COMMAND",
+      "target": "REJECTED_NSSAI",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND with Registration requested bit can delete stored rejected NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "PENDING_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message can provide new pending NSSAI or trigger deletion of stored pending NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REJECTED_NSSAI",
+      "target": "T3526",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When rejected NSSAI is deleted or updated, timer T3526 associated with rejected S-NSSAI is stopped if running.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONFIGURED_NSSAI",
+      "target": "NSAG_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Configured NSSAI may have associated NSAG information that is stored in the ME.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONFIGURED_NSSAI",
+      "target": "NSSRG_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Configured NSSAI may have associated NSSRG information that is stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.11.4",
+  "title": "5GMM cause",
+  "entities": [
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the cause for a 5GMM procedure or response.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container",
+      "entity_type": "Information Element",
+      "description": "Information element containing uplink or downlink payload data.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload container content.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "COND_UPLINK_NOT_FORWARDED",
+      "name": "Uplink payload not forwarded",
+      "entity_type": "Condition",
+      "description": "Condition where an uplink payload contained in the Payload container IE was not forwarded by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "COND_NOT_MULTIPLE_PAYLOADS",
+      "name": "Payload container type not multiple payloads",
+      "entity_type": "Condition",
+      "description": "Condition where the Payload container type IE is not set to 'Multiple payloads'.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_5GMM_CAUSE",
+      "target": "COND_UPLINK_NOT_FORWARDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of 5GMM cause IE is guarded by the condition that uplink payload was not forwarded.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_5GMM_CAUSE",
+      "target": "COND_NOT_MULTIPLE_PAYLOADS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of 5GMM cause IE is guarded by the condition that payload container type is not multiple payloads.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_UPLINK_NOT_FORWARDED",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Condition references the Payload container IE containing uplink payload.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NOT_MULTIPLE_PAYLOADS",
+      "target": "IE_PAYLOAD_CONTAINER_TYPE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Condition references the Payload container type IE value.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.4"
+      ]
+    }
+  ]
+}

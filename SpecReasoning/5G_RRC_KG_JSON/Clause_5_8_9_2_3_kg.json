@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.2.3",
+  "title": "Actions related to transmission of the UECapabilityEnquirySidelink by the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_UECAPABILITYENQUIRY_SIDELINK_TX",
+      "name": "Transmission of UECapabilityEnquirySidelink",
+      "entity_type": "Procedure",
+      "description": "Procedure for the initiating UE to prepare and transmit the UECapabilityEnquirySidelink message to request sidelink capability information from a peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "MSG_UECAPABILITYENQUIRY_SIDELINK",
+      "name": "UECapabilityEnquirySidelink",
+      "entity_type": "Message",
+      "description": "Message sent by initiating UE to request sidelink capability information from a peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "IE_UE_CAPABILITY_INFORMATION_SIDELINK",
+      "name": "ue-CapabilityInformationSidelink",
+      "entity_type": "Information Element",
+      "description": "Information element containing UE radio access capabilities for sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "IE_FREQUENCY_BAND_LIST_FILTER_SIDELINK",
+      "name": "frequencyBandListFilterSidelink",
+      "entity_type": "Information Element",
+      "description": "Information element specifying frequency bands for which the peer UE is requested to provide supported bands and band combinations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_UE_DECISION",
+      "name": "UE decision to include ue-CapabilityInformationSidelink",
+      "entity_type": "Condition",
+      "description": "Condition where the initiating UE decides whether to include its own sidelink capability information in the message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_FREQUENCY_BAND_MANDATORY",
+      "name": "Mandatory inclusion of frequencyBandListFilterSidelink",
+      "entity_type": "Condition",
+      "description": "Condition requiring the initiating UE to always include frequencyBandListFilterSidelink field in the message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "ACTION_SUBMIT_TO_LOWER_LAYERS",
+      "name": "Submit message to lower layers",
+      "entity_type": "Property",
+      "description": "Action where the UE submits the prepared UECapabilityEnquirySidelink message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UECAPABILITYENQUIRY_SIDELINK_TX",
+      "target": "MSG_UECAPABILITYENQUIRY_SIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves preparing and transmitting the UECapabilityEnquirySidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UECAPABILITYENQUIRY_SIDELINK",
+      "target": "IE_UE_CAPABILITY_INFORMATION_SIDELINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may contain the ue-CapabilityInformationSidelink IE if the UE decides to include it.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UECAPABILITYENQUIRY_SIDELINK",
+      "target": "IE_FREQUENCY_BAND_LIST_FILTER_SIDELINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message must contain the frequencyBandListFilterSidelink IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_UE_CAPABILITY_INFORMATION_SIDELINK",
+      "target": "CONDITION_UE_DECISION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of ue-CapabilityInformationSidelink is guarded by UE decision condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_FREQUENCY_BAND_LIST_FILTER_SIDELINK",
+      "target": "CONDITION_FREQUENCY_BAND_MANDATORY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of frequencyBandListFilterSidelink is guarded by mandatory condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_UECAPABILITYENQUIRY_SIDELINK_TX",
+      "target": "ACTION_SUBMIT_TO_LOWER_LAYERS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes submitting the message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.3"
+      ]
+    }
+  ]
+}

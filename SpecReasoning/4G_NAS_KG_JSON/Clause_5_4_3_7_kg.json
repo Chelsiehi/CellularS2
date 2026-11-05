@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing security between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3460",
+      "name": "Timer T3460",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure before SECURITY MODE COMPLETE or REJECT",
+      "entity_type": "Condition",
+      "description": "Condition where lower layer fails before receiving SECURITY MODE COMPLETE or REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "COND_T3460_EXPIRY",
+      "name": "Expiry of timer T3460",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3460 expires, triggering retransmission or procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_WITH_UE_PROCEDURES",
+      "name": "Collision with UE initiated procedures",
+      "entity_type": "Condition",
+      "description": "Condition where security mode control procedure collides with attach, service request, tracking area updating, or detach procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_WITH_OTHER_EMM",
+      "name": "Collision with other EMM procedures",
+      "entity_type": "Condition",
+      "description": "Condition where security mode control procedure collides with other EMM procedures not listed in collision case c.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_NON_DELIVERY",
+      "name": "Non-delivered NAS PDU due to handover",
+      "entity_type": "Condition",
+      "description": "Condition where SECURITY MODE COMMAND message cannot be delivered due to intra MME handover.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to abort the security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "PROP_RETRANSMIT_MSG",
+      "name": "Retransmit message",
+      "entity_type": "Property",
+      "description": "Network behavior to retransmit SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "PROP_PROGRESS_BOTH_PROCEDURES",
+      "name": "Progress both procedures",
+      "entity_type": "Property",
+      "description": "Network behavior to continue both security mode control and other EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure before SECURITY MODE COMPLETE/REJECT causes network to abort security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_T3460_EXPIRY",
+      "target": "PROP_RETRANSMIT_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First four T3460 expiries cause network to retransmit SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3460_EXPIRY",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3460 expiry causes network to abort security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_RETRANSMIT_MSG",
+      "target": "TIMER_T3460",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When retransmitting SECURITY MODE COMMAND, network resets and starts timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_COLLISION_WITH_UE_PROCEDURES",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with UE initiated procedures causes network to abort security mode control and proceed with UE procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_COLLISION_WITH_OTHER_EMM",
+      "target": "PROP_PROGRESS_BOTH_PROCEDURES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with other EMM procedures causes network to progress both procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_HANDOVER_NON_DELIVERY",
+      "target": "PROP_RETRANSMIT_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-delivery due to handover causes network to retransmit SECURITY MODE COMMAND after successful handover or if S1 connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure expects SECURITY MODE COMPLETE message from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure may receive SECURITY MODE REJECT message from UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.7"
+      ]
+    }
+  ]
+}

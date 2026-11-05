@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request bearer resource allocation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "name": "BEARER RESOURCE ALLOCATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to reject bearer resource allocation request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "LINKED_EPS_BEARER_IDENTITY",
+      "name": "linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE included in BEARER RESOURCE ALLOCATION REQUEST message identifying the linked EPS bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_43",
+      "name": "ESM cause #43",
+      "entity_type": "Condition",
+      "description": "Invalid EPS bearer identity cause value used in BEARER RESOURCE ALLOCATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_31",
+      "name": "ESM cause #31",
+      "entity_type": "Condition",
+      "description": "Request rejected, unspecified cause value used in BEARER RESOURCE ALLOCATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "NO_PDN_CONNECTION_CONDITION",
+      "name": "No PDN connection with linked EPS bearer identity activated",
+      "entity_type": "Condition",
+      "description": "Abnormal case where linked EPS bearer identity does not belong to default EPS bearer context of established PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDN_CONDITION",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST for emergency PDN connection",
+      "entity_type": "Condition",
+      "description": "Abnormal case where request is received for PDN connection established for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "MME_REJECT_BEHAVIOR",
+      "name": "MME rejects bearer resource allocation",
+      "entity_type": "Property",
+      "description": "MME behavior to reply with BEARER RESOURCE ALLOCATION REJECT message in abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "LINKED_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REQUEST message contains linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NO_PDN_CONNECTION_CONDITION",
+      "target": "MME_REJECT_BEHAVIOR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no PDN connection with linked EPS bearer identity triggers MME reject behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMERGENCY_PDN_CONDITION",
+      "target": "MME_REJECT_BEHAVIOR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of request for emergency PDN connection triggers MME reject behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MME_REJECT_BEHAVIOR",
+      "target": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME reject behavior results in sending BEARER RESOURCE ALLOCATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "ESM_CAUSE_43",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message uses ESM cause #43 for no PDN connection condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "ESM_CAUSE_31",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message uses ESM cause #31 for emergency PDN connection condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.6"
+      ]
+    }
+  ]
+}

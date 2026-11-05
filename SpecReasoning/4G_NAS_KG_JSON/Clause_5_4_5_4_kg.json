@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.5.4",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "EMM_INFORMATION_MSG",
+      "name": "EMM INFORMATION message",
+      "entity_type": "Message",
+      "description": "A NAS message that could not be delivered due to handover and may be retransmitted by the MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "INTRA_MME_HANDOVER",
+      "name": "Intra MME handover",
+      "entity_type": "Procedure",
+      "description": "A handover procedure within the same MME that may cause non-delivery of NAS PDUs.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list used to determine if the target TA is included.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "S1_CONNECTION_EXISTS",
+      "name": "S1 signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the S1 signalling connection is still active.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "HANDOVER_FAILURE",
+      "name": "Handover procedure failure",
+      "entity_type": "Condition",
+      "description": "Condition reported by lower layers indicating handover procedure failed.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "MME_RETRANSMIT",
+      "name": "MME retransmits EMM INFORMATION message",
+      "entity_type": "Property",
+      "description": "Behavior where the MME retransmits the EMM INFORMATION message under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTRA_MME_HANDOVER",
+      "target": "EMM_INFORMATION_MSG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Intra MME handover may cause non-delivery of the EMM INFORMATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TAI_LIST",
+      "target": "MME_RETRANSMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If target TA is in TAI list and handover completes successfully, MME retransmits the message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "HANDOVER_FAILURE",
+      "target": "MME_RETRANSMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If handover fails and S1 connection exists, MME retransmits the message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "S1_CONNECTION_EXISTS",
+      "target": "MME_RETRANSMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S1 connection existence is required for MME retransmission after handover failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MME_RETRANSMIT",
+      "target": "EMM_INFORMATION_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME retransmission behavior establishes the sending of EMM INFORMATION message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.5.4"
+      ]
+    }
+  ]
+}

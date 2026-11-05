@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.3.5",
+  "title": "EMM-DEREGISTERED.PLMN-SEARCH",
+  "entities": [
+    {
+      "id": "STATE_EMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "EMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Substate in EMM-DEREGISTERED state where the UE is searching for PLMNs.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when a cell has been selected and normal service is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when a cell has been selected but only limited service is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_NO_CELL_AVAILABLE",
+      "name": "NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate entered when it has been concluded that no cell is available at the moment.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_CELL_SELECTED",
+      "name": "Cell selected",
+      "entity_type": "Condition",
+      "description": "Condition where a cell has been selected by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_NO_CELL_AVAILABLE",
+      "name": "No cell available",
+      "entity_type": "Condition",
+      "description": "Condition where it has been concluded that no cell is available at the moment.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_CELL_SELECTED",
+      "target": "STATE_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When a cell is selected, the UE transitions to NORMAL-SERVICE substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_CELL_SELECTED",
+      "target": "STATE_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When a cell is selected, the UE transitions to LIMITED-SERVICE substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_CELL_AVAILABLE",
+      "target": "STATE_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When no cell is available, the UE transitions to NO-CELL-AVAILABLE substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_DEREGISTERED_PLMN_SEARCH",
+      "target": "COND_CELL_SELECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH substate is left when cell selection condition is met.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_DEREGISTERED_PLMN_SEARCH",
+      "target": "COND_NO_CELL_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH substate is left when no cell available condition is met.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.5"
+      ]
+    }
+  ]
+}

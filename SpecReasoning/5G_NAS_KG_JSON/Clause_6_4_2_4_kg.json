@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.4",
+  "title": "UE-requested PDU session modification procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDU_SESSION_MODIFICATION_UE_REQUESTED",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request modification of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject a PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejection of the PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_NOT_ACCEPTED",
+      "name": "Procedure not accepted by the network",
+      "entity_type": "Condition",
+      "description": "Condition where the network rejects the UE's request for PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_MODIFICATION_UE_REQUESTED",
+      "target": "MESSAGE_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending a PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_NOT_ACCEPTED",
+      "target": "MESSAGE_PDU_SESSION_MODIFICATION_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When the network does not accept the procedure, it sends a PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MESSAGE_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The PDU SESSION MODIFICATION REJECT message contains a 5GSM cause IE indicating the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4"
+      ]
+    }
+  ]
+}

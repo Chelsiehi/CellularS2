@@ -1,0 +1,174 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.8.4",
+  "title": "Core Network selection for UEs not using CIoT 5GS optimizations",
+  "entities": [
+    {
+      "id": "UE_CAPABLE_N1_S1",
+      "name": "UE capable of both N1 mode and S1 mode",
+      "entity_type": "Condition",
+      "description": "UE that supports both 5G NAS (N1 mode) and 4G NAS (S1 mode) operations.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5G Mobility Management idle state where the UE is registered but has no active signaling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "N1_MODE_DISABLE",
+      "name": "Disable N1 mode capability",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE disables N1 mode capability when 5GS lacks required functionalities but EPS supports them.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "CN_SELECTION_PLMN",
+      "name": "Core network selection based on PLMN",
+      "entity_type": "Procedure",
+      "description": "UE selects core network type (EPC or 5GCN) using PLMN selection procedures when lower layers indicate dual connectivity without target CN type.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "CN_SELECTION_EMERGENCY",
+      "name": "Core network selection for emergency calls",
+      "entity_type": "Procedure",
+      "description": "UE selects core network type for emergency calls based on IMS emergency services support indication when in limited-service state.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "5GMM_DEREG_LIMITED",
+      "name": "5GMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "State where UE is deregistered and can only access limited services.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "EMM_DEREG_LIMITED",
+      "name": "EMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE is deregistered and limited to emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "CN_SELECTION_NGRAN_EPC",
+      "name": "Core network selection for EPC",
+      "entity_type": "Procedure",
+      "description": "UE selects EPC when lower layers indicate target core network type EPC from NG-RAN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "CN_SELECTION_NGRAN_5GCN",
+      "name": "Core network selection for 5GCN",
+      "entity_type": "Procedure",
+      "description": "UE selects 5GCN when lower layers indicate target core network type 5GCN from NG-RAN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "EMM_PROCEDURE",
+      "name": "EMM procedure",
+      "entity_type": "Procedure",
+      "description": "EPS Mobility Management procedure initiated after EPC selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "5GMM_PROCEDURE",
+      "name": "5GMM procedure",
+      "entity_type": "Procedure",
+      "description": "5G Mobility Management procedure initiated after 5GCN selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "N1_MODE_DISABLE",
+      "target": "5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "N1 mode disable procedure requires UE to be in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CN_SELECTION_PLMN",
+      "target": "UE_CAPABLE_N1_S1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PLMN-based CN selection requires UE to be capable of both N1 and S1 modes.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CN_SELECTION_EMERGENCY",
+      "target": "5GMM_DEREG_LIMITED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency CN selection requires UE to be in 5GMM-DEREGISTERED.LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CN_SELECTION_EMERGENCY",
+      "target": "EMM_DEREG_LIMITED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency CN selection requires UE to be in EMM-DEREGISTERED.LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CN_SELECTION_NGRAN_EPC",
+      "target": "EMM_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "EPC selection procedure includes initiating appropriate EMM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CN_SELECTION_NGRAN_5GCN",
+      "target": "5GMM_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GCN selection procedure includes initiating appropriate 5GMM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.3",
+  "title": "EMM common procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_EMM_COMMON",
+      "name": "EMM common procedures",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedures including identification, authentication, and security mode control that may be triggered during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure, containing identity information.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_IMSI",
+      "name": "IMSI",
+      "entity_type": "Information Element",
+      "description": "International Mobile Subscriber Identity used for subscriber identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Information Element",
+      "description": "Globally Unique Temporary Identity used for UE identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_KSI",
+      "name": "KSI",
+      "entity_type": "Information Element",
+      "description": "Key Set Identifier used for security context identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_OLD_GUTI_TYPE",
+      "name": "Old GUTI type IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to determine if a GUTI is native or mapped.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_MOBILE_IDENTITY",
+      "name": "EPS mobile identity IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing UE identity with type indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACH",
+      "name": "Emergency bearer services attach condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attaching for emergency services or RLOS access.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "PROP_SKIP_AUTH",
+      "name": "Skip authentication procedure",
+      "entity_type": "Property",
+      "description": "MME behavior to bypass authentication when no EPS security context is available during emergency attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_IMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains IMSI information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains GUTI information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_KSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains KSI information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_OLD_GUTI_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains Old GUTI type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_EPS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains EPS mobile identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_OLD_GUTI_TYPE",
+      "target": "IE_EPS_MOBILE_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Old GUTI type IE determines whether EPS mobile identity IE contains native or mapped GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMERGENCY_ATTACH",
+      "target": "PROP_SKIP_AUTH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency attach condition establishes the property of skipping authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_EMM_COMMON",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM common procedure initiation depends on information received in ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.3"
+      ]
+    }
+  ]
+}

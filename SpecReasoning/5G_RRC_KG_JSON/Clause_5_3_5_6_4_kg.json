@@ -1,0 +1,260 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.6.4",
+  "title": "DRB release",
+  "entities": [
+    {
+      "id": "DRB_RELEASE_PROCEDURE",
+      "name": "DRB Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing Data Radio Bearers (DRBs) in UE configuration. Involves releasing PDCP entities, SDAP entities, and indicating releases to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "DRB_ESTABLISHMENT_PROCEDURE",
+      "name": "DRB Establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing Data Radio Bearers (DRBs) in UE configuration. Involves establishing PDCP entities, configuring security, and setting up SDAP entities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "DRB_TO_RELEASE_LIST",
+      "name": "drb-ToReleaseList",
+      "entity_type": "Information Element",
+      "description": "List of DRB identities to be released from current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "DRB_TO_ADD_MOD_LIST",
+      "name": "drb-ToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of DRB identities to be added or modified in current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "PDCP_ENTITY",
+      "name": "PDCP Entity",
+      "entity_type": "Property",
+      "description": "Packet Data Convergence Protocol entity responsible for ciphering, integrity protection, and header compression for DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "SDAP_ENTITY",
+      "name": "SDAP Entity",
+      "entity_type": "Property",
+      "description": "Service Data Adaptation Protocol entity that maps QoS flows to DRBs and handles QoS flow management.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "eps-BearerIdentity",
+      "entity_type": "Identifier",
+      "description": "EPS bearer identity associated with a DRB for interworking with E-UTRAN.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "CIPHERING_DISABLED",
+      "name": "cipheringDisabled",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether ciphering is disabled for a PDCP entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTION",
+      "name": "integrityProtection",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether integrity protection is configured for a PDCP entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REESTABLISH_PDCP",
+      "name": "reestablishPDCP",
+      "entity_type": "Condition",
+      "description": "Flag indicating whether PDCP entity should be re-established during reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "RECOVER_PDCP",
+      "name": "recoverPDCP",
+      "entity_type": "Condition",
+      "description": "Flag indicating whether PDCP entity should perform data recovery during reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "DAPS_BEARER",
+      "name": "DAPS bearer",
+      "entity_type": "Property",
+      "description": "Dual Active Protocol Stack bearer that maintains connections to both source and target cells during handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DRB_RELEASE_PROCEDURE",
+      "target": "DRB_TO_RELEASE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DRB release procedure operates on DRB identities listed in drb-ToReleaseList",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DRB_RELEASE_PROCEDURE",
+      "target": "PDCP_ENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB release procedure includes releasing the PDCP entity",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DRB_RELEASE_PROCEDURE",
+      "target": "SDAP_ENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB release procedure includes indicating release to SDAP entity when configured",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DRB_ESTABLISHMENT_PROCEDURE",
+      "target": "DRB_TO_ADD_MOD_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DRB establishment procedure operates on DRB identities listed in drb-ToAddModList",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DRB_ESTABLISHMENT_PROCEDURE",
+      "target": "PDCP_ENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB establishment procedure includes establishing and configuring PDCP entity",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DRB_ESTABLISHMENT_PROCEDURE",
+      "target": "SDAP_ENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB establishment procedure includes establishing and configuring SDAP entity when sdap-Config is included",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PDCP_ENTITY",
+      "target": "CIPHERING_DISABLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCP entity ciphering configuration depends on cipheringDisabled condition",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PDCP_ENTITY",
+      "target": "INTEGRITY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCP entity integrity protection configuration depends on integrityProtection condition",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REESTABLISH_PDCP",
+      "target": "PDCP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When reestablishPDCP is set, the PDCP entity is re-established with new security configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RECOVER_PDCP",
+      "target": "PDCP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When recoverPDCP is set, the PDCP entity performs data recovery",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "DAPS_BEARER",
+      "target": "PDCP_ENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "DAPS bearer configuration requires specific PDCP entity configuration for target cell group",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "DRB_RELEASE_PROCEDURE",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB release procedure includes indicating release of eps-BearerIdentity to upper layers when applicable",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "DRB_ESTABLISHMENT_PROCEDURE",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DRB establishment procedure includes associating DRB with eps-BearerIdentity and indicating establishment to upper layers",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3485",
+      "name": "Timer T3485",
+      "entity_type": "Timer",
+      "description": "Timer used during default EPS bearer context activation procedure. Controls retransmission of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to activate default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE",
+      "name": "BEARER CONTEXT INACTIVE",
+      "entity_type": "State",
+      "description": "State entered when bearer context becomes inactive.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_T3485_EXPIRY",
+      "name": "Timer T3485 expiry",
+      "entity_type": "Condition",
+      "description": "Condition triggered when timer T3485 expires.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_HENB_REJECTION",
+      "name": "HeNB rejection of default bearer establishment",
+      "entity_type": "Condition",
+      "description": "Condition where Home eNodeB rejects default bearer establishment for LIPA PDN connection or SIPTO at local network PDN connection due to triggered handover.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_RESOURCE_RELEASE",
+      "name": "Resource release",
+      "entity_type": "Property",
+      "description": "Property where MME releases allocated resources for activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_PROCEDURE_ABORT",
+      "name": "Procedure abort",
+      "entity_type": "Property",
+      "description": "Property where MME aborts the activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_T3485_EXPIRY",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3485 expiry triggers retransmission of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_T3485_EXPIRY",
+      "target": "TIMER_T3485",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On first expiry of T3485, the timer is reset and restarted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_T3485_EXPIRY",
+      "target": "PROPERTY_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3485 establishes resource release.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_T3485_EXPIRY",
+      "target": "PROPERTY_PROCEDURE_ABORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3485 establishes procedure abort.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_HENB_REJECTION",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "HeNB rejection establishes BEARER CONTEXT INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_HENB_REJECTION",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "HeNB rejection stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_HENB_REJECTION",
+      "target": "PROPERTY_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "HeNB rejection establishes resource release.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.6"
+      ]
+    }
+  ]
+}

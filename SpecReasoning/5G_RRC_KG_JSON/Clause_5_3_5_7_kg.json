@@ -1,0 +1,287 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.7",
+  "title": "AS Security key update",
+  "entities": [
+    {
+      "id": "PROC_AS_SECURITY_KEY_UPDATE",
+      "name": "AS Security key update",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating AS security keys in the UE based on different triggers and network configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "MSG_MASTER_KEY_UPDATE",
+      "name": "masterKeyUpdate",
+      "entity_type": "Message",
+      "description": "Message that triggers AS security key update procedure when received by the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "IE_SK_COUNTER",
+      "name": "sk-Counter",
+      "entity_type": "Information Element",
+      "description": "Counter value used for updating security keys in E-UTRA/EPC or E-UTRA/5GC connections.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "IE_NAS_CONTAINER",
+      "name": "nas-Container",
+      "entity_type": "Information Element",
+      "description": "Container that may be included in masterKeyUpdate message and forwarded to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "IE_KEY_SET_CHANGE_INDICATOR",
+      "name": "keySetChangeIndicator",
+      "entity_type": "Information Element",
+      "description": "Indicator that when set to true triggers derivation or update of KgNB key.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "IE_NEXT_HOP_CHAINING_COUNT",
+      "name": "nextHopChainingCount",
+      "entity_type": "Information Element",
+      "description": "Value used for deriving or updating KgNB key and stored by the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "IE_SECURITY_ALGORITHM_CONFIG",
+      "name": "securityAlgorithmConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration that includes ciphering and integrity protection algorithms for key derivation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_KG_NB",
+      "name": "KgNB key",
+      "entity_type": "Property",
+      "description": "Base security key used for deriving other AS security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_S_K",
+      "name": "S-K key",
+      "entity_type": "Property",
+      "description": "Secondary security key updated based on KgNB key and sk-Counter.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_K_RRC_ENC",
+      "name": "KRRCenc key",
+      "entity_type": "Property",
+      "description": "RRC ciphering key derived from base security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_K_UP_ENC",
+      "name": "KUPenc key",
+      "entity_type": "Property",
+      "description": "User plane ciphering key derived from base security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_K_RRC_INT",
+      "name": "KRRCint key",
+      "entity_type": "Property",
+      "description": "RRC integrity protection key derived from base security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "KEY_K_UP_INT",
+      "name": "KUPint key",
+      "entity_type": "Property",
+      "description": "User plane integrity protection key derived from base security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "COND_EUTRA_EPC_CONNECTED",
+      "name": "UE connected to E-UTRA/EPC or E-UTRA/5GC",
+      "entity_type": "Condition",
+      "description": "Condition where UE is connected to E-UTRA/EPC or E-UTRA/5GC networks.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "COND_MASTER_KEY_UPDATE_RECEIVED",
+      "name": "masterKeyUpdate received",
+      "entity_type": "Condition",
+      "description": "Condition where the procedure was initiated due to reception of masterKeyUpdate message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AS_SECURITY_KEY_UPDATE",
+      "target": "COND_EUTRA_EPC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be connected to E-UTRA/EPC or E-UTRA/5GC for certain key updates.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_AS_SECURITY_KEY_UPDATE",
+      "target": "COND_MASTER_KEY_UPDATE_RECEIVED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be triggered by reception of masterKeyUpdate message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_MASTER_KEY_UPDATE",
+      "target": "IE_NAS_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "masterKeyUpdate message may contain nas-Container IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MASTER_KEY_UPDATE",
+      "target": "IE_KEY_SET_CHANGE_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "masterKeyUpdate message contains keySetChangeIndicator IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_MASTER_KEY_UPDATE",
+      "target": "IE_NEXT_HOP_CHAINING_COUNT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "masterKeyUpdate message contains nextHopChainingCount IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_KEY_SET_CHANGE_INDICATOR",
+      "target": "KEY_KG_NB",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When keySetChangeIndicator is set to true, KgNB key is derived or updated.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "KEY_KG_NB",
+      "target": "KEY_K_RRC_ENC",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "KgNB key is used to derive KRRCenc key for ciphering protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "KEY_KG_NB",
+      "target": "KEY_K_UP_ENC",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "KgNB key is used to derive KUPenc key for ciphering protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "KEY_KG_NB",
+      "target": "KEY_K_RRC_INT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "KgNB key is used to derive KRRCint key for integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "KEY_KG_NB",
+      "target": "KEY_K_UP_INT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "KgNB key is used to derive KUPint key for integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_SK_COUNTER",
+      "target": "KEY_S_K",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "sk-Counter value is used to update the S-K key.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_SECURITY_ALGORITHM_CONFIG",
+      "target": "KEY_K_RRC_ENC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "securityAlgorithmConfig indicates ciphering algorithm for KRRCenc key derivation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_SECURITY_ALGORITHM_CONFIG",
+      "target": "KEY_K_RRC_INT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "securityAlgorithmConfig indicates integrity protection algorithm for KRRCint key derivation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.7"
+      ]
+    }
+  ]
+}

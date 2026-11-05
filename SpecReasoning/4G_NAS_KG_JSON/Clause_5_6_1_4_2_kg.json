@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.4.2",
+  "title": "UE is using EPS services with control plane CIoT EPS optimization",
+  "entities": [
+    {
+      "id": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "Control Plane Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE using EPS services with control plane CIoT EPS optimization, handling different service types and conditions for sending SERVICE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate control plane service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_ACCEPT",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by MME to accept service request and complete the procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "name": "Control plane service type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of service request (mobile terminating/originating request).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_ACTIVE_FLAG",
+      "name": "Active flag",
+      "entity_type": "Information Element",
+      "description": "Flag in Control plane service type IE indicating UE's request for user plane activation.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "name": "EPS bearer context status",
+      "entity_type": "Information Element",
+      "description": "IE indicating status of EPS bearer contexts for synchronization between UE and MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_T3448_VALUE",
+      "name": "T3448 value",
+      "entity_type": "Information Element",
+      "description": "IE containing timer value for control plane data back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "T3448",
+      "entity_type": "Timer",
+      "description": "Timer for control plane data back-off, started when T3448 value IE is received in SERVICE ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "T3417",
+      "entity_type": "Timer",
+      "description": "Service request attempt timer, stopped upon successful completion of procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by UE upon successful completion of service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_EPS_BEARER_SYNC_NEEDED",
+      "name": "EPS bearer context status synchronization needed",
+      "entity_type": "Condition",
+      "description": "Condition where MME needs to synchronize EPS bearer context status with UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local deactivation of EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "Behavior where UE or MME deactivates EPS bearer contexts locally without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is initiated by UE sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains Control plane service type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_ACTIVE_FLAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains active flag in Control plane service type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message may contain EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EPS_BEARER_SYNC_NEEDED",
+      "target": "MSG_SERVICE_ACCEPT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EPS bearer context status synchronization is needed, MME shall send SERVICE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT message may contain EPS bearer context status IE for synchronization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT message may contain T3448 value IE when congestion control is activated.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receipt of SERVICE ACCEPT with T3448 value IE causes UE to start timer T3448.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Successful completion of procedure stops timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of procedure causes UE to enter EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Presence of EPS bearer context status IE triggers local deactivation of inconsistent bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.2"
+      ]
+    }
+  ]
+}

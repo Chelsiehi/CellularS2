@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.3.2",
+  "title": "Replay protection",
+  "entities": [
+    {
+      "id": "REPLAY_PROTECTION",
+      "name": "Replay protection",
+      "entity_type": "Property",
+      "description": "Mechanism to ensure that the same NAS message is not accepted twice by the receiver. For a given EPS security context, a given NAS COUNT value shall be accepted at most one time and only if message integrity verifies correctly.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "NAS_MESSAGE",
+      "name": "NAS message",
+      "entity_type": "Message",
+      "description": "Non-Access Stratum message exchanged between UE and MME.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT",
+      "name": "EPS security context",
+      "entity_type": "Property",
+      "description": "Security context used in EPS for integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Identifier",
+      "description": "Counter value used for replay protection and integrity protection of NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "EIA0",
+      "name": "EIA0",
+      "entity_type": "Condition",
+      "description": "Null integrity protection algorithm where no integrity protection is applied.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REPLAY_PROTECTION",
+      "target": "NAS_MESSAGE",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Replay protection applies to received NAS messages in both MME and UE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REPLAY_PROTECTION",
+      "target": "EPS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Replay protection is applied per EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REPLAY_PROTECTION",
+      "target": "NAS_COUNT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Replay protection ensures each NAS COUNT value is accepted at most once per security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EIA0",
+      "target": "REPLAY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Replay protection is not applicable when EIA0 is used.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.2"
+      ]
+    }
+  ]
+}

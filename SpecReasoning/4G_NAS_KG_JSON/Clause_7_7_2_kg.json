@@ -1,0 +1,151 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.7.2",
+  "title": "Conditional IE errors",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives and processes EMM or ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network infrastructure that receives and processes EMM or ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "EMM_STATUS",
+      "name": "EMM STATUS",
+      "entity_type": "Message",
+      "description": "A status message used in EMM procedures to report errors.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "ESM_STATUS",
+      "name": "ESM STATUS",
+      "entity_type": "Message",
+      "description": "A status message used in ESM procedures to report errors.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "CAUSE_100",
+      "name": "Conditional IE error",
+      "entity_type": "Condition",
+      "description": "Cause value #100 indicating a conditional IE error (missing, unexpected, or syntactically incorrect conditional IE).",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_IE_ERROR",
+      "name": "Conditional IE error condition",
+      "entity_type": "Condition",
+      "description": "Condition where a message contains missing, unexpected, or syntactically incorrect conditional IEs.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "CONDITIONAL_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE behavior is triggered when a conditional IE error is diagnosed.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "EMM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends EMM STATUS message when conditional IE error occurs in EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "ESM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends ESM STATUS message when conditional IE error occurs in ESM context.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMM_STATUS",
+      "target": "CAUSE_100",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM STATUS message includes cause #100 for conditional IE error.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ESM_STATUS",
+      "target": "CAUSE_100",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM STATUS message includes cause #100 for conditional IE error.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NETWORK",
+      "target": "CONDITIONAL_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network behavior is triggered when a conditional IE error is diagnosed.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NETWORK",
+      "target": "EMM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network may send EMM STATUS message when conditional IE error occurs in EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NETWORK",
+      "target": "ESM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network may send ESM STATUS message when conditional IE error occurs in ESM context.",
+      "provenance": [
+        "TS 24.301, Clause 7.7.2"
+      ]
+    }
+  ]
+}

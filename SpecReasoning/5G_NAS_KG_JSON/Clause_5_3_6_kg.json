@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.6",
+  "title": "Mobile initiated connection only mode",
+  "entities": [
+    {
+      "id": "MICO_MODE",
+      "name": "Mobile Initiated Connection Only Mode",
+      "entity_type": "Procedure",
+      "description": "A mode where UE can deactivate AS layer and only initiate connections, requested during registration procedure and activated when specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE can request MICO mode and network can accept it by providing MICO indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "MICO_INDICATION_IE",
+      "name": "MICO Indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element used by network to indicate acceptance of MICO mode, may contain 'all PLMN registration area allocated' and 'strictly periodic registration timer supported' indications.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "T3324",
+      "name": "Timer T3324",
+      "entity_type": "Timer",
+      "description": "Active timer that controls UE reachability period after entering 5GMM-IDLE mode when MICO mode with active time is used.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "T3512",
+      "name": "Timer T3512",
+      "entity_type": "Timer",
+      "description": "Periodic registration timer that continues running during MICO mode and is used for strictly periodic monitoring.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "5GMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "State entered by UE when activating MICO mode, indicating AS layer is deactivated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "State where UE enters before starting T3324 timer and potentially activating MICO mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "State that stops T3324 timer and prevents MICO mode activation.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU Session",
+      "entity_type": "Condition",
+      "description": "Condition that prevents MICO mode request and disables active MICO mode when established.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "STRICTLY_PERIODIC_MONITORING_TIMER",
+      "name": "Strictly Periodic Monitoring Timer",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when 'strictly periodic registration timer supported' is indicated, using T3512 value.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "MICO_MODE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MICO mode is requested and negotiated during registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "MICO_INDICATION_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network includes MICO indication IE when accepting MICO mode during registration",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MICO_MODE",
+      "target": "5GMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE enters 5GMM-REGISTERED.NO-CELL-AVAILABLE state when activating MICO mode",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5GMM_IDLE",
+      "target": "T3324",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts T3324 timer after entering 5GMM-IDLE mode when active time value is received",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "5GMM_CONNECTED",
+      "target": "T3324",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3324 timer when entering 5GMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMERGENCY_PDU_SESSION",
+      "target": "MICO_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDU session establishment prevents MICO mode request and disables active MICO mode",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MICO_INDICATION_IE",
+      "target": "STRICTLY_PERIODIC_MONITORING_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts strictly periodic monitoring timer when 'strictly periodic registration timer supported' is indicated in MICO indication IE",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMERGENCY_PDU_SESSION",
+      "target": "T3512",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3512 timer when emergency PDU session is established and MICO mode is disabled",
+      "provenance": [
+        "TS 24.501, Clause 5.3.6"
+      ]
+    }
+  ]
+}

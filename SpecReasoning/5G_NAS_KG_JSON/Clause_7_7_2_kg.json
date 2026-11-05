@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.7.2",
+  "title": "Conditional IE errors",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives and processes 5GMM or 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "Network entity that receives and processes 5GMM or 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_IE_ERROR",
+      "name": "Conditional IE error",
+      "entity_type": "Condition",
+      "description": "Error condition diagnosed when a conditional IE is missing, unexpected, or syntactically incorrect in a received message.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "STATUS_MESSAGE",
+      "name": "5GMM STATUS or 5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Status message sent in response to a conditional IE error, containing cause #100.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "CAUSE_100",
+      "name": "Cause #100",
+      "entity_type": "Property",
+      "description": "Cause value indicating 'conditional IE error' in status messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "CONDITIONAL_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses conditional IE error upon receiving a message with missing, unexpected, or syntactically incorrect conditional IE.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "STATUS_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends a status message with cause #100 when a conditional IE error is diagnosed.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATUS_MESSAGE",
+      "target": "CAUSE_100",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Status message includes cause #100 to indicate conditional IE error.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NETWORK",
+      "target": "CONDITIONAL_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network diagnoses conditional IE error upon receiving a message with missing, unexpected, or syntactically incorrect conditional IE.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NETWORK",
+      "target": "STATUS_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network may send a status message with cause #100 when a conditional IE error is diagnosed.",
+      "provenance": [
+        "TS 24.501, Clause 7.7.2"
+      ]
+    }
+  ]
+}

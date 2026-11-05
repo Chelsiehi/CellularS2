@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.1.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_ESM_INFO_REQUEST",
+      "name": "ESM information request procedure",
+      "entity_type": "Procedure",
+      "description": "Used by the network to retrieve ESM information (protocol configuration options, APN, or both) from the UE during the attach procedure when the UE indicated it has ESM information that needs to be sent security protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_INFO",
+      "name": "ESM information",
+      "entity_type": "Information Element",
+      "description": "Includes protocol configuration options, APN, or both that the UE needs to send security protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message where the UE indicates it has ESM information that needs to be sent security protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_CIPHERING_ENABLED",
+      "name": "Ciphering enabled in network",
+      "entity_type": "Condition",
+      "description": "Condition where ciphering is enabled in the network, providing privacy for ESM information.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_PRIVACY_ESM_INFO",
+      "name": "Privacy for ESM information",
+      "entity_type": "Property",
+      "description": "Property achieved when ciphering is enabled, ensuring ESM information is protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_ESM_INFO_REQUEST",
+      "target": "IE_ESM_INFO",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure retrieves ESM information from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MESSAGE_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_ESM_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The PDN CONNECTIVITY REQUEST message indicates the UE has ESM information to send security protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_ESM_INFO_REQUEST",
+      "target": "CONDITION_CIPHERING_ENABLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure provides privacy for ESM information if ciphering is enabled.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_CIPHERING_ENABLED",
+      "target": "PROPERTY_PRIVACY_ESM_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ciphering being enabled establishes privacy for ESM information.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_ESM_INFO",
+      "target": "PROPERTY_PRIVACY_ESM_INFO",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ESM information requires security protection to ensure privacy.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.1"
+      ]
+    }
+  ]
+}

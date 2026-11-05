@@ -1,0 +1,272 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.2",
+  "title": "UE-requested PDU session establishment procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a new PDU session, transfer existing sessions, or establish multi-access PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Identifies the PDU session being established, handed over, or transferred.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity allocated by UE for the session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_TYPE",
+      "name": "PDU session type",
+      "entity_type": "Information Element",
+      "description": "Specifies the PDU session type (IPv4, IPv6, IPv4v6, Ethernet, Unstructured).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_SSC_MODE",
+      "name": "SSC mode",
+      "entity_type": "Information Element",
+      "description": "Session and Service Continuity mode (SSC mode 1, 2, or 3) for the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAPABILITY",
+      "name": "5GSM capability",
+      "entity_type": "Information Element",
+      "description": "Indicates UE capabilities for 5G session management including reflective QoS, multi-homing, and ATSSS support.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Specifies the type of request (initial request, existing PDU session, initial emergency request, existing emergency PDU session, MA PDU request).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information for the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "IE_DNN",
+      "name": "DNN",
+      "entity_type": "Information Element",
+      "description": "Data Network Name identifying the target data network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3580",
+      "name": "T3580",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state where it is registered to the 5G network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REGISTERED",
+      "name": "UE registered for emergency services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registered for emergency services over current access.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "PROP_UE_ALLOCATES_PDU_SESSION_ID",
+      "name": "UE allocates PDU session ID",
+      "entity_type": "Property",
+      "description": "UE behavior to allocate a PDU session ID not currently used by another PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PDU session ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PDU session type IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_SSC_MODE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains SSC mode IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_5GSM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains 5GSM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "TIMER_T3580",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3580 when sending request message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2",
+        "Figure 6.4.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_REGISTERED",
+      "target": "PROP_UE_ALLOCATES_PDU_SESSION_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition guards UE behavior for PDU session ID allocation and emergency session restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain S-NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_DNN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain DNN IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.2"
+      ]
+    }
+  ]
+}

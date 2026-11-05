@@ -1,0 +1,116 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.3.2",
+  "title": "Identification initiation by the network",
+  "entities": [
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the AMF to request identification parameters from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE to initiate identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF in response to IDENTITY REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "T3570",
+      "name": "T3570",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when sending IDENTITY REQUEST and stopped upon receiving IDENTITY RESPONSE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IDENTITY_TYPE_IE",
+      "name": "Identity type information element",
+      "entity_type": "Information Element",
+      "description": "IE in IDENTITY REQUEST message specifying the requested identification parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Identification procedure includes sending IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Identification procedure includes receiving IDENTITY RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDENTITY_REQUEST",
+      "target": "IDENTITY_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY REQUEST message contains Identity type information element.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IDENTITY_REQUEST",
+      "target": "T3570",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending IDENTITY REQUEST starts timer T3570.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IDENTITY_RESPONSE",
+      "target": "T3570",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving IDENTITY RESPONSE stops timer T3570.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    }
+  ]
+}

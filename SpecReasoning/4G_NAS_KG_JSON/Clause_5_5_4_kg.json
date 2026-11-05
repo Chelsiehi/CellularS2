@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.4",
+  "title": "eCall inactivity procedure",
+  "entities": [
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure applicable only to a UE configured for eCall only mode. It is triggered by timer expirations and results in detach procedures and state transition to EMM-DEREGISTERED.eCALL-INACTIVE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer related to eCall inactivity procedure. Expiration triggers the procedure when T3445 is not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer related to eCall inactivity procedure. Expiration triggers the procedure when T3444 is not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where the UE must be (except PLMN-SEARCH or NO-CELL-AVAILABLE substates) for eCall inactivity procedure to start.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM mode where the UE must be for eCall inactivity procedure to start.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED_ECALL_INACTIVE",
+      "name": "EMM-DEREGISTERED.eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "State entered after completing the eCall inactivity procedure actions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "PROPERTY_DELETE_INFO",
+      "name": "Delete stored information",
+      "entity_type": "Property",
+      "description": "Action to delete GUTI, TAI list, last visited registered TAI, list of equivalent PLMNs, and eKSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_EXPIRY",
+      "name": "Timer expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition where T3444 expires and T3445 not running, or T3445 expires and T3444 not running, or both timers expire.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-REGISTERED state (except specific substates).",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_TIMER_EXPIRY",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiry condition triggers the eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_TIMER_EXPIRY",
+      "target": "TIMER_T3444",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition involves T3444 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_TIMER_EXPIRY",
+      "target": "TIMER_T3445",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition involves T3445 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "PROPERTY_DELETE_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in deletion of stored information.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_ECALL_INACTIVITY",
+      "target": "STATE_EMM_DEREGISTERED_ECALL_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in transition to EMM-DEREGISTERED.eCALL-INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.4"
+      ]
+    }
+  ]
+}

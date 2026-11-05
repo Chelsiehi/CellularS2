@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.9",
+  "title": "Disabling and re-enabling of UE's NB-IoT capability",
+  "entities": [
+    {
+      "id": "PROC_DISABLE_NB_IOT",
+      "name": "Disabling NB-IoT capability",
+      "entity_type": "Procedure",
+      "description": "Procedure for disabling UE's NB-IoT capability when in NB-S1 mode, involving selection of alternative RATs and PLMNs.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "PROC_REENABLE_NB_IOT",
+      "name": "Re-enabling NB-IoT capability",
+      "entity_type": "Procedure",
+      "description": "Procedure for re-enabling UE's NB-IoT capability, triggered by PLMN selection, power cycle, or USIM removal.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state where NB-IoT capability can be disabled.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management connected state where UE must release NAS connection before disabling NB-IoT capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_REJECT_NB_IOT",
+      "name": "ATTACH REJECT with NB-IoT not allowed",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE receives ATTACH REJECT or TRACKING AREA UPDATE REJECT with EMM cause #15 and Extended EMM cause 'NB-IoT not allowed'.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "TIMER_ENABLE_NB_IOT",
+      "name": "Timer for enabling NB-IoT capability",
+      "entity_type": "Timer",
+      "description": "Optional timer started by UE to automatically re-enable NB-IoT capability after expiry.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_NB_IOT",
+      "name": "Disabling of NB-IoT capability",
+      "entity_type": "Property",
+      "description": "UE action to disable NB-IoT capability and indicate this to access stratum layers.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "PROP_REENABLE_NB_IOT",
+      "name": "Re-enabling of NB-IoT capability",
+      "entity_type": "Property",
+      "description": "UE action to re-enable NB-IoT capability, either automatically or manually.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_EMM_CAUSE",
+      "name": "Extended EMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying extended EMM cause values, including 'NB-IoT not allowed'.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DISABLE_NB_IOT",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Disabling NB-IoT capability can only be performed when UE is in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ATTACH_REJECT_NB_IOT",
+      "target": "PROP_DISABLE_NB_IOT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with NB-IoT not allowed condition establishes the need to disable NB-IoT capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ATTACH_REJECT_NB_IOT",
+      "target": "IE_EXTENDED_EMM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition is guarded by the Extended EMM cause IE value 'NB-IoT not allowed'.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_REENABLE_NB_IOT",
+      "target": "PROP_REENABLE_NB_IOT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Re-enabling procedure establishes the property of NB-IoT capability being re-enabled.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_ENABLE_NB_IOT",
+      "target": "PROP_REENABLE_NB_IOT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer expiry establishes the re-enabling of NB-IoT capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_EMM_CONNECTED",
+      "target": "PROC_DISABLE_NB_IOT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When in EMM-CONNECTED mode, UE must release NAS connection before proceeding with NB-IoT capability disable procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.9"
+      ]
+    }
+  ]
+}

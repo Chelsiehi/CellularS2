@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.5",
+  "title": "Handling of APN based congestion control",
+  "entities": [
+    {
+      "id": "APN_CONGESTION_CONTROL",
+      "name": "APN based congestion control",
+      "entity_type": "Procedure",
+      "description": "Network procedure for detecting and managing APN congestion. The network may reject session management requests or disconnect existing PDN connections with cause #26 when active.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "EPS session management timer for APN based congestion control, started and stopped on a per APN basis in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "APN",
+      "name": "APN",
+      "entity_type": "Identifier",
+      "description": "Access Point Name used for PDN connection establishment and congestion control association.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "NO_APN",
+      "name": "No APN",
+      "entity_type": "Condition",
+      "description": "Condition when UE does not provide an APN in PDN CONNECTIVITY REQUEST or ESM INFORMATION RESPONSE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDN_CONNECTION",
+      "name": "Emergency PDN connection",
+      "entity_type": "Condition",
+      "description": "Special PDN connection type not affected by APN congestion control when no APN is associated.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "CONGESTION_BACKOFF_TIME",
+      "name": "APN congestion back-off time",
+      "entity_type": "Property",
+      "description": "Time value stored by network on per UE and congested APN basis during congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_26",
+      "name": "ESM cause #26",
+      "entity_type": "Property",
+      "description": "Cause value 'insufficient resources' used when network rejects session management requests during APN congestion.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "APN_CONGESTION_CONTROL",
+      "target": "CONGESTION_BACKOFF_TIME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network may store APN congestion back-off time when performing congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "APN_CONGESTION_CONTROL",
+      "target": "ESM_CAUSE_26",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network may reject requests or disconnect connections with ESM cause #26 during congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3396",
+      "target": "APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 is associated with and operates on a per APN basis.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3396",
+      "target": "NO_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 can be associated with no APN when UE doesn't provide APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NO_APN",
+      "target": "EMERGENCY_PDN_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 associated with no APN does not affect emergency PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "APN_CONGESTION_CONTROL",
+      "target": "T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "APN based congestion control triggers starting of timer T3396 in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.5"
+      ]
+    }
+  ]
+}

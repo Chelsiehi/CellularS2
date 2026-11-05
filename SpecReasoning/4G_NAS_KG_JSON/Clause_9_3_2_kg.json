@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.3.2",
+  "title": "EPS bearer identity",
+  "entities": [
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Bits 5 to 8 of the first octet of every EPS Session Management (ESM) message contain the EPS bearer identity. It is used to identify a message flow.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "ESM_MESSAGE",
+      "name": "ESM message",
+      "entity_type": "Message",
+      "description": "EPS Session Management message that contains the EPS bearer identity in bits 5 to 8 of its first octet.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "MME",
+      "name": "MME",
+      "entity_type": "Property",
+      "description": "Mobility Management Entity that selects EPS bearer identity values and handles bearer context management.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that may not support signalling for maximum 15 EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_15_NOT_SUPPORTED",
+      "name": "Maximum 15 EPS bearer contexts not supported",
+      "entity_type": "Condition",
+      "description": "Condition where UE or MME or both do not support signalling for maximum 15 EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "BEARER_ID_RANGE_5_15",
+      "name": "EPS bearer identity range 5 to 15",
+      "entity_type": "Property",
+      "description": "Value range from which MME selects EPS bearer identity when maximum 15 EPS bearer contexts are not supported.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "BEARER_ID_VALUE_0",
+      "name": "EPS bearer identity value 0",
+      "entity_type": "Property",
+      "description": "Value 0 indicates no EPS bearer identity is assigned, used when maximum 15 EPS bearer contexts are not supported.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM_MESSAGE",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Every ESM message contains the EPS bearer identity in bits 5-8 of its first octet.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_MAX_15_NOT_SUPPORTED",
+      "target": "BEARER_ID_RANGE_5_15",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When maximum 15 EPS bearer contexts are not supported, MME selects EPS bearer identity from range 5 to 15.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_MAX_15_NOT_SUPPORTED",
+      "target": "BEARER_ID_VALUE_0",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When maximum 15 EPS bearer contexts are not supported, MME may select value 0 to indicate no EPS bearer identity assigned.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MME",
+      "target": "CONDITION_MAX_15_NOT_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MME behavior is guarded by the condition of whether maximum 15 EPS bearer contexts are supported.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "CONDITION_MAX_15_NOT_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE capability regarding maximum 15 EPS bearer contexts guards the condition.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.2"
+      ]
+    }
+  ]
+}

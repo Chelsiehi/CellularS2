@@ -1,0 +1,243 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.3.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROCEDURE_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to modify a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REESTABLISH_USER_PLANE_RESOURCES",
+      "name": "Re-establishment of user-plane resources",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-establish user-plane resources for a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3592",
+      "name": "Timer T3592",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of PDU SESSION RELEASE COMMAND message in network-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to UE to initiate PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to SMF to request PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to SMF to request PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_T3592_EXPIRY",
+      "name": "Timer T3592 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3592 expires, triggering retransmission or procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_COLLISION_MODIFICATION",
+      "name": "Collision with UE-requested modification",
+      "entity_type": "Condition",
+      "description": "Condition when SMF receives PDU SESSION MODIFICATION REQUEST during network-requested release procedure for same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_COLLISION_RELEASE",
+      "name": "Collision with UE-requested release",
+      "entity_type": "Condition",
+      "description": "Condition when SMF receives PDU SESSION RELEASE REQUEST after sending PDU SESSION RELEASE COMMAND for same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "CONDITION_COLLISION_REESTABLISHMENT",
+      "name": "Collision with user-plane re-establishment",
+      "entity_type": "Condition",
+      "description": "Condition when SMF receives indication to re-establish user-plane resources during network-requested release procedure for same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_IGNORE_MODIFICATION_REQUEST",
+      "name": "Ignore PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Property",
+      "description": "SMF behavior to ignore received PDU SESSION MODIFICATION REQUEST and proceed with network-requested release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_IGNORE_RELEASE_REQUEST",
+      "name": "Ignore PDU SESSION RELEASE REQUEST",
+      "entity_type": "Property",
+      "description": "SMF behavior to ignore received PDU SESSION RELEASE REQUEST and proceed with network-requested release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_REESTABLISH_USER_PLANE",
+      "name": "Do not re-establish user-plane resources",
+      "entity_type": "Property",
+      "description": "SMF behavior to not re-establish user-plane resources and proceed with network-requested release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "TIMER_T3592",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network-requested PDU session release procedure starts timer T3592.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "MESSAGE_PDU_SESSION_RELEASE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-requested PDU session release procedure includes sending PDU SESSION RELEASE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_T3592_EXPIRY",
+      "target": "MESSAGE_PDU_SESSION_RELEASE_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3592 expiry condition guards retransmission of PDU SESSION RELEASE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_T3592_EXPIRY",
+      "target": "TIMER_T3592",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On first four expiries of timer T3592, SMF resets and restarts the timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_COLLISION_MODIFICATION",
+      "target": "PROPERTY_IGNORE_MODIFICATION_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with UE-requested modification establishes the property to ignore the modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_COLLISION_RELEASE",
+      "target": "PROPERTY_IGNORE_RELEASE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with UE-requested release establishes the property to ignore the release request.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_COLLISION_REESTABLISHMENT",
+      "target": "PROPERTY_NO_REESTABLISH_USER_PLANE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with user-plane re-establishment establishes the property to not re-establish user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "MESSAGE_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session modification procedure includes sending PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "MESSAGE_PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure includes sending PDU SESSION RELEASE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.8.5",
+  "title": "UE actions upon the expiry of DataInactivityTimer",
+  "entities": [
+    {
+      "id": "DataInactivityTimer",
+      "name": "Data Inactivity Timer",
+      "entity_type": "Timer",
+      "description": "Timer that expires when no data activity is detected, triggering UE state transition procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC Connected state",
+      "entity_type": "State",
+      "description": "Radio Resource Control connected state where the UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC Idle state",
+      "entity_type": "State",
+      "description": "Radio Resource Control idle state where the UE does not have an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_FAILURE",
+      "name": "RRC connection failure release cause",
+      "entity_type": "Condition",
+      "description": "Release cause indicating failure in maintaining the RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "OTHER_RELEASE_CAUSE",
+      "name": "Other release cause",
+      "entity_type": "Condition",
+      "description": "Generic release cause for transitions to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "GO_TO_RRC_IDLE_PROCEDURE",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when transitioning from RRC_CONNECTED to RRC_IDLE state as specified in clause 5.3.11.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DataInactivityTimer",
+      "target": "GO_TO_RRC_IDLE_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of DataInactivityTimer triggers the procedure for transitioning to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "GO_TO_RRC_IDLE_PROCEDURE",
+      "target": "RRC_CONNECTION_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The transition procedure uses 'RRC connection failure' as a release cause condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "GO_TO_RRC_IDLE_PROCEDURE",
+      "target": "OTHER_RELEASE_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The transition procedure uses 'other' as a release cause condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "GO_TO_RRC_IDLE_PROCEDURE",
+      "target": "RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Execution of the procedure results in the UE entering RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "GO_TO_RRC_IDLE_PROCEDURE",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires the UE to be in RRC_CONNECTED state before execution.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.5"
+      ]
+    }
+  ]
+}

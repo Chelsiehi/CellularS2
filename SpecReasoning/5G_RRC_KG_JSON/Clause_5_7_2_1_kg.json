@@ -1,0 +1,100 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.2.1",
+  "title": "General ULInformationTransfer",
+  "entities": [
+    {
+      "id": "PROC_UL_INFO_TRANSFER",
+      "name": "UL Information Transfer Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer NAS dedicated information from UE to network, or to transfer F1-C related information from IAB-DU to IAB Donor-CU via IAB-MT in RRC CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    },
+    {
+      "id": "MSG_UL_INFORMATION_TRANSFER",
+      "name": "ULInformationTransfer",
+      "entity_type": "Message",
+      "description": "RRC message used to transfer uplink information from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1",
+        "Figure 5.7.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    },
+    {
+      "id": "IE_NAS_DEDICATED_INFO",
+      "name": "NAS dedicated information",
+      "entity_type": "Information Element",
+      "description": "Non-Access Stratum information transferred between UE and core network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    },
+    {
+      "id": "IE_F1_C_INFO",
+      "name": "F1-C related information",
+      "entity_type": "Information Element",
+      "description": "F1 control plane information transferred from IAB-DU to IAB Donor-CU via IAB-MT.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UL_INFO_TRANSFER",
+      "target": "MSG_UL_INFORMATION_TRANSFER",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The UL Information Transfer procedure involves sending the ULInformationTransfer message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1",
+        "Figure 5.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UL_INFO_TRANSFER",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires the UE to be in RRC CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UL_INFORMATION_TRANSFER",
+      "target": "IE_NAS_DEDICATED_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ULInformationTransfer message can contain NAS dedicated information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UL_INFORMATION_TRANSFER",
+      "target": "IE_F1_C_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ULInformationTransfer message can contain F1-C related information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.1"
+      ]
+    }
+  ]
+}

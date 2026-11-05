@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.2.2",
+  "title": "Network slice-specific EAP message reliable transport procedure accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_NSSAA_ACCEPTED",
+      "name": "Network slice-specific EAP message reliable transport procedure accepted by the UE",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE accepts network slice-specific authentication and authorization by creating and sending a NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message containing EAP-response and S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "MSG_NSS_AUTH_COMPLETE",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to indicate completion of network slice-specific authentication, containing EAP message and S-NSSAI IEs.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element carrying the EAP-response message provided by upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element identifying the network slice (HPLMN S-NSSAI or SNPN S-NSSAI) associated with the EAP-response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3575",
+      "name": "T3575",
+      "entity_type": "Timer",
+      "description": "Timer running in the AMF for the network slice-specific authentication procedure, stopped upon receipt of NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "COND_UPPER_LAYERS_PROVIDE_EAP_RESPONSE",
+      "name": "Upper layers provide EAP-response message",
+      "entity_type": "Condition",
+      "description": "Condition triggering the UE to create the NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message when upper layers provide an EAP-response associated with HPLMN S-NSSAI or SNPN S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "PROP_TRANSPARENT_TO_5GMM",
+      "name": "Transparent to 5GMM layer",
+      "entity_type": "Property",
+      "description": "Property indicating that the network slice-specific authentication and authorization procedure is transparent to the UE's 5GMM layer except for sending the completion message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NSSAA_ACCEPTED",
+      "target": "MSG_NSS_AUTH_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes the step of creating and sending the NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_NSS_AUTH_COMPLETE",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the EAP message IE set to the EAP-response provided by upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_NSS_AUTH_COMPLETE",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the S-NSSAI IE set to the HPLMN S-NSSAI or SNPN S-NSSAI associated with the EAP-response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UPPER_LAYERS_PROVIDE_EAP_RESPONSE",
+      "target": "MSG_NSS_AUTH_COMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition of upper layers providing an EAP-response triggers the creation of the NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_NSS_AUTH_COMPLETE",
+      "target": "TIMER_T3575",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of the NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message by the AMF stops timer T3575.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_NSSAA_ACCEPTED",
+      "target": "PROP_TRANSPARENT_TO_5GMM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure is transparent to the 5GMM layer of the UE except for sending the completion message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.2"
+      ]
+    }
+  ]
+}

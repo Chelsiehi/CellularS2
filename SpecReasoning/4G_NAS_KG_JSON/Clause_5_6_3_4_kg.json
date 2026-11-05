@@ -1,0 +1,189 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.3.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UPLINK_NAS_TRANSPORT",
+      "name": "UPLINK NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "NAS message for uplink transport of payload from UE to network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer controlling when UE is allowed to send UPLINK NAS TRANSPORT under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer controlling when UE is allowed to send UPLINK NAS TRANSPORT in EMM-CONNECTED mode after attach without PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where UE has an active NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "COND_AC11_15",
+      "name": "UE configured to use AC11 15 in selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured with access class 11-15 in the selected PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN",
+      "name": "PDN connection for emergency bearer services established",
+      "entity_type": "Condition",
+      "description": "Condition where UE has an established PDN connection for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "COND_DUAL_PRIORITY",
+      "name": "UE configured for dual priority with specific conditions",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for dual priority and has PDN connection without low access priority but T3346 started for low priority request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SIGNALLING",
+      "name": "Network initiated signalling message received",
+      "entity_type": "Condition",
+      "description": "Condition where UE has received a network-initiated signalling message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "PROP_SEND_ALLOWED",
+      "name": "UPLINK NAS TRANSPORT sending allowed",
+      "entity_type": "Property",
+      "description": "Property indicating when UE is permitted to send UPLINK NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T3346",
+      "target": "UPLINK_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running prevents sending UPLINK NAS TRANSPORT except under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T3447",
+      "target": "UPLINK_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3447 running prevents sending UPLINK NAS TRANSPORT in EMM-CONNECTED mode after attach without PDN connection except under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_AC11_15",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE configured with AC11-15 allows sending UPLINK NAS TRANSPORT even when T3346 or T3447 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_PDN",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency PDN connection established allows sending UPLINK NAS TRANSPORT when T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_DUAL_PRIORITY",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Dual priority configuration with specific conditions allows sending UPLINK NAS TRANSPORT when T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NETWORK_SIGNALLING",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network initiated signalling message received allows sending UPLINK NAS TRANSPORT when T3447 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMM_CONNECTED",
+      "target": "UPLINK_NAS_TRANSPORT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sending UPLINK NAS TRANSPORT when T3447 is running requires consideration of EMM-CONNECTED state after attach without PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "T3346",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer T3346 expiry or stopping allows sending UPLINK NAS TRANSPORT if still necessary.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "T3447",
+      "target": "PROP_SEND_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer T3447 expiry allows sending UPLINK NAS TRANSPORT if still necessary.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.4"
+      ]
+    }
+  ]
+}

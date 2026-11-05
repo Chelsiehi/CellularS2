@@ -1,0 +1,107 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "2",
+  "title": ">   stop the periodical reporting timer and reset the associated information (e.g. sl-TimeToTrigger) for this sl- MeasId.",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives and processes configuration messages.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "SL_MEASID",
+      "name": "Sidelink Measurement Identity",
+      "entity_type": "Identifier",
+      "description": "An identifier for a sidelink measurement configuration in the UE.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "Periodical Reporting Timer",
+      "entity_type": "Timer",
+      "description": "Timer associated with periodic measurement reporting for a sidelink measurement identity.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "SL_TIMETOTRIGGER",
+      "name": "Sidelink Time To Trigger",
+      "entity_type": "Property",
+      "description": "Time duration before a measurement report is triggered for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "SL_MEASIDTOREMOVELIST",
+      "name": "Sidelink Measurement Identity To Remove List",
+      "entity_type": "Information Element",
+      "description": "List of sidelink measurement identities to be removed from UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "NON_CONFIGURED_SL_MEASID",
+      "name": "Non-configured Sidelink Measurement Identity",
+      "entity_type": "Condition",
+      "description": "Condition where a sl-MeasId value in the removal list is not part of current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_MEASID",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Stopping the periodical reporting timer for the specified sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_MEASID",
+      "target": "SL_TIMETOTRIGGER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Resetting associated information like sl-TimeToTrigger for the specified sl-MeasId.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_MEASIDTOREMOVELIST",
+      "target": "SL_MEASID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The removal list contains sl-MeasId values to be processed.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NON_CONFIGURED_SL_MEASID",
+      "target": "UE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE does not consider the message erroneous if removal list includes non-configured sl-MeasId values.",
+      "provenance": [
+        "TS 38.331, Clause 2"
+      ]
+    }
+  ]
+}

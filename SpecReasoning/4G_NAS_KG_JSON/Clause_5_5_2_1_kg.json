@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_DETACH",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE or network to detach from EPS services, non-EPS services, or both. Also used to disconnect from last PDN connection when EMM-REGISTERED without PDN connection is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management registered state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of detach procedure being performed.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_EMM_NO_PDN_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection not supported",
+      "entity_type": "Condition",
+      "description": "Condition where either UE or MME does not support EMM-REGISTERED state without PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_USIM_REMOVAL",
+      "name": "USIM removal",
+      "entity_type": "Condition",
+      "description": "Condition triggered when USIM card is removed from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "Local deactivation of EPS bearer contexts without peer-to-peer signaling between UE and MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "NAS level mobility management congestion control timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_TIN_STORAGE",
+      "name": "TIN storage in non-volatile memory",
+      "entity_type": "Property",
+      "description": "UE stores Temporary Identity used in Next update (TIN) in non-volatile memory for subsequent attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_DETACH",
+      "target": "CONDITION_EMM_NO_PDN_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach procedure is triggered when EMM-REGISTERED without PDN connection is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_DETACH",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Detach procedure uses detach type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_USIM_REMOVAL",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When detach is triggered by USIM removal, UE indicates 'switch off' in detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_DETACH",
+      "target": "PROPERTY_EPS_BEARER_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Detach procedure for EPS services results in local deactivation of EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_DETACH",
+      "target": "PROPERTY_TIN_STORAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE stores TIN in non-volatile memory during detach procedure for subsequent attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_DETACH",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE can initiate detach procedure even when timer T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_DETACH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Detach procedure may be performed when UE is in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.1"
+      ]
+    }
+  ]
+}

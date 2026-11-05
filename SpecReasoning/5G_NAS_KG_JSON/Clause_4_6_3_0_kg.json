@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.3.0",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a PDU session in a network slice to enable PDU transmission when no adequate established PDU session exists.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information used to identify a network slice.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "IE_DNN",
+      "name": "Data network name",
+      "entity_type": "Information Element",
+      "description": "Data Network Name identifying the target data network for the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Set of S-NSSAIs allowed in the serving PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "IE_MAPPED_S_NSSAI",
+      "name": "Mapped S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Mapped S-NSSAI value used in roaming scenarios for PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_ADEQUATE_PDU_SESSION",
+      "name": "No adequate established PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where there is no established PDU session suitable for the required PDU transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "PROPERTY_UE_DECISION",
+      "name": "UE decision mechanism",
+      "entity_type": "Property",
+      "description": "UE determines whether to establish a new PDU session or use an existing one based on URSP rules or local configuration.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "IE_URSP_RULES",
+      "name": "URSP rules",
+      "entity_type": "Information Element",
+      "description": "UE Route Selection Policy rules used by the UE to determine PDU session selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session establishment procedure includes S-NSSAI as a parameter.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_DNN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session establishment procedure includes DNN as a parameter.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "CONDITION_NO_ADEQUATE_PDU_SESSION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PDU session establishment is triggered when no adequate PDU session exists.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_S_NSSAI",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S-NSSAI used in PDU session establishment must be part of the allowed NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_S_NSSAI",
+      "target": "IE_MAPPED_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "In roaming scenarios, mapped S-NSSAI is included along with S-NSSAI for PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_UE_DECISION",
+      "target": "IE_URSP_RULES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE decision to establish or use PDU session is based on URSP rules.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_NO_ADEQUATE_PDU_SESSION",
+      "target": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no adequate PDU session establishes the need for PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.0"
+      ]
+    }
+  ]
+}

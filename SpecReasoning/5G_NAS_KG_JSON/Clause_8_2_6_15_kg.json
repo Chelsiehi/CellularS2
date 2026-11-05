@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.15",
+  "title": "Requested DRX parameters",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that initiates registration and may request DRX parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network for registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_DRX_PARAMETERS",
+      "name": "Requested DRX parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element used by UE to indicate desired DRX parameters to network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    },
+    {
+      "id": "CONDITION_DRX_CHANGE",
+      "name": "UE wants to use or change DRX parameters",
+      "entity_type": "Condition",
+      "description": "Condition where UE desires to utilize or modify its specific DRX parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_DRX_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the Requested DRX parameters IE when UE wants to use or change DRX parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_DRX_CHANGE",
+      "target": "IE_REQUESTED_DRX_PARAMETERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The inclusion of Requested DRX parameters IE is guarded by the condition that UE wants to use or change DRX parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "CONDITION_DRX_CHANGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE triggers the condition for DRX parameter change based on its requirements.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.15"
+      ]
+    }
+  ]
+}

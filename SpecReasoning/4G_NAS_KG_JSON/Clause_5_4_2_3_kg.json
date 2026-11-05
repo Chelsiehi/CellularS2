@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.3",
+  "title": "Authentication response by the UE",
+  "entities": [
+    {
+      "id": "PROC_AUTH_RESPONSE",
+      "name": "Authentication Response Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE responds to AUTHENTICATION REQUEST message with AUTHENTICATION RESPONSE message after processing authentication challenge data.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate authentication challenge.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE containing authentication response (RES) to network.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_RAND",
+      "name": "RAND",
+      "entity_type": "Information Element",
+      "description": "Random challenge value used in authentication.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_RES",
+      "name": "RES",
+      "entity_type": "Information Element",
+      "description": "Authentication response computed by USIM.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3416",
+      "name": "T3416",
+      "entity_type": "Timer",
+      "description": "Timer started/reset during authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is deregistered.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_NULL",
+      "name": "EMM-NULL",
+      "entity_type": "State",
+      "description": "Initial EMM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM state where UE is idle.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "PROP_KASME_STORAGE",
+      "name": "KASME storage in EPS security context",
+      "entity_type": "Property",
+      "description": "New KASME calculated from authentication challenge data is stored in new EPS security context in ME volatile memory.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "COND_RAND_MATCH",
+      "name": "Stored RAND equals new RAND",
+      "entity_type": "Condition",
+      "description": "Condition where stored RAND value equals newly received RAND in AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTH_RESPONSE",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Authentication response procedure is triggered by AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_AUTH_RESPONSE",
+      "target": "MSG_AUTH_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTH_RESPONSE",
+      "target": "IE_RES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains RES information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_AUTH_RESPONSE",
+      "target": "TIMER_T3416",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts or resets and restarts timer T3416 when new RAND is processed.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_DEREGISTERED",
+      "target": "IE_RAND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering EMM-DEREGISTERED state causes deletion of stored RAND and RES.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_EMM_NULL",
+      "target": "IE_RAND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering EMM-NULL state causes deletion of stored RAND and RES.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_EMM_IDLE",
+      "target": "IE_RAND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering EMM-IDLE mode causes deletion of stored RAND and RES.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_RAND_MATCH",
+      "target": "MSG_AUTH_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines whether to send stored RES in AUTHENTICATION RESPONSE without contacting USIM.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_AUTH_RESPONSE",
+      "target": "PROP_KASME_STORAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful authentication challenge establishes storage of new KASME in EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.3"
+      ]
+    }
+  ]
+}

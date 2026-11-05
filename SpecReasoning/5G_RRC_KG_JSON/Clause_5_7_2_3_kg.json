@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.2.3",
+  "title": "Actions related to transmission of ULInformationTransfer message",
+  "entities": [
+    {
+      "id": "ULINFORMATIONTRANSFER_MSG",
+      "name": "ULInformationTransfer message",
+      "entity_type": "Message",
+      "description": "Message used by UE to transfer uplink information to the network",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "DEDICATEDNAS_MESSAGE",
+      "name": "dedicatedNAS-Message",
+      "entity_type": "Information Element",
+      "description": "Information element that carries NAS PDU received from upper layers",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "DEDICATEDINFOF1C",
+      "name": "dedicatedInfoF1c",
+      "entity_type": "Information Element",
+      "description": "Information element that carries F1-C related information for IAB-MT",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "NAS_PDU_PROVIDED",
+      "name": "Upper layer provides NAS PDU",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers provide NAS PDU for transmission",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "F1C_INFO_NEEDED",
+      "name": "Need to transfer F1-C related information",
+      "entity_type": "Condition",
+      "description": "Condition where IAB-MT needs to transfer F1-C related information",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "UL_TRANSMISSION_PROC",
+      "name": "ULInformationTransfer transmission procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for transmitting ULInformationTransfer message to lower layers",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ULINFORMATIONTRANSFER_MSG",
+      "target": "DEDICATEDNAS_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULInformationTransfer message contains dedicatedNAS-Message IE when upper layer provides NAS PDU",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ULINFORMATIONTRANSFER_MSG",
+      "target": "DEDICATEDINFOF1C",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULInformationTransfer message contains dedicatedInfoF1c IE when IAB-MT needs to transfer F1-C information",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_PDU_PROVIDED",
+      "target": "DEDICATEDNAS_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that upper layer provides NAS PDU guards the inclusion of dedicatedNAS-Message",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "F1C_INFO_NEEDED",
+      "target": "DEDICATEDINFOF1C",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that IAB-MT needs to transfer F1-C information guards the inclusion of dedicatedInfoF1c",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UL_TRANSMISSION_PROC",
+      "target": "ULINFORMATIONTRANSFER_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "ULInformationTransfer transmission procedure includes submitting the ULInformationTransfer message to lower layers",
+      "provenance": [
+        "TS 38.331, Clause 5.7.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.4.5",
+  "title": "Deleting a derived QoS rule in the UE",
+  "entities": [
+    {
+      "id": "DERIVED_QOS_RULE",
+      "name": "Derived QoS rule",
+      "entity_type": "Property",
+      "description": "A QoS rule derived by the UE, typically for reflective QoS operation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3583",
+      "name": "Timer T3583",
+      "entity_type": "Timer",
+      "description": "Timer associated with a derived QoS rule. Upon expiry, the UE removes the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "PDU session release",
+      "entity_type": "Condition",
+      "description": "Condition where the PDU session is released, triggering removal of associated derived QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "RQ_DEACTIVATION",
+      "name": "Reflective QoS deactivation",
+      "entity_type": "Condition",
+      "description": "Condition where the network sets RQ timer to 'deactivated' or zero, indicating revocation of reflective QoS usage.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "INTERSYSTEM_MOBILITY",
+      "name": "Inter-system mobility to NB-N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE moves from WB-N1 mode to NB-N1 mode or from NR connected to 5GCN to NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TIMER_T3583",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Expiry of timer T3583 causes removal of the derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDU_SESSION_RELEASE",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session release causes removal of associated derived QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RQ_DEACTIVATION",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reflective QoS deactivation causes removal of associated derived QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTERSYSTEM_MOBILITY",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system mobility to NB-N1 mode causes removal of associated derived QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DERIVED_QOS_RULE",
+      "target": "TIMER_T3583",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When a derived QoS rule is deleted, the associated timer T3583 is stopped.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.5"
+      ]
+    }
+  ]
+}

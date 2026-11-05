@@ -1,0 +1,228 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.2.4",
+  "title": "Change or determination of IMS registration status",
+  "entities": [
+    {
+      "id": "PROC_IMS_REG_STATUS_CHANGE",
+      "name": "IMS registration status change procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE when IMS registration status changes or is determined, involving mode transitions and capability management.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered but attempting to update mobility management.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "T3402",
+      "entity_type": "Timer",
+      "description": "Timer running during EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_IMS_UNAVAILABLE",
+      "name": "UE is not available for voice calls in the IMS indication",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE cannot receive voice calls via IMS.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "COND_VOICE_PREF_IMS_PS_PREFERRED",
+      "name": "Voice domain preference for E-UTRAN is \"IMS PS voice preferred, CS Voice as secondary\"",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE prefers IMS PS voice with CS voice as fallback.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "COND_SMS_OVER_IP_PREFERRED",
+      "name": "SMS configuration is set to prefer to use SMS over IP networks",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE prefers SMS over IP networks.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "COND_CS_FALLBACK_NOT_AVAILABLE",
+      "name": "CS fallback is not available",
+      "entity_type": "Condition",
+      "description": "Condition indicating CS fallback is unavailable, includes EMM causes #16, #17, and #18.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_EUTRA_CAPABILITY",
+      "name": "Disable the E-UTRA capability",
+      "entity_type": "Property",
+      "description": "Action to disable E-UTRA capability as specified in clause 4.5.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "PROC_COMBINED_TAU_IMSI_ATTACH",
+      "name": "Combined tracking area update with IMSI attach",
+      "entity_type": "Procedure",
+      "description": "Procedure to transit to CS/PS mode with combined tracking area update and IMSI attach.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "PROC_COMBINED_TAU_SMS_ONLY",
+      "name": "Combined tracking area update with \"SMS only\"",
+      "entity_type": "Procedure",
+      "description": "Procedure to transit to CS/PS mode with combined tracking area update for SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_IMS_REG_STATUS_CHANGE",
+      "target": "COND_IMS_UNAVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IMS registration status change procedure is triggered by IMS unavailability condition.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_IMS_REG_STATUS_CHANGE",
+      "target": "PROC_COMBINED_TAU_IMSI_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "IMS registration status change procedure includes combined TAU with IMSI attach as a step.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_IMS_REG_STATUS_CHANGE",
+      "target": "PROP_DISABLE_EUTRA_CAPABILITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "IMS registration status change procedure includes disabling E-UTRA capability as a step.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_IMS_UNAVAILABLE",
+      "target": "COND_VOICE_PREF_IMS_PS_PREFERRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IMS unavailability condition combined with voice preference condition triggers specific procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_IMS_UNAVAILABLE",
+      "target": "COND_SMS_OVER_IP_PREFERRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IMS unavailability condition combined with SMS over IP preference condition triggers specific procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.1",
+        "Table 4.3.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_IMS_UNAVAILABLE",
+      "target": "COND_CS_FALLBACK_NOT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IMS unavailability condition combined with CS fallback unavailability condition triggers E-UTRA capability disable.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_IMS_UNAVAILABLE",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "IMS unavailability condition requires UE to be in EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state for optional E-UTRA disable.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "target": "TIMER_T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state starts timer T3402.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_IMS_REG_STATUS_CHANGE",
+      "target": "PROC_COMBINED_TAU_SMS_ONLY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "IMS registration status change procedure includes combined TAU with SMS only as a step.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.4",
+        "Table 4.3.2.4.2"
+      ]
+    }
+  ]
+}

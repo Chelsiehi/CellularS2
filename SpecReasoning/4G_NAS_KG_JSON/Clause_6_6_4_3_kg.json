@@ -1,0 +1,81 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.4.3",
+  "title": "Network initiated transport of user data via the control plane",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_USER_DATA_TRANSPORT",
+      "name": "Network initiated transport of user data via the control plane",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network sends user data to the UE via the control plane using the ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3",
+        "Figure 6.6.4.3.1"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to transport user data to the UE via the control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3",
+        "Figure 6.6.4.3.1"
+      ]
+    },
+    {
+      "id": "IE_USER_DATA_CONTAINER",
+      "name": "User data container",
+      "entity_type": "Information Element",
+      "description": "Information element containing user data to be forwarded to upper layers in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3"
+      ]
+    },
+    {
+      "id": "COND_FORWARD_USER_DATA",
+      "name": "Forward user data to upper layers",
+      "entity_type": "Condition",
+      "description": "Condition where the UE forwards the contents of the User data container IE to upper layers upon receiving the ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_USER_DATA_TRANSPORT",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3",
+        "Figure 6.6.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ESM_DATA_TRANSPORT",
+      "target": "IE_USER_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ESM DATA TRANSPORT message contains the User data container IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_FORWARD_USER_DATA",
+      "target": "IE_USER_DATA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition specifies that the UE forwards the contents of the User data container IE to upper layers.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.3"
+      ]
+    }
+  ]
+}

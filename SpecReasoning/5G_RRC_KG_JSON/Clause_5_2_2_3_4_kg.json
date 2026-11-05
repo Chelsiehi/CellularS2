@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.4",
+  "title": "Actions related to transmission of RRCSystemInfoRequest message",
+  "entities": [
+    {
+      "id": "PROC_SI_REQUEST",
+      "name": "System Information Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests required system information messages from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "name": "RRCSystemInfoRequest Message",
+      "entity_type": "Message",
+      "description": "RRC message used by UE to request system information from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_SI_LIST",
+      "name": "requested-SI-List",
+      "entity_type": "Information Element",
+      "description": "Information element indicating SI messages required for normal cell operation when si-BroadcastStatus is notBroadcasting.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_POS_SI_LIST",
+      "name": "requestedPosSI-List",
+      "entity_type": "Information Element",
+      "description": "Information element indicating SI messages required for positioning operations when posSI-BroadcastStatus is notBroadcasting.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "COND_NORMAL_SI_REQUEST",
+      "name": "Procedure triggered for required SI messages other than positioning",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests SI messages for normal cell operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "COND_POSITIONING_SI_REQUEST",
+      "name": "Procedure triggered for required SI messages for positioning",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests SI messages specifically for positioning operations.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "PROP_SI_BROADCAST_STATUS",
+      "name": "si-BroadcastStatus set to notBroadcasting",
+      "entity_type": "Property",
+      "description": "Property indicating that the required SI message is not currently being broadcast by the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "PROP_POS_SI_BROADCAST_STATUS",
+      "name": "posSI-BroadcastStatus set to notBroadcasting",
+      "entity_type": "Property",
+      "description": "Property indicating that the required positioning SI message is not currently being broadcast by the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SI_REQUEST",
+      "target": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The system information request procedure includes transmission of RRCSystemInfoRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "target": "IE_REQUESTED_SI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCSystemInfoRequest message contains requested-SI-List IE when requesting normal SI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRC_SYSTEM_INFO_REQUEST",
+      "target": "IE_REQUESTED_POS_SI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCSystemInfoRequest message contains requestedPosSI-List IE when requesting positioning SI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NORMAL_SI_REQUEST",
+      "target": "IE_REQUESTED_SI_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition for normal SI request guards the inclusion of requested-SI-List IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_POSITIONING_SI_REQUEST",
+      "target": "IE_REQUESTED_POS_SI_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition for positioning SI request guards the inclusion of requestedPosSI-List IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_REQUESTED_SI_LIST",
+      "target": "PROP_SI_BROADCAST_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "requested-SI-List is only set for SI messages with si-BroadcastStatus set to notBroadcasting.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_REQUESTED_POS_SI_LIST",
+      "target": "PROP_POS_SI_BROADCAST_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "requestedPosSI-List is only set for positioning SI messages with posSI-BroadcastStatus set to notBroadcasting.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.4"
+      ]
+    }
+  ]
+}

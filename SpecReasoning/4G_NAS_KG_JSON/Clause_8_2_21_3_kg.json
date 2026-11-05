@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.21.3",
+  "title": "Replayed NAS message container",
+  "entities": [
+    {
+      "id": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "name": "Replayed NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element included by the UE when HASHMME value in SECURITY MODE COMMAND differs from locally calculated hash value during attach or tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attach to the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to update its tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS security mode command message sent by MME to UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "IE_HASHMME",
+      "name": "HASHMME",
+      "entity_type": "Information Element",
+      "description": "Hash value included in SECURITY MODE COMMAND message for security verification.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "CONDITION_HASHMME_MISMATCH",
+      "name": "HASHMME mismatch condition",
+      "entity_type": "Condition",
+      "description": "Condition where HASHMME value in SECURITY MODE COMMAND differs from locally calculated hash value at UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains HASHMME information element.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_HASHMME_MISMATCH",
+      "target": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "HASHMME mismatch condition triggers inclusion of Replayed NAS message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_ATTACH",
+      "target": "CONDITION_HASHMME_MISMATCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attach procedure context enables HASHMME mismatch condition.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "target": "CONDITION_HASHMME_MISMATCH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure context enables HASHMME mismatch condition.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.21.3"
+      ]
+    }
+  ]
+}

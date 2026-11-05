@@ -1,0 +1,157 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.6",
+  "title": "Mapping between access categories/access identities and RRC establishment cause",
+  "entities": [
+    {
+      "id": "PROC_NAS_SIG_CONN_EST",
+      "name": "NAS signalling connection establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure where 5GMM requests establishment of a NAS-signalling connection, requiring selection of RRC establishment cause based on access identities and access categories.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_IDENTITY",
+      "name": "Access identity",
+      "entity_type": "Information Element",
+      "description": "Identifies UE priority categories (e.g., 1 for MPS, 2 for MCS, 0 for MT access, 11-15 for high priority).",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6",
+        "Table 4.5.6.1",
+        "Table 4.5.6.2"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_CATEGORY",
+      "name": "Access category",
+      "entity_type": "Information Element",
+      "description": "Categorizes access attempts (e.g., 0 for MT access, 1 for delay tolerant, 2 for emergency, 3-7 for MO services, 9 for IMS registration, 10 for exception data).",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6",
+        "Table 4.5.6.1",
+        "Table 4.5.6.2"
+      ]
+    },
+    {
+      "id": "IE_RRC_EST_CAUSE",
+      "name": "RRC establishment cause",
+      "entity_type": "Information Element",
+      "description": "Determines the cause for RRC connection establishment (e.g., mps-PriorityAccess, mcs-PriorityAccess, highPriorityAccess, mt-Access, emergency, mo-Signalling, mo-VoiceCall, mo-VideoCall, mo-SMS, mo-Data, mo-ExceptionData).",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6",
+        "Table 4.5.6.1",
+        "Table 4.5.6.2"
+      ]
+    },
+    {
+      "id": "COND_RULE_SELECTION",
+      "name": "Rule selection condition",
+      "entity_type": "Condition",
+      "description": "Condition where RRC establishment cause is selected based on the lowest rule number when multiple rules match the access attempt.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "COND_OPERATOR_DEFINED_CAT",
+      "name": "Operator-defined access category condition",
+      "entity_type": "Condition",
+      "description": "Condition where if the determined access category is operator-defined, RRC establishment cause is selected based on the standardized access category mapped for the operator-defined category.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "COND_RRC_REDIRECTION",
+      "name": "RRC release with redirection condition",
+      "entity_type": "Condition",
+      "description": "Condition following RRC release with redirection where lower layers can set RRC establishment cause to mpsPriorityAccess (NR cell) or highPriorityAccess (EUTRA cell) if the UE has an active MPS session.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "PROP_LOWEST_RULE_USED",
+      "name": "Lowest rule number used",
+      "entity_type": "Property",
+      "description": "Property that if the access attempt matches more than one rule, the RRC establishment cause of the lowest rule number shall be used.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_SIG_CONN_EST",
+      "target": "IE_RRC_EST_CAUSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS signalling connection establishment procedure includes selecting the RRC establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_RRC_EST_CAUSE",
+      "target": "IE_ACCESS_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC establishment cause selection is guarded by access identities.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6",
+        "Table 4.5.6.1",
+        "Table 4.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_RRC_EST_CAUSE",
+      "target": "IE_ACCESS_CATEGORY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC establishment cause selection is guarded by access categories.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6",
+        "Table 4.5.6.1",
+        "Table 4.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RULE_SELECTION",
+      "target": "PROP_LOWEST_RULE_USED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where multiple rules match establishes the property that the lowest rule number is used.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_OPERATOR_DEFINED_CAT",
+      "target": "IE_RRC_EST_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Operator-defined access category condition guards the selection of RRC establishment cause based on standardized mapping.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RRC_REDIRECTION",
+      "target": "IE_RRC_EST_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC release with redirection condition guards the setting of RRC establishment cause to specific values for MPS sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.6"
+      ]
+    }
+  ]
+}

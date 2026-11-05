@@ -1,0 +1,125 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.2.2.3",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PAGING_MESSAGE",
+      "name": "Paging message",
+      "entity_type": "Message",
+      "description": "Network-initiated message used to page UEs",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "UE_5GMM_CONNECTED_NON3GPP",
+      "name": "UE in 5GMM-CONNECTED mode over non-3GPP access",
+      "entity_type": "State",
+      "description": "UE state when connected via non-3GPP access network",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "UE_INITIATED_PROCEDURE_ONGOING",
+      "name": "UE-initiated 5GMM specific procedure or service request procedure ongoing",
+      "entity_type": "Condition",
+      "description": "Condition when UE is already performing a 5GMM specific procedure or service request procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRED",
+      "name": "Access attempt barred",
+      "entity_type": "Condition",
+      "description": "Condition when lower layers indicate that access attempt is barred",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "SIGNALLING_CONNECTION_ESTABLISHED",
+      "name": "Signalling connection established",
+      "entity_type": "Condition",
+      "description": "Condition when lower layers confirm establishment of signalling connection",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "NO_RESPONSE_TO_PAGING",
+      "name": "UE shall not respond to paging message",
+      "entity_type": "Property",
+      "description": "UE behavior of not responding to paging message in specific abnormal conditions",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "PROCEED_WITH_PROCEDURE",
+      "name": "UE shall proceed with 5GMM specific procedure or service request procedure",
+      "entity_type": "Property",
+      "description": "UE behavior of continuing with ongoing procedures when paging is received",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "IGNORE_PAGING",
+      "name": "UE shall ignore the paging",
+      "entity_type": "Property",
+      "description": "UE behavior of ignoring paging message once signalling connection is established",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_5GMM_CONNECTED_NON3GPP",
+      "target": "NO_RESPONSE_TO_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in 5GMM-CONNECTED mode over non-3GPP access and receives paging with non-3GPP access type, UE shall not respond",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_INITIATED_PROCEDURE_ONGOING",
+      "target": "PROCEED_WITH_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE-initiated procedure is ongoing and paging is received, UE shall proceed with the procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ACCESS_BARRED",
+      "target": "PAGING_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If access attempt is barred, UE shall handle pending paging message as specified in subclause 5.6.2.2.1",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIGNALLING_CONNECTION_ESTABLISHED",
+      "target": "IGNORE_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Once lower layers confirm establishment of signalling connection, UE shall ignore the paging",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.3"
+      ]
+    }
+  ]
+}

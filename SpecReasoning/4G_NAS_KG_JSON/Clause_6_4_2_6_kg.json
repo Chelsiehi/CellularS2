@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.2.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3485",
+      "name": "Timer T3485",
+      "entity_type": "Timer",
+      "description": "Timer used during dedicated EPS bearer context activation procedure. On expiry, the MME resends ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST and restarts timer. After fifth expiry, procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_REQUEST",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE",
+      "name": "BEARER CONTEXT INACTIVE",
+      "entity_type": "State",
+      "description": "State entered when dedicated EPS bearer context activation procedure is aborted after fifth T3485 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQUESTED_PDN_DISCONNECT",
+      "name": "UE requested PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to disconnect a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN disconnection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_T3485_FIFTH_EXPIRY",
+      "name": "Fifth expiry of timer T3485",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3485 expires for the fifth time during dedicated EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_PDN_DISCONNECT",
+      "name": "Collision with PDN disconnect procedure",
+      "entity_type": "Condition",
+      "description": "Condition when MME receives PDN DISCONNECT REQUEST during dedicated EPS bearer activation for the same PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_RELEASE",
+      "name": "Release allocated resources",
+      "entity_type": "Property",
+      "description": "Action to release any resources allocated for the dedicated EPS bearer context activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "TIMER_T3485",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Dedicated EPS bearer activation procedure starts timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3485_FIFTH_EXPIRY",
+      "target": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Fifth expiry of T3485 stops the dedicated EPS bearer activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3485_FIFTH_EXPIRY",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3485 expiry causes transition to BEARER CONTEXT INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_T3485_FIFTH_EXPIRY",
+      "target": "PROP_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3485 expiry triggers release of allocated resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_COLLISION_PDN_DISCONNECT",
+      "target": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Collision with PDN disconnect procedure stops the dedicated EPS bearer activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_COLLISION_PDN_DISCONNECT",
+      "target": "PROP_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision condition triggers release of procedure resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_UE_REQUESTED_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE requested PDN disconnect procedure includes receiving PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.6"
+      ]
+    }
+  ]
+}

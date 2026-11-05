@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.6.3",
+  "title": "Actions related to reception of UEAssistanceInformationSidelink message",
+  "entities": [
+    {
+      "id": "UEAssistanceInformationSidelink",
+      "name": "UEAssistanceInformationSidelink message",
+      "entity_type": "Message",
+      "description": "Message containing sidelink DRX assistance information transmitted between peer UEs for sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "SL_DRX_ASSISTANCE_INFO",
+      "name": "Sidelink DRX assistance information",
+      "entity_type": "Information Element",
+      "description": "DRX assistance parameters provided by a UE to assist in sidelink DRX configuration determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "SL_DRX_CONFIG_UC",
+      "name": "SL-DRX-ConfigUC",
+      "entity_type": "Information Element",
+      "description": "Sidelink DRX configuration determined for unicast communication with a peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where UE does not have an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is inactive but maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "RESOURCE_ALLOCATION_MODE1",
+      "name": "Resource allocation mode 1",
+      "entity_type": "Condition",
+      "description": "Sidelink resource allocation mode where network schedules resources for sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "RESOURCE_ALLOCATION_MODE2",
+      "name": "Resource allocation mode 2",
+      "entity_type": "Condition",
+      "description": "Sidelink resource allocation mode where UE autonomously selects resources for sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "OUT_OF_COVERAGE",
+      "name": "Out of coverage condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is not within network coverage.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "name": "Sidelink unicast DRX configuration determination",
+      "entity_type": "Procedure",
+      "description": "Procedure where a UE determines sidelink DRX configuration for its peer UE based on received assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UEAssistanceInformationSidelink",
+      "target": "SL_DRX_ASSISTANCE_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UEAssistanceInformationSidelink message contains sidelink DRX assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination procedure requires UE to be in RRC_CONNECTED state for resource allocation mode 1.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "RESOURCE_ALLOCATION_MODE1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination is guarded by resource allocation mode 1 condition for reporting to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "RESOURCE_ALLOCATION_MODE2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination is guarded by resource allocation mode 2 condition for autonomous determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination requires UE to be in RRC_IDLE state for autonomous determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination requires UE to be in RRC_INACTIVE state for autonomous determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "OUT_OF_COVERAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination is guarded by out of coverage condition for autonomous determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "SL_DRX_ASSISTANCE_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination takes sidelink DRX assistance information into account.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SIDELINK_UNICAST_DRX_CONFIG_DETERMINATION",
+      "target": "SL_DRX_CONFIG_UC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sidelink DRX configuration determination procedure establishes the SL-DRX-ConfigUC for the peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.3"
+      ]
+    }
+  ]
+}

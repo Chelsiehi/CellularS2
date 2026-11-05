@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.2",
+  "title": "Combined attach procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to attach to network for EPS services and potentially SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_TMSI_STATUS",
+      "name": "TMSI status",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether UE has a valid TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_OLD_LOCATION_AREA_ID",
+      "name": "Old location area identification",
+      "entity_type": "Information Element",
+      "description": "IE containing stored location area identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_TMSI_BASED_NRI_CONTAINER",
+      "name": "TMSI based NRI container",
+      "entity_type": "Information Element",
+      "description": "IE containing TMSI-based network resource identifier.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_UPDATE_TYPE",
+      "name": "Additional update type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of update, such as SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3410",
+      "name": "T3410",
+      "entity_type": "Timer",
+      "description": "Timer started during attach procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_INITIATED",
+      "name": "EMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state entered when UE initiates registration.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_NO_VALID_TMSI",
+      "name": "No valid TMSI available",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not have a valid TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_VALID_LOCATION_AREA_STORED",
+      "name": "Valid location area identification stored",
+      "entity_type": "Condition",
+      "description": "Condition where UE has stored valid location area identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_VALID_TMSI_STORED",
+      "name": "Valid TMSI stored",
+      "entity_type": "Condition",
+      "description": "Condition where UE has stored valid TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_SMS_ONLY_ATTACH",
+      "name": "SMS only attach",
+      "entity_type": "Condition",
+      "description": "Condition where UE initiates attach for SMS only services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "TIMER_T3410",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3410.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "STATE_EMM_REGISTERED_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure causes UE to enter EMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_COMBINED_ATTACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_TMSI_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains TMSI status IE when no valid TMSI is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_OLD_LOCATION_AREA_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Old location area identification IE if valid location area is stored.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_TMSI_BASED_NRI_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains TMSI based NRI container IE if valid TMSI is stored.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_ADDITIONAL_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Additional update type IE for SMS only attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_TMSI_STATUS",
+      "target": "COND_NO_VALID_TMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of TMSI status IE is guarded by condition of no valid TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_OLD_LOCATION_AREA_ID",
+      "target": "COND_VALID_LOCATION_AREA_STORED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Old location area identification IE is guarded by condition of stored valid location area.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_TMSI_BASED_NRI_CONTAINER",
+      "target": "COND_VALID_TMSI_STORED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of TMSI based NRI container IE is guarded by condition of stored valid TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_ADDITIONAL_UPDATE_TYPE",
+      "target": "COND_SMS_ONLY_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Additional update type IE with SMS only indication is guarded by condition of SMS only attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.2"
+      ]
+    }
+  ]
+}

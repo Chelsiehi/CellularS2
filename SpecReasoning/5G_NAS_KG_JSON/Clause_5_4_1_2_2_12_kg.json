@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.12",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "EAP_REQUEST_AKA_CHALLENGE",
+      "name": "EAP-request/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "EAP authentication message used in AKA' challenge procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    },
+    {
+      "id": "AT_KDF_ATTRIBUTES",
+      "name": "AT_KDF attributes",
+      "entity_type": "Information Element",
+      "description": "Key derivation function attributes in EAP-AKA' authentication",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    },
+    {
+      "id": "KDF_VALUE_NOT_1",
+      "name": "KDF value other than 1",
+      "entity_type": "Condition",
+      "description": "Condition where key derivation function attribute is set to a value other than 1",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    },
+    {
+      "id": "UE_AKA_AUTH_FAILURE_HANDLING",
+      "name": "UE AKA' authentication failure handling",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE handles authentication failure as specified in IETF RFC 5448 for incorrect AUTN case",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_REQUEST_AKA_CHALLENGE",
+      "target": "AT_KDF_ATTRIBUTES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP-request/AKA'-challenge message contains AT_KDF attributes",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AT_KDF_ATTRIBUTES",
+      "target": "KDF_VALUE_NOT_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AT_KDF attributes are guarded by condition where KDF value is not 1",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "KDF_VALUE_NOT_1",
+      "target": "UE_AKA_AUTH_FAILURE_HANDLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of KDF value not being 1 establishes UE authentication failure handling procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.12"
+      ]
+    }
+  ]
+}

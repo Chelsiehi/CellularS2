@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.19.15",
+  "title": "Configured NSSAI",
+  "entities": [
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that provides network slice configuration to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "IE_CONFIGURED_NSSAI",
+      "name": "Configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element containing the network slice selection assistance information configured for the UE in the current PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives the configured NSSAI from the AMF.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "CONDITION_NOT_REGISTERING_ONBOARDING",
+      "name": "UE neither registering nor registered for onboarding services in SNPN",
+      "entity_type": "Condition",
+      "description": "Condition that must be satisfied for the AMF to include the Configured NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "CONDITION_NEW_CONFIGURED_NSSAI_NEEDED",
+      "name": "AMF needs to provide new configured NSSAI",
+      "entity_type": "Condition",
+      "description": "Condition where the AMF requires to update the UE's configured NSSAI for the current PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "IE_CONFIGURED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AMF includes the Configured NSSAI IE when specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_NEW_CONFIGURED_NSSAI_NEEDED",
+      "target": "IE_CONFIGURED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that AMF needs to provide a new configured NSSAI guards the inclusion of the IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_NOT_REGISTERING_ONBOARDING",
+      "target": "IE_CONFIGURED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition that UE is neither registering nor registered for onboarding services in SNPN guards the inclusion of the IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.19.15"
+      ]
+    }
+  ]
+}

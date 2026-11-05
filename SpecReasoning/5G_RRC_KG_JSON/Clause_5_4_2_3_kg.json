@@ -1,0 +1,129 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.2.3",
+  "title": "Reception of the RRCReconfiguration by the UE",
+  "entities": [
+    {
+      "id": "RRCReconfiguration",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "RRC message used to reconfigure UE parameters and configurations during handover or reconfiguration procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "RRCReconfigurationProcedure",
+      "name": "RRC reconfiguration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE to apply configuration changes specified in the RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3",
+        "TS 38.331, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "DefaultL1Parameters",
+      "name": "Default L1 parameter values",
+      "entity_type": "Property",
+      "description": "Default physical layer parameter values specified in corresponding physical layer specifications, except for parameters with values provided in SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "DefaultMACCellGroupConfig",
+      "name": "Default MAC Cell Group configuration",
+      "entity_type": "Property",
+      "description": "Default MAC Cell Group configuration as specified in TS 38.331 clause 9.2.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3",
+        "TS 38.331, Clause 9.2.2"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "System Information Block containing essential cell access parameters and configuration information.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "IntraSystemInterRATHandover",
+      "name": "Intra-system inter-RAT handover",
+      "entity_type": "Condition",
+      "description": "Condition where UE is connected to 5GC of the source E-UTRA cell, allowing delta configuration for PDCP and SDAP to be used.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "DeltaConfigPDCP_SDAP",
+      "name": "Delta configuration for PDCP and SDAP",
+      "entity_type": "Property",
+      "description": "Incremental configuration changes for PDCP and SDAP protocols used during intra-system inter-RAT handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCReconfigurationProcedure",
+      "target": "DefaultL1Parameters",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE applies default L1 parameter values as part of RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCReconfigurationProcedure",
+      "target": "DefaultMACCellGroupConfig",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE applies default MAC Cell Group configuration as part of RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRCReconfiguration",
+      "target": "RRCReconfigurationProcedure",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Reception of RRCReconfiguration message triggers the RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DefaultL1Parameters",
+      "target": "SIB1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Default L1 parameter values are applied except for parameters with values provided in SIB1",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IntraSystemInterRATHandover",
+      "target": "DeltaConfigPDCP_SDAP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is connected to 5GC of source E-UTRA cell, delta configuration for PDCP and SDAP can be used",
+      "provenance": [
+        "TS 38.331, Clause 5.4.2.3"
+      ]
+    }
+  ]
+}

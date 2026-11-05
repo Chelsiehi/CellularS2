@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4.2",
+  "title": "Handling of network rejection due to ESM cause #26",
+  "entities": [
+    {
+      "id": "ESM_CAUSE_26",
+      "name": "Insufficient resources",
+      "entity_type": "Condition",
+      "description": "ESM cause value #26 indicating insufficient network resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER_VALUE_IE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information Element carrying the timer value for T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "RE_ATTEMPT_INDICATOR_IE",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information Element indicating re-attempt behavior, ignored in this clause.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Back-off timer controlling UE re-attempts for PDN connectivity and bearer resource requests.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message rejecting attach procedure, may be integrity protected or not.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE is not registered.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "name": "Timer value neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where T3396 timer value is positive and active.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_TIMER_DEACTIVATED",
+      "name": "Timer value deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where T3396 is deactivated, blocking requests until specific events.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_TIMER_ZERO",
+      "name": "Timer value zero",
+      "entity_type": "Condition",
+      "description": "Condition where T3396 timer value is zero, allowing immediate re-attempts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_REJECT_UNPROTECTED",
+      "name": "ATTACH REJECT not integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition where ATTACH REJECT message lacks integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_REJECT_PROTECTED",
+      "name": "ATTACH REJECT integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition where ATTACH REJECT message is integrity protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PROP_BLOCK_REQUESTS",
+      "name": "Block requests until timer expiry or stop",
+      "entity_type": "Property",
+      "description": "UE behavior to block specific PDN connectivity and bearer resource requests while T3396 is running or deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM_CAUSE_26",
+      "target": "BACK_OFF_TIMER_VALUE_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause #26 triggers evaluation of Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BACK_OFF_TIMER_VALUE_IE",
+      "target": "T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Back-off timer value IE provides the value to start timer T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "target": "T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Condition stops running T3396 before starting it with new value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TIMER_NOT_ZERO_DEACTIVATED",
+      "target": "PROP_BLOCK_REQUESTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes blocking of requests until T3396 expires or stops.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TIMER_DEACTIVATED",
+      "target": "PROP_BLOCK_REQUESTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition establishes indefinite blocking of requests until specific events.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TIMER_ZERO",
+      "target": "T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Condition stops T3396 and allows immediate re-attempts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ATTACH_REJECT_UNPROTECTED",
+      "target": "T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Condition starts T3396 with random value from default range.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_ATTACH_REJECT_PROTECTED",
+      "target": "T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Condition starts T3396 with value from Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EMM_DEREGISTERED",
+      "target": "T3396",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3396 continues running if UE enters EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ATTACH_REJECT",
+      "target": "COND_ATTACH_REJECT_UNPROTECTED",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "ATTACH REJECT message guards behavior based on integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "ATTACH_REJECT",
+      "target": "COND_ATTACH_REJECT_PROTECTED",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "ATTACH REJECT message guards behavior based on integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.2"
+      ]
+    }
+  ]
+}

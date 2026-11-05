@@ -1,0 +1,214 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.1.1",
+  "title": "RRC connection control",
+  "entities": [
+    {
+      "id": "RRC_CONN_ESTABLISHMENT",
+      "name": "RRC connection establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure that establishes SRB1 and occurs before NG connection establishment and AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "INITIAL_AS_SECURITY_ACTIVATION",
+      "name": "Initial AS security activation",
+      "entity_type": "Procedure",
+      "description": "Procedure that activates both ciphering and integrity protection for AS security after receiving UE context from 5GC.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_CONN_RELEASE",
+      "name": "RRC connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure normally initiated by network to release RRC connection, potentially redirecting UE to another frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_CONN_SUSPENSION",
+      "name": "RRC connection suspension",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network where UE stores UE Inactive AS context and transitions to RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_CONN_RESUMPTION",
+      "name": "RRC connection resumption",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by upper layers or RRC layer to resume suspended RRC connection, re-activating security and re-establishing bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "SRB1",
+      "name": "Signalling Radio Bearer 1",
+      "entity_type": "Property",
+      "description": "First signalling radio bearer established during RRC connection establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "SRB2",
+      "name": "Signalling Radio Bearer 2",
+      "entity_type": "Property",
+      "description": "Second signalling radio bearer that must be configured with at least one DRB or multicast MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "AS_SECURITY",
+      "name": "AS security",
+      "entity_type": "Property",
+      "description": "Access Stratum security comprising both integrity protection and ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE stores context and can perform SDT while maintaining connection suspension.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "Active RRC connection state with full radio bearer establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state with no active connection, entered after connection release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "T319a",
+      "name": "Timer T319a",
+      "entity_type": "Timer",
+      "description": "Timer running during SDT in RRC_INACTIVE state for data and signalling transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "SDT_CONFIG",
+      "name": "Small Data Transmission configuration",
+      "entity_type": "Property",
+      "description": "Configuration allowing data and signalling transmission while UE remains in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRC_CONN_ESTABLISHMENT",
+      "target": "SRB1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection establishment procedure establishes SRB1",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INITIAL_AS_SECURITY_ACTIVATION",
+      "target": "AS_SECURITY",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Initial AS security activation procedure activates both integrity protection and ciphering",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRC_CONN_SUSPENSION",
+      "target": "RRC_INACTIVE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "RRC connection suspension causes UE to transit to RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONN_RESUMPTION",
+      "target": "RRC_CONNECTED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Successful RRC connection resumption sends UE to RRC_CONNECTED state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_CONN_RESUMPTION",
+      "target": "AS_SECURITY",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "RRC connection resume procedure re-activates AS security",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SDT_CONFIG",
+      "target": "T319a",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SDT configuration starts timer T319a for data transmission in RRC_INACTIVE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRC_CONN_RELEASE",
+      "target": "RRC_IDLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "RRC connection release sends UE to RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SRB2",
+      "target": "AS_SECURITY",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SRB2 establishment requires both integrity protection and ciphering",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.1"
+      ]
+    }
+  ]
+}

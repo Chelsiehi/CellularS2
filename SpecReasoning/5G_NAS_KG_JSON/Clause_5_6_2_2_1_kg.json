@@ -1,0 +1,172 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.2.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PAGING_PROCEDURE",
+      "name": "Paging procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to page UE when NAS signalling messages or user data is pending to be sent to UE in 5GMM-IDLE mode over 3GPP access, subject to paging restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1",
+        "Figure 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "T3513",
+      "name": "Timer T3513",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when initiating paging procedure. Stopped when integrity-protected response is received or NGAP UE context resume request indication received.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE_MODE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where paging procedure is initiated by network for pending NAS signalling or user data.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Condition",
+      "description": "Network-stored restriction that determines when paging should or should not be performed based on restriction type and pending data/signalling type.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to respond to paging when in 5GMM-IDLE mode without suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST_MSG",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE for mobility and periodic registration update in response to paging.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1",
+        "Figure 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTED_RESPONSE",
+      "name": "Integrity-protected response",
+      "entity_type": "Condition",
+      "description": "Response from UE that is integrity protected and successfully integrity checked by network, required to stop T3513 timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "ALLOWED_CAG_LIST",
+      "name": "Allowed CAG list",
+      "entity_type": "Information Element",
+      "description": "List provided by AMF to lower layer indicating allowed Closed Access Groups, not provided when emergency PDU session is active.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PAGING_PROCEDURE",
+      "target": "T3513",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3513 when initiating paging procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PAGING_PROCEDURE",
+      "target": "5GMM_IDLE_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure is initiated when UE is in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAGING_PROCEDURE",
+      "target": "PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging procedure execution is guarded by paging restriction conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTEGRITY_PROTECTED_RESPONSE",
+      "target": "T3513",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Timer T3513 is stopped when integrity-protected response is received and successfully checked.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PAGING_PROCEDURE",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE initiates service request procedure as a response to paging.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PAGING_PROCEDURE",
+      "target": "REGISTRATION_REQUEST_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE sends REGISTRATION REQUEST message as a response to paging.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1",
+        "Figure 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PAGING_PROCEDURE",
+      "target": "ALLOWED_CAG_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AMF may provide allowed CAG list to lower layer during paging procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_REQUEST_MSG",
+      "target": "INTEGRITY_PROTECTED_RESPONSE",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "REGISTRATION REQUEST message requires integrity protection for T3513 stopping conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.2.2.1"
+      ]
+    }
+  ]
+}

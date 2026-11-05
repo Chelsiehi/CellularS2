@@ -1,0 +1,269 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.2.3",
+  "title": "Dedicated EPS bearer context activation accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation",
+      "entity_type": "Procedure",
+      "description": "Procedure for activating a dedicated EPS bearer context in response to network request.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Network-initiated message to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "UE response message accepting the dedicated EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer associated with APN or no APN context, stopped upon dedicated bearer activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3485",
+      "name": "Timer T3485",
+      "entity_type": "Timer",
+      "description": "MME timer stopped upon receiving ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE and MME after successful dedicated bearer activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the dedicated EPS bearer being activated.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_IDENTITY",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Indicates the default bearer to which the dedicated bearer is linked.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template (TFT)",
+      "entity_type": "Information Element",
+      "description": "Used for mapping uplink traffic flows to the radio bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity (PTI)",
+      "entity_type": "Information Element",
+      "description": "Identifies UE-initiated procedures related to bearer resource allocation/modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Contains various parameters including APN rate control, small data rate control, and QoS rules.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN",
+      "name": "Emergency PDN connection",
+      "entity_type": "Condition",
+      "description": "Condition where dedicated bearer activation is for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "PROP_TFT_CHECK",
+      "name": "TFT validation",
+      "entity_type": "Property",
+      "description": "UE checks received TFT before taking it into use.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure begins with receipt of ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T3396 under specified conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in entering BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT includes EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST includes linked EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_TFT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST includes TFT.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST may include PTI.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST includes protocol configuration options IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_PDN",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDN connection condition prevents stopping timer T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "PROP_TFT_CHECK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes TFT validation before use.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT stops MME timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT causes MME to enter BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.3"
+      ]
+    }
+  ]
+}

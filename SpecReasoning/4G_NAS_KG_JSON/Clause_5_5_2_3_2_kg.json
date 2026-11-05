@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.2",
+  "title": "Network initiated detach procedure completion by the UE",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_DETACH",
+      "name": "Network initiated detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network initiates detach and the UE completes it by responding to DETACH REQUEST message and performing various actions based on detach type and EMM cause.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate detach procedure. Contains detach type and optional EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to acknowledge detach request from network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of detach: re-attach required, re-attach not required, or IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "IE providing reason for detach with various cause values like #2, #6, #7, #8, #11, #12, #13, #14, #15, #25, #78.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by UE after detach procedure completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE when receiving DETACH REQUEST with re-attach required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "T3396",
+      "entity_type": "Timer",
+      "description": "ESM back-off timer stopped by UE when receiving DETACH REQUEST with re-attach required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_REQUIRED",
+      "name": "Detach type indicates re-attach required",
+      "entity_type": "Condition",
+      "description": "Condition where UE must deactivate EPS bearers, stop timers, send DETACH ACCEPT, and initiate re-attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "COND_IMSI_DETACH",
+      "name": "Detach type indicates IMSI detach",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not deactivate EPS bearers but sets MM update status and may perform combined TA/LA updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "PROP_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "UE locally deactivates EPS bearer contexts including default bearer without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "PROP_STATE_TRANSITION_EMM_DEREG",
+      "name": "Transition to EMM-DEREGISTERED state",
+      "entity_type": "Property",
+      "description": "UE enters EMM-DEREGISTERED state after sending DETACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves receiving DETACH REQUEST message from network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "MSG_DETACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending DETACH ACCEPT message to network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message may contain EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REATTACH_REQUIRED",
+      "target": "PROP_EPS_BEARER_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When detach type indicates re-attach required, UE deactivates EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REATTACH_REQUIRED",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When detach type indicates re-attach required, UE stops timer T3346 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REATTACH_REQUIRED",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When detach type indicates re-attach required, UE stops timer T3396 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_REATTACH_REQUIRED",
+      "target": "PROP_STATE_TRANSITION_EMM_DEREG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When detach type indicates re-attach required, UE enters EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_IMSI_DETACH",
+      "target": "PROP_STATE_TRANSITION_EMM_DEREG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When detach type indicates IMSI detach, UE may send DETACH ACCEPT and enter EMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_REATTACH_REQUIRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE value determines if re-attach required condition applies.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_IMSI_DETACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE value determines if IMSI detach condition applies.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_EMM_CAUSE",
+      "target": "PROP_STATE_TRANSITION_EMM_DEREG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause IE values determine specific state transitions and behaviors during detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.2"
+      ]
+    }
+  ]
+}

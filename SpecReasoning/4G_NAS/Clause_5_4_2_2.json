@@ -1,0 +1,64 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.2",
+  "title": "Authentication initiation by the network",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-------------------------------------------------",
+    "When a NAS signalling connection exists, the network can initiate an authentication procedure at any time. For restrictions applicable after handover or inter-system handover to S1 mode see clause 5.5.3.2.3",
+    "The network initiates the authentication procedure by sending an AUTHENTICATION REQUEST message to the UE and starting the timer T3460 (see example in figure 5.4.2.2.1). The AUTHENTICATION REQUEST message contains the parameters necessary to calculate the authentication response (see 3GPP S 33.401 [19])",
+    "If an eKSI is contained in an initial NAS message during an EMM procedure, the network shall include a different eKSI value in the AUTHENTICATION REQUEST message when it initiates an authentication procedure",
+    "Figure 5.4.2.2.1: Authentication procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.4.2.2.1",
+      "file": "Figure_5_4_2_2_1_p103.png.json",
+      "title": "Authentication procedure",
+      "content": {
+        "figure_id": "5.4.2.2.1",
+        "title": "Authentication procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "UE",
+              "name": "AUTHENTICATION REQUEST",
+              "notes": "Start T3460"
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "AUTHENTICATION RESPONSE",
+              "notes": "Stop T3460"
+            },
+            {
+              "from": "MME",
+              "to": "UE",
+              "name": "AUTHENTICATION REJECT",
+              "notes": "if authentication failed"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Timer T3460 is started when MME sends AUTHENTICATION REQUEST",
+            "Timer T3460 is stopped when MME receives AUTHENTICATION RESPONSE",
+            "AUTHENTICATION REJECT is sent if authentication failed"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

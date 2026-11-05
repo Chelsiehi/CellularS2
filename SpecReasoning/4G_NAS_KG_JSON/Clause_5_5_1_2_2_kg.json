@@ -1,0 +1,262 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.2",
+  "title": "Attach procedure initiation",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE in EMM-DEREGISTERED state to attach to the network. UE sends ATTACH REQUEST message, starts timer T3410, and enters EMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2",
+        "Figure 5.5.1.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Initial message of attach procedure sent from UE to MME. Contains various information elements including EPS mobile identity, UE network capability, and optional ESM message container.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2",
+        "Figure 5.5.1.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "Initial state where UE is not registered with the network. Attach procedure is initiated from this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_INITIATED",
+      "name": "EMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by UE after sending ATTACH REQUEST message and starting timer T3410.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3410",
+      "name": "T3410",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends ATTACH REQUEST message. Monitors the attach procedure completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2",
+        "Figure 5.5.1.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "T3402",
+      "entity_type": "Timer",
+      "description": "Timer that may be running when attach procedure is initiated. UE stops this timer if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "T3411",
+      "entity_type": "Timer",
+      "description": "Timer that may be running when attach procedure is initiated. UE stops this timer if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_MOBILE_IDENTITY",
+      "name": "EPS mobile identity",
+      "entity_type": "Information Element",
+      "description": "IE in ATTACH REQUEST message containing UE identity (IMSI, GUTI, mapped GUTI, or IMEI) depending on various conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_UE_NETWORK_CAPABILITY",
+      "name": "UE network capability",
+      "entity_type": "Information Element",
+      "description": "IE in ATTACH REQUEST message indicating UE's supported features and capabilities through various capability bits.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container",
+      "entity_type": "Information Element",
+      "description": "IE in ATTACH REQUEST message containing either PDN CONNECTIVITY REQUEST or ESM DUMMY MESSAGE depending on PDN connection requirements.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PLMN_SELECTION",
+      "name": "PLMN selection condition",
+      "entity_type": "Condition",
+      "description": "Condition determining which identity to include in EPS mobile identity IE based on whether selected PLMN is registered PLMN or equivalent PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_INTERWORKING_N26",
+      "name": "Interworking without N26 interface condition",
+      "entity_type": "Condition",
+      "description": "Condition determining identity mapping and security context usage during inter-system change from N1 mode to S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_STOP_TIMERS",
+      "name": "Stop running timers",
+      "entity_type": "Property",
+      "description": "UE behavior to stop timers T3402 and T3411 if they are currently running when initiating attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_PROCEDURE",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes sending ATTACH REQUEST message as initial step",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_PROCEDURE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attach procedure is initiated when UE is in EMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_PROCEDURE",
+      "target": "STATE_EMM_REGISTERED_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Attach procedure causes UE to enter EMM-REGISTERED-INITIATED state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ATTACH_PROCEDURE",
+      "target": "TIMER_T3410",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Attach procedure starts timer T3410",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2",
+        "Figure 5.5.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_PROCEDURE",
+      "target": "PROPERTY_STOP_TIMERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Attach procedure requires stopping timers T3402 and T3411 if running",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_EPS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains EPS mobile identity IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_UE_NETWORK_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains UE network capability IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains ESM message container IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "CONDITION_PLMN_SELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Content of EPS mobile identity IE is determined by PLMN selection conditions",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "CONDITION_INTERWORKING_N26",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Content of EPS mobile identity IE is determined by interworking without N26 interface conditions",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROPERTY_STOP_TIMERS",
+      "target": "TIMER_T3402",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3402 if running during attach procedure initiation",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROPERTY_STOP_TIMERS",
+      "target": "TIMER_T3411",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3411 if running during attach procedure initiation",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.2"
+      ]
+    }
+  ]
+}

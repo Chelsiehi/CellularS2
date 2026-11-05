@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.6",
+  "title": "Handling of network rejection not due to APN based congestion control",
+  "entities": [
+    {
+      "id": "EPS_SESSION_MANAGEMENT_REJECT",
+      "name": "EPS session management reject message",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject EPS session management procedure, may contain back-off timer value and re-attempt indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer value included in EPS session management reject message to regulate UE retry interval for same procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "RE_ATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "Indicator specifying whether UE can re-attempt session management procedure for same APN in different modes after inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_26",
+      "name": "ESM cause #26 insufficient resources",
+      "entity_type": "Condition",
+      "description": "Specific ESM cause value that affects network's inclusion of re-attempt indicator in reject message.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "PLMN_APN_COMBINATION",
+      "name": "PLMN and APN combination",
+      "entity_type": "Property",
+      "description": "Combination of PLMN and APN that back-off timer is associated with, determining scope of timer applicability.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDN_CONNECTION",
+      "name": "Emergency PDN connection",
+      "entity_type": "Condition",
+      "description": "Special PDN connection type that is not affected by back-off timer for PLMN with no APN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "EQUIVALENT_PLMN_LIST",
+      "name": "Equivalent PLMN list",
+      "entity_type": "Property",
+      "description": "List of PLMNs considered equivalent for back-off timer applicability when indicated in re-attempt indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "AC11_15_UE",
+      "name": "UE configured to use AC11-15",
+      "entity_type": "Condition",
+      "description": "UE configuration that allows initiation of procedures even when back-off timer is running for PLMN and APN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EPS_SESSION_MANAGEMENT_REJECT",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS session management reject message may contain back-off timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EPS_SESSION_MANAGEMENT_REJECT",
+      "target": "RE_ATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS session management reject message may contain re-attempt indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ESM_CAUSE_26",
+      "target": "RE_ATTEMPT_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For ESM cause values other than #26, network may include re-attempt indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "BACK_OFF_TIMER",
+      "target": "PLMN_APN_COMBINATION",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Back-off timer is associated with specific PLMN and APN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMERGENCY_PDN_CONNECTION",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer for PLMN with no APN is never started for emergency PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RE_ATTEMPT_INDICATOR",
+      "target": "EQUIVALENT_PLMN_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Re-attempt indicator may specify back-off applies to all PLMNs in equivalent PLMN list.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AC11_15_UE",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UEs configured with AC11-15 can initiate procedures even when back-off timer is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.6"
+      ]
+    }
+  ]
+}

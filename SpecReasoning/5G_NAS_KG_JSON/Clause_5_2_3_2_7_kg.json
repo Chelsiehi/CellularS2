@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.3.2.7",
+  "title": "UPDATE-NEEDED",
+  "entities": [
+    {
+      "id": "UPDATE_NEEDED_STATE",
+      "name": "UPDATE-NEEDED state",
+      "entity_type": "State",
+      "description": "A UE state where radio capability update is needed, restricting certain UE activities until barring is alleviated.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "USER_DATA_RESTRICTION",
+      "name": "User data transmission restriction",
+      "entity_type": "Condition",
+      "description": "UE shall not send any user data while in UPDATE-NEEDED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "SIGNALLING_RESTRICTION",
+      "name": "Signalling restriction with exceptions",
+      "entity_type": "Condition",
+      "description": "UE shall not send signalling information except for service request response to paging, emergency services, or emergency services fallback.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION",
+      "name": "Cell selection/reselection",
+      "entity_type": "Procedure",
+      "description": "UE shall perform cell selection/reselection while in UPDATE-NEEDED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "BARRIER_ALLEVIATION",
+      "name": "Barring alleviation condition",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate barring is alleviated for the access category associated with registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "ECALL_INACTIVITY_PROCEDURE",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when UE is configured for eCall only mode at expiry of timer T3444 or T3445.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode configuration, expiry triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode configuration, expiry triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UPDATE_NEEDED_STATE",
+      "target": "USER_DATA_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UPDATE-NEEDED state establishes restriction on user data transmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UPDATE_NEEDED_STATE",
+      "target": "SIGNALLING_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UPDATE-NEEDED state establishes signalling restrictions with specific exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UPDATE_NEEDED_STATE",
+      "target": "CELL_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UPDATE-NEEDED state includes cell selection/reselection as a required procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "BARRIER_ALLEVIATION",
+      "target": "UPDATE_NEEDED_STATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Barring alleviation condition guards the transition out of UPDATE-NEEDED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3444",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3444 starts the eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_T3445",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3445 starts the eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.7"
+      ]
+    }
+  ]
+}

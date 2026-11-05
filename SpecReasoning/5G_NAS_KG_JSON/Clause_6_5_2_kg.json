@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.5.2",
+  "title": "5GSM status received in the UE",
+  "entities": [
+    {
+      "id": "5GSM_STATUS_MESSAGE",
+      "name": "5GSM STATUS message",
+      "entity_type": "Message",
+      "description": "A 5G session management status message received by the UE containing a 5GSM cause value.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "5GSM_CAUSE_VALUE",
+      "name": "5GSM cause value",
+      "entity_type": "Information Element",
+      "description": "An information element in the 5GSM STATUS message indicating the reason for the status.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Identifier",
+      "description": "An identifier used to associate 5GSM procedures with specific transactions.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Identifier",
+      "description": "An identifier for a PDU session in 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "5GSM_PROCEDURE",
+      "name": "5GSM procedure",
+      "entity_type": "Procedure",
+      "description": "An ongoing 5G session management procedure in the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "TIMER_RELATED",
+      "name": "Related timer",
+      "entity_type": "Timer",
+      "description": "A timer associated with an ongoing 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "CONDITION_INVALID_PTI",
+      "name": "Invalid PTI value",
+      "entity_type": "Condition",
+      "description": "Condition when received 5GSM STATUS message contains cause value #81 (invalid PTI value).",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MSG_TYPE_NONEXISTENT",
+      "name": "Message type non-existent or not implemented",
+      "entity_type": "Condition",
+      "description": "Condition when received 5GSM STATUS message contains cause value #97 (message type non-existent or not implemented).",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "CONDITION_OTHER_CAUSE",
+      "name": "Other 5GSM cause value",
+      "entity_type": "Condition",
+      "description": "Condition when received 5GSM STATUS message contains any 5GSM cause value other than #81 or #97.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_ABORT_PROCEDURE",
+      "name": "Abort ongoing 5GSM procedure",
+      "entity_type": "Property",
+      "description": "Behavior where the UE terminates any ongoing 5GSM procedure related to the received PTI or PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_STOP_TIMER",
+      "name": "Stop related timer",
+      "entity_type": "Property",
+      "description": "Behavior where the UE stops any timer associated with the ongoing 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_ACTION",
+      "name": "No specific action taken",
+      "entity_type": "Property",
+      "description": "Behavior where no state transition or specific action is taken as seen from the radio interface upon receiving certain 5GSM STATUS messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "5GSM_STATUS_MESSAGE",
+      "target": "5GSM_CAUSE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The 5GSM STATUS message contains a 5GSM cause value information element.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "5GSM_STATUS_MESSAGE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The 5GSM STATUS message contains a PTI identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_INVALID_PTI",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving 5GSM STATUS with cause #81 establishes the behavior to abort ongoing 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_INVALID_PTI",
+      "target": "PROPERTY_STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving 5GSM STATUS with cause #81 establishes the behavior to stop related timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_MSG_TYPE_NONEXISTENT",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving 5GSM STATUS with cause #97 establishes the behavior to abort ongoing 5GSM procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_MSG_TYPE_NONEXISTENT",
+      "target": "PROPERTY_STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving 5GSM STATUS with cause #97 establishes the behavior to stop related timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_OTHER_CAUSE",
+      "target": "PROPERTY_NO_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving 5GSM STATUS with any other cause value establishes no specific action behavior.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "5GSM_CAUSE_VALUE",
+      "target": "CONDITION_INVALID_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GSM cause value #81 guards the condition for invalid PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "5GSM_CAUSE_VALUE",
+      "target": "CONDITION_MSG_TYPE_NONEXISTENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "5GSM cause value #97 guards the condition for message type non-existent or not implemented.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "5GSM_CAUSE_VALUE",
+      "target": "CONDITION_OTHER_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Any other 5GSM cause value guards the condition for no specific action.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.2"
+      ]
+    }
+  ]
+}

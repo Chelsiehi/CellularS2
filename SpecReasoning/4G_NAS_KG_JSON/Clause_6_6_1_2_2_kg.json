@@ -1,0 +1,233 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.1.2.2",
+  "title": "ESM information request initiated by the network",
+  "entities": [
+    {
+      "id": "PROC_ESM_INFO_REQ",
+      "name": "ESM information request procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to request ESM information from the UE. The network sends ESM INFORMATION REQUEST message, starts timer T3489, and enters PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ESM_INFO_REQ",
+      "name": "ESM INFORMATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to request ESM information. Contains PTI from associated PDN CONNECTIVITY REQUEST and EPS bearer identity set to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ESM_INFO_RESP",
+      "name": "ESM INFORMATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network in response to ESM INFORMATION REQUEST. Contains protocol configuration options, APN if required, and PTI from request message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3489",
+      "name": "T3489",
+      "entity_type": "Timer",
+      "description": "Timer started by network when sending ESM INFORMATION REQUEST message and stopped upon receipt of ESM INFORMATION RESPONSE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TXN_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by network after sending ESM INFORMATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TXN_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by network after receiving ESM INFORMATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_SETUP",
+      "name": "Security context setup",
+      "entity_type": "Condition",
+      "description": "Condition requiring that security context has been established before ESM INFORMATION REQUEST can be sent.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "COND_ESM_INFO_FLAG_SET",
+      "name": "ESM information transfer flag set",
+      "entity_type": "Condition",
+      "description": "Condition requiring that ESM information transfer flag has been set in PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity included in ESM INFORMATION REQUEST and ESM INFORMATION RESPONSE messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_ID",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "EPS bearer identity set to 'no EPS bearer identity assigned' in both ESM INFORMATION REQUEST and ESM INFORMATION RESPONSE messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ESM_INFO_REQ",
+      "target": "MSG_ESM_INFO_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "ESM information request procedure involves sending ESM INFORMATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ESM_INFO_REQ",
+      "target": "TIMER_T3489",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3489 when sending ESM INFORMATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_ESM_INFO_REQ",
+      "target": "STATE_PROC_TXN_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires network to enter PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ESM_INFO_REQ",
+      "target": "COND_SECURITY_SETUP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM INFORMATION REQUEST message sending is guarded by security context setup condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ESM_INFO_REQ",
+      "target": "COND_ESM_INFO_FLAG_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM INFORMATION REQUEST message sending is guarded by ESM information transfer flag condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ESM_INFO_REQ",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION REQUEST message contains Procedure Transaction Identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ESM_INFO_REQ",
+      "target": "IE_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION REQUEST message contains EPS bearer identity IE set to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ESM_INFO_RESP",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains Procedure Transaction Identity IE from request.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_ESM_INFO_RESP",
+      "target": "IE_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains EPS bearer identity IE set to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_ESM_INFO_RESP",
+      "target": "TIMER_T3489",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of ESM INFORMATION RESPONSE message stops timer T3489.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_ESM_INFO_RESP",
+      "target": "STATE_PROC_TXN_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of ESM INFORMATION RESPONSE message establishes PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.2",
+        "Figure 6.6.1.2.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.3.8",
+  "title": "Abortion of RRC connection establishment",
+  "entities": [
+    {
+      "id": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "name": "Abortion of RRC connection establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when upper layers abort RRC connection establishment due to NAS procedure abortion before UE enters RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "TIMER_T300",
+      "name": "Timer T300",
+      "entity_type": "Timer",
+      "description": "Timer used during RRC connection establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has established connection with network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "CONDITION_UPPER_LAYER_ABORT",
+      "name": "Upper layers abort RRC connection establishment",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers abort RRC connection establishment due to NAS procedure being aborted.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_STOP_T300",
+      "name": "Stop timer T300",
+      "entity_type": "Property",
+      "description": "Action to stop timer T300 if it is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_RESET_MAC",
+      "name": "Reset MAC",
+      "entity_type": "Property",
+      "description": "Action to reset MAC layer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_RELEASE_MAC_CONFIG",
+      "name": "Release MAC configuration",
+      "entity_type": "Property",
+      "description": "Action to release MAC layer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_REESTABLISH_RLC",
+      "name": "Re-establish RLC for all RBs",
+      "entity_type": "Property",
+      "description": "Action to re-establish RLC for all established radio bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_UPPER_LAYER_ABORT",
+      "target": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layer abort condition triggers the RRC connection establishment abortion procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "target": "PROPERTY_STOP_T300",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The abortion procedure includes stopping timer T300 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "target": "PROPERTY_RESET_MAC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The abortion procedure includes resetting MAC layer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "target": "PROPERTY_RELEASE_MAC_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The abortion procedure includes releasing MAC configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_RRC_CONN_EST_ABORT",
+      "target": "PROPERTY_REESTABLISH_RLC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The abortion procedure includes re-establishing RLC for all established radio bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_UPPER_LAYER_ABORT",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The abort condition applies only when UE has not yet entered RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.8"
+      ]
+    }
+  ]
+}

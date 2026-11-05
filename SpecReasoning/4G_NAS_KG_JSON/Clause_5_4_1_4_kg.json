@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.1.4",
+  "title": "GUTI reallocation completion by the network",
+  "entities": [
+    {
+      "id": "GUTI_REALLOCATION_COMPLETE",
+      "name": "GUTI REALLOCATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to indicate completion of GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "GUTI_REALLOCATION_COMMAND",
+      "name": "GUTI REALLOCATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "T3450",
+      "name": "Timer T3450",
+      "entity_type": "Timer",
+      "description": "Timer used during GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identifier used to identify the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list containing tracking areas where the UE can move without performing tracking area update.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "GUTI_REALLOCATION_PROCEDURE",
+      "name": "GUTI reallocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reallocating the GUTI and optionally the TAI list to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "GUTI_REALLOCATION_PROCEDURE",
+      "target": "GUTI_REALLOCATION_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "GUTI reallocation procedure includes receiving GUTI REALLOCATION COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "GUTI_REALLOCATION_COMPLETE",
+      "target": "T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of GUTI REALLOCATION COMPLETE message stops timer T3450.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "GUTI_REALLOCATION_COMPLETE",
+      "target": "GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Upon receipt of GUTI REALLOCATION COMPLETE, the MME considers the new GUTI as valid and old GUTI as invalid.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "GUTI_REALLOCATION_COMMAND",
+      "target": "TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI REALLOCATION COMMAND message may contain a new TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "GUTI_REALLOCATION_COMPLETE",
+      "target": "TAI_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If a new TAI list is provided in GUTI REALLOCATION COMMAND, the MME considers the new TAI list as valid and old TAI list as invalid upon receipt of GUTI REALLOCATION COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.1.5",
+  "title": "Suspend and resume of the N1 NAS signalling connection",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "--------------------------------------------------------------",
+    "Suspend of the N1 NAS signalling connection can be initiated by the network in 5GMM-CONNECTED mode when user plane CIoT 5GS optimization is used. Resume of the suspended N1 NAS signalling connection is initiated by the UE",
+    "In the UE, when user plane CIoT 5GS optimization is used",
+    "- Upon idle suspend indication from the lower layers, the UE shall enter 5GMM-IDLE mode with suspend indication, shall not consider the N1 NAS signalling connection released and shall not consider the secure exchange of NAS messages terminated (see subclause4.4.2.5 and 4.4.5)",
+    "- Upon trigger of a procedure using an initial NAS message when in 5GMM-IDLE mode with suspend indication, the UE shall",
+    "i) if the initial NAS message is a REGISTRATION REQUEST message with the NG-RAN-RCU bit of the 5GS update type IE set to \"UE radio capability update needed\", enter 5GMM-IDLE mode without suspend indication and proceed with the registration procedure; or",
+    "ii) otherwise, request the lower layer to resume the RRC connection",
+    "NOTE1: In NB-N1 mode, in the request to the lower layer the data volume information of the initial NAS message is provided to the lower layers. Interactions between the NAS and the lower layers in order to obtain the data volume information of the initial NAS message (see 3GPPTS36.321[25E], 3GPP TS 36.331 [25A]) is left to implementations",
+    "- Upon indication from the lower layers that the RRC connection has been resumed when in 5GMM-IDLE mode with suspend indication, the UE shall enter 5GMM-CONNECTED mode. If the pending NAS message is",
+    "i) a SERVICE REQUEST message, the service type IE is not set to \"emergency services fallback\", and the UE did not include the NAS message container IE in the SERVICE REQUEST message; or",
+    "ii) a CONTROL PLANE SERVICE REQUEST message, and the UE did not include the CIoT small data container IE or the NAS message container IE in the CONTROL PLANE SERVICE REQUEST message",
+    "the message shall not be sent. Otherwise the UE shall cipher the message as specified in subclause4.4.5 and send the pending initial NAS message upon entering 5GMM-CONNECTED mode",
+    "NOTE2: If a NAS message is discarded and not sent to the network, the uplink NAS COUNT value corresponding to that message is reused for the next uplink NAS message to be sent",
+    "- Upon fallback indication from the lower layers at RRC connection resume when in 5GMM-IDLE mode with suspend indication, the UE shall enter 5GMM-IDLE mode without suspend indication, send any pending initial NAS message and proceed as if RRC connection establishment had been requested",
+    "- Upon indication from the lower layers that the RRC connection resume has failed and indication from the lower layers that the RRC connection is suspended, the UE shall enter 5GMM-IDLE mode with suspend indication and restart the ongoing NAS procedure if required; and",
+    "- Upon indication from the lower layers that the RRC connection resume has failed and indication from the lower layers that the RRC connection is not idle suspended, the UE shall enter 5GMM-IDLE mode without suspend indication and restart the ongoing NAS procedure if required",
+    "In the network, when user plane CIoT 5GS optimization is used",
+    "- Upon idle suspend indication from the lower layers, the network shall enter 5GMM-IDLE mode with suspend indication, shall not consider the N1 NAS signalling connection released and shall not consider the secure exchange of NAS messages terminated; and",
+    "- Upon indication from the lower layers that it has received the NGAP UE context resume request message as specified in 3GPPTS38.413[31] when in 5GMM-IDLE mode with suspend indication, the network shall enter 5GMM-CONNECTED mode",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

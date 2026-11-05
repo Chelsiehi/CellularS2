@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.3A",
+  "title": "Procedures related to EAP methods other than EAP-AKA' and EAP-TLS",
+  "entities": [
+    {
+      "id": "EAP_PRIMARY_AUTH_PROCEDURE",
+      "name": "EAP-based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP methods other than EAP-AKA' and EAP-TLS in SNPN, supporting mutual authentication and EMSK/MSK generation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message containing EAP-request message used in authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "NAS message containing EAP-response message sent by UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REJECT",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message that may contain EAP-failure message when authentication fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "EAP_MESSAGE_IE",
+      "name": "EAP message information element",
+      "entity_type": "Information Element",
+      "description": "IE containing EAP messages (request, response, success, failure) in authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Next Generation Key Set Identifier used to identify security contexts.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "ABBA",
+      "name": "ABBA",
+      "entity_type": "Identifier",
+      "description": "Anti-Bidding-down Between Architectures parameter used in key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "T3520",
+      "name": "Timer T3520",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when AUTHENTICATION RESPONSE is sent if UE fails to authenticate network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "T3247",
+      "name": "Timer T3247",
+      "entity_type": "Timer",
+      "description": "Timer started when AUTHENTICATION REJECT message is received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "5GMM state entered upon authentication failure or rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "name": "Partial native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context created in volatile memory identified by ngKSI value, containing KAMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "AUTH_FAILURE_CONDITION",
+      "name": "Authentication failure condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE fails to authenticate network or network fails to authenticate UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "EAP_MESSAGE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains EAP message IE with EAP-request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "EAP_MESSAGE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains EAP message IE with EAP-response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTH_FAILURE_CONDITION",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When UE fails to authenticate network, UE starts timer T3520.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receiving AUTHENTICATION REQUEST with EAP-request, UE stops timer T3520 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Upon receiving AUTHENTICATION REJECT, UE enters 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EAP_PRIMARY_AUTH_PROCEDURE",
+      "target": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful EAP authentication establishes partial native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "T3247",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When AUTHENTICATION REJECT is received without integrity protection, UE starts timer T3247.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "AUTHENTICATION_REJECT",
+      "target": "AUTH_FAILURE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message indicates authentication failure condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EAP_PRIMARY_AUTH_PROCEDURE",
+      "target": "NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP authentication procedure uses ngKSI to identify security contexts.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EAP_PRIMARY_AUTH_PROCEDURE",
+      "target": "ABBA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP authentication procedure uses ABBA parameter for key derivation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A"
+      ]
+    }
+  ]
+}

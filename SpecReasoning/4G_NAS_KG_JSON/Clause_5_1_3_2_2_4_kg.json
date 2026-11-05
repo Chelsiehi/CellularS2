@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.2.4",
+  "title": "EMM-REGISTERED",
+  "entities": [
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State where an EMM context has been established and a default EPS bearer context may be activated. UE location is known to MME with tracking area list accuracy in EMM-IDLE mode and serving eNodeB accuracy in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "EMM_CONTEXT",
+      "name": "EMM context",
+      "entity_type": "Property",
+      "description": "Established context in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "DEFAULT_EPS_BEARER_CONTEXT",
+      "name": "Default EPS bearer context",
+      "entity_type": "Property",
+      "description": "Activated context in UE when EMM-REGISTERED without PDN connection is not supported or when UE requests PDN connectivity and bearer is successfully established.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_PDN_CONNECTION_SUPPORT",
+      "name": "EMM-REGISTERED without PDN connection support condition",
+      "entity_type": "Condition",
+      "description": "Condition where EMM-REGISTERED without PDN connection is not supported by UE or MME, or UE requests PDN connectivity and default EPS bearer is established.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TAU",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed in EMM-REGISTERED state for updating UE tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "MODE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "Mode where UE location is known to MME with tracking area list accuracy.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "MODE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "Mode where UE location is known to MME with serving eNodeB accuracy.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "EMM_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM-REGISTERED state establishes an EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "DEFAULT_EPS_BEARER_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM-REGISTERED state may establish a default EPS bearer context under specified conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_PDN_CONNECTION_SUPPORT",
+      "target": "DEFAULT_EPS_BEARER_CONTEXT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition guards activation of default EPS bearer context in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "PROCEDURE_TAU",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "EMM-REGISTERED state includes performing tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "MODE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM-REGISTERED state includes EMM-IDLE mode with tracking area list location accuracy.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "MODE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM-REGISTERED state includes EMM-CONNECTED mode with serving eNodeB location accuracy.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.4"
+      ]
+    }
+  ]
+}

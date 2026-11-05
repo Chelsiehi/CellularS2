@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.2.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDN_DISCONNECT",
+      "name": "PDN Disconnection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for disconnecting a PDN connection, including abnormal case handling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent to request disconnection of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REJECT",
+      "name": "PDN DISCONNECT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent to reject a PDN disconnection request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Information element identifying the EPS bearer to be disconnected.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_NO_PDN_CONNECTION",
+      "name": "No PDN connection with linked EPS bearer identity activated",
+      "entity_type": "Condition",
+      "description": "Condition where the linked EPS bearer identity does not belong to the default EPS bearer context of an established PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "PROP_MME_REPLY_REJECT",
+      "name": "MME replies with PDN DISCONNECT REJECT",
+      "entity_type": "Property",
+      "description": "MME behavior to send PDN DISCONNECT REJECT message with ESM cause #43 when invalid EPS bearer identity is detected.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE_43",
+      "name": "ESM cause #43",
+      "entity_type": "Information Element",
+      "description": "ESM cause value indicating 'invalid EPS bearer identity'.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN disconnection procedure involves sending PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDN_DISCONNECT_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REQUEST message contains linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_PDN_CONNECTION",
+      "target": "PROP_MME_REPLY_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no PDN connection with linked EPS bearer identity triggers MME to reply with PDN DISCONNECT REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_MME_REPLY_REJECT",
+      "target": "MSG_PDN_DISCONNECT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MME reply behavior includes sending PDN DISCONNECT REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDN_DISCONNECT_REJECT",
+      "target": "IE_ESM_CAUSE_43",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REJECT message contains ESM cause #43.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_LINKED_EPS_BEARER_ID",
+      "target": "COND_NO_PDN_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Linked EPS bearer identity IE is guarded by condition checking if it belongs to default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.6"
+      ]
+    }
+  ]
+}

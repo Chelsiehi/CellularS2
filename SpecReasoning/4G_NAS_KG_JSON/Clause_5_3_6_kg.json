@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.6",
+  "title": "Handling of timer T3402",
+  "entities": [
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer T3402 is a network-controlled timer used in UE procedures. Its value can be configured by the network via specific messages and has a default value used under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to accept an attach request from the UE. It can carry the T3402 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to accept a tracking area update request from the UE. It can carry the T3402 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT",
+      "name": "ATTACH REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject an attach request from the UE. It can carry the T3402 timer value, which must be integrity protected to be applied.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "COND_T3402_DEACTIVATED",
+      "name": "T3402 deactivated condition",
+      "entity_type": "Condition",
+      "description": "Condition where the network indicates timer T3402 is deactivated, causing the UE to use the default timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "COND_NEW_PLMN_SELECTED",
+      "name": "New PLMN selected condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE selects a new PLMN not in the equivalent PLMN list, which may reset the T3402 timer to its default value under specific failure conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "PROP_DEFAULT_TIMER_USED",
+      "name": "Default timer value used",
+      "entity_type": "Property",
+      "description": "Property indicating the UE uses the default value of timer T3402 in cases such as no stored value, deactivation indication, or specific procedure failures.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "TIMER_T3402",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message can contain the T3402 timer value for UE configuration.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "TIMER_T3402",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message can contain the T3402 timer value for UE configuration.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "TIMER_T3402",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message can contain the T3402 timer value, which must be integrity protected to be applied.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3402_DEACTIVATED",
+      "target": "PROP_DEFAULT_TIMER_USED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the network indicates T3402 is deactivated, the UE uses the default timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NEW_PLMN_SELECTED",
+      "target": "PROP_DEFAULT_TIMER_USED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When a new PLMN is selected and specific procedure failures occur, the UE uses the default T3402 timer value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "TIMER_T3402",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "The T3402 timer value in ATTACH REJECT must be integrity protected for the UE to apply it.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.6"
+      ]
+    }
+  ]
+}

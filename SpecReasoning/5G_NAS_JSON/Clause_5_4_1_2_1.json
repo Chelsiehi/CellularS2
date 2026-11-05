@@ -1,0 +1,124 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------",
+    "The purpose of the EAP based primary authentication and key agreement procedure is to provide mutual authentication between the UE and the network and to agree on the keys KAUSF, KSEAF and KAMF (see 3GPPTS33.501[24])",
+    "Extensible authentication protocol (EAP) as specified in IETFRFC3748[34] enables authentication using various EAP methods",
+    "EAP defines four types of EAP messages",
+    "a) an EAP-request message",
+    "b) an EAP-response message",
+    "c) an EAP-success message; and",
+    "d) an EAP-failure message",
+    "Several rounds of exchanges of an EAP-request message and a related EAP-response message can be required to achieve the authentication (see example in figure5.4.1.2.1.1)",
+    "The EAP based primary authentication and key agreement procedure is always initiated and controlled by the network",
+    "The EAP-request message, the ngKSI and the ABBA are transported from the network to the UE using the AUTHENTICATION REQUEST message of the EAP message reliable transport procedure",
+    "The EAP-response message is transported from the UE to the network using the AUTHENTICATION RESPONSE message of the EAP message reliable transport procedure",
+    "If the authentication of the UE completes successfully, the serving AMF intends to initiate a security mode control procedure after the EAP based primary authentication and key agreement procedure and the security mode control procedure intends to bring into use the partial native 5G NAS security context created by the EAP based primary authentication and key agreement procedure, then the EAP-success message and the ngKSI are transported from the network to the UE using the SECURITY MODE COMMAND message of the security mode control procedure (see subclause5.4.2)",
+    "If the authentication of the UE completes successfully and the serving AMF does not intend to initiate a security mode control procedure bringing into use the partial native 5G NAS security context created by the EAP based primary authentication and key agreement procedure, then the EAP-success message, and the ngKSI are transported from the network to the UE using the AUTHENTICATION RESULT message of the EAP result message transport procedure",
+    "NOTE1: The serving AMF will not initiate a security mode control procedure after the EAP based primary authentication and key agreement procedure e.g. in case of AMF relocation during registration procedure",
+    "If the authentication of the UE completes unsuccessfully, the EAP-failure message is transported from the network to the UE using the AUTHENTICATION RESULT message or the AUTHENTICATION REJECT message of the EAP result message transport procedure or in a response of the initial 5GMM procedure as part of which the EAP based primary authentication and key agreement procedure is performed",
+    "The AMF shall set the authenticator retransmission timer specified in IETFRFC3748[34] subclause4.3 to infinite value",
+    "NOTE2: The EAP message reliable transport procedure provides a reliable transport of EAP messages and therefore retransmissions at the EAP layer do not occur",
+    "The AUSF and the AMF support exchange of EAP messages using N12",
+    "The UE shall detect and handle any duplication of EAP message as specified in IETFRFC3748[34]",
+    "Figure5.4.1.2.1.1: EAP based primary authentication and key agreement procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.4.1.2.1.1",
+      "file": "Figure_5_4_1_2_1_1_p190.png.json",
+      "title": "EAP based primary authentication and key agreement procedure",
+      "content": {
+        "figure_id": "5.4.1.2.1.1",
+        "title": "EAP based primary authentication and key agreement procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION REQUEST",
+              "notes": "<EAP-request message A>, Start T3560"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "AUTHENTICATION RESPONSE",
+              "notes": "<EAP-response message to EAP-request message A>, Stop T3560"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION REQUEST",
+              "notes": "<EAP-request message B>, Start T3560"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "AUTHENTICATION RESPONSE",
+              "notes": "<EAP-response message to EAP-request message B>, Stop T3560"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SECURITY MODE COMMAND",
+              "notes": "<EAP-success message>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "REGISTRATION REJECT",
+              "notes": "<EAP-failure message>, OR"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE REJECT",
+              "notes": "<EAP-failure message>, OR"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "REGISTRATION ACCEPT",
+              "notes": "<EAP-failure message>, OR"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "SERVICE ACCEPT",
+              "notes": "<EAP-failure message>, OR"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION RESULT",
+              "notes": "<EAP-success message or EAP-failure message>, OR"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "AUTHENTICATION REJECT",
+              "notes": "<EAP-failure message>, OR"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

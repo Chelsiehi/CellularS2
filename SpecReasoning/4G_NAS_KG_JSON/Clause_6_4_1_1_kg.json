@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_DEFAULT_BEARER_ACTIVATION",
+      "name": "Default bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Establishes a default EPS bearer context between the UE and the EPC. Initiated by the network in response to PDN CONNECTIVITY REQUEST from UE. Can be part of attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message from UE that triggers the default bearer context activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that may include the default bearer context activation as part of it.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "IE_DEFAULT_EPS_BEARER_CONTEXT",
+      "name": "Default EPS bearer context",
+      "entity_type": "Information Element",
+      "description": "Bearer context established between UE and EPC without TFT assigned during activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template",
+      "entity_type": "Information Element",
+      "description": "Template that can be assigned to default EPS bearer after establishment. May be modified by network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_FAILURE",
+      "name": "Attach procedure failure",
+      "entity_type": "Condition",
+      "description": "If attach procedure fails, default bearer activation is considered implicitly failed.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "PROP_MATCH_ALL_FILTER",
+      "name": "Match-all packet filter",
+      "entity_type": "Property",
+      "description": "Property of default EPS bearer context when no TFT is assigned during activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEFAULT_BEARER_ACTIVATION",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Default bearer activation procedure is initiated by network in response to PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ATTACH",
+      "target": "PROC_DEFAULT_BEARER_ACTIVATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Default bearer activation procedure can be part of the attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ATTACH_FAILURE",
+      "target": "PROC_DEFAULT_BEARER_ACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If attach procedure fails, default bearer activation is considered implicitly failed.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_DEFAULT_EPS_BEARER_CONTEXT",
+      "target": "IE_TFT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Default EPS bearer context does not have TFT assigned during activation, but network may assign/modify TFT later.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_DEFAULT_EPS_BEARER_CONTEXT",
+      "target": "PROP_MATCH_ALL_FILTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Default EPS bearer context without TFT corresponds to using a match-all packet filter.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.1"
+      ]
+    }
+  ]
+}

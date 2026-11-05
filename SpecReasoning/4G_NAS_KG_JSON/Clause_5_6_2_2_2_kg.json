@@ -1,0 +1,203 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.2",
+  "title": "Paging for EPS services through E-UTRAN using IMSI",
+  "entities": [
+    {
+      "id": "PROC_PAGING_IMSI",
+      "name": "Paging for EPS services using IMSI",
+      "entity_type": "Procedure",
+      "description": "An abnormal procedure used for error recovery in the network when S-TMSI is not available. The network initiates paging with CN domain indicator set to PS.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2",
+        "Figure 5.6.2.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PAGING",
+      "name": "Paging",
+      "entity_type": "Message",
+      "description": "Paging message sent from network to UE for EPS services using IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2",
+        "Figure 5.6.2.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to paging using IMSI to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2",
+        "Figure 5.6.2.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_IMSI",
+      "name": "IMSI",
+      "entity_type": "Information Element",
+      "description": "International Mobile Subscriber Identity used for paging when S-TMSI is unavailable.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_CN_DOMAIN_INDICATOR",
+      "name": "CN domain indicator",
+      "entity_type": "Information Element",
+      "description": "Set to PS for paging for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon reception of paging using IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "T3396",
+      "entity_type": "Timer",
+      "description": "All running instances stopped by UE upon reception of paging using IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE after local detach from EPS upon paging using IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DETACH",
+      "name": "Local detach from EPS",
+      "entity_type": "Property",
+      "description": "Action performed by UE upon paging using IMSI: deactivate EPS bearers, delete parameters, set update status to EU2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE after local detach in response to paging using IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PAGING_IMSI",
+      "target": "MSG_PAGING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Paging procedure includes sending Paging message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2",
+        "Figure 5.6.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PAGING",
+      "target": "IE_IMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message uses IMSI for identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PAGING",
+      "target": "IE_CN_DOMAIN_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message includes CN domain indicator set to PS.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PAGING_IMSI",
+      "target": "PROP_LOCAL_DETACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Paging procedure triggers UE to perform local detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_LOCAL_DETACH",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Local detach stops timer T3346 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_LOCAL_DETACH",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Local detach stops all running T3396 timers.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_LOCAL_DETACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Local detach changes UE state to EMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PAGING_IMSI",
+      "target": "PROC_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Paging procedure leads to UE performing attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_ATTACH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes sending ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.2",
+        "Figure 5.6.2.2.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.4.7",
+  "title": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+  "entities": [
+    {
+      "id": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "UE state where E-UTRAN coverage has been lost or PSM is active. In this state, the UE shall not initiate any EMM procedure except for cell and PLMN reselection.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "COND_EUTRAN_COVERAGE_LOST",
+      "name": "E-UTRAN coverage lost",
+      "entity_type": "Condition",
+      "description": "Condition where the UE loses E-UTRAN coverage.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "COND_PSM_ACTIVE",
+      "name": "PSM active",
+      "entity_type": "Condition",
+      "description": "Condition where Power Saving Mode is active in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "PROP_DEACTIVATE_PSM",
+      "name": "PSM deactivation capability",
+      "entity_type": "Property",
+      "description": "UE can deactivate PSM by activating the AS layer when mobile originated signalling or user data needs to be sent.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "PROP_NO_EMM_PROCEDURES",
+      "name": "No EMM procedure initiation",
+      "entity_type": "Property",
+      "description": "UE shall not initiate any EMM procedure except for cell and PLMN reselection while in EMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "PROC_CELL_PLMN_RESELECTION",
+      "name": "Cell and PLMN reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure that the UE is allowed to perform while in EMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "target": "COND_EUTRAN_COVERAGE_LOST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State EMM-REGISTERED.NO-CELL-AVAILABLE is entered when E-UTRAN coverage is lost.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "target": "COND_PSM_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State EMM-REGISTERED.NO-CELL-AVAILABLE is entered when PSM is active.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PSM_ACTIVE",
+      "target": "PROP_DEACTIVATE_PSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PSM is active, the UE can deactivate it by activating the AS layer for mobile originated signalling or user data.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "target": "PROP_NO_EMM_PROCEDURES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "While in EMM-REGISTERED.NO-CELL-AVAILABLE state, the UE shall not initiate any EMM procedure except for cell and PLMN reselection.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "target": "PROC_CELL_PLMN_RESELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Cell and PLMN reselection is the only EMM-related procedure allowed in EMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.7"
+      ]
+    }
+  ]
+}

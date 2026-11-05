@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.3.3",
+  "title": "Network-initiated NAS transport of messages",
+  "entities": [
+    {
+      "id": "DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message used to carry various payload types from network to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer that is stopped upon reception of DL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_TYPE_IE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload contained in the DL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_IE",
+      "name": "Payload container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the actual payload data in DL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "SOR_TRANSPARENT_CONTAINER",
+      "name": "SOR transparent container",
+      "entity_type": "Information Element",
+      "description": "Payload container type for Steering of Roaming information with integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "UE_PARAMETERS_UPDATE_CONTAINER",
+      "name": "UE parameters update transparent container",
+      "entity_type": "Information Element",
+      "description": "Payload container type for UE parameters update with integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to send acknowledgements for certain payload types.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_IE",
+      "name": "5GMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the cause for certain network-initiated actions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER_VALUE_IE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer values for congestion control scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "name": "5GMM-REGISTERED.NON-ALLOWED-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM state entered when service area restrictions apply.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_PASSED",
+      "name": "Integrity check passed",
+      "entity_type": "Condition",
+      "description": "Condition where payload container integrity verification succeeds.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_FAILED",
+      "name": "Integrity check failed",
+      "entity_type": "Condition",
+      "description": "Condition where payload container integrity verification fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of DL NAS TRANSPORT message stops timer T3346 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "PAYLOAD_CONTAINER_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains Payload container type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "PAYLOAD_CONTAINER_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains Payload container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SOR_TRANSPARENT_CONTAINER",
+      "target": "INTEGRITY_CHECK_PASSED",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "SOR transparent container processing requires successful integrity check.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SOR_TRANSPARENT_CONTAINER",
+      "target": "UL_NAS_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Successful SOR processing with ACK bit set triggers UL NAS TRANSPORT acknowledgement.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_PARAMETERS_UPDATE_CONTAINER",
+      "target": "INTEGRITY_CHECK_PASSED",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "UE parameters update container processing requires successful integrity check.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_PARAMETERS_UPDATE_CONTAINER",
+      "target": "UL_NAS_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Successful UE parameters update with ACK bit set triggers UL NAS TRANSPORT acknowledgement.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "5GMM_CAUSE_IE",
+      "target": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GMM cause #28 establishes 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "5GMM_CAUSE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message may contain 5GMM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "BACK_OFF_TIMER_VALUE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message may contain Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "INTEGRITY_CHECK_FAILED",
+      "target": "PAYLOAD_CONTAINER_IE",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Failed integrity check causes payload container IE to be discarded.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.3"
+      ]
+    }
+  ]
+}

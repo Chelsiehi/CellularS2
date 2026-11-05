@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.4.2",
+  "title": "Access control and checking in 5GMM-CONNECTED mode and in 5GMM-CONNECTED mode with RRC inactive indication",
+  "entities": [
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "UE state where NAS connection is active, including variant with RRC inactive indication.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "PROC_ACCESS_CONTROL",
+      "name": "Access control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE categorizes access attempts into access identities and categories, provides them to lower layers for access control checking.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating PDU sessions with pending uplink user data, included in REGISTRATION REQUEST or SERVICE REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used for registration procedure, can include Uplink data status IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used for service request procedure, can include Uplink data status IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "PROC_NAS_TRANSPORT",
+      "name": "NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transport SMS, PDU session messages, location requests, and UE policy transactions via UL NAS TRANSPORT messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to re-establish user-plane resources for existing PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_ALLOWED",
+      "name": "Access attempt allowed",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate that the access attempt is permitted.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access attempt barred",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate that the access attempt is barred.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to carry SMS, PDU session requests, location requests, and UE policy transactions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent to establish a new PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ACCESS_CONTROL",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access control procedure is performed when UE is in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains Uplink data status IE when uplink user data is pending.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains Uplink data status IE when uplink user data is pending.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ACCESS_ALLOWED",
+      "target": "PROC_NAS_TRANSPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When access is allowed, NAS transport procedure is initiated for SMS, PDU session establishment/modification, location requests, and UE policy transactions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ACCESS_ALLOWED",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When access is allowed, service request procedure is initiated to re-establish user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS transport procedure involves sending UL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROC_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When access is barred, NAS transport procedure is not initiated.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When access is barred, service request procedure is not initiated.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS transport procedure is used to send PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_NAS_TRANSPORT",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS transport procedure is used to send PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.4.2"
+      ]
+    }
+  ]
+}

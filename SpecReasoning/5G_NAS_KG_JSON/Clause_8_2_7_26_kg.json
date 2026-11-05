@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.26",
+  "title": "Non-3GPP NW policies",
+  "entities": [
+    {
+      "id": "IE_NON_3GPP_NW_POLICIES",
+      "name": "Non-3GPP NW policies",
+      "entity_type": "Information Element",
+      "description": "Information element used by the network to indicate whether emergency numbers provided via non-3GPP access can be used to initiate UE detected emergency calls.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that handles registration procedures and includes/excludes information elements.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE_NON_3GPP",
+      "name": "Registration procedure over non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Registration procedure performed over non-3GPP access network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_NUMBERS",
+      "name": "Network needs to indicate emergency number usage",
+      "entity_type": "Condition",
+      "description": "Condition where the network needs to indicate whether emergency numbers provided via non-3GPP access can be used for UE detected emergency calls.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "PROPERTY_IE_ABSENT",
+      "name": "IE not included interpretation",
+      "entity_type": "Property",
+      "description": "When the IE is not included, the UE shall interpret this as receiving an information element with all bits of the value part coded as zero.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "IE_NON_3GPP_NW_POLICIES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF shall not include this IE during registration procedure over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_EMERGENCY_NUMBERS",
+      "target": "IE_NON_3GPP_NW_POLICIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The IE is included if the network needs to indicate emergency number usage via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROPERTY_IE_ABSENT",
+      "target": "IE_NON_3GPP_NW_POLICIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When IE is not included, UE interprets it as receiving IE with all bits coded as zero.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_PROCEDURE_NON_3GPP",
+      "target": "IE_NON_3GPP_NW_POLICIES",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure over non-3GPP access restricts inclusion of this IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.26"
+      ]
+    }
+  ]
+}

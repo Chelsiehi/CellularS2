@@ -1,0 +1,274 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.2.2",
+  "title": "Change of UE 's usage setting",
+  "entities": [
+    {
+      "id": "USAGE_SETTING_CHANGE",
+      "name": "UE usage setting change",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when the UE's usage setting changes between voice-centric and data-centric modes. The specific actions depend on the UE's mode of operation and current conditions.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "DISABLE_EUTRA",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Procedure",
+      "description": "Procedure to disable the E-UTRA capability of the UE, typically triggered when changing from data-centric to voice-centric usage setting under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REENABLE_EUTRA",
+      "name": "Re-enable E-UTRA capability",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-enable the E-UTRA capability of the UE, triggered when changing from voice-centric to data-centric usage setting and E-UTRA is currently disabled.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COMBINED_TAU_IMSI_ATTACH",
+      "name": "Combined tracking area update with IMSI attach",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when voice domain selection results in an attempt to stay in E-UTRAN during usage setting change from data-centric to voice-centric.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_VOICE_CENTRIC",
+      "name": "Voice-centric usage setting",
+      "entity_type": "Condition",
+      "description": "UE usage setting where voice services are prioritized over data services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_DATA_CENTRIC",
+      "name": "Data-centric usage setting",
+      "entity_type": "Condition",
+      "description": "UE usage setting where data services are prioritized over voice services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_IMS_VOICE_NOT_AVAIL",
+      "name": "IMS voice not available",
+      "entity_type": "Condition",
+      "description": "Condition indicating that IMS voice services are not available to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_CSFB_NOT_AVAIL",
+      "name": "CS fallback not available",
+      "entity_type": "Condition",
+      "description": "Condition indicating that CS fallback is not available, includes EMM causes #16, #17, and #18.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_CSFB_NOT_PREFERRED",
+      "name": "CS fallback not preferred or SMS only",
+      "entity_type": "Condition",
+      "description": "Condition where the UE received a CS fallback not preferred or SMS only indication during the last successful combined attach or combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_EUTRA_DISABLED",
+      "name": "E-UTRA is disabled",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the E-UTRA capability of the UE is currently disabled.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_VDS_DIFF_RAT",
+      "name": "Voice domain selection to different RAT",
+      "entity_type": "Condition",
+      "description": "Condition where voice domain selection results in selection to a different radio access technology.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_VDS_STAY_EUTRAN",
+      "name": "Voice domain selection to stay in E-UTRAN",
+      "entity_type": "Condition",
+      "description": "Condition where voice domain selection results in attempt to stay in E-UTRAN.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "USAGE_SETTING_CHANGE",
+      "target": "DISABLE_EUTRA",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Usage setting change procedure includes disabling E-UTRA capability under specific conditions",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "USAGE_SETTING_CHANGE",
+      "target": "REENABLE_EUTRA",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Usage setting change procedure includes re-enabling E-UTRA capability when changing from voice-centric to data-centric",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "USAGE_SETTING_CHANGE",
+      "target": "COMBINED_TAU_IMSI_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Usage setting change procedure includes combined TAU with IMSI attach when voice domain selection results in attempt to stay in E-UTRAN",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DISABLE_EUTRA",
+      "target": "COND_VOICE_CENTRIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA is guarded by change to voice-centric usage setting",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DISABLE_EUTRA",
+      "target": "COND_IMS_VOICE_NOT_AVAIL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA is guarded by IMS voice not available condition",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DISABLE_EUTRA",
+      "target": "COND_CSFB_NOT_AVAIL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA is guarded by CS fallback not available condition for CS/PS mode UEs",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DISABLE_EUTRA",
+      "target": "COND_CSFB_NOT_PREFERRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA is guarded by CS fallback not preferred or SMS only condition",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DISABLE_EUTRA",
+      "target": "COND_VDS_DIFF_RAT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA is guarded by voice domain selection to different RAT condition for PS mode UEs",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REENABLE_EUTRA",
+      "target": "COND_DATA_CENTRIC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-enabling E-UTRA is guarded by change to data-centric usage setting",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "REENABLE_EUTRA",
+      "target": "COND_EUTRA_DISABLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-enabling E-UTRA is guarded by E-UTRA currently being disabled",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1",
+        "Table 4.3.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COMBINED_TAU_IMSI_ATTACH",
+      "target": "COND_VDS_STAY_EUTRAN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Combined TAU with IMSI attach is guarded by voice domain selection resulting in attempt to stay in E-UTRAN",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.2",
+        "Table 4.3.2.2.1"
+      ]
+    }
+  ]
+}

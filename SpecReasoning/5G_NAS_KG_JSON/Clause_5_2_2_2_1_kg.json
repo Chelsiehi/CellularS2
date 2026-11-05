@@ -1,0 +1,298 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.2.2.1",
+  "title": "Selection of the substate after power on",
+  "entities": [
+    {
+      "id": "PLMN_SEARCH",
+      "name": "PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Initial substate after power on when USIM is available and valid or there are valid entries in the list of subscriber data.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "NO_CELL_AVAILABLE",
+      "name": "NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate entered when no cell can be selected or in manual network selection mode when no cell of selected PLMN/SNPN is found.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "NO_SUPI",
+      "name": "NO-SUPI",
+      "entity_type": "State",
+      "description": "Substate entered when no USIM is present, USIM is invalid, or in SNPN mode with no valid subscription identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when a suitable cell is found and PLMN/SNPN identity is not in forbidden lists and tracking area is not forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when selected cell is known not to be able to provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "ECALL_INACTIVE",
+      "name": "eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Substate entered when UE is configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_NO_CELL",
+      "name": "No cell can be selected",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot select any cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_NO_USIM_INVALID",
+      "name": "No USIM or invalid USIM",
+      "entity_type": "Condition",
+      "description": "Condition where no USIM is present or USIM is considered invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_SNPN_NO_SUBSCRIPTION",
+      "name": "SNPN no subscription identifier",
+      "entity_type": "Condition",
+      "description": "Condition in SNPN mode where selected entry has no subscription identifier or no valid entry exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_SUITABLE_CELL",
+      "name": "Suitable cell found not forbidden",
+      "entity_type": "Condition",
+      "description": "Condition where suitable cell is found and PLMN/SNPN identity and tracking area are not in forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_CELL_NO_NORMAL_SERVICE",
+      "name": "Cell cannot provide normal service",
+      "entity_type": "Condition",
+      "description": "Condition where selected cell is known not to be able to provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_MANUAL_NO_CELL",
+      "name": "Manual selection no cell found",
+      "entity_type": "Condition",
+      "description": "Condition in manual network selection mode where no cell of selected PLMN/SNPN is found.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_ECALL_MODE",
+      "name": "eCall only mode configured",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "T3444",
+      "entity_type": "Timer",
+      "description": "Timer considered expired at power on for UE configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "T3445",
+      "entity_type": "Timer",
+      "description": "Timer considered expired at power on for UE configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NO_CELL",
+      "target": "NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no cell available establishes NO-CELL-AVAILABLE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NO_USIM_INVALID",
+      "target": "NO_SUPI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no USIM or invalid USIM establishes NO-SUPI substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SNPN_NO_SUBSCRIPTION",
+      "target": "NO_SUPI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no subscription identifier in SNPN mode establishes NO-SUPI substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SUITABLE_CELL",
+      "target": "NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of suitable cell found establishes NORMAL-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CELL_NO_NORMAL_SERVICE",
+      "target": "LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of cell not providing normal service establishes LIMITED-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_MANUAL_NO_CELL",
+      "target": "NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of manual selection with no cell establishes NO-CELL-AVAILABLE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ECALL_MODE",
+      "target": "ECALL_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of eCall only mode establishes eCALL-INACTIVE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PLMN_SEARCH",
+      "target": "COND_NO_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of no cell available.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PLMN_SEARCH",
+      "target": "COND_NO_USIM_INVALID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of no USIM or invalid USIM.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PLMN_SEARCH",
+      "target": "COND_SNPN_NO_SUBSCRIPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of no subscription identifier in SNPN mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PLMN_SEARCH",
+      "target": "COND_SUITABLE_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of suitable cell found.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PLMN_SEARCH",
+      "target": "COND_CELL_NO_NORMAL_SERVICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of cell not providing normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PLMN_SEARCH",
+      "target": "COND_MANUAL_NO_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of manual selection with no cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "PLMN_SEARCH",
+      "target": "COND_ECALL_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN-SEARCH state transition is guarded by condition of eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.2.1"
+      ]
+    }
+  ]
+}

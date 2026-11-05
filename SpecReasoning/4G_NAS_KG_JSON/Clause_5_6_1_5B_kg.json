@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.5B",
+  "title": "Service request procedure for UE attached for access to RLOS not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SR_RLOS_REJECTED",
+      "name": "Service request procedure for UE attached for access to RLOS not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when service request for UE attached for access to RLOS cannot be accepted by the network. Specifies UE behavior including local detach and PLMN selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN where last service request was attempted and rejected",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same PLMN where previous service request was rejected.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "COND_EMM_CAUSE",
+      "name": "Service request rejected with EMM cause value other than #9, #10, #40",
+      "entity_type": "Condition",
+      "description": "Condition where service request rejection uses specific EMM cause values excluding #9, #10, and #40.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that must not be running for certain service request rejection procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "ACTION_LOCAL_DETACH",
+      "name": "Local detach",
+      "entity_type": "Property",
+      "description": "UE performs local detach if not already detached, followed by PLMN selection for EPS attach via another PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "ACTION_PLMN_SELECTION",
+      "name": "PLMN selection for EPS attach via another PLMN",
+      "entity_type": "Property",
+      "description": "UE performs PLMN selection according to 3GPP TS 23.122 to attempt EPS attach for access to RLOS via another PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "PROC_SR_ABNORMAL",
+      "name": "Service request procedure for abnormal cases",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when service request fails due to abnormal cases a), b), c) or e) in clause 5.6.1.6.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SR_RLOS_REJECTED",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request rejection procedure requires UE to be in same PLMN where last service request was rejected.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SR_RLOS_REJECTED",
+      "target": "COND_EMM_CAUSE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request rejection procedure requires specific EMM cause values for rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SR_RLOS_REJECTED",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request rejection procedure is guarded by timer T3346 not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SR_RLOS_REJECTED",
+      "target": "ACTION_LOCAL_DETACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request rejection procedure includes local detach as a step.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SR_RLOS_REJECTED",
+      "target": "ACTION_PLMN_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request rejection procedure includes PLMN selection for EPS attach via another PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SR_ABNORMAL",
+      "target": "ACTION_LOCAL_DETACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request abnormal procedure includes local detach as a step when in same PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SR_ABNORMAL",
+      "target": "ACTION_PLMN_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request abnormal procedure includes PLMN selection for EPS attach via another PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5B"
+      ]
+    }
+  ]
+}

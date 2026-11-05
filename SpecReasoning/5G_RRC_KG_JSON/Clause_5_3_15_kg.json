@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.15",
+  "title": "RRC connection reject",
+  "entities": [
+    {
+      "id": "PROC_RRC_CONNECTION_SETUP",
+      "name": "RRC Connection Setup",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing an RRC connection between UE and network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REJECT",
+      "name": "RRC Connection Reject",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject an RRC connection request from the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "IE_WAIT_TIME",
+      "name": "Wait Time",
+      "entity_type": "Information Element",
+      "description": "Indicates the time the UE should wait before attempting another RRC connection request.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "COND_REJECT_RECEIVED",
+      "name": "RRC Connection Reject Received",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives an RRC Connection Reject message from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "PROP_UE_WAITS",
+      "name": "UE Waits for Wait Time",
+      "entity_type": "Property",
+      "description": "UE behavior to wait for the specified duration before initiating another RRC connection request.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_CONNECTION_SETUP",
+      "target": "MSG_RRC_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC Connection Setup procedure includes sending RRC Connection Reject message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_REJECT",
+      "target": "IE_WAIT_TIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRC Connection Reject message contains Wait Time information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_REJECT_RECEIVED",
+      "target": "PROP_UE_WAITS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving RRC Connection Reject establishes UE behavior to wait for Wait Time duration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_WAIT_TIME",
+      "target": "PROP_UE_WAITS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Wait Time IE guards the duration for which UE waits before next connection attempt.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.15"
+      ]
+    }
+  ]
+}

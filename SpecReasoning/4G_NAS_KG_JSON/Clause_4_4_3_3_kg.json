@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.3.3",
+  "title": "Integrity protection and verification",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter value used as input to integrity protection and verification algorithms. The sender uses locally stored NAS COUNT for protection, while the receiver estimates NAS COUNT from received sequence number and overflow counter for verification.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTION_ALGORITHM",
+      "name": "Integrity protection algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm specified in 3GPP TS 33.401 that calculates integrity protection information using NAS COUNT, NAS integrity key, BEARER ID, DIRECTION bit, and protected NAS message data.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_VERIFICATION_ALGORITHM",
+      "name": "Integrity verification algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm that verifies integrity protection using estimated NAS COUNT and received message data. Not applicable when EIA0 is used.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "SECURITY_PROTECTED_NAS_MESSAGE",
+      "name": "Security protected NAS message",
+      "entity_type": "Message",
+      "description": "NAS message that undergoes integrity protection, including octet 6 to n containing sequence number IE and NAS message IE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_MESSAGE",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Specific NAS message whose integrity protection is defined in clause 9.9.3.28.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "EIA0_CONDITION",
+      "name": "EIA0 used condition",
+      "entity_type": "Condition",
+      "description": "Condition where integrity algorithm EIA0 is used, making integrity verification not applicable.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTEGRITY_PROTECTION_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Integrity protection algorithm uses NAS COUNT as input parameter.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTEGRITY_VERIFICATION_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Integrity verification algorithm uses estimated NAS COUNT as input parameter.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_PROTECTED_NAS_MESSAGE",
+      "target": "INTEGRITY_PROTECTION_ALGORITHM",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Security protected NAS message undergoes integrity protection using the specified algorithm.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SERVICE_REQUEST_MESSAGE",
+      "target": "INTEGRITY_PROTECTION_ALGORITHM",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SERVICE REQUEST message requires integrity protection as defined in clause 9.9.3.28.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EIA0_CONDITION",
+      "target": "INTEGRITY_VERIFICATION_ALGORITHM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When EIA0 is used, integrity verification is not applicable.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.3"
+      ]
+    }
+  ]
+}

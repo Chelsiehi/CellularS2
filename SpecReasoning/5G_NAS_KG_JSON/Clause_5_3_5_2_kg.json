@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.5.2",
+  "title": "3GPP access service area restrictions",
+  "entities": [
+    {
+      "id": "SERVICE_AREA_LIST_IE",
+      "name": "Service area list IE",
+      "entity_type": "Information Element",
+      "description": "Information element that conveys service area restrictions to the UE, containing either an allowed area or non-allowed area.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "ALLOWED_TRACKING_AREAS",
+      "name": "Allowed tracking areas",
+      "entity_type": "Property",
+      "description": "List of tracking areas where the UE is permitted normal service access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "NON_ALLOWED_TRACKING_AREAS",
+      "name": "Non-allowed tracking areas",
+      "entity_type": "Property",
+      "description": "List of tracking areas where the UE is restricted from normal service access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NORMAL_SERVICE",
+      "name": "5GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "UE state where normal 5GMM and 5GSM procedures are allowed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "name": "5GMM-REGISTERED.NON-ALLOWED-SERVICE",
+      "entity_type": "State",
+      "description": "UE state where service is restricted except for specific exceptions like emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message that can contain the Service area list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message that can contain the Service area list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "TAI_IN_ALLOWED_LIST",
+      "name": "TAI in allowed tracking areas list",
+      "entity_type": "Condition",
+      "description": "Condition where current tracking area identifier is in the allowed tracking areas list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "TAI_IN_NON_ALLOWED_LIST",
+      "name": "TAI in non-allowed tracking areas list",
+      "entity_type": "Condition",
+      "description": "Condition where current tracking area identifier is in the non-allowed tracking areas list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "SERVICE_AREA_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message can contain the Service area list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONFIGURATION_UPDATE_COMMAND",
+      "target": "SERVICE_AREA_LIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message can contain the Service area list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TAI_IN_ALLOWED_LIST",
+      "target": "5GMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When TAI is in allowed tracking areas list, UE enters 5GMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TAI_IN_NON_ALLOWED_LIST",
+      "target": "5GMM_REGISTERED_NON_ALLOWED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When TAI is in non-allowed tracking areas list, UE enters 5GMM-REGISTERED.NON-ALLOWED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_AREA_LIST_IE",
+      "target": "ALLOWED_TRACKING_AREAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service area list IE with allowed area indication establishes the allowed tracking areas list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SERVICE_AREA_LIST_IE",
+      "target": "NON_ALLOWED_TRACKING_AREAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service area list IE with non-allowed area indication establishes the non-allowed tracking areas list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.5.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.2.1",
+  "title": "SIB validity",
+  "entities": [
+    {
+      "id": "SI_ACQUISITION_PROCEDURE",
+      "name": "SI acquisition procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for acquiring system information, triggered upon various events like cell selection, cell-reselection, return from out of coverage, etc.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "SIB",
+      "name": "System Information Block",
+      "entity_type": "Information Element",
+      "description": "A block of system information that can be stored by the UE and validated against current cell parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "POSSIB",
+      "name": "Positioning SIB",
+      "entity_type": "Information Element",
+      "description": "A positioning-related system information block with optional valueTag and expirationTime.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "AREASCOPE",
+      "name": "areaScope",
+      "entity_type": "Property",
+      "description": "A parameter associated with stored SIB/posSIB indicating validity area scope.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "VALUETAG",
+      "name": "valueTag",
+      "entity_type": "Property",
+      "description": "A tag indicating the version of SIB/posSIB, used for validation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "EXPIRATIONTIME",
+      "name": "expirationTime",
+      "entity_type": "Property",
+      "description": "Optional parameter for posSIB indicating when the stored information expires.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "CELLIDENTITY",
+      "name": "cellIdentity",
+      "entity_type": "Identifier",
+      "description": "Identity of the cell where SIB/posSIB was acquired.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "SYSTEMINFORMATIONAREAID",
+      "name": "systemInformationAreaID",
+      "entity_type": "Identifier",
+      "description": "Identifier for the system information area, used in SIB/posSIB validation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "PLMN_IDENTITY",
+      "name": "PLMN-Identity",
+      "entity_type": "Identifier",
+      "description": "Public Land Mobile Network identity used for SIB validation in non-NPN cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "NPN_IDENTITY",
+      "name": "NPN identity",
+      "entity_type": "Identifier",
+      "description": "Non-Public Network identity (SNPN or PNI-NPN) used for SIB validation in NPN-only cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "SIB_VALIDITY_CONDITION",
+      "name": "SIB validity condition",
+      "entity_type": "Condition",
+      "description": "Conditions under which a stored SIB is considered valid, including matching areaScope, identities, and valueTag.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "POSSIB_VALIDITY_CONDITION",
+      "name": "posSIB validity condition",
+      "entity_type": "Condition",
+      "description": "Conditions under which a stored posSIB is considered valid, including matching areaScope, systemInformationAreaID/cellIdentity, and valueTag/expirationTime.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "SIB_DELETION_CONDITION",
+      "name": "SIB deletion condition",
+      "entity_type": "Condition",
+      "description": "Condition for deleting stored SIBs after 3 hours from successful validation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SI_ACQUISITION_PROCEDURE",
+      "target": "SIB",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SI acquisition procedure involves acquiring and storing SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SI_ACQUISITION_PROCEDURE",
+      "target": "POSSIB",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SI acquisition procedure involves acquiring and storing posSIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIB",
+      "target": "AREASCOPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB may have associated areaScope parameter.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIB",
+      "target": "VALUETAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB has associated valueTag for version validation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "POSSIB",
+      "target": "VALUETAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "posSIB may have associated valueTag for validation.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "POSSIB",
+      "target": "EXPIRATIONTIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "posSIB may have associated expirationTime for validity checking.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SIB_VALIDITY_CONDITION",
+      "target": "AREASCOPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB validity condition depends on areaScope matching.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SIB_VALIDITY_CONDITION",
+      "target": "VALUETAG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB validity condition depends on valueTag matching.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SIB_VALIDITY_CONDITION",
+      "target": "PLMN_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB validity condition depends on PLMN-Identity matching for non-NPN cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SIB_VALIDITY_CONDITION",
+      "target": "NPN_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB validity condition depends on NPN identity matching for NPN-only cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "POSSIB_VALIDITY_CONDITION",
+      "target": "VALUETAG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "posSIB validity condition depends on valueTag matching.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "POSSIB_VALIDITY_CONDITION",
+      "target": "EXPIRATIONTIME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "posSIB validity condition depends on expirationTime not being expired.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "SIB_DELETION_CONDITION",
+      "target": "SIB",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SIB deletion condition leads to deletion of stored SIBs after 3 hours.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.16.3",
+  "title": "PDU session status",
+  "entities": [
+    {
+      "id": "IE_PDU_SESSION_STATUS",
+      "name": "PDU session status",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the PDU sessions that are associated with the access type and are active within the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that contains active PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_TYPE_MATCH",
+      "name": "Access type match condition",
+      "entity_type": "Condition",
+      "description": "Condition where the PDU sessions are associated with the access type that the message is sent over.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    },
+    {
+      "id": "COND_ACTIVE_PDU_SESSIONS",
+      "name": "Active PDU sessions condition",
+      "entity_type": "Condition",
+      "description": "Condition where PDU sessions are active within the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PDU_SESSION_STATUS",
+      "target": "COND_ACCESS_TYPE_MATCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDU session status IE is included when PDU sessions are associated with the access type of the message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PDU_SESSION_STATUS",
+      "target": "COND_ACTIVE_PDU_SESSIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDU session status IE is included when PDU sessions are active within the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ACTIVE_PDU_SESSIONS",
+      "target": "UE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition of active PDU sessions establishes that these sessions exist within the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.16.3"
+      ]
+    }
+  ]
+}

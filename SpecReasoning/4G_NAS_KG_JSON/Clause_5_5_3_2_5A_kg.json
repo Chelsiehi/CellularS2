@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.5A",
+  "title": "Tracking area updating procedure for initiating a PDN connection for emergency bearer services not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_TAU_EMERGENCY_REJECTED",
+      "name": "Tracking area updating procedure for emergency bearer services rejected",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when a tracking area updating request for initiating a PDN connection for emergency bearer services is not accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "PROC_TAU_EMERGENCY_ABNORMAL",
+      "name": "Tracking area updating procedure for emergency bearer services abnormal cases",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when tracking area updating request for emergency bearer services fails due to abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is in the same selected PLMN where the last tracking area updating request was attempted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "ACTION_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "Action where the UE informs upper layers about the failure of the emergency bearer services procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "ACTION_DETACH_ATTACH_EMERGENCY",
+      "name": "Detach locally and attempt EPS attach for emergency bearer services",
+      "entity_type": "Property",
+      "description": "Action where the UE detaches locally (if not already detached) and attempts EPS attach for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "PROC_CS_EMERGENCY_CALL",
+      "name": "CS emergency call establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure where upper layers establish a CS emergency call as fallback when emergency bearer services fail.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAU_EMERGENCY_REJECTED",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by the condition that UE is in same selected PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same selected PLMN, it establishes the action to inform upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_DETACH_ATTACH_EMERGENCY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same selected PLMN, it establishes the action to detach locally and attempt EPS attach for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACTION_INFORM_UPPER_LAYERS",
+      "target": "PROC_CS_EMERGENCY_CALL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Informing upper layers of failure can establish CS emergency call procedure as fallback.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_TAU_EMERGENCY_ABNORMAL",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal case procedure establishes action to inform upper layers of network access failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.5A"
+      ]
+    }
+  ]
+}

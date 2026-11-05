@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.3.3",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "PAGING_PROCEDURE",
+      "name": "Paging procedure",
+      "entity_type": "Procedure",
+      "description": "Network procedure to page a UE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTED",
+      "name": "Integrity protected message",
+      "entity_type": "Condition",
+      "description": "Condition where message has integrity protection applied",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_SUCCESS",
+      "name": "Integrity check successful",
+      "entity_type": "Condition",
+      "description": "Condition where message integrity verification passes",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "EPS_AUTHENTICATION_PROCEDURE",
+      "name": "EPS authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure performed during attach",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "CS_SERVICE_NOTIFICATION",
+      "name": "CS SERVICE NOTIFICATION",
+      "entity_type": "Message",
+      "description": "Message sent by network to notify UE about CS service",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to update UE's tracking area information",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate detach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "DETACH_TYPE_IMSI",
+      "name": "IMSI detach type",
+      "entity_type": "Condition",
+      "description": "Condition where detach type indicates IMSI detach",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "DETACH_TYPE_COMBINED",
+      "name": "Combined EPS/IMSI detach type",
+      "entity_type": "Condition",
+      "description": "Condition where detach type indicates combined EPS/IMSI detach",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to detach UE from network",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_REQUEST",
+      "target": "INTEGRITY_PROTECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH REQUEST message may or may not be integrity protected",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_REQUEST",
+      "target": "INTEGRITY_CHECK_SUCCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH REQUEST message may pass or fail integrity check",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INTEGRITY_PROTECTED",
+      "target": "PAGING_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "If ATTACH REQUEST is integrity protected and check successful, paging procedure is aborted",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_AUTHENTICATION_PROCEDURE",
+      "target": "PAGING_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Paging procedure is aborted when EPS authentication procedure completes successfully",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TRACKING_AREA_UPDATE_REQUEST",
+      "target": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message triggers tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CS_SERVICE_NOTIFICATION",
+      "target": "TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST is sent in response to CS SERVICE NOTIFICATION",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DETACH_REQUEST",
+      "target": "DETACH_TYPE_IMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DETACH REQUEST message may have IMSI detach type",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DETACH_REQUEST",
+      "target": "DETACH_TYPE_COMBINED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DETACH REQUEST message may have combined EPS/IMSI detach type",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DETACH_REQUEST",
+      "target": "DETACH_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "DETACH REQUEST message triggers detach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CS_SERVICE_NOTIFICATION",
+      "target": "DETACH_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "DETACH REQUEST is sent in response to CS SERVICE NOTIFICATION",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.3.3"
+      ]
+    }
+  ]
+}

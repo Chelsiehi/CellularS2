@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.11",
+  "title": "Inability to comply with RRCResume",
+  "entities": [
+    {
+      "id": "RRC_RESUME_MESSAGE",
+      "name": "RRCResume message",
+      "entity_type": "Message",
+      "description": "The RRCResume message is sent by the network to resume an RRC connection and includes configuration parameters for the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "UE_UNABLE_TO_COMPLY",
+      "name": "UE unable to comply with configuration",
+      "entity_type": "Condition",
+      "description": "Condition where the UE cannot apply (part of) the configuration included in the RRCResume message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_TRANSITION",
+      "name": "Transition to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE transitions to RRC_IDLE state as specified in clause 5.3.11 with release cause 'RRC Resume'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_STATE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where the UE is not actively connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "NO_PARTIAL_APPLICATION",
+      "name": "No partial configuration application",
+      "entity_type": "Property",
+      "description": "Property stating that if the UE cannot comply with part of the configuration, it does not apply any part of the configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_UNABLE_TO_COMPLY",
+      "target": "RRC_IDLE_TRANSITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition of UE being unable to comply with RRCResume configuration triggers the transition to RRC_IDLE procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRC_IDLE_TRANSITION",
+      "target": "RRC_IDLE_STATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The transition procedure results in the UE entering RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_UNABLE_TO_COMPLY",
+      "target": "NO_PARTIAL_APPLICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is unable to comply with part of the configuration, it establishes the property that no part of the configuration is applied.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_RESUME_MESSAGE",
+      "target": "UE_UNABLE_TO_COMPLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The RRCResume message is guarded by the condition that UE may be unable to comply with its configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.11"
+      ]
+    }
+  ]
+}

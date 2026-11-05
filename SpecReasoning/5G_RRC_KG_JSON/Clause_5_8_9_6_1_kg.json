@@ -1,0 +1,101 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.6.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_SL_DRX_ASSISTANCE",
+      "name": "Sidelink DRX Assistance Information Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for a UE to inform its peer UE of sidelink DRX assistance information used to determine sidelink DRX configuration for unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1",
+        "Figure 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "MSG_UE_ASSISTANCE_INFO_SIDELINK",
+      "name": "UEAssistanceInformationSidelink",
+      "entity_type": "Message",
+      "description": "Message transmitted from UE to peer UE containing sidelink DRX assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1",
+        "Figure 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "IE_SL_DRX_ASSISTANCE_INFO",
+      "name": "Sidelink DRX Assistance Information",
+      "entity_type": "Information Element",
+      "description": "Information element containing desired sidelink DRX configuration for unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "COND_UNICAST_COMM",
+      "name": "Sidelink Unicast Communication",
+      "entity_type": "Condition",
+      "description": "Condition where UE is engaged in sidelink unicast communication with peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "PROP_UE_DETERMINES_CONFIG",
+      "name": "UE Determines DRX Configuration",
+      "entity_type": "Property",
+      "description": "UE implementation determines its desired sidelink DRX configuration for unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SL_DRX_ASSISTANCE",
+      "target": "MSG_UE_ASSISTANCE_INFO_SIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending UEAssistanceInformationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1",
+        "Figure 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UE_ASSISTANCE_INFO_SIDELINK",
+      "target": "IE_SL_DRX_ASSISTANCE_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains sidelink DRX assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SL_DRX_ASSISTANCE",
+      "target": "COND_UNICAST_COMM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure is used for sidelink unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UNICAST_COMM",
+      "target": "PROP_UE_DETERMINES_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When in sidelink unicast communication, UE implementation determines desired DRX configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.1"
+      ]
+    }
+  ]
+}

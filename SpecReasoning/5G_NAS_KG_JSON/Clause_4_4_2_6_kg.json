@@ -1,0 +1,200 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.6",
+  "title": "Change of security keys",
+  "entities": [
+    {
+      "id": "REAUTHENTICATION_PROCEDURE",
+      "name": "Re-authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to create a new 5G NAS security context. Messages exchanged during authentication are integrity protected and ciphered using current security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to establish new or modified 5G NAS security context. Involves SECURITY MODE COMMAND and SECURITY MODE COMPLETE messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to initiate security mode control procedure. Includes ngKSI of new or modified security context and sent integrity protected with new/modified context but unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to SECURITY MODE COMMAND. Sent integrity protected and ciphered with new or modified 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Key set identifier for 5G NAS security context. Used in SECURITY MODE COMMAND to indicate which security context to use or modify.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_ALGORITHMS",
+      "name": "NAS security algorithms",
+      "entity_type": "Property",
+      "description": "Set of selected NAS security algorithms included in SECURITY MODE COMMAND when modifying existing security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "CURRENT_SECURITY_CONTEXT",
+      "name": "Current 5G NAS security context",
+      "entity_type": "Property",
+      "description": "The currently active 5G NAS security context used by UE and AMF until security mode control procedure is initiated.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "NEW_SECURITY_CONTEXT",
+      "name": "New 5G NAS security context",
+      "entity_type": "Property",
+      "description": "New security context created through re-authentication and established via security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "MODIFIED_SECURITY_CONTEXT",
+      "name": "Modified 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Existing security context modified by changing security algorithms through security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REAUTHENTICATION_PROCEDURE",
+      "target": "CURRENT_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Messages during re-authentication are integrity protected and ciphered using current security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure involves sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure involves receiving SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND includes ngKSI of the security context to be used.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "NAS_SECURITY_ALGORITHMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND includes new set of selected NAS security algorithms when modifying context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "NEW_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND is integrity protected with new security context but unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "MODIFIED_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND is integrity protected with modified security context but unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SECURITY_MODE_COMPLETE",
+      "target": "NEW_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE is integrity protected and ciphered with new security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SECURITY_MODE_COMPLETE",
+      "target": "MODIFIED_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE is integrity protected and ciphered with modified security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "CURRENT_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Security mode control procedure establishes transition from current to new/modified security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.6"
+      ]
+    }
+  ]
+}

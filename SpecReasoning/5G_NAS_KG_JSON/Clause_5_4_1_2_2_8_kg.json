@@ -1,0 +1,189 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.8",
+  "title": "UE handling EAP-success message",
+  "entities": [
+    {
+      "id": "EAP_SUCCESS_MESSAGE",
+      "name": "EAP-success message",
+      "entity_type": "Message",
+      "description": "EAP authentication success message received by the UE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "KAUSF",
+      "name": "KAUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function key used in 5G security",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "KSEAF",
+      "name": "KSEAF",
+      "entity_type": "Property",
+      "description": "SEAF key derived from KAUSF for access security",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "KAMF",
+      "name": "KAMF",
+      "entity_type": "Property",
+      "description": "AMF key derived from KSEAF for NAS security",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "name": "Partial native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Temporary security context stored in volatile memory identified by ngKSI",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "SOR_COUNTER",
+      "name": "SOR counter",
+      "entity_type": "Property",
+      "description": "Counter for Steering of Roaming operations",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "UE_PARAMETER_UPDATE_COUNTER",
+      "name": "UE parameter update counter",
+      "entity_type": "Property",
+      "description": "Counter for UE parameter updates",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "SNPN_ACCESS_MODE",
+      "name": "SNPN access operation mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE operates in Standalone Non-Public Network access mode",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "MSK_USAGE_INDICATION",
+      "name": "MSK usage indication",
+      "entity_type": "Condition",
+      "description": "Condition where USIM credentials indicate to use MSK for KAUSF derivation",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_SUCCESS_MESSAGE",
+      "target": "KAUSF",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-success message triggers deletion of existing KAUSF and generation of new KAUSF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_SUCCESS_MESSAGE",
+      "target": "KSEAF",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-success message triggers deletion of existing KSEAF and generation of new KSEAF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "KAUSF",
+      "target": "KSEAF",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "New KAUSF is used to generate new KSEAF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "KSEAF",
+      "target": "KAMF",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "New KSEAF is used to generate KAMF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "target": "KAMF",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "KAMF is stored in the partial native 5G NAS security context",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SNPN_ACCESS_MODE",
+      "target": "MSK_USAGE_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SNPN access mode condition guards the MSK usage indication check",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSK_USAGE_INDICATION",
+      "target": "KAUSF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MSK usage indication condition determines whether KAUSF is generated from MSK or EMSK",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EAP_SUCCESS_MESSAGE",
+      "target": "SOR_COUNTER",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-success message triggers reset of SOR counter to zero",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EAP_SUCCESS_MESSAGE",
+      "target": "UE_PARAMETER_UPDATE_COUNTER",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-success message triggers reset of UE parameter update counter to zero",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.8"
+      ]
+    }
+  ]
+}

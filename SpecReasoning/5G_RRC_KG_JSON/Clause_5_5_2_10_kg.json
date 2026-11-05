@@ -1,0 +1,187 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.10",
+  "title": "Reference signal measurement timing configuration",
+  "entities": [
+    {
+      "id": "SMTC1",
+      "name": "First SS/PBCH Block Measurement Timing Configuration",
+      "entity_type": "Procedure",
+      "description": "UE setup procedure for the first SS/PBCH block measurement timing configuration using periodicityAndOffset parameter from smtc1 configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "SMTC2",
+      "name": "Additional SS/PBCH Block Measurement Timing Configuration",
+      "entity_type": "Procedure",
+      "description": "UE setup procedure for additional SS/PBCH block measurement timing configuration using periodicity parameter from smtc2 configuration and Offset/duration from smtc1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "SMTC2_LP",
+      "name": "Additional SS/PBCH Block Measurement Timing Configuration for Cell Reselection",
+      "entity_type": "Procedure",
+      "description": "UE setup procedure for additional SS/PBCH block measurement timing configuration using periodicity parameter from smtc2-LP configuration and Offset/duration from smtc configuration for that frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "SMTC3LIST",
+      "name": "SS Block Measurement Timing Configuration List",
+      "entity_type": "Procedure",
+      "description": "IAB-MT setup procedure for additional SS block measurement timing configuration using periodicityAndOffset parameter from each SSB-MTC3 configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "RMTC",
+      "name": "RSSI Measurement Timing Configuration",
+      "entity_type": "Procedure",
+      "description": "UE setup procedure for RSSI measurement timing configuration using rmtc-Periodicity and rmtc-SubframeOffset parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "PERIODICITY_OFFSET",
+      "name": "Periodicity and Offset Parameter",
+      "entity_type": "Information Element",
+      "description": "Parameter providing periodicity and offset values for SMTC configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "SMTC_CONDITION",
+      "name": "SMTC Occasion Condition",
+      "entity_type": "Condition",
+      "description": "Condition determining the first subframe of each SMTC occasion based on SFN mod T and subframe calculation.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "RMTC_CONDITION",
+      "name": "RMTC Occasion Condition",
+      "entity_type": "Condition",
+      "description": "Condition determining the first symbol of each RMTC occasion based on SFN mod T and subframe calculation.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "MEASUREMENT_RESTRICTION",
+      "name": "Measurement Restriction Property",
+      "entity_type": "Property",
+      "description": "UE shall not consider SS/PBCH block transmission outside SMTC occasion for RRM measurements based on SS/PBCH blocks and CSI-RS.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "RSSI_MEASUREMENT_RESTRICTION",
+      "name": "RSSI Measurement Restriction Property",
+      "entity_type": "Property",
+      "description": "UE shall not consider RSSI measurements outside the configured RMTC occasion for RSSI and channel occupancy measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SMTC1",
+      "target": "PERIODICITY_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SMTC1 configuration uses periodicityAndOffset parameter",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SMTC1",
+      "target": "SMTC_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMTC1 occasion timing is determined by the SMTC condition",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SMTC2",
+      "target": "PERIODICITY_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SMTC2 configuration uses Offset parameter derived from periodicityAndOffset",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMTC2_LP",
+      "target": "PERIODICITY_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SMTC2-LP configuration uses Offset parameter derived from periodicityAndOffset",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SMTC3LIST",
+      "target": "PERIODICITY_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SSB-MTC3 configuration uses periodicityAndOffset parameter",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RMTC",
+      "target": "RMTC_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RMTC occasion timing is determined by the RMTC condition",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SMTC_CONDITION",
+      "target": "MEASUREMENT_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMTC condition establishes measurement restriction property",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RMTC_CONDITION",
+      "target": "RSSI_MEASUREMENT_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RMTC condition establishes RSSI measurement restriction property",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.10"
+      ]
+    }
+  ]
+}

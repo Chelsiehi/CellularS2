@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3",
+  "title": "EPS bearer context modification procedure",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_MOD",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for modifying an existing EPS bearer context between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to request modification of EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "MODIFY EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to accept the EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "name": "MODIFY EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to reject the EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_ID",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the EPS bearer context to be modified.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "IE_NEW_QOS",
+      "name": "New QoS parameters",
+      "entity_type": "Information Element",
+      "description": "Contains the modified QoS parameters for the EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic flow template",
+      "entity_type": "Information Element",
+      "description": "Defines packet filters for the EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE must be in EMM-REGISTERED state to perform EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with network sending MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure continues with UE sending MODIFY EPS BEARER CONTEXT ACCEPT message if modification is accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure continues with UE sending MODIFY EPS BEARER CONTEXT REJECT message if modification is rejected.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_NEW_QOS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains new QoS parameters IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_TFT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message may contain traffic flow template IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EPS bearer context modification procedure requires UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3"
+      ]
+    }
+  ]
+}

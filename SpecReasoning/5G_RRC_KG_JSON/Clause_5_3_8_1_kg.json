@@ -1,0 +1,120 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.8.1",
+  "title": "General RRCRelease",
+  "entities": [
+    {
+      "id": "PROC_RRC_RELEASE",
+      "name": "RRC Connection Release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release the RRC connection, including release of established radio bearers (except broadcast MRBs), BH RLC channels, Uu Relay RLC channels, and all radio resources.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "PROC_RRC_SUSPEND",
+      "name": "RRC Connection Suspend",
+      "entity_type": "Procedure",
+      "description": "Procedure to suspend the RRC connection when SRB2 and at least one DRB or multicast MRB (or for IAB, SRB2) are setup, which includes suspension of established radio bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RELEASE",
+      "name": "RRCRelease",
+      "entity_type": "Message",
+      "description": "Message sent from network to UE to initiate RRC connection release or suspension.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1",
+        "Figure 5.3.8.1"
+      ]
+    },
+    {
+      "id": "COND_SUSPEND_REQUIREMENTS",
+      "name": "Suspension Requirements",
+      "entity_type": "Condition",
+      "description": "Condition that SRB2 and at least one DRB or multicast MRB (or for IAB, SRB2) must be setup for RRC connection suspension to occur.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "PROP_RELEASE_RESOURCES",
+      "name": "Release Radio Resources",
+      "entity_type": "Property",
+      "description": "Property that all radio bearers (except broadcast MRBs), BH RLC channels, Uu Relay RLC channels, and radio resources are released during RRC connection release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "PROP_SUSPEND_BEARERS",
+      "name": "Suspend Radio Bearers",
+      "entity_type": "Property",
+      "description": "Property that established radio bearers are suspended during RRC connection suspension.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_RRC_RELEASE",
+      "target": "PROC_RRC_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCRelease message triggers the RRC connection release procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1",
+        "Figure 5.3.8.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_RELEASE",
+      "target": "PROC_RRC_SUSPEND",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRCRelease message triggers the RRC connection suspension procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_RRC_SUSPEND",
+      "target": "COND_SUSPEND_REQUIREMENTS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC connection suspension procedure requires that suspension conditions are met",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_RELEASE",
+      "target": "PROP_RELEASE_RESOURCES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection release procedure establishes the release of radio resources",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_RRC_SUSPEND",
+      "target": "PROP_SUSPEND_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection suspension procedure establishes the suspension of radio bearers",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.1"
+      ]
+    }
+  ]
+}

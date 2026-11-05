@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.4.3",
+  "title": "Integrity checking of NAS signalling messages in the MME",
+  "entities": [
+    {
+      "id": "PROC_INTEGRITY_CHECKING",
+      "name": "Integrity checking of NAS signalling messages",
+      "entity_type": "Procedure",
+      "description": "Procedure for handling NAS signalling messages based on their integrity protection status in the MME. Defines which messages can be processed without protection and actions when integrity checks fail.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "NAS message used to provide identity information. Can be processed without integrity protection when requested parameter is IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that rejects security mode establishment. Can be processed without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for tracking area update procedure. Can be sent without integrity protection in certain scenarios.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for detach procedure. Can be sent without integrity protection in emergency scenarios.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for attach procedure. Requires authentication if received without integrity protection for non-emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for service request procedure. Integrity check failure leads to service rejection for non-emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_HASHMME",
+      "name": "HASHMME IE",
+      "entity_type": "Information Element",
+      "description": "Information element included in SECURITY MODE COMMAND message when security mode control procedure is initiated after integrity check failure.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with the network. MME may remain in this state if detach request fails integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with the network. Network uses additional criteria before marking UE in this state.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange of NAS messages established",
+      "entity_type": "Condition",
+      "description": "Condition indicating that secure NAS message exchange has been established. After this point, all messages must pass integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "PROP_DISCARD_MESSAGE",
+      "name": "Discard message",
+      "entity_type": "Property",
+      "description": "Property where NAS in MME discards messages that fail integrity check after secure exchange is established.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_IDENTITY_RESPONSE",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "IDENTITY RESPONSE message can be processed without integrity protection when requested parameter is IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SECURITY MODE REJECT message can be processed without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message can be sent without integrity protection in certain scenarios.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "DETACH REQUEST message can be sent without integrity protection for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_HASHMME",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ATTACH REQUEST without integrity protection triggers security mode control with HASHMME IE.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "If detach request fails integrity check and is due to switch off, MME may remain in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "target": "PROP_DISCARD_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Once secure exchange is established, messages failing integrity check are discarded.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SERVICE REQUEST with integrity check failure for non-emergency services leads to service rejection while maintaining EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.3"
+      ]
+    }
+  ]
+}

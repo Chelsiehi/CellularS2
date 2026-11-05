@@ -1,0 +1,924 @@
+[
+  {
+    "id": "VD-01",
+    "label": "NON_VULN",
+    "input": "If an attacker can send a CONFIGURATION UPDATE COMMAND with the acknowledgement bit set, the UE is required to return CONFIGURATION UPDATE COMPLETE and accept the configuration, enabling unauthorized remote modification and persistent state changes without prior user confirmation.",
+    "evidence": "TS 24.501, Clause 5.4.4.3, Generic UE configuration update accepted by the UE",
+    "non_vuln_reason": "This clause defines normal UE behavior for a network-initiated configuration update. In standard-compliant operation, the CONFIGURATION UPDATE COMMAND is expected to be protected by the established NAS security context; the scenario assumes a forged/unauthenticated command without showing a spec-permitted protection gap.",
+    "how_to_use": [
+      "Use as a negative example: protocol behavior that is only dangerous if integrity/ciphering is bypassed by an attacker or implementation bug.",
+      "Use as a message-handling semantics example for configuration update flows."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.4.3"
+    ]
+  },
+  {
+    "id": "VD-02",
+    "label": "NON_VULN",
+    "input": "Upon receiving any CONFIGURATION UPDATE COMMAND, the UE stops T3346 if running and updates stored parameters, which allows a forged or tampered command to neutralize backoff timers and silently inject configuration for tracking or policy manipulation.",
+    "evidence": "TS 24.501, Clause 5.4.4.3, Generic UE configuration update accepted by the UE",
+    "non_vuln_reason": "Stopping T3346 and updating stored parameters are specified functional outcomes of a legitimate configuration update. The described attack hinges on accepting a forged/tampered command, which is not a spec-allowed condition once NAS security is in use.",
+    "how_to_use": [
+      "Use as a negative example to test whether your root-cause finder correctly rejects ‘attacker can forge a protected message’ assumptions.",
+      "Use to extract timer/state side effects for benign procedure modeling."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.4.3"
+    ]
+  },
+  {
+    "id": "VD-03",
+    "label": "VULN",
+    "input": "Replay protection is mandated but left implementation-dependent with no specific mechanism, creating inconsistent defenses across devices and enabling replay, desynchronization, and denial-of-service attacks in practice.",
+    "evidence": "TS 24.501, Clause 4.4.3.2, Replay protection",
+    "vuln_title": "Replay protection required, but mechanism left implementation-dependent (inconsistent defenses)",
+    "vuln_type": [
+      "Replay acceptance risk",
+      "Implementation divergence"
+    ],
+    "threat_model": "An adversary can capture previously transmitted security-protected NAS messages (including their MAC and sequence number) and replay them to a target UE/AMF, exploiting weak or incomplete replay-detection implementations.",
+    "preconditions": [
+      "Attacker can record and replay NAS messages on the air interface (e.g., rogue gNB / MITM capability).",
+      "Receiver replay protection is incomplete or does not correctly enforce ‘accept at most once per NAS COUNT’."
+    ],
+    "attack_story": [
+      "Attacker records a valid NAS message that was accepted once by the receiver.",
+      "Attacker replays the same message later.",
+      "If replay protection is implemented weakly (e.g., only checks integrity, but not ‘seen COUNT’), the receiver may accept the message again, causing duplicate state transitions or service disruption."
+    ],
+    "impact": [
+      "Duplicate processing of NAS procedures",
+      "State desynchronization between UE and AMF",
+      "Denial-of-service via repeated procedure triggers"
+    ],
+    "root_cause_in_spec": [
+      "Replay protection is required but the specification explicitly does not mandate a concrete interoperable mechanism, so real-world robustness depends on vendor implementation choices."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.3.2"
+    ]
+  },
+  {
+    "id": "VD-04",
+    "label": "VULN",
+    "input": "Because the receiver may select an overflow counter that yields a lower NAS COUNT than the stored value when it believes a message is fresh, ambiguity in this rule can permit COUNT rollback, counter desynchronization, and replay opportunities.",
+    "evidence": "TS 24.501, Clause 4.4.3.1, General (NAS COUNT estimation rule)",
+    "vuln_title": "NAS COUNT estimation rule allows lower-than-stored COUNT under ‘guarantee’ condition (rollback/replay risk)",
+    "vuln_type": [
+      "Replay window",
+      "Counter desynchronization"
+    ],
+    "threat_model": "An adversary replays an earlier downlink NAS message near a sequence-number wrap/overflow boundary; the receiver’s ‘guarantee not previously accepted’ determination is wrong, causing acceptance of an old message with a lower estimated NAS COUNT.",
+    "preconditions": [
+      "Attacker can replay previously valid NAS messages.",
+      "Receiver uses the ‘lower than stored NAS COUNT’ option under an incorrect freshness guarantee.",
+      "Timing/COUNT state makes the ambiguity practically reachable (e.g., near wrap-around)."
+    ],
+    "attack_story": [
+      "Attacker replays a previously accepted NAS message with an older sequence number.",
+      "Receiver incorrectly concludes the message could not have been accepted before (e.g., due to incomplete replay tracking).",
+      "Receiver selects an overflow counter that makes the estimated NAS COUNT lower than the stored value.",
+      "Receiver may accept and process an old message, creating state rollback or divergence."
+    ],
+    "impact": [
+      "Replay acceptance",
+      "State rollback or inconsistent NAS security state",
+      "Potential procedure confusion/DoS"
+    ],
+    "root_cause_in_spec": [
+      "The rule explicitly permits selecting an estimated overflow counter that yields an estimated NAS COUNT lower than the stored NAS COUNT when the receiver ‘can guarantee’ non-acceptance before, pushing safety into implementation-dependent logic."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.3.1"
+    ]
+  },
+  {
+    "id": "VD-05",
+    "label": "NON_VULN",
+    "input": "Resetting the uplink NAS COUNT upon certain SECURITY MODE COMMAND cases can be exploited to force counter resets, creating desynchronization windows that weaken replay protection and introduce race conditions.",
+    "evidence": "TS 24.501, Clause 5.4.2.3, NAS security mode command accepted by the UE",
+    "non_vuln_reason": "Resetting NAS COUNT is a normal part of taking a new security context into use and is performed under NAS security-mode control. The attack assumes the adversary can trigger SECURITY MODE COMMAND processing without the normal security guarantees.",
+    "how_to_use": [
+      "Use as a benign example of counter lifecycle management across security context changes.",
+      "Use as a hard negative to ensure your system distinguishes ‘specified key roll-over behavior’ from ‘spec-permitted unprotected acceptance’."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.2.3"
+    ]
+  },
+  {
+    "id": "VD-06",
+    "label": "VULN",
+    "input": "Because security-protected NAS messages include a visible security header and sequence number, observers can exploit sequence number exposure for traffic analysis, fingerprinting, and potential linkability even when payloads are encrypted.",
+    "evidence": "TS 24.501, Clause 9.1.1, NAS message format (security protected 5GS NAS message fields)",
+    "vuln_title": "Security-protected NAS exposes metadata (header type + sequence number) enabling traffic analysis",
+    "vuln_type": [
+      "Privacy leakage",
+      "Traffic analysis"
+    ],
+    "threat_model": "A passive eavesdropper monitors NAS traffic and correlates visible header/sequence-number patterns across time and locations to infer UE activity or assist linkability.",
+    "preconditions": [
+      "Attacker can passively observe radio traffic.",
+      "Metadata fields (e.g., sequence number) are observable even when the plain NAS payload is ciphered."
+    ],
+    "attack_story": [
+      "Attacker records security-protected NAS messages and extracts visible metadata fields.",
+      "Attacker tracks sequence-number progression, retransmissions, and message timing to infer UE behavior (e.g., mobility, paging/service activity).",
+      "Attacker correlates patterns to fingerprint implementations or aid long-term monitoring."
+    ],
+    "impact": [
+      "Information leakage about user/device activity patterns",
+      "Potential linkability/fingerprinting assistance"
+    ],
+    "root_cause_in_spec": [
+      "The NAS message format for security-protected messages explicitly carries non-payload fields (including sequence number) outside the encrypted ‘plain NAS message’ portion."
+    ],
+    "evidence_targets": [
+      "TS 24.501 9.1.1"
+    ]
+  },
+  {
+    "id": "VD-07",
+    "label": "NON_VULN",
+    "input": "Integrity protection is only mandatory once a valid 5G NAS security context is in use, so any implementation gaps during transitions or missing MAC verification can allow unauthenticated messages to be accepted, enabling fake registration or deregistration and signalling denial-of-service.",
+    "evidence": "TS 24.501, Clause 4.4.4.1, General (integrity mandatory once valid 5G NAS security context exists)",
+    "non_vuln_reason": "This is a security requirement statement, not a spec-granted exception. The risky part (‘implementation gaps’ or ‘missing MAC verification’) is an implementation failure, not a normative permission to accept unauthenticated messages.",
+    "how_to_use": [
+      "Use as a security requirement to anchor your root-cause search (what must hold once a valid context exists).",
+      "Use as a negative example: don’t label a requirement as a vulnerability unless paired with a spec exception elsewhere."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.4.1"
+    ]
+  },
+  {
+    "id": "VD-08",
+    "label": "VULN",
+    "input": "Because the AMF may process several initial NAS messages without an established secure exchange, attackers can submit unauthenticated registration, identity, or security-mode outcomes to induce fake messages, denial-of-service, or unauthorized state changes.",
+    "evidence": "TS 24.501, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the AMF (exception list + MAC-failure processing)",
+    "vuln_title": "AMF processes a defined set of NAS messages before secure exchange (unauthenticated/weakly checked window)",
+    "vuln_type": [
+      "Unauthenticated signalling window",
+      "DoS / state manipulation"
+    ],
+    "threat_model": "An active attacker with rogue gNB/MITM capability injects or replays early NAS messages during the period before secure exchange is established (or when the AMF cannot verify MAC due to missing context).",
+    "preconditions": [
+      "Secure exchange of NAS messages is not yet established for the NAS signalling connection.",
+      "The message type is in the AMF exception list (e.g., REGISTRATION REQUEST, IDENTITY RESPONSE for SUCI, AUTHENTICATION FAILURE, SECURITY MODE REJECT, DEREGISTRATION REQUEST/ACCEPT, SERVICE REQUEST, CONTROL PLANE SERVICE REQUEST)."
+    ],
+    "attack_story": [
+      "Attacker injects or replays an allowed early NAS message while secure exchange is not established.",
+      "AMF processes the message because it is explicitly listed as an exception.",
+      "AMF may also process some of these messages even if the MAC fails or cannot be verified due to missing context, increasing the attacker’s leverage.",
+      "This can disrupt authentication/registration flow or induce unwanted state transitions."
+    ],
+    "impact": [
+      "Denial-of-service against registration/service establishment",
+      "State confusion (e.g., premature deregistration marking without robust confirmation)",
+      "Procedure disruption via injected SECURITY MODE REJECT/AUTHENTICATION FAILURE"
+    ],
+    "root_cause_in_spec": [
+      "The AMF integrity-checking rules explicitly whitelist specific message types before secure exchange, and also define conditions where processing may occur even if MAC verification fails or cannot be performed."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.4.3"
+    ]
+  },
+  {
+    "id": "VD-09",
+    "label": "VULN",
+    "input": "Since the AMF shall answer a received DEREGISTRATION REQUEST with DEREGISTRATION ACCEPT, a forged or replayed request can force unauthorized deregistration and denial-of-service if integrity checks are absent or bypassed.",
+    "evidence": "TS 24.501, Clause 5.5.2.2.2, UE-initiated de-registration procedure completion",
+    "vuln_title": "Forced deregistration via unprotected/weakly checked DEREGISTRATION REQUEST handling",
+    "vuln_type": [
+      "Unauthenticated deregistration",
+      "Signalling DoS"
+    ],
+    "threat_model": "An attacker injects a DEREGISTRATION REQUEST during a phase where it can be sent/processed without integrity protection (e.g., emergency registration without a valid context or cancellation before secure exchange).",
+    "preconditions": [
+      "DEREGISTRATION REQUEST is sent/processed without integrity protection under a spec-permitted condition (see TS 24.501 4.4.4.3 Note 2).",
+      "Attacker can inject or replay a DEREGISTRATION REQUEST."
+    ],
+    "attack_story": [
+      "Attacker transmits a DEREGISTRATION REQUEST targeting a victim UE context under the unprotected condition.",
+      "AMF processes it and proceeds with de-registration completion behavior (including sending DEREGISTRATION ACCEPT).",
+      "Victim loses service and must re-register."
+    ],
+    "impact": [
+      "Service denial",
+      "Repeated deregistration/re-registration churn"
+    ],
+    "root_cause_in_spec": [
+      "The de-registration completion procedure mandates an ACCEPT response upon receiving a DEREGISTRATION REQUEST, and separate integrity-checking rules allow unprotected deregistration requests in certain cases."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.5.2.2.2",
+      "TS 24.501 4.4.4.3"
+    ]
+  },
+  {
+    "id": "VD-10",
+    "label": "VULN",
+    "input": "Because a DEREGISTRATION REQUEST can be sent without integrity protection in certain cases (e.g., emergency services with no valid 5G NAS security context, or cancellation before secure exchange), attackers can inject spoofed deregistration to trigger unauthorized deregistration and denial-of-service.",
+    "evidence": "TS 24.501, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the AMF (NOTE 2 on DEREGISTRATION REQUEST without integrity)",
+    "vuln_title": "DEREGISTRATION REQUEST permitted without integrity in specific cases (spoofing/DoS surface)",
+    "vuln_type": [
+      "Integrity exception abuse",
+      "Signalling DoS"
+    ],
+    "threat_model": "An active attacker injects a forged DEREGISTRATION REQUEST during emergency/no-context or pre-secure-exchange cancellation scenarios.",
+    "preconditions": [
+      "UE has no valid 5G NAS security context (e.g., emergency registration) OR registration was cancelled before secure exchange is established.",
+      "Attacker can inject NAS signalling toward the AMF."
+    ],
+    "attack_story": [
+      "Attacker targets a UE context that is in the spec-listed unprotected deregistration situation.",
+      "Attacker sends a DEREGISTRATION REQUEST without integrity protection.",
+      "AMF may de-register the UE unless additional criteria are applied consistently and robustly."
+    ],
+    "impact": [
+      "Unauthorized deregistration",
+      "Service denial, especially for emergency-mode edge cases"
+    ],
+    "root_cause_in_spec": [
+      "The specification explicitly allows sending DEREGISTRATION REQUEST without integrity protection for certain scenarios and suggests ‘additional criteria’ rather than mandating a strict interoperable defense."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.4.3"
+    ]
+  },
+  {
+    "id": "VD-11",
+    "label": "NON_VULN",
+    "input": "The NAS COUNT counters are only 24-bit and are maintained independently by UE and AMF, which increases the risk of wraparound, desynchronization, and replay windows if implementations do not handle edge cases robustly.",
+    "evidence": "TS 24.501, Clause 4.4.3.1, General (NAS COUNT is 24-bit and independently maintained)",
+    "non_vuln_reason": "This is a design parameter with defined construction (sequence number + overflow counter) and specified wrap-around handling. The risks described arise from poor edge-case handling, not from a spec-granted missing protection property by itself.",
+    "how_to_use": [
+      "Use as a benign ‘protocol parameter’ example for NAS COUNT modeling.",
+      "Use as a negative example to avoid over-labeling ‘finite counter size’ as a vulnerability without an exploit path tied to a spec exception."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.4.3.1"
+    ]
+  },
+  {
+    "id": "VD-12",
+    "label": "NON_VULN",
+    "input": "A UE must generate and return a fresh SUCI and start T3519 when requested and the timer is not running, which enables forced computation, storage pressure, and potential SUCI-based linkability or resource exhaustion via repeated identity requests.",
+    "evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE",
+    "non_vuln_reason": "The procedure includes a built-in rate-limiting behavior via T3519 (fresh SUCI only when the timer is not running). Additionally, in normal operation identity requests occur within authenticated signalling contexts; the described abuse requires an attacker-controlled network-side trigger beyond what the clause itself grants.",
+    "how_to_use": [
+      "Use as a non-vulnerability example of privacy-conscious design (fresh SUCI + reuse window).",
+      "Use to extract timer-gated behavior for UE identity response modeling."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.3.3"
+    ]
+  },
+  {
+    "id": "VD-13",
+    "label": "VULN",
+    "input": "The identification procedure explicitly allows the network to request identifiers such as SUCI, IMEI, IMEISV, EUI-64, or MAC, expanding the surface for identity solicitation that can be misused for tracking and privacy invasion.",
+    "evidence": "TS 24.501, Clause 5.4.3.1, General (identification parameters that may be requested)",
+    "vuln_title": "Network may request multiple UE identifiers (tracking/identity harvesting surface)",
+    "vuln_type": [
+      "Privacy leakage",
+      "Identity harvesting"
+    ],
+    "threat_model": "A malicious/compromised network element, rogue gNB, or active attacker inducing identity procedures attempts to obtain stable identifiers for tracking or correlation.",
+    "preconditions": [
+      "Attacker can trigger or impersonate the network side of the identification procedure (e.g., rogue RAN).",
+      "UE follows the identification procedure requirements."
+    ],
+    "attack_story": [
+      "Attacker triggers an identification procedure requesting a stable identifier (e.g., IMEI/IMEISV/MAC/EUI-64).",
+      "UE provides the requested identifier per procedure requirements.",
+      "Attacker uses the identifier for persistent tracking and correlation across sessions/locations."
+    ],
+    "impact": [
+      "Long-term device tracking",
+      "Correlation of user activity across networks or sessions"
+    ],
+    "root_cause_in_spec": [
+      "The procedure explicitly permits requesting multiple identifier types beyond privacy-preserving SUCI, enabling identity solicitation as a standardized capability."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.3.1"
+    ]
+  },
+  {
+    "id": "VD-14",
+    "label": "VULN",
+    "input": "Because the UE must be ready to respond to an IDENTITY REQUEST at any time in 5GMM-CONNECTED mode, spoofed or frequent requests can lead to unbounded identity replies that facilitate tracking and rate-limit abuse.",
+    "evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (ready to respond at any time in 5GMM-CONNECTED)",
+    "vuln_title": "Always-ready identity response in 5GMM-CONNECTED enables tracking and request-amplification abuse",
+    "vuln_type": [
+      "Privacy leakage",
+      "Signalling amplification / resource abuse"
+    ],
+    "threat_model": "An active attacker or malicious network repeatedly solicits identity responses to (i) harvest identifiers and (ii) impose signalling/computation burden.",
+    "preconditions": [
+      "UE is in 5GMM-CONNECTED mode.",
+      "Attacker can trigger repeated IDENTITY REQUEST messages (directly or via a compromised network)."
+    ],
+    "attack_story": [
+      "Attacker sends frequent IDENTITY REQUEST messages while UE is connected.",
+      "UE is required to respond, generating and/or returning identifiers depending on Identity type and timers (e.g., T3519 for SUCI).",
+      "Attacker uses responses for tracking or forces repeated control-plane signalling."
+    ],
+    "impact": [
+      "Tracking via repeated identity solicitation",
+      "Increased UE control-plane activity and potential battery drain"
+    ],
+    "root_cause_in_spec": [
+      "The specification requires the UE to be ready to respond to IDENTITY REQUEST at any time in 5GMM-CONNECTED, without mandating a general-purpose anti-abuse rate limit for all identity types."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.3.3"
+    ]
+  },
+  {
+    "id": "VD-15",
+    "label": "VULN",
+    "input": "If the IDENTITY REQUEST is not for SUCI, the UE must return the requested identifiers (e.g., IMSI or IMEI) in plaintext, directly enabling active harvesting of permanent identifiers and long-term tracking.",
+    "evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (non-SUCI Identity type handling)",
+    "vuln_title": "Non-SUCI identity requests can elicit stable identifiers (permanent ID harvesting risk)",
+    "vuln_type": [
+      "Privacy leakage",
+      "Identifier harvesting"
+    ],
+    "threat_model": "A rogue or malicious network-side entity requests stable identifiers to track devices. The highest risk is when the request/response occurs before secure exchange is established or when the adversary controls the access network.",
+    "preconditions": [
+      "Attacker can cause an IDENTITY REQUEST with Identity type not set to SUCI.",
+      "UE complies and returns the requested identifier."
+    ],
+    "attack_story": [
+      "Attacker issues an IDENTITY REQUEST asking for a stable identifier (e.g., IMEI/IMEISV).",
+      "UE sends IDENTITY RESPONSE containing the requested value.",
+      "Attacker stores the identifier for long-term tracking/correlation."
+    ],
+    "impact": [
+      "Exposure of stable device identifiers",
+      "Long-term tracking and correlation"
+    ],
+    "root_cause_in_spec": [
+      "The non-SUCI identity response behavior is standardized and requires returning requested identifiers, expanding tracking surface beyond privacy-preserving SUCI."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.3.3"
+    ]
+  },
+  {
+    "id": "VD-16",
+    "label": "VULN",
+    "input": "When SUCI is requested, the UE either generates a fresh SUCI or reuses the stored one depending on T3519, which can be exploited as an authentication or linkability oracle and to impose repeated computation costs.",
+    "evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (SUCI generation vs reuse gated by T3519)",
+    "vuln_title": "SUCI reuse window (T3519) can create short-term linkability and probing oracle",
+    "vuln_type": [
+      "Privacy leakage",
+      "Linkability oracle"
+    ],
+    "threat_model": "A nearby active attacker repeatedly triggers SUCI requests within the T3519 window to force reuse of the same SUCI, enabling short-term linkability.",
+    "preconditions": [
+      "Attacker can trigger repeated SUCI requests to the same UE within the T3519 interval.",
+      "UE is required to reuse the stored SUCI while T3519 is running."
+    ],
+    "attack_story": [
+      "Attacker sends a SUCI-requesting IDENTITY REQUEST to the UE.",
+      "UE generates a fresh SUCI and starts T3519, storing the SUCI.",
+      "Attacker quickly repeats the SUCI request before T3519 expires.",
+      "UE responds with the stored SUCI, enabling the attacker to link the two observations to the same UE within that window."
+    ],
+    "impact": [
+      "Short-term linkability (within timer window)",
+      "Increased probing surface for active attackers"
+    ],
+    "root_cause_in_spec": [
+      "The specification explicitly defines SUCI reuse vs regeneration behavior based on T3519, allowing repeated requests to obtain identical SUCI during the timer window."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.3.3"
+    ]
+  },
+  {
+    "id": "VD-17",
+    "label": "VULN",
+    "input": "By returning AUTHENTICATION FAILURE with a specific cause when rejecting authentication due to incorrect AUTN or ngKSI, the UE exposes an error-code oracle that assists linkability and targeted probing.",
+    "evidence": "TS 24.501, Clause 5.4.1.3.6, Authentication not accepted by the UE (cause value indicates reason)",
+    "vuln_title": "Authentication failure cause values can act as an oracle for probing and linkability",
+    "vuln_type": [
+      "Side-channel / oracle",
+      "Privacy leakage"
+    ],
+    "threat_model": "An active attacker sends crafted authentication challenges and observes whether/how the UE responds with specific failure causes, learning information about UE state or authentication context.",
+    "preconditions": [
+      "Attacker can induce authentication attempts (e.g., rogue network).",
+      "UE returns AUTHENTICATION FAILURE with a reason-indicating cause value."
+    ],
+    "attack_story": [
+      "Attacker triggers authentication with intentionally malformed or mismatched parameters (e.g., AUTN/ngKSI).",
+      "UE rejects and sends AUTHENTICATION FAILURE with a cause value indicating the reason.",
+      "Attacker uses the distribution of causes to fingerprint UE behavior or infer state, aiding targeted probing or linkability."
+    ],
+    "impact": [
+      "Enhanced attacker probing capability",
+      "Potential device fingerprinting/linkability assistance"
+    ],
+    "root_cause_in_spec": [
+      "The specification requires that the UE return AUTHENTICATION FAILURE with a cause value indicating the reason for rejecting the authentication challenge."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.4.1.3.6"
+    ]
+  },
+  {
+    "id": "VD-18",
+    "label": "VULN",
+    "input": "A REGISTRATION REJECT with cause #9 ('UE identity cannot be derived by the network') acts as an identity-related error oracle that can leak information about identity derivation status and aid tracking or targeted attacks.",
+    "evidence": "TS 24.501, Clause 5.5.1.3.5, Mobility and periodic registration update not accepted by the network (cause #9)",
+    "vuln_title": "Registration reject cause #9 can serve as an identity-derivation oracle",
+    "vuln_type": [
+      "Side-channel / oracle",
+      "Privacy leakage"
+    ],
+    "threat_model": "A malicious network or rogue access can trigger registration outcomes and observe whether the network sends a specific reject cause, revealing identity-derivation status.",
+    "preconditions": [
+      "Attacker can influence or observe registration procedures (e.g., rogue network).",
+      "REGISTRATION REJECT includes cause #9 under defined conditions."
+    ],
+    "attack_story": [
+      "Attacker triggers or manipulates registration attempts.",
+      "Network responds with REGISTRATION REJECT cause #9 for certain identity-derivation failures.",
+      "Attacker uses the presence/absence of cause #9 as a signal about identity derivation and device state, aiding tracking or targeted probing."
+    ],
+    "impact": [
+      "Information leakage about identity handling state",
+      "Improved attacker probing and correlation capability"
+    ],
+    "root_cause_in_spec": [
+      "The specification mandates using a specific reject cause for this identity-related condition, creating a standardized observable outcome."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.5.1.3.5"
+    ]
+  },
+  {
+    "id": "VD-19",
+    "label": "VULN",
+    "input": "Upon receiving REGISTRATION REJECT with cause #76 from a CAG cell, the UE overwrites or deletes stored CAG lists based on the message, enabling configuration poisoning, persistent policy changes, and long-lived denial-of-service.",
+    "evidence": "TS 24.501, Clause 5.5.1.2.5, Initial registration not accepted by the network (CAG list handling for cause #76)",
+    "vuln_title": "CAG list update on REGISTRATION REJECT cause #76 can enable configuration poisoning if reject is unprotected",
+    "vuln_type": [
+      "Configuration poisoning",
+      "Persistent DoS"
+    ],
+    "threat_model": "An active attacker injects or forges a REGISTRATION REJECT (cause #76) in scenarios where the reject is not integrity protected, causing the UE to modify stored CAG policy data persistently.",
+    "preconditions": [
+      "UE receives a REGISTRATION REJECT with cause #76 (CAG-related).",
+      "The message is not integrity protected (or integrity checks are not enforced in the relevant phase).",
+      "Attacker can inject the reject message toward the UE."
+    ],
+    "attack_story": [
+      "Attacker transmits a forged REGISTRATION REJECT with cause #76 and optionally a crafted CAG information list IE.",
+      "UE deletes/overwrites stored CAG information list or removes CAG-IDs from allowed CAG list as specified.",
+      "UE experiences persistent access restrictions or repeated registration failures in affected cells/PLMNs."
+    ],
+    "impact": [
+      "Persistent misconfiguration of CAG policy data",
+      "Long-lived access denial or degraded service"
+    ],
+    "root_cause_in_spec": [
+      "The UE is specified to delete/overwrite stored CAG lists based on receiving REGISTRATION REJECT cause #76, which becomes dangerous if the reject is deliverable without integrity protection."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.5.1.2.5"
+    ]
+  },
+  {
+    "id": "VD-20",
+    "label": "VULN",
+    "input": "If a REGISTRATION REJECT is not integrity-protected, the UE must start T3346 with a random backoff value, allowing injected rejects to impose prolonged service denial via timer manipulation.",
+    "evidence": "TS 24.501, Clause 5.5.1.2.5, Initial registration not accepted by the network (T3346 behavior for non-integrity-protected reject)",
+    "vuln_title": "Non-integrity-protected REGISTRATION REJECT triggers T3346 backoff (injectable DoS)",
+    "vuln_type": [
+      "Timer manipulation",
+      "Signalling DoS"
+    ],
+    "threat_model": "A rogue access network injects non-integrity-protected REGISTRATION REJECT messages to force UEs into backoff, delaying re-registration.",
+    "preconditions": [
+      "UE accepts a REGISTRATION REJECT that is not integrity protected (pre-secure-exchange or weakly checked phase).",
+      "Attacker can inject/forge the reject on the air interface."
+    ],
+    "attack_story": [
+      "Attacker sends a REGISTRATION REJECT that is not integrity protected.",
+      "UE starts T3346 with a random backoff value per the specification.",
+      "Attacker repeats injections to keep the UE in backoff, extending service unavailability."
+    ],
+    "impact": [
+      "Prolonged service denial",
+      "Reduced availability for registration and normal services"
+    ],
+    "root_cause_in_spec": [
+      "The specification explicitly defines UE behavior that starts T3346 when a REGISTRATION REJECT is not integrity protected, enabling a standardized DoS lever if such rejects can be injected."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.5.1.2.5"
+    ]
+  },
+  {
+    "id": "VD-21",
+    "label": "NON_VULN",
+    "input": "Because the AMF can send SERVICE REJECT to terminate a service request, forged or replayed rejects can be used to block service establishment if integrity protections are bypassed.",
+    "evidence": "TS 24.501, Clause 8.2.18, Service reject (message purpose definition)",
+    "non_vuln_reason": "This clause describes the purpose of the SERVICE REJECT message. The ‘forged or replayed’ aspect is not a spec-permitted protection exception; it depends on an attacker bypassing integrity/ciphering, which is outside the clause’s normative intent.",
+    "how_to_use": [
+      "Use as a message-purpose semantics example.",
+      "Use as a negative example: avoid labeling message definitions as vulnerabilities without a concrete spec exception enabling forgery/replay."
+    ],
+    "evidence_targets": [
+      "TS 24.501 8.2.18"
+    ]
+  },
+  {
+    "id": "VD-22",
+    "label": "NON_VULN",
+    "input": "The UE may self-initiate deregistration followed by re-registration when emergency services cease, which can be abused by adversaries manipulating emergency state to cause repeated deregistration and service disruption.",
+    "evidence": "TS 24.501, Clause 5.5.2.1, General (UE behavior after emergency services cease)",
+    "non_vuln_reason": "This is optional UE behavior driven by upper-layer indication and normal emergency-to-normal service transition logic. The ‘adversary manipulating emergency state’ assumption is not grounded in a spec-granted signalling exception in this clause.",
+    "how_to_use": [
+      "Use as a non-vulnerability example of emergency-to-normal transition behavior.",
+      "Use to extract permitted UE actions (may de-register then re-register) for procedure modeling."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.5.2.1"
+    ]
+  },
+  {
+    "id": "VD-23",
+    "label": "NON_VULN",
+    "input": "Because NAS signalling low priority for the UE is not supported in this release, devices that rely on low-priority access behavior may suffer access failures and encounter denial-of-service in congestion scenarios.",
+    "evidence": "TS 24.501, Clause 4.5.2, Determination of access identities/access category (NOTE: low priority not supported in this release)",
+    "non_vuln_reason": "This is a feature/support note about a non-supported configuration, not a security weakness or protection exception.",
+    "how_to_use": [
+      "Use as a negative example: capability/feature notes are not vulnerabilities.",
+      "Use to filter out non-security ‘release limitation’ statements during vulnerability mining."
+    ],
+    "evidence_targets": [
+      "TS 24.501 4.5.2"
+    ]
+  },
+  {
+    "id": "VD-24",
+    "label": "NON_VULN",
+    "input": "While SDT is not ongoing, the UE can acquire system information and send SI requests, which unauthenticated or fake cells can exploit to elicit information, trigger control-plane load, or deny service.",
+    "evidence": "TS 38.331, Clause 4.2.1, UE states and state transitions including inter RAT",
+    "non_vuln_reason": "This is RRC-layer behavior (TS 38.331), and it is outside the TS 24.501 PDF scope you provided for this batch. Treat it as out-of-scope here rather than labeling it as a NAS vulnerability without the corresponding RRC security context and requirements.",
+    "how_to_use": [
+      "Use as an out-of-scope negative example when focusing on TS 24.501 NAS vulnerabilities.",
+      "Move into a separate TS 38.331 dataset where you ground the threat in RRC/SI security assumptions."
+    ],
+    "evidence_targets": [
+      "TS 38.331 4.2.1"
+    ]
+  },
+  {
+    "id": "VD-25",
+    "label": "VULN",
+    "input": "A MUSIM UE that rejects RAN paging in 5GMM-CONNECTED with RRC inactive must initiate a SERVICE REQUEST with specific request types, which can be manipulated to create paging-driven signalling spikes and denial-of-service.",
+    "evidence": "TS 24.501, Clause 5.3.1.4, 5GMM-CONNECTED mode with RRC inactive indication (MUSIM paging rejection behavior)",
+    "vuln_title": "Paging-triggered SERVICE REQUEST amplification for MUSIM UEs (signalling spike/DoS surface)",
+    "vuln_type": [
+      "Signalling amplification",
+      "Resource exhaustion / DoS"
+    ],
+    "threat_model": "A malicious or compromised RAN triggers repeated paging indications to MUSIM UEs in RRC inactive indication states, causing repeated SERVICE REQUEST procedures.",
+    "preconditions": [
+      "UE is MUSIM and in 5GMM-CONNECTED with RRC inactive indication.",
+      "UE decides to reject RAN paging (per the procedure).",
+      "Attacker can induce repeated paging indications (RAN-side control or rogue gNB)."
+    ],
+    "attack_story": [
+      "Attacker repeatedly pages the UE while it is in the relevant connected/RRC-inactive condition.",
+      "UE rejects paging and is required to initiate a SERVICE REQUEST with specific request/service types.",
+      "Repeated paging yields repeated SERVICE REQUEST signalling, increasing control-plane load and draining UE resources."
+    ],
+    "impact": [
+      "Increased UE signalling/battery drain",
+      "Control-plane load amplification",
+      "Potential service disruption"
+    ],
+    "root_cause_in_spec": [
+      "The specification mandates a SERVICE REQUEST procedure initiation when a MUSIM UE rejects RAN paging in this state, creating an amplification path if paging can be adversarially driven."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.3.1.4"
+    ]
+  },
+  {
+    "id": "VD-26",
+    "label": "NON_VULN",
+    "input": "Requiring a 5GMM-IDLE UE to request resources for V2X communication over PC5 can be abused to trigger unauthorized resource requests that strain control-plane capacity and cause denial-of-service.",
+    "evidence": "TS 24.501, Clause 5.6.1.1, General (resource request for V2X over PC5 mention)",
+    "non_vuln_reason": "This is a functional requirement describing when the UE requests resources for V2X over PC5; it does not itself define a protection exception or an attacker-permitted injection point. ‘Unauthorized resource requests’ would require attacker control of UE behavior or network-side triggers beyond the clause.",
+    "how_to_use": [
+      "Use as a benign example of when SERVICE REQUEST is needed for a specific use case (V2X/PC5).",
+      "Use as a negative example to avoid labeling ‘UE must do X’ as a vulnerability without a concrete spec exception enabling adversarial triggering."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.6.1.1"
+    ]
+  },
+  {
+    "id": "VD-27",
+    "label": "NON_VULN",
+    "input": "The UE transitions between defined 5GMM sublayer states such as 5GMM-DEREGISTERED, 5GMM-REGISTERED, and intermediate substates based on explicit procedure outcomes.",
+    "evidence": "TS 24.501, Clause 5.1.3, 5GMM sublayer states",
+    "non_vuln_reason": "This clause defines the normative state machine for 5GMM. State transitions are deterministic outcomes of procedures and do not represent a security weakness.",
+    "how_to_use": [
+      "Use as a state-machine modeling reference for UE-side 5GMM behavior.",
+      "Use as a negative example to avoid treating protocol state transitions as vulnerabilities."
+    ],
+    "evidence_targets": ["TS 24.501 5.1.3"]
+  },
+  {
+    "id": "VD-28",
+    "label": "NON_VULN",
+    "input": "The UE selects appropriate registration areas and tracking area lists based on information provided by the network during registration procedures.",
+    "evidence": "TS 24.501, Clause 5.3.4, Registration areas",
+    "non_vuln_reason": "Registration area handling is a core mobility-management function and does not grant an attacker additional capability by itself.",
+    "how_to_use": [
+      "Use to extract UE mobility management logic.",
+      "Use as a benign example of location management behavior."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.4"]
+  },
+  {
+    "id": "VD-29",
+    "label": "NON_VULN",
+    "input": "The UE stores and updates the list of equivalent PLMNs as provided by the network during registration accept.",
+    "evidence": "TS 24.501, Clause 5.3.14, List of equivalent PLMNs",
+    "non_vuln_reason": "Maintaining equivalent PLMN lists is a standardized roaming support mechanism, not a security exception.",
+    "how_to_use": [
+      "Use as a data persistence example for UE configuration storage.",
+      "Use as a negative example for non-security-related list updates."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.14"]
+  },
+  {
+    "id": "VD-30",
+    "label": "NON_VULN",
+    "input": "The UE handles periodic registration update timers and mobile reachable timers according to configured values.",
+    "evidence": "TS 24.501, Clause 5.3.7, Handling of the periodic registration update timer",
+    "non_vuln_reason": "Timer-based periodic updates are part of normal reachability management and do not expose a protocol weakness.",
+    "how_to_use": [
+      "Use to model UE liveness and reachability logic.",
+      "Use as a negative example for timer-driven behavior."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.7"]
+  },
+  {
+    "id": "VD-31",
+    "label": "NON_VULN",
+    "input": "The UE enters LIMITED-SERVICE or NO-CELL-AVAILABLE substates when radio coverage or PLMN availability is insufficient.",
+    "evidence": "TS 24.501, Clause 5.2.2.3, Detailed description of UE behaviour in state 5GMM-DEREGISTERED",
+    "non_vuln_reason": "These substates reflect radio and coverage conditions, not security decisions or exceptions.",
+    "how_to_use": [
+      "Use for accurate modeling of UE behavior under coverage loss.",
+      "Use as a non-security state example."
+    ],
+    "evidence_targets": ["TS 24.501 5.2.2.3"]
+  },
+  {
+    "id": "VD-32",
+    "label": "NON_VULN",
+    "input": "The UE coordinates between 5GMM and EMM during interworking with EPC using N26 interface when applicable.",
+    "evidence": "TS 24.501, Clause 5.1.4, Coordination between 5GMM and EMM",
+    "non_vuln_reason": "Interworking coordination is a compatibility mechanism and does not imply weakened security.",
+    "how_to_use": [
+      "Use as a reference for multi-system interworking logic.",
+      "Use as a negative example for interoperability text."
+    ],
+    "evidence_targets": ["TS 24.501 5.1.4"]
+  },
+  {
+    "id": "VD-33",
+    "label": "NON_VULN",
+    "input": "The UE maintains lists of forbidden tracking areas and forbidden PLMNs as instructed by the network.",
+    "evidence": "TS 24.501, Clause 5.3.13, Lists of 5GS forbidden tracking areas",
+    "non_vuln_reason": "Forbidden lists are policy-enforcement data structures, not attack-enabling mechanisms.",
+    "how_to_use": [
+      "Use as a configuration data handling example.",
+      "Use as a negative example for access restriction logic."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.13"]
+  },
+  {
+    "id": "VD-34",
+    "label": "NON_VULN",
+    "input": "The UE may apply extended DRX cycles in IDLE or CONNECTED with RRC inactive indication to reduce power consumption.",
+    "evidence": "TS 24.501, Clause 5.3.16, Extended DRX cycle",
+    "non_vuln_reason": "Extended DRX is an energy-saving feature and does not relax security guarantees.",
+    "how_to_use": [
+      "Use for power-saving behavior modeling.",
+      "Use as a benign optimization example."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.16"]
+  },
+  {
+    "id": "VD-35",
+    "label": "NON_VULN",
+    "input": "The UE handles NAS-level congestion control by deferring or limiting certain procedures when congestion indicators are present.",
+    "evidence": "TS 24.501, Clause 5.3.9, Handling of NAS level mobility management congestion control",
+    "non_vuln_reason": "Congestion control is a resilience mechanism, not a vulnerability.",
+    "how_to_use": [
+      "Use as an example of defensive protocol behavior.",
+      "Use as a negative example in vulnerability classification."
+    ],
+    "evidence_targets": ["TS 24.501 5.3.9"]
+  },
+  {
+    "id": "VD-36",
+    "label": "NON_VULN",
+    "input": "The UE supports operator-defined access categories that influence access control decisions.",
+    "evidence": "TS 24.501, Clause 4.5.3, Operator-defined access categories",
+    "non_vuln_reason": "Access categories are policy inputs and do not themselves weaken security.",
+    "how_to_use": [
+      "Use for access-control policy modeling.",
+      "Use as a non-vulnerability configuration example."
+    ],
+    "evidence_targets": ["TS 24.501 4.5.3"]
+  },
+  {
+    "id": "VD-37",
+    "label": "NON_VULN",
+    "input": "The UE updates NSSAI information received from the network for network slicing support.",
+    "evidence": "TS 24.501, Clause 4.6.2.2, NSSAI storage",
+    "non_vuln_reason": "NSSAI storage supports slicing functionality and does not expose a security weakness.",
+    "how_to_use": [
+      "Use for slice-awareness modeling.",
+      "Use as a benign configuration update example."
+    ],
+    "evidence_targets": ["TS 24.501 4.6.2.2"]
+  },
+  {
+    "id": "VD-38",
+    "label": "NON_VULN",
+    "input": "The UE follows defined procedures for disabling and re-enabling its N1 mode capability.",
+    "evidence": "TS 24.501, Clause 4.9, Disabling and re-enabling of UE's N1 mode capability",
+    "non_vuln_reason": "Mode enable/disable procedures are controlled and explicitly specified, without granting attacker leverage.",
+    "how_to_use": [
+      "Use as a mode-transition example.",
+      "Use as a negative example for feature toggling."
+    ],
+    "evidence_targets": ["TS 24.501 4.9"]
+  },
+  {
+    "id": "VD-39",
+    "label": "NON_VULN",
+    "input": "The UE processes NAS STATUS messages to report protocol errors or inconsistencies.",
+    "evidence": "TS 24.501, Clause 5.4.6, 5GMM status procedure",
+    "non_vuln_reason": "STATUS messages are error-reporting tools and do not expose a security exception.",
+    "how_to_use": [
+      "Use to model error-handling behavior.",
+      "Use as a benign protocol recovery example."
+    ],
+    "evidence_targets": ["TS 24.501 5.4.6"]
+  },
+  {
+    "id": "VD-40",
+    "label": "NON_VULN",
+    "input": "The UE applies defined behavior when receiving messages with unknown or unforeseen information elements.",
+    "evidence": "TS 24.501, Clause 7.6, Unknown and unforeseen IEs",
+    "non_vuln_reason": "Explicit handling of unknown IEs improves robustness and does not weaken security.",
+    "how_to_use": [
+      "Use as an example of defensive parsing.",
+      "Use as a negative robustness-related sample."
+    ],
+    "evidence_targets": ["TS 24.501 7.6"]
+  },
+  {
+    "id": "VD-41",
+    "label": "NON_VULN",
+    "input": "The UE follows defined rules for handling messages that are too short or too long.",
+    "evidence": "TS 24.501, Clause 7.2, Message too short or too long",
+    "non_vuln_reason": "Length checking is a robustness requirement, not a vulnerability.",
+    "how_to_use": [
+      "Use for input-validation modeling.",
+      "Use as a negative example for parser behavior."
+    ],
+    "evidence_targets": ["TS 24.501 7.2"]
+  },
+  {
+    "id": "VD-42",
+    "label": "NON_VULN",
+    "input": "The UE coordinates 5GSM and ESM state when interworking with EPC without N26 interface.",
+    "evidence": "TS 24.501, Clause 6.1.4.2, Coordination between 5GSM and ESM without N26",
+    "non_vuln_reason": "This coordination ensures service continuity and does not introduce security gaps.",
+    "how_to_use": [
+      "Use for session-management interworking modeling.",
+      "Use as a benign coordination example."
+    ],
+    "evidence_targets": ["TS 24.501 6.1.4.2"]
+  },
+  {
+    "id": "VD-43",
+    "label": "NON_VULN",
+    "input": "The UE processes network-requested PDU session modification procedures according to standardized rules.",
+    "evidence": "TS 24.501, Clause 6.3.2, Network-requested PDU session modification procedure",
+    "non_vuln_reason": "Session modification is a controlled SM procedure and does not expose an inherent vulnerability.",
+    "how_to_use": [
+      "Use as a session lifecycle example.",
+      "Use as a negative example for SM procedure handling."
+    ],
+    "evidence_targets": ["TS 24.501 6.3.2"]
+  },
+  {
+    "id": "VD-44",
+    "label": "NON_VULN",
+    "input": "The UE releases PDU sessions upon network request following defined abnormal-case handling.",
+    "evidence": "TS 24.501, Clause 6.3.3, Network-requested PDU session release procedure",
+    "non_vuln_reason": "Release procedures are controlled teardown operations, not exploitable behaviors by themselves.",
+    "how_to_use": [
+      "Use for teardown logic modeling.",
+      "Use as a benign procedure example."
+    ],
+    "evidence_targets": ["TS 24.501 6.3.3"]
+  },
+  {
+    "id": "VD-45",
+    "label": "NON_VULN",
+    "input": "The UE handles service request rejection due to congestion using standardized backoff and retry rules.",
+    "evidence": "TS 24.501, Clause 5.6.1.5, Service request procedure not accepted by the network",
+    "non_vuln_reason": "Congestion-based rejection is a resilience feature, not a security vulnerability.",
+    "how_to_use": [
+      "Use to model retry/backoff behavior.",
+      "Use as a non-vulnerability congestion example."
+    ],
+    "evidence_targets": ["TS 24.501 5.6.1.5"]
+  },
+  {
+    "id": "VD-46",
+    "label": "NON_VULN",
+    "input": "The UE supports emergency registration procedures with special handling for emergency services.",
+    "evidence": "TS 24.501, Clause 5.5.1.2.6, Initial registration for emergency services",
+    "non_vuln_reason": "Emergency procedures are intentionally permissive for availability and do not constitute a vulnerability by themselves.",
+    "how_to_use": [
+      "Use as an emergency-service modeling example.",
+      "Use as a negative example unless paired with a concrete protection exception."
+    ],
+    "evidence_targets": ["TS 24.501 5.5.1.2.6"]
+  },
+  {
+    "id": "VD-47",
+    "label": "NON_VULN",
+    "input": "The UE processes paging messages to re-establish connectivity when services are pending.",
+    "evidence": "TS 24.501, Clause 5.6.2, Paging procedure",
+    "non_vuln_reason": "Paging is a core reachability mechanism and not a security weakness.",
+    "how_to_use": [
+      "Use for idle-to-connected transition modeling.",
+      "Use as a benign control-plane trigger example."
+    ],
+    "evidence_targets": ["TS 24.501 5.6.2"]
+  },
+  {
+    "id": "VD-48",
+    "label": "NON_VULN",
+    "input": "The UE follows defined rules for notification procedures initiated by the network.",
+    "evidence": "TS 24.501, Clause 5.6.3, Notification procedure",
+    "non_vuln_reason": "Notification procedures are informational and do not weaken security.",
+    "how_to_use": [
+      "Use as a signaling flow example.",
+      "Use as a negative example for non-critical messaging."
+    ],
+    "evidence_targets": ["TS 24.501 5.6.3"]
+  },
+  {
+    "id": "VD-49",
+    "label": "NON_VULN",
+    "input": "The UE handles unknown or unforeseen message types according to standardized error-handling rules.",
+    "evidence": "TS 24.501, Clause 7.4, Unknown or unforeseen message type",
+    "non_vuln_reason": "Graceful handling of unknown messages improves robustness and does not introduce vulnerability.",
+    "how_to_use": [
+      "Use as a parser-hardening example.",
+      "Use as a negative robustness sample."
+    ],
+    "evidence_targets": ["TS 24.501 7.4"]
+  },
+  {
+    "id": "VD-50",
+    "label": "NON_VULN",
+    "input": "The UE follows defined abnormal-case handling when NAS procedures fail or are interrupted.",
+    "evidence": "TS 24.501, Clause 5.6.2.2.2, Abnormal cases on the network side",
+    "non_vuln_reason": "Abnormal-case handling clauses describe recovery behavior and do not grant attacker capabilities.",
+    "how_to_use": [
+      "Use for failure-recovery modeling.",
+      "Use as a generic negative example across procedures."
+    ],
+    "evidence_targets": [
+      "TS 24.501 5.6.2.2.2",
+      "TS 24.501 5.4.3.5",
+      "TS 24.501 5.5.1.2.7"
+    ]
+  }
+]

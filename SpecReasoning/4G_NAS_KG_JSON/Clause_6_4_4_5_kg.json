@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3495",
+      "name": "Timer T3495",
+      "entity_type": "Timer",
+      "description": "Timer used during EPS bearer context deactivation procedure. On expiry, the MME resends DEACTIVATE EPS BEARER CONTEXT REQUEST and restarts timer. After fifth expiry, MME aborts procedure and deactivates EPS bearer context locally.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deactivating EPS bearer contexts initiated by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_PDN_DISCONNECT",
+      "name": "UE requested PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to disconnect a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to deactivate an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN disconnection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_DEDICATED_BEARER",
+      "name": "Dedicated EPS bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition where the EPS bearer indicated in DEACTIVATE EPS BEARER CONTEXT REQUEST is a dedicated EPS bearer belonging to the PDN connection the UE wants to disconnect.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_DEFAULT_BEARER",
+      "name": "Default EPS bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition where the EPS bearer indicated in DEACTIVATE EPS BEARER CONTEXT REQUEST is the default EPS bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "MME deactivates EPS bearer context locally without peer-to-peer ESM signalling after fifth T3495 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "TIMER_T3495",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "EPS bearer context deactivation procedure starts timer T3495.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "EPS bearer context deactivation procedure includes sending DEACTIVATE EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3495",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On first T3495 expiry, MME resends DEACTIVATE EPS BEARER CONTEXT REQUEST and resets/restarts timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3495",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3495 establishes local EPS bearer context deactivation without peer-to-peer signalling.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE requested PDN disconnect procedure includes sending PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_DEDICATED_BEARER",
+      "target": "PROC_EPS_BEARER_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When dedicated EPS bearer condition is met, MME proceeds with both EPS bearer deactivation and PDN disconnect procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_DEDICATED_BEARER",
+      "target": "PROC_UE_PDN_DISCONNECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When dedicated EPS bearer condition is met, MME proceeds with both EPS bearer deactivation and PDN disconnect procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_DEFAULT_BEARER",
+      "target": "PROC_EPS_BEARER_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When default EPS bearer condition is met, MME proceeds only with EPS bearer context deactivation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.5"
+      ]
+    }
+  ]
+}

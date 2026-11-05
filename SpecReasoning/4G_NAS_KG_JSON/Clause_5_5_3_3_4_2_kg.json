@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.4.2",
+  "title": "Combined tracking area updating successful",
+  "entities": [
+    {
+      "id": "PROCEDURE_COMBINED_TAU",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for combined tracking area and location area updating, which may include TMSI reallocation.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept tracking area update request, may contain LAI, TMSI, and update result IEs.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "name": "TRACKING AREA UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to confirm TMSI reallocation during combined tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_UPDATE_RESULT",
+      "name": "Additional update result IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating update result values like 'SMS only' or 'CS Fallback not preferred'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_UPDATE_TYPE",
+      "name": "Additional update type IE",
+      "entity_type": "Information Element",
+      "description": "Information element used by UE to request specific update types like 'SMS only'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_UPDATE_RESULT",
+      "name": "EPS update result IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating EPS update results, including ISR activation status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_TMSI",
+      "name": "TMSI",
+      "entity_type": "Identifier",
+      "description": "Temporary Mobile Subscriber Identity allocated during TMSI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_LAI",
+      "name": "Location Area Identification",
+      "entity_type": "Identifier",
+      "description": "Location Area Identification included in TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3450",
+      "name": "T3450",
+      "entity_type": "Timer",
+      "description": "Timer started by MME during TMSI reallocation part of combined tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "name": "EMM-COMMON-PROCEDURE-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state entered by MME when TMSI reallocation is part of combined tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by network after receiving TRACKING AREA UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SMS_ONLY_REQUESTED",
+      "name": "SMS only requested condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests 'SMS only' in Additional update type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_MME_STORES_LAI",
+      "name": "MME stores LAI",
+      "entity_type": "Property",
+      "description": "MME behavior to store location area identification from TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_COMBINED_TAU",
+      "target": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Combined tracking area updating procedure includes sending TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IDENTIFIER_LAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains Location Area Identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IDENTIFIER_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain TMSI during reallocation.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_ADDITIONAL_UPDATE_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains Additional update result IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_EPS_UPDATE_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain EPS update result IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_COMBINED_TAU",
+      "target": "STATE_EMM_COMMON_PROCEDURE_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Combined tracking area updating with TMSI reallocation requires MME to enter EMM-COMMON-PROCEDURE-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_COMBINED_TAU",
+      "target": "TIMER_T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME starts timer T3450 during TMSI reallocation part of combined tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "target": "TIMER_T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3450 upon receiving TRACKING AREA UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving TRACKING AREA UPDATE COMPLETE message causes network to change to EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_SMS_ONLY_REQUESTED",
+      "target": "IE_ADDITIONAL_UPDATE_RESULT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When UE requests 'SMS only', network indicates 'SMS only' in Additional update result IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "PROPERTY_MME_STORES_LAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE stores received LAI from TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.2"
+      ]
+    }
+  ]
+}

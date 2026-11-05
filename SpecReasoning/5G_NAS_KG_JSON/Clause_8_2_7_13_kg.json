@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.13",
+  "title": "MICO indication",
+  "entities": [
+    {
+      "id": "IE_MICO_INDICATION",
+      "name": "MICO indication",
+      "entity_type": "Information Element",
+      "description": "Information element indicating Mobile Initiated Connection Only mode preference and acceptance.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate registration procedure with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "COND_UE_INCLUDES_MICO",
+      "name": "UE included MICO indication IE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE includes the MICO indication IE in the REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_MICO",
+      "name": "Network supports and accepts MICO mode",
+      "entity_type": "Condition",
+      "description": "Condition where the network supports and accepts the use of MICO mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "PROP_NETWORK_INCLUDES_MICO",
+      "name": "Network includes MICO indication IE",
+      "entity_type": "Property",
+      "description": "Network behavior to include the MICO indication IE in the response message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_MICO_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain the MICO indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_UE_INCLUDES_MICO",
+      "target": "PROP_NETWORK_INCLUDES_MICO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network includes MICO IE only if UE included it in REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NETWORK_SUPPORTS_MICO",
+      "target": "PROP_NETWORK_INCLUDES_MICO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network includes MICO IE only if it supports and accepts MICO mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_INCLUDES_MICO",
+      "target": "COND_NETWORK_SUPPORTS_MICO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Both conditions must be satisfied for network to include MICO IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.13"
+      ]
+    }
+  ]
+}

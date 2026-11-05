@@ -1,0 +1,211 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2",
+  "title": "Security mode control procedure",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to activate integrity protection and ciphering for NAS signalling between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to initiate security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to confirm successful security mode activation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to indicate security mode activation failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "IE_SELECTED_INTEGRITY_ALGORITHM",
+      "name": "Selected integrity algorithm",
+      "entity_type": "Information Element",
+      "description": "Indicates the integrity protection algorithm selected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "IE_SELECTED_CIPHERING_ALGORITHM",
+      "name": "Selected ciphering algorithm",
+      "entity_type": "Information Element",
+      "description": "Indicates the ciphering algorithm selected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "IE_REPLAYED_UE_SECURITY_CAPABILITIES",
+      "name": "Replayed UE security capabilities",
+      "entity_type": "Information Element",
+      "description": "Contains the UE security capabilities as sent by the UE in an earlier message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "IE_IMEISV_REQUEST",
+      "name": "IMEISV request",
+      "entity_type": "Information Element",
+      "description": "Indicates whether the network requests the IMEISV from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "Contains a NAS message that needs to be integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes receiving SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure may include receiving SECURITY MODE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_INTEGRITY_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains selected integrity algorithm IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_SELECTED_CIPHERING_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains selected ciphering algorithm IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_REPLAYED_UE_SECURITY_CAPABILITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message contains replayed UE security capabilities IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_IMEISV_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message may contain IMEISV request IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE message may contain NAS message container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message requires integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE message requires integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SECURITY_MODE_REJECT",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE REJECT message requires integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2"
+      ]
+    }
+  ]
+}

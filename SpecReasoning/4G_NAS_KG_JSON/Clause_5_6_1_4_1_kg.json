@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.4.1",
+  "title": "UE is not using EPS services with control plane CIoT EPS optimization",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of bearers for user data or signalling",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate service request procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "MSG_EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Extended version of service request message supporting additional service types",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_ACCEPT",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "Network response message indicating acceptance of service request",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_TYPE",
+      "name": "Service Type Information Element",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of service requested (e.g., CS fallback, packet services)",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "name": "EPS Bearer Context Status",
+      "entity_type": "Information Element",
+      "description": "IE indicating the status of EPS bearer contexts",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging Restriction IE",
+      "entity_type": "Information Element",
+      "description": "Information element for paging restriction control",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "Timer T3417",
+      "entity_type": "Timer",
+      "description": "Timer used during service request procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is registered with network",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is registered but no cell is available",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "COND_CSFB_ACCEPTED",
+      "name": "CS fallback accepted by UE",
+      "entity_type": "Condition",
+      "description": "Condition where UE accepts CS fallback procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "Property where network or UE deactivates EPS bearer contexts without peer-to-peer signalling",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves sending SERVICE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure can involve sending EXTENDED SERVICE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST message contains Service Type IE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST message may contain EPS Bearer Context Status IE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves receiving SERVICE ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Successful completion of service request procedure stops timer T3417",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful service request procedure establishes EMM-REGISTERED state",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_SERVICE_TYPE",
+      "target": "COND_CSFB_ACCEPTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service Type IE guards CS fallback procedures when CS fallback is accepted",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EPS Bearer Context Status IE triggers local deactivation of bearer contexts",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST message may contain Paging Restriction IE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request procedure for CS fallback cases establishes EMM-REGISTERED.NO-CELL-AVAILABLE state",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.4.1"
+      ]
+    }
+  ]
+}

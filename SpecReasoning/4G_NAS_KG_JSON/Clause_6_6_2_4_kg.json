@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.2.4",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "NOTIFICATION_MSG",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "A NAS message that could not be delivered due to handover and is retransmitted by the MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "INTRA_MME_HANDOVER",
+      "name": "Intra MME handover",
+      "entity_type": "Procedure",
+      "description": "A handover procedure within the same MME that may cause non-delivery of NAS PDUs.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "HANDOVER_SUCCESS",
+      "name": "Successful handover completion",
+      "entity_type": "Condition",
+      "description": "Condition where intra MME handover completes successfully, triggering retransmission of the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "HANDOVER_FAILURE",
+      "name": "Handover procedure failure",
+      "entity_type": "Condition",
+      "description": "Condition where handover procedure fails but S1 signalling connection exists, triggering retransmission of the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "S1_CONNECTION_EXISTS",
+      "name": "S1 signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Condition indicating the S1 signalling connection is still present despite handover failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "MME_RETRANSMIT",
+      "name": "MME retransmits NOTIFICATION message",
+      "entity_type": "Property",
+      "description": "Behavior where the MME retransmits the NOTIFICATION message after handover success or failure with S1 connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTRA_MME_HANDOVER",
+      "target": "NOTIFICATION_MSG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Intra MME handover causes non-delivery of the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "HANDOVER_SUCCESS",
+      "target": "MME_RETRANSMIT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful handover completion establishes MME retransmission of the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "HANDOVER_FAILURE",
+      "target": "MME_RETRANSMIT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Handover failure with S1 connection existing establishes MME retransmission of the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "HANDOVER_FAILURE",
+      "target": "S1_CONNECTION_EXISTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Handover failure condition is guarded by the presence of S1 signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MME_RETRANSMIT",
+      "target": "NOTIFICATION_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MME retransmission action is triggered by the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.2",
+  "title": "QoS in MA PDU session",
+  "entities": [
+    {
+      "id": "MA_PDU_SESSION",
+      "name": "MA PDU session",
+      "entity_type": "Procedure",
+      "description": "Multi-access PDU session that can be established over 3GPP and/or non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "QOS_RULES",
+      "name": "QoS rules",
+      "entity_type": "Property",
+      "description": "Set of rules defining QoS parameters for packet flows in a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "QOS_FLOW_DESCRIPTIONS",
+      "name": "QoS flow descriptions",
+      "entity_type": "Property",
+      "description": "Set of descriptions defining QoS flow characteristics in a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "SESSION_AMBR",
+      "name": "Session-AMBR",
+      "entity_type": "Property",
+      "description": "Aggregate Maximum Bit Rate for the entire PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "NON_3GPP_ACCESS",
+      "name": "Non-3GPP access",
+      "entity_type": "Condition",
+      "description": "Access type using non-3GPP technologies such as Wi-Fi.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTION_RESOURCE",
+      "name": "PDN connection as user-plane resource",
+      "entity_type": "Condition",
+      "description": "PDN connection serving as user-plane resource for the MA PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXTS",
+      "name": "EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "EPS bearer contexts associated with PDN connection in MA PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "EXTENDED_PCO_IE",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying extended protocol configuration parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MA_PDU_SESSION",
+      "target": "QOS_RULES",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MA PDU session contains one set of QoS rules unless specific conditions apply.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MA_PDU_SESSION",
+      "target": "QOS_FLOW_DESCRIPTIONS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MA PDU session contains one set of QoS flow descriptions unless specific conditions apply.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MA_PDU_SESSION",
+      "target": "SESSION_AMBR",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MA PDU session contains one session-AMBR unless specific conditions apply.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MA_PDU_SESSION",
+      "target": "NON_3GPP_ACCESS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MA PDU session can be established over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MA_PDU_SESSION",
+      "target": "PDN_CONNECTION_RESOURCE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MA PDU session can have PDN connection as user-plane resource.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MA_PDU_SESSION",
+      "target": "EPS_BEARER_CONTEXTS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MA PDU session with PDN connection resource maintains QoS parameters via EPS bearer contexts.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_BEARER_CONTEXTS",
+      "target": "EXTENDED_PCO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer contexts maintain QoS parameters via extended PCO IE parameters received via PDN connection.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NON_3GPP_ACCESS",
+      "target": "PDN_CONNECTION_RESOURCE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When MA PDU session is established over non-3GPP access and has PDN connection resource, UE maintains two sets of QoS parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.2"
+      ]
+    }
+  ]
+}

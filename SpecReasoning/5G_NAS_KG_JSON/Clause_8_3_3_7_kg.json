@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.3.7",
+  "title": "Service-level-AA container",
+  "entities": [
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "An information element that contains the service-level authentication and authorization response from the DN when the procedure completes unsuccessfully with cause #29.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_LEVEL_AA",
+      "name": "Service-level authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure for authenticating and authorizing the user at the service level, which may complete unsuccessfully.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_UNSUCCESSFUL_AA",
+      "name": "Service-level AA procedure completed unsuccessfully with cause #29",
+      "entity_type": "Condition",
+      "description": "The condition where the service-level authentication and authorization procedure fails with 5GSM cause #29 'user authentication or authorization failed'.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_NETWORK_INCLUDES_IE",
+      "name": "Network includes Service-level-AA container IE",
+      "entity_type": "Property",
+      "description": "The network includes the Service-level-AA container IE when the service-level AA procedure fails with cause #29 and the DN provides a service-level-AA response.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROPERTY_NETWORK_INCLUDES_IE",
+      "target": "CONDITION_UNSUCCESSFUL_AA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The network includes the Service-level-AA container IE only if the service-level AA procedure completed unsuccessfully with cause #29.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROPERTY_NETWORK_INCLUDES_IE",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The network includes the Service-level-AA container IE when the condition is met.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_UNSUCCESSFUL_AA",
+      "target": "PROCEDURE_SERVICE_LEVEL_AA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition is defined by the outcome of the service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.3.7"
+      ]
+    }
+  ]
+}

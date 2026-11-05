@@ -1,0 +1,247 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.11",
+  "title": "UE actions upon going to RRC_IDLE",
+  "entities": [
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "Radio Resource Control idle state where UE performs cell selection and monitors paging.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "Radio Resource Control inactive state where UE maintains connection context but uses less power.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "RRCRelease",
+      "name": "RRCRelease message",
+      "entity_type": "Message",
+      "description": "Message that commands UE to release RRC connection and may include waitTime.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "T302",
+      "name": "Timer T302",
+      "entity_type": "Timer",
+      "description": "Timer used for access barring with duration set by waitTime in RRCRelease.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "T320",
+      "name": "Timer T320",
+      "entity_type": "Timer",
+      "description": "Timer for cell reselection priority information validity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "T390",
+      "name": "Timer T390",
+      "entity_type": "Timer",
+      "description": "Timer used for access barring per access category.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "pendingRNA_Update",
+      "name": "pendingRNA-Update variable",
+      "entity_type": "Condition",
+      "description": "Boolean variable indicating if RNA update is pending; set to false when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "UE_Inactive_AS_Context",
+      "name": "UE Inactive AS context",
+      "entity_type": "Property",
+      "description": "Access Stratum context stored in RRC_INACTIVE; discarded when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "suspendConfig",
+      "name": "suspendConfig",
+      "entity_type": "Property",
+      "description": "Configuration for RRC connection suspension; released when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "VarConditionalReconfig",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Property",
+      "description": "Stored conditional reconfiguration entries; all removed when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "VarMeasConfig",
+      "name": "VarMeasConfig",
+      "entity_type": "Property",
+      "description": "Stored measurement configuration; entries for condTriggerConfig report types removed when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "Security_Keys",
+      "name": "Security keys",
+      "entity_type": "Property",
+      "description": "K_eNB, K_gNB, RRCenc, RRCint, UPint, UPenc keys; discarded when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "Radio_Resources",
+      "name": "Radio resources",
+      "entity_type": "Property",
+      "description": "RLC, BAP, MAC, PDCP, SDAP entities and configurations; released when entering RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCRelease",
+      "target": "T302",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "RRCRelease message with waitTime starts timer T302.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCRelease",
+      "target": "T302",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message with waitTime stops timer T302 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRC_INACTIVE",
+      "target": "T320",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Leaving RRC_INACTIVE stops timer T320 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_INACTIVE",
+      "target": "T390",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Leaving RRC_INACTIVE stops timer T390 for all access categories.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_IDLE",
+      "target": "pendingRNA_Update",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE sets pendingRNA-Update to false.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRC_IDLE",
+      "target": "UE_Inactive_AS_Context",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE discards UE Inactive AS context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRC_IDLE",
+      "target": "suspendConfig",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE releases suspendConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RRC_IDLE",
+      "target": "VarConditionalReconfig",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE removes all entries in VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RRC_IDLE",
+      "target": "VarMeasConfig",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE removes condTriggerConfig-related entries from VarMeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RRC_IDLE",
+      "target": "Security_Keys",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE discards all security keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RRC_IDLE",
+      "target": "Radio_Resources",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_IDLE releases all radio resources.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.11"
+      ]
+    }
+  ]
+}

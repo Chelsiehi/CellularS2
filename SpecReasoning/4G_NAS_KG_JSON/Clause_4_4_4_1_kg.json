@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "INTEGRITY_PROTECTION",
+      "name": "Integrity Protection",
+      "entity_type": "Property",
+      "description": "Mandatory protection mechanism for NAS messages once valid EPS security context exists and secure exchange is established. Responsible for ensuring message authenticity and integrity.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "NULL_INTEGRITY_ALGORITHM",
+      "name": "Null Integrity Protection Algorithm EIA0",
+      "entity_type": "Property",
+      "description": "Integrity protection algorithm that provides no actual cryptographic protection. Only allowed for unauthenticated UEs requiring emergency services or RLOS access.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "NAS_MESSAGE",
+      "name": "NAS Signalling Message",
+      "entity_type": "Message",
+      "description": "Non-Access Stratum message exchanged between UE and network. Subject to integrity protection and ciphering requirements.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT",
+      "name": "EPS Security Context",
+      "entity_type": "Property",
+      "description": "Security context established between UE and network that includes integrity and ciphering algorithms and keys.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "SECURITY_HEADER",
+      "name": "Security Header",
+      "entity_type": "Information Element",
+      "description": "Header field in NAS messages indicating security processing applied, including integrity protection status.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "MAC_CALCULATION",
+      "name": "MAC Calculation",
+      "entity_type": "Property",
+      "description": "Process of computing Message Authentication Code for integrity protection using NAS message content and sequence number.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "NAS_SEQUENCE_NUMBER",
+      "name": "NAS Sequence Number",
+      "entity_type": "Information Element",
+      "description": "Sequence number included in NAS messages used as input for MAC calculation during integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "EMERGENCY_ACCESS",
+      "name": "Emergency Bearer Services Access",
+      "entity_type": "Condition",
+      "description": "Condition where UE is unauthenticated but allowed to establish emergency services or access RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EPS_SECURITY_CONTEXT",
+      "target": "INTEGRITY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Integrity protection becomes mandatory once valid EPS security context exists and is taken into use.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EMERGENCY_ACCESS",
+      "target": "NULL_INTEGRITY_ALGORITHM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Null integrity protection algorithm EIA0 is only allowed for unauthenticated UEs requiring emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_MESSAGE",
+      "target": "SECURITY_HEADER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS messages contain security header indicating integrity protection status.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTEGRITY_PROTECTION",
+      "target": "MAC_CALCULATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Integrity protection is implemented through MAC calculation using NAS message and sequence number.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MAC_CALCULATION",
+      "target": "NAS_SEQUENCE_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MAC calculation includes NAS sequence number as input parameter.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NULL_INTEGRITY_ALGORITHM",
+      "target": "NAS_MESSAGE",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "When null integrity algorithm EIA0 is used, NAS messages with security header indicating integrity protection are still regarded as integrity protected despite no actual protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.4.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.19",
+  "title": "KSI and sequence number",
+  "entities": [
+    {
+      "id": "IE_KSI_SEQ_NUM",
+      "name": "KSI and sequence number",
+      "entity_type": "Information Element",
+      "description": "A type 3 information element with a length of 2 octets that provides the network with the key set identifier (KSI) value of the current EPS security context and the 5 least significant bits of the NAS COUNT value applicable for the message including this information element.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "FIELD_SEQ_NUM_SHORT",
+      "name": "Sequence number (short)",
+      "entity_type": "Property",
+      "description": "This field contains the 5 least significant bits of the NAS COUNT value applicable when the message is sent.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "FIELD_KSI",
+      "name": "KSI",
+      "entity_type": "Property",
+      "description": "This field contains the key set identifier value, as specified in bit 1 to 3 of octet 1 of the NAS key set identifier information element.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "IE_KSI",
+      "name": "NAS key set identifier",
+      "entity_type": "Information Element",
+      "description": "The information element that defines the key set identifier value, referenced by the KSI field in the KSI and sequence number IE.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "The NAS COUNT value applicable for the message, whose 5 least significant bits are included in the sequence number (short) field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_KSI_SEQ_NUM",
+      "target": "FIELD_SEQ_NUM_SHORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The KSI and sequence number IE contains the sequence number (short) field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_KSI_SEQ_NUM",
+      "target": "FIELD_KSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The KSI and sequence number IE contains the KSI field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FIELD_KSI",
+      "target": "IE_KSI",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The KSI field value is defined in the NAS key set identifier information element.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Table 9.9.3.19.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_SEQ_NUM_SHORT",
+      "target": "NAS_COUNT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The sequence number (short) field contains the 5 least significant bits of the NAS COUNT value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.19",
+        "Figure 9.9.3.19.1",
+        "Table 9.9.3.19.1"
+      ]
+    }
+  ]
+}

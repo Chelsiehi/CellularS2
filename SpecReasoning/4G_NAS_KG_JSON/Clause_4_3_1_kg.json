@@ -1,0 +1,154 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PS_MODE_1",
+      "name": "PS mode 1 of operation",
+      "entity_type": "State",
+      "description": "UE registers only to EPS services with voice centric usage setting.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "PS_MODE_2",
+      "name": "PS mode 2 of operation",
+      "entity_type": "State",
+      "description": "UE registers only to EPS services with data centric usage setting.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "CS_PS_MODE_1",
+      "name": "CS/PS mode 1 of operation",
+      "entity_type": "State",
+      "description": "UE registers to both EPS and non-EPS services with voice centric usage setting.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "CS_PS_MODE_2",
+      "name": "CS/PS mode 2 of operation",
+      "entity_type": "State",
+      "description": "UE registers to both EPS and non-EPS services with data centric usage setting.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "CS_FALLBACK_EMERGENCY_CALL",
+      "name": "CS fallback emergency call",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing emergency call via CS fallback when UE cannot perform normal CS fallback.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "1XCS_FALLBACK_EMERGENCY_CALL",
+      "name": "1xCS fallback emergency call",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing emergency call via 1xCS fallback when UE cannot perform normal 1xCS fallback.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_NOT_AVAILABLE",
+      "name": "IMS voice not available",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot use IMS for voice services due to configuration or network indications.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_AVAILABLE",
+      "name": "IMS voice available",
+      "entity_type": "Condition",
+      "description": "Condition where UE can use IMS for voice services when all IMS voice not available conditions evaluate to false.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "NAS message that may indicate IMS voice over PS session support.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT message",
+      "entity_type": "Message",
+      "description": "NAS message that may indicate IMS voice over PS session support.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CS_FALLBACK_EMERGENCY_CALL",
+      "target": "IMS_VOICE_NOT_AVAILABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "CS fallback emergency call procedure requires IMS voice not available condition.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "1XCS_FALLBACK_EMERGENCY_CALL",
+      "target": "IMS_VOICE_NOT_AVAILABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "1xCS fallback emergency call procedure requires IMS voice not available condition.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_ACCEPT",
+      "target": "IMS_VOICE_NOT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH ACCEPT message guards IMS voice not available condition through IMS voice over PS session support indication.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IMS_VOICE_NOT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message guards IMS voice not available condition through IMS voice over PS session support indication.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IMS_VOICE_NOT_AVAILABLE",
+      "target": "IMS_VOICE_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When IMS voice not available conditions evaluate to false, IMS voice available condition is established.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.1"
+      ]
+    }
+  ]
+}

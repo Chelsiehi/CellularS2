@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.3.1",
+  "title": "NORMAL-SERVICE",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to attach to the network for normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "COMBINED_ATTACH_PROCEDURE",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to attach to the network with combined services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "EMERGENCY_ATTACH_PROCEDURE",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE specifically for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that controls when UE can initiate attach procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_NOT_RUNNING",
+      "name": "Timer T3346 not running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3346 is not active.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_RUNNING",
+      "name": "Timer T3346 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3346 is currently active.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "T3346_EXPIRY",
+      "name": "Timer T3346 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3346 expires.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T3346_NOT_RUNNING",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE initiates attach procedure when T3346 is not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T3346_NOT_RUNNING",
+      "target": "COMBINED_ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE initiates combined attach procedure when T3346 is not running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3346_EXPIRY",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE initiates attach procedure on T3346 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3346_EXPIRY",
+      "target": "COMBINED_ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE initiates combined attach procedure on T3346 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "T3346_RUNNING",
+      "target": "EMERGENCY_ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE may initiate emergency attach even when T3346 is running.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.1"
+      ]
+    }
+  ]
+}

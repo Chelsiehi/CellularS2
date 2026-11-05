@@ -1,0 +1,240 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.7.2",
+  "title": "PC5 Relay RLC channel addition/modification",
+  "entities": [
+    {
+      "id": "PROC_PC5_RELAY_RLC_CHANNEL_MOD",
+      "name": "PC5 Relay RLC channel addition/modification",
+      "entity_type": "Procedure",
+      "description": "Procedure for adding or modifying PC5 Relay RLC channels between L2 U2N Relay UE and L2 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "IE_SL_RLC_CHANNEL_TO_ADD_MOD_LIST_PC5",
+      "name": "sl-RLC-ChannelToAddModList-PC5",
+      "entity_type": "Information Element",
+      "description": "Information element containing list of PC5 RLC channels to add or modify.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "IE_SL_RLC_CHANNEL_ID_PC5",
+      "name": "sl-RLC-ChannelID-PC5",
+      "entity_type": "Information Element",
+      "description": "Information element identifying a specific PC5 RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "IE_SL_RLC_CONFIG_PC5",
+      "name": "sl-RLC-ConfigPC5",
+      "entity_type": "Information Element",
+      "description": "Information element containing RLC configuration parameters for PC5 interface.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "IE_SL_MAC_LOGICAL_CHANNEL_CONFIG_PC5",
+      "name": "sl-MAC-LogicalChannelConfigPC5",
+      "entity_type": "Information Element",
+      "description": "Information element containing MAC logical channel configuration for PC5 interface.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "COND_EXISTING_CHANNEL",
+      "name": "Existing sidelink RLC bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition checking if current configuration contains a sidelink RLC bearer with the received sl-RLC-ChannelID-PC5.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "COND_NEW_CHANNEL",
+      "name": "New PC5 Relay RLC channel condition",
+      "entity_type": "Condition",
+      "description": "Condition when a PC5 Relay RLC channel with the received sl-RLC-ChannelID-PC5 was not configured before.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "PROP_RECONFIGURE_RLC",
+      "name": "Reconfigure sidelink RLC entity",
+      "entity_type": "Property",
+      "description": "Action to reconfigure the sidelink RLC entity or entities in accordance with received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "PROP_RECONFIGURE_MAC",
+      "name": "Reconfigure sidelink logical channel",
+      "entity_type": "Property",
+      "description": "Action to reconfigure the sidelink logical channel in accordance with received MAC configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "PROP_ESTABLISH_RLC",
+      "name": "Establish sidelink RLC entity",
+      "entity_type": "Property",
+      "description": "Action to establish a new sidelink RLC entity in accordance with received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "PROP_CONFIGURE_MAC",
+      "name": "Configure sidelink MAC entity",
+      "entity_type": "Property",
+      "description": "Action to configure the sidelink MAC entity with a logical channel in accordance with received configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PC5_RELAY_RLC_CHANNEL_MOD",
+      "target": "IE_SL_RLC_CHANNEL_TO_ADD_MOD_LIST_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The procedure processes the sl-RLC-ChannelToAddModList-PC5 IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_SL_RLC_CHANNEL_TO_ADD_MOD_LIST_PC5",
+      "target": "IE_SL_RLC_CHANNEL_ID_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The list IE contains individual sl-RLC-ChannelID-PC5 IEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SL_RLC_CHANNEL_ID_PC5",
+      "target": "COND_EXISTING_CHANNEL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The channel ID is used to check if an existing sidelink RLC bearer is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EXISTING_CHANNEL",
+      "target": "PROP_RECONFIGURE_RLC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If existing channel condition is true, reconfigure RLC entity action is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EXISTING_CHANNEL",
+      "target": "PROP_RECONFIGURE_MAC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If existing channel condition is true, reconfigure MAC logical channel action is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_SL_RLC_CHANNEL_ID_PC5",
+      "target": "COND_NEW_CHANNEL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The channel ID is used to check if this is a new PC5 Relay RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NEW_CHANNEL",
+      "target": "PROP_ESTABLISH_RLC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If new channel condition is true, establish new RLC entity action is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NEW_CHANNEL",
+      "target": "PROP_CONFIGURE_MAC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If new channel condition is true, configure MAC entity action is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROP_RECONFIGURE_RLC",
+      "target": "IE_SL_RLC_CONFIG_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RLC reconfiguration uses the sl-RLC-ConfigPC5 IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_RECONFIGURE_MAC",
+      "target": "IE_SL_MAC_LOGICAL_CHANNEL_CONFIG_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MAC logical channel reconfiguration uses the sl-MAC-LogicalChannelConfigPC5 IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_ESTABLISH_RLC",
+      "target": "IE_SL_RLC_CONFIG_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RLC entity establishment uses the sl-RLC-ConfigPC5 IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROP_CONFIGURE_MAC",
+      "target": "IE_SL_MAC_LOGICAL_CHANNEL_CONFIG_PC5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MAC entity configuration uses the sl-MAC-LogicalChannelConfigPC5 IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.7.2"
+      ]
+    }
+  ]
+}

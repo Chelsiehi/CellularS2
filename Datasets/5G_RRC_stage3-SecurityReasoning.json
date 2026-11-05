@@ -1,0 +1,544 @@
+[
+  {
+    "id": "VD-01",
+    "label": "VULN",
+    "input": "Because the UE sets RRCSetupRequest.ue-Identity to either ng-5G-S-TMSI-Part1 (if provided by upper layers) or to a 39-bit random value before AS security is active, this pre-security identifier can be observed and correlated (linkability/tracking) and can be replayed/spoofed by an active attacker to induce contention/connection-setup denial-of-service.",
+    "evidence": "TS 38.331, Clause 5.3.3.3, Actions related to transmission of RRCSetupRequest (ue-Identity selection before AS security).",
+    "vuln_title": "Pre-security ue-Identity in RRCSetupRequest enables linkability and contention/DoS",
+    "vuln_type": ["Pre-security identifier exposure", "Linkability / tracking", "Contention / setup DoS"],
+    "threat_model": "A passive sniffer or an active rogue gNB relays/spoofs initial RRC establishment messages before AS security activation.",
+    "preconditions": ["UE is initiating RRC connection establishment", "AS security is not yet activated (initial phase)"],
+    "attack_story": [
+      "Attacker observes the ue-Identity in RRCSetupRequest and correlates repeated appearances of the same identifier to track a UE across attempts/cells.",
+      "Active attacker replays/spoofs a victim's ue-Identity in competing setup attempts to trigger contention/confusion and degrade successful establishment (DoS)."
+    ],
+    "impact": ["Privacy loss via linkability", "RRC establishment disruption / denial-of-service"],
+    "root_cause_in_spec": ["ue-Identity is set to ng-5G-S-TMSI-Part1 or a 39-bit random value prior to AS security activation."],
+    "how_to_use": ["Use as a pre-security identity exposure / linkability example.", "Use as a vulnerability (VULN) sample for initial RRC establishment attack surfaces."],
+    "evidence_targets": ["TS 38.331 5.3.3.3"]
+  },
+  {
+    "id": "VD-02",
+    "label": "VULN",
+    "input": "RRCSetupRequest is allowed to be sent unprotected prior to AS security activation, so an active attacker (rogue gNB / spoofing UE) can inject/spoof initial connection attempts to create signalling storms or contention-based denial-of-service before integrity/ciphering are available.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCSetupRequest: P=+, A-I=NA, A-C=NA).",
+    "vuln_title": "Unprotected RRCSetupRequest before AS security enables spoofing/injection DoS",
+    "vuln_type": ["Unauthenticated pre-security signalling", "Injection/spoofing", "RRC DoS"],
+    "threat_model": "Attacker transmits crafted RRCSetupRequest prior to AS security activation to overload gNB or trigger contention/false setups.",
+    "preconditions": ["AS security not yet activated", "Attacker can transmit over the radio interface"],
+    "attack_story": [
+      "Attacker sends many RRCSetupRequest messages that are accepted at the pre-security phase.",
+      "Network expends resources on bogus connection establishment attempts, degrading service for legitimate UEs."
+    ],
+    "impact": ["Signalling/resource exhaustion", "RRC-level denial-of-service"],
+    "root_cause_in_spec": ["RRCSetupRequest can be sent unprotected prior to AS security activation."],
+    "how_to_use": ["Use as a canonical Annex B.1 pre-security unprotected-message vulnerability example."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (RRCSetupRequest)"]
+  },
+  {
+    "id": "VD-03",
+    "label": "VULN",
+    "input": "During the Security Mode procedure, ciphering is not applied immediately (ciphering is applied after completing the procedure), and if integrity verification fails the UE continues using the prior configuration (neither integrity protection nor ciphering). This creates an attack surface where an active attacker can force repeated failures and keep the connection from entering a fully protected state, leading to downgrade-like DoS and extended exposure of pre-security signalling.",
+    "evidence": "TS 38.331, Clause 5.3.4.3 (on integrity failure: continue using prior configuration, neither integrity nor ciphering) and Annex B.1 (SecurityModeCommand/Complete/Failure protection behavior).",
+    "vuln_title": "Security Mode procedure: integrity-failure fallback + delayed ciphering expands downgrade/DoS surface",
+    "vuln_type": ["Security-mode failure abuse", "Protection delay (ciphering after completion)", "Downgrade/DoS surface"],
+    "threat_model": "Active attacker interferes with SecurityModeCommand reception/verification (e.g., by spoofing/altering/jamming) to prevent successful transition into protected mode.",
+    "preconditions": ["UE is executing Security Mode procedure", "Attacker can cause integrity verification to fail or prevent completion"],
+    "attack_story": [
+      "Attacker causes SecurityModeCommand integrity verification failure; UE keeps prior (unprotected) configuration and proceeds with failure handling.",
+      "Attacker repeats the disruption so ciphering never becomes active (since ciphering is applied after completion), resulting in extended pre-security exposure and/or repeated re-establishment (DoS)."
+    ],
+    "impact": ["Repeated security activation failure (availability)", "Extended window where full protection is not achieved"],
+    "root_cause_in_spec": [
+      "On integrity verification failure, UE continues using the prior configuration (no integrity/ciphering).",
+      "Ciphering is applied after completing the procedure; SecurityModeComplete is integrity-protected but unciphered."
+    ],
+    "how_to_use": ["Use as a procedure-level vulnerability/attack-surface sample (security activation robustness)."],
+    "evidence_targets": ["TS 38.331 5.3.4.3", "TS 38.331 Annex B.1 (SecurityModeCommand/Complete/Failure)"]
+  },
+  {
+    "id": "VD-04",
+    "label": "VULN",
+    "input": "An RRCRelease carrying waitTime can force the UE into RRC_IDLE with a backoff timer. Since RRCRelease may be sent unprotected prior to AS security activation, an attacker can spoof RRCRelease+waitTime to repeatedly push UEs into idle/backoff, causing denial-of-service and energy drain.",
+    "evidence": "TS 38.331, Clause 5.3.11 (UE behavior on RRCRelease with waitTime) and Annex B.1 (RRCRelease: P=+; unprotected prior to AS security).",
+    "vuln_title": "Unprotected RRCRelease with waitTime enables backoff-based RRC DoS",
+    "vuln_type": ["Unauthenticated release", "Backoff abuse", "RRC DoS / energy drain"],
+    "threat_model": "Rogue transmitter spoofs RRCRelease (before AS security) with waitTime to enforce repeated backoff/idle transitions.",
+    "preconditions": ["UE is in a phase where RRCRelease can be received before AS security activation", "Attacker can transmit spoofed downlink RRC messages"],
+    "attack_story": [
+      "Attacker transmits spoofed RRCRelease including waitTime.",
+      "UE goes to RRC_IDLE and applies the waitTime backoff, delaying reconnection.",
+      "Repeating this forces persistent loss of service and increases signalling/energy cost."
+    ],
+    "impact": ["Connection denial-of-service", "Battery drain via repeated idle/reconnect cycles"],
+    "root_cause_in_spec": [
+      "UE applies waitTime behavior upon receiving RRCRelease including waitTime.",
+      "RRCRelease may be sent unprotected prior to AS security activation."
+    ],
+    "how_to_use": ["Use as an RRC DoS example combining procedural behavior (waitTime) with Annex B.1 protection exceptions."],
+    "evidence_targets": ["TS 38.331 5.3.11", "TS 38.331 Annex B.1 (RRCRelease)", "TS 38.331 ASN.1 RRCRelease (waitTime IE)"]
+  },
+  {
+    "id": "VD-05",
+    "label": "VULN",
+    "input": "RRCReject can be sent unprotected (including in SRB0 in RRC_INACTIVE), so a rogue node can reject connection/resume attempts without integrity/ciphering and thereby enforce connection-control abuse and RRC-level denial-of-service.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCReject: P=+, A-I=+, A-C=+; comment notes SRB0 in RRC_INACTIVE).",
+    "vuln_title": "Unprotected RRCReject enables connection denial (RRC-level DoS)",
+    "vuln_type": ["Unauthenticated rejection", "Connection control abuse", "RRC DoS"],
+    "threat_model": "Rogue gNB broadcasts/sends RRCReject to block UE establishment/resume attempts.",
+    "preconditions": ["UE attempts RRC setup/resume", "Attacker can transmit spoofed RRCReject"],
+    "attack_story": [
+      "Attacker sends RRCReject to the UE during establishment/resume attempts.",
+      "UE backs off/aborts, repeatedly failing to connect, causing sustained denial-of-service."
+    ],
+    "impact": ["Loss of service availability", "Signalling/battery overhead due to retries"],
+    "root_cause_in_spec": ["RRCReject is permitted to be sent unprotected in Annex B.1 (including SRB0/RRC_INACTIVE scenarios)."],
+    "how_to_use": ["Use as a clean unprotected-message DoS sample from Annex B.1."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (RRCReject)"]
+  },
+  {
+    "id": "VD-06",
+    "label": "VULN",
+    "input": "RRCRelease may be sent unprotected prior to AS security activation, allowing an attacker to spoof releases to tear down connections or prematurely end signalling-only connections, causing repeated disconnects and signalling/energy-drain denial-of-service.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCRelease: P=+; justification for being sent unprotected).",
+    "vuln_title": "Unprotected RRCRelease before AS security enables forced disconnect DoS",
+    "vuln_type": ["Unauthenticated release", "Forced disconnect", "RRC DoS"],
+    "threat_model": "Rogue gNB transmits spoofed RRCRelease before AS security activation.",
+    "preconditions": ["AS security not yet activated (or connection is released prematurely as per spec justification)", "Attacker can transmit downlink RRC messages"],
+    "attack_story": [
+      "Attacker sends spoofed RRCRelease to target UE.",
+      "UE releases the RRC connection and must re-establish, increasing signalling load.",
+      "Repeated spoofing leads to persistent denial-of-service and battery drain."
+    ],
+    "impact": ["Service disruption", "Signalling amplification", "Energy drain"],
+    "root_cause_in_spec": ["RRCRelease is allowed to be sent unprotected prior to AS security activation (Annex B.1 justification)."],
+    "how_to_use": ["Use as a baseline RRC forced-release DoS example tied directly to Annex B.1."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (RRCRelease)"]
+  },
+  {
+    "id": "VD-07",
+    "label": "NON_VULN",
+    "input": "MeasurementReport is specified to be sent only from the UE after successful AS security activation to protect UE privacy; the spec explicitly notes that measurement configuration may be sent earlier but the reporting is delayed until AS security is active.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (MeasurementReport: P=-, A-I=-, A-C=-; privacy note).",
+    "non_vuln_reason": "This is a protection requirement (privacy safeguard), not a relaxation/exception that introduces an additional attack surface.",
+    "how_to_use": ["Use as a negative (NON_VULN) example of a message explicitly gated by AS security for privacy."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (MeasurementReport)"]
+  },
+  {
+    "id": "VD-08",
+    "label": "NON_VULN",
+    "input": "UEInformationResponse is specified to be sent only from the UE after successful security activation to protect UE privacy.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (UEInformationResponse: P=-, A-I=-, A-C=-; privacy note).",
+    "non_vuln_reason": "This is a security-strengthening constraint (send only after security activation), so it should be treated as non-vulnerability evidence.",
+    "how_to_use": ["Use as a NON_VULN privacy-gating example.", "Use as supporting evidence when contrasting with messages allowed unprotected."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (UEInformationResponse)"]
+  },
+  {
+    "id": "VD-09",
+    "label": "VULN",
+    "input": "RRCReconfiguration is permitted to be sent unprotected prior to AS security activation (with explicit restrictions such as not using it unprotected for handover or to establish SRB2/SRB4/multicast MRBs/DRBs). This allows an attacker (rogue gNB) to push unauthenticated configuration changes early in connection setup and disrupt mobility/setup behavior.",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCReconfiguration: P=+; restriction note for HO/SRB2/SRB4/DRBs).",
+    "vuln_title": "Unprotected RRCReconfiguration before AS security enables unauthorized early reconfiguration",
+    "vuln_type": ["Unauthenticated configuration injection", "Pre-security control-plane abuse"],
+    "threat_model": "Rogue gNB sends unprotected RRCReconfiguration before AS security activation to manipulate UE behavior.",
+    "preconditions": ["AS security not yet activated", "Message use falls into cases where unprotected sending is allowed by spec"],
+    "attack_story": [
+      "Attacker sends an unprotected RRCReconfiguration during early setup.",
+      "UE applies configuration changes that can alter measurements, mobility parameters, or connection behavior, causing disruption or steering."
+    ],
+    "impact": ["Connection instability / disruption", "Potential mobility manipulation (within allowed unprotected cases)"],
+    "root_cause_in_spec": ["RRCReconfiguration can be sent unprotected prior to AS security activation, with specified exceptions."],
+    "how_to_use": ["Use as a nuanced Annex B.1 vulnerability sample with conditional constraints."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (RRCReconfiguration)"]
+  },
+  {
+    "id": "VD-10",
+    "label": "NON_VULN",
+    "input": "AS security is not activated during the initial phase of the RRC connection, which explains why certain initial RRC messages can be unprotected prior to security activation.",
+    "evidence": "TS 38.331, Clause 5.3.1.1, RRC connection control (AS security not activated during the initial phase).",
+    "non_vuln_reason": "This is a high-level architectural statement/background context. By itself it does not specify a concrete exception, missing check, or exploitable behavior tied to a specific message/procedure.",
+    "how_to_use": ["Use as contextual evidence supporting other VULN items about pre-security unprotected messages."],
+    "evidence_targets": ["TS 38.331 5.3.1.1"]
+  },
+  {
+    "id": "VD-11",
+    "label": "VULN",
+    "input": "Paging can be sent unprotected both prior to AS security activation and after AS security activation (without integrity and without ciphering), enabling spoofed paging and broad privacy/availability abuse (e.g., tracking via induced paging responses or broadcast manipulation).",
+    "evidence": "TS 38.331, Annex B.1, Protection of RRC messages (Paging: P=+, A-I=+, A-C=+).",
+    "vuln_title": "Unprotected Paging (before and after AS security) enables spoofing and privacy abuse",
+    "vuln_type": ["Unprotected broadcast control", "Spoofing", "Privacy / tracking surface"],
+    "threat_model": "Attacker transmits fake Paging to trigger UE behaviors or to assist tracking/observation at scale.",
+    "preconditions": ["Attacker can transmit paging-like signals/messages", "UEs react to paging mechanisms"],
+    "attack_story": [
+      "Attacker sends spoofed paging to cause unnecessary wake-ups and responses.",
+      "Repeated paging can be used to degrade availability (battery drain) and assist tracking/observation patterns."
+    ],
+    "impact": ["Battery drain / signalling load", "Potential tracking/observation amplification"],
+    "root_cause_in_spec": ["Paging is allowed without integrity and without ciphering even after AS security activation (Annex B.1)."],
+    "how_to_use": ["Use as a canonical always-unprotected (A-I=+, A-C=+) RRC message vulnerability example."],
+    "evidence_targets": ["TS 38.331 Annex B.1 (Paging)"]
+  },
+  {
+    "id": "VD-12",
+    "label": "VULN",
+    "input": "If a UE receives an RRCSetup in response to an RRCResumeRequest/RRCResumeRequest1, it must discard the stored UE Inactive AS context and suspendConfig, discard the current AS security context (including K_RRCenc/K_RRCint/K_UPint/K_UPenc), and release RBs except SRB0. A spoofed RRCSetup at this timing can therefore force security-context deletion and state loss, causing RRC-level denial-of-service.",
+    "evidence": "TS 38.331, Clause 5.3.3.4, Reception of the RRCSetup by the UE (on RRCSetup received in response to RRCResumeRequest/RRCResumeRequest1: discard contexts/keys and release RBs except SRB0).",
+    "vuln_title": "Spoofed RRCSetup after resume request can wipe inactive AS context and keys (state-loss DoS)",
+    "vuln_type": ["State-loss / key erasure trigger", "Resume procedure abuse", "RRC DoS"],
+    "threat_model": "Active attacker injects an RRCSetup at the resume boundary to force the UE to drop stored inactive context and security keys.",
+    "preconditions": ["UE initiates resume (RRCResumeRequest/RRCResumeRequest1)", "Attacker can inject/spoof RRCSetup at that moment"],
+    "attack_story": [
+      "UE sends a resume request expecting resume handling.",
+      "Attacker injects an RRCSetup response at that timing.",
+      "UE follows spec: discards stored inactive AS context/suspendConfig and deletes AS security keys, releasing RBs (except SRB0), forcing costly recovery/re-establishment."
+    ],
+    "impact": ["Forced loss of security context", "Service disruption and recovery overhead", "RRC-level denial-of-service"],
+    "root_cause_in_spec": ["Spec mandates discarding stored inactive context and AS security keys when RRCSetup is received in response to resume request."],
+    "how_to_use": ["Use as a resume-boundary state-loss vulnerability example (strong procedural trigger + security impact)."],
+    "evidence_targets": ["TS 38.331 5.3.3.4"]
+  },
+  {
+    "id": "VD-13",
+    "label": "NON_VULN",
+    "input": "After successful completion of the Security Mode procedure, the UE applies integrity protection and ciphering according to the configured AS security algorithms.",
+    "evidence": "TS 38.331, Clause 5.3.4.4",
+    "non_vuln_reason": "This describes correct activation of AS security protections after procedure completion.",
+    "how_to_use": ["Positive example of security enforcement after procedure success."],
+    "evidence_targets": ["TS 38.331 5.3.4.4"]
+  },
+  {
+    "id": "VD-14",
+    "label": "NON_VULN",
+    "input": "If the Security Mode procedure completes successfully, the UE stores the negotiated AS security parameters for subsequent signalling.",
+    "evidence": "TS 38.331, Clause 5.3.4.4",
+    "non_vuln_reason": "This is normal security context establishment behavior.",
+    "how_to_use": ["Baseline for correct security context handling."],
+    "evidence_targets": ["TS 38.331 5.3.4.4"]
+  },
+  {
+    "id": "VD-15",
+    "label": "NON_VULN",
+    "input": "The UE shall start timer T300 upon transmission of RRCSetupRequest to monitor RRC connection establishment.",
+    "evidence": "TS 38.331, Clause 5.3.3.2",
+    "non_vuln_reason": "Timer supervision is a reliability mechanism, not a security exception.",
+    "how_to_use": ["Timer semantics reference."],
+    "evidence_targets": ["TS 38.331 5.3.3.2"]
+  },
+  {
+    "id": "VD-16",
+    "label": "NON_VULN",
+    "input": "If timer T300 expires before receiving RRCSetup, the UE shall consider the RRC connection establishment failed.",
+    "evidence": "TS 38.331, Clause 5.3.3.2",
+    "non_vuln_reason": "Failure handling logic without security relaxation.",
+    "how_to_use": ["Normal failure-path modeling."],
+    "evidence_targets": ["TS 38.331 5.3.3.2"]
+  },
+  {
+    "id": "VD-17",
+    "label": "NON_VULN",
+    "input": "Upon reception of RRCSetup, the UE shall transition to RRC_CONNECTED state.",
+    "evidence": "TS 38.331, Clause 5.3.3.4",
+    "non_vuln_reason": "State transition semantics only.",
+    "how_to_use": ["FSM construction reference."],
+    "evidence_targets": ["TS 38.331 5.3.3.4"]
+  },
+  {
+    "id": "VD-18",
+    "label": "NON_VULN",
+    "input": "The UE shall start timer T301 upon sending RRCResumeRequest to supervise the resume procedure.",
+    "evidence": "TS 38.331, Clause 5.3.13.2",
+    "non_vuln_reason": "Timer supervision does not weaken security properties.",
+    "how_to_use": ["Resume procedure modeling."],
+    "evidence_targets": ["TS 38.331 5.3.13.2"]
+  },
+  {
+    "id": "VD-19",
+    "label": "NON_VULN",
+    "input": "If timer T301 expires, the UE shall perform actions specified for resume failure handling.",
+    "evidence": "TS 38.331, Clause 5.3.13.2",
+    "non_vuln_reason": "Defined failure handling, not a protection exception.",
+    "how_to_use": ["Failure recovery logic."],
+    "evidence_targets": ["TS 38.331 5.3.13.2"]
+  },
+  {
+    "id": "VD-20",
+    "label": "NON_VULN",
+    "input": "When AS security is active, RRC messages shall be integrity protected and ciphered as specified.",
+    "evidence": "TS 38.331, Clause 4.3.2",
+    "non_vuln_reason": "Explicit security requirement statement.",
+    "how_to_use": ["Security policy enforcement example."],
+    "evidence_targets": ["TS 38.331 4.3.2"]
+  },
+  {
+    "id": "VD-21",
+    "label": "NON_VULN",
+    "input": "The UE shall not send MeasurementReport before successful AS security activation.",
+    "evidence": "TS 38.331, Annex B.1",
+    "non_vuln_reason": "Privacy-preserving restriction.",
+    "how_to_use": ["Negative example for privacy leakage."],
+    "evidence_targets": ["TS 38.331 Annex B.1"]
+  },
+  {
+    "id": "VD-22",
+    "label": "NON_VULN",
+    "input": "The UE shall only send UEInformationResponse after AS security activation.",
+    "evidence": "TS 38.331, Annex B.1",
+    "non_vuln_reason": "Information disclosure protection.",
+    "how_to_use": ["Non-vulnerability privacy control."],
+    "evidence_targets": ["TS 38.331 Annex B.1"]
+  },
+  {
+    "id": "VD-23",
+    "label": "NON_VULN",
+    "input": "If handover is performed, RRCReconfiguration shall be integrity protected and ciphered.",
+    "evidence": "TS 38.331, Annex B.1",
+    "non_vuln_reason": "Explicit restriction strengthening security during handover.",
+    "how_to_use": ["Secure handover constraint."],
+    "evidence_targets": ["TS 38.331 Annex B.1"]
+  },
+  {
+    "id": "VD-24",
+    "label": "NON_VULN",
+    "input": "The UE shall apply the received cell reselection priorities only after successful configuration.",
+    "evidence": "TS 38.331, Clause 5.2.4",
+    "non_vuln_reason": "Configuration sequencing rule.",
+    "how_to_use": ["FSM sequencing constraint."],
+    "evidence_targets": ["TS 38.331 5.2.4"]
+  },
+  {
+    "id": "VD-25",
+    "label": "NON_VULN",
+    "input": "The UE shall discard invalid or malformed RRC messages.",
+    "evidence": "TS 38.331, Clause 4.3.1",
+    "non_vuln_reason": "Robustness requirement, not a vulnerability.",
+    "how_to_use": ["Input validation example."],
+    "evidence_targets": ["TS 38.331 4.3.1"]
+  },
+  {
+    "id": "VD-26",
+    "label": "NON_VULN",
+    "input": "Upon entering RRC_IDLE, the UE releases all radio bearers except those explicitly preserved.",
+    "evidence": "TS 38.331, Clause 5.3.11",
+    "non_vuln_reason": "Normal state transition behavior.",
+    "how_to_use": ["State cleanup semantics."],
+    "evidence_targets": ["TS 38.331 5.3.11"]
+  },
+  {
+    "id": "VD-27",
+    "label": "NON_VULN",
+    "input": "The UE shall ignore paging messages that do not match its configured identifiers.",
+    "evidence": "TS 38.331, Clause 7.1",
+    "non_vuln_reason": "Paging filtering rule improves robustness.",
+    "how_to_use": ["Paging handling logic."],
+    "evidence_targets": ["TS 38.331 7.1"]
+  },
+  {
+    "id": "VD-28",
+    "label": "NON_VULN",
+    "input": "If a configuration IE is not understood, the UE shall ignore it and continue processing the message.",
+    "evidence": "TS 38.331, Clause 4.3.1",
+    "non_vuln_reason": "Forward compatibility rule.",
+    "how_to_use": ["Protocol robustness example."],
+    "evidence_targets": ["TS 38.331 4.3.1"]
+  },
+  {
+    "id": "VD-29",
+    "label": "NON_VULN",
+    "input": "The UE shall apply suspendConfig only when entering RRC_INACTIVE as specified.",
+    "evidence": "TS 38.331, Clause 5.3.11.2",
+    "non_vuln_reason": "Context preservation rule.",
+    "how_to_use": ["Inactive-state modeling."],
+    "evidence_targets": ["TS 38.331 5.3.11.2"]
+  },
+  {
+    "id": "VD-30",
+    "label": "NON_VULN",
+    "input": "The UE shall release suspendConfig when leaving RRC_INACTIVE.",
+    "evidence": "TS 38.331, Clause 5.3.13",
+    "non_vuln_reason": "State exit cleanup logic.",
+    "how_to_use": ["Context lifecycle example."],
+    "evidence_targets": ["TS 38.331 5.3.13"]
+  },
+
+  {
+    "id": "VD-31",
+    "label": "NON_VULN",
+    "input": "If RRCResume completes successfully, the UE transitions back to RRC_CONNECTED.",
+    "evidence": "TS 38.331, Clause 5.3.13.3",
+    "non_vuln_reason": "Normal resume success path.",
+    "how_to_use": ["Resume FSM path."],
+    "evidence_targets": ["TS 38.331 5.3.13.3"]
+  },
+  {
+    "id": "VD-32",
+    "label": "NON_VULN",
+    "input": "The UE shall stop timer T301 upon successful completion of the resume procedure.",
+    "evidence": "TS 38.331, Clause 5.3.13.3",
+    "non_vuln_reason": "Timer cleanup rule.",
+    "how_to_use": ["Timer lifecycle modeling."],
+    "evidence_targets": ["TS 38.331 5.3.13.3"]
+  },
+  {
+    "id": "VD-33",
+    "label": "NON_VULN",
+    "input": "The UE shall maintain the mapping between SRBs and logical channels as configured.",
+    "evidence": "TS 38.331, Clause 6.2",
+    "non_vuln_reason": "Bearer mapping semantics.",
+    "how_to_use": ["Protocol modeling."],
+    "evidence_targets": ["TS 38.331 6.2"]
+  },
+  {
+    "id": "VD-34",
+    "label": "NON_VULN",
+    "input": "The UE shall apply DRX configuration only after receiving a valid configuration message.",
+    "evidence": "TS 38.331, Clause 5.7",
+    "non_vuln_reason": "Power-saving configuration rule.",
+    "how_to_use": ["Energy management modeling."],
+    "evidence_targets": ["TS 38.331 5.7"]
+  },
+  {
+    "id": "VD-35",
+    "label": "NON_VULN",
+    "input": "The UE shall reset RRC timers upon transitioning to RRC_IDLE.",
+    "evidence": "TS 38.331, Clause 5.3.11",
+    "non_vuln_reason": "State reset behavior.",
+    "how_to_use": ["FSM reset rule."],
+    "evidence_targets": ["TS 38.331 5.3.11"]
+  },
+  {
+    "id": "VD-36",
+    "label": "NON_VULN",
+    "input": "The UE shall discard stored measurement configurations when entering RRC_IDLE.",
+    "evidence": "TS 38.331, Clause 5.3.11",
+    "non_vuln_reason": "State cleanup requirement.",
+    "how_to_use": ["Measurement lifecycle modeling."],
+    "evidence_targets": ["TS 38.331 5.3.11"]
+  },
+  {
+    "id": "VD-37",
+    "label": "NON_VULN",
+    "input": "The UE shall use the most recently received system information that is valid.",
+    "evidence": "TS 38.331, Clause 5.2.2",
+    "non_vuln_reason": "System information management rule.",
+    "how_to_use": ["SI handling example."],
+    "evidence_targets": ["TS 38.331 5.2.2"]
+  },
+  {
+    "id": "VD-38",
+    "label": "NON_VULN",
+    "input": "If system information becomes invalid, the UE shall trigger acquisition of updated system information.",
+    "evidence": "TS 38.331, Clause 5.2.2",
+    "non_vuln_reason": "Consistency maintenance logic.",
+    "how_to_use": ["SI refresh modeling."],
+    "evidence_targets": ["TS 38.331 5.2.2"]
+  },
+  {
+    "id": "VD-39",
+    "label": "NON_VULN",
+    "input": "The UE shall only apply radio bearer configurations that are explicitly configured.",
+    "evidence": "TS 38.331, Clause 6.2",
+    "non_vuln_reason": "Explicit configuration enforcement.",
+    "how_to_use": ["RB configuration semantics."],
+    "evidence_targets": ["TS 38.331 6.2"]
+  },
+  {
+    "id": "VD-40",
+    "label": "NON_VULN",
+    "input": "The UE shall ignore optional IEs that are not present in a received message.",
+    "evidence": "TS 38.331, Clause 4.3.1",
+    "non_vuln_reason": "Optional IE handling rule.",
+    "how_to_use": ["Protocol parsing robustness."],
+    "evidence_targets": ["TS 38.331 4.3.1"]
+  },
+  {
+    "id": "VD-41",
+    "label": "NON_VULN",
+    "input": "The UE shall only enter RRC_INACTIVE if configured by the network.",
+    "evidence": "TS 38.331, Clause 5.3.11.2",
+    "non_vuln_reason": "State entry restriction.",
+    "how_to_use": ["State transition control."],
+    "evidence_targets": ["TS 38.331 5.3.11.2"]
+  },
+  {
+    "id": "VD-42",
+    "label": "NON_VULN",
+    "input": "The UE shall not perform RRC resume if resume is not supported by the network.",
+    "evidence": "TS 38.331, Clause 5.3.13",
+    "non_vuln_reason": "Capability-based behavior constraint.",
+    "how_to_use": ["Capability checking example."],
+    "evidence_targets": ["TS 38.331 5.3.13"]
+  },
+  {
+    "id": "VD-43",
+    "label": "NON_VULN",
+    "input": "The UE shall apply security configuration only after successful negotiation.",
+    "evidence": "TS 38.331, Clause 4.3.2",
+    "non_vuln_reason": "Security correctness requirement.",
+    "how_to_use": ["Security state machine modeling."],
+    "evidence_targets": ["TS 38.331 4.3.2"]
+  },
+  {
+    "id": "VD-44",
+    "label": "NON_VULN",
+    "input": "The UE shall not reuse obsolete AS security contexts.",
+    "evidence": "TS 38.331, Clause 4.3.2",
+    "non_vuln_reason": "Security freshness rule.",
+    "how_to_use": ["Context lifecycle constraint."],
+    "evidence_targets": ["TS 38.331 4.3.2"]
+  },
+  {
+    "id": "VD-45",
+    "label": "NON_VULN",
+    "input": "The UE shall follow the configured priority rules for cell reselection.",
+    "evidence": "TS 38.331, Clause 5.2.4",
+    "non_vuln_reason": "Mobility policy enforcement.",
+    "how_to_use": ["Mobility modeling."],
+    "evidence_targets": ["TS 38.331 5.2.4"]
+  },
+  {
+    "id": "VD-46",
+    "label": "NON_VULN",
+    "input": "The UE shall maintain RRC state consistency across mobility events.",
+    "evidence": "TS 38.331, Clause 5.3",
+    "non_vuln_reason": "General state consistency rule.",
+    "how_to_use": ["FSM consistency constraint."],
+    "evidence_targets": ["TS 38.331 5.3"]
+  },
+  {
+    "id": "VD-47",
+    "label": "NON_VULN",
+    "input": "The UE shall process only RRC messages applicable to its current RRC state.",
+    "evidence": "TS 38.331, Clause 4.2",
+    "non_vuln_reason": "State-based message validation.",
+    "how_to_use": ["FSM guard condition."],
+    "evidence_targets": ["TS 38.331 4.2"]
+  },
+  {
+    "id": "VD-48",
+    "label": "NON_VULN",
+    "input": "The UE shall release radio resources upon leaving RRC_CONNECTED.",
+    "evidence": "TS 38.331, Clause 5.3.11",
+    "non_vuln_reason": "Normal resource cleanup.",
+    "how_to_use": ["Resource lifecycle modeling."],
+    "evidence_targets": ["TS 38.331 5.3.11"]
+  },
+  {
+    "id": "VD-49",
+    "label": "NON_VULN",
+    "input": "The UE shall only apply network-provided configurations that are valid for the current PLMN.",
+    "evidence": "TS 38.331, Clause 5.2.1",
+    "non_vuln_reason": "PLMN consistency rule.",
+    "how_to_use": ["Multi-PLMN modeling."],
+    "evidence_targets": ["TS 38.331 5.2.1"]
+  },
+  {
+    "id": "VD-50",
+    "label": "NON_VULN",
+    "input": "The UE shall ignore messages that are not syntactically valid according to ASN.1.",
+    "evidence": "TS 38.331, Clause 4.3.1",
+    "non_vuln_reason": "Syntax validation rule.",
+    "how_to_use": ["Parser robustness constraint."],
+    "evidence_targets": ["TS 38.331 4.3.1"]
+  }
+]
+

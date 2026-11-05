@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.4.2",
+  "title": "IP address allocation via NAS signalling",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that initiates PDU session establishment and has IP stack capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to request establishment of a PDU session for IP connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_TYPE",
+      "name": "PDU session type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating requested IP version capability (IPv4, IPv6, IPv4v6).",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to indicate DHCPv4 usage for IPv4 address assignment.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_SELECTED_PDU_SESSION_TYPE",
+      "name": "Selected PDU session type IE",
+      "entity_type": "Information Element",
+      "description": "Information element set by network indicating final selected IP version.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_ADDRESS",
+      "name": "PDU address IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing allocated IP address(es) from network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_IP_CAPABILITY",
+      "name": "UE IP capability condition",
+      "entity_type": "Condition",
+      "description": "Condition based on UE's IP stack capabilities (IPv6/IPv4 capable, IPv6 only, IPv4 only, or unknown).",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_DHCPV4_REQUEST",
+      "name": "DHCPv4 usage condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE wants to use DHCPv4 for IPv4 address assignment.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_IP_ADDRESS_ALLOCATION",
+      "name": "IP address allocation",
+      "entity_type": "Property",
+      "description": "Network behavior to allocate IP addresses based on PDU session type, operator policies, and subscription data.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains PDU session type IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains Extended protocol configuration options IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_IP_CAPABILITY",
+      "target": "IE_PDU_SESSION_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE IP capability condition determines the value set in PDU session type IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_DHCPV4_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DHCPv4 usage condition determines content in Extended protocol configuration options IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_IP_ADDRESS_ALLOCATION",
+      "target": "IE_SELECTED_PDU_SESSION_TYPE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "IP address allocation process establishes the Selected PDU session type IE value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_SELECTED_PDU_SESSION_TYPE",
+      "target": "IE_PDU_ADDRESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Selected PDU session type IE value determines the content of PDU address IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE",
+      "target": "CONDITION_IP_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE's IP stack capabilities establish the IP capability condition.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.2"
+      ]
+    }
+  ]
+}

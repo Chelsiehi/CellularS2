@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.23.2",
+  "title": "List of \"PLMNs not allowed to operate at the present UE location\"",
+  "entities": [
+    {
+      "id": "LIST_PLMNS_NOT_ALLOWED",
+      "name": "List of PLMNs not allowed to operate at the present UE location",
+      "entity_type": "Property",
+      "description": "A stored list in the UE containing PLMNs that are not permitted to operate at the current UE location when using satellite NG-RAN access. Each entry includes PLMN identity, geographical location (if known), and a UE implementation specific distance value.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "PLMN_IDENTITY",
+      "name": "PLMN identity",
+      "entity_type": "Identifier",
+      "description": "The identity of the PLMN that sent a message with 5GMM cause value #78 via satellite NG-RAN access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "GEOGRAPHICAL_LOCATION",
+      "name": "Geographical location",
+      "entity_type": "Property",
+      "description": "The location where 5GMM cause value #78 was received, stored if known by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "DISTANCE_VALUE",
+      "name": "UE implementation specific distance value",
+      "entity_type": "Property",
+      "description": "A UE-specific distance threshold used to determine if the UE is far enough from the stored location to attempt access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "TIMER_ENTRY",
+      "name": "Timer instance for PLMN entry",
+      "entity_type": "Timer",
+      "description": "A timer started when a new entry is stored in the list. Duration is implementation-specific but not smaller than the Lower bound timer value IE if provided.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "LOWER_BOUND_TIMER_IE",
+      "name": "Lower bound timer value IE",
+      "entity_type": "Information Element",
+      "description": "An optional IE provided by the network indicating the minimum timer value for entries in the list.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_ALLOWED",
+      "name": "Conditions for allowed access to listed PLMN",
+      "entity_type": "Condition",
+      "description": "Conditions under which the UE may attempt access to a PLMN in the list: current location known and distance exceeds threshold, timer expired, or access for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "CONDITION_ENTRY_REMOVAL",
+      "name": "Conditions for entry removal",
+      "entity_type": "Condition",
+      "description": "Conditions under which an entry is removed: successful registration via satellite NG-RAN to the PLMN, timer expiration, or UE implementation decision based on distance.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES_ACCESS",
+      "name": "Access for emergency services",
+      "entity_type": "Condition",
+      "description": "Access to a PLMN in the list is allowed if for emergency services, regardless of other conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LIST_PLMNS_NOT_ALLOWED",
+      "target": "PLMN_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The list contains entries identified by PLMN identity.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LIST_PLMNS_NOT_ALLOWED",
+      "target": "GEOGRAPHICAL_LOCATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each entry in the list may include geographical location if known.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LIST_PLMNS_NOT_ALLOWED",
+      "target": "DISTANCE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Each entry includes a UE implementation specific distance value if geographical location is stored.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "LIST_PLMNS_NOT_ALLOWED",
+      "target": "TIMER_ENTRY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Upon storing a new entry, the UE starts a timer instance associated with the entry.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_ENTRY",
+      "target": "LOWER_BOUND_TIMER_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The timer value shall not be smaller than the value indicated by the Lower bound timer value IE if provided.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_ACCESS_ALLOWED",
+      "target": "LIST_PLMNS_NOT_ALLOWED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access to a PLMN in the list is allowed only if specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_ENTRY_REMOVAL",
+      "target": "LIST_PLMNS_NOT_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entries are removed from the list under specified conditions such as successful registration or timer expiration.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMERGENCY_SERVICES_ACCESS",
+      "target": "CONDITION_ACCESS_ALLOWED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access for emergency services is an allowed condition regardless of other restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.2"
+      ]
+    }
+  ]
+}

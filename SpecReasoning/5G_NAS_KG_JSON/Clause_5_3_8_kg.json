@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.8",
+  "title": "Handling of timer T3502",
+  "entities": [
+    {
+      "id": "TIMER_T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer used in 5GMM procedures, with value configurable by network via REGISTRATION ACCEPT or REGISTRATION REJECT messages. Default value used when no value is provided or specific conditions occur.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE during registration procedure, which may contain T3502 timer value.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE during initial registration procedure, which may contain T3502 timer value.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "COND_NO_VALUE_SPECIFIED",
+      "name": "No timer value specified",
+      "entity_type": "Condition",
+      "description": "Condition where REGISTRATION ACCEPT message is received without T3502 value specified.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "COND_NO_STORED_VALUE",
+      "name": "No stored timer value",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not have a stored value for T3502 timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "COND_NEW_PLMN_NO_REJECT",
+      "name": "New PLMN registration failure without reject",
+      "entity_type": "Condition",
+      "description": "Condition where new PLMN (not in equivalent PLMNs) is entered, initial registration fails, registration attempt counter equals 5, and no REGISTRATION REJECT message was received.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "COND_TIMER_DEACTIVATED",
+      "name": "Timer deactivated by network",
+      "entity_type": "Condition",
+      "description": "Condition where network indicates T3502 timer is deactivated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "COND_MOBILITY_UPDATE_FAILURE",
+      "name": "Mobility and periodic update registration failure",
+      "entity_type": "Condition",
+      "description": "Condition where new PLMN (not in equivalent PLMNs) is entered, mobility and periodic update registration procedure fails, and registration attempt counter equals 5.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "PROP_APPLY_DEFAULT_VALUE",
+      "name": "Apply default timer value",
+      "entity_type": "Property",
+      "description": "UE behavior to use default T3502 timer value when specific conditions occur.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "TIMER_T3502",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain T3502 timer value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "TIMER_T3502",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message may contain T3502 timer value during initial registration",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NO_VALUE_SPECIFIED",
+      "target": "PROP_APPLY_DEFAULT_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "No timer value specified in REGISTRATION ACCEPT establishes use of default value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NO_STORED_VALUE",
+      "target": "PROP_APPLY_DEFAULT_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "No stored timer value establishes use of default value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NEW_PLMN_NO_REJECT",
+      "target": "PROP_APPLY_DEFAULT_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "New PLMN registration failure without reject establishes use of default value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_TIMER_DEACTIVATED",
+      "target": "PROP_APPLY_DEFAULT_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer deactivation by network establishes use of default value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_MOBILITY_UPDATE_FAILURE",
+      "target": "PROP_APPLY_DEFAULT_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Mobility and periodic update registration failure establishes use of default value",
+      "provenance": [
+        "TS 24.501, Clause 5.3.8"
+      ]
+    }
+  ]
+}

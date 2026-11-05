@@ -1,0 +1,27 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.2.5",
+  "title": "Derivation of keys at CS to PS SRVCC handover from A/Gb mode to S1 mode or from Iu mode to S1 mode",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------------------------------------------------------------------",
+    "At change from A/Gb mode to S1 mode or from Iu mode to S1 mode due to CS to PS SRVCC handover (see 3GPP S 23.216 [8]), the UE shall derive a mapped EPS security context for the PS domain from the UMTS security context for the CS domain",
+    "At change from A/Gb mode to S1 mode due to CS to PS SRVCC handover, ciphering may be started and integrity protection shall be started (see 3GPP S 36.331 [22]) without any new authentication procedure",
+    "NOTE 1: CS to PS SRVCC handover from A/Gb mode to S1 mode or from Iu mode to S1 mode is not supported if the current CS security context is a GSM security context",
+    "NOTE 2: For emergency calls, CS to PS SRVCC handover from A/Gb mode to S1 mode or from Iu mode to S1 mode is not supported",
+    "In order to derive a mapped EPS security context for a CS to PS SRVCC handover from A/Gb mode or Iu mode to S1 mode, the MSC creates a NONCEMSC and generates the CK 'PS and IK 'PS using the CS UMTS integrity key, the CS UMTS ciphering key and the created NONCEMSC as specified in annex B.6 in 3GPP S 33.102 [18]. The MSC associates the CK 'PS and IK 'PS with a KSI 'PS. The KSI 'PS is set to the value of the KSICS associated with the CS UMTS integrity key and the CS UMTS ciphering key. The MSC transfers the CK 'PS, IK 'PS and the KSI 'PS to the MME. The MME shall create a mapped EPS security context by setting the K 'ASME to the concatenation of the CK 'PS and IK 'PS received from the MSC (i.e. CK 'PS || IK 'PS). The MME shall associate the K 'ASME with a KSISGSN. The MME shall set KSISGSN to the value of the KSI 'PS received from the MSC. The MME shall include the selected NAS algorithms, NONCEMME and generated KSISGSN (associated with the K 'ASME) in the NAS security transparent container for the handover to E-UTRAN. The MME shall derive the EPS NAS keys from K 'ASME",
+    "When the UE receives the command to perform CS to PS SRVCC handover to S1 mode, the ME shall generate the CK 'PS and IK 'PS using the CS UMTS integrity key, the CS UMTS ciphering key and the received NONCEMSC value in the transparent container in the CS to PS SRVCC handover command as specified in annex B.6 in 3GPP S 33.102 [18]. The ME shall ignore the NONCEMME value received in the NAS Security Transparent Container in the CS to PS SRVCC handover command",
+    "NOTE 3: The NONCEMME value received in the NAS Security Transparent Container for the handover to E-UTRAN is not used by the ME or MME in any key derivation in this handover",
+    "The ME shall create the key K 'ASME by concatenating the derived CK 'PS and IK 'PS (i.e. CK 'PS || IK 'PS.). The ME shall associate the derived key K 'ASME with a KSISGSN. The ME shall set the KSISGSN associated to K 'ASME to the KSISGSN value received in the NAS Security Transparent Container from the network",
+    "NOTE 4: Although this case is related to the MSC server enhanced for SRVCC, the name KSISGSN is kept to avoid introducing a new name for the same domain",
+    "The ME shall derive the EPS NAS keys (CK ' and IK ') from the K 'ASME as specified in 3GPP S 33.401 [19]. The ME shall apply these derived EPS NAS security keys (CK ' and IK '), reset the uplink and downlink NAS COUNT values for the mapped EPS security context (i.e. to the value 0), and replace an already established mapped EPS security context for the PS domain, if any, in the ME, when the CS to PS SRVCC handover from A/Gb mode or Iu mode has been completed successfully. If the already established current EPS security context is of type native, then it shall become the non-current native EPS security context and overwrite any existing non-current native EPS security context in the ME",
+    "The network shall replace an already established mapped EPS security context for the PS domain, if any, when the CS to PS SRVCC handover from A/Gb mode or Iu mode has been completed successfully. If the already established current EPS security context is of type native, then it shall become the non-current native EPS security context and overwrite any existing non-current native EPS security context in the MME",
+    "If the CS to PS SRVCC handover from A/Gb mode or Iu mode has not been completed successfully, the UE and the network shall delete the new derived mapped EPS security context for the PS domain. Additionally, the network shall delete an already established mapped EPS security context for the PS domain, if any, if the eKSI of the already established EPS security context is equal to the KSISGSN of the new derived EPS security context for the PS domain",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.2.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PDU_SESSION_AUTHENTICATION_COMMAND",
+      "name": "PDU SESSION AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message received by the UE during PDU session authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a PDU session included in the PDU SESSION AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE",
+      "entity_type": "State",
+      "description": "State of a PDU session when it is inactive in the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "5GSM_STATUS",
+      "name": "5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to indicate 5GSM status with cause information.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "5GSM_CAUSE_43",
+      "name": "5GSM cause #43",
+      "entity_type": "Information Element",
+      "description": "5GSM cause IE set to value #43 indicating 'Invalid PDU session identity'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "name": "PDU session authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure involving PDU SESSION AUTHENTICATION COMMAND message for authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_INACTIVE_PDU_SESSION",
+      "name": "PDU session inactive for received PDU session ID",
+      "entity_type": "Condition",
+      "description": "Condition where the PDU session ID in PDU SESSION AUTHENTICATION COMMAND belongs to a PDU session in PDU SESSION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_PROCEDURE_COLLISION",
+      "name": "Collision of UE-requested PDU session release and PDU session authentication",
+      "entity_type": "Condition",
+      "description": "Condition where PDU SESSION AUTHENTICATION COMMAND is received during UE-requested PDU session release for the same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_IGNORE_COMMAND",
+      "name": "Ignore PDU SESSION AUTHENTICATION COMMAND",
+      "entity_type": "Property",
+      "description": "UE behavior to ignore the PDU SESSION AUTHENTICATION COMMAND message and proceed with UE-requested PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_INACTIVE_PDU_SESSION",
+      "target": "5GSM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of inactive PDU session leads to sending 5GSM STATUS message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "5GSM_STATUS",
+      "target": "5GSM_CAUSE_43",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains 5GSM cause IE set to #43.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_INACTIVE_PDU_SESSION",
+      "target": "PDU_SESSION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires PDU session to be in PDU SESSION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PDU_SESSION_AUTHENTICATION_COMMAND",
+      "target": "PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION COMMAND message contains PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "BEHAVIOR_IGNORE_COMMAND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision condition leads to ignoring PDU SESSION AUTHENTICATION COMMAND and proceeding with release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "UE_REQUESTED_PDU_SESSION_RELEASE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Collision condition requires UE-requested PDU session release procedure to be ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_PROCEDURE_COLLISION",
+      "target": "PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Collision condition involves PDU session authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.4"
+      ]
+    }
+  ]
+}

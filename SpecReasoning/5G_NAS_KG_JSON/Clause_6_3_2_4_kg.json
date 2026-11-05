@@ -1,0 +1,285 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.2.4",
+  "title": "Network-requested PDU session modification procedure not accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_MOD_REJECT",
+      "name": "Network-requested PDU session modification procedure not accepted by the UE",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the UE when it rejects a PDU SESSION MODIFICATION COMMAND message from the network. The UE creates and sends a PDU SESSION MODIFICATION COMMAND REJECT message with appropriate 5GSM cause.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by the network to modify an existing PDU session. Contains PTI, Authorized QoS rules IE, Authorized QoS flow descriptions IE, and other IEs.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_COMMAND_REJECT",
+      "name": "PDU SESSION MODIFICATION COMMAND REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to reject a PDU SESSION MODIFICATION COMMAND. Contains 5GSM cause IE indicating the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "IE included in PDU SESSION MODIFICATION COMMAND REJECT to indicate the reason for rejection. Common values: #44 semantic error in packet filters, #45 syntactical error in packet filters, #83 semantic error in QoS operation, #84 syntactical error in QoS operation, #26 insufficient resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_RULES",
+      "name": "Authorized QoS rules",
+      "entity_type": "Information Element",
+      "description": "IE in PDU SESSION MODIFICATION COMMAND containing QoS rule operations (create, modify, delete) and associated parameters like DQR bit, packet filters, precedence.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "name": "Authorized QoS flow descriptions",
+      "entity_type": "Information Element",
+      "description": "IE in PDU SESSION MODIFICATION COMMAND containing QoS flow description operations (create, modify, delete) and parameters like QFI, GBR parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3581",
+      "name": "T3581",
+      "entity_type": "Timer",
+      "description": "Timer stopped by the UE if the PDU SESSION MODIFICATION COMMAND contains the PTI value allocated in the UE-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3591",
+      "name": "T3591",
+      "entity_type": "Timer",
+      "description": "Timer stopped by the SMF upon receipt of PDU SESSION MODIFICATION COMMAND REJECT in state PDU SESSION MODIFICATION PENDING.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_MODIFICATION_PENDING",
+      "name": "PDU SESSION MODIFICATION PENDING",
+      "entity_type": "State",
+      "description": "SMF state when a PDU session modification procedure is ongoing. SMF leaves this state upon receiving PDU SESSION MODIFICATION COMMAND REJECT.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_ACTIVE",
+      "name": "PDU SESSION ACTIVE",
+      "entity_type": "State",
+      "description": "SMF state entered after aborting the PDU session modification procedure upon receiving PDU SESSION MODIFICATION COMMAND REJECT.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_SEMANTIC_ERROR_QOS",
+      "name": "Semantic error in QoS operation",
+      "entity_type": "Condition",
+      "description": "Condition triggering rejection with 5GSM cause #83. Includes cases like DQR bit mismatch, duplicate precedence, invalid rule operations on default QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_SYNTACTICAL_ERROR_QOS",
+      "name": "Syntactical error in QoS operation",
+      "entity_type": "Condition",
+      "description": "Condition triggering rejection with 5GSM cause #84. Includes empty packet filter list when not allowed, invalid packet filter counts, missing mandatory GBR parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_SEMANTIC_ERROR_PACKET_FILTER",
+      "name": "Semantic error in packet filter(s)",
+      "entity_type": "Condition",
+      "description": "Condition triggering rejection with 5GSM cause #44. Occurs when packet filter components conflict making the filter ineffective.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "COND_SYNTACTICAL_ERROR_PACKET_FILTER",
+      "name": "Syntactical error in packet filter(s)",
+      "entity_type": "Condition",
+      "description": "Condition triggering rejection with 5GSM cause #45. Includes duplicate packet filter identifiers, reserved values in packet filter components.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "PROP_UE_STOPS_T3581",
+      "name": "UE stops timer T3581",
+      "entity_type": "Property",
+      "description": "Behavior where the UE stops timer T3581 if the PDU SESSION MODIFICATION COMMAND contains the PTI value from UE-requested procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "PROP_SMF_STOPS_T3591",
+      "name": "SMF stops timer T3591",
+      "entity_type": "Property",
+      "description": "Behavior where the SMF stops timer T3591 upon receiving PDU SESSION MODIFICATION COMMAND REJECT in PDU SESSION MODIFICATION PENDING state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NW_REQ_PDU_MOD_REJECT",
+      "target": "MSG_PDU_SESSION_MODIFICATION_COMMAND_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes creating and sending the PDU SESSION MODIFICATION COMMAND REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REJECT message contains the 5GSM cause IE to indicate the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_RULES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The COMMAND message may contain the Authorized QoS rules IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The COMMAND message may contain the Authorized QoS flow descriptions IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_NW_REQ_PDU_MOD_REJECT",
+      "target": "PROP_UE_STOPS_T3581",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes stopping timer T3581 if PTI matches UE-requested procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SEMANTIC_ERROR_QOS",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Semantic error in QoS operation condition leads to 5GSM cause #83 in REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SYNTACTICAL_ERROR_QOS",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Syntactical error in QoS operation condition leads to 5GSM cause #84 in REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SEMANTIC_ERROR_PACKET_FILTER",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Semantic error in packet filter condition leads to 5GSM cause #44 in REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_SYNTACTICAL_ERROR_PACKET_FILTER",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Syntactical error in packet filter condition leads to 5GSM cause #45 in REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND_REJECT",
+      "target": "PROP_SMF_STOPS_T3591",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of REJECT message triggers SMF to stop timer T3591.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_MODIFICATION_COMMAND_REJECT",
+      "target": "STATE_PDU_SESSION_ACTIVE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Receipt of REJECT message causes SMF to transition from PDU SESSION MODIFICATION PENDING to PDU SESSION ACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "STATE_PDU_SESSION_MODIFICATION_PENDING",
+      "target": "PROP_SMF_STOPS_T3591",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Stopping T3591 occurs when SMF is in PDU SESSION MODIFICATION PENDING state.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.4"
+      ]
+    }
+  ]
+}

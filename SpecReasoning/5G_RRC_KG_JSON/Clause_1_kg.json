@@ -1,0 +1,160 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "1",
+  "title": "> for this NR sidelink measurement, consider the NR sidelink frequency indicated by the sl-MeasObject associated to this event.",
+  "entities": [
+    {
+      "id": "NR_SIDELINK_MEASUREMENT",
+      "name": "NR Sidelink Measurement",
+      "entity_type": "Procedure",
+      "description": "Measurement procedure for NR sidelink frequency evaluation using event-based triggering conditions with hysteresis and threshold parameters.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "Ms",
+      "name": "NR Sidelink Measurement Result",
+      "entity_type": "Property",
+      "description": "The NR sidelink measurement result of the NR sidelink frequency, expressed in dBm for RSRP, without considering any offsets.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "Hys",
+      "name": "Hysteresis Parameter",
+      "entity_type": "Property",
+      "description": "Hysteresis parameter for the event (sl-Hysteresis as defined within sl-ReportConfig), expressed in dB.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "Thresh",
+      "name": "Threshold Parameter",
+      "entity_type": "Property",
+      "description": "Threshold parameter for the event (s2-Threshold as defined within sl-ReportConfig), expressed in the same unit as Ms.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "SL_MEASOBJECT",
+      "name": "sl-MeasObject",
+      "entity_type": "Identifier",
+      "description": "Object indicating the NR sidelink frequency to be considered for this measurement event.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "SL_REPORTCONFIG",
+      "name": "sl-ReportConfig",
+      "entity_type": "Identifier",
+      "description": "Configuration containing hysteresis (sl-Hysteresis) and threshold (s2-Threshold) parameters for the measurement event.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "EVENT_CONDITION",
+      "name": "Event Triggering Condition",
+      "entity_type": "Condition",
+      "description": "Condition defined by formulas Ms + Hys < Thresh and Ms - Hys > Thresh for measurement event triggering.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "SL_MEASOBJECT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The measurement procedure considers the NR sidelink frequency indicated by the sl-MeasObject.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "SL_REPORTCONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The measurement procedure uses parameters defined in sl-ReportConfig.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_REPORTCONFIG",
+      "target": "Hys",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ReportConfig defines the hysteresis parameter (sl-Hysteresis).",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_REPORTCONFIG",
+      "target": "Thresh",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "sl-ReportConfig defines the threshold parameter (s2-Threshold).",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EVENT_CONDITION",
+      "target": "Ms",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The event condition uses the measurement result Ms in its formulas.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EVENT_CONDITION",
+      "target": "Hys",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The event condition uses the hysteresis parameter Hys in its formulas.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EVENT_CONDITION",
+      "target": "Thresh",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The event condition uses the threshold parameter Thresh in its formulas.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "EVENT_CONDITION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The measurement procedure includes evaluation of event triggering conditions.",
+      "provenance": [
+        "TS 38.331, Clause 1"
+      ]
+    }
+  ]
+}

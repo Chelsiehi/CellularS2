@@ -1,0 +1,143 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.2.1",
+  "title": "Selection of the substate after power on",
+  "entities": [
+    {
+      "id": "STATE_PLMN_SEARCH",
+      "name": "PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Initial substate entered when UE is powered on with valid USIM available.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_NO_CELL_AVAILABLE",
+      "name": "NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate entered when no cell can be selected, no cell of selected PLMN found in manual mode, or selected cell is non-3GPP.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_NO_IMSI",
+      "name": "NO-IMSI",
+      "entity_type": "State",
+      "description": "Substate entered when no USIM is present in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when suitable cell found and PLMN/tracking area not in forbidden list.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "Substate entered when selected cell is known not to provide normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_ECALL_INACTIVE",
+      "name": "eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Substate entered when UE is configured for eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_USIM_AVAILABLE",
+      "name": "USIM available and valid",
+      "entity_type": "Condition",
+      "description": "Condition that USIM is present and valid in the UE at power on.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_ECALL_ONLY_MODE",
+      "name": "UE configured for eCall only mode",
+      "entity_type": "Condition",
+      "description": "Condition that UE is configured for emergency call only mode as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "T3444",
+      "entity_type": "Timer",
+      "description": "Timer considered expired at power on for UE configured for eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "T3445",
+      "entity_type": "Timer",
+      "description": "Timer considered expired at power on for UE configured for eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_USIM_AVAILABLE",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters PLMN-SEARCH substate when USIM is available and valid at power on.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "STATE_ECALL_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters eCALL-INACTIVE substate when configured for eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "TIMER_T3444",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Timer T3444 is considered expired at power on for eCall only mode UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "TIMER_T3445",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Timer T3445 is considered expired at power on for eCall only mode UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.2",
+  "title": "Types of ESM procedures",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_CONTEXT",
+      "name": "Procedures related to EPS bearer contexts",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedures for manipulation of EPS bearer contexts including default/dedicated bearer activation, modification, and deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_TRANSACTION_RELATED",
+      "name": "Transaction related procedures",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedures for requesting or releasing resources including PDN connectivity/disconnect and bearer resource allocation/modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_TRANSPORT_USER_DATA",
+      "name": "Transport of user data via the control plane procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network or UE for transporting user data via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure to request a new PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_ESM_INFO_REQUEST",
+      "name": "ESM information request procedure",
+      "entity_type": "Procedure",
+      "description": "Transaction related procedure triggered by network when PDN connectivity procedure is combined with attach.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_ESM_DUMMY_MSG",
+      "name": "ESM dummy message procedure",
+      "entity_type": "Procedure",
+      "description": "Transaction related procedure executed when no PDN connectivity procedure is initiated during attach with EMM-REGISTERED without PDN connection support.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_REMOTE_UE_REPORT",
+      "name": "Remote UE report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by ProSe UE-to-network relay for manipulation of EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "PROC_ESM_STATUS",
+      "name": "ESM status procedure",
+      "entity_type": "Procedure",
+      "description": "ESM procedure that can be related to an EPS bearer context or procedure transaction.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NO_PDN",
+      "name": "EMM-REGISTERED without PDN connection",
+      "entity_type": "State",
+      "description": "Protocol state where UE is registered but has no active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "COND_NO_TRANSPORT_DURING_EPS",
+      "name": "No transport of user data during EPS bearer procedures",
+      "entity_type": "Condition",
+      "description": "MME and UE shall not initiate transport of user data via control plane until ongoing EPS bearer context procedure is completed.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "COND_NO_TRANSPORT_DURING_TRANSACTION",
+      "name": "No transport of user data during transaction procedures",
+      "entity_type": "Condition",
+      "description": "MME and UE shall not initiate transport of user data via control plane until ongoing transaction procedure is completed, except for remote UE report and ESM information request.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "PROC_ESM_INFO_REQUEST",
+      "relation_type": "triggers",
+      "family": "core",
+      "description": "PDN connectivity procedure combined with attach triggers ESM information request procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_EMM_REGISTERED_NO_PDN",
+      "target": "PROC_ESM_DUMMY_MSG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ESM dummy message procedure requires EMM-REGISTERED without PDN connection state",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_TRANSACTION_RELATED",
+      "target": "PROC_EPS_BEARER_CONTEXT",
+      "relation_type": "triggers",
+      "family": "core",
+      "description": "Successful transaction related procedure triggers network to execute EPS bearer context procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NO_TRANSPORT_DURING_EPS",
+      "target": "PROC_TRANSPORT_USER_DATA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition prevents initiation of transport user data procedure during EPS bearer context procedures",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NO_TRANSPORT_DURING_TRANSACTION",
+      "target": "PROC_TRANSPORT_USER_DATA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition prevents initiation of transport user data procedure during transaction procedures",
+      "provenance": [
+        "TS 24.301, Clause 6.1.2"
+      ]
+    }
+  ]
+}

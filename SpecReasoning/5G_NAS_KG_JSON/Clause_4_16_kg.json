@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.16",
+  "title": "UE radio capability signalling optimisation",
+  "entities": [
+    {
+      "id": "RACS",
+      "name": "UE radio capability signalling optimisation",
+      "entity_type": "Procedure",
+      "description": "Optional feature that optimizes transmission of UE radio capabilities by using UE radio capability IDs instead of full capability containers.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID",
+      "entity_type": "Identifier",
+      "description": "Identifier representing a set of UE radio capabilities, which can be manufacturer-assigned or network-assigned.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used for registration procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message used for configuration updates.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used to request identity information from UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE capabilities including RACS support.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying UE radio capability ID.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "IE_5GS_UPDATE_TYPE",
+      "name": "5GS update type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating update type including radio capability update needed.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "name": "UE radio capability ID deletion indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating deletion of network-assigned UE radio capability IDs.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "COND_RADIO_CONFIG_CHANGE",
+      "name": "UE radio configuration change",
+      "entity_type": "Condition",
+      "description": "Condition where UE radio configuration changes, triggering registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "PROP_STORE_NETWORK_ASSIGNED_ID",
+      "name": "Store network-assigned UE radio capability ID",
+      "entity_type": "Property",
+      "description": "UE stores network-assigned UE radio capability ID with PLMN/SNPN identity and mapping to radio configuration.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_NETWORK_ASSIGNED_IDS",
+      "name": "Delete network-assigned UE radio capability IDs",
+      "entity_type": "Property",
+      "description": "UE deletes all network-assigned UE radio capability IDs for serving network when requested.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GMM capability IE to indicate RACS support.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_REQUEST",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains UE radio capability ID IE when applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_REQUEST",
+      "target": "IE_5GS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS update type IE with NG-RAN-RCU bit set.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RADIO_CONFIG_CHANGE",
+      "target": "REGISTRATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE radio configuration change triggers registration procedure with update type IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain UE radio capability ID IE for network assignment.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain UE radio capability ID deletion indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain UE radio capability ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain UE radio capability ID deletion indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_UE_RADIO_CAPABILITY_ID_DELETION",
+      "target": "PROP_DELETE_NETWORK_ASSIGNED_IDS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE radio capability ID deletion indication IE triggers deletion of network-assigned IDs.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_UE_RADIO_CAPABILITY_ID",
+      "target": "PROP_STORE_NETWORK_ASSIGNED_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving network-assigned UE radio capability ID triggers storage procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IDENTITY_REQUEST",
+      "target": "RACS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network may send IDENTITY REQUEST to retrieve PEI from UE supporting RACS.",
+      "provenance": [
+        "TS 24.501, Clause 4.16"
+      ]
+    }
+  ]
+}

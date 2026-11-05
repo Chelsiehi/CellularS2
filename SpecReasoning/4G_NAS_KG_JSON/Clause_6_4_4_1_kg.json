@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to deactivate an EPS bearer context or disconnect from a PDN by deactivating all EPS bearer contexts to the PDN. Initiated by the network and may be triggered by UE procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQUESTED_BEARER_MODIFICATION",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure that may trigger EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQUESTED_PDN_DISCONNECT",
+      "name": "UE requested PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure that may trigger EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE to deactivate EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state where EPS bearer context deactivation procedures can occur.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "COND_CSG_SUBSCRIPTION_EXPIRED",
+      "name": "CSG subscription expired or removed",
+      "entity_type": "Condition",
+      "description": "Condition where CSG subscription expires or is removed while UE is receiving emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "COND_DETACH_REQUESTED_BY_HSS",
+      "name": "Detach requested by HSS",
+      "entity_type": "Condition",
+      "description": "Condition where HSS requests detach for UE with emergency bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "PROP_DEACTIVATE_NON_EMERGENCY_BEARERS",
+      "name": "MME deactivates non-emergency EPS bearers",
+      "entity_type": "Property",
+      "description": "MME behavior to deactivate all non-emergency EPS bearers when CSG subscription expires.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "PROP_PRESERVE_EMERGENCY_BEARERS",
+      "name": "MME preserves emergency EPS bearers",
+      "entity_type": "Property",
+      "description": "MME behavior to not deactivate emergency EPS bearers during CSG subscription expiration.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "PROC_UE_REQUESTED_BEARER_MODIFICATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EPS bearer deactivation may be triggered by UE requested bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "PROC_UE_REQUESTED_PDN_DISCONNECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EPS bearer deactivation may be triggered by UE requested PDN disconnect procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "EPS bearer deactivation procedure involves sending DEACTIVATE EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_EPS_BEARER_DEACTIVATION",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EPS bearer deactivation procedure requires UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CSG_SUBSCRIPTION_EXPIRED",
+      "target": "PROP_DEACTIVATE_NON_EMERGENCY_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CSG subscription expiration condition establishes MME behavior to deactivate non-emergency bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_CSG_SUBSCRIPTION_EXPIRED",
+      "target": "PROP_PRESERVE_EMERGENCY_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CSG subscription expiration condition establishes MME behavior to preserve emergency bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_DETACH_REQUESTED_BY_HSS",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "HSS detach request condition triggers sending DEACTIVATE EPS BEARER CONTEXT REQUEST for non-emergency bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.1"
+      ]
+    }
+  ]
+}

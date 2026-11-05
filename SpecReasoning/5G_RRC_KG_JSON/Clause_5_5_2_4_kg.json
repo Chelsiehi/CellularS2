@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.4",
+  "title": "Measurement object removal",
+  "entities": [
+    {
+      "id": "PROC_MEAS_OBJ_REMOVAL",
+      "name": "Measurement object removal procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE to remove measurement objects and associated measurement identities from its configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJ_TO_REMOVE_LIST",
+      "name": "measObjectToRemoveList",
+      "entity_type": "Information Element",
+      "description": "List of measurement object identifiers to be removed from UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJ_ID",
+      "name": "measObjectId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a measurement object in UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG",
+      "name": "VarMeasConfig",
+      "entity_type": "Property",
+      "description": "UE variable storing measurement configuration including measurement object list and measurement identity list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID",
+      "name": "measId",
+      "entity_type": "Identifier",
+      "description": "Identifier for a measurement identity linking measurement objects and reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST",
+      "name": "VarMeasReportList",
+      "entity_type": "Property",
+      "description": "UE variable storing measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_PERIODIC_REPORT",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer for periodic measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "timer T321",
+      "entity_type": "Timer",
+      "description": "Measurement reporting timer T321.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "timer T322",
+      "entity_type": "Timer",
+      "description": "Measurement reporting timer T322.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "COND_MEAS_ID_REMOVED",
+      "name": "measId removed from measIdList",
+      "entity_type": "Condition",
+      "description": "Condition where a measurement identity is removed from the measurement identity list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEAS_OBJ_REMOVAL",
+      "target": "IE_MEAS_OBJ_TO_REMOVE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses measObjectToRemoveList to identify which measurement objects to remove.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_MEAS_OBJ_TO_REMOVE_LIST",
+      "target": "IE_MEAS_OBJ_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObjectToRemoveList contains measObjectId values.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MEAS_OBJ_REMOVAL",
+      "target": "VAR_MEAS_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure modifies VarMeasConfig by removing entries from measObjectList and measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MEAS_OBJ_REMOVAL",
+      "target": "COND_MEAS_ID_REMOVED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution conditionally triggers actions when measId is removed from measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_MEAS_ID_REMOVED",
+      "target": "VAR_MEAS_REPORT_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When measId is removed, UE removes corresponding measurement reporting entry from VarMeasReportList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_MEAS_ID_REMOVED",
+      "target": "TIMER_PERIODIC_REPORT",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When measId is removed, UE stops the periodical reporting timer if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_MEAS_ID_REMOVED",
+      "target": "TIMER_T321",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When measId is removed, UE stops timer T321 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_MEAS_ID_REMOVED",
+      "target": "TIMER_T322",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When measId is removed, UE stops timer T322 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_MEAS_ID_REMOVED",
+      "target": "IE_MEAS_ID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When measId is removed, UE resets associated information for this measId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.4"
+      ]
+    }
+  ]
+}

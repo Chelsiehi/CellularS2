@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.8",
+  "title": "IMSI-DETACH-INITIATED",
+  "entities": [
+    {
+      "id": "STATE_IMSI_DETACH_INITIATED",
+      "name": "IMSI-DETACH-INITIATED",
+      "entity_type": "State",
+      "description": "A protocol state where the UE has initiated IMSI detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_TAU",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating tracking area and performing location registration.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when configured for eCall only mode at timer expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "T3444",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode operation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "T3445",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode operation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "CONDITION_ECALL_ONLY_MODE",
+      "name": "Configured for eCall only mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for emergency call only operation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_IMSI_DETACH_INITIATED",
+      "target": "PROCEDURE_COMBINED_TAU",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in IMSI-DETACH-INITIATED state shall initiate combined tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_ECALL_ONLY_MODE",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If configured for eCall only mode, UE shall perform eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3444",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3444 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3445",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3445 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.8"
+      ]
+    }
+  ]
+}

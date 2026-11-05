@@ -1,0 +1,183 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5",
+  "title": "Measurements",
+  "entities": [
+    {
+      "id": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "name": "Logged measurement configuration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to configure the UE to perform logging of measurement results while in RRC_IDLE and RRC_INACTIVE states. Applies to logged measurements capable UEs that are in RRC_CONNECTED.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "LOGGED_MEASUREMENT_CONFIGURATION_MSG",
+      "name": "LoggedMeasurementConfiguration",
+      "entity_type": "Message",
+      "description": "Message sent from Network to UE to configure logged measurement parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The user equipment that receives the logged measurement configuration and performs measurement logging.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network entity that sends the logged measurement configuration to the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_STATE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs measurement logging according to configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE_STATE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs measurement logging according to configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED_STATE",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE receives the logged measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "LOGGED_MEASUREMENTS_CAPABLE",
+      "name": "Logged measurements capable",
+      "entity_type": "Condition",
+      "description": "Condition that UE must support logged measurements capability.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "UE_INFORMATION_PROCEDURE",
+      "name": "UE information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by NG-RAN to retrieve stored logged measurement information from UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "target": "LOGGED_MEASUREMENT_CONFIGURATION_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the LoggedMeasurementConfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NETWORK",
+      "target": "LOGGED_MEASUREMENT_CONFIGURATION_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network sends the LoggedMeasurementConfiguration message to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "target": "RRC_IDLE_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_IDLE state for measurement logging.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "target": "RRC_INACTIVE_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_INACTIVE state for measurement logging.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "target": "RRC_CONNECTED_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_CONNECTED state to receive configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "target": "LOGGED_MEASUREMENTS_CAPABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure applies only to logged measurements capable UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_INFORMATION_PROCEDURE",
+      "target": "LOGGED_MEASUREMENT_CONFIGURATION_PROCEDURE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "UE information procedure is used to retrieve logged measurement information configured by this procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.5",
+        "Figure 5.5a.1.1"
+      ]
+    }
+  ]
+}

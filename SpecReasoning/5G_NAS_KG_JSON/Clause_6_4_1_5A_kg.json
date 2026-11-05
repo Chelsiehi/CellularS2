@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.5A",
+  "title": "Handling the maximum number of allowed active user-plane resources for PDU sessions of UEs in NB-N1 mode",
+  "entities": [
+    {
+      "id": "UE_NB_N1_MODE",
+      "name": "UE in NB-N1 mode",
+      "entity_type": "Condition",
+      "description": "UE operating in NB-N1 mode with specific limitations on user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "MAX_USER_PLANE_RESOURCES_ONE",
+      "name": "Maximum user-plane resources = 1",
+      "entity_type": "Condition",
+      "description": "Condition where UE supports only one active user-plane resource.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "MAX_USER_PLANE_RESOURCES_TWO",
+      "name": "Maximum user-plane resources = 2",
+      "entity_type": "Condition",
+      "description": "Condition where UE supports two active user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE_PROCEDURE",
+      "name": "PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to release PDU session via explicit 5GSM signalling when maximum active user-plane resources are reached.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "EXCEPTION_DATA_REPORTING",
+      "name": "Exception data reporting",
+      "entity_type": "Condition",
+      "description": "Special case where PDU session is used for exception data reporting and has protection from release under normal conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "UPPER_LAYER_REQUEST",
+      "name": "Upper layer request for user-plane resources",
+      "entity_type": "Condition",
+      "description": "Request from upper layers for additional user-plane resources when maximum is reached.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NB_N1_MODE",
+      "target": "MAX_USER_PLANE_RESOURCES_ONE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE in NB-N1 mode may have maximum user-plane resources limited to one.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_NB_N1_MODE",
+      "target": "MAX_USER_PLANE_RESOURCES_TWO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE in NB-N1 mode may have maximum user-plane resources limited to two if multiple user-plane resources supported.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UPPER_LAYER_REQUEST",
+      "target": "PDU_SESSION_RELEASE_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layer request triggers PDU session release procedure when maximum active resources are reached.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EXCEPTION_DATA_REPORTING",
+      "target": "PDU_SESSION_RELEASE_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDU session with exception data reporting shall not be released under normal conditions, but must be released if needed for exception data reporting request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UPPER_LAYER_REQUEST",
+      "target": "EXCEPTION_DATA_REPORTING",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layer request for exception data reporting forces release of another PDU session with user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.14.3",
+  "title": "Actions related to transmission of UEPositioningAssistanceInfo message",
+  "entities": [
+    {
+      "id": "UEPOSITIONINGASSISTANCEINFO_MSG",
+      "name": "UEPositioningAssistanceInfo message",
+      "entity_type": "Message",
+      "description": "A message transmitted by the UE to provide positioning assistance information, specifically the association between UL SRS Resource for positioning and Tx TEG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "UE_TXTEG_ASSOCIATIONLIST_IE",
+      "name": "ue-TxTEG-AssociationList",
+      "entity_type": "Information Element",
+      "description": "An information element included in the UEPositioningAssistanceInfo message that contains the association between UL SRS Resource for positioning and Tx TEG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "UL_SRS_RESOURCE_POSITIONING",
+      "name": "UL SRS Resource for positioning",
+      "entity_type": "Property",
+      "description": "Uplink Sounding Reference Signal resource used for positioning purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "TX_TEG",
+      "name": "Tx TEG",
+      "entity_type": "Property",
+      "description": "Transmission Timing Error Group, used in positioning assistance.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "ASSOCIATION_CONDITION",
+      "name": "Association between UL SRS Resource for positioning and Tx TEG",
+      "entity_type": "Condition",
+      "description": "Condition where transmission of UEPositioningAssistanceInfo message is initiated to provide the association between UL SRS Resource for positioning and Tx TEG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UEPOSITIONINGASSISTANCEINFO_MSG",
+      "target": "UE_TXTEG_ASSOCIATIONLIST_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The UEPositioningAssistanceInfo message includes the ue-TxTEG-AssociationList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ASSOCIATION_CONDITION",
+      "target": "UEPOSITIONINGASSISTANCEINFO_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Transmission of UEPositioningAssistanceInfo message is initiated when the association between UL SRS Resource for positioning and Tx TEG needs to be provided.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_TXTEG_ASSOCIATIONLIST_IE",
+      "target": "UL_SRS_RESOURCE_POSITIONING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ue-TxTEG-AssociationList information element contains the association with UL SRS Resource for positioning.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_TXTEG_ASSOCIATIONLIST_IE",
+      "target": "TX_TEG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ue-TxTEG-AssociationList information element contains the association with Tx TEG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.3"
+      ]
+    }
+  ]
+}

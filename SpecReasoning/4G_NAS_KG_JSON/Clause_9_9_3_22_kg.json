@@ -1,0 +1,111 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.22",
+  "title": "NAS message container",
+  "entities": [
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "An information element used to encapsulate SMS messages transferred between the UE and the network. It is a type 4 IE with a minimum length of 4 octets and a maximum length of 253 octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1",
+        "Table 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "NAS message container IEI",
+      "entity_type": "Property",
+      "description": "The information element identifier for the NAS message container, occupying octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "FIELD_LENGTH",
+      "name": "Length of NAS message container contents",
+      "entity_type": "Property",
+      "description": "Field indicating the length of the NAS message container contents, occupying octets 2-3.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "FIELD_CONTENTS",
+      "name": "NAS message container contents",
+      "entity_type": "Property",
+      "description": "Field containing the encapsulated SMS message (CP-DATA, CP-ACK, or CP-ERROR) as defined in 3GPP TS 24.011, occupying octets 3 to n.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1",
+        "Table 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "SMS_MESSAGE",
+      "name": "SMS message",
+      "entity_type": "Message",
+      "description": "Encapsulated message within the NAS message container, which can be CP-DATA, CP-ACK, or CP-ERROR as defined in 3GPP TS 24.011.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1",
+        "Table 9.9.3.22.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The NAS message container IE includes the IEI field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_LENGTH",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The NAS message container IE includes the length field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "FIELD_CONTENTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The NAS message container IE includes the contents field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_CONTENTS",
+      "target": "SMS_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The contents field encapsulates an SMS message (CP-DATA, CP-ACK, or CP-ERROR).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.22",
+        "Figure 9.9.3.22.1",
+        "Table 9.9.3.22.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message requesting deactivation of an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "DEFAULT_EPS_BEARER_LAST_PDN",
+      "name": "Default EPS bearer of last PDN connection",
+      "entity_type": "Condition",
+      "description": "Condition where the EPS bearer to be deactivated is the default bearer of the UE's last PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection supported",
+      "entity_type": "Condition",
+      "description": "Condition indicating both UE and MME support EMM-REGISTERED state without any active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NO_PDN_NOT_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection not supported",
+      "entity_type": "Condition",
+      "description": "Condition indicating either UE or MME does not support EMM-REGISTERED state without any active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE to detach from the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE to attach to the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "DEACTIVATION_PROCEDURE",
+      "name": "Deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deactivating an EPS bearer context as specified in clause 6.4.4.3.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where the UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "DEFAULT_EPS_BEARER_LAST_PDN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The DEACTIVATE EPS BEARER CONTEXT REQUEST message is evaluated against the condition of being the default bearer of the last PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EMM_REGISTERED_NO_PDN_NOT_SUPPORTED",
+      "target": "DETACH_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If EMM-REGISTERED without PDN connection is not supported, the UE shall perform a detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMM_REGISTERED_NO_PDN_NOT_SUPPORTED",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If EMM-REGISTERED without PDN connection is not supported, the UE should perform an attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "DEACTIVATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If EMM-REGISTERED without PDN connection is supported, the UE shall proceed with the deactivation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DETACH_PROCEDURE",
+      "target": "EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The detach procedure is performed when the UE is in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.4"
+      ]
+    }
+  ]
+}

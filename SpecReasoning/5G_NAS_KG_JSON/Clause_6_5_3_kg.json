@@ -1,0 +1,231 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.5.3",
+  "title": "5GSM status received in the SMF",
+  "entities": [
+    {
+      "id": "MESSAGE_5GSM_STATUS",
+      "name": "5GSM STATUS message",
+      "entity_type": "Message",
+      "description": "A 5G session management status message received by the SMF containing a 5GSM cause value.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ABORT_5GSM",
+      "name": "Abort ongoing 5GSM procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the SMF aborts any ongoing 5GSM procedure related to the PTI or PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "TIMER_RELATED",
+      "name": "Related timer",
+      "entity_type": "Timer",
+      "description": "Timer associated with ongoing 5GSM procedures that gets stopped when procedures are aborted.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_LOCAL_RELEASE",
+      "name": "Local PDU session release",
+      "entity_type": "Procedure",
+      "description": "Procedure where the SMF locally releases the PDU session indicated in the 5GSM STATUS message or PDU SESSION ESTABLISHMENT ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "CAUSE_43",
+      "name": "Invalid PDU session identity",
+      "entity_type": "Condition",
+      "description": "5GSM cause value #43 indicating invalid PDU session identity.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "CAUSE_81",
+      "name": "Invalid PTI value",
+      "entity_type": "Condition",
+      "description": "5GSM cause value #81 indicating invalid PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "CAUSE_96",
+      "name": "Invalid mandatory information",
+      "entity_type": "Condition",
+      "description": "5GSM cause value #96 indicating invalid mandatory information.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "CAUSE_97",
+      "name": "Message type non-existent or not implemented",
+      "entity_type": "Condition",
+      "description": "5GSM cause value #97 indicating message type non-existent or not implemented.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "Procedure transaction identity used to identify ongoing 5GSM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session identity",
+      "entity_type": "Information Element",
+      "description": "PDU session identity used to identify specific PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MESSAGE_5GSM_STATUS",
+      "target": "CAUSE_43",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains cause value #43.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MESSAGE_5GSM_STATUS",
+      "target": "CAUSE_81",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains cause value #81.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MESSAGE_5GSM_STATUS",
+      "target": "CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains cause value #96.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MESSAGE_5GSM_STATUS",
+      "target": "CAUSE_97",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains cause value #97.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CAUSE_43",
+      "target": "PROCEDURE_ABORT_5GSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cause #43 establishes the need to abort ongoing 5GSM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CAUSE_43",
+      "target": "PROCEDURE_LOCAL_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cause #43 establishes the need for local PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CAUSE_81",
+      "target": "PROCEDURE_ABORT_5GSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cause #81 establishes the need to abort ongoing 5GSM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CAUSE_96",
+      "target": "PROCEDURE_ABORT_5GSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cause #96 establishes the need to abort ongoing 5GSM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CAUSE_97",
+      "target": "PROCEDURE_ABORT_5GSM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cause #97 establishes the need to abort ongoing 5GSM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROCEDURE_ABORT_5GSM",
+      "target": "TIMER_RELATED",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Aborting 5GSM procedures stops related timers.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROCEDURE_ABORT_5GSM",
+      "target": "IE_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure abortion is guarded by PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROCEDURE_ABORT_5GSM",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure abortion is guarded by PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.5.3"
+      ]
+    }
+  ]
+}

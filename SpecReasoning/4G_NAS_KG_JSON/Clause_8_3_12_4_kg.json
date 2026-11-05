@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.12.4",
+  "title": "WLAN offload indication",
+  "entities": [
+    {
+      "id": "IE_WLAN_OFFLOAD_INDICATION",
+      "name": "WLAN offload indication",
+      "entity_type": "Information Element",
+      "description": "Indicates if the UE is allowed to offload the traffic of the associated PDN connection to WLAN(s).",
+      "provenance": [
+        "TS 24.301, Clause 8.3.12.4"
+      ]
+    },
+    {
+      "id": "MME",
+      "name": "MME",
+      "entity_type": "Property",
+      "description": "Mobility Management Entity that includes or excludes the WLAN offload indication IE based on network policies.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.12.4"
+      ]
+    },
+    {
+      "id": "CONDITION_DEACTIVATE_ALL_BEARERS",
+      "name": "Deactivate all EPS bearer contexts",
+      "entity_type": "Condition",
+      "description": "Condition where MME wishes to deactivate all EPS bearer contexts of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.12.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MME",
+      "target": "IE_WLAN_OFFLOAD_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MME includes the WLAN offload indication IE in the message when indicating WLAN offload permission.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.12.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_DEACTIVATE_ALL_BEARERS",
+      "target": "IE_WLAN_OFFLOAD_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If MME wishes to deactivate all EPS bearer contexts, it shall not include the WLAN offload indication IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.12.4"
+      ]
+    }
+  ]
+}

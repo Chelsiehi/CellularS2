@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.11",
+  "title": "UE status",
+  "entities": [
+    {
+      "id": "IE_UE_STATUS",
+      "name": "UE status",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE status conditions for registration procedures.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration in 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "COND_SINGLE_REG_INTERSYSTEM",
+      "name": "Single-registration mode with inter-system change from S1 to N1",
+      "entity_type": "Condition",
+      "description": "Condition where UE in single-registration mode performs registration due to inter-system change from S1 mode to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "COND_DUAL_REG_EMM_REGISTERED",
+      "name": "Dual-registration mode with EMM-REGISTERED state",
+      "entity_type": "Condition",
+      "description": "Condition where UE in dual-registration mode and EMM state EMM-REGISTERED performs initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "Evolved Packet System Mobility Management registered state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_REGISTRATION",
+      "target": "IE_UE_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes UE status IE under specified conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UE_STATUS",
+      "target": "COND_SINGLE_REG_INTERSYSTEM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE status IE inclusion is guarded by single-registration mode with inter-system change condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_UE_STATUS",
+      "target": "COND_DUAL_REG_EMM_REGISTERED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE status IE inclusion is guarded by dual-registration mode with EMM-REGISTERED state condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_DUAL_REG_EMM_REGISTERED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Dual-registration mode condition requires EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.11"
+      ]
+    }
+  ]
+}

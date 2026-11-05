@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.13",
+  "title": "Handling of Small data rate control",
+  "entities": [
+    {
+      "id": "SMALL_DATA_RATE_CONTROL",
+      "name": "Small data rate control",
+      "entity_type": "Procedure",
+      "description": "Controls the maximum number of uplink user data messages including uplink exception data reporting sent by the UE in a time interval for a PDU session. Applicable only to NB-N1 mode and WB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "SD_RATE_CONTROL_PARAMS",
+      "name": "Small data rate control parameters",
+      "entity_type": "Information Element",
+      "description": "Parameters provided by the network to control the rate of uplink user data messages. Includes parameters for exception data reporting.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "SD_RATE_CONTROL_EXCEPTION_PARAMS",
+      "name": "Small data rate control parameters for exception data",
+      "entity_type": "Information Element",
+      "description": "Specific parameters controlling the rate of uplink exception data reports, provided alongside general small data rate control parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "INITIAL_SD_RATE_CONTROL_PARAMS",
+      "name": "Initial small data rate control parameters",
+      "entity_type": "Information Element",
+      "description": "Parameters provided during PDU session establishment, representing the remaining small data rate control status from a previously released session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "CIOT_5GS_OPTIMIZATIONS",
+      "name": "CIoT 5GS optimizations",
+      "entity_type": "Condition",
+      "description": "Condition where the UE indicates support for CIoT 5GS optimizations, enabling the network to provide small data rate control parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "ALLOWED_INDICATION_ADDITIONAL_EXCEPTION",
+      "name": "Allowed indication of additional exception reports",
+      "entity_type": "Condition",
+      "description": "Condition allowing the UE to send uplink exception reports even if the general small data rate control limit has been reached.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "SD_RATE_CONTROL_STATUS",
+      "name": "Small data rate control status",
+      "entity_type": "Property",
+      "description": "Stored status of small data rate control parameters, maintained during PDU session release or inter-system changes for reuse in subsequent sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the network may store the small data rate control status for a released PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the network may provide initial small data rate control parameters based on stored status.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the UE stores the current small data rate control status for PDU sessions being transferred.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the UE uses stored small data rate control status for transferred PDU sessions, if valid.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SMALL_DATA_RATE_CONTROL",
+      "target": "SD_RATE_CONTROL_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Small data rate control procedure uses parameters provided by the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SD_RATE_CONTROL_PARAMS",
+      "target": "SD_RATE_CONTROL_EXCEPTION_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Small data rate control parameters may include specific parameters for exception data reporting.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CIOT_5GS_OPTIMIZATIONS",
+      "target": "SD_RATE_CONTROL_PARAMS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Provision of small data rate control parameters is conditional on UE support for CIoT 5GS optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ALLOWED_INDICATION_ADDITIONAL_EXCEPTION",
+      "target": "SD_RATE_CONTROL_EXCEPTION_PARAMS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Allowed indication of additional exception reports governs the use of exception data parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_RELEASE",
+      "target": "SD_RATE_CONTROL_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session release procedure may result in storage of small data rate control status.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION_ESTABLISHMENT",
+      "target": "INITIAL_SD_RATE_CONTROL_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session establishment procedure may include initial small data rate control parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SD_RATE_CONTROL_STATUS",
+      "target": "INITIAL_SD_RATE_CONTROL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Stored small data rate control status is used to derive initial parameters for new sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "target": "SD_RATE_CONTROL_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode triggers storage of small data rate control status.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "INTER_SYSTEM_CHANGE_S1_TO_N1",
+      "target": "SD_RATE_CONTROL_STATUS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode uses stored small data rate control status if valid.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.13"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE configuration parameters initiated by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for mobility registration or periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_DEREGISTRATION",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request service establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_CONFIGURATION_UPDATE_COMPLETE",
+      "name": "CONFIGURATION UPDATE COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND message",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "IE_CAG_INFORMATION_LIST",
+      "name": "CAG information list IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing Closed Access Group information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current Tracking Area Identity is not present in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_IN_LIST",
+      "name": "Current TAI in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current Tracking Area Identity is present in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_SAME_ACCESS_TYPE",
+      "name": "Same access type",
+      "entity_type": "Condition",
+      "description": "Condition where access type in DEREGISTRATION REQUEST matches access type of CONFIGURATION UPDATE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_REQUEST_TYPE_NAS_RELEASE",
+      "name": "Request type set to NAS signalling connection release",
+      "entity_type": "Condition",
+      "description": "Condition where UE request type IE has value indicating NAS signalling connection release.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "COND_SNPN_ACCESS_MODE",
+      "name": "UE operating in SNPN access operation mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE is operating in Standalone Non-Public Network access mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_CAG_INFO",
+      "name": "Ignore CAG information list content",
+      "entity_type": "Property",
+      "description": "UE behavior to ignore the content of CAG information list IE when in SNPN access mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROCEDURE_GENERIC_UE_CONFIG_UPDATE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Aborts generic UE configuration update procedure when current TAI is not in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROCEDURE_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Initiates registration procedure when current TAI is not in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SAME_ACCESS_TYPE",
+      "target": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Determines whether CONFIGURATION UPDATE COMMAND is ignored based on access type matching.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_ACCESS_TYPE",
+      "target": "PROCEDURE_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ensures de-registration procedure proceeds when access types match.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REQUEST_TYPE_NAS_RELEASE",
+      "target": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Determines whether CONFIGURATION UPDATE COMMAND is ignored based on request type.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REQUEST_TYPE_NAS_RELEASE",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ensures service request procedure proceeds when request type is NAS signalling connection release.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SNPN_ACCESS_MODE",
+      "target": "IE_CAG_INFORMATION_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Determines handling of CAG information list based on SNPN access mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SNPN_ACCESS_MODE",
+      "target": "PROP_IGNORE_CAG_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Triggers UE to ignore CAG information list content when in SNPN access mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message may contain UE request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_CAG_INFORMATION_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain CAG information list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.5"
+      ]
+    }
+  ]
+}

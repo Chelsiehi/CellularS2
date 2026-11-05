@@ -1,0 +1,220 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.1",
+  "title": "Introduction",
+  "entities": [
+    {
+      "id": "PROCEDURE_NR_SL_MEAS_CONFIG",
+      "name": "NR Sidelink Measurement Configuration",
+      "entity_type": "Procedure",
+      "description": "Procedure where a UE configures its peer UE to perform NR sidelink measurements and reporting over a PC5-RRC connection using RRCReconfigurationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG_SL",
+      "name": "RRCReconfigurationSidelink",
+      "entity_type": "Message",
+      "description": "RRC message used to configure NR sidelink measurement parameters for unicast communication over PC5-RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "IE_SL_MEAS_OBJECT",
+      "name": "NR Sidelink Measurement Object",
+      "entity_type": "Information Element",
+      "description": "Specifies the NR sidelink frequency of reference signals to be measured by the peer UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "IE_SL_REPORT_CONFIG",
+      "name": "NR Sidelink Reporting Configuration",
+      "entity_type": "Information Element",
+      "description": "Configuration for NR sidelink measurement reporting consisting of reporting criterion, RS type, and reporting format.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "IE_SL_MEAS_ID",
+      "name": "NR Sidelink Measurement Identity",
+      "entity_type": "Information Element",
+      "description": "Links one NR sidelink measurement object with one NR sidelink reporting configuration and serves as reference in measurement reports.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "IE_SL_QUANTITY_CONFIG",
+      "name": "NR Sidelink Quantity Configuration",
+      "entity_type": "Information Element",
+      "description": "Defines NR sidelink measurement filtering configuration with different filter coefficients for different measurement quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_MAINTAIN_LISTS",
+      "name": "Maintains NR Sidelink Measurement Lists",
+      "entity_type": "Property",
+      "description": "Both UEs of the PC5-RRC connection maintain NR sidelink measurement object list, reporting configuration list, and measurement identities list.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "CONDITION_REPORT_CRITERION",
+      "name": "Reporting Criterion",
+      "entity_type": "Condition",
+      "description": "Criterion that triggers UE to send NR sidelink measurement report, which can be periodical or based on single event description.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "CONDITION_RS_TYPE_DMRS",
+      "name": "RS Type DMRS",
+      "entity_type": "Condition",
+      "description": "Specifies that only DMRS is supported for NR sidelink measurement in this release.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "CONDITION_REPORT_FORMAT_RSRP",
+      "name": "Reporting Format RSRP",
+      "entity_type": "Condition",
+      "description": "Specifies that only RSRP measurement is supported in the reporting format for this release.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_NR_SL_MEAS_CONFIG",
+      "target": "MSG_RRC_RECONFIG_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NR sidelink measurement configuration procedure uses RRCReconfigurationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_RECONFIG_SL",
+      "target": "IE_SL_MEAS_OBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfigurationSidelink message contains NR sidelink measurement objects.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRC_RECONFIG_SL",
+      "target": "IE_SL_REPORT_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfigurationSidelink message contains NR sidelink reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_RRC_RECONFIG_SL",
+      "target": "IE_SL_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfigurationSidelink message contains NR sidelink measurement identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_RRC_RECONFIG_SL",
+      "target": "IE_SL_QUANTITY_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfigurationSidelink message contains NR sidelink quantity configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_SL_REPORT_CONFIG",
+      "target": "CONDITION_REPORT_CRITERION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR sidelink reporting configuration includes reporting criterion condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_SL_REPORT_CONFIG",
+      "target": "CONDITION_RS_TYPE_DMRS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR sidelink reporting configuration specifies DMRS as the only supported RS type.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_SL_REPORT_CONFIG",
+      "target": "CONDITION_REPORT_FORMAT_RSRP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR sidelink reporting configuration specifies RSRP as the only supported reporting format.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_SL_MEAS_ID",
+      "target": "IE_SL_MEAS_OBJECT",
+      "relation_type": "links",
+      "family": "core",
+      "description": "NR sidelink measurement identity links one NR sidelink measurement object.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_SL_MEAS_ID",
+      "target": "IE_SL_REPORT_CONFIG",
+      "relation_type": "links",
+      "family": "core",
+      "description": "NR sidelink measurement identity links one NR sidelink reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROCEDURE_NR_SL_MEAS_CONFIG",
+      "target": "PROPERTY_MAINTAIN_LISTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NR sidelink measurement configuration procedure establishes that both UEs maintain measurement lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.1"
+      ]
+    }
+  ]
+}

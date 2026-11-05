@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.17",
+  "title": "Handling of edge computing enhancements",
+  "entities": [
+    {
+      "id": "EAS_DISCOVERY",
+      "name": "EAS discovery",
+      "entity_type": "Procedure",
+      "description": "Procedure for discovering Edge Application Servers in 5GS as specified in 3GPP TS 23.548.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "EAS_REDISCOVERY",
+      "name": "EAS rediscovery",
+      "entity_type": "Procedure",
+      "description": "Procedure for rediscovering Edge Application Servers when triggered by the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "ECS_ADDRESS_PROVISIONING",
+      "name": "ECS address provisioning",
+      "entity_type": "Procedure",
+      "description": "Procedure for providing Edge Configuration Server configuration information to the UE over NAS.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to establish a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "Network-requested PDU session modification",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to modify an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information Element used to carry DNS server addresses, EAS rediscovery information, ECS configuration information, and EDC support indications.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "EASDF",
+      "name": "Edge Application Server Discovery Function",
+      "entity_type": "Property",
+      "description": "Network function selected by SMF to handle DNS messages for EAS discovery in session breakout or distributed anchor connectivity models.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "LOCAL_DNS_SERVER",
+      "name": "Local DNS server",
+      "entity_type": "Property",
+      "description": "DNS server selected by SMF for EAS discovery in session breakout connectivity model.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "EDC",
+      "name": "Edge DNS Client",
+      "entity_type": "Property",
+      "description": "UE capability for edge DNS functionality that can be indicated to and configured by the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "Session Management Function",
+      "entity_type": "Property",
+      "description": "Network function responsible for selecting EASDF, local DNS server, triggering EAS rediscovery, and providing ECS configuration information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended protocol configuration options IE is used during UE-requested PDU session establishment to carry DNS server addresses and capability indications.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended protocol configuration options IE is used during network-requested PDU session modification to provide DNS server addresses and ECS configuration information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended protocol configuration options IE is used during UE-requested PDU session modification to carry capability indications and receive ECS configuration information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMF",
+      "target": "EASDF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF selects the EASDF and provides its IP address to the UE for EAS discovery.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SMF",
+      "target": "LOCAL_DNS_SERVER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF selects the local DNS server and can provide its IP address to the UE for EAS discovery.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SMF",
+      "target": "EAS_REDISCOVERY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SMF initiates network-requested PDU session modification to trigger EAS rediscovery when it decides to do so.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ECS_ADDRESS_PROVISIONING",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended protocol configuration options IE carries ECS configuration information during ECS address provisioning.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EDC",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended protocol configuration options IE carries EDC support indications and network EDC configuration.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.17"
+      ]
+    }
+  ]
+}

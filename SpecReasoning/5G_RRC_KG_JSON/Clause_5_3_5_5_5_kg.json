@@ -1,0 +1,136 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.5",
+  "title": "MAC entity configuration",
+  "entities": [
+    {
+      "id": "SCG_MAC_ENTITY",
+      "name": "SCG MAC entity",
+      "entity_type": "Property",
+      "description": "A MAC entity for the Secondary Cell Group that is created when SCG is not part of current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "MAC_MAIN_CONFIG",
+      "name": "MAC main configuration",
+      "entity_type": "Property",
+      "description": "The main MAC configuration for a cell group that can be reconfigured during DAPS bearer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "TAG",
+      "name": "Timing Advance Group",
+      "entity_type": "Property",
+      "description": "A group of cells with the same timing advance value, identified by TAG-Id.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "TIME_ALIGNMENT_TIMER",
+      "name": "timeAlignmentTimer",
+      "entity_type": "Timer",
+      "description": "Timer used for maintaining timing alignment for a TAG.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "COND_SCG_ESTABLISHMENT",
+      "name": "SCG establishment condition",
+      "entity_type": "Condition",
+      "description": "Condition where SCG MAC is not part of current UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "COND_DAPS_BEARER_CONFIGURED",
+      "name": "DAPS bearer configured condition",
+      "entity_type": "Condition",
+      "description": "Condition where any DAPS bearer is configured in the UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "COND_TAG_RELEASE_LIST",
+      "name": "tag-ToReleaseList present condition",
+      "entity_type": "Condition",
+      "description": "Condition where received mac-CellGroupConfig includes tag-ToReleaseList.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "COND_TAG_ADD_MOD_LIST",
+      "name": "tag-ToAddModList present condition",
+      "entity_type": "Condition",
+      "description": "Condition where received mac-CellGroupConfig includes tag-ToAddModList.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_SCG_ESTABLISHMENT",
+      "target": "SCG_MAC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SCG MAC is not part of current configuration, UE creates SCG MAC entity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_DAPS_BEARER_CONFIGURED",
+      "target": "MAC_MAIN_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When DAPS bearer is configured, UE reconfigures MAC main configuration excluding tag lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_TAG_RELEASE_LIST",
+      "target": "TAG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When tag-ToReleaseList is present, UE releases indicated TAGs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TAG_ADD_MOD_LIST",
+      "target": "TAG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When tag-ToAddModList is present, UE adds or modifies TAGs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TAG_ADD_MOD_LIST",
+      "target": "TIME_ALIGNMENT_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When adding or modifying TAGs, UE configures them according to received timeAlignmentTimer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.5"
+      ]
+    }
+  ]
+}

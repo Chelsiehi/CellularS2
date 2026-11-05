@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.5.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_EAP_RESULT_TRANSPORT",
+      "name": "EAP result message transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to provide an EAP-success message or an EAP-failure message, and ngKSI from the network to the UE, when the EAP message cannot be piggybacked by another NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_RESULT",
+      "name": "AUTHENTICATION RESULT message",
+      "entity_type": "Message",
+      "description": "NAS message that can initiate the EAP result message transport procedure by carrying the EAP message IE with EAP-success or EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_REJECT",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "NAS message that can initiate the EAP result message transport procedure by carrying the EAP message IE with EAP-failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Information Element that carries the EAP-success message or EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Information Element",
+      "description": "ngKSI (Next Generation Key Set Identifier) provided from the network to the UE as part of the EAP result message transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "EAP_SUCCESS",
+      "name": "EAP-success message",
+      "entity_type": "Information Element",
+      "description": "EAP message indicating successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Information Element",
+      "description": "EAP message indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_EAP_RESULT_TRANSPORT",
+      "target": "MSG_AUTHENTICATION_RESULT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The EAP result message transport procedure can be initiated by an AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_EAP_RESULT_TRANSPORT",
+      "target": "MSG_AUTHENTICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The EAP result message transport procedure can be initiated by an AUTHENTICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTHENTICATION_RESULT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESULT message contains the EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message contains the EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EAP_MESSAGE",
+      "target": "EAP_SUCCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP message IE can carry an EAP-success message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_EAP_MESSAGE",
+      "target": "EAP_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP message IE can carry an EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_EAP_RESULT_TRANSPORT",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EAP result message transport procedure provides ngKSI from the network to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.5.1"
+      ]
+    }
+  ]
+}

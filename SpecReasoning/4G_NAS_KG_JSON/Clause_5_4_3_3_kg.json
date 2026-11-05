@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.3",
+  "title": "NAS security mode command accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "name": "Security Mode Command Acceptance",
+      "entity_type": "Procedure",
+      "description": "UE procedure for accepting SECURITY MODE COMMAND message by performing integrity check and verifying replayed security parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Network-initiated message to establish NAS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "UE response message confirming security mode establishment, integrity protected and ciphered.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_NAS_KEY_SET_IDENTIFIER",
+      "name": "NAS key set identifier",
+      "entity_type": "Information Element",
+      "description": "IE carrying KSI/eKSI and type of security context flag.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_UE_SECURITY_CAPABILITIES",
+      "name": "UE security capabilities",
+      "entity_type": "Information Element",
+      "description": "Replayed UE security capabilities from SECURITY MODE COMMAND.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_NONCEUE",
+      "name": "nonceUE",
+      "entity_type": "Information Element",
+      "description": "Nonce value sent by UE, replayed in SECURITY MODE COMMAND.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_IMEISV",
+      "name": "IMEISV",
+      "entity_type": "Information Element",
+      "description": "International Mobile Equipment Identity and Software Version number.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID",
+      "entity_type": "Information Element",
+      "description": "Identifier for UE radio capabilities, either network-assigned or manufacturer-assigned.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "name": "Replayed NAS message container",
+      "entity_type": "Information Element",
+      "description": "Container for replayed ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_BEARER_SERVICES",
+      "name": "Emergency bearer services condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has PDN connection for emergency bearer services or is attaching for RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_EIA0_ACCEPTABLE",
+      "name": "EIA0 acceptable condition",
+      "entity_type": "Condition",
+      "description": "Condition where null integrity algorithm EIA0 is acceptable only for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_UPLINK_NAS_COUNT_RESET",
+      "name": "Uplink NAS COUNT reset",
+      "entity_type": "Property",
+      "description": "Property where UE resets uplink NAS COUNT under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_DOWNLINK_NAS_COUNT_SET",
+      "name": "Downlink NAS COUNT setting",
+      "entity_type": "Property",
+      "description": "Property where UE sets downlink NAS COUNT based on integrity check result.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_SECURITY_CONTEXT_ACTIVATION",
+      "name": "EPS security context activation",
+      "entity_type": "Property",
+      "description": "Property where UE takes EPS security context into use and deletes old contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure triggered by receipt of SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure results in sending SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_NAS_KEY_SET_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains NAS key set identifier IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_UE_SECURITY_CAPABILITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains replayed UE security capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SECURITY_MODE_COMMAND",
+      "target": "IE_NONCEUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND may contain nonceUE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EMERGENCY_BEARER_SERVICES",
+      "target": "COND_EIA0_ACCEPTABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency bearer services condition guards acceptance of EIA0.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "target": "PROP_UPLINK_NAS_COUNT_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes uplink NAS COUNT reset under conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "target": "PROP_DOWNLINK_NAS_COUNT_SET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes downlink NAS COUNT setting based on integrity check.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_SECURITY_MODE_COMMAND_ACCEPTANCE",
+      "target": "PROP_SECURITY_CONTEXT_ACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes activation of new EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_IMEISV",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE contains IMEISV if requested.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE contains UE radio capability ID if requested in WB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_REPLAYED_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMPLETE contains replayed NAS message container if HASHMME mismatch.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE requires integrity protection and ciphering with new security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.3"
+      ]
+    }
+  ]
+}

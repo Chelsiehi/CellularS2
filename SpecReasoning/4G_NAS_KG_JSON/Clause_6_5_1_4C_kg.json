@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4C",
+  "title": "Handling the maximum number of active user plane radio bearers in NB-S1 mode",
+  "entities": [
+    {
+      "id": "MAX_ACTIVE_UP_RB_NB_S1",
+      "name": "Maximum number of active user plane radio bearers in NB-S1 mode",
+      "entity_type": "Condition",
+      "description": "The condition where the maximum number of active user plane radio bearers in NB-S1 mode is reached, limiting the establishment of new DRBs.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "UPPER_LAYER_DRB_REQUEST",
+      "name": "Upper layer request for more DRBs",
+      "entity_type": "Condition",
+      "description": "A request from upper layers for additional DRBs for PDN connections other than those already having DRBs.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "EXCEPTION_DATA_REPORTING_REQUEST",
+      "name": "Upper layer request for exception data reporting",
+      "entity_type": "Condition",
+      "description": "A request from upper layers for user-plane resources specifically for exception data reporting.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTION_RELEASE_PROCEDURE",
+      "name": "PDN connection release procedure",
+      "entity_type": "Procedure",
+      "description": "The procedure to release a PDN connection, performed via explicit ESM signalling when needed to free up resources for new DRB requests.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "EXCEPTION_DATA_PDN",
+      "name": "PDN connection for exception data reporting",
+      "entity_type": "Property",
+      "description": "A PDN connection that is used for exception data reporting, which must not be released when the UE needs to free up resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "ESM_SIGNALLING",
+      "name": "Explicit ESM signalling",
+      "entity_type": "Procedure",
+      "description": "The signalling procedure used to release a PDN connection, ensuring proper protocol handling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MAX_ACTIVE_UP_RB_NB_S1",
+      "target": "UPPER_LAYER_DRB_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition of maximum active bearers being reached guards the handling of upper layer requests for more DRBs.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MAX_ACTIVE_UP_RB_NB_S1",
+      "target": "EXCEPTION_DATA_REPORTING_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The condition of maximum active bearers being reached guards the handling of upper layer requests for exception data reporting.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UPPER_LAYER_DRB_REQUEST",
+      "target": "PDN_CONNECTION_RELEASE_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "An upper layer request for more DRBs can establish the need to release a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EXCEPTION_DATA_REPORTING_REQUEST",
+      "target": "PDN_CONNECTION_RELEASE_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "An upper layer request for exception data reporting establishes the requirement to release a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDN_CONNECTION_RELEASE_PROCEDURE",
+      "target": "ESM_SIGNALLING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The PDN connection release procedure includes the step of using explicit ESM signalling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EXCEPTION_DATA_PDN",
+      "target": "PDN_CONNECTION_RELEASE_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The property that a PDN connection is used for exception data reporting guards against its release in the PDN connection release procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4C"
+      ]
+    }
+  ]
+}

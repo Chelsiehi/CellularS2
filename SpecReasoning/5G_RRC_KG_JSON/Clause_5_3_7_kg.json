@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7",
+  "title": "RRC connection re-establishment",
+  "entities": [
+    {
+      "id": "PROCEDURE_RRC_REESTABLISHMENT",
+      "name": "RRC connection re-establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to re-establish the RRC connection after radio link failure or handover failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "name": "RRCReestablishmentRequest",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request re-establishment of the RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT",
+      "name": "RRCReestablishment",
+      "entity_type": "Message",
+      "description": "Message sent by the network to re-establish the RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "name": "RRCReestablishmentComplete",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to confirm successful re-establishment of the RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC-CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE has an established RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_RADIO_LINK_FAILURE",
+      "name": "Radio link failure",
+      "entity_type": "Condition",
+      "description": "Condition that triggers the RRC connection re-establishment procedure when the UE detects radio link failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The re-establishment procedure includes sending the RRCReestablishmentRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The re-establishment procedure includes receiving the RRCReestablishment message from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The re-establishment procedure includes sending the RRCReestablishmentComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_REESTABLISHMENT",
+      "target": "CONDITION_RADIO_LINK_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The re-establishment procedure is triggered by radio link failure condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_RRC_REESTABLISHMENT",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of the re-establishment procedure transitions the UE to RRC-CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7"
+      ]
+    }
+  ]
+}

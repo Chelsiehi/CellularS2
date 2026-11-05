@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.2",
+  "title": "Linkage between the protocols for EPS mobility management and EPS session management",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "EPS Attach Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration with the network, which can include default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROC_DEFAULT_BEARER_ACT",
+      "name": "Default EPS Bearer Context Activation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish a default EPS bearer context, potentially transmitted within EPS mobility management messages during attach.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROC_DEDICATED_BEARER_ACT",
+      "name": "Dedicated EPS Bearer Context Activation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish one or several dedicated EPS bearer contexts for PDN connections of IP or Ethernet type.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for transport of user data via control plane, especially in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST Message",
+      "entity_type": "Message",
+      "description": "Message used in service request procedure for control plane CIoT EPS optimization, which can contain ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT Message",
+      "entity_type": "Message",
+      "description": "ESM message transmitted within CONTROL PLANE SERVICE REQUEST message for user data transport via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state indicating UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE is not actively communicating but registered.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "COND_NO_PDN_CONNECTION",
+      "name": "EMM-REGISTERED without PDN connection",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registered but has no PDN connection, which may not be supported by UE or MME.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "PROP_SUSPEND_ESM_TRANSMISSION",
+      "name": "Suspend ESM message transmission",
+      "entity_type": "Property",
+      "description": "Behavior where UE or MME suspends transmission of ESM messages during certain EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "PROC_DEFAULT_BEARER_ACT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Default EPS bearer context activation can be performed as part of the attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ATTACH",
+      "target": "PROC_DEDICATED_BEARER_ACT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Dedicated EPS bearer context activation can be performed in parallel during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_ATTACH",
+      "target": "PROC_DEFAULT_BEARER_ACT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Attach procedure completion is dependent on default EPS bearer activation if EMM-REGISTERED without PDN connection is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NO_PDN_CONNECTION",
+      "target": "PROC_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that attach success depends on default bearer activation if EMM-REGISTERED without PDN connection is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains ESM DATA TRANSPORT message as an information element.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves transmission of CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure can be initiated by UE in EMM-IDLE mode for control plane data transport.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_SUSPEND_ESM_TRANSMISSION",
+      "target": "PROC_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM message transmission is not suspended during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROP_SUSPEND_ESM_TRANSMISSION",
+      "target": "PROC_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM message transmission is not suspended during service request procedure for control plane data transport.",
+      "provenance": [
+        "TS 24.301, Clause 4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.20.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "UE_NOT_CONFIGURED_T3245",
+      "name": "UE not configured to use timer T3245",
+      "entity_type": "Condition",
+      "description": "UE that does not have timer T3245 configured according to 3GPP TS 24.368 or 3GPP TS 31.102 specifications.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "5GMM message that rejects registration request from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "5GMM message that rejects service request from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "NO_INTEGRITY_PROTECTION",
+      "name": "No integrity protection",
+      "entity_type": "Condition",
+      "description": "Condition where message is received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "SPECIFIC_5GMM_CAUSES",
+      "name": "Specific 5GMM causes",
+      "entity_type": "Condition",
+      "description": "Specific 5GMM cause values received in reject messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "UE_REQUIREMENTS",
+      "name": "UE requirements",
+      "entity_type": "Property",
+      "description": "Requirements specified for UE behavior when receiving unprotected reject messages with specific 5GMM causes.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NOT_CONFIGURED_T3245",
+      "target": "UE_REQUIREMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE not configured with T3245 establishes specific requirements when receiving unprotected reject messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_REJECT",
+      "target": "NO_INTEGRITY_PROTECTION",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "REGISTRATION REJECT message may be received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SERVICE_REJECT",
+      "target": "NO_INTEGRITY_PROTECTION",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SERVICE REJECT message may be received without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SPECIFIC_5GMM_CAUSES",
+      "target": "UE_REQUIREMENTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Specific 5GMM causes guard the UE requirements for unprotected reject messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.1"
+      ]
+    }
+  ]
+}

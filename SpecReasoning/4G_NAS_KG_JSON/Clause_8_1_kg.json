@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.1",
+  "title": "Overview",
+  "entities": [
+    {
+      "id": "L3_MESSAGE",
+      "name": "Layer 3 Message",
+      "entity_type": "Message",
+      "description": "Standard L3 messages defined in 3GPP TS 24.007, with defined structure including imperative and non-imperative parts.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "INFORMATION_ELEMENT",
+      "name": "Information Element",
+      "entity_type": "Information Element",
+      "description": "Component of L3 messages with specific format, coding, and presence requirements. Includes IEI, name, type, presence requirement, format, and length.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "IEI",
+      "name": "Information Element Identifier",
+      "entity_type": "Identifier",
+      "description": "Hexadecimal identifier for IEs with format T, TV, TLV, or TLV-E. Can be half-octet length.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "PRESENCE_REQUIREMENT",
+      "name": "Presence Requirement",
+      "entity_type": "Property",
+      "description": "Defines whether an IE is Mandatory (M), Conditional (C), or Optional (O) in a message.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "IE_FORMAT",
+      "name": "IE Format",
+      "entity_type": "Property",
+      "description": "Coding format of IEs: T, V, TV, LV, TLV, LV-E, or TLV-E as defined in TS 24.007.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "MESSAGE_SIGNIFICANCE",
+      "name": "Message Significance",
+      "entity_type": "Property",
+      "description": "Scope of message relevance: Local, Access, Dual, or Global significance.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "L3_MESSAGE",
+      "target": "INFORMATION_ELEMENT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Messages contain Information Elements in a specified order, with imperative part IEs (V, LV, LV-E) preceding non-imperative part IEs (T, TV, TLV, TLV-E).",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INFORMATION_ELEMENT",
+      "target": "IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Information Elements with formats T, TV, TLV, or TLV-E include an Information Element Identifier.",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INFORMATION_ELEMENT",
+      "target": "PRESENCE_REQUIREMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion in a message is governed by presence requirements (M, C, O).",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INFORMATION_ELEMENT",
+      "target": "IE_FORMAT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE coding and structure are defined by its format (T, V, TV, LV, TLV, LV-E, TLV-E).",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "L3_MESSAGE",
+      "target": "MESSAGE_SIGNIFICANCE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Message usage and direction are defined by its significance (Local, Access, Dual, Global).",
+      "provenance": [
+        "TS 24.301, Clause 8.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.3.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_SIDELINK_UE_INFO",
+      "name": "Sidelink UE Information Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for a UE in RRC_CONNECTED to indicate interest in NR sidelink communication, discovery, or U2N relay operation, and to request dedicated resources or report failures.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "MSG_SIDELINK_UE_INFO_NR",
+      "name": "SidelinkUEInformationNR",
+      "entity_type": "Message",
+      "description": "RRC message transmitted by UE to indicate sidelink interests, request resources, or report configurations and failures.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "IE_SL_RX_INTERESTED_FREQ_LIST",
+      "name": "sl-RxInterestedFreqList",
+      "entity_type": "Information Element",
+      "description": "IE indicating frequencies of interest for NR sidelink communication reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "IE_SL_TX_RESOURCE_REQ_LIST",
+      "name": "sl-TxResourceReqList",
+      "entity_type": "Information Element",
+      "description": "IE indicating required transmission resources for NR sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "IE_SL_DRX_CONFIG",
+      "name": "sidelink DRX configuration",
+      "entity_type": "Information Element",
+      "description": "IE reporting DRX configuration received from peer UE for NR sidelink unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "IE_SL_DRX_ASSISTANCE_INFO",
+      "name": "sidelink DRX assistance information",
+      "entity_type": "Information Element",
+      "description": "IE reporting DRX assistance information received from peer UE for NR sidelink unicast communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "IE_DEST_L2_ID_QOS_PROFILE",
+      "name": "Destination Layer-2 ID and QoS profile",
+      "entity_type": "Information Element",
+      "description": "IE reporting service-related parameters for NR sidelink groupcast or broadcast communication with DRX.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state in which the UE must be to initiate the Sidelink UE Information procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "COND_SIB12_PROVIDED",
+      "name": "SIB12 including sl-ConfigCommonNR provided by PCell",
+      "entity_type": "Condition",
+      "description": "Condition that SIB12 with sidelink common configuration is broadcast by the serving cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "COND_UPPER_LAYER_CONFIG",
+      "name": "Configured by upper layers",
+      "entity_type": "Condition",
+      "description": "Condition that upper layers have configured the UE for sidelink transmission or reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "COND_CHANGE_SINCE_LAST_MSG",
+      "name": "Change since last SidelinkUEInformationNR message",
+      "entity_type": "Condition",
+      "description": "Condition that UE interests, configurations, or resources have changed since last message transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "COND_RELAY_THRESHOLD_MET",
+      "name": "U2N Relay/Remote UE threshold conditions met",
+      "entity_type": "Condition",
+      "description": "Condition that UE meets threshold conditions for acting as U2N Relay UE or Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SIDELINK_UE_INFO",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure initiation requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SIDELINK_UE_INFO",
+      "target": "MSG_SIDELINK_UE_INFO_NR",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of SidelinkUEInformationNR message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SIDELINK_UE_INFO_NR",
+      "target": "IE_SL_RX_INTERESTED_FREQ_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain sl-RxInterestedFreqList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SIDELINK_UE_INFO_NR",
+      "target": "IE_SL_TX_RESOURCE_REQ_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain sl-TxResourceReqList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SIDELINK_UE_INFO_NR",
+      "target": "IE_SL_DRX_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain sidelink DRX configuration IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SIDELINK_UE_INFO_NR",
+      "target": "IE_SL_DRX_ASSISTANCE_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain sidelink DRX assistance information IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SIDELINK_UE_INFO_NR",
+      "target": "IE_DEST_L2_ID_QOS_PROFILE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Destination Layer-2 ID and QoS profile IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SIB12_PROVIDED",
+      "target": "PROC_SIDELINK_UE_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by SIB12 being provided by PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_UPPER_LAYER_CONFIG",
+      "target": "PROC_SIDELINK_UE_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by upper layer configuration for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_CHANGE_SINCE_LAST_MSG",
+      "target": "MSG_SIDELINK_UE_INFO_NR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Message transmission is guarded by changes in UE interests or configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_RELAY_THRESHOLD_MET",
+      "target": "MSG_SIDELINK_UE_INFO_NR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Message transmission for relay operations is guarded by threshold conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.3.2"
+      ]
+    }
+  ]
+}

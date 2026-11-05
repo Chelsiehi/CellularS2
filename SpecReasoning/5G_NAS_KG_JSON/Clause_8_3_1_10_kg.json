@@ -1,0 +1,145 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.1.10",
+  "title": "IP header compression configuration",
+  "entities": [
+    {
+      "id": "IE_IP_HEADER_COMPRESSION_CONFIGURATION",
+      "name": "IP header compression configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information element for configuring IP header compression parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_TYPE",
+      "name": "PDU session type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the PDU session type (IPv4, IPv6, IPv4v6).",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE capabilities for 5GMM.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "IE_5GS_NETWORK_SUPPORT_FEATURE",
+      "name": "5GS network support feature IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating network-supported features for 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept registration.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_TYPE_IP",
+      "name": "PDU session type is IPv4, IPv6, or IPv4v6",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session type IE value is set to IPv4, IPv6, or IPv4v6.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_CIOT_OPTIMIZATION",
+      "name": "UE supports control plane CIoT 5GS optimization and IP header compression",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicates support for control plane CIoT 5GS optimization and IP header compression in 5GMM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_CIOT_OPTIMIZATION",
+      "name": "Network supports control plane CIoT 5GS optimization and IP header compression",
+      "entity_type": "Condition",
+      "description": "Condition where network indicates support for control plane CIoT 5GS optimization and IP header compression in 5GS network support feature IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the 5GMM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_5GS_NETWORK_SUPPORT_FEATURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains the 5GS network support feature IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_IP_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_PDU_SESSION_TYPE_IP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IP header compression configuration IE is guarded by PDU session type being IPv4, IPv6, or IPv4v6.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_IP_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_UE_SUPPORTS_CIOT_OPTIMIZATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IP header compression configuration IE is guarded by UE supporting control plane CIoT 5GS optimization and IP header compression.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_IP_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_NETWORK_SUPPORTS_CIOT_OPTIMIZATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IP header compression configuration IE is guarded by network supporting control plane CIoT 5GS optimization and IP header compression.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.10"
+      ]
+    }
+  ]
+}

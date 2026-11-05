@@ -1,0 +1,258 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.9",
+  "title": "Actions upon reception of SIB8",
+  "entities": [
+    {
+      "id": "SIB8",
+      "name": "System Information Block 8",
+      "entity_type": "Message",
+      "description": "System Information Block containing warning message information and geographical area coordinates.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "WARNING_MESSAGE_ASSEMBLY",
+      "name": "Warning Message Assembly Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for assembling warning messages from segments received in SIB8.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "COMPLETE_WARNING_CONDITION",
+      "name": "Complete Warning Message Condition",
+      "entity_type": "Condition",
+      "description": "Condition where SIB8 contains a complete warning message and complete geographical area coordinates.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "SAME_IDENTIFIER_CONDITION",
+      "name": "Same Identifier Condition",
+      "entity_type": "Condition",
+      "description": "Condition where received messageIdentifier and serialNumber match an ongoing assembly process.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "DIFFERENT_IDENTIFIER_CONDITION",
+      "name": "Different Identifier Condition",
+      "entity_type": "Condition",
+      "description": "Condition where received messageIdentifier and/or serialNumber don't match any ongoing assembly process.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "ALL_SEGMENTS_RECEIVED_CONDITION",
+      "name": "All Segments Received Condition",
+      "entity_type": "Condition",
+      "description": "Condition where all segments of a warning message and geographical area coordinates have been received.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "MESSAGE_IDENTIFIER",
+      "name": "messageIdentifier",
+      "entity_type": "Identifier",
+      "description": "Identifier for distinguishing different warning messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "SERIAL_NUMBER",
+      "name": "serialNumber",
+      "entity_type": "Identifier",
+      "description": "Serial number for versioning warning messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "WARNING_MESSAGE_SEGMENT",
+      "name": "warningMessageSegment",
+      "entity_type": "Information Element",
+      "description": "Segment of a warning message contained in SIB8.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "WARNING_AREA_COORDINATES_SEGMENT",
+      "name": "warningAreaCoordinatesSegment",
+      "entity_type": "Information Element",
+      "description": "Segment of geographical area coordinates contained in SIB8.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "DATA_CODING_SCHEME",
+      "name": "dataCodingScheme",
+      "entity_type": "Information Element",
+      "description": "Coding scheme for the warning message data.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "UPPER_LAYERS",
+      "name": "Upper Layers",
+      "entity_type": "Property",
+      "description": "Higher protocol layers that receive assembled warning messages and coordinates.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "ASSEMBLY_TIMEOUT",
+      "name": "Assembly Timeout",
+      "entity_type": "Property",
+      "description": "Property that warning messages must be assembled within 3 hours or discarded.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "WARNING_MESSAGE_ASSEMBLY",
+      "target": "SIB8",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Warning message assembly procedure is triggered by reception of SIB8.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COMPLETE_WARNING_CONDITION",
+      "target": "UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When complete warning condition is met, forward message and coordinates to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SAME_IDENTIFIER_CONDITION",
+      "target": "WARNING_MESSAGE_SEGMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When identifiers match ongoing assembly, store received segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SAME_IDENTIFIER_CONDITION",
+      "target": "WARNING_AREA_COORDINATES_SEGMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When identifiers match ongoing assembly, store received coordinates segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ALL_SEGMENTS_RECEIVED_CONDITION",
+      "target": "UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When all segments are received, assemble and forward complete message to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DIFFERENT_IDENTIFIER_CONDITION",
+      "target": "WARNING_MESSAGE_ASSEMBLY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When identifiers don't match any ongoing assembly, start new assembly process.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SIB8",
+      "target": "MESSAGE_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB8 contains messageIdentifier information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SIB8",
+      "target": "SERIAL_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB8 contains serialNumber information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SIB8",
+      "target": "WARNING_MESSAGE_SEGMENT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB8 contains warningMessageSegment information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SIB8",
+      "target": "WARNING_AREA_COORDINATES_SEGMENT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB8 contains warningAreaCoordinatesSegment information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "SIB8",
+      "target": "DATA_CODING_SCHEME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB8 contains dataCodingScheme information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "ASSEMBLY_TIMEOUT",
+      "target": "WARNING_MESSAGE_ASSEMBLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Assembly process is constrained by 3-hour timeout requirement.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.9"
+      ]
+    }
+  ]
+}

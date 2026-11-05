@@ -1,0 +1,119 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.2A",
+  "title": "Determination of the access identities and access category associated with a request for access for UEs operating in SNPN access mode",
+  "entities": [
+    {
+      "id": "ACCESS_IDENTITY",
+      "name": "Access Identity",
+      "entity_type": "Identifier",
+      "description": "Standardized identifiers used by UE to determine access rights for network access attempts in SNPN mode. Includes identities 0, 1, 2, 11, 12, 13, 14, and 15.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A",
+        "Table 4.5.2A.1"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY",
+      "name": "Access Category",
+      "entity_type": "Identifier",
+      "description": "Categories used to classify access attempts, including standardized and operator-defined categories for SNPN access mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "ACCESS_ATTEMPT",
+      "name": "Access Attempt",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE when needing network access in SNPN mode, requiring determination of access identities and categories.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "SNPN_SELECTION",
+      "name": "SNPN Selection",
+      "entity_type": "Condition",
+      "description": "Condition where UE selects a new SNPN or uses RSNPN for determining applicable access identities.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "IDENTITY_APPLICABILITY_CHECK",
+      "name": "Identity Applicability Check",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE checks whether specific access identities (1, 2, 11-15) are applicable in the selected SNPN or RSNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "DEFAULT_IDENTITY_0",
+      "name": "Default Access Identity 0",
+      "entity_type": "Condition",
+      "description": "Condition where access identity 0 becomes applicable when no other access identities (1, 2, 11-15) are applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_IDENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access attempt requires determination of applicable access identities.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access attempt requires determination of applicable access category.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDENTITY_APPLICABILITY_CHECK",
+      "target": "ACCESS_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Identity applicability check procedure guards which access identities are applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SNPN_SELECTION",
+      "target": "IDENTITY_APPLICABILITY_CHECK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SNPN selection condition guards the identity applicability check procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DEFAULT_IDENTITY_0",
+      "target": "ACCESS_IDENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Default identity condition establishes that access identity 0 is applicable when no other identities apply.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.13",
+  "title": "EPS update result",
+  "entities": [
+    {
+      "id": "IE_EPS_UPDATE_RESULT",
+      "name": "EPS update result",
+      "entity_type": "Information Element",
+      "description": "Information element that specifies the result of the associated updating procedure. It is a type 1 information element with coded values indicating different update outcomes.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "EPS update result IEI",
+      "entity_type": "Identifier",
+      "description": "Information element identifier for the EPS update result IE, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "FIELD_SPARE",
+      "name": "Spare bit",
+      "entity_type": "Property",
+      "description": "Bit 4 of octet 1 is spare and shall be coded as zero.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "FIELD_UPDATE_RESULT_VALUE",
+      "name": "EPS update result value",
+      "entity_type": "Property",
+      "description": "Coded value in bits 3-1 of octet 1 indicating the update result: TA updated, combined TA/LA updated, TA updated and ISR activated, combined TA/LA updated and ISR activated, or reserved values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_TA_UPDATED",
+      "name": "TA updated",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result value is 000, indicating tracking area updated.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_TA_LA_UPDATED",
+      "name": "combined TA/LA updated",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result value is 001, indicating combined tracking area and location area updated.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_TA_UPDATED_ISR_ACTIVATED",
+      "name": "TA updated and ISR activated",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result value is 010, indicating tracking area updated and idle mode signaling reduction activated. Used only for UEs supporting A/Gb or Iu mode.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_TA_LA_UPDATED_ISR_ACTIVATED",
+      "name": "combined TA/LA updated and ISR activated",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result value is 011, indicating combined tracking area and location area updated and idle mode signaling reduction activated. Used only for UEs supporting A/Gb or Iu mode.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_RESERVED_VALUES",
+      "name": "Reserved values",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result value is any value other than 000, 001, 010, or 011.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EPS_UPDATE_RESULT",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update result information element contains the IEI identifier field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_UPDATE_RESULT",
+      "target": "FIELD_SPARE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update result information element contains a spare bit field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_UPDATE_RESULT",
+      "target": "FIELD_UPDATE_RESULT_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS update result information element contains the update result value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Figure 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_UPDATE_RESULT_VALUE",
+      "target": "COND_TA_UPDATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The update result value field is guarded by the condition when value is 000 (TA updated).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_UPDATE_RESULT_VALUE",
+      "target": "COND_COMBINED_TA_LA_UPDATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The update result value field is guarded by the condition when value is 001 (combined TA/LA updated).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIELD_UPDATE_RESULT_VALUE",
+      "target": "COND_TA_UPDATED_ISR_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The update result value field is guarded by the condition when value is 010 (TA updated and ISR activated).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "FIELD_UPDATE_RESULT_VALUE",
+      "target": "COND_COMBINED_TA_LA_UPDATED_ISR_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The update result value field is guarded by the condition when value is 011 (combined TA/LA updated and ISR activated).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "FIELD_UPDATE_RESULT_VALUE",
+      "target": "COND_RESERVED_VALUES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The update result value field is guarded by the condition when value is any reserved value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.13",
+        "Table 9.9.3.13.1"
+      ]
+    }
+  ]
+}

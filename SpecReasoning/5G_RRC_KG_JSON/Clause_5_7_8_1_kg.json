@@ -1,0 +1,276 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.8.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "name": "Idle/Inactive Measurement Configuration Update",
+      "entity_type": "Procedure",
+      "description": "Procedure to update the idle/inactive measurement configuration for UE measurements in RRC_IDLE and RRC_INACTIVE states.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "TIMER_T331",
+      "name": "T331",
+      "entity_type": "Timer",
+      "description": "Timer that must be running for the measurement configuration update procedure to initiate.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "TIMER_T319A",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer that must not be running for the measurement configuration update procedure to initiate.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs idle measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "IE_VARMEASIDLECONFIG",
+      "name": "VarMeasIdleConfig",
+      "entity_type": "Information Element",
+      "description": "Variable storing the UE's idle/inactive measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "IE_MEASIDLECARRIERLISTEUTRA",
+      "name": "measIdleCarrierListEUTRA",
+      "entity_type": "Information Element",
+      "description": "List of E-UTRA carriers for idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "IE_MEASIDLECARRIERLISTNR",
+      "name": "measIdleCarrierListNR",
+      "entity_type": "Information Element",
+      "description": "List of NR carriers for idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "IE_SSB_MEASCONFIG",
+      "name": "ssb-MeasConfig",
+      "entity_type": "Information Element",
+      "description": "SSB measurement configuration for NR carriers.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "COND_CELL_SELECTION",
+      "name": "Cell selection condition",
+      "entity_type": "Condition",
+      "description": "Condition met when UE selects a cell upon entering RRC_IDLE or RRC_INACTIVE from RRC_CONNECTED or RRC_INACTIVE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "COND_SI_UPDATE",
+      "name": "System information update condition",
+      "entity_type": "Condition",
+      "description": "Condition met upon update of system information (SIB4 or SIB11) due to intra-RAT cell (re)selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "PROP_STORE_EUTRA_LIST",
+      "name": "Store EUTRA carrier list",
+      "entity_type": "Property",
+      "description": "UE stores or replaces measIdleCarrierListEUTRA from SIB11 in VarMeasIdleConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "PROP_REMOVE_EUTRA_LIST",
+      "name": "Remove EUTRA carrier list",
+      "entity_type": "Property",
+      "description": "UE removes measIdleCarrierListEUTRA from VarMeasIdleConfig if stored.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "PROP_STORE_NR_LIST",
+      "name": "Store NR carrier list",
+      "entity_type": "Property",
+      "description": "UE stores or replaces measIdleCarrierListNR from SIB11 in VarMeasIdleConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "PROP_REMOVE_NR_LIST",
+      "name": "Remove NR carrier list",
+      "entity_type": "Property",
+      "description": "UE removes measIdleCarrierListNR from VarMeasIdleConfig if stored.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "TIMER_T331",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires T331 timer to be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "TIMER_T319A",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires T319a timer to not be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "COND_CELL_SELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by cell selection condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "COND_SI_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by system information update condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "IE_VARMEASIDLECONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure operates on VarMeasIdleConfig information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_VARMEASIDLECONFIG",
+      "target": "IE_MEASIDLECARRIERLISTEUTRA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasIdleConfig may contain measIdleCarrierListEUTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_VARMEASIDLECONFIG",
+      "target": "IE_MEASIDLECARRIERLISTNR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasIdleConfig may contain measIdleCarrierListNR.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_MEASIDLECARRIERLISTNR",
+      "target": "IE_SSB_MEASCONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measIdleCarrierListNR entries may contain ssb-MeasConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_CELL_SELECTION",
+      "target": "PROP_STORE_EUTRA_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell selection condition may lead to storing EUTRA carrier list.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_SI_UPDATE",
+      "target": "PROP_STORE_NR_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "System information update condition may lead to storing NR carrier list.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure is performed in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_IDLE_INACTIVE_MEAS_CONFIG_UPDATE",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure is performed in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.3.1",
+  "title": "Network-initiated de-registration procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "----------------------------------------------------------------",
+    "The network initiates the de-registration procedure by sending a DEREGISTRATION REQUEST message to the UE (see example in figure5.5.2.3.1.1)",
+    "NOTE1: If the AMF performs a local de-registration, it will inform the UE with a 5GMM messages (e.g. SERVICE REJECT message or REGISTRATION REJECT message) with 5GMM cause #10 \"implicitly de-registered\" only when the UE initiates a 5GMM procedure",
+    "The network may include a 5GMM cause IE to specify the reason for the DEREGISTRATION REQUEST message. The network shall start timer T3522. The network shall indicate whether re-registration is needed or not in the De-registration type IE. The network shall also indicate via the access type whether the de-registration procedure is",
+    "a) for 3GPP access only",
+    "b) for non-3GPP access only; or",
+    "c) for 3GPP access, non-3GPP access or both when the UE is registered in the same PLMN for both accesses",
+    "If the network de-registration is triggered due to network slice-specific authentication and authorization failure or revocation as specified in subclause4.6.2.4, then the network shall set the 5GMM cause value to #62 \"No network slices available\" in the DEREGISTRATION REQUEST message. In addition, if the UE supports extended rejected NSSAI, the AMF shall include the Extended rejected NSSAI IE in the DEREGISTRATION REQUEST message; otherwise the AMF shall include the Rejected NSSAI IE in the DEREGISTRATION REQUEST message",
+    "If the UE supports extended rejected NSSAI and the network de-registration is triggered due to mobility management based network slice admission control as specified in subclause4.6.2.5, then the network shall set the 5GMM cause value to #62 \"No network slices available\" in the DEREGISTRATION REQUEST message. In addition, the network may include a back-off timer value for each S-NSSAI with the rejection cause \"S-NSSAI not available due to maximum number of UEs reached\" in the Extended rejected NSSAI IE of the DEREGISTRATION REQUEST message",
+    "If the network de-registration is triggered for a UE supporting CAG due to CAG restrictions, the network shall set the 5GMM cause value to #76 \"Not authorized for this CAG or authorized for CAG cells only\" and should include the \"CAG information list\" in the CAG information list IE or the Extended CAG information list IE in the DEREGISTRATION REQUEST message",
+    "NOTE2: If the UE supports extended CAG information list, the CAG information list can be included either in the CAG information list IE or Extended CAG information list IE",
+    "If the network de-registration is triggered for a UE not supporting CAG due to CAG restrictions, the network shall operate as described in bulletg) of subclause5.5.2.3.5",
+    "If the network de-registration is triggered because the network determines that the UE is in a location where the network is not allowed to operate, see 3GPPTS23.502[9], the network shall set the 5GMM cause value in the DEREGISTRATION REQUEST message to #78 \"PLMN not allowed to operate at the present UE location\"",
+    "If the network de-registration is triggered due to",
+    "a) an unsuccessful outcome of an ongoing UUAA-MM procedure",
+    "b) an UUAA revocation notification received from the UAS-NF for a UE supporting UAS service requesting UAS services; or",
+    "c) the UE not allowed to use UAS services via 5GS due to a change of the aerial UE subscription information",
+    "then the network shall set the 5GMM cause value in the DEREGISTRATION REQUEST message to #79 \"UAS services not allowed\"",
+    "NOTE3: If the UE supporting UAS service has requested other services than UAS services, or if there are other ongoing network slice-specific authentication and authorization on pending NSSAIs, it is then an operator policy or configuration decision whether to keep the UE supporting UAS service registered to the network, but that UE supporting UAS services is not allowed to access UAS services via 5GS as specified in 3GPPTS23.256[6AB]",
+    "If the network de-registration is triggered for a UE supporting MINT due to a disaster condition no longer being applicable in the current location of the UE, the network shall set the 5GMM cause value to #11 \"PLMN not allowed\" and may include a disaster return wait range in the Disaster return wait range IE in the DEREGISTRATION REQUEST message",
+    "The AMF shall trigger the SMF to release locally the PDU session(s) over the indicated access(es), if any, for the UE and enter state 5GMM-DEREGISTERED-INITIATED. If a PDU session is associated with one or more MBS sessions, the SMF shall consider the UE as removed from the associated MBS sessions",
+    "Figure5.5.2.3.1.1: Network-initiated de-registration procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.5.2.3.1.1",
+      "file": "Figure_5_5_2_3_1_1_p391.png.json",
+      "title": "Network-initiated de-registration procedure",
+      "content": {
+        "figure_id": "5.5.2.3.1.1",
+        "title": "Network-initiated de-registration procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "DEREGISTRATION REQUEST",
+              "notes": "Start T3522"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "DEREGISTRATION ACCEPT",
+              "notes": "Stop T3522"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

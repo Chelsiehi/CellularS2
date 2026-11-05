@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.4",
+  "title": "Default EPS bearer context activation not accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE attachment to the network, which may include default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by UE to reject default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for ESM procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_INACTIVE",
+      "name": "BEARER CONTEXT INACTIVE",
+      "entity_type": "State",
+      "description": "ESM state indicating that the bearer context is inactive.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3485",
+      "name": "T3485",
+      "entity_type": "Timer",
+      "description": "Timer associated with default EPS bearer context activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_PART",
+      "name": "Default EPS bearer context activation is part of attach procedure",
+      "entity_type": "Condition",
+      "description": "Condition where default EPS bearer context activation occurs during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "COND_NOT_ATTACH_PART",
+      "name": "Default EPS bearer context activation is not part of attach procedure",
+      "entity_type": "Condition",
+      "description": "Condition where default EPS bearer context activation occurs standalone.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "PROP_ESM_FAILURE_NOTIFICATION",
+      "name": "ESM sublayer notifies EMM sublayer of ESM failure",
+      "entity_type": "Property",
+      "description": "Behavior where ESM sublayer informs EMM sublayer about ESM procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "PROP_MME_ENTER_INACTIVE_STOP_TIMER",
+      "name": "MME enters BEARER CONTEXT INACTIVE and stops T3485",
+      "entity_type": "Property",
+      "description": "MME behavior upon receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_ATTACH_PART",
+      "target": "PROP_ESM_FAILURE_NOTIFICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When default EPS bearer context activation is part of attach procedure, ESM sublayer notifies EMM of failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NOT_ATTACH_PART",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When default EPS bearer context activation is not part of attach procedure, UE sends reject message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NOT_ATTACH_PART",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When default EPS bearer context activation is not part of attach procedure, UE enters BEARER CONTEXT INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message contains ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "target": "PROP_MME_ENTER_INACTIVE_STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Upon receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT, MME enters BEARER CONTEXT INACTIVE and stops T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_MME_ENTER_INACTIVE_STOP_TIMER",
+      "target": "STATE_BEARER_CONTEXT_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME enters BEARER CONTEXT INACTIVE state upon reject message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_MME_ENTER_INACTIVE_STOP_TIMER",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME stops timer T3485 upon receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.4"
+      ]
+    }
+  ]
+}

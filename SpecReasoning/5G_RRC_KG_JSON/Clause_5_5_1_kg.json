@@ -1,0 +1,249 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.1",
+  "title": "Introduction",
+  "entities": [
+    {
+      "id": "PROC_MEASUREMENT_CONFIGURATION",
+      "name": "Measurement Configuration",
+      "entity_type": "Procedure",
+      "description": "Network configuration of UE measurements in RRC_CONNECTED state using dedicated signaling (RRCReconfiguration or RRCResume). Includes measurement objects, reporting configurations, measurement identities, quantity configurations, and measurement gaps.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRECONFIGURATION",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "RRC message used to provide measurement configuration to UE via dedicated signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRESUME",
+      "name": "RRCResume",
+      "entity_type": "Message",
+      "description": "RRC message used to provide measurement configuration to UE via dedicated signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_CONFIG",
+      "name": "measConfig",
+      "entity_type": "Information Element",
+      "description": "Measurement configuration provided to UE, containing measurement objects, reporting configurations, measurement identities, quantity configurations, and measurement gaps.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJECT",
+      "name": "Measurement Object",
+      "entity_type": "Information Element",
+      "description": "Defines objects on which UE performs measurements, including frequency/time location, subcarrier spacing, and cell lists (allow-listed/exclude-listed).",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_REPORTING_CONFIG",
+      "name": "Reporting Configuration",
+      "entity_type": "Information Element",
+      "description": "Configuration for measurement reporting including reporting criterion (periodical/event), RS type, and reporting format.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_IDENTITY",
+      "name": "Measurement Identity",
+      "entity_type": "Information Element",
+      "description": "Links measurement objects with reporting configurations, included in measurement reports as reference.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_QUANTITY_CONFIG",
+      "name": "Quantity Configuration",
+      "entity_type": "Information Element",
+      "description": "Defines measurement filtering configuration for event evaluation and periodical reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_GAP",
+      "name": "Measurement Gap",
+      "entity_type": "Information Element",
+      "description": "Periods that UE may use to perform measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE maintains measurement configuration and performs measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "COND_SAME_RAT_TYPE",
+      "name": "Same RAT Type Linking",
+      "entity_type": "Condition",
+      "description": "Measurement objects can only be linked to reporting configurations of the same RAT type.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "PROP_MAINTAIN_LISTS",
+      "name": "Maintain Measurement Lists",
+      "entity_type": "Property",
+      "description": "UE in RRC_CONNECTED maintains measurement object list, reporting configuration list, and measurement identities list.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEASUREMENT_CONFIGURATION",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Measurement configuration procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRCRECONFIGURATION",
+      "target": "IE_MEAS_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfiguration message contains measConfig IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRCRESUME",
+      "target": "IE_MEAS_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCResume message contains measConfig IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains measurement objects.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_REPORTING_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains reporting configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_MEAS_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains measurement identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_QUANTITY_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains quantity configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_MEAS_CONFIG",
+      "target": "IE_MEAS_GAP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measConfig contains measurement gaps.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_MEAS_IDENTITY",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "links_to",
+      "family": "core",
+      "description": "Measurement identity links measurement object to reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_MEAS_IDENTITY",
+      "target": "IE_REPORTING_CONFIG",
+      "relation_type": "links_to",
+      "family": "core",
+      "description": "Measurement identity links reporting configuration to measurement object.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_SAME_RAT_TYPE",
+      "target": "IE_MEAS_OBJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Measurement objects can only be linked to reporting configurations of same RAT type.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROP_MAINTAIN_LISTS",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE maintains measurement lists when in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.3.2.1.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "Main state in 5GMM protocol indicating the UE is deregistered from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "SUBSTATE_NO_SUPI",
+      "name": "5GMM-DEREGISTERED.NO-SUPI",
+      "entity_type": "State",
+      "description": "Substate of 5GMM-DEREGISTERED where the UE does not have a valid SUPI.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NON_3GPP_ACCESS",
+      "name": "Non-3GPP access not applicable",
+      "entity_type": "Condition",
+      "description": "Condition indicating that certain substates are not applicable when using non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_VALID_SUBSCRIBER_DATA",
+      "name": "Valid subscriber data available",
+      "entity_type": "Condition",
+      "description": "Condition that valid subscriber data must be available before entering most substates, except for NO-SUPI.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_NO_SUPI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state contains the NO-SUPI substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_NON_3GPP_ACCESS",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-3GPP access condition restricts applicability of substates within 5GMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_VALID_SUBSCRIBER_DATA",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Valid subscriber data condition is required before entering most substates of 5GMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_VALID_SUBSCRIBER_DATA",
+      "target": "SUBSTATE_NO_SUPI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Valid subscriber data condition is explicitly not required for entering the NO-SUPI substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.1"
+      ]
+    }
+  ]
+}

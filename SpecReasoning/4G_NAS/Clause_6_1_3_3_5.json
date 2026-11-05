@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.3.3.5",
+  "title": "BEARER CONTEXT MODIFY PENDING",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "----------------------------------------",
+    "The network has initiated an EPS bearer context modification towards the UE",
+    "Figure 6.1.3.3.5.1: The ESM sublayer states for EPS bearer context handling in the network (overview)",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.1.3.3.5.1",
+      "file": "Figure_6_1_3_3_5_1_p269.png.json",
+      "title": "The ESM sublayer states for EPS bearer context handling in the network (overview)",
+      "content": {
+        "figure_id": "6.1.3.3.5.1",
+        "title": "The ESM sublayer states for EPS bearer context handling in the network (overview)",
+        "type": "STATE_TRANSITION",
+        "content": {
+          "states": [
+            "BEARER CONTEXT INACTIVE",
+            "BEARER CONTEXT ACTIVE PENDING",
+            "BEARER CONTEXT ACTIVE",
+            "BEARER CONTEXT INACTIVE PENDING",
+            "BEARER CONTEXT MODIFY PENDING"
+          ],
+          "transitions": [
+            {
+              "from": "BEARER CONTEXT INACTIVE",
+              "to": "BEARER CONTEXT ACTIVE PENDING",
+              "conditions": [
+                "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+                "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE PENDING",
+              "to": "BEARER CONTEXT ACTIVE",
+              "conditions": [
+                "ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT",
+                "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE PENDING",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT",
+                "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE",
+              "to": "BEARER CONTEXT INACTIVE PENDING",
+              "conditions": [
+                "DEACTIVATE EPS BEARER CONTEXT REQUEST"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT INACTIVE PENDING",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "DEACTIVATE EPS BEARER CONTEXT ACCEPT"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE",
+              "to": "BEARER CONTEXT MODIFY PENDING",
+              "conditions": [
+                "MODIFY EPS BEARER CONTEXT REQUEST"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT MODIFY PENDING",
+              "to": "BEARER CONTEXT ACTIVE",
+              "conditions": [
+                "MODIFY EPS BEARER CONTEXT ACCEPT/REJECT including cause value #= 43"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT INACTIVE PENDING",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "MODIFY EPS BEARER CONTEXT REJECT including cause value #= 43"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "PDN DISCONNECT REJECT including cause value = 49",
+                "BEARER RESOURCE MODIFICATION REJECT including cause value #= 43"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT INACTIVE PENDING",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "PDN CONNECTIVITY REJECT",
+                "BEARER RESOURCE MODIFICATION REJECT including cause value #= 43",
+                "BEARER RESOURCE ALLOCATION REJECT"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE PENDING",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "PDN DISCONNECT REJECT including cause value != 49"
+              ]
+            }
+          ],
+          "entities": [],
+          "messages": [],
+          "fields": [],
+          "notes": [
+            "This state transition diagram shows the ESM sublayer states for EPS bearer context handling in the network",
+            "The network initiates various bearer context procedures towards the UE"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

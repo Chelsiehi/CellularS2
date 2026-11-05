@@ -1,0 +1,149 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.9.3",
+  "title": "ProSeP",
+  "entities": [
+    {
+      "id": "PROSEP",
+      "name": "ProSeP",
+      "entity_type": "Procedure",
+      "description": "Procedure for ProSe layer-3 UE-to-network relay UE interaction between upper layers and 5GSM entities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "UPPER_LAYERS",
+      "name": "Upper layers",
+      "entity_type": "Condition",
+      "description": "Upper layers in the UE that can request 5GSM entity actions for PDU session management.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "5GSM_ENTITY",
+      "name": "5GSM entity",
+      "entity_type": "Procedure",
+      "description": "5GSM entity in the UE acting as a 5G ProSe layer-3 UE-to-network relay UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish a PDU session with specified attributes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "PDU session release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ATTRIBUTES",
+      "name": "PDU session attributes",
+      "entity_type": "Property",
+      "description": "Attributes of a PDU session including PDU session identity, SSC mode, S-NSSAI, DNN, PDU session type, access type, and PDU address.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_IDENTITY",
+      "name": "PDU session identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROSEP",
+      "target": "UPPER_LAYERS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ProSeP requires interaction between upper layers and 5GSM entities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROSEP",
+      "target": "5GSM_ENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ProSeP requires interaction between upper layers and 5GSM entities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UPPER_LAYERS",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layers may request 5GSM entity to establish a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UPPER_LAYERS",
+      "target": "PDU_SESSION_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layers may request 5GSM entity to release an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "5GSM_ENTITY",
+      "target": "PDU_SESSION_ATTRIBUTES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GSM entity indicates attributes of newly established PDU session to upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "5GSM_ENTITY",
+      "target": "PDU_SESSION_IDENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5GSM entity informs PDU session identity of released PDU session to upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PDU_SESSION_ESTABLISHMENT",
+      "target": "PDU_SESSION_ATTRIBUTES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session establishment indicates one or more PDU session attributes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.3"
+      ]
+    }
+  ]
+}

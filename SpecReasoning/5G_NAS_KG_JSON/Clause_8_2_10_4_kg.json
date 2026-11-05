@@ -1,0 +1,116 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.10.4",
+  "title": "Request type",
+  "entities": [
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of request being made by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Information element that identifies a specific PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container",
+      "entity_type": "Information Element",
+      "description": "Information element that contains other NAS messages or information elements.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used to request establishment of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used to request modification of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_ID_PRESENT",
+      "name": "PDU session ID IE is included",
+      "entity_type": "Condition",
+      "description": "Condition that the PDU session ID information element is present in the message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "COND_PAYLOAD_CONTAINS_ESTABLISHMENT_OR_MODIFICATION",
+      "name": "Payload container contains PDU session establishment or modification request",
+      "entity_type": "Condition",
+      "description": "Condition that the payload container contains either a PDU session establishment request or a PDU session modification request that is not for 3GPP PS data off status change.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_PDU_SESSION_ID_PRESENT",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The presence of PDU session ID IE guards the inclusion of Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PAYLOAD_CONTAINS_ESTABLISHMENT_OR_MODIFICATION",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The payload container content condition guards the inclusion of Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_PAYLOAD_CONTAINER",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Payload container IE can contain PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_PAYLOAD_CONTAINER",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Payload container IE can contain PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.4"
+      ]
+    }
+  ]
+}

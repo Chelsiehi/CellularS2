@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.4.5",
+  "title": "Setting of the contents of MBS Interest Indication",
+  "entities": [
+    {
+      "id": "MBS_INTEREST_INDICATION",
+      "name": "MBS Interest Indication",
+      "entity_type": "Message",
+      "description": "Message sent by UE to indicate interest in MBS frequencies and services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "IE_MBS_FREQ_LIST",
+      "name": "mbs-FreqList",
+      "entity_type": "Information Element",
+      "description": "Information element containing MBS frequencies of interest sorted by decreasing order of interest.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "IE_MBS_PRIORITY",
+      "name": "mbs-Priority",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE prioritizes MBS reception above unicast bearers and multicast MRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "IE_MBS_SERVICE_LIST",
+      "name": "mbs-ServiceList",
+      "entity_type": "Information Element",
+      "description": "Information element indicating set of MBS services of interest sorted by decreasing order of interest.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "COND_MBS_FREQ_NOT_EMPTY",
+      "name": "MBS frequencies of interest not empty",
+      "entity_type": "Condition",
+      "description": "Condition where the set of MBS frequencies of interest determined according to 5.9.4.3 is not empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "COND_UE_PRIORITIZES_MBS",
+      "name": "UE prioritizes MBS reception",
+      "entity_type": "Condition",
+      "description": "Condition where UE prioritizes reception of all indicated MBS frequencies above unicast bearers and multicast MRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "COND_SIB20_SCHEDULED_BY_PCELL",
+      "name": "SIB20 scheduled by PCell",
+      "entity_type": "Condition",
+      "description": "Condition where SIB20 is scheduled by the PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MBS_INTEREST_INDICATION",
+      "target": "IE_MBS_FREQ_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MBS Interest Indication includes mbs-FreqList when MBS frequencies of interest are not empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MBS_INTEREST_INDICATION",
+      "target": "IE_MBS_PRIORITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MBS Interest Indication includes mbs-Priority when UE prioritizes MBS reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MBS_INTEREST_INDICATION",
+      "target": "IE_MBS_SERVICE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MBS Interest Indication includes mbs-ServiceList when SIB20 is scheduled by PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_MBS_FREQ_NOT_EMPTY",
+      "target": "IE_MBS_FREQ_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of mbs-FreqList is guarded by condition that MBS frequencies of interest are not empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UE_PRIORITIZES_MBS",
+      "target": "IE_MBS_PRIORITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of mbs-Priority is guarded by condition that UE prioritizes MBS reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SIB20_SCHEDULED_BY_PCELL",
+      "target": "IE_MBS_SERVICE_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of mbs-ServiceList is guarded by condition that SIB20 is scheduled by PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.4.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.3.5",
+  "title": "Actions related to transmission of SCGFailureInformation message",
+  "entities": [
+    {
+      "id": "SCGFailureInformation",
+      "name": "SCGFailureInformation message",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE to report secondary cell group (SCG) failure events to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer used for radio link failure detection in SCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer used for SCG failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "IE_failureType",
+      "name": "failureType",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of SCG failure that triggered the SCGFailureInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "IE_failureType_v1610",
+      "name": "failureType-v1610",
+      "entity_type": "Information Element",
+      "description": "Extended failure type IE for additional failure scenarios introduced in later specifications.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "IE_MeasResultSCG_Failure",
+      "name": "MeasResultSCG-Failure",
+      "entity_type": "Information Element",
+      "description": "IE containing measurement results for SCG frequencies configured by SCG RRC signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "IE_measResultFreqList",
+      "name": "measResultFreqList",
+      "entity_type": "Information Element",
+      "description": "List containing measurement results per frequency for MCG-configured measurement objects.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "COND_T310_expiry",
+      "name": "T310 expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition where timer T310 expires, indicating SCG radio link failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "COND_T312_expiry",
+      "name": "T312 expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition where timer T312 expires, indicating SCG failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "COND_beam_failure_recovery",
+      "name": "Beam failure recovery condition",
+      "entity_type": "Condition",
+      "description": "Condition where random access procedure was initiated for beam failure recovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "PROP_set_failureType",
+      "name": "Set failureType property",
+      "entity_type": "Property",
+      "description": "UE action to set the failureType IE based on the specific SCG failure condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SCGFailureInformation",
+      "target": "IE_failureType",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCGFailureInformation message contains the failureType IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SCGFailureInformation",
+      "target": "IE_failureType_v1610",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCGFailureInformation message contains the failureType-v1610 IE for extended failure types.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SCGFailureInformation",
+      "target": "IE_MeasResultSCG_Failure",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCGFailureInformation message contains MeasResultSCG-Failure IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SCGFailureInformation",
+      "target": "IE_measResultFreqList",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SCGFailureInformation message contains measResultFreqList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_T310_expiry",
+      "target": "PROP_set_failureType",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T310 expiry condition establishes the property to set failureType as t310-Expiry.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_T312_expiry",
+      "target": "PROP_set_failureType",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T312 expiry condition establishes the property to set failureType as other and failureType-v1610 as t312-Expiry.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_beam_failure_recovery",
+      "target": "PROP_set_failureType",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Beam failure recovery condition establishes the property to set failureType as other and failureType-v1610 as beamFailureRecoveryFailure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_failureType",
+      "target": "COND_T310_expiry",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "failureType IE value is guarded by T310 expiry condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_failureType_v1610",
+      "target": "COND_T312_expiry",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "failureType-v1610 IE value is guarded by T312 expiry condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_failureType_v1610",
+      "target": "COND_beam_failure_recovery",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "failureType-v1610 IE value is guarded by beam failure recovery condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3.5"
+      ]
+    }
+  ]
+}

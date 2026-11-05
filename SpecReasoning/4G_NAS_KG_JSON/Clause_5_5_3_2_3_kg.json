@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.3",
+  "title": "EMM common procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update its tracking area information with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_OLD_GUTI_TYPE",
+      "name": "Old GUTI type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether the mobile identity is native GUTI or mapped GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_OLD_GUTI",
+      "name": "Old GUTI IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the old Globally Unique Temporary Identity.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_GUTI",
+      "name": "Additional GUTI IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing an additional GUTI provided by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "PROC_EMM_AUTHENTICATION",
+      "name": "EMM authentication procedure",
+      "entity_type": "Procedure",
+      "description": "EMM common procedure for authenticating the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "EMM common procedure for establishing security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_NO_AUTH_BEFORE_TUA_COMPLETE",
+      "name": "Conditions for skipping authentication before TAU completion",
+      "entity_type": "Condition",
+      "description": "Conditions where MME shall not initiate EMM authentication before tracking area update completion: after handover to S1 mode, target cell is shared network cell, and PLMN identity mismatch conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "PROP_SKIP_AUTH_FOR_EMERGENCY",
+      "name": "Skip authentication for emergency services",
+      "entity_type": "Property",
+      "description": "MME may be configured to skip authentication and proceed directly to security mode control for UEs with only emergency PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_OLD_GUTI_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains Old GUTI type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_OLD_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains Old GUTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_ADDITIONAL_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message may contain Additional GUTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_TRACKING_AREA_UPDATE",
+      "target": "PROC_EMM_AUTHENTICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MME may initiate EMM authentication procedure during tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_TRACKING_AREA_UPDATE",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MME may initiate security mode control procedure during tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_SKIP_AUTH_FOR_EMERGENCY",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME configuration to skip authentication establishes direct execution of security mode control.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NO_AUTH_BEFORE_TUA_COMPLETE",
+      "target": "PROC_EMM_AUTHENTICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Specific conditions guard against initiating EMM authentication before tracking area update completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.3"
+      ]
+    }
+  ]
+}

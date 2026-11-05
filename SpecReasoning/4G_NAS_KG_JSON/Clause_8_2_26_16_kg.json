@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.26.16",
+  "title": "T3324 value",
+  "entities": [
+    {
+      "id": "IE_T3324_VALUE",
+      "name": "T3324 value",
+      "entity_type": "Information Element",
+      "description": "Timer value for Power Saving Mode (PSM) operation, included by the network in TRACKING AREA UPDATE ACCEPT message under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "COND_UE_INCLUDED_T3324",
+      "name": "UE included T3324 value IE in TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicates support for PSM by including T3324 value IE in TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_PSM",
+      "name": "Network supports PSM and accepts its use",
+      "entity_type": "Condition",
+      "description": "Condition where network has PSM capability and accepts UE's request to use Power Saving Mode.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "PROP_NETWORK_INCLUDES_T3324",
+      "name": "Network includes T3324 value IE",
+      "entity_type": "Property",
+      "description": "Network behavior of including T3324 value IE in TRACKING AREA UPDATE ACCEPT message when conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_T3324_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message may contain T3324 value IE when UE supports PSM.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROP_NETWORK_INCLUDES_T3324",
+      "target": "COND_UE_INCLUDED_T3324",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network includes T3324 value IE only if UE included it in TRACKING AREA UPDATE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_NETWORK_INCLUDES_T3324",
+      "target": "COND_NETWORK_SUPPORTS_PSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network includes T3324 value IE only if network supports PSM and accepts its use.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_INCLUDED_T3324",
+      "target": "PROP_NETWORK_INCLUDES_T3324",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE including T3324 value IE in request establishes network behavior to include it in response.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NETWORK_SUPPORTS_PSM",
+      "target": "PROP_NETWORK_INCLUDES_T3324",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network supporting PSM establishes network behavior to include T3324 value IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.16"
+      ]
+    }
+  ]
+}

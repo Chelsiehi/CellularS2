@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.3.2.5",
+  "title": "PLMN-SEARCH",
+  "entities": [
+    {
+      "id": "PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE to select a PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "SNPN_SELECTION",
+      "name": "SNPN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE to select an SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ATTEMPT_COUNTER",
+      "name": "Registration attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking registration attempts, reset when a new PLMN or SNPN is selected.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_MOBILITY_PERIODIC",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated after PLMN selection for mobility and periodic updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_INITIAL",
+      "name": "Registration procedure for initial registration",
+      "entity_type": "Procedure",
+      "description": "Initial registration procedure initiated after SNPN selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "LOCAL_DEREGISTRATION",
+      "name": "Local de-registration",
+      "entity_type": "Procedure",
+      "description": "De-registration performed locally by the UE without network signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "INITIAL_REGISTRATION_EMERGENCY",
+      "name": "Initial registration for emergency services",
+      "entity_type": "Procedure",
+      "description": "Initial registration initiated for emergency services when selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_NEW_PLMN",
+      "name": "New PLMN selected",
+      "entity_type": "Condition",
+      "description": "Condition where a new PLMN is selected by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_NEW_SNPN",
+      "name": "New SNPN selected",
+      "entity_type": "Condition",
+      "description": "Condition where a new SNPN is selected by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_CELL_NO_NORMAL_SERVICE",
+      "name": "Selected cell cannot provide normal service",
+      "entity_type": "Condition",
+      "description": "Condition where the selected cell in the new PLMN is known not to provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PLMN_SELECTION",
+      "target": "CONDITION_NEW_PLMN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PLMN selection may result in a new PLMN being selected.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SNPN_SELECTION",
+      "target": "CONDITION_NEW_SNPN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SNPN selection may result in a new SNPN being selected.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_NEW_PLMN",
+      "target": "REGISTRATION_ATTEMPT_COUNTER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When a new PLMN is selected, the UE resets the registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_NEW_PLMN",
+      "target": "REGISTRATION_MOBILITY_PERIODIC",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When a new PLMN is selected, the UE initiates registration for mobility and periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_NEW_SNPN",
+      "target": "REGISTRATION_ATTEMPT_COUNTER",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "When a new SNPN is selected, the UE resets the registration attempt counter.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_NEW_SNPN",
+      "target": "LOCAL_DEREGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When a new SNPN is selected, the UE may perform local de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_NEW_SNPN",
+      "target": "REGISTRATION_INITIAL",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When a new SNPN is selected, the UE initiates initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_CELL_NO_NORMAL_SERVICE",
+      "target": "LOCAL_DEREGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If the selected cell cannot provide normal service, the UE may perform local de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_CELL_NO_NORMAL_SERVICE",
+      "target": "INITIAL_REGISTRATION_EMERGENCY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If the selected cell cannot provide normal service, the UE initiates initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.5"
+      ]
+    }
+  ]
+}

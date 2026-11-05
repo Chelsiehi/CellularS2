@@ -1,0 +1,53 @@
+{
+  "figure_id": "5.5.3.2.2.1",
+  "title": "Tracking area updating procedure",
+  "type": "PROCEDURE_FLOW",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [
+      "UE",
+      "MME"
+    ],
+    "messages": [
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "TRACKING AREA UPDATE REQUEST",
+        "notes": "Start T3430"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "TRACKING AREA UPDATE ACCEPT",
+        "notes": "If GUTI allocated, Start T3450; Stop T3430"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "TRACKING AREA UPDATE COMPLETE",
+        "notes": "If GUTI allocated; Stop T3450"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "TRACKING AREA UPDATE REQUEST",
+        "notes": "Start T3430 (alternative flow)"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "TRACKING AREA UPDATE REJECT",
+        "notes": "Stop T3430"
+      }
+    ],
+    "fields": [],
+    "notes": [
+      "The figure shows two alternative flows separated by 'OR'",
+      "Timer T3430 is started when UE sends TRACKING AREA UPDATE REQUEST",
+      "Timer T3430 is stopped when UE receives TRACKING AREA UPDATE ACCEPT or TRACKING AREA UPDATE REJECT",
+      "Timer T3450 is started by MME when GUTI is allocated in TRACKING AREA UPDATE ACCEPT",
+      "Timer T3450 is stopped when MME receives TRACKING AREA UPDATE COMPLETE"
+    ]
+  }
+}

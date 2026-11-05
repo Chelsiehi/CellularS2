@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.4.3",
+  "title": "EAP message reliable transport procedure accepted by the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_EAP_RELIABLE_TRANSPORT",
+      "name": "EAP message reliable transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reliable transport of EAP messages between UE and AMF using AUTHENTICATION RESPONSE messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF containing EAP response messages for authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying EAP request or response messages within AUTHENTICATION RESPONSE messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3560",
+      "name": "Timer T3560",
+      "entity_type": "Timer",
+      "description": "Timer used by AMF to monitor response time for authentication procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EAP_REQUEST_RECEIVED",
+      "name": "EAP-request message received",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives an EAP-request message from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "ACTION_AMF_HANDLES_EAP",
+      "name": "AMF handles EAP message",
+      "entity_type": "Property",
+      "description": "Action performed by AMF when processing EAP message received in AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_EAP_RELIABLE_TRANSPORT",
+      "target": "MSG_AUTHENTICATION_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes creating and sending AUTHENTICATION RESPONSE message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_AUTHENTICATION_RESPONSE",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains EAP message IE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EAP_REQUEST_RECEIVED",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When EAP-request is received, UE sets EAP message IE to EAP-response",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTHENTICATION_RESPONSE",
+      "target": "TIMER_T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of AUTHENTICATION RESPONSE message stops timer T3560",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EAP_MESSAGE",
+      "target": "ACTION_AMF_HANDLES_EAP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Presence of EAP message IE in AUTHENTICATION RESPONSE triggers AMF to handle EAP message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.3"
+      ]
+    }
+  ]
+}

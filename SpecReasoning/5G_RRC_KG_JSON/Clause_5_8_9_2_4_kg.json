@@ -1,0 +1,176 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.2.4",
+  "title": "Actions related to reception of the UECapabilityEnquirySidelink by the UE",
+  "entities": [
+    {
+      "id": "UECapabilityEnquirySidelink",
+      "name": "UECapabilityEnquirySidelink",
+      "entity_type": "Message",
+      "description": "Message received by the UE that triggers the UE capability information procedure for sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "UECapabilityInformationSidelink",
+      "name": "UECapabilityInformationSidelink",
+      "entity_type": "Message",
+      "description": "Message constructed by the UE in response to UECapabilityEnquirySidelink, containing UE radio access capabilities for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "UE_RADIO_ACCESS_CAPABILITIES_SIDELINK",
+      "name": "UE radio access capabilities for sidelink",
+      "entity_type": "Information Element",
+      "description": "Information element containing the UE's radio access capabilities specific to sidelink communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "FREQUENCY_BAND_LIST_FILTER_SIDELINK",
+      "name": "frequencyBandListFilterSidelink",
+      "entity_type": "Information Element",
+      "description": "Information element received in UECapabilityEnquirySidelink that filters which frequency bands to include in capability reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "CANDIDATE_BAND_COMBINATIONS",
+      "name": "candidate band combinations",
+      "entity_type": "Information Element",
+      "description": "Temporary list of band combinations compiled by the UE based on frequencyBandListFilterSidelink, prioritized according to the filter order.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "SUPPORTED_BAND_COMBINATION_LIST_SIDELINK_NR",
+      "name": "supportedBandCombinationListSidelinkNR",
+      "entity_type": "Information Element",
+      "description": "Information element in UECapabilityInformationSidelink containing the actual supported band combinations for sidelink NR.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "APPLIED_FREQ_BAND_LIST_FILTER",
+      "name": "appliedFreqBandListFilter",
+      "entity_type": "Information Element",
+      "description": "Field in the requested UE capability that includes the received frequencyBandListFilterSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "MESSAGE_SIZE_CONSTRAINT",
+      "name": "message size constraints",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot include all band combinations due to message size limitations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "LIST_SIZE_CONSTRAINT",
+      "name": "list size constraints",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot include all band combinations due to list size limitations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "UE_IMPLEMENTATION_PRIORITIZATION",
+      "name": "UE implementation prioritization",
+      "entity_type": "Property",
+      "description": "Property that allows UE implementation to decide which band combinations to prioritize when constraints prevent including all combinations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UECapabilityInformationSidelink",
+      "target": "UE_RADIO_ACCESS_CAPABILITIES_SIDELINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UECapabilityInformationSidelink message contains UE radio access capabilities for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UECapabilityInformationSidelink",
+      "target": "SUPPORTED_BAND_COMBINATION_LIST_SIDELINK_NR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UECapabilityInformationSidelink message contains supportedBandCombinationListSidelinkNR.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UECapabilityInformationSidelink",
+      "target": "APPLIED_FREQ_BAND_LIST_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UECapabilityInformationSidelink message contains appliedFreqBandListFilter field.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CANDIDATE_BAND_COMBINATIONS",
+      "target": "FREQUENCY_BAND_LIST_FILTER_SIDELINK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Candidate band combinations are compiled based on and prioritized according to frequencyBandListFilterSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SUPPORTED_BAND_COMBINATION_LIST_SIDELINK_NR",
+      "target": "CANDIDATE_BAND_COMBINATIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Supported band combination list includes band combinations from the candidate band combinations list.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MESSAGE_SIZE_CONSTRAINT",
+      "target": "UE_IMPLEMENTATION_PRIORITIZATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Message size constraints establish that UE implementation decides prioritization of band combinations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "LIST_SIZE_CONSTRAINT",
+      "target": "UE_IMPLEMENTATION_PRIORITIZATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List size constraints establish that UE implementation decides prioritization of band combinations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.2.4"
+      ]
+    }
+  ]
+}

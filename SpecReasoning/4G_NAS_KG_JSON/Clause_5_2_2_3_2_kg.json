@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.2.3.2",
+  "title": "LIMITED-SERVICE",
+  "entities": [
+    {
+      "id": "STATE_LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE state",
+      "entity_type": "State",
+      "description": "UE state where only limited services are available, typically when camped on a cell that does not provide normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to attach to the network for normal services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that combines attach with other functionalities like location registration.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH_EMERGENCY",
+      "name": "Attach for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to attach for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH_RLOS",
+      "name": "Attach for access to RLOS",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to attach for access to RLOS (Restricted Local Operator Services).",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NORMAL_SERVICE_CELL",
+      "name": "Entering a cell which provides normal service",
+      "entity_type": "Condition",
+      "description": "Condition where the UE moves into a cell that offers normal network services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "CONDITION_NORMAL_SERVICE_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When in LIMITED-SERVICE state, the UE initiates attach procedures upon entering a normal service cell.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_NORMAL_SERVICE_CELL",
+      "target": "PROCEDURE_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering a normal service cell triggers the UE to initiate an attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_NORMAL_SERVICE_CELL",
+      "target": "PROCEDURE_COMBINED_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering a normal service cell triggers the UE to initiate a combined attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "PROCEDURE_ATTACH_EMERGENCY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, the UE may initiate attach for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_LIMITED_SERVICE",
+      "target": "PROCEDURE_ATTACH_RLOS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, the UE may initiate attach for access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.2.3.2"
+      ]
+    }
+  ]
+}

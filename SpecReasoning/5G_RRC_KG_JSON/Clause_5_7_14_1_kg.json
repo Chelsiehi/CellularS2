@@ -1,0 +1,134 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.14.1",
+  "title": "General UE Network RRCReconfiguration UEPositioningAssistanceInfo",
+  "entities": [
+    {
+      "id": "PROC_UEPOS_ASSIST_INFO",
+      "name": "UE Positioning Assistance Information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE to report UE Positioning Assistance Information, including the association between UL-SRS resources for positioning and UE Tx TEG ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1",
+        "Figure 5.7.14.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "Message sent from Network to UE to configure RRC parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1",
+        "Figure 5.7.14.1"
+      ]
+    },
+    {
+      "id": "MSG_UE_POS_ASSIST_INFO",
+      "name": "UEPositioningAssistanceInfo",
+      "entity_type": "Message",
+      "description": "Message sent from UE to Network containing UE Positioning Assistance Information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1",
+        "Figure 5.7.14.1"
+      ]
+    },
+    {
+      "id": "IE_UL_SRS_RESOURCES",
+      "name": "UL-SRS resources for positioning",
+      "entity_type": "Information Element",
+      "description": "Uplink Sounding Reference Signal resources used for positioning purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    },
+    {
+      "id": "IE_UE_TX_TEG_ID",
+      "name": "UE Tx TEG ID",
+      "entity_type": "Information Element",
+      "description": "UE Transmit Timing Error Group Identifier.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    },
+    {
+      "id": "COND_ASSOCIATION_REPORTED",
+      "name": "Association between UL-SRS resources and UE Tx TEG ID",
+      "entity_type": "Condition",
+      "description": "Condition where UE reports the association between UL-SRS resources for positioning and UE Tx TEG ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UEPOS_ASSIST_INFO",
+      "target": "MSG_RRC_RECONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE Positioning Assistance Information procedure includes receiving RRCReconfiguration message from Network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1",
+        "Figure 5.7.14.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UEPOS_ASSIST_INFO",
+      "target": "MSG_UE_POS_ASSIST_INFO",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE Positioning Assistance Information procedure includes sending UEPositioningAssistanceInfo message to Network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1",
+        "Figure 5.7.14.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UE_POS_ASSIST_INFO",
+      "target": "IE_UL_SRS_RESOURCES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UEPositioningAssistanceInfo message contains UL-SRS resources for positioning information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UE_POS_ASSIST_INFO",
+      "target": "IE_UE_TX_TEG_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UEPositioningAssistanceInfo message contains UE Tx TEG ID information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ASSOCIATION_REPORTED",
+      "target": "IE_UL_SRS_RESOURCES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Association condition involves UL-SRS resources for positioning.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ASSOCIATION_REPORTED",
+      "target": "IE_UE_TX_TEG_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Association condition involves UE Tx TEG ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.1"
+      ]
+    }
+  ]
+}

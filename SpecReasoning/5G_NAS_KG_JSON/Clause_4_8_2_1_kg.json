@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.8.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives network indications and determines its operational mode based on network support and UE capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "INDICATION_INTERWORKING_NO_N26_NOT_SUPPORTED",
+      "name": "Interworking without N26 interface not supported",
+      "entity_type": "Condition",
+      "description": "Network indication that interworking without N26 interface is not supported, received by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "INDICATION_INTERWORKING_NO_N26_SUPPORTED",
+      "name": "Interworking without N26 interface supported",
+      "entity_type": "Condition",
+      "description": "Network indication that interworking without N26 interface is supported, received by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_DUAL_REGISTRATION",
+      "name": "UE does not support dual-registration mode",
+      "entity_type": "Condition",
+      "description": "Condition where the UE lacks support for dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_SINGLE_REGISTRATION_MODE",
+      "name": "UE determines to operate in single-registration mode",
+      "entity_type": "Condition",
+      "description": "Condition where a UE supporting dual-registration mode chooses to operate in single-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "OPERATION_4_8_2_2",
+      "name": "Operation as per subclause 4.8.2.2",
+      "entity_type": "Procedure",
+      "description": "UE operational procedure defined in subclause 4.8.2.2, triggered when interworking without N26 interface is not supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "OPERATION_4_8_2_3",
+      "name": "Operation as per subclause 4.8.2.3",
+      "entity_type": "Procedure",
+      "description": "UE operational procedure defined in subclause 4.8.2.3, triggered when interworking without N26 interface is supported and UE operates in single-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INDICATION_INTERWORKING_NO_N26_NOT_SUPPORTED",
+      "target": "OPERATION_4_8_2_2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of 'interworking without N26 interface not supported' indication causes the UE to operate as described in subclause 4.8.2.2.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INDICATION_INTERWORKING_NO_N26_SUPPORTED",
+      "target": "CONDITION_NO_DUAL_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The 'interworking without N26 interface supported' indication is guarded by the condition that the UE does not support dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INDICATION_INTERWORKING_NO_N26_SUPPORTED",
+      "target": "CONDITION_SINGLE_REGISTRATION_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The 'interworking without N26 interface supported' indication is guarded by the condition that the UE determines to operate in single-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_NO_DUAL_REGISTRATION",
+      "target": "OPERATION_4_8_2_3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE does not support dual-registration mode, it operates as described in subclause 4.8.2.3.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_SINGLE_REGISTRATION_MODE",
+      "target": "OPERATION_4_8_2_3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE determines to operate in single-registration mode, it operates as described in subclause 4.8.2.3.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.1"
+      ]
+    }
+  ]
+}

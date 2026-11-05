@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.10",
+  "title": "Handling of DNN based congestion control",
+  "entities": [
+    {
+      "id": "DNN_CONGESTION_CONTROL",
+      "name": "DNN based congestion control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by AMF when DNN congestion criteria are met. Includes detection and activation of congestion control mechanisms.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that detects congestion and performs congestion control procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that performs congestion control procedures when DNN based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "DNN",
+      "name": "DNN",
+      "entity_type": "Identifier",
+      "description": "Data Network Name used for identifying the network and for congestion control procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "DNN_CONGESTION_CRITERIA",
+      "name": "DNN congestion criteria",
+      "entity_type": "Condition",
+      "description": "Criteria specified in 3GPP TS 23.501 that trigger DNN based congestion control when met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "NON_EMERGENCY_PDU_SESSION",
+      "name": "Non-emergency PDU session",
+      "entity_type": "Condition",
+      "description": "PDU session type where DNN must be provided by UE or selected by AMF for congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "DNN_CONGESTION_CONTROL",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts performing DNN based congestion control when congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DNN_CONGESTION_CONTROL",
+      "target": "DNN_CONGESTION_CRITERIA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DNN based congestion control is triggered when DNN congestion criteria are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AMF",
+      "target": "DNN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF uses selected DNN or DNN associated with PDU session when UE does not provide DNN for non-emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DNN_CONGESTION_CONTROL",
+      "target": "AMF",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF performs congestion control procedures when DNN based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DNN_CONGESTION_CONTROL",
+      "target": "UE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE performs congestion control procedures when DNN based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NON_EMERGENCY_PDU_SESSION",
+      "target": "DNN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "DNN must be provided or selected for non-emergency PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.10"
+      ]
+    }
+  ]
+}

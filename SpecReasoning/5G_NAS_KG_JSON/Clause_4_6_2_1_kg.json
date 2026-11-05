@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration to PLMN or SNPN, including initial registration, periodic registration update, mobility registration update, and SNPN onboarding registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information sent by UE to AMF during registration, indicating intended network slice(s) for registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information provided by AMF to UE, indicating permitted network slices for the PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_CONFIGURED_NSSAI",
+      "name": "Configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Pre-configured network slice selection assistance information stored in the UE for a specific PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_DEFAULT_CONFIGURED_NSSAI",
+      "name": "Default configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Default network slice selection assistance information used when UE has neither allowed nor configured NSSAI for current PLMN/SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_SNSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single network slice selection assistance information, the building block of NSSAI representing individual network slices.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_MAPPED_SNSSAI",
+      "name": "Mapped S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "S-NSSAI mapped between visited and home PLMN in roaming scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of registration procedure being performed.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "COND_REGISTRATION_TYPE",
+      "name": "Registration type conditions",
+      "entity_type": "Condition",
+      "description": "Conditions based on 5GS registration type IE value that determine whether requested NSSAI or allowed NSSAI are included in registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "PROP_AMF_VERIFICATION",
+      "name": "AMF NSSAI verification",
+      "entity_type": "Property",
+      "description": "AMF verifies if requested NSSAI is permitted based on subscribed S-NSSAIs and optionally mapped S-NSSAI(s) provided by UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to update UE configuration including NSSAI parameters and may trigger registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REGISTRATION",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes requested NSSAI IE when UE registers to PLMN/SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_REGISTRATION",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes allowed NSSAI IE provided by AMF to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_REQUESTED_NSSAI",
+      "target": "IE_SNSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Requested NSSAI includes one or more S-NSSAIs from allowed NSSAI, configured NSSAI, or default configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_REQUESTED_NSSAI",
+      "target": "IE_MAPPED_SNSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "In roaming scenarios, requested NSSAI can include mapped S-NSSAI(s).",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_AMF_VERIFICATION",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF verification process establishes whether requested NSSAI is permitted.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_AMF_VERIFICATION",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful AMF verification results in AMF providing allowed NSSAI to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REGISTRATION_TYPE",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration type conditions guard whether UE includes requested NSSAI during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_REGISTRATION_TYPE",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration type conditions guard whether AMF includes allowed NSSAI during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Generic UE configuration update procedure can change allowed NSSAI and associated registration area.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Generic UE configuration update procedure may trigger registration procedure to update allowed NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.3",
+  "title": "UL user data packet matching",
+  "entities": [
+    {
+      "id": "UL_USER_DATA_PACKET",
+      "name": "UL user data packet",
+      "entity_type": "Property",
+      "description": "Uplink user data packet received from upper layers for transmission via a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "QFI",
+      "name": "QFI",
+      "entity_type": "Identifier",
+      "description": "QoS Flow Identifier used to mark user data packets for QoS handling.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "SIGNALLED_QOS_RULE",
+      "name": "Signalled QoS rule",
+      "entity_type": "Property",
+      "description": "QoS rule with packet filters for UL or both directions, evaluated in precedence order.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "DERIVED_QOS_RULE",
+      "name": "Derived QoS rule",
+      "entity_type": "Property",
+      "description": "QoS rule with packet filter for UL direction only.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "DEFAULT_QOS_RULE",
+      "name": "Default QoS rule",
+      "entity_type": "Property",
+      "description": "QoS rule used for unstructured PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "PACKET_FILTER",
+      "name": "Packet filter",
+      "entity_type": "Property",
+      "description": "Filter used to match UL user data packets against QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "PRECEDENCE_VALUE",
+      "name": "Precedence value",
+      "entity_type": "Property",
+      "description": "Value determining evaluation order of QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU session",
+      "entity_type": "Property",
+      "description": "Session context for user data transmission.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UL_USER_DATA_PACKET",
+      "target": "SIGNALLED_QOS_RULE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UL user data packet is matched against signalled QoS rule packet filters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UL_USER_DATA_PACKET",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UL user data packet is matched against derived QoS rule packet filters.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UL_USER_DATA_PACKET",
+      "target": "DEFAULT_QOS_RULE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UL user data packet is associated with default QoS rule for unstructured PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Signalled QoS rule contains packet filters for UL or both directions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DERIVED_QOS_RULE",
+      "target": "PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains packet filter for UL direction.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SIGNALLED_QOS_RULE",
+      "target": "PRECEDENCE_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Signalled QoS rules are evaluated in increasing order of precedence values.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DERIVED_QOS_RULE",
+      "target": "PRECEDENCE_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Derived QoS rules are evaluated in increasing order of precedence values.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UL_USER_DATA_PACKET",
+      "target": "QFI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If UL user data packet matches a QoS rule, it is associated with a QFI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UL_USER_DATA_PACKET",
+      "target": "PDU_SESSION",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "UL user data packet is transmitted via a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.3"
+      ]
+    }
+  ]
+}

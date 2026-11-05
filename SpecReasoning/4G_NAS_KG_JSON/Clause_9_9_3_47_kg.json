@@ -1,0 +1,145 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.47",
+  "title": "Control plane service type",
+  "entities": [
+    {
+      "id": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "name": "Control plane service type",
+      "entity_type": "Information Element",
+      "description": "Specifies the purpose of the CONTROL PLANE SERVICE REQUEST message. It is a type 1 information element with values indicating mobile originating request, mobile terminating request, or unused values interpreted as mobile originating request.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.47",
+        "Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message whose purpose is specified by the Control plane service type information element.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.47"
+      ]
+    },
+    {
+      "id": "FIELD_IEI",
+      "name": "Control plane service type IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for Control plane service type, located in bits 5-8 of octet 1.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "FIELD_ACTIVE_FLAG",
+      "name": "Active flag",
+      "entity_type": "Property",
+      "description": "Active flag indicator located in bit 4 of octet 1.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "FIELD_SERVICE_TYPE_VALUE",
+      "name": "Control plane service type value",
+      "entity_type": "Property",
+      "description": "Control plane service type value located in bits 1-3 of octet 1, with values: 000=mobile originating request, 001=mobile terminating request, 010=unused (interpreted as mobile originating request).",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "COND_MO_REQUEST",
+      "name": "Mobile originating request",
+      "entity_type": "Condition",
+      "description": "Condition when Control plane service type value bits are 000 or unused value 010 is received.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "COND_MT_REQUEST",
+      "name": "Mobile terminating request",
+      "entity_type": "Condition",
+      "description": "Condition when Control plane service type value bits are 001.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains the Control plane service type information element to specify its purpose.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.47"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "target": "FIELD_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Control plane service type IE contains the IEI field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "target": "FIELD_ACTIVE_FLAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Control plane service type IE contains the Active flag field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "target": "FIELD_SERVICE_TYPE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Control plane service type IE contains the Control plane service type value field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_SERVICE_TYPE_VALUE",
+      "target": "COND_MO_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Control plane service type value field is guarded by mobile originating request condition when bits are 000 or unused value 010 is received.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIELD_SERVICE_TYPE_VALUE",
+      "target": "COND_MT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Control plane service type value field is guarded by mobile terminating request condition when bits are 001.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.3.47.1",
+        "Table 9.9.3.47.1"
+      ]
+    }
+  ]
+}

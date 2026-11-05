@@ -1,0 +1,31 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.6",
+  "title": "Abnormal cases on the network side",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "-------------------------------------------",
+    "The following abnormal cases can be identified",
+    "a) UE initiated PDN connectivity request for an already existing PDN connection",
+    "If the network receives a PDN CONNECTIVITY REQUEST message with the same combination of APN and PDN type as an already existing PDN connection",
+    "If the information elements in the PDN CONNECTIVITY REQUEST message do not differ from the ones received within the previous PDN CONNECTIVITY REQUEST message, and the MME has not received the ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message from UE, the network shall resend the ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message and continue the previous procedure",
+    "If one or more information elements in the PDN CONNECTIVITY REQUEST message differ from the ones received within the previous PDN CONNECTIVITY REQUEST message, and multiple PDN connections for a given APN are not allowed, the network may deactivate the existing EPS bearer contexts for the PDN connection locally without notification to the UE and proceed with the requested PDN connectivity procedure or may reject this PDN connectivity procedure including the ESM cause #55 \"multiple PDN connections for a given APN not allowed\", in the PDN CONNECTIVITY REJECT message",
+    "If the network receives a PDN CONNECTIVITY REQUEST message with request type \"emergency\" and the MME has not received the ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message from UE for the previous PDN connectivity request for emergency bearer services, the network shall resend the ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message and continue the previous procedure. If there is already a PDN connection for emergency bearer services existing, the MME shall reject the request with ESM cause #55 \"multiple PDN connections for a given APN not allowed\" or deactivate the existing EPS bearer contexts for the PDN connection locally without notification to the UE and proceed with the requested PDN connectivity procedure",
+    "b) UE initiated PDN connectivity request with request type \"handover\" for a PDN connection that does not exist",
+    "If the network receives a PDN CONNECTIVITY REQUEST message for either a default APN or a specific APN with request type set to \"handover\" and the MME does not have any information about that PDN connection, then MME shall reject the PDN connectivity request procedure including the ESM cause #54 \"PDN connection does not exist\", in the PDN CONNECTIVITY REJECT message",
+    "c) ESM information not received",
+    "If the ESM information transfer flag in the PDN CONNECTIVITY REQUEST message has been set and the ESM information is not received before the final expiry of timer T3489 as described in clause 6.6.1.2.6, the MME shall reject the PDN connectivity request procedure including the ESM cause #53 \"ESM information not received\", in the PDN CONNECTIVITY REJECT message",
+    "d) Additional UE initiated PDN connectivity request received from a UE that is attached for emergency bearer services",
+    "The MME shall reject the request with ESM cause #31 \"request rejected, unspecified\"",
+    "e) A PDN CONNECTIVITY REQUEST message with request type \"handover of emergency bearer services\" received from a UE and the MME does not have any information about a P-GW currently providing emergency bearer services for the UE or the MME is not configured with an address of a P-GW in the MME emergency configuration data",
+    "MME shall reject the PDN connectivity request procedure including the ESM cause #54 \"PDN connection does not exist\", in the PDN CONNECTIVITY REJECT message",
+    "f) Additional UE initiated PDN connectivity request received from a UE that is attached for access to RLOS",
+    "The MME shall reject the request with ESM cause #31 \"request rejected, unspecified\"",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

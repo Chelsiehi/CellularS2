@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.3",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "ESM_UPLINK_MSG_TX_FAILURE",
+      "name": "ESM uplink message transmission failure",
+      "entity_type": "Condition",
+      "description": "Abnormal case where lower layers indicate transmission failure of an ESM uplink message.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 3"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE_NOT_IN_LIST",
+      "name": "TAI change with current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate a TAI change and the current TAI is not in the TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 5"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE_IN_LIST",
+      "name": "TAI change with current TAI in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate a TAI change but the current TAI remains in the TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 6"
+      ]
+    },
+    {
+      "id": "TAI_NO_CHANGE",
+      "name": "No TAI change",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate no TAI change has occurred.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 7"
+      ]
+    },
+    {
+      "id": "ESM_PROCEDURE",
+      "name": "ESM procedure",
+      "entity_type": "Procedure",
+      "description": "Generic ESM procedure that may be affected by transmission failures.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text lines 4-8"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed to update tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 5"
+      ]
+    },
+    {
+      "id": "ESM_INFO_RESPONSE",
+      "name": "ESM INFORMATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "ESM message that is exempt from transmission failure handling due to handover constraints.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 9"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEFAULT_EPS_BEARER_ACCEPT_TX_FAILURE",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT transmission failure",
+      "entity_type": "Condition",
+      "description": "Transmission failure indication from EMM sublayer for ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message when dedicated bearer requests were received during attach.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 11"
+      ]
+    },
+    {
+      "id": "DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for activating dedicated EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 12"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEDICATED_EPS_BEARER_ACCEPT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message used to accept dedicated EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 13"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEDICATED_EPS_BEARER_REJECT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message",
+      "entity_type": "Message",
+      "description": "Message used to reject dedicated EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TAI_CHANGE_NOT_IN_LIST",
+      "target": "ESM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When TAI change occurs with current TAI not in TAI list, the ESM procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TAI_CHANGE_NOT_IN_LIST",
+      "target": "TRACKING_AREA_UPDATING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "After aborting ESM procedure due to TAI change not in list, tracking area updating procedure must be performed successfully.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TAI_CHANGE_IN_LIST",
+      "target": "ESM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When TAI change occurs but current TAI remains in TAI list, UE implementation decides how to re-initiate ESM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TAI_NO_CHANGE",
+      "target": "ESM_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When no TAI change occurs, UE implementation decides how to re-initiate ESM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ESM_UPLINK_MSG_TX_FAILURE",
+      "target": "ESM_INFO_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM uplink message transmission failure case does not apply to ESM INFORMATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACTIVATE_DEFAULT_EPS_BEARER_ACCEPT_TX_FAILURE",
+      "target": "DEDICATED_EPS_BEARER_ACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transmission failure of ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT affects how dedicated EPS bearer activation is re-initiated.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text lines 11-12"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "ACTIVATE_DEDICATED_EPS_BEARER_ACCEPT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Dedicated EPS bearer activation procedure may use ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT message for re-initiation.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "ACTIVATE_DEDICATED_EPS_BEARER_REJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Dedicated EPS bearer activation procedure may use ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message for re-initiation.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.3, text line 13"
+      ]
+    }
+  ]
+}

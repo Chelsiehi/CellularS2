@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.2",
+  "title": "Non-current native NAS key set identifier",
+  "entities": [
+    {
+      "id": "IE_NON_CURRENT_NATIVE_NAS_KSI",
+      "name": "Non-current native NAS key set identifier",
+      "entity_type": "Information Element",
+      "description": "An information element that indicates the UE has a valid non-current native 5G NAS security context during inter-system change from S1 mode to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "PROC_INTER_SYSTEM_CHANGE",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE transitions from S1 mode (E-UTRA) to N1 mode (5G) while in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5G Mobility Management connected state where the UE has an established NAS signaling connection.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate registration procedure with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "CONTEXT_NON_CURRENT_NATIVE",
+      "name": "Valid non-current native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "A security context that is valid but not currently active, available to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "CONTEXT_MAPPED_5G_NAS",
+      "name": "Mapped 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context derived from EPS security context, used to protect NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "COND_INTER_SYSTEM_CHANGE",
+      "name": "Condition for IE inclusion",
+      "entity_type": "Condition",
+      "description": "Condition where UE performs inter-system change from S1 to N1 mode in 5GMM-CONNECTED state using mapped 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_NON_CURRENT_NATIVE_NAS_KSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the Non-current native NAS key set identifier IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "IE_NON_CURRENT_NATIVE_NAS_KSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of the IE is guarded by the condition of inter-system change with specific security context configuration.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The inter-system change condition requires the UE to be in 5GMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "CONTEXT_NON_CURRENT_NATIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The condition requires the UE to have a valid non-current native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "CONTEXT_MAPPED_5G_NAS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The condition requires the UE to use a mapped 5G NAS security context for protecting the REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_INTER_SYSTEM_CHANGE",
+      "target": "COND_INTER_SYSTEM_CHANGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The inter-system change procedure includes the condition for IE inclusion as part of its execution.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.2"
+      ]
+    }
+  ]
+}

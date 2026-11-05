@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.20.7",
+  "title": "Header compression configuration",
+  "entities": [
+    {
+      "id": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "name": "Header compression configuration",
+      "entity_type": "Information Element",
+      "description": "Information element that contains header compression configuration parameters for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "IE_PDN_TYPE",
+      "name": "PDN type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the PDN type (IPv4, IPv6, or IPv4v6).",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "IE_UE_NETWORK_CAPABILITY",
+      "name": "UE network capability",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the UE's network capabilities including support for Control Plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by the UE to initiate an attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "COND_PDN_TYPE_IP",
+      "name": "PDN type is IPv4, IPv6, or IPv4v6",
+      "entity_type": "Condition",
+      "description": "Condition where the PDN type IE value is set to IPv4, IPv6, or IPv4v6.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "COND_CIOT_OPT_SUPPORTED",
+      "name": "Control Plane CIoT EPS optimization supported",
+      "entity_type": "Condition",
+      "description": "Condition where the UE indicates support for Control Plane CIoT EPS optimization in the UE network capability IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "COND_HEADER_COMPRESSION_SUPPORTED",
+      "name": "UE supports header compression",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has header compression support capability.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ATTACH REQUEST message may contain the Header compression configuration IE under specified conditions.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_UE_NETWORK_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ATTACH REQUEST message contains the UE network capability IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_PDN_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The ATTACH REQUEST message contains the PDN type IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_PDN_TYPE_IP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Header compression configuration IE is guarded by the condition that PDN type is IPv4, IPv6, or IPv4v6.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_CIOT_OPT_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Header compression configuration IE is guarded by the condition that UE indicates Control Plane CIoT EPS optimization support.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_HEADER_COMPRESSION_CONFIGURATION",
+      "target": "COND_HEADER_COMPRESSION_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Header compression configuration IE is guarded by the condition that the UE supports header compression.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.7"
+      ]
+    }
+  ]
+}

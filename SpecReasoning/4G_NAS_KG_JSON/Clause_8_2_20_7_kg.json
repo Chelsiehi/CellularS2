@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.20.7",
+  "title": "UE radio capability ID request",
+  "entities": [
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID_REQUEST",
+      "name": "UE radio capability ID request",
+      "entity_type": "Information Element",
+      "description": "An information element that the MME may include in WB-S1 mode to request the UE to send its UE radio capability ID.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "A NAS message that the UE uses to send its UE radio capability ID when requested by the MME.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_ID",
+      "name": "UE radio capability ID",
+      "entity_type": "Information Element",
+      "description": "An identifier representing the UE's radio capabilities that the UE sends in the SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    },
+    {
+      "id": "COND_WB_S1_MODE",
+      "name": "WB-S1 mode",
+      "entity_type": "Condition",
+      "description": "A condition where the MME may include the UE radio capability ID request information element.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SECURITY_MODE_COMPLETE",
+      "target": "IE_UE_RADIO_CAPABILITY_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The SECURITY MODE COMPLETE message contains the UE radio capability ID information element when requested.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UE_RADIO_CAPABILITY_ID_REQUEST",
+      "target": "COND_WB_S1_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The inclusion of the UE radio capability ID request IE is guarded by the WB-S1 mode condition.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_UE_RADIO_CAPABILITY_ID_REQUEST",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The UE radio capability ID request triggers the UE to send the UE radio capability ID in the SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.20.7"
+      ]
+    }
+  ]
+}

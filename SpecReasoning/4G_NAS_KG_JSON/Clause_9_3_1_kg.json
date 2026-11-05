@@ -1,0 +1,171 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.3.1",
+  "title": "Security header type",
+  "entities": [
+    {
+      "id": "IE_SECURITY_HEADER_TYPE",
+      "name": "Security header type",
+      "entity_type": "Information Element",
+      "description": "A 4-bit information element in bits 5-8 of the first octet of every EMM message containing control information related to NAS message security protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1"
+      ]
+    },
+    {
+      "id": "MSG_PLAIN_NAS",
+      "name": "Plain NAS message",
+      "entity_type": "Message",
+      "description": "An EMM message that is not security protected, indicated by security header type 0000.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "A NAS message that can only use security header type 0011 (integrity protected with new EPS security context).",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 1"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "A NAS message that can only use security header type 0100 (integrity protected and ciphered with new EPS security context).",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "A NAS message that uses security header type 1100, with bits 5-6 reserved for future extensions.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 3"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "A NAS message that can only use security header type 0101 (integrity protected and partially ciphered).",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 4"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_HEADER_0000",
+      "name": "Security header type 0000",
+      "entity_type": "Condition",
+      "description": "Indicates a plain NAS message that is not security protected.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_HEADER_1100_1111",
+      "name": "Security header type 1100-1111",
+      "entity_type": "Condition",
+      "description": "Values 1100-1111 are interpreted as 1100 in this protocol version, with bits 5-6 reserved for SERVICE REQUEST extensions.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_SECURITY_HEADER_TYPE",
+      "target": "MSG_PLAIN_NAS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security header type 0000 indicates a plain NAS message without security protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_SECURITY_HEADER_TYPE",
+      "target": "MSG_SECURITY_MODE_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security header type 0011 is exclusively used for SECURITY MODE COMMAND messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SECURITY_HEADER_TYPE",
+      "target": "MSG_SECURITY_MODE_COMPLETE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security header type 0100 is exclusively used for SECURITY MODE COMPLETE messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_SECURITY_HEADER_TYPE",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security header type 1100 is used for SERVICE REQUEST messages with bits 5-6 reserved for future extensions.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_SECURITY_HEADER_TYPE",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security header type 0101 is exclusively used for CONTROL PLANE SERVICE REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SECURITY_HEADER_0000",
+      "target": "MSG_PLAIN_NAS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When security header type is 0000, the message is treated as a plain NAS message without security protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SECURITY_HEADER_1100_1111",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Security header types 1100-1111 are interpreted as 1100 for SERVICE REQUEST messages in this protocol version.",
+      "provenance": [
+        "TS 24.301, Clause 9.3.1",
+        "Table 9.3.1 Note 3"
+      ]
+    }
+  ]
+}

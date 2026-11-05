@@ -1,0 +1,176 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.4",
+  "title": "Actions related to transmission of RRCReestablishmentRequest message",
+  "entities": [
+    {
+      "id": "PROC_RRC_REESTABLISHMENT",
+      "name": "RRC Re-establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for re-establishing RRC connection after failures",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "name": "RRCReestablishmentRequest",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate RRC connection re-establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "IE_UE_IDENTITY",
+      "name": "ue-Identity",
+      "entity_type": "Information Element",
+      "description": "Contains C-RNTI, physCellId, and shortMAC-I for UE identification",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "IE_REESTABLISHMENT_CAUSE",
+      "name": "reestablishmentCause",
+      "entity_type": "Information Element",
+      "description": "Indicates the reason for re-establishment (reconfigurationFailure, handoverFailure, otherFailure)",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "IE_VARRLF_REPORT",
+      "name": "VarRLF-Report",
+      "entity_type": "Information Element",
+      "description": "Contains reestablishmentCellId for radio link failure reporting",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_RLF_OR_SYNC_FAILURE",
+      "name": "Radio link failure or reconfiguration with sync failure",
+      "entity_type": "Condition",
+      "description": "Condition when procedure is initiated due to radio link failure or reconfiguration with sync failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_RECONFIG_FAILURE",
+      "name": "Reconfiguration failure",
+      "entity_type": "Condition",
+      "description": "Condition when re-establishment is initiated due to reconfiguration failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_L2_U2N_RELAY",
+      "name": "UE connected with L2 U2N Relay UE",
+      "entity_type": "Condition",
+      "description": "Condition when UE is connected with a L2 U2N Relay UE via PC5-RRC connection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "PROP_SUSPEND_SECURITY",
+      "name": "Suspend integrity protection and ciphering for SRB1",
+      "entity_type": "Property",
+      "description": "Configuration to suspend integrity protection and ciphering for SRB1 during re-establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "PROP_APPLY_DEFAULT_CONFIG",
+      "name": "Apply default configurations for SL-RLC1 and PDCP",
+      "entity_type": "Property",
+      "description": "Apply default configurations for SL-RLC1 and PDCP when connected via L2 U2N Relay",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC re-establishment procedure includes transmission of RRCReestablishmentRequest message",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "target": "IE_UE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReestablishmentRequest message contains ue-Identity information element",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "target": "IE_REESTABLISHMENT_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReestablishmentRequest message contains reestablishmentCause information element",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RLF_OR_SYNC_FAILURE",
+      "target": "IE_VARRLF_REPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Radio link failure or sync failure condition guards the setting of reestablishmentCellId in VarRLF-Report",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RECONFIG_FAILURE",
+      "target": "IE_REESTABLISHMENT_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reconfiguration failure condition guards the setting of reestablishmentCause to reconfigurationFailure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_L2_U2N_RELAY",
+      "target": "PROP_APPLY_DEFAULT_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "L2 U2N Relay connection condition establishes the need to apply default configurations",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "PROP_SUSPEND_SECURITY",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "RRC re-establishment procedure establishes suspension of integrity protection and ciphering for SRB1",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "4.2.1",
+  "title": "UE states and state transitions including inter RAT",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------",
+    " A UE is either in RRC_CONNECTED state or in RRC_INACTIVE state  when an RRC connection has been established.",
+    " If this is not the case,   i.e. no RRC connection is established, the UE is in RRC_IDLE state.",
+    " The RRC states can further be characterised as follows:",
+    " a) RRC_IDLE:",
+    " b) A UE specific DRX may be configured by upper layers;",
+    " c) An MBS broadcast specific DRX may be configured by upper layers;",
+    " d) UE controlled mobility based on network configuration;",
+    " e)  The UE:",
+    " f) Monitors Short Messages transmitted with P-RNTI over DCI (see clause 6.5);",
+    " g) Monitors a Paging channel for CN paging using 5G-S-TMSI;",
+    " h) If configured by upper layers for MBS multicast reception,   monitors Paging channel for CN paging using TMGI;",
+    " i) Performs neighbouring cell measurements and cell (re-)selection;",
+    " j) Acquires system information and can send SI request (if configured);",
+    " k) Performs logging of available measurements together with location and time for logged measurement configured UEs;",
+    " l) Performs idle/inactive measurements for idle/inactive measurement configured UEs;",
+    " m) If configured by upper layers for MBS broadcast reception,   acquires MCCH change notification and MBS broadcast control information and data.",
+    " n) RRC_INACTIVE:",
+    " o) A UE specific DRX may be configured by upper layers or by RRC layer;",
+    " p) UE controlled mobility based on network configuration;",
+    " q) The UE stores the UE Inactive AS context;",
+    " r) A RAN-based notification area is configured by RRC layer;",
+    " s) Transfer of unicast data and/or signalling to/from UE over radio bearers configured for SDT;",
+    " The UE:",
+    " t) Monitors Short Messages transmitted with P-RNTI over DCI (see clause 6.5);",
+    " u) During SDT procedure,   monitors control channels associated with the shared data channel to determine if data is scheduled for it;",
+    " v)  While SDT procedure is not ongoing,   monitors a Paging channel for CN paging using 5G-S-TMSI and RAN paging using fullI-RNTI;",
+    " w)  If configured by upper layers for MBS multicast reception,   monitors Paging channel for paging using TMGI;",
+    " x)  Performs neighbouring cell measurements and cell (re-)selection;",
+    " y)  Performs RAN-based notification area updates periodically and  when moving outside the configured RAN-based notification area;",
+    " z)  Acquires system information, while SDT procedure is not ongoing,  and  can send SI request (if configured);",
+    " a)  While SDT procedure is not ongoing, performs logging of available measurements together with location and time for logged measurement configured UEs;",
+    " b)  While SDT procedure is not ongoing, performs idle/inactive measurements for idle/inactive measurement configured UEs;",
+    " c)  If configured by upper layers for MBS broadcast reception, acquires MCCH change notification and MBS broadcast control information and data.",
+    " d) RRC_CONNECTED:",
+    " e) The UE stores the AS context;",
+    " f)  Transfer of unicast data to/from UE;",
+    " g)  Transfer of MBS multicast data to UE;",
+    " h)  At lower layers,  the UE may be configured with a UE specific DRX;",
+    " i)  For UEs supporting CA,   use of one or more SCells, aggregated with the SpCell, for increased bandwidth;",
+    " j)  For UEs supporting DC,   use of one SCG, aggregated with the MCG, for increased bandwidth;",
+    " k) Network controlled mobility within NR, to/from E-UTRA, and to UTRA-FDD;",
+    " l) The UE:",
+    " m) Monitors Short Messages transmitted with P-RNTI over DCI (see clause 6.5), if configured;",
+    " n)  Monitors control channels associated with the shared data channel to determine if data is scheduled for it;",
+    " o)  Provides channel quality and feedback information;",
+    " p)  Performs neighbouring cell measurements and measurement reporting;",
+    " q)  Acquires system information;",
+    " r)  Performs immediate MDT measurement together with available location reporting;",
+    " s)  If configured by upper layers for MBS broadcast reception,   acquires MCCH change notification and MBS broadcast control information and data.",
+    "state in NR at one time.",
+    "NR RRC_CONNECTED",
+    "Resume / Release with Suspend",
+    "Establish /",
+    "Release NR RRC_INACTIVE",
+    "Release NR RRC_IDLE supported between NR/5GC, E-UTRA/EPC and E-UTRA/5GC.",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "4.2.1",
+      "file": "Figure_4_2_1_p34.png.json",
+      "title": "UE state machine and state transitions in NR",
+      "content": {
+        "figure_id": "4.2.1",
+        "title": "UE state machine and state transitions in NR",
+        "type": "STATE_TRANSITION",
+        "content": {
+          "states": [
+            "NR RRC_CONNECTED",
+            "NR RRC_INACTIVE",
+            "NR RRC_IDLE"
+          ],
+          "transitions": [
+            {
+              "from": "NR RRC_CONNECTED",
+              "to": "NR RRC_INACTIVE",
+              "conditions": [
+                "Resume / Release with Suspend"
+              ]
+            },
+            {
+              "from": "NR RRC_INACTIVE",
+              "to": "NR RRC_CONNECTED",
+              "conditions": [
+                "Resume / Release with Suspend"
+              ]
+            },
+            {
+              "from": "NR RRC_INACTIVE",
+              "to": "NR RRC_IDLE",
+              "conditions": [
+                "Release"
+              ]
+            },
+            {
+              "from": "NR RRC_CONNECTED",
+              "to": "NR RRC_IDLE",
+              "conditions": [
+                "Establish / Release"
+              ]
+            },
+            {
+              "from": "NR RRC_IDLE",
+              "to": "NR RRC_CONNECTED",
+              "conditions": [
+                "Establish / Release"
+              ]
+            }
+          ],
+          "entities": [],
+          "messages": [],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

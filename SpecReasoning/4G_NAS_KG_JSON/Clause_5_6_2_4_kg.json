@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.4",
+  "title": "Paging for SMS",
+  "entities": [
+    {
+      "id": "PROC_PAGING_SMS",
+      "name": "Paging for SMS",
+      "entity_type": "Procedure",
+      "description": "Network-initiated paging procedure triggered when receiving an incoming mobile terminating SMS for a UE without an existing NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_IMSI_ATTACHED_NON_EPS",
+      "name": "IMSI attached for non-EPS services or SMS only",
+      "entity_type": "Condition",
+      "description": "Condition where UE is IMSI attached for non-EPS services or for SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_EPS_CIOT_SMS_ONLY",
+      "name": "Attached for EPS services with CIoT optimization and SMS only in NB-S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached for EPS services with CIoT EPS optimization, has requested SMS only, and is in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_NO_NAS_CONNECTION",
+      "name": "No NAS signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Condition indicating absence of an active NAS signalling connection between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_NO_PAGING_RESTRICTION",
+      "name": "No paging restriction applied",
+      "entity_type": "Condition",
+      "description": "Condition where network has not applied any paging restrictions for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_DRX_PARAMETERS",
+      "name": "Extended DRX parameters",
+      "entity_type": "Information Element",
+      "description": "IE containing eDRX parameters provided to UE during attach or tracking area updating procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3413",
+      "name": "T3413",
+      "entity_type": "Timer",
+      "description": "Timer that is not started during paging for SMS procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3415",
+      "name": "T3415",
+      "entity_type": "Timer",
+      "description": "Timer that is not started during paging for SMS procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "PROP_PAGING_TIME_WINDOW",
+      "name": "Paging time window",
+      "entity_type": "Property",
+      "description": "Time window during which network initiates paging for UEs using eDRX when SMS is received.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "PROP_UE_PAGING_PROBABILITY",
+      "name": "Negotiated UE paging probability information",
+      "entity_type": "Property",
+      "description": "Paging probability information available in EMM context and provided to lower layers during paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PAGING_SMS",
+      "target": "COND_IMSI_ATTACHED_NON_EPS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging for SMS procedure is triggered when UE is IMSI attached for non-EPS services or SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PAGING_SMS",
+      "target": "COND_EPS_CIOT_SMS_ONLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging for SMS procedure is triggered when UE is attached for EPS services with CIoT optimization and SMS only in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_PAGING_SMS",
+      "target": "COND_NO_NAS_CONNECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging for SMS procedure requires that no NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PAGING_SMS",
+      "target": "COND_NO_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging for SMS procedure requires that no paging restriction is applied in the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PAGING_SMS",
+      "target": "IE_EXTENDED_DRX_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging procedure timing for eDRX UEs depends on Extended DRX parameters IE values.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_PAGING_SMS",
+      "target": "TIMER_T3413",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME shall not start timer T3413 during paging for SMS procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_PAGING_SMS",
+      "target": "TIMER_T3415",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME shall not start timer T3415 during paging for SMS procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PAGING_SMS",
+      "target": "PROP_PAGING_TIME_WINDOW",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging for SMS procedure for eDRX UEs is initiated within the paging time window.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_PAGING_SMS",
+      "target": "PROP_UE_PAGING_PROBABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM entity provides negotiated UE paging probability information to lower layers during paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.4"
+      ]
+    }
+  ]
+}

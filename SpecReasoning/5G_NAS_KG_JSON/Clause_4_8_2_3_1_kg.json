@@ -1,0 +1,276 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.8.2.3.1",
+  "title": "Interworking between NG-RAN and E-UTRAN",
+  "entities": [
+    {
+      "id": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE transitioning from 5G NAS (N1 mode) to EPS NAS (S1 mode) in EMM-IDLE mode, involving PDU session to EPS bearer context mapping and attach/tracking area update procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE transitioning from EPS NAS (S1 mode) to 5G NAS (N1 mode) in 5GMM-IDLE mode, involving EPS bearer context to PDU session mapping and registration procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "EPS_ATTACH_PROCEDURE",
+      "name": "EPS attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE to attach to EPS network, potentially including PDN CONNECTIVITY REQUEST with handover request types for PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_PROCEDURE",
+      "name": "Tracking area update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE to update its tracking area in EPS network.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "5G NAS procedure for mobility and periodic registration update with mobility registration updating indication.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT_PROCEDURE",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "5G NAS procedure for establishing PDU sessions with various request types including existing PDU session, existing emergency PDU session, MA PDU request, and initial request.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST message",
+      "entity_type": "Message",
+      "description": "EPS NAS message used for network attachment, potentially containing PDN CONNECTIVITY REQUEST message for PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST message",
+      "entity_type": "Message",
+      "description": "ESM message used to request PDN connectivity with request types including handover and handover of emergency bearer services.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "5GMM message used for registration procedures with 5GS registration type IE indicating mobility registration updating.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REQUEST_TYPE_HANDOVER",
+      "name": "Request type handover",
+      "entity_type": "Condition",
+      "description": "Condition where request type is set to 'handover' for transferring non-emergency PDU sessions from N1 mode to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REQUEST_TYPE_HANDOVER_EMERGENCY",
+      "name": "Request type handover of emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where request type is set to 'handover of emergency bearer services' for transferring emergency PDU sessions from N1 mode to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "INTERWORKING_WITHOUT_N26_SUPPORTED",
+      "name": "Interworking without N26 interface supported",
+      "entity_type": "Condition",
+      "description": "Condition where UE has received indication from network that interworking without N26 interface is supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED_NORMAL_SERVICE",
+      "name": "EMM-DEREGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EPS NAS state entered during inter-system change procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "name": "5GMM-DEREGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "5G NAS state entered during inter-system change procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ATTEMPT_COUNTER_RESET",
+      "name": "Registration attempt counter reset",
+      "entity_type": "Property",
+      "description": "Property where UE resets registration attempt counter for 3GPP access after successful procedure completion.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "EPS_ATTACH_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode includes EPS attach procedure when conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "TRACKING_AREA_UPDATE_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode includes tracking area update procedure when conditions are not met for handover.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode includes registration procedure for mobility registration updating.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "target": "PDU_SESSION_ESTABLISHMENT_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode includes PDU session establishment procedure for PDN connection transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_REQUEST",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains PDN CONNECTIVITY REQUEST message for PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EPS_ATTACH_PROCEDURE",
+      "target": "REQUEST_TYPE_HANDOVER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS attach procedure uses request type 'handover' for non-emergency PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_ATTACH_PROCEDURE",
+      "target": "REQUEST_TYPE_HANDOVER_EMERGENCY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS attach procedure uses request type 'handover of emergency bearer services' for emergency PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "INTERWORKING_WITHOUT_N26_SUPPORTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode requires interworking without N26 interface supported indication for handover procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "EMM_DEREGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode establishes EMM-DEREGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode establishes 5GMM-DEREGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EPS_ATTACH_PROCEDURE",
+      "target": "REGISTRATION_ATTEMPT_COUNTER_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful EPS attach procedure establishes registration attempt counter reset property.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "REGISTRATION_ATTEMPT_COUNTER_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful registration procedure establishes registration attempt counter reset property.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.2.3.1"
+      ]
+    }
+  ]
+}

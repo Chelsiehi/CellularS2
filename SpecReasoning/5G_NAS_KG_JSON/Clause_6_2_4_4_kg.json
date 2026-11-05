@@ -1,0 +1,153 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.4.4",
+  "title": "Additional requirements of the UE acting as 5G ProSe layer-3 UE-to-network relay UE for IP address allocation",
+  "entities": [
+    {
+      "id": "UE_5G_PROSE_RELAY",
+      "name": "UE acting as 5G ProSe layer-3 UE-to-network relay",
+      "entity_type": "Property",
+      "description": "A UE that functions as a 5G ProSe layer-3 UE-to-network relay, requiring additional IP address allocation capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "IP_ADDRESS_CONFIGURATION_IE",
+      "name": "IP address configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information Element used to indicate IP address configuration capabilities, such as IPv6 Router or DHCPv4 Server & IPv6 Router.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "3GPP 24.554[19E]"
+      ]
+    },
+    {
+      "id": "REQUESTING_ROUTER",
+      "name": "Requesting Router",
+      "entity_type": "Property",
+      "description": "A role defined in IETF RFC 8415 where the UE requests additional IPv6 prefixes from the SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "IETF RFC 8415[33D]"
+      ]
+    },
+    {
+      "id": "DHCPV6_REQUEST",
+      "name": "DHCPv6 request for additional prefixes",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE acting as a relay requests additional IPv6 prefixes using DHCPv6.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "OPTION_ORO",
+      "name": "OPTION_ORO option",
+      "entity_type": "Information Element",
+      "description": "DHCPv6 option used to request specific options, including OPTION_PD_EXCLUDE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "IETF RFC 6603[40A]"
+      ]
+    },
+    {
+      "id": "OPTION_PD_EXCLUDE",
+      "name": "OPTION_PD_EXCLUDE option",
+      "entity_type": "Information Element",
+      "description": "DHCPv6 option code included in OPTION_ORO to request prefix delegation exclusion.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "IETF RFC 6603[40A]"
+      ]
+    },
+    {
+      "id": "RAPID_COMMIT_OPTION",
+      "name": "Rapid Commit Option",
+      "entity_type": "Information Element",
+      "description": "Optional DHCPv6 option that enables faster address assignment.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "IETF RFC 8415[33D]"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "SMF",
+      "entity_type": "Property",
+      "description": "Session Management Function that allocates additional IPv6 prefixes to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4",
+        "3GPP TS 23.304[6E]"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_5G_PROSE_RELAY",
+      "target": "IP_ADDRESS_CONFIGURATION_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The UE includes the IP address configuration IE to indicate its capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_5G_PROSE_RELAY",
+      "target": "REQUESTING_ROUTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The UE supports acting as a Requesting Router to request additional IPv6 prefixes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DHCPV6_REQUEST",
+      "target": "OPTION_ORO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DHCPv6 request includes the OPTION_ORO option.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "OPTION_ORO",
+      "target": "OPTION_PD_EXCLUDE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "OPTION_ORO includes the OPTION_PD_EXCLUDE option code.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DHCPV6_REQUEST",
+      "target": "RAPID_COMMIT_OPTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DHCPv6 request may include the Rapid Commit Option.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DHCPV6_REQUEST",
+      "target": "SMF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The DHCPv6 request is used to request additional IPv6 prefixes from the SMF.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.4"
+      ]
+    }
+  ]
+}

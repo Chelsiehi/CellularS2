@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.34",
+  "title": "Pending NSSAI",
+  "entities": [
+    {
+      "id": "IE_PENDING_NSSAI",
+      "name": "Pending NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element that informs the UE of one or more S-NSSAIs that are pending due to incomplete network slice-specific authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information representing a network slice.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    },
+    {
+      "id": "NETWORK_SLICE_AUTH",
+      "name": "Network slice-specific authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and authorizing network slice usage.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    },
+    {
+      "id": "COND_PENDING",
+      "name": "Pending due to incomplete authentication",
+      "entity_type": "Condition",
+      "description": "Condition where S-NSSAIs are pending because network slice-specific authentication and authorization procedure is not completed.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PENDING_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Pending NSSAI IE contains one or more S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PENDING",
+      "target": "S_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S-NSSAIs are pending due to incomplete network slice-specific authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NETWORK_SLICE_AUTH",
+      "target": "COND_PENDING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Incomplete network slice-specific authentication and authorization procedure establishes the pending condition for S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.34"
+      ]
+    }
+  ]
+}

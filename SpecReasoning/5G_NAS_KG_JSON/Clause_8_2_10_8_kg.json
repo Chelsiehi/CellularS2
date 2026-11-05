@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.10.8",
+  "title": "MA PDU session information",
+  "entities": [
+    {
+      "id": "IE_MA_PDU_SESSION_INFO",
+      "name": "MA PDU session information",
+      "entity_type": "Information Element",
+      "description": "Information element that may be included in UL NAS TRANSPORT message under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of request in the UL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message that carries the MA PDU session information IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    },
+    {
+      "id": "COND_REQUEST_TYPE_NOT_EMERGENCY",
+      "name": "Request type not emergency",
+      "entity_type": "Condition",
+      "description": "Condition where Request type IE is included and not set to 'initial emergency request' or 'existing emergency PDU session'.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_MA_PDU_SESSION_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message may contain MA PDU session information IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MA_PDU_SESSION_INFO",
+      "target": "COND_REQUEST_TYPE_NOT_EMERGENCY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of MA PDU session information IE is guarded by the condition that Request type is not emergency.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.10.8"
+      ]
+    }
+  ]
+}

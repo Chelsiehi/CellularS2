@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.12",
+  "title": "DFN derivation from GNSS",
+  "entities": [
+    {
+      "id": "GNSS_SYNC_SOURCE",
+      "name": "GNSS synchronization reference source",
+      "entity_type": "Property",
+      "description": "GNSS selected as the synchronization reference source for NR sidelink communication/discovery. Provides UTC time for DFN derivation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "DFN_DERIVATION_PROCEDURE",
+      "name": "DFN derivation from GNSS",
+      "entity_type": "Procedure",
+      "description": "Procedure to derive DFN, subframe number, and slot number from GNSS UTC time using specified formulae.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "UTC_TIME",
+      "name": "Current UTC time",
+      "entity_type": "Property",
+      "description": "Current UTC time obtained from GNSS, expressed in milliseconds as Tcurrent.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "UTC_REF_TIME",
+      "name": "Reference UTC time",
+      "entity_type": "Property",
+      "description": "Reference UTC time 00:00:00 on 1 January 1900, expressed in milliseconds as Tref.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "OFFSET_DFN",
+      "name": "DFN offset",
+      "entity_type": "Property",
+      "description": "Offset value for DFN derivation, set to sl-OffsetDFN if configured, otherwise zero. Expressed in milliseconds.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "SCS_INDEX",
+      "name": "SCS index",
+      "entity_type": "Property",
+      "description": "Index value (0/1/2/3) corresponding to 15/30/60/120 kHz subcarrier spacing for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "LEAP_SECOND_CONDITION",
+      "name": "Leap second change condition",
+      "entity_type": "Condition",
+      "description": "Condition where leap second change events occur, requiring UE implementation to handle UTC time adjustment and avoid DFN discontinuity.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DFN_DERIVATION_PROCEDURE",
+      "target": "GNSS_SYNC_SOURCE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "DFN derivation procedure requires GNSS to be selected as synchronization reference source.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DFN_DERIVATION_PROCEDURE",
+      "target": "UTC_TIME",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DFN derivation procedure uses current UTC time (Tcurrent) from GNSS as input.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DFN_DERIVATION_PROCEDURE",
+      "target": "UTC_REF_TIME",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DFN derivation procedure uses reference UTC time (Tref) as baseline for calculations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DFN_DERIVATION_PROCEDURE",
+      "target": "OFFSET_DFN",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DFN derivation procedure applies DFN offset value in the calculation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DFN_DERIVATION_PROCEDURE",
+      "target": "SCS_INDEX",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DFN derivation procedure uses SCS index to determine subcarrier spacing for sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "LEAP_SECOND_CONDITION",
+      "target": "UTC_TIME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Leap second change condition affects how current UTC time is obtained and adjusted.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.12"
+      ]
+    }
+  ]
+}

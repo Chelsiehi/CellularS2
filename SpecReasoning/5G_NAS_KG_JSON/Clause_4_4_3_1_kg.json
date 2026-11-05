@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "A 24-bit counter used for NAS security, consisting of an 8-bit NAS sequence number and a 16-bit NAS overflow counter. Maintained separately for uplink and downlink messages per access type.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "NAS_SEQUENCE_NUMBER",
+      "name": "NAS sequence number",
+      "entity_type": "Property",
+      "description": "The 8 least significant bits of the NAS COUNT, exchanged in NAS signaling and incremented for each new or retransmitted SECURITY PROTECTED 5GS NAS MESSAGE.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "NAS_OVERFLOW_COUNTER",
+      "name": "NAS overflow counter",
+      "entity_type": "Property",
+      "description": "The 16 most significant bits of the NAS COUNT, incremented when the NAS sequence number wraps around to zero.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "SECURITY_PROTECTED_5GS_NAS_MESSAGE",
+      "name": "SECURITY PROTECTED 5GS NAS MESSAGE",
+      "entity_type": "Message",
+      "description": "A NAS message that is security protected, triggering NAS COUNT increment upon transmission or retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment, maintains NAS COUNT counters for uplink and downlink messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function, maintains NAS COUNT counters for uplink and downlink messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "5GMM_CONNECTED_MODE",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "A 5G Mobility Management state during which inter-system changes and handovers occur, affecting NAS COUNT handling.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "MAPPED_5G_NAS_SECURITY_CONTEXT",
+      "name": "Mapped 5G NAS security context",
+      "entity_type": "Property",
+      "description": "A security context derived during inter-system change from S1 mode to N1 mode, with NAS COUNT counters set to zero.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "NAS_CIPHERING_ALGORITHM",
+      "name": "NAS ciphering algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm that uses NAS COUNT as a 32-bit input (24-bit NAS COUNT padded with 8 zeros in MSBs) for ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "NAS_INTEGRITY_ALGORITHM",
+      "name": "NAS integrity algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm that uses NAS COUNT as a 32-bit input (24-bit NAS COUNT padded with 8 zeros in MSBs) for integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_COUNT",
+      "target": "NAS_SEQUENCE_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS COUNT includes the NAS sequence number as its 8 least significant bits.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NAS_COUNT",
+      "target": "NAS_OVERFLOW_COUNTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS COUNT includes the NAS overflow counter as its 16 most significant bits.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_PROTECTED_5GS_NAS_MESSAGE",
+      "target": "NAS_COUNT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending or retransmitting a SECURITY PROTECTED 5GS NAS MESSAGE increments the NAS COUNT by one.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_CIPHERING_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS ciphering algorithm uses NAS COUNT as a 32-bit input (padded with 8 zeros in MSBs).",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_INTEGRITY_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "NAS integrity algorithm uses NAS COUNT as a 32-bit input (padded with 8 zeros in MSBs).",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MAPPED_5G_NAS_SECURITY_CONTEXT",
+      "target": "NAS_COUNT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "During inter-system change to N1 mode in 5GMM-CONNECTED mode, both UE and AMF set uplink and downlink NAS COUNT counters to zero for the mapped 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "5GMM_CONNECTED_MODE",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NAS COUNT handling during inter-system changes and handovers is performed in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE",
+      "target": "NAS_COUNT",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "UE maintains NAS COUNT counters for uplink and downlink messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AMF",
+      "target": "NAS_COUNT",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "AMF maintains NAS COUNT counters for uplink and downlink messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.1"
+      ]
+    }
+  ]
+}

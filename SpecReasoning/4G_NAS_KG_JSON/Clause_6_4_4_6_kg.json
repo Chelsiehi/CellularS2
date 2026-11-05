@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.4.6",
+  "title": "Local EPS bearer context deactivation without NAS signalling",
+  "entities": [
+    {
+      "id": "PROCEDURE_LOCAL_EPS_DEACTIVATION",
+      "name": "Local EPS bearer context deactivation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE and MME deactivate EPS bearer contexts locally without peer-to-peer ESM signalling based on indications from lower layers about user plane radio bearer status.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_PDN_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection not supported",
+      "entity_type": "Condition",
+      "description": "Condition where either UE or MME does not support EMM-REGISTERED state without an active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_PDN_SUPPORTED_BOTH",
+      "name": "EMM-REGISTERED without PDN connection supported",
+      "entity_type": "Condition",
+      "description": "Condition where both UE and MME support EMM-REGISTERED state without an active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "CONDITION_LAST_NON_EMERGENCY_PDN",
+      "name": "Last remaining PDN connection for non-emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where the last remaining PDN connection being deactivated is for non-emergency bearer services, leaving only emergency PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_DEACTIVATE_ALL_PDN_BEARERS",
+      "name": "Deactivate all EPS bearer contexts in PDN connection",
+      "entity_type": "Property",
+      "description": "Behavior where if default EPS bearer context is locally deactivated, all EPS bearer contexts associated with that PDN connection must also be deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_LOCAL_DETACH",
+      "name": "Perform local detach",
+      "entity_type": "Property",
+      "description": "Behavior where UE or MME performs local detach procedure when last PDN connection is deactivated and EMM-REGISTERED without PDN connection is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_ATTACH_EMERGENCY_ONLY",
+      "name": "Consider attached for emergency bearer services only",
+      "entity_type": "Property",
+      "description": "Behavior where UE or MME considers the UE to be attached only for emergency bearer services when last non-emergency PDN connection is deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_LOCAL_EPS_DEACTIVATION",
+      "target": "PROPERTY_DEACTIVATE_ALL_PDN_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Local EPS bearer deactivation procedure establishes the behavior of deactivating all EPS bearer contexts in a PDN connection when default bearer is deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_LOCAL_EPS_DEACTIVATION",
+      "target": "CONDITION_NO_PDN_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Local EPS bearer deactivation procedure behavior is guarded by condition of EMM-REGISTERED without PDN connection not being supported.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_NO_PDN_SUPPORTED",
+      "target": "PROPERTY_LOCAL_DETACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no PDN connection support establishes the local detach behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROPERTY_LOCAL_DETACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Local detach behavior establishes transition to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_NO_PDN_SUPPORTED_BOTH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of both UE and MME supporting EMM-REGISTERED without PDN connection establishes transition to EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_LAST_NON_EMERGENCY_PDN",
+      "target": "PROPERTY_ATTACH_EMERGENCY_ONLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of last non-emergency PDN connection deactivation establishes the behavior of considering UE attached for emergency services only.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.4.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.3.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "MOBILITY_FROM_NR_PROCEDURE",
+      "name": "Mobility from NR procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated mobility procedure for UEs in RRC_CONNECTED state, triggered by measurement reports or MCG failure information.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "MOBILITY_FROM_NR_COMMAND",
+      "name": "MobilityFromNRCommand message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate mobility from NR procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "MEASUREMENT_REPORT",
+      "name": "MeasurementReport message",
+      "entity_type": "Message",
+      "description": "Message that may trigger the mobility from NR procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "MCG_FAILURE_INFORMATION",
+      "name": "MCGFailureInformation message",
+      "entity_type": "Message",
+      "description": "Message that may trigger the mobility from NR procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where the UE must be for mobility from NR procedure initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_ACTIVATED",
+      "name": "AS security activated",
+      "entity_type": "Condition",
+      "description": "Condition requiring AS security to be activated before procedure initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "SRB2_DRB_SETUP",
+      "name": "SRB2 and DRB setup condition",
+      "entity_type": "Condition",
+      "description": "Condition requiring SRB2 with at least one DRB to be setup and not suspended.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "NO_DAPS_BEARER",
+      "name": "No DAPS bearer configured",
+      "entity_type": "Condition",
+      "description": "Condition requiring that no DAPS bearer is configured for procedure initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "MOBILITY_FROM_NR_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is initiated by sending MobilityFromNRCommand message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "MEASUREMENT_REPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure may be triggered by MeasurementReport message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "MCG_FAILURE_INFORMATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure may be triggered by MCGFailureInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "AS_SECURITY_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by AS security activation requirement.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "SRB2_DRB_SETUP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by SRB2 and DRB setup requirement.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MOBILITY_FROM_NR_PROCEDURE",
+      "target": "NO_DAPS_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by absence of DAPS bearer configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.4.2",
+  "title": "EAP message reliable transport procedure initiation by the network",
+  "entities": [
+    {
+      "id": "EAP_RELIABLE_TRANSPORT_PROCEDURE",
+      "name": "EAP message reliable transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reliable transport of EAP messages between AMF and UE during authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE to initiate EAP authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the EAP-request message to be sent to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the ngKSI value selected during authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "IE_ABBA",
+      "name": "ABBA IE",
+      "entity_type": "Information Element",
+      "description": "Information element with length 2 and contents 0000H as specified in subclause 9.11.3.10.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3560",
+      "name": "T3560",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when sending AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that initiates the EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives the AUTHENTICATION REQUEST message and processes EAP message and ABBA.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "EAP_RELIABLE_TRANSPORT_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF initiates the EAP message reliable transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_RELIABLE_TRANSPORT_PROCEDURE",
+      "target": "AUTHENTICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains ngKSI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "IE_ABBA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains ABBA IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AMF",
+      "target": "TIMER_T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF starts timer T3560 when sending AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2",
+        "Figure 5.4.1.2.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE handles EAP message received in EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE",
+      "target": "IE_ABBA",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE handles ABBA of the AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.2"
+      ]
+    }
+  ]
+}

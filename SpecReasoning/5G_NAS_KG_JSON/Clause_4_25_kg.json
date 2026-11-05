@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.25",
+  "title": "Support of MUSIM features",
+  "entities": [
+    {
+      "id": "MUSIM_UE",
+      "name": "MUSIM UE",
+      "entity_type": "Property",
+      "description": "A UE that supports one or more MUSIM features including N1 NAS signalling connection release, paging indication for voice services, reject paging request, paging restriction, and paging timing collision control.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which MUSIM feature support is indicated by UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "N1_NAS_RELEASE",
+      "name": "N1 NAS signalling connection release",
+      "entity_type": "Property",
+      "description": "MUSIM feature for releasing N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "PAGING_INDICATION_VOICE",
+      "name": "Paging indication for voice services",
+      "entity_type": "Property",
+      "description": "MUSIM feature for paging indication specifically for voice services.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REJECT_PAGING_REQUEST",
+      "name": "Reject paging request",
+      "entity_type": "Property",
+      "description": "MUSIM feature allowing UE to reject paging requests.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Property",
+      "description": "MUSIM feature for restricting paging, indicated only with N1 NAS release or reject paging request support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "PAGING_TIMING_COLLISION_CONTROL",
+      "name": "Paging timing collision control",
+      "entity_type": "Property",
+      "description": "MUSIM feature for controlling paging timing collisions, not indicated during registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES",
+      "name": "Emergency services registration",
+      "entity_type": "Condition",
+      "description": "Registration for emergency services where network does not indicate MUSIM feature support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "NB_N1_MODE",
+      "name": "NB-N1 mode",
+      "entity_type": "Condition",
+      "description": "Operating mode where UE does not indicate paging indication for voice services support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "WB_N1_CE_MODE_B",
+      "name": "WB-N1 mode CE mode B",
+      "entity_type": "Condition",
+      "description": "Operating mode where UE does not indicate paging indication for voice services support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MUSIM_UE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MUSIM UE indicates support of MUSIM features during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "N1_NAS_RELEASE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes indication of N1 NAS signalling connection release support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "REJECT_PAGING_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure includes indication of reject paging request support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PAGING_RESTRICTION",
+      "target": "N1_NAS_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging restriction support is indicated only if N1 NAS release or reject paging request is supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PAGING_RESTRICTION",
+      "target": "REJECT_PAGING_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging restriction support is indicated only if N1 NAS release or reject paging request is supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMERGENCY_SERVICES",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "During emergency services registration, network does not indicate MUSIM feature support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NB_N1_MODE",
+      "target": "PAGING_INDICATION_VOICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE in NB-N1 mode does not indicate paging indication for voice services support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "WB_N1_CE_MODE_B",
+      "target": "PAGING_INDICATION_VOICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE in WB-N1 mode CE mode B does not indicate paging indication for voice services support.",
+      "provenance": [
+        "TS 24.501, Clause 4.25"
+      ]
+    }
+  ]
+}

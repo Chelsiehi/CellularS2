@@ -1,0 +1,67 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.1",
+  "title": "UE-initiated de-registration procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------------------",
+    "The de-registration procedure is initiated by the UE by sending a DEREGISTRATION REQUEST message (see example in figure5.5.2.2.1). The De-registration type IE included in the message indicates whether the de-registration procedure is due to a \"switch off\" or not. The access type included in the message indicates whether the de-registration procedure is",
+    "a) for 5GS services over 3GPP access when the UE is registered over 3GPP access",
+    "b) for 5GS services over non-3GPP access when the UE is registered over non-3GPP access; or",
+    "c) for 3GPP access, non-3GPP access or both when the UE is registered in the same PLMN over both accesses",
+    "If the UE has a valid 5G-GUTI, the UE shall populate the 5GS mobile identity IE with the valid 5G-GUTI. If the UE does not have a valid 5G-GUTI, the UE shall populate the 5GS mobile identity IE with its SUCI as follows",
+    "a) if timer T3519 is not running, generate a fresh SUCI as specified in 3GPPTS33.501[24], send a DEREGISTRATION REQUEST message with the SUCI, start timer T3519 and store the value of the SUCI sent in the DEREGISTRATION REQUEST message; and",
+    "b) if timer T3519 is running, send a DEREGISTRATION REQUEST message with the stored SUCI",
+    "If the UE does not have a valid 5G-GUTI and it does not have a valid SUCI, then the UE shall populate the5GS mobile identity IE with its PEI",
+    "If the de-registration request is not due to switch off and the UE is in the state 5GMM-REGISTERED or 5GMM-REGISTERED-INITIATED, timer T3521 shall be started in the UE after the DEREGISTRATION REQUEST message has been sent. The UE shall enter the state 5GMM-DEREGISTERED-INITIATED",
+    "If the UE is to be switched off, the UE shall try for a period of 5 seconds to send the DEREGISTRATION REQUEST message. During this period, the UE may be switched off as soon as the DEREGISTRATION REQUEST message has been sent",
+    "Figure5.5.2.2.1.1: UE-initiated de-registration procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.5.2.2.1.1",
+      "file": "Figure_5_5_2_2_1_1_p386.png.json",
+      "title": "UE-initiated de-registration procedure",
+      "content": {
+        "figure_id": "5.5.2.2.1.1",
+        "title": "UE-initiated de-registration procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "DEREGISTRATION REQUEST",
+              "notes": "Start T3521"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "DEREGISTRATION ACCEPT",
+              "notes": "Stop T3521"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "DEREGISTRATION REQUEST",
+              "notes": "or UE at switch off:"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

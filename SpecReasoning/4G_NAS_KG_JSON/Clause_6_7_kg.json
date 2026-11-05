@@ -1,0 +1,223 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.7",
+  "title": "Reception of an ESM STATUS message by an ESM entity",
+  "entities": [
+    {
+      "id": "ESM_STATUS_MSG",
+      "name": "ESM STATUS message",
+      "entity_type": "Message",
+      "description": "Message sent to report certain error conditions detected upon receipt of ESM protocol data. Can be sent by both MME and UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.7",
+        "Figure 6.7.1"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_43",
+      "name": "ESM cause #43 (Invalid EPS bearer identity)",
+      "entity_type": "Condition",
+      "description": "Error condition indicating an invalid EPS bearer identity was received.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_81",
+      "name": "ESM cause #81 (Invalid PTI value)",
+      "entity_type": "Condition",
+      "description": "Error condition indicating an invalid Procedure Transaction Identity (PTI) value was received.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_97",
+      "name": "ESM cause #97 (Message type non-existent or not implemented)",
+      "entity_type": "Condition",
+      "description": "Error condition indicating a message type that is non-existent or not implemented was received.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "ABORT_PROCEDURE",
+      "name": "Abort ongoing ESM procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to abort any ongoing ESM procedure related to the received EPS bearer identity or PTI value.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "STOP_TIMER",
+      "name": "Stop related timer",
+      "entity_type": "Procedure",
+      "description": "Action to stop any timer related to the aborted ESM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "DEACTIVATE_EPS_BEARER",
+      "name": "Deactivate EPS bearer context locally",
+      "entity_type": "Procedure",
+      "description": "Procedure to deactivate the corresponding EPS bearer context locally without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for an EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "PTI",
+      "name": "Procedure Transaction Identity (PTI)",
+      "entity_type": "Identifier",
+      "description": "Identifier for an ESM procedure transaction.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM_STATUS_MSG",
+      "target": "ESM_CAUSE_43",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM STATUS message behavior is determined by ESM cause value #43.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ESM_STATUS_MSG",
+      "target": "ESM_CAUSE_81",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM STATUS message behavior is determined by ESM cause value #81.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ESM_STATUS_MSG",
+      "target": "ESM_CAUSE_97",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM STATUS message behavior is determined by ESM cause value #97.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ESM_CAUSE_43",
+      "target": "ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #43 triggers abortion of ongoing ESM procedure related to EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ESM_CAUSE_43",
+      "target": "STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #43 triggers stopping of related timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ESM_CAUSE_43",
+      "target": "DEACTIVATE_EPS_BEARER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #43 triggers local deactivation of EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ESM_CAUSE_81",
+      "target": "ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #81 triggers abortion of ongoing ESM procedure related to PTI value.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ESM_CAUSE_81",
+      "target": "STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #81 triggers stopping of related timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ESM_CAUSE_97",
+      "target": "ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #97 triggers abortion of ongoing ESM procedure related to PTI or EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ESM_CAUSE_97",
+      "target": "STOP_TIMER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #97 triggers stopping of related timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "ABORT_PROCEDURE",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Abort procedure may be related to EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "ABORT_PROCEDURE",
+      "target": "PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Abort procedure may be related to PTI value.",
+      "provenance": [
+        "TS 24.301, Clause 6.7"
+      ]
+    }
+  ]
+}

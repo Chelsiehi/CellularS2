@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.6.2.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3586",
+      "name": "Timer T3586",
+      "entity_type": "Timer",
+      "description": "Timer used in the remote UE report procedure. On expiry, the UE resends REMOTE UE REPORT message and restarts timer. After third expiry, procedure is aborted.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "PROC_REMOTE_UE_REPORT",
+      "name": "Remote UE report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends REMOTE UE REPORT message to report remote UE information. Can be aborted on timer T3586 expiry or collision with PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT message",
+      "entity_type": "Message",
+      "description": "Message sent by UE during remote UE report procedure to report remote UE information.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "PROC_PDU_SESSION_RELEASE_NW",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to release a PDU session, triggered by PDU SESSION RELEASE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_CMD",
+      "name": "PDU SESSION RELEASE COMMAND message",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_T3586_FIRST_EXPIRY",
+      "name": "First expiry of timer T3586",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3586 expires for the first time. UE resends REMOTE UE REPORT and restarts timer.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_T3586_THIRD_EXPIRY",
+      "name": "Third expiry of timer T3586",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3586 expires for the third time. UE aborts remote UE report procedure and releases resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_PDU_RELEASE",
+      "name": "Collision with PDU session release",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives PDU SESSION RELEASE COMMAND for same PDU session ID as in REMOTE UE REPORT during remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort procedure",
+      "entity_type": "Property",
+      "description": "Behavior where UE stops the ongoing procedure and releases associated resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "PROP_RESEND_MSG",
+      "name": "Resend message",
+      "entity_type": "Property",
+      "description": "Behavior where UE retransmits a message, specifically REMOTE UE REPORT message on T3586 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "TIMER_T3586",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Remote UE report procedure starts timer T3586.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_T3586_FIRST_EXPIRY",
+      "target": "PROP_RESEND_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First expiry of T3586 establishes resending of REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3586_FIRST_EXPIRY",
+      "target": "TIMER_T3586",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "First expiry of T3586 causes timer to be reset and restarted.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3586_THIRD_EXPIRY",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Third expiry of T3586 establishes abortion of remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_COLLISION_PDU_RELEASE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with PDU session release establishes abortion of remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_COLLISION_PDU_RELEASE",
+      "target": "PROC_PDU_SESSION_RELEASE_NW",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision condition establishes proceeding with network-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Remote UE report procedure includes sending REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PDU_SESSION_RELEASE_NW",
+      "target": "MSG_PDU_SESSION_RELEASE_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-requested PDU session release procedure includes receiving PDU SESSION RELEASE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.4"
+      ]
+    }
+  ]
+}

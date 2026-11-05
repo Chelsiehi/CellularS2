@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.4.3",
+  "title": "Handling of network rejection due to ESM cause other than ESM cause #26",
+  "entities": [
+    {
+      "id": "BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER_VALUE_IE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer value for back-off procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REATTEMPT_INDICATOR_IE",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether re-attempt is allowed in different modes.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer used to prevent UE from sending BEARER RESOURCE MODIFICATION REQUEST messages for specific PLMN and APN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_32",
+      "name": "ESM cause #32",
+      "entity_type": "Condition",
+      "description": "Service option not supported ESM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_33",
+      "name": "ESM cause #33",
+      "entity_type": "Condition",
+      "description": "Requested service option not subscribed ESM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "SM_RETRYWAITTIME",
+      "name": "SM_RetryWaitTime",
+      "entity_type": "Property",
+      "description": "Configured timer value used as back-off timer when ESM cause is #32 or #33 and UE is in HPLMN/EHPLMN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_MODIFICATION_PROCEDURE",
+      "name": "Bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for modifying bearer resources initiated by UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "BACK_OFF_TIMER_VALUE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REQUEST may be affected by Back-off timer value IE presence.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BEARER_RESOURCE_MODIFICATION_PROCEDURE",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Bearer resource modification procedure starts back-off timer when timer value is provided.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ESM_CAUSE_32",
+      "target": "SM_RETRYWAITTIME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #32 establishes use of SM_RetryWaitTime as back-off timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ESM_CAUSE_33",
+      "target": "SM_RETRYWAITTIME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #33 establishes use of SM_RetryWaitTime as back-off timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "BACK_OFF_TIMER_VALUE_IE",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards the behavior of back-off timer (start, deactivate, or zero value).",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "REATTEMPT_INDICATOR_IE",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-attempt indicator IE guards whether back-off timer applies to different modes.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.3"
+      ]
+    }
+  ]
+}

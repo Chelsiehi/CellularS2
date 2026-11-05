@@ -1,0 +1,189 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.23.5",
+  "title": "Handling multiple tracking area codes from the lower layers",
+  "entities": [
+    {
+      "id": "PROC_TAI_SELECTION",
+      "name": "TAI selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to select a TAI when multiple TACs are received from lower layers in satellite NG-RAN cells. The UE constructs TAIs by concatenating current PLMN identity with each TAC and applies selection criteria based on registration area, allowed/non-allowed areas, and forbidden areas.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "IE_TAI",
+      "name": "Tracking Area Identity",
+      "entity_type": "Information Element",
+      "description": "Constructed by concatenating current PLMN identity with each TAC received from lower layers. Represents a tracking area that the UE can potentially select.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "IE_TAC",
+      "name": "Tracking Area Code",
+      "entity_type": "Information Element",
+      "description": "Multiple TACs received from lower layers when UE camps on satellite NG-RAN cell. Used to construct TAIs for selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "COND_IN_REGISTRATION_AREA",
+      "name": "TAI in current registration area",
+      "entity_type": "Condition",
+      "description": "Condition where at least one TAI belongs to the UE's current registration area. Triggers selection criteria based on allowed/non-allowed tracking areas.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "COND_ALLOWED_NOT_NONALLOWED",
+      "name": "TAI in allowed area and not in non-allowed area",
+      "entity_type": "Condition",
+      "description": "Condition where TAI belongs to allowed tracking area list (if any) and does not belong to non-allowed tracking areas list (if any).",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "COND_NOT_FORBIDDEN",
+      "name": "TAI not in forbidden areas",
+      "entity_type": "Condition",
+      "description": "Condition where TAI belongs to neither 5GS forbidden tracking areas for roaming nor 5GS forbidden tracking areas for regional provision of service.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "PROP_IMPLEMENTATION_SPECIFIC_SELECTION",
+      "name": "Implementation-specific TAI selection",
+      "entity_type": "Property",
+      "description": "When multiple TAIs meet criteria equally, UE selects TAI in implementation-specific way, potentially considering LADN service area information.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "PROP_CURRENT_TAI",
+      "name": "Current TAI assignment",
+      "entity_type": "Property",
+      "description": "The selected TAI becomes the current TAI for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "COND_TRIGGER_SELECTION",
+      "name": "TAI selection trigger conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that trigger TAI selection: UE receives multiple TACs from lower layers, or UE has received multiple TACs and registration area/allowed/non-allowed/forbidden lists are updated.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAI_SELECTION",
+      "target": "IE_TAI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "TAI selection procedure involves constructing TAIs from multiple TACs and current PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_TAI",
+      "target": "IE_TAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TAI is constructed by concatenating current PLMN identity with each TAC.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_TAI_SELECTION",
+      "target": "COND_IN_REGISTRATION_AREA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI selection procedure is guarded by whether TAIs are in current registration area.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_IN_REGISTRATION_AREA",
+      "target": "COND_ALLOWED_NOT_NONALLOWED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When TAI is in registration area, selection is further guarded by allowed/non-allowed area conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_ALLOWED_NOT_NONALLOWED",
+      "target": "PROP_IMPLEMENTATION_SPECIFIC_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When multiple TAIs meet allowed/non-allowed criteria equally, implementation-specific selection is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_TAI_SELECTION",
+      "target": "COND_NOT_FORBIDDEN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When no TAI is in registration area, selection is guarded by forbidden area conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NOT_FORBIDDEN",
+      "target": "PROP_IMPLEMENTATION_SPECIFIC_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When all TAIs are forbidden, implementation-specific selection is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_TAI_SELECTION",
+      "target": "PROP_CURRENT_TAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI selection procedure establishes the selected TAI as current TAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_TRIGGER_SELECTION",
+      "target": "PROC_TAI_SELECTION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Trigger conditions start the TAI selection procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.5"
+      ]
+    }
+  ]
+}

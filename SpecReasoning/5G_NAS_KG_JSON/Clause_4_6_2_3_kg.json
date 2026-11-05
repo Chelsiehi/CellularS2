@@ -1,0 +1,175 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.3",
+  "title": "Provision of NSSAI to lower layers in 5GMM-IDLE mode",
+  "entities": [
+    {
+      "id": "NSSAI_INCLUSION_MODE_IE",
+      "name": "NSSAI inclusion mode IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION ACCEPT message that indicates which NSSAI inclusion mode the UE shall operate in for the current access within the current PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information requested by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information allowed by the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message from AMF to UE that may include the NSSAI inclusion mode IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message sent by UE in 5GMM-IDLE mode that may trigger NSSAI provision to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message that may trigger NSSAI provision to lower layers depending on NSSAI inclusion mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE_MODE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5G mobility management state where UE may send initial NAS messages and provide NSSAI to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "NSSAI_INCLUSION_MODE_STORAGE",
+      "name": "NSSAI inclusion mode storage",
+      "entity_type": "Property",
+      "description": "UE stores the NSSAI inclusion mode together with PLMN/SNPN identity and access type in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES_CONDITION",
+      "name": "Emergency services condition",
+      "entity_type": "Condition",
+      "description": "Condition where no NSSAI is provided to lower layers for emergency services, onboarding services, or specific message types.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1 NOTE 2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "NSSAI_INCLUSION_MODE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain the NSSAI inclusion mode IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NSSAI_INCLUSION_MODE_IE",
+      "target": "REQUESTED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NSSAI inclusion mode IE determines whether Requested NSSAI is provided to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NSSAI_INCLUSION_MODE_IE",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NSSAI inclusion mode IE determines whether Allowed NSSAI is provided to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_REQUEST",
+      "target": "5GMM_IDLE_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message is sent when UE is in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_REQUEST",
+      "target": "5GMM_IDLE_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SERVICE REQUEST message is sent when UE is in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMERGENCY_SERVICES_CONDITION",
+      "target": "NSSAI_INCLUSION_MODE_STORAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency services condition establishes that no NSSAI is provided to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3",
+        "Table 4.6.2.3.1 NOTE 2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NSSAI_INCLUSION_MODE_STORAGE",
+      "target": "NSSAI_INCLUSION_MODE_IE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "NSSAI inclusion mode storage property is defined by the NSSAI inclusion mode IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.3"
+      ]
+    }
+  ]
+}

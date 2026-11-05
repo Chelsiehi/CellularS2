@@ -1,0 +1,165 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Identifier for sidelink measurement configuration included in sl-MeasIdList within VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "SL_REPORT_TYPE_EVENT_TRIGGERED",
+      "name": "sl-ReportType sl-EventTriggered",
+      "entity_type": "Condition",
+      "description": "Condition where reporting type is set to event-triggered for sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "SL_REPORT_TYPE_PERIODICAL",
+      "name": "sl-ReportType sl-Periodical",
+      "entity_type": "Condition",
+      "description": "Condition where reporting type is set to periodical for sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "EVENT_ENTRY_CONDITION_FULFILLED",
+      "name": "Event entry condition fulfilled",
+      "entity_type": "Condition",
+      "description": "Condition where the entry condition for the event corresponding to sl-EventId is fulfilled for NR sidelink frequency after layer 3 filtering during sl-TimeToTrigger.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "EVENT_LEAVING_CONDITION_FULFILLED",
+      "name": "Event leaving condition fulfilled",
+      "entity_type": "Condition",
+      "description": "Condition where the leaving condition for the event is fulfilled for NR sidelink frequency in sl-FrequencyTriggeredList after layer 3 filtering during sl-TimeToTrigger.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "SL_FREQUENCY_TRIGGERED_LIST_EMPTY",
+      "name": "sl-FrequencyTriggeredList empty",
+      "entity_type": "Condition",
+      "description": "Condition where the sl-FrequencyTriggeredList for a sl-MeasId becomes empty.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "SL_REPORT_ON_LEAVE_TRUE",
+      "name": "sl-ReportOnLeave set to true",
+      "entity_type": "Condition",
+      "description": "Condition where sl-ReportOnLeave is set to true in the corresponding reporting configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "NR_SIDELINK_MEAS_REPORTING_PROCEDURE",
+      "name": "NR sidelink measurement reporting procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated to report NR sidelink measurements, as specified in clause 5.8.10.5.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "PERIODICAL_REPORTING_TIMER",
+      "name": "Periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer associated with a sl-MeasId for periodical reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Property",
+      "description": "List containing NR sidelink measurement reporting entries and associated data like sl-NumberOfReportsSent and sl-FrequencyTriggeredList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EVENT_ENTRY_CONDITION_FULFILLED",
+      "target": "NR_SIDELINK_MEAS_REPORTING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Fulfillment of event entry condition triggers initiation of NR sidelink measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EVENT_LEAVING_CONDITION_FULFILLED",
+      "target": "NR_SIDELINK_MEAS_REPORTING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Fulfillment of event leaving condition and sl-ReportOnLeave true triggers initiation of NR sidelink measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_REPORT_TYPE_PERIODICAL",
+      "target": "NR_SIDELINK_MEAS_REPORTING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Periodical reporting type and available measurement result trigger initiation of NR sidelink measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PERIODICAL_REPORTING_TIMER",
+      "target": "NR_SIDELINK_MEAS_REPORTING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Expiry of periodical reporting timer triggers initiation of NR sidelink measurement reporting procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EVENT_LEAVING_CONDITION_FULFILLED",
+      "target": "PERIODICAL_REPORTING_TIMER",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Fulfillment of event leaving condition and empty sl-FrequencyTriggeredList stops the periodical reporting timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SL_MEAS_ID",
+      "target": "VAR_MEAS_REPORT_LIST_SL",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "sl-MeasId is associated with entries and data in VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.4.1"
+      ]
+    }
+  ]
+}

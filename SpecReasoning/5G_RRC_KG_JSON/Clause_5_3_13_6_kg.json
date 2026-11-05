@@ -1,0 +1,196 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.6",
+  "title": "Cell re-selection or cell selection or L2 U2N relay (re)selection while T390, T319, T319a or T302 is running (UE in RRC_INACTIVE)",
+  "entities": [
+    {
+      "id": "T390",
+      "name": "T390",
+      "entity_type": "Timer",
+      "description": "Timer T390 running in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "T319",
+      "name": "T319",
+      "entity_type": "Timer",
+      "description": "Timer T319 running in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "T319a",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer T319a running in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "T302",
+      "name": "T302",
+      "entity_type": "Timer",
+      "description": "Timer T302 running in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION",
+      "name": "Cell reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a new cell while in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION",
+      "name": "Cell selection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a cell while in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "RELAY_RESELECTION",
+      "name": "Relay reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a new L2 U2N relay while in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_TRANSITION",
+      "name": "Transition to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE transitions from RRC_INACTIVE to RRC_IDLE state with release cause 'RRC Resume failure'",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "T390_STOP_ACTION",
+      "name": "Stop T390 action",
+      "entity_type": "Procedure",
+      "description": "Procedure to stop T390 timer for all access categories",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "COND_T319_T302_T319a_RUNNING",
+      "name": "T319, T302 or T319a running condition",
+      "entity_type": "Condition",
+      "description": "Condition where timer T319, T302 or T319a is running during cell/reselection or relay reselection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "COND_T390_RUNNING",
+      "name": "T390 running condition",
+      "entity_type": "Condition",
+      "description": "Condition where timer T390 is running during cell selection/reselection or relay selection/reselection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_T319_T302_T319a_RUNNING",
+      "target": "RRC_IDLE_TRANSITION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell/reselection or relay reselection while T319, T302 or T319a is running triggers transition to RRC_IDLE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_T390_RUNNING",
+      "target": "T390_STOP_ACTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell selection/reselection or relay selection/reselection while T390 is running triggers stopping T390",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T390_STOP_ACTION",
+      "target": "T390",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "T390 stop action stops timer T390 for all access categories",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CELL_RESELECTION",
+      "target": "COND_T319_T302_T319a_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell reselection is guarded by condition of T319, T302 or T319a running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RELAY_RESELECTION",
+      "target": "COND_T319_T302_T319a_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Relay reselection is guarded by condition of T319, T302 or T319a running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CELL_SELECTION",
+      "target": "COND_T390_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell selection is guarded by condition of T390 running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CELL_RESELECTION",
+      "target": "COND_T390_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell reselection is guarded by condition of T390 running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RELAY_RESELECTION",
+      "target": "COND_T390_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Relay reselection is guarded by condition of T390 running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.6"
+      ]
+    }
+  ]
+}

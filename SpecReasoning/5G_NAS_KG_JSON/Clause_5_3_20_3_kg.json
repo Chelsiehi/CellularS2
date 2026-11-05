@@ -1,0 +1,240 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.20.3",
+  "title": "Requirements for UE in an SNPN",
+  "entities": [
+    {
+      "id": "SNPN_ATTEMPT_COUNTER_3GPP",
+      "name": "SNPN-specific attempt counter for 3GPP access",
+      "entity_type": "Property",
+      "description": "Counter maintained by UE for access attempts via 3GPP access in SNPN operation mode. Stored in non-volatile memory and erased when subscriber data is updated or USIM is removed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "SNPN_ATTEMPT_COUNTER_NON3GPP",
+      "name": "SNPN-specific attempt counter for non-3GPP access",
+      "entity_type": "Property",
+      "description": "Counter maintained by UE for access attempts via PLMN when accessing SNPN services. Applicable only if UE supports accessing SNPN services via PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "INVALID_EVENT_COUNTER_3GPP",
+      "name": "Counter for entry considered invalid for 3GPP access events",
+      "entity_type": "Property",
+      "description": "Counter tracking events where current SNPN entry is considered invalid for 3GPP access. Reset to zero when subscriber data is updated or USIM is removed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "INVALID_EVENT_COUNTER_NON3GPP",
+      "name": "Counter for entry considered invalid for non-3GPP access events",
+      "entity_type": "Property",
+      "description": "Counter tracking events where current SNPN entry is considered invalid for non-3GPP access. Applicable only if UE supports accessing SNPN services via PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that may be received without integrity protection with various 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that may be received without integrity protection with various 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "T3247",
+      "name": "Timer T3247",
+      "entity_type": "Timer",
+      "description": "Timer started when UE receives unprotected REGISTRATION REJECT or SERVICE REJECT with specific 5GMM cause values. Duration varies based on cause value.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "T3510",
+      "name": "Timer T3510",
+      "entity_type": "Timer",
+      "description": "Timer stopped when UE receives unprotected reject message with specific 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "T3517",
+      "name": "Timer T3517",
+      "entity_type": "Timer",
+      "description": "Timer stopped when UE receives unprotected reject message with specific 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "name": "5GMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "State entered by UE when storing TAI in forbidden lists after receiving non-integrity protected NAS reject message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "CONDITION_UNPROTECTED_REJECT",
+      "name": "Unprotected reject message condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives REGISTRATION REJECT or SERVICE REJECT without integrity protection before secure NAS message exchange is established.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "T3510",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3510 when receiving unprotected reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3517 when receiving unprotected reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "T3247",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3247 when receiving unprotected reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "STATE_5GMM_DEREGISTERED_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters 5GMM-DEREGISTERED.LIMITED-SERVICE state after receiving unprotected reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "INVALID_EVENT_COUNTER_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE increments invalid event counter for 3GPP access when receiving unprotected reject with specific cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "INVALID_EVENT_COUNTER_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE increments invalid event counter for non-3GPP access when receiving unprotected reject with specific cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "SNPN_ATTEMPT_COUNTER_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE increments SNPN-specific attempt counter for 3GPP access when receiving unprotected reject with specific cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_UNPROTECTED_REJECT",
+      "target": "SNPN_ATTEMPT_COUNTER_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE increments SNPN-specific attempt counter for non-3GPP access when receiving unprotected reject with specific cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REGISTRATION_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Unprotected REGISTRATION REJECT message triggers the unprotected reject condition",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SERVICE_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Unprotected SERVICE REJECT message triggers the unprotected reject condition",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "REGISTRATION_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "REGISTRATION REJECT message may be received without integrity protection",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "SERVICE_REJECT",
+      "target": "CONDITION_UNPROTECTED_REJECT",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SERVICE REJECT message may be received without integrity protection",
+      "provenance": [
+        "TS 24.501, Clause 5.3.20.3"
+      ]
+    }
+  ]
+}

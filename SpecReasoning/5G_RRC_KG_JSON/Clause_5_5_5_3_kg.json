@@ -1,0 +1,260 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.5.3",
+  "title": "Sorting of cell measurement results",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE that performs cell measurement result sorting according to report configuration parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REPORT_CONFIG",
+      "name": "Report Configuration",
+      "entity_type": "Property",
+      "description": "Configuration parameters associated with a measurement ID that triggers reporting and determines sorting quantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "EVENT_TRIGGERED",
+      "name": "Event Triggered Report Type",
+      "entity_type": "Condition",
+      "description": "Report type set to eventTriggered, which determines sorting quantity based on event-specific thresholds.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "PERIODICAL",
+      "name": "Periodical Report Type",
+      "entity_type": "Condition",
+      "description": "Report type set to periodical, which determines sorting quantity based on report quantity configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "SORTING_QUANTITY",
+      "name": "Sorting Quantity",
+      "entity_type": "Property",
+      "description": "The measurement quantity used to sort cell measurement results, determined by report configuration parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "NR_CELL",
+      "name": "NR Cell",
+      "entity_type": "Property",
+      "description": "New Radio cell for which sorting quantity is determined based on event thresholds or report quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "EUTRA_CELL",
+      "name": "E-UTRA Cell",
+      "entity_type": "Property",
+      "description": "Evolved UTRA cell for which sorting quantity is determined based on bN-ThresholdEUTRA or reportQuantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "UTRA_FDD_CELL",
+      "name": "UTRA-FDD Cell",
+      "entity_type": "Property",
+      "description": "UTRA Frequency Division Duplex cell for which sorting quantity is determined based on bN-ThresholdUTRA-FDD or reportQuantityUTRA-FDD.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "L2_U2N_RELAY_UE",
+      "name": "Candidate L2 U2N Relay UE",
+      "entity_type": "Property",
+      "description": "Layer 2 UE-to-Network relay candidate UE for which sorting quantity is determined based on yN-Threshold2-Relay or reportQuantityRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "RSRP",
+      "name": "Reference Signal Received Power",
+      "entity_type": "Property",
+      "description": "RSRP measurement quantity used as sorting quantity when rsrp is set to true in periodical reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "RSRQ",
+      "name": "Reference Signal Received Quality",
+      "entity_type": "Property",
+      "description": "RSRQ measurement quantity used as sorting quantity when rsrq is set to true in periodical reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "RSCP",
+      "name": "Received Signal Code Power",
+      "entity_type": "Property",
+      "description": "RSCP measurement quantity used as sorting quantity for UTRA-FDD cells in periodical reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "SORTING_QUANTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE determines sorting quantity according to report configuration parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REPORT_CONFIG",
+      "target": "SORTING_QUANTITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sorting quantity is determined by parameters of the report configuration associated with the measurement ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EVENT_TRIGGERED",
+      "target": "NR_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For event triggered reporting, NR cell sorting quantity uses event-specific thresholds.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EVENT_TRIGGERED",
+      "target": "EUTRA_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For event triggered reporting, E-UTRA cell sorting quantity uses bN-ThresholdEUTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EVENT_TRIGGERED",
+      "target": "UTRA_FDD_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For event triggered reporting, UTRA-FDD cell sorting quantity uses bN-ThresholdUTRA-FDD.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EVENT_TRIGGERED",
+      "target": "L2_U2N_RELAY_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For event triggered reporting, candidate L2 U2N Relay UE sorting quantity uses yN-Threshold2-Relay.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PERIODICAL",
+      "target": "NR_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting, NR cell sorting quantity uses reportQuantityCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PERIODICAL",
+      "target": "EUTRA_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting, E-UTRA cell sorting quantity uses reportQuantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PERIODICAL",
+      "target": "UTRA_FDD_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting, UTRA-FDD cell sorting quantity uses reportQuantityUTRA-FDD.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PERIODICAL",
+      "target": "L2_U2N_RELAY_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting, candidate L2 U2N Relay UE sorting quantity uses reportQuantityRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PERIODICAL",
+      "target": "RSRP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting with rsrp set to true, RSRP is used as sorting quantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PERIODICAL",
+      "target": "RSRQ",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting with rsrq set to true, RSRQ is used as sorting quantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PERIODICAL",
+      "target": "RSCP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For periodical reporting of UTRA-FDD cells, RSCP is used as sorting quantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.3"
+      ]
+    }
+  ]
+}

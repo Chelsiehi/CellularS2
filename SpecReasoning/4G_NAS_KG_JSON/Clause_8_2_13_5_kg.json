@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.13.5",
+  "title": "Universal time and local time zone",
+  "entities": [
+    {
+      "id": "IE_UT_LTZ",
+      "name": "Universal time and local time zone",
+      "entity_type": "Information Element",
+      "description": "Information element sent by the network providing time zone information for the current tracking area and tracking area list.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "IE_NDST",
+      "name": "Network daylight saving time",
+      "entity_type": "Information Element",
+      "description": "Information element indicating when the local time zone has been adjusted for daylight saving time.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "COND_TA_APPLIES",
+      "name": "Time zone applies to current tracking area",
+      "entity_type": "Condition",
+      "description": "Condition where the UE assumes the time zone applies to its current tracking area and tracking area list.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "PROP_TIME_INACCURATE",
+      "name": "Time information not accurate",
+      "entity_type": "Property",
+      "description": "Property indicating the UE shall not assume the time information is accurate, especially when TAI list includes tracking areas from different time zones.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "COND_DST_ADJUSTED",
+      "name": "Local time zone adjusted for daylight saving",
+      "entity_type": "Condition",
+      "description": "Condition where the local time zone has been adjusted for daylight saving time.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_UT_LTZ",
+      "target": "COND_TA_APPLIES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Universal time and local time zone IE is guarded by the condition that it applies to the current tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UT_LTZ",
+      "target": "PROP_TIME_INACCURATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The Universal time and local time zone IE establishes that time information may not be accurate.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_DST_ADJUSTED",
+      "target": "IE_NDST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When local time zone is adjusted for daylight saving, the network must include the Network daylight saving time IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.13.5"
+      ]
+    }
+  ]
+}

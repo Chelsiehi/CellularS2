@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.17",
+  "title": "Service Gap Control",
+  "entities": [
+    {
+      "id": "PROC_SGC",
+      "name": "Service Gap Control",
+      "entity_type": "Procedure",
+      "description": "Network mechanism to control frequency of UE transitions from EMM-IDLE to EMM-CONNECTED mode by imposing service gaps.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Service Gap Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer used to enforce service gap periods, started when NAS signalling connection is released and running during service gap control.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered but has no active NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where UE has an active NAS signalling connection with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate attach procedure, indicates SGC support.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to initiate tracking area update procedure, indicates SGC support.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept attach request, contains T3447 value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept tracking area update request, contains T3447 value.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "COND_SGC_ACTIVE",
+      "name": "SGC Active Condition",
+      "entity_type": "Condition",
+      "description": "Condition where network supports SGC and service gap time value is available in UE EMM context.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "COND_T3447_START_UE",
+      "name": "T3447 Start Condition (UE)",
+      "entity_type": "Condition",
+      "description": "UE starts T3447 when NAS signalling connection is released, UE supports SGC, and timer value is available and non-zero.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "COND_T3447_START_NETWORK",
+      "name": "T3447 Start Condition (Network)",
+      "entity_type": "Condition",
+      "description": "Network starts T3447 when UE transitions from EMM-CONNECTED to EMM-IDLE mode, except for specific request types.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "PROP_ALLOWED_REQUESTS",
+      "name": "Allowed Requests During T3447",
+      "entity_type": "Property",
+      "description": "Network allows specific requests when T3447 is running: emergency bearer services, exception data reporting, attach without PDN connection, TA update without active flags, high priority access, and mobile terminated services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SGC",
+      "target": "TIMER_T3447",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service Gap Control procedure involves starting and managing timer T3447.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SGC",
+      "target": "COND_SGC_ACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service Gap Control procedure requires SGC to be active in the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "PROC_SGC",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "ATTACH REQUEST message indicates UE support for SGC feature.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "PROC_SGC",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message indicates UE support for SGC feature.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_ACCEPT",
+      "target": "TIMER_T3447",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains T3447 timer value for SGC.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "TIMER_T3447",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains T3447 timer value for SGC.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_T3447_START_UE",
+      "target": "TIMER_T3447",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts T3447 when NAS signalling connection is released and conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_T3447_START_NETWORK",
+      "target": "TIMER_T3447",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts T3447 when UE transitions from EMM-CONNECTED to EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_EMM_CONNECTED",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "UE transitions from EMM-CONNECTED to EMM-IDLE mode triggers T3447 start.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3447",
+      "target": "PROP_ALLOWED_REQUESTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When T3447 is running, network allows specific types of requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "STATE_EMM_DEREGISTERED",
+      "target": "TIMER_T3447",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3447 continues running when UE enters EMM-DEREGISTERED state if UE remains on and USIM unchanged.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.17"
+      ]
+    }
+  ]
+}

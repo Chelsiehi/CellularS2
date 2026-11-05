@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.26.17",
+  "title": "Extended DRX parameters",
+  "entities": [
+    {
+      "id": "IE_EXTENDED_DRX_PARAMETERS",
+      "name": "Extended DRX parameters",
+      "entity_type": "Information Element",
+      "description": "Information element containing extended DRX configuration parameters for power saving in connected mode.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to update its tracking area registration with the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "COND_UE_INCLUDED_EDRX",
+      "name": "UE included Extended DRX parameters IE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has included the Extended DRX parameters IE in the TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_EDRX",
+      "name": "Network supports eDRX and accepts use",
+      "entity_type": "Condition",
+      "description": "Condition where the network supports extended DRX functionality and accepts the UE's request to use eDRX.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "PROP_NETWORK_INCLUDES_EDRX_IE",
+      "name": "Network includes Extended DRX parameters IE",
+      "entity_type": "Property",
+      "description": "Network behavior where the Extended DRX parameters IE is included in the response message when conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_EXTENDED_DRX_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message can contain the Extended DRX parameters IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROP_NETWORK_INCLUDES_EDRX_IE",
+      "target": "COND_UE_INCLUDED_EDRX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network inclusion of Extended DRX parameters IE is guarded by the condition that UE included it in request.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_NETWORK_INCLUDES_EDRX_IE",
+      "target": "COND_NETWORK_SUPPORTS_EDRX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network inclusion of Extended DRX parameters IE is guarded by the condition that network supports and accepts eDRX.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_INCLUDED_EDRX",
+      "target": "PROP_NETWORK_INCLUDES_EDRX_IE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE including Extended DRX parameters IE in request establishes network behavior to include it in response.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NETWORK_SUPPORTS_EDRX",
+      "target": "PROP_NETWORK_INCLUDES_EDRX_IE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network supporting and accepting eDRX establishes network behavior to include Extended DRX parameters IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.17"
+      ]
+    }
+  ]
+}

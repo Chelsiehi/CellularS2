@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.3.4",
+  "title": "Derivation of L2 U2N Relay UE measurement results",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE that performs L2 U2N Relay UE measurements as configured by the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "L2_U2N_RELAY_UE_MEASUREMENT",
+      "name": "L2 U2N Relay UE measurement",
+      "entity_type": "Procedure",
+      "description": "Procedure for deriving NR sidelink measurement results of serving L2 Relay UE or candidate L2 U2N Relay UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "MEASUREMENT_QUANTITY",
+      "name": "Measurement quantity",
+      "entity_type": "Property",
+      "description": "The specific measurement quantity to be derived for L2 U2N Relay UE measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "DMRS_BASED_DERIVATION",
+      "name": "DMRS-based derivation",
+      "entity_type": "Procedure",
+      "description": "Procedure to derive measurement quantity based on DMRS as specified in TS 38.215.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "LAYER3_FILTERING",
+      "name": "Layer 3 filtering",
+      "entity_type": "Procedure",
+      "description": "Filtering procedure applied to measurement results as described in clause 5.5.3.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "MEASOBJECTRELAY",
+      "name": "measObjectRelay",
+      "entity_type": "Information Element",
+      "description": "Measurement object configuration containing NR sidelink frequency information for L2 U2N Relay UE measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "L2_U2N_RELAY_UE_MEASUREMENT",
+      "target": "MEASUREMENT_QUANTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The measurement procedure includes deriving specific measurement quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "L2_U2N_RELAY_UE_MEASUREMENT",
+      "target": "DMRS_BASED_DERIVATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The measurement procedure includes DMRS-based derivation of measurement quantities.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "L2_U2N_RELAY_UE_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The measurement procedure includes layer 3 filtering of results.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DMRS_BASED_DERIVATION",
+      "target": "MEASOBJECTRELAY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "DMRS-based derivation uses the NR sidelink frequency indicated in the measObjectRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "L2_U2N_RELAY_UE_MEASUREMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE performs L2 U2N Relay UE measurement when configured by the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.22.3",
+  "title": "Authorization of C2 communication",
+  "entities": [
+    {
+      "id": "C2_AUTHORIZATION_PROCEDURE",
+      "name": "C2 authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authorizing C2 communication between UAV and UAV-C, requiring successful USS authorization before enabling user plane connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "UUAA_SM_PROCEDURE",
+      "name": "UUAA-SM procedure",
+      "entity_type": "Procedure",
+      "description": "UAS Unmanned Aerial System Authentication and Authorization Service Management procedure used to authorize C2 communication during PDU session establishment or modification.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish a PDU session, during which UUAA-SM can be performed for C2 communication authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION",
+      "name": "PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to modify an existing PDU session, during which UUAA-SM can be performed for C2 communication authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "CAA_LEVEL_UAV_ID",
+      "name": "CAA-level UAV ID",
+      "entity_type": "Information Element",
+      "description": "Identifier provided by UE to the network for C2 authorization procedure, representing the UAV identity at Civil Aviation Authority level.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "APPLICATION_LAYER_PAYLOAD",
+      "name": "Application layer payload",
+      "entity_type": "Information Element",
+      "description": "Payload containing information for UAV-C pairing and UAV flight authorization, provided by upper layers during C2 authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "UAV_UAVC_PAIRING",
+      "name": "UAV and UAV-C pairing",
+      "entity_type": "Condition",
+      "description": "Condition requiring successful USS authorization before C2 communication user plane connectivity can be enabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "PAIRING_REVOCATION",
+      "name": "Pairing revocation",
+      "entity_type": "Condition",
+      "description": "Condition where UAV and UAV-C pairing is revoked, leading to disabling of C2 communication.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "C2_COMMUNICATION_DISABLED",
+      "name": "C2 communication disabled",
+      "entity_type": "Property",
+      "description": "Property where network disables C2 communication, either by removing QoS flow during PDU session modification or releasing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "C2_AUTHORIZATION_PROCEDURE",
+      "target": "UAV_UAVC_PAIRING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "C2 authorization procedure requires successful UAV and UAV-C pairing authorization by USS.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "C2_AUTHORIZATION_PROCEDURE",
+      "target": "CAA_LEVEL_UAV_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "C2 authorization procedure includes CAA-level UAV ID provided by UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "C2_AUTHORIZATION_PROCEDURE",
+      "target": "APPLICATION_LAYER_PAYLOAD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "C2 authorization procedure may include application layer payload with UAV-C pairing and flight authorization information.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PDU_SESSION_ESTABLISHMENT",
+      "target": "UUAA_SM_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session establishment procedure may include UUAA-SM procedure for C2 communication authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_MODIFICATION",
+      "target": "UUAA_SM_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session modification procedure may include UUAA-SM procedure for C2 communication authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PAIRING_REVOCATION",
+      "target": "C2_COMMUNICATION_DISABLED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Pairing revocation condition leads to C2 communication being disabled by the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.22.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing security between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "T3560",
+      "name": "Timer T3560",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition where lower layer fails before SECURITY MODE COMPLETE or SECURITY MODE REJECT is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "T3560_EXPIRY",
+      "name": "Timer T3560 expiry",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3560 expires, triggering retransmission or procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COLLISION",
+      "name": "Procedure collision",
+      "entity_type": "Condition",
+      "description": "Condition where security mode control procedure collides with other procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "HANDOVER_NON_DELIVERY",
+      "name": "Handover non-delivery",
+      "entity_type": "Condition",
+      "description": "Condition where NAS PDU cannot be delivered due to handover.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ABORTION",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Network behavior of aborting security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "MESSAGE_RETRANSMISSION",
+      "name": "Message retransmission",
+      "entity_type": "Property",
+      "description": "Network behavior of retransmitting SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "PROCEDURE_ABORTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure before SECURITY MODE COMPLETE/REJECT causes procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T3560_EXPIRY",
+      "target": "MESSAGE_RETRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First four T3560 expiries trigger SECURITY MODE COMMAND retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3560_EXPIRY",
+      "target": "PROCEDURE_ABORTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3560 expiry causes procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Security mode control procedure starts timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "T3560",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Security mode control procedure resets timer T3560 on retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_COLLISION",
+      "target": "PROCEDURE_ABORTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with registration/service/de-registration procedures causes security mode control abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "HANDOVER_NON_DELIVERY",
+      "target": "MESSAGE_RETRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Handover non-delivery of SECURITY MODE COMMAND triggers retransmission after successful handover.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.7"
+      ]
+    }
+  ]
+}

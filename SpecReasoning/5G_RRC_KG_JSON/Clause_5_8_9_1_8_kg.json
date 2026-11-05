@@ -1,0 +1,119 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.1.8",
+  "title": "Reception of an RRCReconfigurationFailureSidelink by the UE",
+  "entities": [
+    {
+      "id": "MSG_RRCReconfigurationFailureSidelink",
+      "name": "RRCReconfigurationFailureSidelink",
+      "entity_type": "Message",
+      "description": "Message received by UE indicating failure of sidelink reconfiguration procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "TIMER_T400",
+      "name": "Timer T400",
+      "entity_type": "Timer",
+      "description": "Timer associated with sidelink reconfiguration procedure for a specific destination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SIDELINK_UE_INFO",
+      "name": "sidelink UE information for NR sidelink communication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE provides sidelink capability and configuration information to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8",
+        "References TS 38.331 Clause 5.8.3.3 and TS 36.331 Clause 5.10.15"
+      ]
+    },
+    {
+      "id": "COND_UE_IN_RRC_CONNECTED",
+      "name": "UE is in RRC_CONNECTED",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE is currently in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_USE_PREV_CONFIG",
+      "name": "continue using previous configuration",
+      "entity_type": "Property",
+      "description": "UE continues using the configuration that was active prior to the corresponding RRCReconfigurationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_RRCReconfigurationFailureSidelink",
+      "target": "TIMER_T400",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCReconfigurationFailureSidelink stops timer T400 for the destination if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRCReconfigurationFailureSidelink",
+      "target": "PROPERTY_USE_PREV_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCReconfigurationFailureSidelink causes UE to continue using previous configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRCReconfigurationFailureSidelink",
+      "target": "COND_UE_IN_RRC_CONNECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reception of RRCReconfigurationFailureSidelink triggers conditional execution based on UE RRC state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_UE_IN_RRC_CONNECTED",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UE_IN_RRC_CONNECTED",
+      "target": "PROCEDURE_SIDELINK_UE_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in RRC_CONNECTED state, sidelink UE information procedure is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.8"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.8",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_REG_MOB_PERIODIC_UPDATE",
+      "name": "Registration procedure for mobility and periodic update",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration updates including mobility and periodic registration updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "MSG_REG_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to accept UE registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "MSG_REG_COMPLETE",
+      "name": "REGISTRATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "MSG_REG_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject UE registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message initiating de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "TIMER_T3550",
+      "name": "T3550",
+      "entity_type": "Timer",
+      "description": "Timer used during registration procedure for waiting for REGISTRATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "IE_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Information Element",
+      "description": "Globally Unique Temporary Identifier for 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list for UE location tracking.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "IE_PEIPS_ASSISTANCE",
+      "name": "Negotiated PEIPS assistance information",
+      "entity_type": "Information Element",
+      "description": "Information element containing paging subgroup ID for power efficient paging.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "IE_DEREG_TYPE",
+      "name": "De-registration type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5GMM idle state where UE is not actively communicating.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition when lower layer communication fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort procedure",
+      "entity_type": "Property",
+      "description": "Property indicating procedure termination due to abnormal conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes AMF to enter 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REG_ACCEPT",
+      "target": "IE_5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain 5G-GUTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REG_ACCEPT",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain TAI list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REG_ACCEPT",
+      "target": "IE_PEIPS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_REG_MOB_PERIODIC_UPDATE",
+      "target": "TIMER_T3550",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Registration procedure starts timer T3550.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_REG_MOB_PERIODIC_UPDATE",
+      "target": "MSG_REG_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes sending REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DEREG_REQUEST",
+      "target": "IE_DEREG_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains De-registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_REG_REJECT",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "REGISTRATION REJECT message causes procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.8"
+      ]
+    }
+  ]
+}

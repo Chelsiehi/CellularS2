@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.3.2.2",
+  "title": "BEARER CONTEXT ACTIVE",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "--------------------------------",
+    "The EPS bearer context is active in the UE",
+    "Figure 6.1.3.2.2.1: The ESM sublayer states for EPS bearer context handling in the UE (overview)",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.1.3.2.2.1",
+      "file": "Figure_6_1_3_2_2_1_p268.png.json",
+      "title": "The ESM sublayer states for EPS bearer context handling in the UE (overview)",
+      "content": {
+        "figure_id": "6.1.3.2.2.1",
+        "title": "The ESM sublayer states for EPS bearer context handling in the UE (overview)",
+        "type": "STATE_TRANSITION",
+        "content": {
+          "states": [
+            "BEARER CONTEXT INACTIVE",
+            "BEARER CONTEXT ACTIVE"
+          ],
+          "transitions": [
+            {
+              "from": "BEARER CONTEXT INACTIVE",
+              "to": "BEARER CONTEXT ACTIVE",
+              "conditions": [
+                "ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT",
+                "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+                "PDN DISCONNECT REJECT including cause value ≠ 49",
+                "BEARER RESOURCE MODIFICATION REJECT including cause value = 43"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT INACTIVE",
+              "to": "BEARER CONTEXT INACTIVE",
+              "conditions": [
+                "PDN CONNECTIVITY REJECT",
+                "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT",
+                "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT",
+                "MODIFY EPS BEARER CONTEXT REJECT including cause value = 43"
+              ]
+            },
+            {
+              "from": "BEARER CONTEXT ACTIVE",
+              "to": "BEARER CONTEXT ACTIVE",
+              "conditions": [
+                "PDN DISCONNECT REJECT including cause value = 49",
+                "MODIFY EPS BEARER CONTEXT ACCEPT/REJECT including cause value ≠ 43",
+                "BEARER RESOURCE MODIFICATION ACCEPT/REJECT including cause value ≠ 43"
+              ]
+            }
+          ],
+          "entities": [],
+          "messages": [],
+          "fields": [],
+          "notes": [
+            "Figure shows ESM sublayer state transitions for EPS bearer context handling in the UE"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

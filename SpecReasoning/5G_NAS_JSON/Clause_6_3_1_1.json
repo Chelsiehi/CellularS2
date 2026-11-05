@@ -1,0 +1,122 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------",
+    "The purpose of the PDU session authentication and authorization procedure is to enable the DN",
+    "a) to authenticate the upper layers of the UE, when establishing the PDU session",
+    "b) to authorize the upper layers of the UE, when establishing the PDU session",
+    "c) both of the above",
+    "d) to re-authenticate the upper layers of the UE after establishment of the PDU session; or",
+    "e) to authenticate the upper layers of the 5G ProSe layer-3 remote UE, upon receipt of the REMOTE UE REPORT message",
+    "The PDU session authentication and authorization procedure can be performed only during or after the UE-requested PDU session procedure establishing a non-emergency PDU session. The PDU session authentication and authorization procedure shall not be performed during or after the UE-requested PDU session establishment procedure establishing an emergency PDU session",
+    "The upper layers store the association between a DNN and corresponding credentials, if any, for the PDU session authentication and authorization",
+    "If the UE is registered for onboarding services in SNPN the SMF may initiate the PDU session authentication and authorization procedure based on local policy with a DCS as specified in 3GPPTS33.501[24] clauseI.9.2.4.1 or a DNAAA server as specified in 3GPPTS33.501[24] clauseI.9.2.4.2",
+    "If the UE is registered for onboarding services in SNPN and the network initiates the PDU session authentication and authorization procedure, the UE shall use the default UE credentials for secondary authentication for the PDU session authentication and authorization procedure",
+    "The network authenticates the UE using the Extensible Authentication Protocol (EAP) as specified in IETFRFC3748[34]",
+    "EAP has defined four types of EAP messages",
+    "a) an EAP-request message",
+    "b) an EAP-response message",
+    "c) an EAP-success message; and",
+    "d) an EAP-failure message",
+    "The EAP-request message is transported from the network to the UE using the PDU SESSION AUTHENTICATION COMMAND message of the PDU EAP message reliable transport procedure",
+    "The EAP-response message to the EAP-request message is transported from the UE to the network using the PDU SESSION AUTHENTICATION COMPLETE message of the PDU EAP message reliable transport procedure",
+    "If the PDU session authentication and authorization procedure is performed during the UE-requested PDU session establishment procedure",
+    "a) and the DN authentication of the UE completes successfully, the EAP-success message is transported from the network to the UE as part of the UE-requested PDU session establishment procedure in the PDU SESSION ESTABLISHMENT ACCEPT message",
+    "b) and the DN authentication of the UE completes unsuccessfully, the EAP-failure message is transported from the network to the UE as part of the UE-requested PDU session establishment procedure in the PDU SESSION ESTABLISHMENT REJECT message",
+    "If the PDU session authentication and authorization procedure is performed after the UE-requested PDU session establishment procedure",
+    "a) and the DN authentication of the UE completes successfully, the EAP-success message is transported from the network to the UE using the PDU SESSION AUTHENTICATION RESULT message of the PDU EAP result message transport procedure",
+    "b) and the DN authentication of the UE completes unsuccessfully, the EAP-failure message is transported from the network to the UE using the PDU SESSION RELEASE COMMAND message of the network-requested PDU session release procedure",
+    "There can be several rounds of exchange of an EAP-request message and a related EAP-response message for the DN to complete the authentication and authorization of the request for a PDU session (see example in figure6.3.1.1)",
+    "The SMF shall set the authenticator retransmission timer specified in IETFRFC3748[34] subclause4.3 to infinite value",
+    "NOTE: The PDU session authentication and authorization procedure provides a reliable transport of EAP messages and therefore retransmissions at the EAP layer of the SMF do not occur",
+    "Figure6.3.1.1: PDU session authentication and authorization procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.3.1.1",
+      "file": "Figure_6_3_1_1_p494.png.json",
+      "title": "PDU session authentication and authorization procedure",
+      "content": {
+        "figure_id": "6.3.1.1",
+        "title": "PDU session authentication and authorization procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "SMF"
+          ],
+          "messages": [
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION AUTHENTICATION COMMAND",
+              "notes": "<EAP-request message A> Start T3590"
+            },
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "PDU SESSION AUTHENTICATION COMPLETE",
+              "notes": "<EAP-response message to EAP-request message A> Stop T3590"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION AUTHENTICATION COMMAND",
+              "notes": "<EAP-request message B> Start T3590"
+            },
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "PDU SESSION AUTHENTICATION COMPLETE",
+              "notes": "<EAP-response message to EAP-request message B> Stop T3590"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+              "notes": "<EAP-success message>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION ESTABLISHMENT REJECT",
+              "notes": "<EAP-failure message>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION AUTHENTICATION RESULT",
+              "notes": "<EAP-success message>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION RELEASE COMMAND",
+              "notes": "<EAP-failure message>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "REMOTE UE REPORT RESPONSE",
+              "notes": "<EAP-success message or EAP-failure message>"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "OR alternatives shown between PDU SESSION ESTABLISHMENT ACCEPT, PDU SESSION ESTABLISHMENT REJECT, PDU SESSION AUTHENTICATION RESULT, PDU SESSION RELEASE COMMAND, and REMOTE UE REPORT RESPONSE"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.6.2",
+  "title": "SRB release",
+  "entities": [
+    {
+      "id": "PROC_SRB_RELEASE",
+      "name": "SRB release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing SRB3 or SRB4, including PDCP entity release and potential reconfiguration for DAPS bearers or SRB establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "ENTITY_PDCP",
+      "name": "PDCP entity",
+      "entity_type": "Property",
+      "description": "Packet Data Convergence Protocol entity handling SRB data processing, security, and configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "IE_SRB_IDENTITY",
+      "name": "srb-Identity",
+      "entity_type": "Information Element",
+      "description": "Identifier for Signaling Radio Bearer (SRB3 or SRB4).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "IE_SRB_TOADDMODLIST",
+      "name": "srb-ToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of SRBs to be added or modified during reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "IE_PDCP_CONFIG",
+      "name": "pdcp-Config",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for PDCP entity setup or reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "COND_DAPS_BEARER_CONFIGURED",
+      "name": "DAPS bearer configured",
+      "entity_type": "Condition",
+      "description": "Condition indicating if any DAPS bearer is configured, affecting PDCP entity handling for target cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "COND_MASTERKEYUPDATE_RECEIVED",
+      "name": "masterKeyUpdate received",
+      "entity_type": "Condition",
+      "description": "Condition indicating if masterKeyUpdate is received, triggering security algorithm and key configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_ACTIVATED",
+      "name": "AS security activated",
+      "entity_type": "Condition",
+      "description": "Condition indicating if Access Stratum security has been activated, affecting PDCP security configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "COND_REESTABLISHPDCP_SET",
+      "name": "reestablishPDCP set",
+      "entity_type": "Condition",
+      "description": "Condition indicating if reestablishPDCP is set, triggering PDCP re-establishment and security configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCENC",
+      "name": "K_RRCenc key",
+      "entity_type": "Property",
+      "description": "RRC encryption key used for ciphering PDCP entities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCINT",
+      "name": "K_RRCint key",
+      "entity_type": "Property",
+      "description": "RRC integrity key used for integrity protection in PDCP entities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SRB_RELEASE",
+      "target": "ENTITY_PDCP",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SRB release procedure includes releasing or reconfiguring PDCP entities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SRB_RELEASE",
+      "target": "IE_SRB_IDENTITY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves handling srb-Identity for SRB3 or SRB4.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SRB_RELEASE",
+      "target": "COND_DAPS_BEARER_CONFIGURED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior depends on whether DAPS bearer is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SRB_RELEASE",
+      "target": "COND_MASTERKEYUPDATE_RECEIVED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Security configuration step is conditional on masterKeyUpdate reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SRB_RELEASE",
+      "target": "COND_AS_SECURITY_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCP security configuration depends on AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SRB_RELEASE",
+      "target": "COND_REESTABLISHPDCP_SET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCP re-establishment and security application depend on reestablishPDCP being set.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTITY_PDCP",
+      "target": "IE_PDCP_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDCP entity configuration is based on pdcp-Config IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ENTITY_PDCP",
+      "target": "KEY_K_RRCENC",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "PDCP entity uses K_RRCenc key for ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ENTITY_PDCP",
+      "target": "KEY_K_RRCINT",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "PDCP entity uses K_RRCint key for integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_SRB_TOADDMODLIST",
+      "target": "IE_SRB_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "srb-ToAddModList contains srb-Identity values for SRB addition or modification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.6.2"
+      ]
+    }
+  ]
+}

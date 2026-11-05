@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.6.17",
+  "title": "Extended APN aggregate maximum bit rate",
+  "entities": [
+    {
+      "id": "IE_EXTENDED_APN_AMBR",
+      "name": "Extended APN aggregate maximum bit rate",
+      "entity_type": "Information Element",
+      "description": "Information element that carries APN-AMBR values from network to UE for uplink policy enforcement when values exceed the maximum specified in the regular APN-AMBR IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    },
+    {
+      "id": "IE_APN_AMBR",
+      "name": "APN aggregate maximum bit rate",
+      "entity_type": "Information Element",
+      "description": "Regular APN aggregate maximum bit rate information element defined in clause 9.9.4.2 with specified maximum values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.4.2"
+      ]
+    },
+    {
+      "id": "COND_EXCEEDS_MAX",
+      "name": "APN-AMBR values exceed maximum",
+      "entity_type": "Condition",
+      "description": "Condition where at least one APN-AMBR value to be transmitted exceeds the maximum value specified in the regular APN-AMBR IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_WISHES",
+      "name": "Network wishes to transmit APN-AMBR values",
+      "entity_type": "Condition",
+      "description": "Condition where the network intends to send APN-AMBR values to the UE for uplink policy enforcement.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EXTENDED_APN_AMBR",
+      "target": "COND_NETWORK_WISHES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended APN-AMBR IE inclusion is guarded by the condition that network wishes to transmit APN-AMBR values for uplink policy enforcement.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EXTENDED_APN_AMBR",
+      "target": "COND_EXCEEDS_MAX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended APN-AMBR IE inclusion is guarded by the condition that at least one APN-AMBR value exceeds the maximum specified in the regular APN-AMBR IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EXCEEDS_MAX",
+      "target": "IE_APN_AMBR",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The maximum value condition is defined relative to the regular APN-AMBR IE specifications.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.17"
+      ]
+    }
+  ]
+}

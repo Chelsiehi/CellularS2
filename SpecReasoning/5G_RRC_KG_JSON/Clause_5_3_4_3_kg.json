@@ -1,0 +1,216 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.4.3",
+  "title": "Reception of the SecurityModeCommand by the UE",
+  "entities": [
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security Mode Control Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE receives SecurityModeCommand message and activates AS security upon successful integrity verification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODECOMMAND",
+      "name": "SecurityModeCommand",
+      "entity_type": "Message",
+      "description": "RRC message that initiates security activation, containing integrity and ciphering algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODECOMPLETE",
+      "name": "SecurityModeComplete",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE after successful security activation, transmitted unciphered.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODEFAILURE",
+      "name": "SecurityModeFailure",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE if integrity protection check fails.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "IE_INTEGRITY_PROT_ALGORITHM",
+      "name": "integrityProtAlgorithm",
+      "entity_type": "Information Element",
+      "description": "Indicates the integrity protection algorithm to be used for SRB protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "IE_CIPHERING_ALGORITHM",
+      "name": "cipheringAlgorithm",
+      "entity_type": "Information Element",
+      "description": "Indicates the ciphering algorithm to be used for SRB protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCINT",
+      "name": "K_RRCint",
+      "entity_type": "Property",
+      "description": "Integrity protection key for RRC signaling derived from K_gNB and integrityProtAlgorithm.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCENC",
+      "name": "K_RRCenc",
+      "entity_type": "Property",
+      "description": "Ciphering key for RRC signaling derived from K_gNB and cipheringAlgorithm.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "KEY_K_UPINT",
+      "name": "K_UPint",
+      "entity_type": "Property",
+      "description": "Integrity protection key for user plane derived from K_gNB and integrityProtAlgorithm.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "KEY_K_UPENC",
+      "name": "K_UPenc",
+      "entity_type": "Property",
+      "description": "Ciphering key for user plane derived from K_gNB and cipheringAlgorithm.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_CHECK_PASS",
+      "name": "Integrity protection check passes",
+      "entity_type": "Condition",
+      "description": "Condition where SecurityModeCommand message passes integrity verification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "PROP_AS_SECURITY_ACTIVATED",
+      "name": "AS security activated",
+      "entity_type": "Property",
+      "description": "State where UE considers AS security to be activated after successful security mode procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "MSG_SECURITY_MODECOMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves receiving SecurityModeCommand message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_SECURITY_MODECOMMAND",
+      "target": "IE_INTEGRITY_PROT_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SecurityModeCommand contains integrityProtAlgorithm IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SECURITY_MODECOMMAND",
+      "target": "IE_CIPHERING_ALGORITHM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SecurityModeCommand contains cipheringAlgorithm IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SECURITY_MODE_CONTROL",
+      "target": "COND_INTEGRITY_CHECK_PASS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by integrity check condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_INTEGRITY_CHECK_PASS",
+      "target": "PROP_AS_SECURITY_ACTIVATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful integrity check establishes AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_INTEGRITY_CHECK_PASS",
+      "target": "MSG_SECURITY_MODECOMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful integrity check leads to transmission of SecurityModeComplete.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_INTEGRITY_CHECK_PASS",
+      "target": "MSG_SECURITY_MODEFAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Failed integrity check leads to transmission of SecurityModeFailure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SECURITY_MODECOMPLETE",
+      "target": "MSG_SECURITY_MODECOMPLETE",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SecurityModeComplete message is sent unciphered.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SECURITY_MODECOMMAND",
+      "target": "MSG_SECURITY_MODECOMMAND",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "SecurityModeCommand message requires integrity protection verification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.4.3"
+      ]
+    }
+  ]
+}

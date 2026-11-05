@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.14.4",
+  "title": "Rejected NSSAI",
+  "entities": [
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element used by AMF to inform UE about S-NSSAIs rejected by the network due to authentication/authorization failure or revocation.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that includes the Rejected NSSAI IE in messages to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives the Rejected NSSAI information from the AMF.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Identifier",
+      "description": "Single Network Slice Selection Assistance Identifier that may be rejected by the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "AUTH_FAILURE_CONDITION",
+      "name": "Network slice-specific authentication and authorization failure or revocation",
+      "entity_type": "Condition",
+      "description": "Condition where S-NSSAI is rejected due to authentication/authorization issues as specified in subclause 4.6.2.4.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF includes Rejected NSSAI IE to inform UE about rejected S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REJECTED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Rejected NSSAI IE contains one or more S-NSSAIs that were rejected.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTH_FAILURE_CONDITION",
+      "target": "S_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "S-NSSAI rejection is guarded by authentication/authorization failure or revocation condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.14.4"
+      ]
+    }
+  ]
+}

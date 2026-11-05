@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.2",
+  "title": "UE requested bearer resource modification procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------------------------------------------",
+    "In order to request the modification of bearer resources for one traffic flow aggregate, the UE shall send a BEARER RESOURCE MODIFICATION REQUEST message to the MME, start timer T3481 and enter the state PROCEDURE TRANSACTION PENDING (see example in figure 6.5.4.2.1)",
+    "The UE shall include the EPS bearer identity of the EPS bearer associated with the traffic flow aggregate in the EPS bearer identity for packet filter IE",
+    "To request a change of the GBR without changing the packet filter(s), the UE shall set the TFT operation code in the Traffic flow aggregate IE to \"no TFT operation\" and include the packet filter identifier(s) to which the change of the GBR applies in the Packet filter identifier parameter in the parameters list. The UE shall indicate the new GBR requested for the EPS bearer context in the Required traffic flow QoS IE",
+    "To request a modification of a traffic flow aggregate, the UE shall set the TFT operation code in the Traffic flow aggregate IE to \"Replace packet filters in existing TFT\" or \"Add packet filters to existing TFT\". If the TFT operation code is set to \"Add packet filters to existing TFT\", the UE shall include in the parameter list one existing packet filter identifier to which the newly added packet filter(s) is linked. If the EPS bearer is a GBR bearer and the UE also wishes to request a change of GBR, the UE shall indicate the new GBR requested for the EPS bearer context in the Required traffic flow QoS IE",
+    "To request a release of bearer resources, the UE shall set the TFT operation code in the Traffic flow aggregate IE to \"Delete packet filters from existing TFT\". If the EPS bearer is a GBR bearer and the UE does not request the release of all bearer resources, the UE shall indicate the new GBR requested for the EPS bearer context in the Required traffic flow QoS IE",
+    "To request re-negotiation of header compression configuration associated to an EPS bearer context, the UE shall include the Header compression configuration IE in the BEARER RESOURCE MODIFICATION REQUEST message if the network indicated \"Control plane CIoT EPS optimization supported\" and \"Header compression for control plane CIoT EPS optimization supported\" in the EPS network feature support IE",
+    "After an inter-system change from N1 mode to S1 mode, if",
+    "a) the UE is operating in single-registration mode and has received the interworking without N26 interface indicator set to \"interworking without N26 interface not supported\" from the network",
+    "b) the PDN type value of the PDN type IE is set to \"IPv4\", \"IPv6\" or \"IPv4v6\"",
+    "c) the UE indicates \"Control plane CIoT EPS optimization supported\" and \"Header compression for control plane CIoT EPS optimization supported\" in the UE network capability IE of the TRACKING AREA UPDATE REQUEST message; and",
+    "d) the network indicates \"Control plane CIoT EPS optimization supported\" and \"Header compression for control plane CIoT EPS optimization supported\" in the EPS network feature support IE of the TRACKING AREA UPDATE ACCEPT message",
+    "the UE shall send a BEARER RESOURCE MODIFICATION REQUEST message to the MME and include the Header compression configuration IE to negotiate the header compression configuration",
+    "To indicate a change of 3GPP PS data off UE status associated to a PDN connection, the UE shall include the protocol configuration options IE in the BEARER RESOURCE MODIFICATION REQUEST message and set the 3GPP PS data off UE status only if",
+    "- the network included the 3GPP PS data off support indication in the protocol configuration options IE in the ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message when the PDN connection was established; or",
+    "- the PDU session was established when in N1 mode",
+    "To indicate a change of 3GPP PS data off UE status, the UE shall include the EPS bearer identity of the default EPS bearer context of the PDN connection, for which the UE wishes a change of the 3GPP PS data off UE status, in the EPS bearer identity for packet filter IE",
+    "The UE behaves as described in clause 6.3.10",
+    "If the UE requests the modification of a traffic flow aggregate, which is assigned to a dedicated EPS bearer context, it shall ensure that at least one packet filter applicable for the uplink direction remains among the packet filters created on request from the UE in that TFT, or no own packet filters",
+    "NOTE: If the UE requests the release of all bearer resources of a GBR bearer and includes a Required traffic flow QoS IE in the BEARER RESOURCE MODIFICATION REQUEST message, the network ignores the Required traffic flow QoS IE",
+    "If the UE includes the Required traffic flow QoS IE, the UE shall set the QCI to the current QCI value of the EPS bearer context",
+    "If the UE requests the release of bearer resources, the ESM cause value typically indicates one of the following",
+    "To perform authorization for the C2 communication when a PDN connection is already established for the USS communication, the UE shall include the extended protocol configuration options IE in the BEARER RESOURCE MODIFICATION REQUEST message containing the service-level-AA container with the length of two octets. In the service-level-AA container with the length of two octets, the UE shall include",
+    "a) the service-level device ID, with the value set to CAA-level UAV ID",
+    "b) if provided by the upper layers, the service-level-AA payload type parameter with the value set to \"C2 authorization payload\"; and",
+    "c) the service-level-AA payload parameter, with the value set to C2 authorization payload",
+    "NOTE: C2 authorization payload can contain pairing information for C2 communication and flight authorization information",
+    "Figure 6.5.4.2.1: UE requested bearer resource modification procedure",
+    "For the NBIFOM procedures as defined in 3GPP S 24.161 [36], the UE may send a BEARER RESOURCE MODIFICATION REQUEST message to the MME",
+    "It is possible that the traffic flow aggregate IE is not needed in the following procedures",
+    "- re-negotiation of header compression configuration associated to an EPS bearer context",
+    "- indicating a change of 3GPP PS data off UE status associated to a PDN connection; or",
+    "If the traffic flow aggregate IE is not needed, the UE shall set",
+    "- the length indicator of the Traffic flow aggregate IE to the value 1",
+    "- the TFT operation code to \"000\"",
+    "- the E bit to zero; and",
+    "- the number of packet filters to zero",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.5.4.2.1",
+      "file": "Figure_6_5_4_2_1_p332.png.json",
+      "title": "UE requested bearer resource modification procedure",
+      "content": {
+        "figure_id": "6.5.4.2.1",
+        "title": "UE requested bearer resource modification procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "BEARER RESOURCE MODIFICATION REQUEST",
+              "notes": "Start T3481"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3481"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3481, OR condition"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+              "notes": "Stop T3481, OR condition"
+            },
+            {
+              "from": "Network",
+              "to": "UE",
+              "name": "BEARER RESOURCE MODIFICATION REJECT",
+              "notes": "Stop T3481, OR condition"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Figure shows two identical sequences - one above and one below",
+            "Multiple possible Network responses indicated by OR conditions",
+            "Timer T3481 started when UE sends request",
+            "Timer T3481 stopped when UE receives any of the possible response messages"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

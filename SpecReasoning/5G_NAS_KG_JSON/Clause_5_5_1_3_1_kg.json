@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_REGISTRATION_UPDATE",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure used by a UE for both mobility and periodic registration update of 5GS services. When used for periodic registration update, it is performed only in 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3512",
+      "name": "Timer T3512",
+      "entity_type": "Timer",
+      "description": "Timer that controls periodic registration update procedure in the UE. When it expires, the registration procedure for mobility and periodic registration area updating is started.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "MESSAGE_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by the network during registration procedure. For MUSIM UE registered for emergency services, certain indications are not included.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_MUSIM_EMERGENCY",
+      "name": "MUSIM UE registered for emergency services",
+      "entity_type": "Condition",
+      "description": "Condition where a MUSIM UE is registered for emergency services and initiates registration procedure for mobility and periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_NETWORK_RESTRICTIONS",
+      "name": "Network indication restrictions",
+      "entity_type": "Property",
+      "description": "Network shall not indicate support of NAS signalling connection release, paging indication for voice services, reject paging request, or paging restriction in REGISTRATION ACCEPT message for MUSIM UE in emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TIMER_T3512",
+      "target": "PROCEDURE_REGISTRATION_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3512 expires, the registration procedure for mobility and periodic registration area updating is started.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_MUSIM_EMERGENCY",
+      "target": "PROPERTY_NETWORK_RESTRICTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If MUSIM UE is registered for emergency services and initiates registration procedure, the network shall not indicate certain supports in REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MESSAGE_REGISTRATION_ACCEPT",
+      "target": "PROPERTY_NETWORK_RESTRICTIONS",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Network indication restrictions apply specifically to the REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.1"
+      ]
+    }
+  ]
+}

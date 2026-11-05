@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.4.1",
+  "title": "UE is not using 5GS services with control plane CIoT 5GS optimization",
+  "entities": [
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request service establishment or reactivation of PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "SERVICE_ACCEPT_MESSAGE",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to accept service request and provide session status information.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_MESSAGE",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_STATUS_IE",
+      "name": "PDU session status",
+      "entity_type": "Information Element",
+      "description": "IE indicating status of PDU sessions for synchronization between UE and AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_REACTIVATION_RESULT_IE",
+      "name": "PDU session reactivation result",
+      "entity_type": "Information Element",
+      "description": "IE indicating result of user-plane resources re-establishment for PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "ALLOWED_PDU_SESSION_STATUS_IE",
+      "name": "Allowed PDU session status",
+      "entity_type": "Information Element",
+      "description": "IE indicating PDU sessions for which UE allows user-plane reactivation.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "UPLINK_DATA_STATUS_IE",
+      "name": "Uplink data status",
+      "entity_type": "Information Element",
+      "description": "IE indicating PDU sessions with pending uplink data.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "PAGING_RESTRICTION_IE",
+      "name": "Paging restriction",
+      "entity_type": "Information Element",
+      "description": "IE used by MUSIM UE to request paging restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3517",
+      "name": "T3517",
+      "entity_type": "Timer",
+      "description": "Timer used during service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE upon successful service request completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "CONDITION_PDU_STATUS_INCLUDED",
+      "name": "PDU session status IE included",
+      "entity_type": "Condition",
+      "description": "Condition when PDU session status IE is present in SERVICE REQUEST or SERVICE ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_LOCAL_RELEASE_PDU_SESSIONS",
+      "name": "Local release of PDU sessions",
+      "entity_type": "Property",
+      "description": "Behavior where UE or AMF locally releases PDU sessions based on status mismatch.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SERVICE_ACCEPT_MESSAGE",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of SERVICE ACCEPT message indicates successful completion of service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "TIMER_T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Successful completion of service request procedure stops timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful service request procedure causes UE to enter 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SERVICE_REQUEST_MESSAGE",
+      "target": "PDU_SESSION_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message may contain PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_ACCEPT_MESSAGE",
+      "target": "PDU_SESSION_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT message may contain PDU session status IE for synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_PDU_STATUS_INCLUDED",
+      "target": "PROPERTY_LOCAL_RELEASE_PDU_SESSIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDU session status IE is included, UE/AMF performs local release of mismatched PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SERVICE_ACCEPT_MESSAGE",
+      "target": "PDU_SESSION_REACTIVATION_RESULT_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT message contains PDU session reactivation result IE to indicate user-plane re-establishment results.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SERVICE_REQUEST_MESSAGE",
+      "target": "ALLOWED_PDU_SESSION_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message may contain Allowed PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SERVICE_REQUEST_MESSAGE",
+      "target": "UPLINK_DATA_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message may contain Uplink data status IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SERVICE_REQUEST_MESSAGE",
+      "target": "PAGING_RESTRICTION_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MUSIM UE may include Paging restriction IE in SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.1"
+      ]
+    }
+  ]
+}

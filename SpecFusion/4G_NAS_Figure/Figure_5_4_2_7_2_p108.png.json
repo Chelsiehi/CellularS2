@@ -1,0 +1,47 @@
+{
+  "figure_id": "5.4.2.7.2",
+  "title": "Authentication failure procedure (EMM cause #21 \"synch failure\")",
+  "type": "PROCEDURE_FLOW",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [
+      "UE",
+      "MME"
+    ],
+    "messages": [
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "AUTHENTICATION REQUEST",
+        "notes": "Start T3460"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "AUTHENTICATION FAILURE (cause = \"synch failure\")",
+        "notes": "Start T3420; Stop T3460; Perform re-synch with HSS"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "AUTHENTICATION REQUEST",
+        "notes": "Stop T3420; Start T3460"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "AUTHENTICATION RESPONSE",
+        "notes": "Stop T3460"
+      }
+    ],
+    "fields": [],
+    "notes": [
+      "Authentication failure procedure handling synch failure cause",
+      "Timer T3460 started by MME on sending AUTHENTICATION REQUEST",
+      "Timer T3420 started by UE on sending AUTHENTICATION FAILURE",
+      "MME performs re-synchronization with HSS upon receiving synch failure",
+      "Timer T3460 stopped when AUTHENTICATION RESPONSE received"
+    ]
+  }
+}

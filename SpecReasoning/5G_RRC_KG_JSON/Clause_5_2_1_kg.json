@@ -1,0 +1,178 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.1",
+  "title": "Introduction",
+  "entities": [
+    {
+      "id": "MIB",
+      "name": "Master Information Block",
+      "entity_type": "Information Element",
+      "description": "Always transmitted on BCH with 80 ms periodicity. Contains parameters needed to acquire SIB1 from the cell. First transmission scheduled in subframes as defined in TS 38.213.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "Transmitted on DL-SCH with 160 ms periodicity. Contains information about availability and scheduling of other SIBs, including on-demand SIB configuration. Cell-specific SIB.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "SI_MESSAGE",
+      "name": "System Information Message",
+      "entity_type": "Information Element",
+      "description": "Carries SIBs other than SIB1 and posSIBs on DL-SCH. Transmitted within periodically occurring SI-windows. Only SIBs with same periodicity mapped to same SI message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "SI_WINDOW",
+      "name": "System Information Window",
+      "entity_type": "Property",
+      "description": "Periodically occurring time domain windows where SI messages are transmitted. Same length for all SI messages, non-overlapping between different SI messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "RRC_RECONFIGURATION",
+      "name": "RRCReconfiguration Message",
+      "entity_type": "Message",
+      "description": "Used by network to provide system information through dedicated signaling for UEs in RRC_CONNECTED state, particularly when UE has no common search space configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED State",
+      "entity_type": "State",
+      "description": "UE state where network can provide system information through dedicated signaling using RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "SCHEDULING_INFO_LIST",
+      "name": "schedulingInfoList",
+      "entity_type": "Property",
+      "description": "Configuration that maps SIBs to SI messages. Works together with schedulingInfoList2 for SIB mapping and posSchedulingInfoList for posSIB mapping.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "PSCELL_SI",
+      "name": "PSCell System Information",
+      "entity_type": "Property",
+      "description": "Required SI for PSCell provided by dedicated signaling. Can only be changed with Reconfiguration with Sync. UE must acquire MIB of PSCell for SCG SFN timing.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "SCELL_SI",
+      "name": "SCell System Information",
+      "entity_type": "Property",
+      "description": "Required SI for SCells provided by dedicated signaling. Network releases and adds concerned SCell upon change of relevant SI.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MIB",
+      "target": "SIB1",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MIB includes parameters needed to acquire SIB1 from the cell",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIB1",
+      "target": "SI_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB1 includes information regarding availability and scheduling of other SIBs mapped to SI messages",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SI_MESSAGE",
+      "target": "SI_WINDOW",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Each SI message is transmitted within periodically occurring SI-windows",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SCHEDULING_INFO_LIST",
+      "target": "SI_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapping of SIBs to SI messages is configured in schedulingInfoList and schedulingInfoList2",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_RECONFIGURATION",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "For UE in RRC_CONNECTED, network can provide system information through RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRC_RECONFIGURATION",
+      "target": "PSCELL_SI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network provides required SI for PSCell by dedicated signaling within RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRC_RECONFIGURATION",
+      "target": "SCELL_SI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network provides required SI for SCells by dedicated signaling within RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MIB",
+      "target": "PSCELL_SI",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE shall acquire MIB of PSCell to get SFN timing of the SCG",
+      "provenance": [
+        "TS 38.331, Clause 5.2.1"
+      ]
+    }
+  ]
+}

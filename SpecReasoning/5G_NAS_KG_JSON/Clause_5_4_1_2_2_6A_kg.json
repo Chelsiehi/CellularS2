@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.6A",
+  "title": "EAP based Identification initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_EAP_IDENTIFICATION",
+      "name": "EAP based Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network (AUSF, AAA server of CH or DCS) to perform EAP-based identification of the UE using EAP-Request/Identity or EAP-Request/AKA'-Identity messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message sent by AMF to UE that encapsulates EAP-Request/Identity or EAP-Request/AKA'-Identity messages for EAP-based identification.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "IE_EAP_REQUEST_IDENTITY",
+      "name": "EAP-Request/Identity",
+      "entity_type": "Information Element",
+      "description": "EAP message used for identity request in EAP-based identification procedure as specified in IETF RFC 5448.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "IE_EAP_REQUEST_AKA_IDENTITY",
+      "name": "EAP-Request/AKA'-Identity",
+      "entity_type": "Information Element",
+      "description": "EAP message used for AKA' identity request in EAP-based identification procedure as specified in IETF RFC 5448.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "ENTITY_AUSF",
+      "name": "AUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function that can initiate EAP-based identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "ENTITY_AAA_CH",
+      "name": "AAA server of CH",
+      "entity_type": "Property",
+      "description": "AAA server of Credentials Holder that can initiate EAP-based identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "ENTITY_AAA_DCS",
+      "name": "AAA server of DCS",
+      "entity_type": "Property",
+      "description": "AAA server of De-Coupling Server that can initiate EAP-based identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "ENTITY_AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that encapsulates EAP messages in AUTHENTICATION REQUEST and sends to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EAP_IDENTIFICATION",
+      "target": "ENTITY_AUSF",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-based identification procedure can be initiated by AUSF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EAP_IDENTIFICATION",
+      "target": "ENTITY_AAA_CH",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-based identification procedure can be initiated by AAA server of CH.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EAP_IDENTIFICATION",
+      "target": "ENTITY_AAA_DCS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-based identification procedure can be initiated by AAA server of DCS.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTHENTICATION_REQUEST",
+      "target": "IE_EAP_REQUEST_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message encapsulates EAP-Request/Identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTHENTICATION_REQUEST",
+      "target": "IE_EAP_REQUEST_AKA_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message encapsulates EAP-Request/AKA'-Identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ENTITY_AMF",
+      "target": "MSG_AUTHENTICATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF sends AUTHENTICATION REQUEST message to UE containing EAP messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6A"
+      ]
+    }
+  ]
+}

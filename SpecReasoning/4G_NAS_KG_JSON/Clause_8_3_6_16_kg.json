@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.6.16",
+  "title": "Serving PLMN rate control",
+  "entities": [
+    {
+      "id": "IE_SERVING_PLMN_RATE_CONTROL",
+      "name": "Serving PLMN rate control",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the maximum number of uplink ESM DATA TRANSPORT messages including User data container IEs the UE is allowed to send per 6 minute interval.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink ESM message used for data transport.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    },
+    {
+      "id": "IE_USER_DATA_CONTAINER",
+      "name": "User data container IE",
+      "entity_type": "Information Element",
+      "description": "Information element contained within ESM DATA TRANSPORT messages.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    },
+    {
+      "id": "COND_RATE_CONTROL_APPLIED",
+      "name": "Network wishes to apply rate control",
+      "entity_type": "Condition",
+      "description": "Condition when the network wishes to indicate rate control parameters to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_RATE_CONTROL_APPLIED",
+      "target": "IE_SERVING_PLMN_RATE_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Serving PLMN rate control IE is included when the network wishes to apply rate control.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ESM_DATA_TRANSPORT",
+      "target": "IE_USER_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM DATA TRANSPORT messages contain User data container IEs.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SERVING_PLMN_RATE_CONTROL",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The Serving PLMN rate control IE governs the maximum number of uplink ESM DATA TRANSPORT messages allowed per interval.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.6.16"
+      ]
+    }
+  ]
+}

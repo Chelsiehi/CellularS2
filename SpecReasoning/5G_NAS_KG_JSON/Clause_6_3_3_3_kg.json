@@ -1,0 +1,260 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.3.3",
+  "title": "Network-requested PDU session release procedure accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network initiates PDU session release by sending PDU SESSION RELEASE COMMAND message, and the UE accepts it by releasing the session and responding with PDU SESSION RELEASE COMPLETE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Network-initiated message to release a PDU session. Contains PDU session ID and may include Access type IE, PTI, Back-off timer value IE, and various 5GSM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMPLETE",
+      "name": "PDU SESSION RELEASE COMPLETE",
+      "entity_type": "Message",
+      "description": "UE response message to PDU SESSION RELEASE COMMAND, confirming session release. Transported using NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type (3GPP or non-3GPP) for which user-plane resources should be released in MA PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer values for congestion control timers T3396, T3584, T3585, or back-off timers for authentication failures.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for PDU session release, including causes like #26 'insufficient resources', #39 'reactivation requested', #67 'insufficient resources for specific slice and DNN', #69 'insufficient resources for specific slice', and #29 'user authentication or authorization failed'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3582",
+      "name": "Timer T3582",
+      "entity_type": "Timer",
+      "description": "Timer used in UE-requested PDU session release procedure. Stopped when PDU SESSION RELEASE COMMAND contains the PTI value allocated in that procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Congestion control timer for DNN-based restrictions. Started, stopped, or deactivated based on Back-off timer value IE and 5GSM cause in PDU SESSION RELEASE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "Timer T3584",
+      "entity_type": "Timer",
+      "description": "Congestion control timer for S-NSSAI and DNN combination restrictions. Started, stopped, or deactivated based on Back-off timer value IE and 5GSM cause #67.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "Timer T3585",
+      "entity_type": "Timer",
+      "description": "Congestion control timer for S-NSSAI-based restrictions. Started, stopped, or deactivated based on Back-off timer value IE and 5GSM cause #69.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "COND_CAUSE_39_REACTIVATION",
+      "name": "5GSM cause #39 'reactivation requested'",
+      "entity_type": "Condition",
+      "description": "Condition where the network indicates the UE should re-initiate PDU session establishment after release. UE ignores Back-off timer value IE and stops relevant timers.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "PROP_PDU_SESSION_RELEASED",
+      "name": "PDU session released",
+      "entity_type": "Property",
+      "description": "State where the UE considers the PDU session as released, stops associated timers, and may leave associated MBS multicast sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-requested PDU session release procedure begins with receipt of PDU SESSION RELEASE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE completes the procedure by sending PDU SESSION RELEASE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND may contain Access type IE to specify which access to release in MA PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND contains 5GSM cause IE indicating the reason for release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND may contain Back-off timer value IE for congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "TIMER_T3582",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND stops timer T3582 if it contains the PTI value allocated in UE-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CAUSE_39_REACTIVATION",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "5GSM cause #39 'reactivation requested' stops timer T3396 if running for the S-NSSAI or no S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_CAUSE_39_REACTIVATION",
+      "target": "TIMER_T3584",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "5GSM cause #39 'reactivation requested' stops timer T3584 if running for S-NSSAI and DNN combinations.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_CAUSE_39_REACTIVATION",
+      "target": "TIMER_T3585",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "5GSM cause #39 'reactivation requested' stops timer T3585 if running for S-NSSAI or no S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "TIMER_T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Back-off timer value IE starts timer T3396 with provided value when 5GSM cause is #26 'insufficient resources'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "TIMER_T3584",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Back-off timer value IE starts timer T3584 with provided value when 5GSM cause is #67 'insufficient resources for specific slice and DNN'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "TIMER_T3585",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Back-off timer value IE starts timer T3585 with provided value when 5GSM cause is #69 'insufficient resources for specific slice'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "target": "PROP_PDU_SESSION_RELEASED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of network-requested PDU session release procedure establishes that the PDU session is released.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.3"
+      ]
+    }
+  ]
+}

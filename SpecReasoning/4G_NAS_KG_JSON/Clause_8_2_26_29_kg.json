@@ -1,0 +1,87 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.26.29",
+  "title": "Negotiated IMSI offset",
+  "entities": [
+    {
+      "id": "IE_NEGOTIATED_IMSI_OFFSET",
+      "name": "Negotiated IMSI offset",
+      "entity_type": "Information Element",
+      "description": "Information element included by the network when paging timing collision control is supported and the MUSIM UE has included the Requested IMSI offset IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_IMSI_OFFSET",
+      "name": "Requested IMSI offset",
+      "entity_type": "Information Element",
+      "description": "Information element included by the MUSIM UE in the TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request tracking area update.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_PAGING_COLLISION_CONTROL",
+      "name": "Network supports paging timing collision control",
+      "entity_type": "Condition",
+      "description": "Condition that the network supports paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "COND_UE_INCLUDED_REQUESTED_IMSI_OFFSET",
+      "name": "MUSIM UE included Requested IMSI offset IE",
+      "entity_type": "Condition",
+      "description": "Condition that the MUSIM UE has included the Requested IMSI offset IE in the TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_REQUESTED_IMSI_OFFSET",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains the Requested IMSI offset IE when sent by MUSIM UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_NEGOTIATED_IMSI_OFFSET",
+      "target": "COND_NETWORK_SUPPORTS_PAGING_COLLISION_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Negotiated IMSI offset IE is guarded by the condition that network supports paging timing collision control.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_NEGOTIATED_IMSI_OFFSET",
+      "target": "COND_UE_INCLUDED_REQUESTED_IMSI_OFFSET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Negotiated IMSI offset IE is guarded by the condition that MUSIM UE included Requested IMSI offset IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.29"
+      ]
+    }
+  ]
+}

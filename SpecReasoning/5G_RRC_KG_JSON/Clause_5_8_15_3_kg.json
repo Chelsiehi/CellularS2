@@ -1,0 +1,258 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.15.3",
+  "title": "Selection and reselection of NR sidelink U2N Relay UE",
+  "entities": [
+    {
+      "id": "U2N_REMOTE_UE",
+      "name": "U2N Remote UE",
+      "entity_type": "Property",
+      "description": "A UE capable of NR sidelink U2N Remote UE operation that is configured by upper layers to search for a NR sidelink U2N Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "U2N_RELAY_UE",
+      "name": "U2N Relay UE",
+      "entity_type": "Property",
+      "description": "A relay UE that provides connectivity to the network for U2N Remote UEs via NR sidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "NO_SUITABLE_CELL",
+      "name": "No suitable cell condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has no suitable cell to camp on.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "LOW_CELL_RSRP",
+      "name": "Low cell RSRP condition",
+      "entity_type": "Condition",
+      "description": "Condition where RSRP measurement of the camping cell/PCell is below threshHighRemote within sl-remoteUE-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "NO_SELECTED_RELAY",
+      "name": "No selected relay condition",
+      "entity_type": "Condition",
+      "description": "Condition where the UE does not have a selected NR sidelink U2N Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "LOW_SL_RSRP",
+      "name": "Low SL-RSRP condition",
+      "entity_type": "Condition",
+      "description": "Condition where SL-RSRP of currently selected relay UE is below sl-RSRP-Thresh.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "LOW_SD_RSRP",
+      "name": "Low SD-RSRP condition",
+      "entity_type": "Condition",
+      "description": "Condition where SD-RSRP of currently selected relay UE is below sl-RSRP-Thresh when SL-RSRP is not available.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "UPPER_LAYER_REJECT",
+      "name": "Upper layer rejection condition",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers indicate not to use the currently selected relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "PC5_RRC_RELEASE",
+      "name": "PC5-RRC connection release condition",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers request release or AS layer releases the PC5-RRC connection with the currently selected relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "SIDELINK_RLF",
+      "name": "Sidelink radio link failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where sidelink radio link failure is detected on the PC5-RRC connection with the current relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "NR_SIDELINK_DISCOVERY",
+      "name": "NR sidelink discovery procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed to search for candidate NR sidelink U2N Relay UEs as specified in clause 5.8.13.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "RELAY_SELECTION",
+      "name": "Relay selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to select a candidate NR sidelink U2N Relay UE based on SD-RSRP measurements and filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "NO_RELAY_SELECTED",
+      "name": "No relay selected outcome",
+      "entity_type": "Property",
+      "description": "Outcome when UE did not detect any candidate relay UE which SD-RSRP exceeds sl-RSRP-Thresh by sl-HystMin.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "U2N_REMOTE_UE",
+      "target": "NO_SUITABLE_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when it has no suitable cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "U2N_REMOTE_UE",
+      "target": "LOW_CELL_RSRP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when cell RSRP is below threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "U2N_REMOTE_UE",
+      "target": "NO_SELECTED_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when it has no selected relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "U2N_REMOTE_UE",
+      "target": "LOW_SL_RSRP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when SL-RSRP of current relay is below threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "U2N_REMOTE_UE",
+      "target": "LOW_SD_RSRP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when SD-RSRP of current relay is below threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "U2N_REMOTE_UE",
+      "target": "UPPER_LAYER_REJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when upper layers reject current relay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "U2N_REMOTE_UE",
+      "target": "PC5_RRC_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when PC5-RRC connection is released.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "U2N_REMOTE_UE",
+      "target": "SIDELINK_RLF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE performs relay search when sidelink radio link failure occurs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "U2N_REMOTE_UE",
+      "target": "NR_SIDELINK_DISCOVERY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs NR sidelink discovery procedure to search for candidate relay UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "U2N_REMOTE_UE",
+      "target": "RELAY_SELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs relay selection procedure to evaluate and select candidate relay UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RELAY_SELECTION",
+      "target": "U2N_RELAY_UE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Relay selection procedure establishes connection with a suitable U2N Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "RELAY_SELECTION",
+      "target": "NO_RELAY_SELECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Relay selection procedure may result in no relay being selected if no suitable candidates found.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.15.3"
+      ]
+    }
+  ]
+}

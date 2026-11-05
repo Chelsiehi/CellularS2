@@ -1,0 +1,102 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1A",
+  "title": "Service-level authentication and authorization procedure",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------------------------------------------------------",
+    "The purpose of the service-level authentication and authorization (service-level-AA) procedure is to enable the DN using NEF services for authentication",
+    "a) to authenticate the upper layers of the UE, when establishing the PDU session",
+    "b) to authorize the upper layers of the UE, when establishing the PDU session",
+    "c) both of the above; or",
+    "d) to re-authenticate the upper layers of the UE after establishment of the PDU session",
+    "The service-level authentication and authorization procedure is used for UUAA as specified in TS23.256[6AB]",
+    "NOTE1: The authentication protocol for UUAA is out of scope of 3GPP in this release of specification",
+    "The service-level authentication and authorization procedure can be performed only during or after the UE-requested PDU session procedure establishing a non-emergency PDU session. The service-level authentication and authorization procedure shall not be performed during or after the UE-requested PDU session establishment procedure establishing an emergency PDU session",
+    "If the service-level authentication and authorization procedure is performed during the UE-requested PDU session establishment procedure",
+    "a) and the service-level-AA procedure of the UE completes successfully, the service-level-AA response is transported from the network to the UE as a part of the UE-requested PDU session establishment procedure in the PDU SESSION ESTABLISHMENT ACCEPT message; or",
+    "b) and the service-level-AA procedure of the UE completes unsuccessfully, the service-level-AA response is transported from the network to the UE as a part of the UE-requested PDU session establishment procedure in the PDU SESSION ESTABLISHMENT REJECT message",
+    "NOTE2: If the SMF receives the HTTP code set to \"4xx\" or \"5xx\" as specified in 3GPPTS29.500[20AA] or the SMF detects a UUAA-SM failure as specified in 3GPPTS29.256[21B], then the SMF considers that the UUAA-SM procedure has completed unsuccessfully",
+    "If the service-level authentication and authorization procedure is performed for the established PDU session with re-authentication purpose",
+    "a) and the service-level-AA procedure of the UE completes successfully, the service-level-AA response is transported from the network to the UE as a part of the network-requested PDU session modification procedure in the PDU SESSION MODIFICATION COMMAND message; or",
+    "b) and the service-level-AA procedure of the UE completes unsuccessfully, the service-level-AA response is transported from the network to the UE as a part of the network-requested PDU session release procedure in the PDU SESSION RELEASE COMMAND message",
+    "There can be several rounds of exchange of a service-level-AA payload for the service to complete the service-level authentication and authorization of the request for a PDU session (see example in figure6.3.1A.1-1)",
+    "If the UE receives the service-level-AA response in the PDU SESSION ESTABLISHMENT ACCEPT message or the PDU SESSION ESTABLISHMENT REJECT message, the UE passes it to the upper layer",
+    "Figure6.3.1A.1-1: Service-level authentication and authorization procedure"
+  ],
+  "figures": [
+    {
+      "figure_id": "6.3.1A.1",
+      "file": "Figure_6_3_1A_1_p498.png.json",
+      "title": "Service-level authentication and authorization procedure",
+      "content": {
+        "figure_id": "6.3.1A.1",
+        "title": "Service-level authentication and authorization procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "SMF"
+          ],
+          "messages": [
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "SERVICE-LEVEL AUTHENTICATION COMMAND",
+              "notes": "<Service-level-AA payload A>, Start T3594"
+            },
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "SERVICE-LEVEL AUTHENTICATION COMPLETE",
+              "notes": "<Service-level-AA payload B>, Stop T3594"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "SERVICE-LEVEL AUTHENTICATION COMMAND",
+              "notes": "<Service-level-AA payload C>, Start T3594"
+            },
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "SERVICE-LEVEL AUTHENTICATION COMPLETE",
+              "notes": "<Service-level-AA payload D>, Stop T3594"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+              "notes": "<Service-level-AA response:successful>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION MODIFICATION COMMAND",
+              "notes": "<Service-level-AA response:successful>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION ESTABLISHMENT REJECT",
+              "notes": "<Service-level-AA response: not successful>"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION RELEASE COMMAND",
+              "notes": "<Service-level-AA response: not successful>"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

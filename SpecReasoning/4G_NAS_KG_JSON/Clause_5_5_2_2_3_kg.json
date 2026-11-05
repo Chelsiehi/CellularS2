@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.3",
+  "title": "UE initiated combined detach procedure completion",
+  "entities": [
+    {
+      "id": "PROC_UE_COMBINED_DETACH",
+      "name": "UE initiated combined detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE-initiated detach from network, handling both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept detach request when Detach type IE does not indicate 'switch off'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of detach, including 'switch off' and combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3421",
+      "name": "T3421",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receiving DETACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered after combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "STATE_MM_NULL",
+      "name": "MM-NULL",
+      "entity_type": "State",
+      "description": "MM state entered after combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered for non-EPS services after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "COND_DETACH_TYPE_NOT_SWITCH_OFF",
+      "name": "Detach type not 'switch off'",
+      "entity_type": "Condition",
+      "description": "Condition where Detach type IE does not indicate 'switch off', triggering DETACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_MARKED_INACTIVE",
+      "name": "UE marked as inactive",
+      "entity_type": "Property",
+      "description": "UE is marked as inactive in network for EPS and non-EPS services after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "PROP_EPS_BEARER_DEACTIVATED",
+      "name": "EPS bearer context deactivated",
+      "entity_type": "Property",
+      "description": "EPS bearer contexts are deactivated locally without peer-to-peer signaling after combined EPS/IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_DETACH_TYPE_NOT_SWITCH_OFF",
+      "target": "MSG_DETACH_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DETACH ACCEPT message is sent only if Detach type IE does not indicate 'switch off'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "PROP_EPS_BEARER_DEACTIVATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes deactivation of EPS bearer contexts locally.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "PROP_UE_MARKED_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes UE marked as inactive in network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "STATE_MM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes MM-NULL state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_UE_COMBINED_DETACH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EMM-REGISTERED state for non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_DETACH_ACCEPT",
+      "target": "TIMER_T3421",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DETACH ACCEPT message stops timer T3421.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.3"
+      ]
+    }
+  ]
+}

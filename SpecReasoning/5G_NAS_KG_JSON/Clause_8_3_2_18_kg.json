@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.2.18",
+  "title": "Ethernet header compression configuration",
+  "entities": [
+    {
+      "id": "SMF",
+      "name": "Session Management Function",
+      "entity_type": "Property",
+      "description": "Network function responsible for session management in 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "IE_ETH_HC_CONFIG",
+      "name": "Ethernet header compression configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to configure Ethernet header compression parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "ETH_PDU_SESSION",
+      "name": "Ethernet PDU session type",
+      "entity_type": "Condition",
+      "description": "PDU session type supporting Ethernet traffic.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "CP_CIOT_OPT",
+      "name": "Control plane CIoT 5GS optimization",
+      "entity_type": "Condition",
+      "description": "Optimization for Cellular IoT using control plane in 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "MSG_PDU_EST_REQ",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request establishment of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "Terminal device used by the subscriber to access network services.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SMF",
+      "target": "IE_ETH_HC_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SMF may include the Ethernet header compression configuration IE under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "ETH_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IE is guarded by network accepting Ethernet PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "CP_CIOT_OPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IE is guarded by control plane CIoT 5GS optimization being selected.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "MSG_PDU_EST_REQ",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of IE is guarded by UE providing the IE in PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_EST_REQ",
+      "target": "IE_ETH_HC_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message may contain Ethernet header compression configuration IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE",
+      "target": "MSG_PDU_EST_REQ",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.18"
+      ]
+    }
+  ]
+}

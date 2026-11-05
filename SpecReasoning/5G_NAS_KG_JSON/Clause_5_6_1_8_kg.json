@@ -1,0 +1,183 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.8",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request service establishment",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT_MESSAGE",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject a service request",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_MESSAGE",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "CONTROL_PLANE_SERVICE_REQUEST_MESSAGE",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Control plane variant of service request message",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST_MESSAGE",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message used for various types of registration procedures",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "5GS_REGISTRATION_TYPE_IE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of registration (initial, emergency, mobility, periodic)",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE_STATE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5GMM idle state where UE is not actively communicating",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Failure condition at lower protocol layers",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "PROTOCOL_ERROR",
+      "name": "Protocol error",
+      "entity_type": "Condition",
+      "description": "Condition where message contains protocol violations",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "DUPLICATE_MESSAGE",
+      "name": "Duplicate message received",
+      "entity_type": "Condition",
+      "description": "Condition where multiple service request messages are received before procedure completion",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "CAG_RESTRICTION",
+      "name": "CAG restriction",
+      "entity_type": "Condition",
+      "description": "Condition where UE access is restricted due to CAG policies",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_VALUES",
+      "name": "5GMM cause values",
+      "entity_type": "Property",
+      "description": "Various cause codes used in SERVICE REJECT messages for different error conditions",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "5GMM_IDLE_STATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes AMF to enter/stay in 5GMM-IDLE state",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROTOCOL_ERROR",
+      "target": "SERVICE_REJECT_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Protocol error in SERVICE REQUEST triggers SERVICE REJECT message",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SERVICE_REJECT_MESSAGE",
+      "target": "5GMM_CAUSE_VALUES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains 5GMM cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DUPLICATE_MESSAGE",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Duplicate message condition determines whether to abort or continue service request procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REGISTRATION_REQUEST_MESSAGE",
+      "target": "5GS_REGISTRATION_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CAG_RESTRICTION",
+      "target": "SERVICE_REJECT_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CAG restriction condition triggers SERVICE REJECT with specific cause values",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.8"
+      ]
+    }
+  ]
+}

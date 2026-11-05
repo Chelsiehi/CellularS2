@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.2.2",
+  "title": "UE is using 5GS services with control plane CIoT 5GS optimization",
+  "entities": [
+    {
+      "id": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "Control Plane Service Request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends CONTROL PLANE SERVICE REQUEST message to initiate services using control plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to request control plane services in 5GS with CIoT optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "name": "Control plane service type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of service request: mobile terminating request, mobile originating request, emergency services, emergency services fallback, or mobile terminated services.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "name": "CIoT small data container",
+      "entity_type": "Information Element",
+      "description": "Container for small data transmission in CIoT, containing Data type field, PDU session ID, data, and Downlink data expected (DDX).",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container",
+      "entity_type": "Information Element",
+      "description": "Container for larger data payloads when data size exceeds 254 octets or optional IEs are included.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status",
+      "entity_type": "Information Element",
+      "description": "IE indicating which PDU session(s) have pending user data to be sent via user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status",
+      "entity_type": "Information Element",
+      "description": "IE included when paging request includes non-3GPP access type indication and UE has PDU sessions not associated with control plane only.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Information Element",
+      "description": "Optional IE for UE to include paging restriction preferences.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type",
+      "entity_type": "Information Element",
+      "description": "IE containing Request type field values like 'NAS signalling connection release' or 'Rejection of paging'.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3517",
+      "name": "T3517",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_SERVICE_REQUEST_INITIATED",
+      "name": "5GMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by UE after sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_DATA_SIZE_LE_254",
+      "name": "Data size not more than 254 octets",
+      "entity_type": "Condition",
+      "description": "Condition where data size is ≤254 octets and no other optional IEs to include.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_DATA_SIZE_GT_254",
+      "name": "Data size more than 254 octets",
+      "entity_type": "Condition",
+      "description": "Condition where data size >254 octets or other optional IEs to include.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3517",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3517.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "STATE_5GMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure causes UE to enter 5GMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CONTROL_PLANE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Control plane service type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain CIoT small data container IE for small data.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Payload container IE for larger data.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Uplink data status IE for user-plane data indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Allowed PDU session status IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may optionally contain Paging restriction IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain UE request type IE for specific request types.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_DATA_SIZE_LE_254",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines use of CIoT small data container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_DATA_SIZE_GT_254",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines use of Payload container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.2.2"
+      ]
+    }
+  ]
+}

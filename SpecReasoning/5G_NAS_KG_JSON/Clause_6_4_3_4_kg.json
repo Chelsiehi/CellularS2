@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.3.4",
+  "title": "UE-requested PDU session release procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDU_RELEASE_NOT_ACCEPTED",
+      "name": "UE-requested PDU session release procedure not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when the network rejects a UE's request to release a PDU session. The SMF sends a PDU SESSION RELEASE REJECT message with a 5GSM cause indicating the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request release of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "name": "PDU SESSION RELEASE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the SMF to reject a PDU session release request, containing a 5GSM cause IE indicating the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejecting the PDU session release. Common values include #35 (PTI already in use), #43 (Invalid PDU session identity), and #95-111 (protocol errors).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3582",
+      "name": "T3582",
+      "entity_type": "Timer",
+      "description": "Timer running in the UE during the PDU session release procedure. Stopped upon receipt of a PDU SESSION RELEASE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_PTI",
+      "name": "PTI",
+      "entity_type": "Identifier",
+      "description": "Procedure Transaction Identity allocated for the PDU session release procedure. Released by the UE upon receipt of a PDU SESSION RELEASE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Identifier",
+      "description": "Identity of the PDU session being released.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "CONDITION_SMF_DOES_NOT_ACCEPT",
+      "name": "SMF does not accept the request",
+      "entity_type": "Condition",
+      "description": "Condition where the SMF decides not to accept the UE's request to release the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "PROPERTY_LOCAL_RELEASE_PDU_SESSION",
+      "name": "Locally release PDU session",
+      "entity_type": "Property",
+      "description": "Action performed by the UE to locally release the PDU session upon receipt of a PDU SESSION RELEASE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "PROPERTY_LEAVE_MBS_MULTICAST_SESSIONS",
+      "name": "Locally leave MBS multicast sessions",
+      "entity_type": "Property",
+      "description": "Action performed by the UE to locally leave any associated MBS multicast sessions when the PDU session is released.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_PDU_RELEASE_NOT_ACCEPTED",
+      "target": "CONDITION_SMF_DOES_NOT_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure is triggered when the SMF does not accept the PDU session release request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQUESTED_PDU_RELEASE_NOT_ACCEPTED",
+      "target": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes the SMF creating and sending a PDU SESSION RELEASE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The PDU SESSION RELEASE REJECT message contains the 5GSM cause IE indicating the rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "target": "TIMER_T3582",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of the PDU SESSION RELEASE REJECT message causes the UE to stop timer T3582.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "target": "IDENTIFIER_PTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of the PDU SESSION RELEASE REJECT message causes the UE to release the allocated PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_RELEASE_REJECT",
+      "target": "PROPERTY_LOCAL_RELEASE_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of the PDU SESSION RELEASE REJECT message causes the UE to locally release the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_LOCAL_RELEASE_PDU_SESSION",
+      "target": "PROPERTY_LEAVE_MBS_MULTICAST_SESSIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Local release of the PDU session causes the UE to locally leave any associated MBS multicast sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.3.4"
+      ]
+    }
+  ]
+}

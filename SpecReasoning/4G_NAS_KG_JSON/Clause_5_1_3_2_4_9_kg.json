@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.4.9",
+  "title": "EMM-REGISTERED.IMSI-DETACH-INITIATED",
+  "entities": [
+    {
+      "id": "STATE_IMSI_DETACH_INITIATED",
+      "name": "EMM-REGISTERED.IMSI-DETACH-INITIATED",
+      "entity_type": "State",
+      "description": "Substate entered when UE is attached for EPS and non-EPS services and wants to detach for non-EPS services only. User data and signalling information may still be sent and received.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_DETACH_NON_EPS",
+      "name": "Combined detach procedure for non-EPS services only",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE for IMSI detach (non-EPS services only) while remaining attached for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    },
+    {
+      "id": "CONDITION_ATTACHED_EPS_NON_EPS",
+      "name": "UE attached for EPS and non-EPS services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached for both EPS and non-EPS services before initiating IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    },
+    {
+      "id": "CONDITION_DETACH_NON_EPS_ONLY",
+      "name": "UE wants to detach for non-EPS services only",
+      "entity_type": "Condition",
+      "description": "Condition where UE wants to detach only for non-EPS services while maintaining EPS attachment.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_ATTACHED_EPS_NON_EPS",
+      "target": "STATE_IMSI_DETACH_INITIATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State entry is guarded by condition that UE is attached for both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_DETACH_NON_EPS_ONLY",
+      "target": "STATE_IMSI_DETACH_INITIATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State entry is guarded by condition that UE wants to detach only for non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_IMSI_DETACH_INITIATED",
+      "target": "PROCEDURE_COMBINED_DETACH_NON_EPS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs combined detach procedure for non-EPS services only while in this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.9"
+      ]
+    }
+  ]
+}

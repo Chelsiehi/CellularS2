@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.22",
+  "title": "Handling multiple tracking area codes from the lower layers",
+  "entities": [
+    {
+      "id": "PROC_TAI_SELECTION",
+      "name": "TAI Selection Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for selecting a TAI when UE receives multiple TACs from lower layers in satellite E-UTRAN cells. UE constructs TAIs by concatenating current PLMN identity with each TAC and selects based on TAI list membership and forbidden area lists.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "IE_TAI",
+      "name": "Tracking Area Identity",
+      "entity_type": "Information Element",
+      "description": "Identity constructed by concatenating PLMN identity and Tracking Area Code. Used to identify tracking areas in E-UTRAN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "IE_TAC",
+      "name": "Tracking Area Code",
+      "entity_type": "Information Element",
+      "description": "Code received from lower layers that identifies a tracking area within a PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "LIST_TAI",
+      "name": "TAI List",
+      "entity_type": "Property",
+      "description": "List of TAIs stored in the UE that the UE is registered to or allowed to use.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "LIST_FORBIDDEN_ROAMING",
+      "name": "Forbidden Tracking Areas for Roaming",
+      "entity_type": "Property",
+      "description": "List of TAIs where roaming is not allowed for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "LIST_FORBIDDEN_REGIONAL",
+      "name": "Forbidden Tracking Areas for Regional Provision of Service",
+      "entity_type": "Property",
+      "description": "List of TAIs where regional service provision is not allowed for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "COND_TAI_IN_LIST",
+      "name": "TAI belongs to TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where at least one constructed TAI is present in the UE's TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_FORBIDDEN",
+      "name": "TAI not in forbidden lists",
+      "entity_type": "Condition",
+      "description": "Condition where TAI is not in forbidden tracking areas for roaming or regional provision of service lists.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "COND_GEOGRAPHICAL_BEST",
+      "name": "Geographical location best match",
+      "entity_type": "Condition",
+      "description": "Condition where UE can determine which TAI best represents its geographical location.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "PROP_CURRENT_TAI",
+      "name": "Current TAI",
+      "entity_type": "Property",
+      "description": "The TAI selected by the UE as its current tracking area identity.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAI_SELECTION",
+      "target": "IE_TAI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "TAI selection procedure involves constructing TAIs from multiple TACs and PLMN identity",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_TAI",
+      "target": "IE_TAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TAI is constructed by concatenating PLMN identity and TAC",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_TAI_SELECTION",
+      "target": "COND_TAI_IN_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI selection is guarded by whether any TAI belongs to the UE's TAI list",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_TAI_SELECTION",
+      "target": "COND_TAI_NOT_FORBIDDEN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI selection is guarded by whether TAI is in forbidden tracking area lists",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_TAI_SELECTION",
+      "target": "COND_GEOGRAPHICAL_BEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI selection is guarded by whether UE can determine geographical best match",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_TAI_SELECTION",
+      "target": "PROP_CURRENT_TAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI selection procedure establishes the current TAI for the UE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_TAI_IN_LIST",
+      "target": "LIST_TAI",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "TAI list membership condition requires access to the UE's TAI list",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_TAI_NOT_FORBIDDEN",
+      "target": "LIST_FORBIDDEN_ROAMING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Forbidden area check condition requires access to forbidden tracking areas for roaming list",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_TAI_NOT_FORBIDDEN",
+      "target": "LIST_FORBIDDEN_REGIONAL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Forbidden area check condition requires access to forbidden tracking areas for regional provision of service list",
+      "provenance": [
+        "TS 24.301, Clause 5.3.22"
+      ]
+    }
+  ]
+}

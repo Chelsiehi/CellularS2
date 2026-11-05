@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.16",
+  "title": "Extended DRX cycle for UEs in 5GMM-IDLE and 5GMM-CONNECTED mode with RRC inactive indication",
+  "entities": [
+    {
+      "id": "EDRX_PROCEDURE",
+      "name": "Extended DRX procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for negotiating and using extended DRX cycles in 5GMM-IDLE mode and 5GMM-CONNECTED mode with RRC inactive indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which eDRX parameters can be negotiated between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_EDRX_PARAMS",
+      "name": "Requested extended DRX parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element used by UE to request eDRX during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "IE_NEGOTIATED_EDRX_PARAMS",
+      "name": "Negotiated extended DRX parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element provided by network to accept eDRX request during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "State where UE can use eDRX when not in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "name": "5GMM-CONNECTED mode with RRC inactive indication",
+      "entity_type": "State",
+      "description": "State where UE can use eDRX when not in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_EMERGENCY_PDU",
+      "name": "No emergency PDU session condition",
+      "entity_type": "Condition",
+      "description": "Condition that must be satisfied for UE to use eDRX.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "CONDITION_EDRX_NEGOTIATED",
+      "name": "eDRX negotiated condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE received Negotiated extended DRX parameters IE during last registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "PROPERTY_USE_EDRX",
+      "name": "Use eDRX",
+      "entity_type": "Property",
+      "description": "Property indicating that UE or network is using extended DRX cycles.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "PROPERTY_USE_UE_SPECIFIC_DRX",
+      "name": "Use UE specific DRX parameter",
+      "entity_type": "Property",
+      "description": "Property indicating fallback to stored UE specific DRX parameters when eDRX cannot be used.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "IE_REQUESTED_EDRX_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure may contain Requested extended DRX parameters IE when UE requests eDRX.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "IE_NEGOTIATED_EDRX_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure may contain Negotiated extended DRX parameters IE when network accepts eDRX request.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EDRX_PROCEDURE",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "eDRX procedure requires UE to be in 5GMM-IDLE mode (when not in NB-N1 mode).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EDRX_PROCEDURE",
+      "target": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "eDRX procedure requires UE to be in 5GMM-CONNECTED mode with RRC inactive indication (when not in NB-N1 mode).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EDRX_NEGOTIATED",
+      "target": "PROPERTY_USE_EDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where eDRX was negotiated establishes the property of using eDRX.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_NO_EMERGENCY_PDU",
+      "target": "PROPERTY_USE_EDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no emergency PDU session establishes the property of using eDRX.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_NEGOTIATED_EDRX_PARAMS",
+      "target": "CONDITION_EDRX_NEGOTIATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of Negotiated extended DRX parameters IE guards the eDRX negotiated condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_EDRX_NEGOTIATED",
+      "target": "PROPERTY_USE_UE_SPECIFIC_DRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Negation of eDRX negotiated condition establishes fallback to UE specific DRX parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.16"
+      ]
+    }
+  ]
+}

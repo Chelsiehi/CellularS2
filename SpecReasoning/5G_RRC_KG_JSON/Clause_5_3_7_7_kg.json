@@ -1,0 +1,79 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.7",
+  "title": "T301 expiry or selected cell no longer suitable",
+  "entities": [
+    {
+      "id": "T301",
+      "name": "Timer T301",
+      "entity_type": "Timer",
+      "description": "Timer used during RRC connection establishment procedures",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    },
+    {
+      "id": "CELL_NO_LONGER_SUITABLE",
+      "name": "Selected cell no longer suitable",
+      "entity_type": "Condition",
+      "description": "Condition where the selected cell becomes unsuitable according to cell selection criteria in TS 38.304",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    },
+    {
+      "id": "GO_TO_RRC_IDLE",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when UE transitions to RRC_IDLE state with release cause 'RRC connection failure'",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7",
+        "TS 38.331, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_FAILURE",
+      "name": "RRC connection failure",
+      "entity_type": "Condition",
+      "description": "Release cause indicating failure in RRC connection establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T301",
+      "target": "GO_TO_RRC_IDLE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T301 expiry triggers the procedure to go to RRC_IDLE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_NO_LONGER_SUITABLE",
+      "target": "GO_TO_RRC_IDLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell becoming no longer suitable triggers the procedure to go to RRC_IDLE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "GO_TO_RRC_IDLE",
+      "target": "RRC_CONNECTION_FAILURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure to go to RRC_IDLE is performed with release cause 'RRC connection failure'",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.9",
+  "title": "Handling of NAS level mobility management congestion control",
+  "entities": [
+    {
+      "id": "PROC_MM_CONGESTION_CONTROL",
+      "name": "NAS level mobility management congestion control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by AMF to handle 5GMM signalling congestion by rejecting requests and managing back-off timer T3346.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Mobility management back-off timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when receiving reject messages during congestion control to defer subsequent requests.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_ATTEMPTING_UPDATE",
+      "name": "5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+      "entity_type": "State",
+      "description": "State entered by UE when attempting registration update after change in registration area.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_SERVICES",
+      "name": "Emergency services requests",
+      "entity_type": "Condition",
+      "description": "Condition where UE requests emergency services or emergency services fallback.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "COND_HIGH_PRIORITY_ACCESS",
+      "name": "High priority access in selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for high priority access in the selected PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "COND_PLMN_CHANGE",
+      "name": "PLMN change",
+      "entity_type": "Condition",
+      "description": "Condition where UE enters a new PLMN not equivalent to the PLMN where T3346 was started.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request deregistration from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "MSG_PAGING",
+      "name": "Paging message",
+      "entity_type": "Message",
+      "description": "Message sent by network to page the UE for mobile terminated services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "MSG_NOTIFICATION",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "Message sent by network to notify the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "PROP_UPDATE_STATUS_CHANGE",
+      "name": "5GS update status change to 5U2 NOT UPDATED",
+      "entity_type": "Property",
+      "description": "Property where UE sets 5GS update status to 5U2 NOT UPDATED after registration area change.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MM_CONGESTION_CONTROL",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF includes T3346 value in reject messages during congestion control, causing UE to start the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PAGING",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3346 when receiving paging message while timer is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_NOTIFICATION",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3346 when receiving NOTIFICATION message while timer is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_PLMN_CHANGE",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3346 when entering a new non-equivalent PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "TIMER_T3346",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3346 continues running if UE enters 5GMM-DEREGISTERED state while timer is active.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EMERGENCY_SERVICES",
+      "target": "PROC_MM_CONGESTION_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services requests are not rejected during congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_HIGH_PRIORITY_ACCESS",
+      "target": "PROC_MM_CONGESTION_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "High priority access requests are not rejected during congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROC_MM_CONGESTION_CONTROL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST messages are not rejected during congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMERGENCY_SERVICES",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE can initiate 5GMM procedures for emergency services even if T3346 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_HIGH_PRIORITY_ACCESS",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE configured for high priority access can initiate 5GMM procedures even if T3346 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_UPDATE_STATUS_CHANGE",
+      "target": "STATE_5GMM_REGISTERED_ATTEMPTING_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "After registration area change with T3346 running, UE sets update status to 5U2 NOT UPDATED and enters 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.9"
+      ]
+    }
+  ]
+}

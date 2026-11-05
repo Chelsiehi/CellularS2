@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for detaching UE from network. Includes abnormal cases for CSG cell access and handover scenarios.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "DETACH_REQUEST",
+      "name": "DETACH REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to initiate detach procedure. May include EMM cause #25 for CSG authorization failures.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "DETACH_ACCEPT",
+      "name": "DETACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept detach request. Retransmitted during intra MME handover if undelivered.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_25",
+      "name": "EMM cause #25",
+      "entity_type": "Condition",
+      "description": "EMM cause value indicating 'not authorized for this CSG'. Included in DETACH REQUEST when UE lacks valid CSG subscription.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "CSG_CELL_NO_SUBSCRIPTION",
+      "name": "CSG cell with no valid subscription",
+      "entity_type": "Condition",
+      "description": "Abnormal condition where UE initiates detach in CSG cell without valid CSG subscription, excluding switch-off detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "HANDOVER_NON_DELIVERY",
+      "name": "Non-delivered NAS PDU due to handover",
+      "entity_type": "Condition",
+      "description": "Condition where DETACH ACCEPT message cannot be delivered due to intra MME handover, requiring retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDN_CONNECTION",
+      "name": "PDN connection for emergency bearer services",
+      "entity_type": "Property",
+      "description": "Active PDN connection dedicated to emergency services. Preserved during IMSI detach in unauthorized CSG cells.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "NON_EMERGENCY_EPS_BEARERS",
+      "name": "Non-emergency EPS bearers",
+      "entity_type": "Property",
+      "description": "EPS bearers not used for emergency services. Deactivated during IMSI detach in unauthorized CSG cells if emergency PDN is active.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CSG_CELL_NO_SUBSCRIPTION",
+      "target": "DETACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach procedure behavior is guarded by CSG subscription validity condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DETACH_PROCEDURE",
+      "target": "DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Detach procedure includes sending DETACH REQUEST message with EMM cause #25 for CSG authorization failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DETACH_REQUEST",
+      "target": "EMM_CAUSE_25",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REESSAGE message contains EMM cause #25 IE when UE is not authorized for CSG.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMERGENCY_PDN_CONNECTION",
+      "target": "DETACH_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DETACH ACCEPT message is sent if UE has active emergency PDN connection during IMSI detach in unauthorized CSG cell.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMERGENCY_PDN_CONNECTION",
+      "target": "NON_EMERGENCY_EPS_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Active emergency PDN connection establishes deactivation of non-emergency EPS bearers during IMSI detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "HANDOVER_NON_DELIVERY",
+      "target": "DETACH_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DETACH ACCEPT message retransmission is guarded by non-delivery due to intra MME handover condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.5"
+      ]
+    }
+  ]
+}

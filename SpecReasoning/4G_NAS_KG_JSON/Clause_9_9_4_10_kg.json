@@ -1,0 +1,181 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.4.10",
+  "title": "PDN type",
+  "entities": [
+    {
+      "id": "IE_PDN_TYPE",
+      "name": "PDN type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the IP version capability of the IP stack associated with the UE or non-IP/Ethernet connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.4.10",
+        "Figure 9.9.4.10.1",
+        "Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "FIELD_PDN_TYPE_IEI",
+      "name": "PDN type IEI",
+      "entity_type": "Identifier",
+      "description": "Information element identifier for the PDN type IE, located in bits 5-8 of octet 1.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "FIELD_PDN_TYPE_VALUE",
+      "name": "PDN type value",
+      "entity_type": "Property",
+      "description": "Three-bit field (bits 1-3 of octet 1) that encodes the PDN type capability: IPv4, IPv6, IPv4v6, non IP, or Ethernet.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.4.10.1",
+        "Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_IPV4",
+      "name": "PDN type IPv4",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 001, indicating IPv4 capability.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_IPV6",
+      "name": "PDN type IPv6",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 010, indicating IPv6 capability.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_IPV4V6",
+      "name": "PDN type IPv4v6",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 011, indicating dual-stack IPv4 and IPv6 capability.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_NON_IP",
+      "name": "PDN type non IP",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 101, indicating non-IP connectivity.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_ETHERNET",
+      "name": "PDN type Ethernet",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 110, indicating Ethernet connectivity.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "COND_PDN_UNUSED",
+      "name": "PDN type unused",
+      "entity_type": "Condition",
+      "description": "Condition when PDN type value bits are 100, which is unused and interpreted as IPv6 by the network.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PDN_TYPE",
+      "target": "FIELD_PDN_TYPE_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The PDN type IE contains the IE identifier field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PDN_TYPE",
+      "target": "FIELD_PDN_TYPE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The PDN type IE contains the PDN type value field.",
+      "provenance": [
+        "TS 24.301, Figure 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_IPV4",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the IPv4 condition when bits are 001.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_IPV6",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the IPv6 condition when bits are 010.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_IPV4V6",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the IPv4v6 condition when bits are 011.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_NON_IP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the non-IP condition when bits are 101.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_ETHERNET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the Ethernet condition when bits are 110.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "FIELD_PDN_TYPE_VALUE",
+      "target": "COND_PDN_UNUSED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PDN type value field is guarded by the unused condition when bits are 100, interpreted as IPv6.",
+      "provenance": [
+        "TS 24.301, Table 9.9.4.10.1"
+      ]
+    }
+  ]
+}

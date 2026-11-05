@@ -1,0 +1,32 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.16",
+  "title": "UE radio capability signalling optimisation",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------",
+    "UE radio capability signalling optimisation (RACS) is a feature that is optional at both the UE and the network and which aims to optimise the transmission of UE radio capability over the radio interface (see 3GPPTS23.501[8]). RACS works by assigning an identifier to represent a set of UE radio capabilities. This identifier is called the UE radio capability ID. A UE radio capability ID can be either manufacturer-assigned or network-assigned. The UE radio capability ID is an alternative to the signalling of the radio capabilities container over the radio interface",
+    "In this release of the specification, RACS is applicable to neither NB-N1 mode nor non-3GPP access",
+    "If the UE supports RACS",
+    "a) the UE shall indicate support for RACS by setting the RACS bit to \"RACS supported\" in the 5GMM capability IE of the REGISTRATION REQUEST message",
+    "b) if the UE performs a registration procedure for initial registration and the UE has an applicable UE radio capability ID for the current UE radio configuration in the selected network, the UE shall include the UE radio capability ID in the UE radio capability ID IE as a non-cleartext IE in the REGISTRATION REQUEST message. If both a network-assigned UE radio capability ID and a manufacturer-assigned UE Radio Capability ID are applicable, the UE shall include the network-assigned UE radio capability ID in the REGISTRATION REQUEST message",
+    "c) if the radio configuration at the UE changes (for instance because the UE has disabled a specific radio capability) then",
+    "1) if the UE has an applicable UE radio capability ID for the new UE radio configuration, the UE shall initiate a registration procedure for mobility and periodic registration update. The UE shall include the applicable UE radio capability ID in the UE radio capability ID IE of the REGISTRATION REQUEST message and shall include the 5GS update type IE in the REGISTRATION REQUEST message with the NG-RAN-RCU bit set to \"UE radio capability update needed\". If both a network-assigned UE radio capability ID and a manufacturer-assigned UE Radio Capability ID are applicable, the UE shall include the network-assigned UE radio capability ID in the REGISTRATION REQUEST message; and",
+    "2) if the UE does not have an applicable UE radio capability ID for the new UE radio configuration, the UE shall initiate a registration procedure for mobility and periodic registration update and include the 5GS update type IE in the REGISTRATION REQUEST message with the NG-RAN-RCU bit set to \"UE radio capability update needed\"",
+    "NOTE: Performing the registration procedure for mobility and periodic registration update and including the 5GS update type IE in the REGISTRATION REQUEST message with the NG-RAN-RCU bit set to \"UE radio capability update needed\" without a UE radio capability ID included in the REGISTRATION REQUEST message can trigger the network to assign a new UE radio capability ID to the UE",
+    "d) upon receiving a network-assigned UE radio capability ID in the REGISTRATION ACCEPT message or the CONFIGURATION UPDATE COMMAND message, the UE shall store the network-assigned UE radio capability ID and the PLMN ID or SNPN identity of the serving network and, if the UE supports access to an SNPN using credentials from a credentials holder, the selected entry of the \"list of subscriber data\" or the selected PLMN subscription along with a mapping to the current UE radio configuration in its non-volatile memory as specified in annexC. The UE shall be able to store at least the last 16 received network-assigned UE radio capability IDs with the associated PLMN ID or SNPN identity and, if the UE supports access to an SNPN using credentials from a credentials holder, the selected entry of the \"list of subscriber data\" or the selected PLMN subscription and the mapping to the corresponding UE radio configuration",
+    "e) the UE shall not use a network-assigned UE radio capability ID assigned by a PLMN in PLMNs equivalent to the PLMN which assigned it",
+    "f) upon receiving a UE radio capability ID deletion indication IE set to \"Network-assigned UE radio capability IDs deletion requested\" in the REGISTRATION ACCEPT message or the CONFIGURATION UPDATE COMMAND message, the UE shall delete all network-assigned UE radio capability IDs stored at the UE for the serving network, initiate a registration procedure for mobility and periodic registration update and include an applicable manufacturer-assigned UE radio capability ID for the current UE radio configuration, if available at the UE, in the UE radio capability ID IE of the REGISTRATION REQUEST message; and",
+    "g) if the UE performs a registration procedure for mobility and periodic registration update due to entering a tracking area that is not in the list of tracking areas that the UE previously registered in the AMF and the UE has an applicable UE radio capability ID for the current UE radio configuration in the selected network, the UE shall include the UE radio capability ID in the UE radio capability ID IE as a non-cleartext IE in the REGISTRATION REQUEST message. If both a network-assigned UE radio capability ID and a manufacturer-assigned UE Radio Capability ID are applicable, the UE shall include the network-assigned UE radio capability ID in the REGISTRATION REQUEST message",
+    "If the network supports RACS",
+    "a) the network may assign a network-assigned UE radio capability ID to a UE which supports RACS by including a UE radio capability ID IE in the REGISTRATION ACCEPT message or in the CONFIGURATION UPDATE COMMAND message",
+    "b) the network may trigger the UE to delete all network-assigned UE radio capability IDs stored at the UE for the serving network by including a UE radio capability ID deletion indication IE set to \"Network-assigned UE radio capability IDs deletion requested\" in the REGISTRATION ACCEPT message or in the CONFIGURATION UPDATE COMMAND message; and",
+    "c) the network may send an IDENTITY REQUEST message to the UE that supports RACS to retrieve the PEI, if not available in the network",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

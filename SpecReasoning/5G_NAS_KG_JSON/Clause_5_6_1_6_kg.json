@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.6",
+  "title": "Service request procedure for initiating an emergency PDU session not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "name": "Service request procedure for initiating an emergency PDU session",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish an emergency PDU session when the network does not accept the service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "PROC_SUBCLAUSE_5_6_1_5",
+      "name": "Procedures from subclause 5.6.1.5",
+      "entity_type": "Procedure",
+      "description": "Procedures performed by UE when service request for emergency PDU session is not accepted by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "PROC_SUBCLAUSE_5_6_1_7",
+      "name": "Procedures from subclause 5.6.1.7",
+      "entity_type": "Procedure",
+      "description": "Procedures performed by UE when service request fails due to abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN where last service request was attempted",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same PLMN where the previous service request was made.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "ACTION_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE informs upper layers about the failure of the service request procedure for emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "ACTION_DEREGISTER_LOCALLY",
+      "name": "De-register locally",
+      "entity_type": "Property",
+      "description": "UE performs local de-registration if not already de-registered.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "PROC_INITIAL_REG_EMERGENCY",
+      "name": "Initial registration for emergency services",
+      "entity_type": "Procedure",
+      "description": "UE attempts initial registration specifically for emergency services after local de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure for emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "PROC_SUBCLAUSE_5_6_1_5",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes performing procedures from subclause 5.6.1.5 when not accepted by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "PROC_SUBCLAUSE_5_6_1_7",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes performing procedures from subclause 5.6.1.7 when failing due to abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in same PLMN condition for subsequent actions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN condition, it establishes the action of informing upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_DEREGISTER_LOCALLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN condition, it establishes the action of local de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACTION_DEREGISTER_LOCALLY",
+      "target": "PROC_INITIAL_REG_EMERGENCY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "After local de-registration, UE performs initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure involves sending SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6"
+      ]
+    }
+  ]
+}

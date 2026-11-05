@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.4.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "name": "UPLINK GENERIC NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "NAS transport message sent from UE to network",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that restricts sending of UPLINK GENERIC NAS TRANSPORT message under certain conditions",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that restricts sending of UPLINK GENERIC NAS TRANSPORT message in EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management connected state",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "COND_T3346_RUNNING",
+      "name": "Timer T3346 is running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3346 is active, restricting UPLINK GENERIC NAS TRANSPORT transmission",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "COND_T3447_RUNNING",
+      "name": "Timer T3447 is running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3447 is active, restricting UPLINK GENERIC NAS TRANSPORT transmission in EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "EXCEPTION_CONDITIONS",
+      "name": "Exception conditions for message transmission",
+      "entity_type": "Condition",
+      "description": "Special conditions that allow UPLINK GENERIC NAS TRANSPORT transmission despite running timers",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_T3346_RUNNING",
+      "target": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running condition restricts sending of UPLINK GENERIC NAS TRANSPORT message",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_T3447_RUNNING",
+      "target": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3447 running condition restricts sending of UPLINK GENERIC NAS TRANSPORT message in EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3447_RUNNING",
+      "target": "EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3447 restriction applies specifically when UE is in EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EXCEPTION_CONDITIONS",
+      "target": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Exception conditions allow UPLINK GENERIC NAS TRANSPORT transmission despite running timers",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "T3346",
+      "target": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When timer T3346 expires or is stopped, UPLINK GENERIC NAS TRANSPORT message can be sent",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "T3447",
+      "target": "UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "When timer T3447 expires, UPLINK GENERIC NAS TRANSPORT message can be sent",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.4"
+      ]
+    }
+  ]
+}

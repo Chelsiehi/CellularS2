@@ -1,0 +1,289 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_RRC_RESUME",
+      "name": "RRC Connection Resume Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to resume a suspended RRC connection, triggered by upper layers, AS, RAN paging response, RNA updates, NR sidelink communication, or SDT initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RESUME_REQUEST",
+      "name": "RRCResumeRequest",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE to initiate RRC connection resume.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RESUME_REQUEST1",
+      "name": "RRCResumeRequest1",
+      "entity_type": "Message",
+      "description": "Alternative message transmitted by UE to initiate RRC connection resume.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "IE_RESUME_CAUSE",
+      "name": "resumeCause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for RRC connection resume, with values like emergency, mps-PriorityAccess, or mcs-PriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_CATEGORY",
+      "name": "Access Category",
+      "entity_type": "Information Element",
+      "description": "Information element used in unified access control procedure, with values like '0', '2', or '8'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_IDENTITIES",
+      "name": "Access Identities",
+      "entity_type": "Information Element",
+      "description": "Information element provided by upper layers for unified access control.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "TIMER_T319",
+      "name": "T319",
+      "entity_type": "Timer",
+      "description": "Timer started when resume procedure is initiated for SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "TIMER_T319A",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer started when resume procedure is initiated for SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "TIMER_T342",
+      "name": "T342",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon initiation of RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "TIMER_T345",
+      "name": "T345",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon initiation of RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access Attempt Barred",
+      "entity_type": "Condition",
+      "description": "Condition where unified access control procedure determines access is barred, causing procedure to end.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_SERVICE",
+      "name": "Emergency Service Ongoing",
+      "entity_type": "Condition",
+      "description": "Condition where an emergency service is ongoing, affecting Access Category selection and resumeCause setting.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "PROP_PENDING_RNA_UPDATE",
+      "name": "pendingRNA-Update",
+      "entity_type": "Property",
+      "description": "Variable set to true if access attempt is barred during RNA update, otherwise set to false.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE can trigger RNA updates and resume RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_RESUME",
+      "target": "MSG_RRC_RESUME_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of RRCResumeRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_RRC_RESUME",
+      "target": "MSG_RRC_RESUME_REQUEST1",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of RRCResumeRequest1 message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_RRC_RESUME",
+      "target": "IE_RESUME_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure involves setting resumeCause based on trigger conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_RESUME",
+      "target": "IE_ACCESS_CATEGORY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure involves selecting Access Category for unified access control.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_RRC_RESUME",
+      "target": "IE_ACCESS_IDENTITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses Access Identities for unified access control.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_RRC_RESUME",
+      "target": "COND_ACCESS_BARRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure ends if access attempt is barred.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_RRC_RESUME",
+      "target": "COND_EMERGENCY_SERVICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior changes if emergency service is ongoing.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_RRC_RESUME",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be triggered when UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_RRC_RESUME",
+      "target": "TIMER_T319",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T319 when initiated for SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_RRC_RESUME",
+      "target": "TIMER_T319A",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T319a when initiated for SDT.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_RRC_RESUME",
+      "target": "TIMER_T342",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T342 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_RRC_RESUME",
+      "target": "TIMER_T345",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T345 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROP_PENDING_RNA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If access attempt is barred during RNA update, pendingRNA-Update is set to true.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "PROC_RRC_RESUME",
+      "target": "PROP_PENDING_RNA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure sets pendingRNA-Update to false upon initiation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.2"
+      ]
+    }
+  ]
+}

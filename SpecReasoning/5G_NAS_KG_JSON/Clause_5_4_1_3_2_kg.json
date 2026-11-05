@@ -1,0 +1,182 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.2",
+  "title": "Authentication initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication procedure initiated by the network using 5G AKA method. It establishes authentication and key agreement between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2",
+        "Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to initiate 5G AKA authentication procedure. Contains authentication parameters and security context identifiers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2",
+        "Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "UE response message to AUTHENTICATION REQUEST, containing authentication calculation results.",
+      "provenance": [
+        "TS 24.501, Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REJECT",
+      "name": "AUTHENTICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network when authentication fails, terminating the authentication procedure.",
+      "provenance": [
+        "TS 24.501, Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3560",
+      "name": "T3560",
+      "entity_type": "Timer",
+      "description": "Timer started by network when sending AUTHENTICATION REQUEST, waiting for UE response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2",
+        "Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Information Element",
+      "description": "Key Set Identifier used by UE and AMF to identify K_AMF and partial native security context created after successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "IE_ABBA",
+      "name": "ABBA parameter",
+      "entity_type": "Information Element",
+      "description": "Authentication and key management for applications parameter. In this specification release, set to 2 octets with value 0000H.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "5GMM connection state where UE has an established NAS signaling connection with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "COND_INITIAL_NAS_MSG",
+      "name": "Initial NAS message condition",
+      "entity_type": "Condition",
+      "description": "Condition where ngKSI is contained in an initial NAS message during a 5GMM procedure, requiring different ngKSI value in AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure is initiated by sending AUTHENTICATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "TIMER_T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3560 when sending AUTHENTICATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2",
+        "Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTH_RESPONSE",
+      "target": "TIMER_T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Timer T3560 is stopped when AUTHENTICATION RESPONSE is received",
+      "provenance": [
+        "TS 24.501, Figure 5.4.1.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains ngKSI information element",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_ABBA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains ABBA parameter",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Authentication procedure can be initiated when UE is in 5GMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_INITIAL_NAS_MSG",
+      "target": "IE_NGKSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When ngKSI is in initial NAS message, different ngKSI value must be used in AUTHENTICATION REQUEST",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_AUTH_REJECT",
+      "target": "PROC_5G_AKA_AUTH",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AUTHENTICATION REJECT message terminates the authentication procedure when authentication fails",
+      "provenance": [
+        "TS 24.501, Figure 5.4.1.3.2.1"
+      ]
+    }
+  ]
+}

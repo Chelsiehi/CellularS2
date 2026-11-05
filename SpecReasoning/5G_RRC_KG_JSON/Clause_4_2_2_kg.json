@@ -1,0 +1,180 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "4.2.2",
+  "title": "Signalling radio bearers",
+  "entities": [
+    {
+      "id": "SRB0",
+      "name": "Signalling Radio Bearer 0",
+      "entity_type": "Property",
+      "description": "SRB used for RRC messages over CCCH logical channel.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "SRB1",
+      "name": "Signalling Radio Bearer 1",
+      "entity_type": "Property",
+      "description": "SRB used for RRC messages (may include piggybacked NAS) and NAS messages prior to SRB2 establishment, using DCCH logical channel.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "SRB2",
+      "name": "Signalling Radio Bearer 2",
+      "entity_type": "Property",
+      "description": "SRB used for NAS messages and RRC messages with logged measurement information, using DCCH logical channel. Configured after AS security activation with lower priority than SRB1.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "SRB3",
+      "name": "Signalling Radio Bearer 3",
+      "entity_type": "Property",
+      "description": "SRB used for specific RRC messages in (NG)EN-DC or NR-DC, using DCCH logical channel.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "SRB4",
+      "name": "Signalling Radio Bearer 4",
+      "entity_type": "Property",
+      "description": "SRB used for RRC messages with application layer measurement report information, using DCCH logical channel. Configured after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_ACTIVATION",
+      "name": "AS Security Activation",
+      "entity_type": "Condition",
+      "description": "Condition where Access Stratum security is activated, enabling integrity protection and ciphering for RRC messages.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "SPLIT_SRB",
+      "name": "Split SRB",
+      "entity_type": "Property",
+      "description": "Feature supporting split signalling radio bearers for MR-DC options in SRB1 and SRB2.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "CAPC_1",
+      "name": "Channel Access Priority Class 1",
+      "entity_type": "Property",
+      "description": "Highest priority CAPC assigned to SRB0, SRB1, and SRB3 for shared spectrum channel access.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SRB1",
+      "target": "AS_SECURITY_ACTIVATION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "RRC messages on SRB1 are integrity protected and ciphered after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SRB2",
+      "target": "AS_SECURITY_ACTIVATION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "RRC messages on SRB2 are integrity protected and ciphered after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SRB3",
+      "target": "AS_SECURITY_ACTIVATION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "RRC messages on SRB3 are integrity protected and ciphered after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SRB4",
+      "target": "AS_SECURITY_ACTIVATION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "RRC messages on SRB4 are integrity protected and ciphered after AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SPLIT_SRB",
+      "target": "SRB1",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Split SRB is supported for SRB1 in MR-DC options.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SPLIT_SRB",
+      "target": "SRB2",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Split SRB is supported for SRB2 in MR-DC options.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SRB0",
+      "target": "CAPC_1",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "SRB0 is assigned CAPC 1 for shared spectrum channel access.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SRB1",
+      "target": "CAPC_1",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "SRB1 is assigned CAPC 1 for shared spectrum channel access.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SRB3",
+      "target": "CAPC_1",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "SRB3 is assigned CAPC 1 for shared spectrum channel access.",
+      "provenance": [
+        "TS 38.331, Clause 4.2.2"
+      ]
+    }
+  ]
+}

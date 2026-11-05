@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4",
+  "title": "UE requested PDN connectivity procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDN_CONNECTIVITY_REJECTED",
+      "name": "UE requested PDN connectivity procedure not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when the network rejects a UE's PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    },
+    {
+      "id": "MESSAGE_PDN_CONNECTIVITY_REJECT",
+      "name": "PDN CONNECTIVITY REJECT",
+      "entity_type": "Message",
+      "description": "Network-to-UE message indicating rejection of PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    },
+    {
+      "id": "IE_CAUSE",
+      "name": "Cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state when registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDN_CONNECTIVITY_REJECTED",
+      "target": "MESSAGE_PDN_CONNECTIVITY_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDN CONNECTIVITY REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MESSAGE_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message contains Cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_PDN_CONNECTIVITY_REJECTED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4"
+      ]
+    }
+  ]
+}

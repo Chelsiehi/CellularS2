@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.4.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "name": "UE Assistance Information Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE provides various assistance information to the network while in RRC_CONNECTED state",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "UE_ASSISTANCE_INFORMATION_MESSAGE",
+      "name": "UEAssistanceInformation message",
+      "entity_type": "Message",
+      "description": "RRC message used by UE to transmit assistance information to the network",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "DELAY_BUDGET_REPORT_IE",
+      "name": "delayBudgetReport",
+      "entity_type": "Information Element",
+      "description": "Information element containing UE's delay budget report",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "T342_TIMER",
+      "name": "Timer T342",
+      "entity_type": "Timer",
+      "description": "Timer used to control transmission of UE assistance information",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED_STATE",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an established RRC connection",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "CONFIGURED_CONDITION",
+      "name": "UE configured to provide assistance",
+      "entity_type": "Condition",
+      "description": "Condition where UE has been configured by network to provide specific assistance information",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "CHANGE_CONDITION",
+      "name": "Change in assistance information",
+      "entity_type": "Condition",
+      "description": "Condition where UE's assistance information preferences or status have changed",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "FIRST_TRANSMISSION_CONDITION",
+      "name": "First transmission condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has not transmitted the assistance information since being configured to provide it",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "target": "UE_ASSISTANCE_INFORMATION_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending UEAssistanceInformation message",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_ASSISTANCE_INFORMATION_MESSAGE",
+      "target": "DELAY_BUDGET_REPORT_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains delayBudgetReport information element",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "target": "RRC_CONNECTED_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be initiated in RRC_CONNECTED state",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONFIGURED_CONDITION",
+      "target": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by UE being configured to provide assistance",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CHANGE_CONDITION",
+      "target": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by change in assistance information",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIRST_TRANSMISSION_CONDITION",
+      "target": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by first transmission condition",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "T342_TIMER",
+      "target": "UE_ASSISTANCE_INFORMATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by timer T342 not running",
+      "provenance": [
+        "TS 38.331, Clause 5.7.4.2"
+      ]
+    }
+  ]
+}

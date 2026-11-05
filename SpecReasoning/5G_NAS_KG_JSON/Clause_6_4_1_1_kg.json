@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish a new PDU session with a DN, perform handover between 3GPP and non-3GPP access, transfer existing PDN connections from EPS to 5GS, establish MA PDU session for ATSSS, or relay service for 5G ProSe layer-3 UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "COND_OUTSIDE_LADN_SERVICE_AREA",
+      "name": "UE located outside LADN service area",
+      "entity_type": "Condition",
+      "description": "Condition where UE is outside the service area of a Local Area Data Network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "COND_3GPP_PS_DATA_OFF_ACTIVATED",
+      "name": "3GPP PS data off UE status activated",
+      "entity_type": "Condition",
+      "description": "Condition where UE's 3GPP packet switched data off status is activated and UE is not using exempt services.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "COND_NB_N1_USER_PLANE_CIOT_MAX_RESOURCES",
+      "name": "NB-N1 mode with user plane CIoT 5GS optimization and max user-plane resources",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in NB-N1 mode, user plane CIoT 5GS optimization is accepted, and number of PDU sessions with user-plane resources equals maximum supported.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "COND_CONTROL_PLANE_ONLY_INDICATION_RECEIVED",
+      "name": "Control plane only indication IE received",
+      "entity_type": "Condition",
+      "description": "Condition where Control plane only indication IE was received in PDU SESSION ESTABLISHMENT ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "IE_CONTROL_PLANE_ONLY_INDICATION",
+      "name": "Control plane only indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating control plane only operation for CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "name": "PDU SESSION ESTABLISHMENT ACCEPT",
+      "entity_type": "Message",
+      "description": "Network message accepting PDU session establishment request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "PROP_PDU_SESSION_ENABLES_PDU_EXCHANGE",
+      "name": "PDU session enables PDU exchange",
+      "entity_type": "Property",
+      "description": "Property where accepted PDU session enables exchange of PDUs between UE and DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "PROP_PDU_SESSION_ENABLES_PDU_EXCHANGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful procedure execution establishes PDU session enabling PDU exchange between UE and DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_OUTSIDE_LADN_SERVICE_AREA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure shall not be requested when UE is outside LADN service area.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_3GPP_PS_DATA_OFF_ACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure shall not be requested when 3GPP PS data off is activated and no exempt services are used.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_NB_N1_USER_PLANE_CIOT_MAX_RESOURCES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure shall not be requested in NB-N1 mode with user plane CIoT optimization and maximum user-plane resources reached.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_CONTROL_PLANE_ONLY_INDICATION_RECEIVED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure shall not be requested when control plane only indication IE was received.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_ACCEPT",
+      "target": "IE_CONTROL_PLANE_ONLY_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT ACCEPT message may contain Control plane only indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CONTROL_PLANE_ONLY_INDICATION_RECEIVED",
+      "target": "IE_CONTROL_PLANE_ONLY_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition depends on reception of Control plane only indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.1"
+      ]
+    }
+  ]
+}

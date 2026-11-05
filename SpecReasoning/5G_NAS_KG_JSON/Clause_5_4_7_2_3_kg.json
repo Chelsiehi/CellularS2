@@ -1,0 +1,189 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.2.3",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_NSSAA",
+      "name": "Network slice-specific authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and authorizing a UE for a specific network slice (S-NSSAI).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "PROC_DEREG",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "MSG_NSSAA_CMD",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to initiate network slice-specific authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQ",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3575",
+      "name": "T3575",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_NON_DELIVERY",
+      "name": "Lower layers indication of non-delivered NAS PDU due to handover",
+      "entity_type": "Condition",
+      "description": "Condition where NAS PDU cannot be delivered due to intra AMF handover.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "COND_PROC_COLLISION",
+      "name": "Network slice-specific authentication and authorization procedure and de-registration procedure collision",
+      "entity_type": "Condition",
+      "description": "Condition where DEREGISTRATION REQUEST is received while network slice-specific authentication and authorization procedure is ongoing.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_NSSAA",
+      "name": "AMF aborts network slice-specific authentication and authorization procedure",
+      "entity_type": "Property",
+      "description": "AMF behavior to abort the network slice-specific authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "PROP_RETRANSMIT_NSSAA_CMD",
+      "name": "AMF retransmits NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND",
+      "entity_type": "Property",
+      "description": "AMF behavior to retransmit the NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NSSAA",
+      "target": "MSG_NSSAA_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network slice-specific authentication and authorization procedure involves sending NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NSSAA",
+      "target": "TIMER_T3575",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network slice-specific authentication and authorization procedure starts timer T3575.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NSSAA",
+      "target": "TIMER_T3575",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Network slice-specific authentication and authorization procedure resets timer T3575 on retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3575",
+      "target": "PROP_RETRANSMIT_NSSAA_CMD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3575 expiry triggers retransmission of NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3575",
+      "target": "PROP_ABORT_NSSAA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Fifth expiry of timer T3575 triggers abortion of network slice-specific authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_HANDOVER_NON_DELIVERY",
+      "target": "PROP_RETRANSMIT_NSSAA_CMD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Handover non-delivery condition establishes retransmission of NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_PROC_COLLISION",
+      "target": "PROP_ABORT_NSSAA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition establishes abortion of network slice-specific authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_PROC_COLLISION",
+      "target": "PROC_DEREG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure collision condition establishes progression of UE-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_DEREG",
+      "target": "MSG_DEREG_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure involves receiving DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.6",
+  "title": "Local area data network (LADN)",
+  "entities": [
+    {
+      "id": "LADN_INFO",
+      "name": "LADN Information",
+      "entity_type": "Information Element",
+      "description": "Consists of LADN DNNs and LADN service area information (a set of tracking areas). Received during registration or generic UE configuration update procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "LADN_DNN",
+      "name": "LADN DNN",
+      "entity_type": "Identifier",
+      "description": "Data Network Name identifying a Local Area Data Network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "LADN_SERVICE_AREA",
+      "name": "LADN Service Area",
+      "entity_type": "Property",
+      "description": "Set of tracking areas where LADN services are available. UE determines location inside/outside based on this information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "UE_INSIDE_LADN",
+      "name": "UE located inside LADN service area",
+      "entity_type": "Condition",
+      "description": "Condition when UE is within the LADN service area based on LADN service area information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "UE_OUTSIDE_LADN",
+      "name": "UE located outside LADN service area",
+      "entity_type": "Condition",
+      "description": "Condition when UE is outside the LADN service area or lacks LADN service area information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "5GMM_REGISTERED_NORMAL_SERVICE",
+      "name": "5GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "5GMM substate where UE has normal network service availability.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a PDU session for LADN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify a PDU session for LADN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-establish user-plane resources for PDU session for LADN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to release a PDU session for LADN.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LADN_INFO",
+      "target": "LADN_DNN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "LADN information contains LADN DNNs.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LADN_INFO",
+      "target": "LADN_SERVICE_AREA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "LADN information contains LADN service area information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_INSIDE_LADN",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE inside LADN service area condition allows PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_INSIDE_LADN",
+      "target": "PDU_SESSION_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE inside LADN service area condition allows PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_INSIDE_LADN",
+      "target": "SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE inside LADN service area condition allows service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_OUTSIDE_LADN",
+      "target": "PDU_SESSION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE outside LADN service area condition allows PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_OUTSIDE_LADN",
+      "target": "PDU_SESSION_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE outside LADN service area condition allows PDU session modification for 3GPP PS data off status change.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "5GMM_REGISTERED_NORMAL_SERVICE",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PDU session establishment for LADN requires UE to be in 5GMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "5GMM_DEREGISTERED",
+      "target": "LADN_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Transition to 5GMM-DEREGISTERED state causes UE to delete stored LADN information.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.6"
+      ]
+    }
+  ]
+}

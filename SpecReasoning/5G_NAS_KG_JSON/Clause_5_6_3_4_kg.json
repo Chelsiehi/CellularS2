@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.3.4",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3565",
+      "name": "Timer T3565",
+      "entity_type": "Timer",
+      "description": "Timer used for NOTIFICATION message retransmission. Expiry triggers retransmission or procedure abortion after fifth expiry.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_MESSAGE",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "Message retransmitted by network upon T3565 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message received from UE that triggers de-registration procedure collision handling.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message that could be received instead of DEREGISTRATION REQUEST in collision case.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message that could be received instead of DEREGISTRATION REQUEST in collision case.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "PAGING_PROCEDURE",
+      "name": "Paging procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by AMF over 3GPP access when UE is unreachable.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_PROCEDURE",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by AMF when de-registration collision occurs.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "UE_UNREACHABLE_CONDITION",
+      "name": "UE unreachable condition",
+      "entity_type": "Condition",
+      "description": "Condition where AMF determines UE is unreachable after fifth T3565 expiry.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_COLLISION_CONDITION",
+      "name": "De-registration procedure collision condition",
+      "entity_type": "Condition",
+      "description": "Condition where network receives DEREGISTRATION REQUEST before SERVICE REQUEST or REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "AMF_5GMM_IDLE_MODE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "State that AMF may enter over 3GPP access when UE is unreachable.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TIMER_T3565",
+      "target": "NOTIFICATION_MESSAGE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3565 is started when NOTIFICATION message is transmitted.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TIMER_T3565",
+      "target": "NOTIFICATION_MESSAGE",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Timer T3565 is reset and started again upon first expiry for NOTIFICATION message retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_UNREACHABLE_CONDITION",
+      "target": "PAGING_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE unreachable condition may trigger paging procedure execution.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_UNREACHABLE_CONDITION",
+      "target": "AMF_5GMM_IDLE_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE unreachable condition may cause AMF to enter 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DEREGISTRATION_COLLISION_CONDITION",
+      "target": "TIMER_T3565",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "De-registration collision condition causes AMF to stop timer T3565.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DEREGISTRATION_COLLISION_CONDITION",
+      "target": "DEREGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "De-registration collision condition triggers de-registration procedure execution.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "DEREGISTRATION_COLLISION_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message guards the de-registration collision condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.3.3",
+  "title": "Session management based network slice data rate limitation control",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_SLICE_DATA_RATE_LIMITATION",
+      "name": "Network slice data rate limitation control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by serving PLMN or HPLMN to monitor and control the total data rate of established PDU sessions per network slice for S-NSSAI(s) subject to limitation control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "PROC_UE_SLICE_MBR_MANAGEMENT",
+      "name": "UE-Slice-MBR management",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by serving PLMN or HPLMN to manage Slice-Maximum Bit Rate per UE for S-NSSAI to which PDU session is allocated.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDU sessions on a network slice associated with an S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information identifying a network slice.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "COND_MAX_DATA_RATE_EXCEEDED",
+      "name": "Maximum data rate exceeded",
+      "entity_type": "Condition",
+      "description": "Condition where the maximum data rate of PDU sessions on a network slice associated with an S-NSSAI has been exceeded.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "COND_UE_SLICE_MBR_EXCEEDED",
+      "name": "UE-Slice-MBR exceeded",
+      "entity_type": "Condition",
+      "description": "Condition where the UE-Slice-MBR for the UE and S-NSSAI to which the PDU session is allocated is exceeded.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "PROP_SMF_REJECT_PDU_SESSION",
+      "name": "SMF rejects PDU session establishment request",
+      "entity_type": "Property",
+      "description": "Behavior where SMF may reject PDU session establishment request using S-NSSAI based congestion control when data rate limits are exceeded.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "COND_NOT_APPLICABLE_EMERGENCY",
+      "name": "Not applicable for emergency services",
+      "entity_type": "Condition",
+      "description": "Condition where network slice data rate limitation control can be not applicable for S-NSSAI(s) used for emergency services or priority services based on operator policy.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "ENTITY_PCF",
+      "name": "PCF",
+      "entity_type": "Property",
+      "description": "Policy Control Function that performs network slice data rate limitation control and UE-Slice-MBR management.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_SLICE_DATA_RATE_LIMITATION",
+      "target": "IE_S_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice data rate limitation control applies to S-NSSAI(s) subject to limitation control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_MAX_DATA_RATE_EXCEEDED",
+      "target": "PROP_SMF_REJECT_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When maximum data rate is exceeded during PDU session establishment, SMF may reject the request.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_UE_SLICE_MBR_EXCEEDED",
+      "target": "PROP_SMF_REJECT_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE-Slice-MBR is exceeded during PDU session establishment, SMF may reject the request.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_MAX_DATA_RATE_EXCEEDED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Maximum data rate exceeded condition is checked during PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "target": "COND_UE_SLICE_MBR_EXCEEDED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-Slice-MBR exceeded condition is checked during PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NOT_APPLICABLE_EMERGENCY",
+      "target": "PROC_NETWORK_SLICE_DATA_RATE_LIMITATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice data rate limitation control may not apply to emergency services S-NSSAIs based on operator policy.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTITY_PCF",
+      "target": "PROC_NETWORK_SLICE_DATA_RATE_LIMITATION",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PCF performs network slice data rate limitation control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ENTITY_PCF",
+      "target": "PROC_UE_SLICE_MBR_MANAGEMENT",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PCF performs UE-Slice-MBR management.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.3"
+      ]
+    }
+  ]
+}

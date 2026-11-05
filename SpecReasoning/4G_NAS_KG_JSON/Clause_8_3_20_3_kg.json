@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.20.3",
+  "title": "Access point name",
+  "entities": [
+    {
+      "id": "IE_ACCESS_POINT_NAME",
+      "name": "Access point name",
+      "entity_type": "Information Element",
+      "description": "Information element included when UE wishes to request network connectivity as defined by a certain access point name.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message that may contain the Access point name IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message that may contain the PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REQUEST",
+      "name": "Emergency request type condition",
+      "entity_type": "Condition",
+      "description": "Condition when request type indicates emergency, handover of emergency bearer services, or RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_ACCESS_POINT_NAME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message may contain Access point name IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message may contain PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EMERGENCY_REQUEST",
+      "target": "IE_ACCESS_POINT_NAME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access point name IE shall not be included when request type indicates emergency, handover of emergency bearer services, or RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.20.3"
+      ]
+    }
+  ]
+}

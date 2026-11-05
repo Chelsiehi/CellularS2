@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.26.13",
+  "title": "EPS network feature support",
+  "entities": [
+    {
+      "id": "IE_EPS_NETWORK_FEATURE_SUPPORT",
+      "name": "EPS network feature support",
+      "entity_type": "Information Element",
+      "description": "Information element used by the network to inform the UE about support of certain EPS features.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    },
+    {
+      "id": "COND_IE_NOT_INCLUDED",
+      "name": "IE not included condition",
+      "entity_type": "Condition",
+      "description": "Condition when the EPS network feature support IE is not included in the message.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    },
+    {
+      "id": "PROP_S1_U_DATA_SUPPORTED",
+      "name": "S1-U data transfer supported",
+      "entity_type": "Property",
+      "description": "Property indicating that the network supports S1-u data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    },
+    {
+      "id": "COND_ZERO_BITS_EXCEPT_S1U",
+      "name": "All bits zero except S1-U bit",
+      "entity_type": "Condition",
+      "description": "Condition where all value part bits are coded as zero except for the S1-U data transfer bit (octet 4, bit 2).",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_IE_NOT_INCLUDED",
+      "target": "COND_ZERO_BITS_EXCEPT_S1U",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When IE is not included, UE interprets it as all bits zero except S1-U bit.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ZERO_BITS_EXCEPT_S1U",
+      "target": "PROP_S1_U_DATA_SUPPORTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of all bits zero except S1-U bit establishes that network supports S1-u data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_NETWORK_FEATURE_SUPPORT",
+      "target": "COND_IE_NOT_INCLUDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The IE presence/absence is guarded by the condition of whether it is included.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.26.13"
+      ]
+    }
+  ]
+}

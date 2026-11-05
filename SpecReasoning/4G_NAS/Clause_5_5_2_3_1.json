@@ -1,0 +1,59 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.1",
+  "title": "Network initiated detach procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "--------------------------------------------------------",
+    "The network initiates the detach procedure by sending a DETACH REQUEST message to the UE (see example in figure 5.5.2.3.1)",
+    "NOTE: If the MME performs a local detach, it will inform the UE with an EMM messages (e.g. SERVICE REJECT or TRACKING AREA UPDATE reject) with EMM cause #10 \"implicitly detached\" only when the UE initiates an EMM procedure",
+    "The network may include an EMM cause IE to specify the reason for the detach request. The network shall start timer T3422. If the Detach type IE indicates \"re-attach required\" or \"re-attach not required\" and the EMM cause value is not #2 \"IMSI unknown in HSS\", or if the MME performs a local detach, the MME shall either store the current EPS security context if it is a native EPS security context, or the MME shall delete the current EPS security context if it is a mapped EPS security context. If the detach type IE indicates \"re-attach required\" or \"re-attach not required\" and the EMM cause value is not #2 \"IMSI unknown in HSS\", the network shall deactivate the EPS bearer context(s), if any, for the UE locally and enter state EMM-DEREGISTERED-INITIATED",
+    "In NB-S1 mode or WB-S1 mode via satellite E-UTRAN access, if the network initiates the detach procedure because the network determines that the UE is in a location where the network is not allowed to operate (see 3GPP S 23.401 [10]), the network shall set the EMM cause value in the DETACH REQUEST message to #78 \"PLMN not allowed to operate at the present UE location\"",
+    "Figure 5.5.2.3.1: Network initiated detach procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.5.2.3.1",
+      "file": "Figure_5_5_2_3_1_p164.png.json",
+      "title": "Network initiated detach procedure",
+      "content": {
+        "figure_id": "5.5.2.3.1",
+        "title": "Network initiated detach procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "UE",
+              "name": "DETACH REQUEST",
+              "notes": "Start T3422"
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "DETACH ACCEPT",
+              "notes": "Stop T3422"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Network initiated detach procedure showing message exchange between UE and MME",
+            "Timer T3422 is started by MME upon sending DETACH REQUEST",
+            "Timer T3422 is stopped by MME upon receiving DETACH ACCEPT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

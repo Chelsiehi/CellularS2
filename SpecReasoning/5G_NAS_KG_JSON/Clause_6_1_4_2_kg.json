@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.1.4.2",
+  "title": "Coordination between 5GSM and ESM without N26 interface",
+  "entities": [
+    {
+      "id": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for transferring PDU sessions from 5GS to EPS when N26 interface is not supported. The UE creates PDN CONNECTIVITY REQUEST messages based on PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for transferring PDN connections from EPS to 5GS when N26 interface is not supported. The UE creates PDU SESSION ESTABLISHMENT REQUEST messages based on EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "ESM message used by UE to request PDN connectivity during inter-system change from N1 to S1 mode. Contains mapped parameters from PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message used by UE to establish PDU sessions during inter-system change from S1 to N1 mode. Contains mapped parameters from PDN connections.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "PROTOCOL_CONFIGURATION_OPTIONS_IE",
+      "name": "Protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element that carries PDU session identity and ATSSS request parameters during inter-system change procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_IDENTITY",
+      "name": "PDU session identity",
+      "entity_type": "Identifier",
+      "description": "Identifier allocated by UE for PDN connections to enable transfer to 5GS. Stored in Protocol configuration options IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state during which inter-system change from N1 to S1 mode occurs.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5G Mobility Management idle state during which inter-system change from S1 to N1 mode occurs.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "NO_N26_INTERFACE",
+      "name": "No N26 interface support",
+      "entity_type": "Condition",
+      "description": "Condition where network does not support N26 interface, requiring UE to perform parameter mapping and local session management during inter-system changes.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "LOCAL_SESSION_RELEASE",
+      "name": "Local session release",
+      "entity_type": "Property",
+      "description": "UE behavior to locally release PDU sessions/PDN connections and associated resources that are not transferred during inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE creates PDN CONNECTIVITY REQUEST message during inter-system change from N1 to S1 mode",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "target": "PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE creates PDU SESSION ESTABLISHMENT REQUEST message during inter-system change from S1 to N1 mode",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PDN_CONNECTIVITY_REQUEST",
+      "target": "PROTOCOL_CONFIGURATION_OPTIONS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains Protocol configuration options IE with PDU session identity",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode occurs when UE is in EMM-IDLE state",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "target": "5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode occurs when UE is in 5GMM-IDLE state",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NO_N26_INTERFACE",
+      "target": "LOCAL_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When N26 interface is not supported, UE performs local release of sessions not transferred during inter-system change",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROTOCOL_CONFIGURATION_OPTIONS_IE",
+      "target": "PDU_SESSION_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Protocol configuration options IE contains PDU session identity parameter",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.2"
+      ]
+    }
+  ]
+}

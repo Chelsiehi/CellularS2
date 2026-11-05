@@ -1,0 +1,156 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.3.6",
+  "title": "Cell re-selection or cell selection while T390, T300 or T302 is running (UE in RRC_IDLE)",
+  "entities": [
+    {
+      "id": "T300",
+      "name": "T300",
+      "entity_type": "Timer",
+      "description": "Timer for RRC connection establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "T302",
+      "name": "T302",
+      "entity_type": "Timer",
+      "description": "Timer for RRC connection rejection or failure handling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "T390",
+      "name": "T390",
+      "entity_type": "Timer",
+      "description": "Timer for access barring",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION",
+      "name": "Cell reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a new cell while in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION",
+      "name": "Cell selection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a cell while in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE is not connected to the network",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_FAILURE",
+      "name": "RRC connection failure",
+      "entity_type": "Condition",
+      "description": "Condition when RRC connection establishment fails",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "VARCONNESTFAILREPORT",
+      "name": "VarConnEstFailReport",
+      "entity_type": "Property",
+      "description": "UE variable storing connection establishment failure information",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "CONNESTFAILOFFSET",
+      "name": "connEstFailOffset",
+      "entity_type": "Property",
+      "description": "Temporary offset applied to cell selection/reselection parameters after connection failures",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_RESELECTION",
+      "target": "RRC_CONNECTION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell reselection while T300/T302 running triggers RRC connection failure handling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_SELECTION",
+      "target": "T390",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Cell selection while T390 running stops T390 timer",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRC_CONNECTION_FAILURE",
+      "target": "VARCONNESTFAILREPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection failure triggers storage of failure information in VarConnEstFailReport",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONNECTION_FAILURE",
+      "target": "CONNESTFAILOFFSET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection failure enables use of temporary offset for cell selection/reselection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CELL_RESELECTION",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell reselection procedure occurs while UE is in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CELL_SELECTION",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Cell selection procedure occurs while UE is in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.6"
+      ]
+    }
+  ]
+}

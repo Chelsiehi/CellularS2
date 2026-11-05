@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "PDN Connectivity Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDN connectivity, including emergency and normal cases.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request Type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of PDN connectivity request (e.g., emergency, handover).",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3482",
+      "name": "Timer T3482",
+      "entity_type": "Timer",
+      "description": "Timer used for PDN connectivity request retransmission control.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that restricts sending PDN CONNECTIVITY REQUEST in certain EMM states.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where UE is connected to the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered when procedure transaction is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REQUEST",
+      "name": "Emergency Request Condition",
+      "entity_type": "Condition",
+      "description": "Condition where request type is emergency or handover of emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "COND_T3447_RUNNING",
+      "name": "T3447 Running Condition",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3447 is running, restricting PDN CONNECTIVITY REQUEST transmission.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort Procedure",
+      "entity_type": "Property",
+      "description": "Behavior where UE aborts the procedure on fifth T3482 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN connectivity procedure involves sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains Request Type IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "TIMER_T3482",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3482 for retransmission control.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "TIMER_T3482",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Procedure resets and restarts T3482 on retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMERGENCY_REQUEST",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency request condition guards procedure abort behavior on T3482 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes PROCEDURE TRANSACTION INACTIVE state on abort.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "COND_T3447_RUNNING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sending PDN CONNECTIVITY REQUEST requires T3447 not running unless exceptions apply.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_T3447_RUNNING",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3447 running condition applies when UE is in EMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.5"
+      ]
+    }
+  ]
+}

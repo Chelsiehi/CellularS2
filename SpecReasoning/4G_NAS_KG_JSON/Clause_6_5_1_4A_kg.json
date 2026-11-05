@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4A",
+  "title": "Handling the maximum number of active EPS bearer contexts",
+  "entities": [
+    {
+      "id": "MAX_ACTIVE_EPS_BEARERS_REACHED",
+      "name": "Maximum active EPS bearer contexts reached",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has reached the maximum number of active EPS bearer contexts as defined in clause 6.5.0.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request connectivity to a PDN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation",
+      "entity_type": "Procedure",
+      "description": "Procedure to deactivate an active EPS bearer context, either locally or via explicit signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "EMERGENCY_EPS_BEARER",
+      "name": "Emergency EPS bearer context",
+      "entity_type": "Property",
+      "description": "EPS bearer context established for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE to update tracking area and indicate EPS bearer context status to the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MAX_ACTIVE_EPS_BEARERS_REACHED",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When maximum active EPS bearers is reached, UE shall not send PDN CONNECTIVITY REQUEST unless an active bearer is deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EPS_BEARER_DEACTIVATION",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST requires deactivation of an active EPS bearer context if maximum is reached.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMERGENCY_EPS_BEARER",
+      "target": "EPS_BEARER_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE shall not deactivate an EPS bearer context for emergency when requesting emergency EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_BEARER_DEACTIVATION",
+      "target": "TRACKING_AREA_UPDATING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "If UE performs local deactivation for emergency bearer, it shall perform tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4A"
+      ]
+    }
+  ]
+}

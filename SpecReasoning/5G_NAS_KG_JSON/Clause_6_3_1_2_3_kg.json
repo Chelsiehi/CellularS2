@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.2.3",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3590",
+      "name": "Timer T3590",
+      "entity_type": "Timer",
+      "description": "Timer used during PDU session authentication and authorization procedure. On fifth expiry, the SMF aborts the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "name": "PDU SESSION AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message transmitted by SMF during PDU session authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "PROC_PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "name": "PDU session authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and authorizing a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "name": "PDU SESSION RELEASE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request release of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "COND_COLLISION",
+      "name": "Collision of procedures",
+      "entity_type": "Condition",
+      "description": "Condition when UE-requested PDU session release procedure overlaps with PDU session authentication and authorization procedure for same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_AUTH",
+      "name": "Abort authentication procedure",
+      "entity_type": "Property",
+      "description": "SMF behavior to abort PDU session authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "target": "TIMER_T3590",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SMF starts timer T3590 during PDU session authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "target": "TIMER_T3590",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "SMF resets timer T3590 on first expiry during retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_PDU_SESSION_AUTHENTICATION_AUTHORIZATION",
+      "target": "MSG_PDU_SESSION_AUTHENTICATION_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session authentication and authorization procedure includes sending PDU SESSION AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_COLLISION",
+      "target": "PROP_ABORT_AUTH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision condition establishes the behavior to abort authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "target": "COND_COLLISION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receipt of PDU SESSION RELEASE REQUEST message during authentication procedure creates collision condition.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session release procedure includes receiving PDU SESSION RELEASE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.2.3"
+      ]
+    }
+  ]
+}

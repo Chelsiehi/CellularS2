@@ -1,0 +1,103 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.2.2.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-----------------",
+    "The network shall initiate the paging procedure for 5GS services when NAS signalling messages or user data is pending to be sent to the UE in 5GMM-IDLE mode over 3GPP access (see example in figure5.6.2.2.1.1) and there is no paging restriction applied in the network for that paging",
+    "To initiate the procedure the 5GMM entity in the AMF requests the lower layer to start paging and shall start timer T3513",
+    "If downlink signalling or user data is pending to be sent over non-3GPP access, the 5GMM entity in the AMF shall indicate to the lower layer that the paging is associated to non-3GPP access",
+    "The network shall not page the UE to re-establish user-plane resources of PDU session(s) associated with non-3GPP access over 3GPP access if all the PDU sessions of the UE that are established over the 3GPP access are associated with control plane only indication",
+    "If the network has downlink user data pending for a UE, the AMF has stored paging restriction of the UE and the Paging restriction type in the stored paging restriction is set to",
+    "a) \"All paging is restricted\", the network should not page the UE",
+    "b) \"All paging is restricted except for voice service\", the network should page the UE only when",
+    "1) the pending downlink user data for the UE is considered as voice service related by the network",
+    "c) \"All paging is restricted except for specified PDU session(s)\", the network should page the UE only when",
+    "1) for PDU session(s) that paging is not restricted based on the stored paging restriction, the network has downlink user data pending; or",
+    "d) \"All paging is restricted except for voice service and specified PDU session(s)\", the network should page the UE only when",
+    "1) the pending downlink user data for the UE is considered as voice service related by the network; or",
+    "2) for PDU session(s) that paging is not restricted based on the stored paging restriction, the network has downlink user data pending",
+    "If the network has downlink signalling pending for a UE and the AMF has stored paging restriction of the UE and the Paging restriction type in the stored paging restriction is set to",
+    "a) \"All paging is restricted\", the network should not page the UE",
+    "b) \"All paging is restricted except for voice service\", the network should page the UE only when",
+    "1) the pending downlink signalling for the UE is 5GMM signalling or 5GSM signalling of the PDU session of voice service",
+    "c) \"All paging is restricted except for specified PDU session(s)\", the network should page the UE only when",
+    "1) the pending downlink signalling for the UE is 5GMM signalling; or",
+    "2) for PDU session(s) that paging is not restricted based on the stored paging restriction, the network has downlink 5GSM signalling pending; or",
+    "d) \"All paging is restricted except for voice service and specified PDU session(s)\", the network should page the UE only when",
+    "1) the pending downlink signalling for the UE is 5GMM signalling or 5GSM signalling of the PDU session of voice service; or",
+    "2) for PDU session(s) that paging is not restricted based on the stored paging restriction, the network has downlink 5GSM signalling pending",
+    "NOTE1: If the network pages the UE due to downlink signalling pending, the network initiates the release of the N1 NAS signalling connection after network-requested procedure is completed",
+    "The 5GMM entity in the AMF may provide the lower layer with the \"allowed CAG list\" and an \"indication that the UE is only allowed to access 5GS via CAG cells\" for the current PLMN, if available, and with the \"allowed CAG list\" and an \"indication that the UE is only allowed to access 5GS via CAG cells\" per equivalent PLMN, if available. If there is an active emergency PDU session, the 5GMM entity in the AMF shall not provide the lower layer with the \"allowed CAG list\" and an \"indication that the UE is only allowed to access 5GS via CAG cells\" for the current PLMN, even if available, or with the \"allowed CAG list\" and an \"indication that the UE is only allowed to access 5GS via CAG cells\" per equivalent PLMN, even if available",
+    "Upon reception of a paging indication, the UE shall stop the timer T3346, if running, and",
+    "a) if control plane CIoT 5GS optimization is not used by the UE, the UE shall",
+    "1) initiate a service request procedure over 3GPP access to respond to the paging as specified in subclauses5.6.1.2.1 if the UE is in 5GMM-REGISTERED.NORMAL-SERVICE or 5GMM-REGISTERED.NON-ALLOWED-SERVICE (as described in subclause5.3.5.2) state and the UE is in the 5GMM-IDLE mode without suspend indication",
+    "2) initiate a service request procedure over non-3GPP access to respond to the paging as specified in subclauses5.6.1",
+    "3) initiate a registration procedure for mobility and periodic registration update over 3GPP access to respond to the paging as specified in subclauses5.5.1.3.2; or",
+    "4) proceed as specified in subclause5.3.1.5 if the UE is in the 5GMM-IDLE mode with suspend indication; or",
+    "b) if control plane CIoT 5GS optimization is used by the UE, the UE shall",
+    "1) initiate a service request procedure as specified in subclause5.6.1.2.2 if the UE is in the 5GMM-IDLE mode without suspend indication",
+    "2) initiate a registration procedure for mobility and periodic registration update over 3GPP access as specified in subclauses5.5.1.3.2; or",
+    "3) proceed as specified in subclause5.3.1.5 if the UE is in the 5GMM-IDLE mode with suspend indication",
+    "NOTE2: If the UE is in the 5GMM-IDLE mode without suspend indication and has an uplink user data to be sent to the network using control plane CIoT 5GS optimization when receiving the paging indication, the UE can piggyback the uplink user data during the service request procedure initiated to respond to the paging, as specified in subclause5.6.1.2.2",
+    "The MUSIM UE based on implementation may use the paging cause indicated by lower layers (see 3GPPTS38.331[30]), if any, to accept the paging, reject the paging or ignore the paging indication",
+    "Upon reception of a paging indication, if the network supports the rejection of paging request and if a MUSIM UE decides not to accept the paging, the UE may initiate a service request procedure to reject the paging as specified in clause5.6.1.1",
+    "NOTE3: As an implementation option, MUSIM UE is allowed to not respond to paging based on the information available in the paging message, e.g. voice service indication",
+    "If TMGI is used as paging identity and the TMGI matches with MBS multicast session which the has UE joined, the UE shall respond to the paging. Otherwise, the UE shall not respond to the paging",
+    "The network shall stop timer T3513 for the paging procedure when an integrity-protected response is received from the UE and successfully integrity checked by the network or when the 5GMM entity in the AMF receives an indication from the lower layer that it has received the NGAP UE context resume request message as specified in 3GPPTS38.413[31]. If the response received is not integrity protected, or the integrity check is unsuccessful, timer T3513 for the paging procedure shall be kept running unless",
+    "a) the UE is registered for emergency services",
+    "b) the UE has an emergency PDU session; or",
+    "c) the response received is a REGISTRATION REQUEST message for mobility and periodic registration update and the security mode control procedure or authentication procedure performed during mobility and periodic registration update has completed successfully",
+    "Upon expiry of timer T3513, the network may reinitiate paging",
+    "If the network, while waiting for a response to the paging sent without paging priority, receives downlink signalling or downlink data associated with priority user-plane resources for PDU sessions, the network shall stop timer T3513, and then initiate the paging procedure with paging priority",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.2.2.1.1",
+      "file": "Figure_5_6_2_2_1_1_p443.png.json",
+      "title": "Paging procedure",
+      "content": {
+        "figure_id": "5.6.2.2.1.1",
+        "title": "Paging procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "AS",
+              "name": "Request paging",
+              "notes": "Start T3513"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "Paging",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "SERVICE REQUEST or REGISTRATION REQUEST or CONTROL PLANE SERVICE REQUEST",
+              "notes": "Stop T3513"
+            }
+          ],
+          "fields": [],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "tables": []
+}

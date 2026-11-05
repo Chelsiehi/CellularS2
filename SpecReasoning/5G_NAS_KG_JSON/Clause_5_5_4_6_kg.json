@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_AKA_5G_PROSE_RELAY",
+      "name": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+      "entity_type": "Procedure",
+      "description": "Procedure for authentication and key agreement between UE and network for 5G ProSe UE-to-network relay functionality.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_REQUEST",
+      "name": "RELAY KEY REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used in the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_AUTH_RESP",
+      "name": "RELAY KEY AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message used in the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "TIMER_T35XX",
+      "name": "Timer T35xx",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of RELAY KEY REQUEST or RELAY KEY AUTHENTICATION RESPONSE messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "PROC_DEREG_NETWORK_INIT",
+      "name": "Network initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to de-register a UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "COND_TRANSMISSION_FAILURE",
+      "name": "Transmission failure of relay key messages",
+      "entity_type": "Condition",
+      "description": "Condition where RELAY KEY REQUEST or RELAY KEY AUTHENTICATION RESPONSE message transmission fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "COND_TIMER_EXPIRY_FIRST",
+      "name": "First expiry of timer T35xx",
+      "entity_type": "Condition",
+      "description": "Condition when timer T35xx expires for the first time.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "COND_TIMER_EXPIRY_FIFTH",
+      "name": "Fifth expiry of timer T35xx",
+      "entity_type": "Condition",
+      "description": "Condition when timer T35xx expires for the fifth time.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "COND_PROCEDURE_COLLISION",
+      "name": "Collision between authentication and de-registration procedures",
+      "entity_type": "Condition",
+      "description": "Condition where authentication and key agreement procedure for 5G ProSe UE-to-network relay collides with de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort authentication and key agreement procedure",
+      "entity_type": "Property",
+      "description": "Behavior where UE aborts the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "PROP_RETRANSMIT_MESSAGE",
+      "name": "Retransmit relay key messages",
+      "entity_type": "Property",
+      "description": "Behavior where UE retransmits RELAY KEY REQUEST or RELAY KEY AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "PROP_PROCEED_DEREGISTRATION",
+      "name": "Proceed with network initiated de-registration",
+      "entity_type": "Property",
+      "description": "Behavior where UE proceeds with network initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_TRANSMISSION_FAILURE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Transmission failure of relay key messages causes UE to abort the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_TIMER_EXPIRY_FIRST",
+      "target": "PROP_RETRANSMIT_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First expiry of timer T35xx causes UE to retransmit relay key messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_TIMER_EXPIRY_FIRST",
+      "target": "TIMER_T35XX",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "First expiry of timer T35xx causes UE to reset and start timer T35xx.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TIMER_EXPIRY_FIFTH",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T35xx causes UE to abort the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision between procedures causes UE to abort the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_PROCEDURE_COLLISION",
+      "target": "PROP_PROCEED_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision between procedures causes UE to proceed with network initiated de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_AKA_5G_PROSE_RELAY",
+      "target": "MSG_RELAY_KEY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Authentication and key agreement procedure uses RELAY KEY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_AKA_5G_PROSE_RELAY",
+      "target": "MSG_RELAY_KEY_AUTH_RESP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Authentication and key agreement procedure uses RELAY KEY AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_AKA_5G_PROSE_RELAY",
+      "target": "TIMER_T35XX",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication and key agreement procedure uses timer T35xx for message retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.6"
+      ]
+    }
+  ]
+}

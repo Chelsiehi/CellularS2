@@ -1,0 +1,283 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.1",
+  "title": "UE initiated detach procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_DETACH",
+      "name": "UE initiated detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to detach from network, either due to switch off or normal detach. Involves sending DETACH REQUEST message and handling different detach types.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate detach procedure. Contains Detach type IE and EPS mobile identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether detach is due to switch off and whether detach is for EPS services only, non-EPS services only, or both.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_MOBILE_IDENTITY",
+      "name": "EPS mobile identity",
+      "entity_type": "Information Element",
+      "description": "IE containing GUTI, IMSI, or IMEI depending on UE's available identities.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity used to identify UE in EPS.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_IMSI",
+      "name": "IMSI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Subscriber Identity, permanent subscriber identifier.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "ID_IMEI",
+      "name": "IMEI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Equipment Identity, device hardware identifier.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3421",
+      "name": "T3421",
+      "entity_type": "Timer",
+      "description": "Timer started in UE after sending DETACH REQUEST when detach is not due to switch off and UE is in EMM-REGISTERED or EMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_INITIATED",
+      "name": "EMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state where UE has initiated registration but not yet completed.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED_INITIATED",
+      "name": "EMM-DEREGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state entered when UE initiates detach for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_MM_IMSI_DETACH_PENDING",
+      "name": "MM IMSI DETACH PENDING",
+      "entity_type": "State",
+      "description": "MM state entered when detach type indicates detach for non-EPS services or both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_SWITCH_OFF",
+      "name": "Detach due to switch off",
+      "entity_type": "Condition",
+      "description": "Condition where UE is detaching because it is being switched off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "PROP_SECURITY_CONTEXT_STORAGE",
+      "name": "EPS security context storage",
+      "entity_type": "Property",
+      "description": "UE stores current EPS security context as valid after sending last DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE initiated detach procedure involves sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_EPS_MOBILE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains EPS mobile identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "ID_GUTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS mobile identity IE contains GUTI if UE has valid GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "ID_IMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS mobile identity IE contains IMSI if UE has no valid GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "ID_IMEI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS mobile identity IE contains IMEI if UE has neither valid GUTI nor valid IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_UE_DETACH",
+      "target": "TIMER_T3421",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3421 when detach is not due to switch off and UE is in EMM-REGISTERED or EMM-REGISTERED-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1",
+        "Figure 5.5.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_UE_DETACH",
+      "target": "STATE_EMM_DEREGISTERED_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EMM-DEREGISTERED-INITIATED state when detach type indicates detach for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_UE_DETACH",
+      "target": "STATE_MM_IMSI_DETACH_PENDING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes MM IMSI DETACH PENDING state when detach type indicates detach for non-EPS services or both.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_UE_DETACH",
+      "target": "PROP_SECURITY_CONTEXT_STORAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EPS security context storage after last DETACH REQUEST is sent.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_UE_DETACH",
+      "target": "COND_SWITCH_OFF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior depends on whether detach is due to switch off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_UE_DETACH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-REGISTERED state for certain behaviors.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PROC_UE_DETACH",
+      "target": "STATE_EMM_REGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-REGISTERED-INITIATED state for certain behaviors.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.1"
+      ]
+    }
+  ]
+}

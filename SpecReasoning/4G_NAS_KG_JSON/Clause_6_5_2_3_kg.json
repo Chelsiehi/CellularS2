@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.2.3",
+  "title": "UE requested PDN disconnection procedure accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_PDN_DISCONNECT_ACCEPTED",
+      "name": "UE requested PDN disconnection procedure accepted by the network",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network accepts the UE's PDN disconnection request and initiates bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN disconnection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to initiate bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_ACCEPT",
+      "name": "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE identifying the default bearer associated with the PDN to disconnect.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "IE used to identify the procedure transaction.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3492",
+      "name": "T3492",
+      "entity_type": "Timer",
+      "description": "Timer used in PDN disconnection procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after stopping timer T3492.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "PROP_MME_RELEASES_RESOURCES",
+      "name": "MME releases PDN resources",
+      "entity_type": "Property",
+      "description": "MME releases all resources reserved for the PDN upon receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_DISCONNECT_ACCEPTED",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts upon receipt of PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_DISCONNECT_ACCEPTED",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MME initiates bearer context deactivation by sending DEACTIVATE EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEACTIVATE EPS BEARER CONTEXT REQUEST contains linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEACTIVATE EPS BEARER CONTEXT REQUEST contains PTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "TIMER_T3492",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3492 upon receiving DEACTIVATE EPS BEARER CONTEXT REQUEST with matching PTI.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQUEST",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters PROCEDURE TRANSACTION INACTIVE state after stopping T3492.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_ACCEPT",
+      "target": "PROP_MME_RELEASES_RESOURCES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME releases PDN resources upon receiving DEACTIVATE EPS BEARER CONTEXT ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.3"
+      ]
+    }
+  ]
+}

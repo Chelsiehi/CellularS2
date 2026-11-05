@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.5",
+  "title": "Tracking area update request message (for N1 mode only)",
+  "entities": [
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to construct a TRACKING AREA UPDATE REQUEST message for inter-system change from S1 mode to N1 mode for security verification by the MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message created by EMM upon request from 5GMM, included in REGISTRATION REQUEST message for N1 mode inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "IE_EPS_UPDATE_TYPE",
+      "name": "EPS update type",
+      "entity_type": "Information Element",
+      "description": "Mandatory IE in TRACKING AREA UPDATE REQUEST message that must be set to 'TA updating'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "IE_NAS_KEY_SET_IDENTIFIER",
+      "name": "NAS Key Set Identifier",
+      "entity_type": "Information Element",
+      "description": "Mandatory IE containing eKSI (KSIASME or KSISGSN) for security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "IE_OLD_GUTI",
+      "name": "Old GUTI",
+      "entity_type": "Information Element",
+      "description": "Mandatory IE containing the associated GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate where UE remains if tracking area updating procedure is not initiated during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "PROP_INTEGRITY_PROTECTION",
+      "name": "Integrity protection with EPS security context",
+      "entity_type": "Property",
+      "description": "TRACKING AREA UPDATE REQUEST message must be integrity protected using current EPS security context with uplink NAS COUNT increased by one.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TRACKING_AREA_UPDATE",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Tracking area updating procedure constructs the TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_EPS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains mandatory EPS update type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_NAS_KEY_SET_IDENTIFIER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains mandatory NAS Key Set Identifier IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_OLD_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains mandatory Old GUTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "PROP_INTEGRITY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message must be integrity protected with EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If UE is in EMM-REGISTERED.NO-CELL-AVAILABLE state, tracking area updating procedure is not initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.5"
+      ]
+    }
+  ]
+}

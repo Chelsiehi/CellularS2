@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.3",
+  "title": "UE-initiated de-registration procedure completion for 5GS services over 3GPP access",
+  "entities": [
+    {
+      "id": "PROC_UE_DEREG_3GPP",
+      "name": "UE-initiated de-registration procedure for 3GPP access",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE-initiated de-registration from 5GS services over 3GPP access, involving PDU session release and state transitions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type (3GPP, non-3GPP, or both) for de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state indicating the UE is de-registered for 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_NULL",
+      "name": "5GMM-NULL",
+      "entity_type": "State",
+      "description": "5GMM state indicating no NAS signaling connection exists.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "COND_3GPP_ACCESS",
+      "name": "De-registration for 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition where access type indicates de-registration is for 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "COND_N1_ONLY_NOT_SWITCH_OFF",
+      "name": "UE supports N1 mode only and de-registration not due to switch off",
+      "entity_type": "Condition",
+      "description": "Condition where UE supports only N1 mode and de-registration is not due to switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "COND_DISABLE_5GS",
+      "name": "De-registration due to disabling of 5GS services",
+      "entity_type": "Condition",
+      "description": "Condition where de-registration procedure was performed due to disabling of 5GS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_INACTIVE_3GPP",
+      "name": "UE marked as inactive for 5GS services over 3GPP access",
+      "entity_type": "Property",
+      "description": "Property where UE is marked as inactive in AMF for 5GS services over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_RELEASE_PDU",
+      "name": "Local release of PDU sessions",
+      "entity_type": "Property",
+      "description": "Property where UE and network perform local release of PDU sessions established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "PROP_MA_PDU_RELEASE",
+      "name": "MA PDU session release",
+      "entity_type": "Property",
+      "description": "Property where Multi-Access PDU sessions are released on 3GPP access or locally released.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DEREG_3GPP",
+      "target": "MSG_DEREG_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "De-registration procedure involves sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEREG_REQUEST",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains access type information element.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ACCESS_TYPE",
+      "target": "COND_3GPP_ACCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access type IE guards the condition for 3GPP access de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_3GPP_ACCESS",
+      "target": "PROP_LOCAL_RELEASE_PDU",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of 3GPP access de-registration establishes local release of PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_3GPP_ACCESS",
+      "target": "PROP_MA_PDU_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of 3GPP access de-registration establishes MA PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_3GPP_ACCESS",
+      "target": "PROP_UE_INACTIVE_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of 3GPP access de-registration establishes UE marked as inactive.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_3GPP_ACCESS",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of 3GPP access de-registration establishes 5GMM-DEREGISTERED state in AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_N1_ONLY_NOT_SWITCH_OFF",
+      "target": "COND_DISABLE_5GS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of N1 mode only and not switch off guards de-registration due to disabling 5GS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_DISABLE_5GS",
+      "target": "STATE_5GMM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of de-registration due to disabling 5GS services establishes 5GMM-NULL state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_N1_ONLY_NOT_SWITCH_OFF",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of N1 mode only and not switch off (not due to disabling 5GS) establishes 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.3"
+      ]
+    }
+  ]
+}

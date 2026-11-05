@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU Session",
+      "entity_type": "Procedure",
+      "description": "A protocol data unit session that can be initiated with IPv4, IPv6, or IPv4v6 session types for IP address allocation.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "IPV4_PDU_SESSION_TYPE",
+      "name": "IPv4 PDU Session Type",
+      "entity_type": "Property",
+      "description": "PDU session type where only IPv4 address is allocated to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "IPV6_PDU_SESSION_TYPE",
+      "name": "IPv6 PDU Session Type",
+      "entity_type": "Property",
+      "description": "PDU session type where IPv6 prefix and interface identifier for IPv6 link local address are allocated to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "IPV4V6_PDU_SESSION_TYPE",
+      "name": "IPv4v6 PDU Session Type",
+      "entity_type": "Property",
+      "description": "PDU session type where both IPv4 address and IPv6 prefix with interface identifier are allocated to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "Session Management Function",
+      "entity_type": "Property",
+      "description": "Network function responsible for IP address allocation based on selected PDU session type and operator policies.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "SUGGESTED_INTERFACE_IDENTIFIER_IE",
+      "name": "Suggested Interface Identifier IE",
+      "entity_type": "Information Element",
+      "description": "Information element in PDU SESSION ESTABLISHMENT REQUEST message that suggests the interface identifier for IPv6 link local address.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "IPV4_ADDRESS_ALLOCATION",
+      "name": "IPv4 Address Allocation",
+      "entity_type": "Procedure",
+      "description": "Process where UE obtains IPv4 address via NAS signalling or IPv4 configuration parameters via DHCPv4 or other methods.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "IPV6_ADDRESS_ALLOCATION",
+      "name": "IPv6 Address Allocation",
+      "entity_type": "Procedure",
+      "description": "Process where UE builds IPv6 link local address, obtains /64 IPv6 prefix via stateless autoconfiguration, and may get configuration parameters via stateless DHCPv6 or Router Advertisement.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PDU_SESSION",
+      "target": "IPV4_PDU_SESSION_TYPE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session can be initiated with IPv4 session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDU_SESSION",
+      "target": "IPV6_PDU_SESSION_TYPE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session can be initiated with IPv6 session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PDU_SESSION",
+      "target": "IPV4V6_PDU_SESSION_TYPE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session can be initiated with IPv4v6 session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMF",
+      "target": "IPV4_ADDRESS_ALLOCATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF performs IPv4 address allocation for IPv4 and IPv4v6 session types.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SMF",
+      "target": "IPV6_ADDRESS_ALLOCATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF performs IPv6 prefix and interface identifier allocation for IPv6 and IPv4v6 session types.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IPV6_ADDRESS_ALLOCATION",
+      "target": "SUGGESTED_INTERFACE_IDENTIFIER_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If Suggested Interface Identifier IE is present, SMF allocates the indicated interface identifier for IPv6 link local address.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.4.1"
+      ]
+    }
+  ]
+}

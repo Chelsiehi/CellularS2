@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.3.16.2",
+  "title": "Protocol configuration options",
+  "entities": [
+    {
+      "id": "IE_PCO",
+      "name": "Protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "Information element used by the UE to transmit protocol data such as configuration parameters, error codes, or messages/events to the network.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that initiates transmission of protocol data to the network using the PCO IE.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    },
+    {
+      "id": "COND_PCO_INCLUSION",
+      "name": "PCO inclusion condition",
+      "entity_type": "Condition",
+      "description": "Condition for including the PCO IE: when UE wishes to transmit protocol data and extended protocol configuration options is not supported by UE or network end-to-end for the PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    },
+    {
+      "id": "PROP_EXT_PCO_NOT_SUPPORTED",
+      "name": "Extended PCO not supported",
+      "entity_type": "Property",
+      "description": "Property indicating that extended protocol configuration options are not supported by UE or network end-to-end for the PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "IE_PCO",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE triggers transmission of PCO IE when it wishes to send protocol data to network.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PCO_INCLUSION",
+      "target": "IE_PCO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PCO IE inclusion is guarded by the condition that UE wishes to transmit protocol data and extended PCO is not supported.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PCO_INCLUSION",
+      "target": "PROP_EXT_PCO_NOT_SUPPORTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The inclusion condition establishes that extended PCO must not be supported by UE or network end-to-end for PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 8.3.16.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "3",
+  "title": "> start or restart timer T342 with the timer value set to the delayBudgetReportingProhibitTimer;",
+  "entities": [
+    {
+      "id": "UEAssistanceInformation",
+      "name": "UEAssistanceInformation message",
+      "entity_type": "Message",
+      "description": "RRC message used by UE to provide various assistance information to the network including delay budget reports, overheating assistance, IDC assistance, power saving preferences, and other UE capabilities.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T345",
+      "name": "Timer T345",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of overheating assistance information, set to overheatingIndicationProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346a",
+      "name": "Timer T346a",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of DRX preference information for a cell group, set to drx-PreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346b",
+      "name": "Timer T346b",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of maximum bandwidth preference information for a cell group, set to maxBW-PreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346c",
+      "name": "Timer T346c",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of maximum component carrier preference information for a cell group, set to maxCC-PreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346d",
+      "name": "Timer T346d",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of maximum MIMO layer preference information for a cell group, set to maxMIMO-LayerPreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346e",
+      "name": "Timer T346e",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of minimum scheduling offset preference information for a cell group, set to minSchedulingOffsetPreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346f",
+      "name": "Timer T346f",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of release preference information, set to releasePreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346g",
+      "name": "Timer T346g",
+      "entity_type": "Timer",
+      "description": "Timer used for MUSIM assistance when leaving RRC_CONNECTED state, set to musim-LeaveWithoutResponseTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346h",
+      "name": "Timer T346h",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of MUSIM gap preference information, set to musim-GapProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346i",
+      "name": "Timer T346i",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of SCG deactivation preference, set to scg-DeactivationPreferenceProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346j",
+      "name": "Timer T346j",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of RLM measurement relaxation state, set to rlm-RelaxtionReportingProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "T346k",
+      "name": "Timer T346k",
+      "entity_type": "Timer",
+      "description": "Timer used to prohibit frequent transmission of BFD measurement relaxation state, set to bfd-RelaxtionReportingProhibitTimer value.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "OVERHEATING_CONDITION",
+      "name": "Overheating condition detected",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects overheating and needs to provide assistance information to the network.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "IDC_PROBLEMS",
+      "name": "IDC problems detected",
+      "entity_type": "Condition",
+      "description": "Condition where UE experiences In-Device Coexistence interference problems that it cannot solve by itself on certain frequencies or UL CA combinations.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "OVERHEATING_CONDITION",
+      "target": "T345",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Detection of overheating condition starts timer T345 to prevent frequent assistance information transmission.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "OVERHEATING_CONDITION",
+      "target": "UEAssistanceInformation",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Overheating condition triggers transmission of UEAssistanceInformation message with overheating assistance.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDC_PROBLEMS",
+      "target": "UEAssistanceInformation",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "IDC problems trigger transmission of UEAssistanceInformation message with IDC assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONNECTED",
+      "target": "T346f",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Release preference transmission requires UE to be in RRC_CONNECTED state and starts timer T346f.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_CONNECTED",
+      "target": "T346g",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MUSIM assistance for leaving RRC_CONNECTED requires the UE to be in connected state and starts timer T346g.",
+      "provenance": [
+        "TS 38.331, Clause 3"
+      ]
+    }
+  ]
+}

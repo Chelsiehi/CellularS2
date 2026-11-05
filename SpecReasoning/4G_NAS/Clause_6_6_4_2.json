@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.4.2",
+  "title": "UE initiated transport of user data via the control plane",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------------------------",
+    "Upon receipt of a request to transfer user data via the control plane, if the UE is in EMM-CONNECTED mode, the UE initiates the procedure by sending the ESM DATA TRANSPORT message including the user data to be sent in the User data container IE (see example in figure 6.6.4.2.1). The length of the value part of the User data container IE should not exceed the link MTU size for the respective type of user data (IPv4, IPv6 or Non-IP). If the user data in the value part of the User data container IE is an Ethernet frame, then the length of the Ethernet frame payload should not exceed the Ethernet frame payload MTU size",
+    "NOTE: The recommended maximum size for link MTU is 1358 octets to prevent fragmentation in the backbone network (see 3GPP S 23.060 [74]). Depending on the network configuration, setting link MTU size to a value larger than 1358 octets could lead to inefficient core network implementation due to fragmentation",
+    "If the UE is in EMM-IDLE mode, the UE initiates the procedure by sending the ESM DATA TRANSPORT message included in a CONTROL PLANE SERVICE REQUEST message",
+    "Based on information provided by the upper layers, the UE may include a Release assistance indication IE in the ESM DATA TRANSPORT message to inform the network that",
+    "1) subsequent to the current uplink data transmission no further uplink or downlink data transmission (e.g. an acknowledgement or response) is expected; i.e. the upper layers indicated that data exchanges have completed with the current UL data transfer; or",
+    "2) subsequent to the current uplink data transmission only a single downlink data transmission and no further uplink data transmission is expected; i.e. the upper layers indicated that data exchanges will have completed with the next downlink data transmission",
+    "When receiving the ESM DATA TRANSPORT message, the MME shall identify the PDN connection to the SCEF or to the PDN GW, based on the EPS bearer identity included in message, and forward the contents of the User data container IE accordingly. If the ESM DATA TRANSPORT message includes a Release assistance indication IE, then ESM layer indicates to the EMM layer to initiate release of the NAS signalling connection",
+    "1) if the release assistance indication indicates that no further uplink and no further downlink data transmission subsequent to the uplink data transmission is expected; or",
+    "2) upon subsequent delivery of the next received downlink data transmission to the UE if the release assistance indication indicates that only a single downlink data transmission and no further uplink data transmission subsequent to the uplink data transmission is expected",
+    "Figure 6.6.4.2.1: UE initiated transport of user data via the control plane procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.6.4.2.1",
+      "file": "Figure_6_6_4_2_1_p346.png.json",
+      "title": "UE initiated transport of user data via the control plane procedure",
+      "content": {
+        "figure_id": "6.6.4.2.1",
+        "title": "UE initiated transport of user data via the control plane procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "Network"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "Network",
+              "name": "ESM DATA TRANSPORT",
+              "notes": ""
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Upon receipt of a request to transfer user data via the control plane, if the UE is in EMM-CONNECTED mode, the UE initiates the procedure by sending the ESM DATA TRANSPORT message including the user data to be sent in the User data container IE",
+            "If the UE is in EMM-IDLE mode, the UE initiates the procedure by sending the ESM DATA TRANSPORT message included in a CONTROL PLANE SERVICE REQUEST message",
+            "Based on information provided by the upper layers, the UE may include a Release assistance indication IE in the ESM DATA TRANSPORT message"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

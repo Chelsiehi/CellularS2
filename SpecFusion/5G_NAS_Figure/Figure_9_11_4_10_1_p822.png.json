@@ -1,0 +1,62 @@
+{
+  "figure_id": "9.11.4.10.1",
+  "title": "PDU address information element",
+  "type": "BIT_LAYOUT",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [],
+    "messages": [],
+    "fields": [
+      {
+        "name": "PDU address IEI",
+        "bit_range": "8-5",
+        "octet_range": "1",
+        "description": "PDU address information element identifier"
+      },
+      {
+        "name": "Length of PDU address contents",
+        "bit_range": "",
+        "octet_range": "2",
+        "description": "Length of PDU address contents"
+      },
+      {
+        "name": "Spare",
+        "bit_range": "8-5",
+        "octet_range": "3",
+        "description": "Spare bits (coded as zero)"
+      },
+      {
+        "name": "SI6LLA",
+        "bit_range": "4",
+        "octet_range": "3",
+        "description": "SMF's IPv6 link local address bit - 0: field is absent, 1: field is present"
+      },
+      {
+        "name": "PDU session type value",
+        "bit_range": "3-1",
+        "octet_range": "3",
+        "description": "PDU session type value: 001=IPv4, 010=IPv6, 011=IPv4v6"
+      },
+      {
+        "name": "PDU address information",
+        "bit_range": "",
+        "octet_range": "4 to n",
+        "description": "Contains IPv4 address, IPv6 interface identifier, or both depending on PDU session type"
+      },
+      {
+        "name": "SMF's IPv6 link local address",
+        "bit_range": "",
+        "octet_range": "(n+1) to (n+16)",
+        "description": "SMF's IPv6 link local address field (present if SI6LLA bit is set)"
+      }
+    ],
+    "notes": [
+      "Bits 5 to 8 of octet 3 are spare and shall be coded as zero",
+      "If the PDU session type value indicates IPv4, the PDU address information in octet 4 to octet 7 contains an IPv4 address",
+      "If the PDU session type value indicates IPv6, the PDU address information in octet 4 to octet 11 contains an interface identifier for the IPv6 link local address",
+      "If the PDU session type value indicates IPv4v6, the PDU address information in octet 4 to octet 11 contains an interface identifier for the IPv6 link local address and in octet 12 to octet 15 contains an IPv4 address",
+      "In the UE to network direction, the SI6LLA bit shall be set to 'SMF's IPv6 link local address field is absent'"
+    ]
+  }
+}

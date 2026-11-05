@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "name": "UE requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for a UE to request setup of a default EPS bearer to a PDN. Used to establish first or subsequent default bearers for multiple PDN access.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to request PDN connectivity. Can be included in initial attach or sent stand-alone.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management registered state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "COND_EMM_REGISTERED_WITHOUT_PDN",
+      "name": "EMM-REGISTERED without PDN connection support",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether UE and MME support EMM-REGISTERED state without active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_BEARER_SERVICES",
+      "name": "Emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition for PDN connectivity requested for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "COND_RLOS_ACCESS",
+      "name": "RLOS access",
+      "entity_type": "Condition",
+      "description": "Condition for PDN connectivity for RLOS (Restricted Local Operator Services).",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "PROP_DEFAULT_EPS_BEARER_ESTABLISHMENT",
+      "name": "Default EPS bearer context establishment",
+      "entity_type": "Property",
+      "description": "Property established when network accepts PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "PROP_MME_NO_RESTRICTION_CHECK",
+      "name": "MME does not check regional/subscription restrictions",
+      "entity_type": "Property",
+      "description": "MME behavior when processing PDN connectivity request for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE sends PDN CONNECTIVITY REQUEST message as part of the procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "target": "PROP_DEFAULT_EPS_BEARER_ESTABLISHMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes default EPS bearer context when accepted by network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_REQUESTED_PDN_CONNECTIVITY",
+      "target": "COND_EMM_REGISTERED_WITHOUT_PDN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution depends on EMM-REGISTERED without PDN connection support.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_BEARER_SERVICES",
+      "target": "PROP_MME_NO_RESTRICTION_CHECK",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDN connectivity is for emergency services, MME does not check restrictions.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMERGENCY_BEARER_SERVICES",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency bearer services condition restricts when PDN CONNECTIVITY REQUEST can be sent.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RLOS_ACCESS",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLOS access condition restricts when PDN CONNECTIVITY REQUEST can be sent.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.1"
+      ]
+    }
+  ]
+}

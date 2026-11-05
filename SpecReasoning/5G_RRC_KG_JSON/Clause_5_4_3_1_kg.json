@@ -1,0 +1,103 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.3.1",
+  "title": "General MobilityFromNRCommand MobilityFromNRCommand RRC connection re-establishment",
+  "entities": [
+    {
+      "id": "PROC_MOBILITY_FROM_NR",
+      "name": "Mobility from NR procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to move a UE in RRC_CONNECTED to a cell using other RAT such as E-UTRA or UTRA-FDD. Covers handover where radio resources are allocated in the target cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1",
+        "Figure 5.4.3.1"
+      ]
+    },
+    {
+      "id": "MSG_MOBILITY_FROM_NR_COMMAND",
+      "name": "MobilityFromNRCommand",
+      "entity_type": "Message",
+      "description": "RRC message sent by the network to command UE mobility from NR to another RAT. Includes allocated radio resources for the target cell in case of handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1",
+        "Figure 5.4.3.1"
+      ]
+    },
+    {
+      "id": "PROC_RRC_REESTABLISHMENT",
+      "name": "RRC connection re-establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE when mobility from NR fails, to re-establish RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1",
+        "Figure 5.4.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active RRC connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER",
+      "name": "Handover condition",
+      "entity_type": "Condition",
+      "description": "Condition where MobilityFromNRCommand message includes radio resources allocated for the UE in the target cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MOBILITY_FROM_NR",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Mobility from NR procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MOBILITY_FROM_NR",
+      "target": "MSG_MOBILITY_FROM_NR_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Mobility from NR procedure involves sending MobilityFromNRCommand message.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1",
+        "Figure 5.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_MOBILITY_FROM_NR_COMMAND",
+      "target": "COND_HANDOVER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MobilityFromNRCommand message is guarded by handover condition when it includes allocated radio resources.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MOBILITY_FROM_NR",
+      "target": "PROC_RRC_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Mobility from NR procedure may lead to RRC connection re-establishment in case of failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.1",
+        "Figure 5.4.3.1"
+      ]
+    }
+  ]
+}

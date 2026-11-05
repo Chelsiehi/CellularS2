@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.5",
+  "title": "Allowed NSSAI",
+  "entities": [
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element that contains the network slice selection assistance information allowed by the network for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element containing the network slices requested by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "Single Network Slice Selection Assistance Information identifying a network slice.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "COND_NSSAA_NOT_SUPPORTED",
+      "name": "Network not supporting NSSAA",
+      "entity_type": "Condition",
+      "description": "Condition where the network does not support Network Slice-Specific Authentication and Authorization.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "COND_NSSAA_NOT_SUBJECT",
+      "name": "S-NSSAI not subject to NSSAA",
+      "entity_type": "Condition",
+      "description": "Condition where S-NSSAI is not subject to Network Slice-Specific Authentication and Authorization.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "COND_NSSAA_SUCCESSFUL",
+      "name": "NSSAA successfully performed",
+      "entity_type": "Condition",
+      "description": "Condition where Network Slice-Specific Authentication and Authorization has been successfully completed.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "PROP_DEFAULT_S_NSSAI",
+      "name": "Default S-NSSAI available",
+      "entity_type": "Property",
+      "description": "Property indicating the network has one or more default S-NSSAIs configured.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the Requested NSSAI information element.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_REQUESTED_NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Requested NSSAI contains one or more S-NSSAIs.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NSSAA_NOT_SUPPORTED",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When network does not support NSSAA and S-NSSAIs are allowed, Allowed NSSAI IE shall be included.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NSSAA_NOT_SUBJECT",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When S-NSSAIs are not subject to NSSAA and are allowed, Allowed NSSAI IE shall be included.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NSSAA_SUCCESSFUL",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When NSSAA has been successfully performed for S-NSSAIs, Allowed NSSAI IE shall be included.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_DEFAULT_S_NSSAI",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When no requested NSSAI is allowed but default S-NSSAIs exist, Allowed NSSAI IE shall be included.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.5"
+      ]
+    }
+  ]
+}

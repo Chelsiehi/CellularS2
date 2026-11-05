@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.4.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3396",
+      "name": "T3396",
+      "entity_type": "Timer",
+      "description": "Timer T3396 that restricts sending of ESM DATA TRANSPORT messages under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "MSG_ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT",
+      "entity_type": "Message",
+      "description": "Message used for transporting user data via control plane in ESM.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "COND_AC11_15_CONFIGURED",
+      "name": "UE configured to use AC11 15 in selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition allowing ESM DATA TRANSPORT transmission when T3396 is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "COND_EXCEPTION_DATA_ALLOWED",
+      "name": "Exception data reporting allowed",
+      "entity_type": "Condition",
+      "description": "Condition allowing ESM DATA TRANSPORT for exception data reporting when T3396 is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_REINITIATE",
+      "name": "Abort and re-initiate user data transport",
+      "entity_type": "Property",
+      "description": "System behavior to abort and re-initiate user data transport when TAI change occurs and current TAI not in TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "PROP_REINITIATE_IMMEDIATE",
+      "name": "Re-initiate user data transport immediately",
+      "entity_type": "Property",
+      "description": "System behavior to immediately re-initiate user data transport when TAI change occurs but current TAI remains in TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "PROP_CALCULATE_NAS_MAC",
+      "name": "Calculate NAS MAC",
+      "entity_type": "Property",
+      "description": "UE behavior to calculate NAS MAC when indicated by lower layers and update uplink NAS COUNT.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used in tracking area updating procedure with 'signalling active' flag set.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to re-initiate user data transport including ESM DATA TRANSPORT.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TIMER_T3396",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3396 running restricts sending of ESM DATA TRANSPORT message unless specific conditions are met.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_AC11_15_CONFIGURED",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition allows ESM DATA TRANSPORT transmission when T3396 is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EXCEPTION_DATA_ALLOWED",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition allows ESM DATA TRANSPORT for exception data reporting when T3396 is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3396",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM DATA TRANSPORT can be sent when T3396 expires or is stopped.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_ABORT_REINITIATE",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abort and re-initiate behavior leads to sending TRACKING AREA UPDATE REQUEST with 'signalling active' flag.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_REINITIATE_IMMEDIATE",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Immediate re-initiate behavior leads to including ESM DATA TRANSPORT in CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message includes ESM DATA TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_CALCULATE_NAS_MAC",
+      "target": "MSG_ESM_DATA_TRANSPORT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "ESM DATA TRANSPORT message requires NAS MAC calculation for integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.4.4"
+      ]
+    }
+  ]
+}

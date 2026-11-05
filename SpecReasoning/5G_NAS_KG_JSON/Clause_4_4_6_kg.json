@@ -1,0 +1,291 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.6",
+  "title": "Protection of initial NAS signalling messages",
+  "entities": [
+    {
+      "id": "PROC_INITIAL_NAS_PROTECTION",
+      "name": "Protection of initial NAS signalling messages",
+      "entity_type": "Procedure",
+      "description": "Procedure for protecting initial NAS messages (REGISTRATION REQUEST, SERVICE REQUEST, CONTROL PLANE SERVICE REQUEST) using security contexts and ciphering of non-cleartext IEs.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for registration procedure. Contains cleartext and potentially non-cleartext IEs.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for service request procedure. Contains cleartext and potentially non-cleartext IEs.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for control plane service request. Contains cleartext IEs and optionally CIoT small data container or NAS message container.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message that is always sent unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "IE used to contain entire NAS messages (both cleartext and non-cleartext IEs) for protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "name": "CIoT small data container",
+      "entity_type": "Information Element",
+      "description": "IE used in CONTROL PLANE SERVICE REQUEST for small data transmission, can be ciphered independently.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "COND_VALID_SECURITY_CONTEXT",
+      "name": "UE has valid 5G NAS security context",
+      "entity_type": "Condition",
+      "description": "Condition where UE possesses an active 5G NAS security context for ciphering operations.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "COND_NO_VALID_SECURITY_CONTEXT",
+      "name": "UE does not have valid 5G NAS security context",
+      "entity_type": "Condition",
+      "description": "Condition where UE lacks an active 5G NAS security context, requiring cleartext-only transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "COND_NON_CLEARTEXT_IES_NEEDED",
+      "name": "UE needs to send non-cleartext IEs",
+      "entity_type": "Condition",
+      "description": "Condition where UE requires transmission of IEs that need ciphering protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "PROP_SECURITY_HEADER_INTEGRITY_PROTECTED",
+      "name": "Security header type set to integrity protected",
+      "entity_type": "Property",
+      "description": "Property where UE sets security header type to 'integrity protected' when including NAS message container IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "PROP_AMF_DECIPHERS_NAS_CONTAINER",
+      "name": "AMF deciphers NAS message container",
+      "entity_type": "Property",
+      "description": "AMF behavior to decipher the value part of NAS message container IE upon reception.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "PROP_AMF_DECIPHERS_CIOT_CONTAINER",
+      "name": "AMF deciphers CIoT small data container",
+      "entity_type": "Property",
+      "description": "AMF behavior to decipher the value part of CIoT small data container IE in CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INITIAL_NAS_PROTECTION",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Protection procedure applies to REGISTRATION REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INITIAL_NAS_PROTECTION",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Protection procedure applies to SERVICE REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INITIAL_NAS_PROTECTION",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Protection procedure applies to CONTROL PLANE SERVICE REQUEST messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST can contain NAS message container IE for protected transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST can contain NAS message container IE for protected transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST can contain NAS message container IE for protected transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST can contain CIoT small data container IE for small data transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NON_CLEARTEXT_IES_NEEDED",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition where non-cleartext IEs are needed triggers use of NAS message container.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_VALID_SECURITY_CONTEXT",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "When valid security context exists, NAS message container value part is ciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_VALID_SECURITY_CONTEXT",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "When valid security context exists, CIoT small data container value part is ciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_NO_VALID_SECURITY_CONTEXT",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When no valid security context exists, REGISTRATION REQUEST contains cleartext IEs only.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "PROP_SECURITY_HEADER_INTEGRITY_PROTECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inclusion of NAS message container IE requires security header type to be set to integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_NAS_MESSAGE_CONTAINER",
+      "target": "PROP_AMF_DECIPHERS_NAS_CONTAINER",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF deciphers NAS message container IE upon reception in integrity protected initial NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "target": "PROP_AMF_DECIPHERS_CIOT_CONTAINER",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF deciphers CIoT small data container IE upon reception in CONTROL PLANE SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROC_INITIAL_NAS_PROTECTION",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "DEREGISTRATION REQUEST message is always sent unciphered.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.6"
+      ]
+    }
+  ]
+}

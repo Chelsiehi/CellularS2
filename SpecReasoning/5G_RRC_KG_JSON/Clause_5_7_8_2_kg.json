@@ -1,0 +1,238 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.8.2",
+  "title": "Void",
+  "entities": [
+    {
+      "id": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "name": "Idle/Inactive Mode Measurements",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to perform measurements on NR and E-UTRA carriers while in RRC_IDLE or RRC_INACTIVE state when specific timer conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC idle state where UE performs idle mode measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC inactive state where UE performs inactive mode measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "TIMER_T331",
+      "name": "T331",
+      "entity_type": "Timer",
+      "description": "Timer that must be running for UE to perform idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "TIMER_T319a",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer that must NOT be running for UE to perform idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "IE_VARMEASIDLECONFIG",
+      "name": "VarMeasIdleConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration containing measurement parameters for idle/inactive mode, including carrier lists and measurement settings.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "IE_MEASIDLECARRIERLISTEUTRA",
+      "name": "measIdleCarrierListEUTRA",
+      "entity_type": "Information Element",
+      "description": "List of E-UTRA carriers for idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "IE_MEASIDLECARRIERLISTNR",
+      "name": "measIdleCarrierListNR",
+      "entity_type": "Information Element",
+      "description": "List of NR carriers for idle/inactive measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "IE_VARMEASIDLEREPORT",
+      "name": "VarMeasIdleReport",
+      "entity_type": "Information Element",
+      "description": "Storage for measurement results collected during idle/inactive mode.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "COND_NE_DC_SUPPORT",
+      "name": "NE-DC Support Condition",
+      "entity_type": "Condition",
+      "description": "Condition that UE supports NE-DC between serving carrier and E-UTRA carrier frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "COND_CARRIER_AGG_NR_DC_SUPPORT",
+      "name": "Carrier Aggregation/NR-DC Support Condition",
+      "entity_type": "Condition",
+      "description": "Condition that UE supports carrier aggregation or NR-DC between serving carrier and NR carrier frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "PROP_MEASUREMENT_PERFORMANCE",
+      "name": "Measurement Performance",
+      "entity_type": "Property",
+      "description": "UE performs measurements according to configured parameters and stores results in measurement report.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "TIMER_T331",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires timer T331 to be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "TIMER_T319a",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure requires timer T319a NOT to be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "IE_VARMEASIDLECONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure uses VarMeasIdleConfig for measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_VARMEASIDLECONFIG",
+      "target": "IE_MEASIDLECARRIERLISTEUTRA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasIdleConfig contains E-UTRA carrier list for measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_VARMEASIDLECONFIG",
+      "target": "IE_MEASIDLECARRIERLISTNR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasIdleConfig contains NR carrier list for measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "IE_VARMEASIDLEREPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure stores measurement results in VarMeasIdleReport.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_MEASIDLECARRIERLISTEUTRA",
+      "target": "COND_NE_DC_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "E-UTRA carrier measurements require NE-DC support condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_MEASIDLECARRIERLISTNR",
+      "target": "COND_CARRIER_AGG_NR_DC_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR carrier measurements require carrier aggregation/NR-DC support condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_MEASUREMENTS_IDLE_INACTIVE",
+      "target": "PROP_MEASUREMENT_PERFORMANCE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes measurement performance property when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.8.2"
+      ]
+    }
+  ]
+}

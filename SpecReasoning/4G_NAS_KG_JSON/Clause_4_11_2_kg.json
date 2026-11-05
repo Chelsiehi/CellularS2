@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.11.2",
+  "title": "Handling list of \"PLMNs not allowed to operate at the present UE location\"",
+  "entities": [
+    {
+      "id": "PLMN_NOT_ALLOWED_LIST",
+      "name": "PLMNs not allowed to operate at the present UE location list",
+      "entity_type": "Property",
+      "description": "A list stored by the UE containing PLMNs that are not allowed to operate at the current UE location when accessing via satellite E-UTRAN. Each entry contains PLMN identity, geographical location (if known), and an implementation-specific distance value.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_78",
+      "name": "EMM cause #78",
+      "entity_type": "Condition",
+      "description": "EMM cause value #78 indicating 'PLMN not allowed to operate at the present UE location'. This cause is applicable only when the UE is accessing a PLMN using satellite E-UTRAN access.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "PLMN_ACCESS_RESTRICTION",
+      "name": "PLMN access restriction condition",
+      "entity_type": "Condition",
+      "description": "Conditions under which the UE shall not attempt to access a PLMN via satellite E-UTRAN if it is in the not-allowed list, including distance checks, timer expiration, or emergency services access.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "ENTRY_TIMER",
+      "name": "Timer for PLMN list entry",
+      "entity_type": "Timer",
+      "description": "Implementation-specific timer associated with each entry in the PLMN not-allowed list. Started when a new entry is stored and used to determine when access restrictions can be lifted.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "SATELLITE_EUTRAN_ACCESS",
+      "name": "Satellite E-UTRAN access",
+      "entity_type": "Condition",
+      "description": "Access technology condition specifying that the PLMN list handling procedures apply specifically when the UE is accessing via satellite E-UTRAN.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICES_ACCESS",
+      "name": "Emergency services access exception",
+      "entity_type": "Condition",
+      "description": "Condition that allows UE to access a PLMN in the not-allowed list if the access is for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EMM_CAUSE_78",
+      "target": "PLMN_NOT_ALLOWED_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of EMM cause #78 via satellite E-UTRAN triggers the creation of an entry in the PLMN not-allowed list.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PLMN_NOT_ALLOWED_LIST",
+      "target": "ENTRY_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When a new entry is stored in the PLMN not-allowed list, the UE starts a timer instance associated with that entry.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PLMN_ACCESS_RESTRICTION",
+      "target": "PLMN_NOT_ALLOWED_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PLMN access restriction condition guards access attempts to PLMNs in the not-allowed list based on distance, timer status, and emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PLMN_ACCESS_RESTRICTION",
+      "target": "ENTRY_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiration is one of the conditions that lifts the PLMN access restriction.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PLMN_ACCESS_RESTRICTION",
+      "target": "EMERGENCY_SERVICES_ACCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency services access is an exception that overrides the PLMN access restriction.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SATELLITE_EUTRAN_ACCESS",
+      "target": "PLMN_NOT_ALLOWED_LIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The PLMN not-allowed list handling procedures are only applicable when the UE is accessing via satellite E-UTRAN technology.",
+      "provenance": [
+        "TS 24.301, Clause 4.11.2"
+      ]
+    }
+  ]
+}

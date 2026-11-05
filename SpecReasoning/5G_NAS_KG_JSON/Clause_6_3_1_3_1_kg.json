@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1.3.1",
+  "title": "PDU EAP result message transport procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_PDU_EAP_RESULT_TRANSPORT",
+      "name": "PDU EAP result message transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by SMF when PDU session authentication and authorization is performed after PDU session establishment and DN authentication completes successfully. Used to transport EAP result message to UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_AUTHENTICATION_RESULT",
+      "name": "PDU SESSION AUTHENTICATION RESULT",
+      "entity_type": "Message",
+      "description": "NAS message created by SMF to transport EAP result message to UE during PDU EAP result message transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity information element in PDU SESSION AUTHENTICATION RESULT message, set to 'No procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the EAP-success message provided by the DN, included in PDU SESSION AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "COND_DN_AUTH_SUCCESS",
+      "name": "DN authentication completes successfully",
+      "entity_type": "Condition",
+      "description": "Condition where the DN authentication of the UE completes successfully after PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "PROP_SMF_CREATES_MSG",
+      "name": "SMF creates PDU SESSION AUTHENTICATION RESULT message",
+      "entity_type": "Property",
+      "description": "Behavior where SMF creates the PDU SESSION AUTHENTICATION RESULT message to initiate the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "PROP_UE_PASSES_EAP_TO_UPPER",
+      "name": "UE passes EAP message to upper layers",
+      "entity_type": "Property",
+      "description": "Behavior where UE passes the EAP message received in EAP message IE to upper layers upon receipt of PDU SESSION AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_EAP_RESULT_TRANSPORT",
+      "target": "COND_DN_AUTH_SUCCESS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure initiation requires that DN authentication completes successfully after PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDU_EAP_RESULT_TRANSPORT",
+      "target": "PROP_SMF_CREATES_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes the step where SMF creates PDU SESSION AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_RESULT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION RESULT message contains PTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_AUTHENTICATION_RESULT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION AUTHENTICATION RESULT message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_SMF_CREATES_MSG",
+      "target": "MSG_PDU_SESSION_AUTHENTICATION_RESULT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF creating the message establishes the PDU SESSION AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_UE_PASSES_EAP_TO_UPPER",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE behavior establishes that EAP message from EAP message IE is passed to upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1.3.1"
+      ]
+    }
+  ]
+}

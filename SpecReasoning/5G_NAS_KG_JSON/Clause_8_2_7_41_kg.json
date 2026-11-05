@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.41",
+  "title": "Service-level-AA container",
+  "entities": [
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "An information element included by the network during UUAA procedure for UE supporting UAS services, or when valid successful UUAA result exists in UE 5GMM context upon UAS services registration request.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UUAA",
+      "name": "UUAA procedure",
+      "entity_type": "Procedure",
+      "description": "Uncrewed Aerial System Authentication and Authorization procedure triggered for UE supporting UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "CONDITION_UAS_SUPPORT",
+      "name": "UE supports UAS services",
+      "entity_type": "Condition",
+      "description": "Condition where the UE supports Uncrewed Aerial System services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "CONDITION_VALID_UUAA_RESULT",
+      "name": "Valid successful UUAA result in UE 5GMM context",
+      "entity_type": "Condition",
+      "description": "Condition where a valid successful UUAA result exists in the UE 5GMM context upon registration for UAS services is requested.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "CONTEXT_UE_5GMM",
+      "name": "UE 5GMM context",
+      "entity_type": "Property",
+      "description": "The 5G Mobility Management context stored for the UE, containing authentication and authorization results.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UUAA",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The network includes the Service-level-AA container IE when UUAA procedure is triggered for UE supporting UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_UAS_SUPPORT",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Service-level-AA container is guarded by the condition that UE supports UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_VALID_UUAA_RESULT",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Service-level-AA container may be guarded by the condition that a valid successful UUAA result exists in UE 5GMM context upon UAS services registration request.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONTEXT_UE_5GMM",
+      "target": "CONDITION_VALID_UUAA_RESULT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The UE 5GMM context establishes the condition for valid successful UUAA result.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.41"
+      ]
+    }
+  ]
+}

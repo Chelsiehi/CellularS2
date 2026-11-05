@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.5",
+  "title": "Handling session management request for UE configured for dual priority",
+  "entities": [
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer that runs when session management requests with low priority indicator are rejected due to insufficient resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to request PDN connectivity, can include low priority indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to modify bearer resources, can include low priority indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to allocate bearer resources, can include low priority indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to deactivate EPS bearer context, can include timer T3396 and ESM cause #26.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "IE_LOW_PRIORITY_INDICATOR",
+      "name": "Low priority indicator",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether MS is configured for NAS signalling low priority or not.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "CONDITION_T3396_RUNNING",
+      "name": "Timer T3396 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3396 is active due to rejection of low priority requests with insufficient resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "CONDITION_UPPER_LAYER_REQUEST",
+      "name": "Upper layer request",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers request the UE to send session management messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_SEND_WITHOUT_LOW_PRIORITY",
+      "name": "Send messages without low priority",
+      "entity_type": "Property",
+      "description": "UE behavior to send session management messages with low priority indicator set to 'MS is not configured for NAS signalling low priority' when T3396 is running.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE when T3396 is running for certain conditions, with low priority indicator set to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_T3396_RUNNING",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3396 running condition guards the UE behavior for session management requests.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_UPPER_LAYER_REQUEST",
+      "target": "PROPERTY_SEND_WITHOUT_LOW_PRIORITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Upper layer request establishes UE behavior to send messages without low priority indicator.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_LOW_PRIORITY_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message contains the low priority indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "target": "IE_LOW_PRIORITY_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REQUEST message contains the low priority indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IE_LOW_PRIORITY_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REQUEST message contains the low priority indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_ATTACH",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure includes sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_SEND_WITHOUT_LOW_PRIORITY",
+      "target": "IE_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Send without low priority property is guarded by setting low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.5"
+      ]
+    }
+  ]
+}

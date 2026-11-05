@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.3.8",
+  "title": "EMM-DEREGISTERED.NO-CELL-AVAILABLE",
+  "entities": [
+    {
+      "id": "STATE_EMM_DEREG_NO_CELL_AVAILABLE",
+      "name": "EMM-DEREGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate entered when no E-UTRAN cell can be selected after intensive search fails in EMM-DEREGISTERED.PLMN-SEARCH. Cells are searched at low rhythm and no EPS services are offered.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREG_PLMN_SEARCH",
+      "name": "EMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Previous substate where intensive cell search was performed before transitioning to NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "COND_NO_EUTRAN_CELL_SELECTED",
+      "name": "No E-UTRAN cell can be selected",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot select any E-UTRAN cell after intensive search.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "PROP_NO_EPS_SERVICES",
+      "name": "No EPS services offered",
+      "entity_type": "Property",
+      "description": "System behavior where EPS services are not available to the UE in this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "PROP_LOW_RHYTHM_SEARCH",
+      "name": "Cells searched at low rhythm",
+      "entity_type": "Property",
+      "description": "System behavior where UE performs cell search operations at reduced frequency.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NO_EUTRAN_CELL_SELECTED",
+      "target": "STATE_EMM_DEREG_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no E-UTRAN cell being selected establishes transition to NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_EMM_DEREG_PLMN_SEARCH",
+      "target": "STATE_EMM_DEREG_NO_CELL_AVAILABLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "State transition from PLMN-SEARCH to NO-CELL-AVAILABLE after intensive search fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_EMM_DEREG_NO_CELL_AVAILABLE",
+      "target": "PROP_NO_EPS_SERVICES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in NO-CELL-AVAILABLE state establishes that no EPS services are offered.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_DEREG_NO_CELL_AVAILABLE",
+      "target": "PROP_LOW_RHYTHM_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in NO-CELL-AVAILABLE state establishes that cells are searched at low rhythm.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.8"
+      ]
+    }
+  ]
+}

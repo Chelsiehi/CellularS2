@@ -1,0 +1,280 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.3.3",
+  "title": "Derivation of cell measurement results",
+  "entities": [
+    {
+      "id": "UE_RRC_CONNECTED",
+      "name": "UE in RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "Radio Resource Control connected state where UE can perform measurements with network configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "UE_RRC_IDLE_INACTIVE",
+      "name": "UE in RRC_IDLE or RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "Radio Resource Control idle or inactive states where UE performs measurements based on idle carrier configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "MEAS_OBJECT",
+      "name": "Measurement Object",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters for NR measurements including beam averaging and consolidation thresholds.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REPORT_CONFIG",
+      "name": "Report Configuration",
+      "entity_type": "Information Element",
+      "description": "Configuration parameters specifying measurement quantities and reference signal types (SS/PBCH or CSI-RS).",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "MEAS_IDLE_CARRIER_LIST_NR",
+      "name": "measIdleCarrierListNR",
+      "entity_type": "Information Element",
+      "description": "Configuration for idle/inactive state measurements within VarMeasIdleConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "CELL_MEAS_DERIVATION_SSB",
+      "name": "Cell measurement derivation based on SS/PBCH block",
+      "entity_type": "Procedure",
+      "description": "Procedure to derive RSRP, RSRQ, and SINR measurements from SS/PBCH blocks using beam consolidation and averaging.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "CELL_MEAS_DERIVATION_CSI_RS",
+      "name": "Cell measurement derivation based on CSI-RS",
+      "entity_type": "Procedure",
+      "description": "Procedure to derive cell measurements from applicable CSI-RS resources using beam consolidation and averaging.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_NO_AVERAGING_CONFIG",
+      "name": "No averaging configuration condition",
+      "entity_type": "Condition",
+      "description": "Condition when nrofSS-BlocksToAverage or nrofCSI-RS-ResourcesToAverage is not configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_NO_CONSOLIDATION_THRESHOLD",
+      "name": "No consolidation threshold condition",
+      "entity_type": "Condition",
+      "description": "Condition when absThreshSS-BlocksConsolidation or absThreshCSI-RS-Consolidation is not configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_BEAM_BELOW_THRESHOLD",
+      "name": "Beam measurement below threshold condition",
+      "entity_type": "Condition",
+      "description": "Condition when the highest beam measurement quantity value is below or equal to the consolidation threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "PROP_HIGHEST_BEAM_VALUE",
+      "name": "Use highest beam measurement value",
+      "entity_type": "Property",
+      "description": "Property where cell measurement quantity is derived as the highest beam measurement quantity value.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "PROP_AVERAGE_ABOVE_THRESHOLD",
+      "name": "Average beams above threshold",
+      "entity_type": "Property",
+      "description": "Property where cell measurement quantity is derived as linear power scale average of beams above consolidation threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "PROP_LAYER3_FILTERING",
+      "name": "Apply layer 3 cell filtering",
+      "entity_type": "Property",
+      "description": "Property where layer 3 filtering is applied to cell measurements as described in clause 5.5.3.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "UE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SS/PBCH based cell measurement derivation requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "UE_RRC_IDLE_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SS/PBCH based cell measurement derivation requires UE to be in RRC_IDLE or RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "MEAS_OBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SS/PBCH based derivation uses parameters from Measurement Object configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "COND_NO_AVERAGING_CONFIG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SS/PBCH derivation procedure is guarded by absence of averaging configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "COND_NO_CONSOLIDATION_THRESHOLD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SS/PBCH derivation procedure is guarded by absence of consolidation threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "COND_BEAM_BELOW_THRESHOLD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SS/PBCH derivation procedure is guarded by beam measurement below threshold condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NO_AVERAGING_CONFIG",
+      "target": "PROP_HIGHEST_BEAM_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Absence of averaging configuration establishes use of highest beam measurement value.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NO_CONSOLIDATION_THRESHOLD",
+      "target": "PROP_HIGHEST_BEAM_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Absence of consolidation threshold establishes use of highest beam measurement value.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_BEAM_BELOW_THRESHOLD",
+      "target": "PROP_HIGHEST_BEAM_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Beam measurement below threshold establishes use of highest beam measurement value.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "PROP_AVERAGE_ABOVE_THRESHOLD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SS/PBCH derivation includes step to average beams above consolidation threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CELL_MEAS_DERIVATION_SSB",
+      "target": "PROP_LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SS/PBCH derivation includes step to apply layer 3 cell filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CELL_MEAS_DERIVATION_CSI_RS",
+      "target": "UE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "CSI-RS based cell measurement derivation requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "CELL_MEAS_DERIVATION_CSI_RS",
+      "target": "MEAS_OBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CSI-RS based derivation uses parameters from Measurement Object configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "CELL_MEAS_DERIVATION_CSI_RS",
+      "target": "PROP_LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "CSI-RS derivation includes step to apply layer 3 cell filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.3"
+      ]
+    }
+  ]
+}

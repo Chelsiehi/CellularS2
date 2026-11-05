@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.3.3",
+  "title": "Identification response by the UE",
+  "entities": [
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to request identity information from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent by the UE in response to an IDENTITY REQUEST, containing the requested identification parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "IE_IDENTITY_TYPE",
+      "name": "Identity type IE",
+      "entity_type": "Information Element",
+      "description": "Information element in IDENTITY REQUEST indicating the type of identity requested.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "SUCI",
+      "name": "SUCI",
+      "entity_type": "Identifier",
+      "description": "Subscription Concealed Identifier, a protected form of subscription identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "T3519",
+      "name": "Timer T3519",
+      "entity_type": "Timer",
+      "description": "Timer used to manage SUCI freshness and prevent frequent regeneration.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_SUCI_REQUESTED",
+      "name": "Identity type IE set to SUCI",
+      "entity_type": "Condition",
+      "description": "Condition where the Identity type IE in IDENTITY REQUEST is set to SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_T3519_NOT_RUNNING",
+      "name": "Timer T3519 not running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3519 is not currently active.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "COND_T3519_RUNNING",
+      "name": "Timer T3519 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3519 is currently active.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_STORE_SUCI",
+      "name": "Store SUCI value",
+      "entity_type": "Property",
+      "description": "UE stores the value of the SUCI sent in IDENTITY RESPONSE for reuse while T3519 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "PROP_GENERATE_FRESH_SUCI",
+      "name": "Generate fresh SUCI",
+      "entity_type": "Property",
+      "description": "UE generates a new SUCI as specified in 3GPP TS 33.501 when T3519 is not running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTITY_REQUEST",
+      "target": "IE_IDENTITY_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY REQUEST message contains the Identity type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTITY_RESPONSE",
+      "target": "SUCI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message contains the SUCI when requested.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SUCI_REQUESTED",
+      "target": "COND_T3519_NOT_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When SUCI is requested, behavior depends on whether T3519 is running or not.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3519_NOT_RUNNING",
+      "target": "PROP_GENERATE_FRESH_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If T3519 is not running, UE generates a fresh SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_T3519_NOT_RUNNING",
+      "target": "T3519",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If T3519 is not running, UE starts timer T3519 after sending IDENTITY RESPONSE with fresh SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_T3519_NOT_RUNNING",
+      "target": "PROP_STORE_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If T3519 is not running, UE stores the SUCI value sent in IDENTITY RESPONSE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_T3519_RUNNING",
+      "target": "PROP_STORE_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If T3519 is running, UE sends the stored SUCI in IDENTITY RESPONSE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.3"
+      ]
+    }
+  ]
+}

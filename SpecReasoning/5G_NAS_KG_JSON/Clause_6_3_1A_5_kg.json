@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1A.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_LEVEL_AUTHENTICATION_AUTHORIZATION",
+      "name": "Service-level authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and authorizing at the service level.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_LEVEL_AUTHENTICATION_COMMAND",
+      "name": "SERVICE-LEVEL AUTHENTICATION COMMAND message",
+      "entity_type": "Message",
+      "description": "Message used in service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_SAME_PDU_SESSION",
+      "name": "Collision with same PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where SERVICE-LEVEL AUTHENTICATION COMMAND message indicates the same PDU session that UE is releasing.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_MESSAGE",
+      "name": "Ignore SERVICE-LEVEL AUTHENTICATION COMMAND message",
+      "entity_type": "Property",
+      "description": "UE behavior to ignore the received SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "PROP_PROCEED_WITH_RELEASE",
+      "name": "Proceed with UE-requested PDU session release procedure",
+      "entity_type": "Property",
+      "description": "UE behavior to continue with the UE-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_COLLISION_SAME_PDU_SESSION",
+      "target": "PROP_IGNORE_MESSAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where collision occurs with same PDU session establishes UE behavior to ignore the message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_COLLISION_SAME_PDU_SESSION",
+      "target": "PROP_PROCEED_WITH_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where collision occurs with same PDU session establishes UE behavior to proceed with release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_LEVEL_AUTHENTICATION_COMMAND",
+      "target": "PROC_SERVICE_LEVEL_AUTHENTICATION_AUTHORIZATION",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "SERVICE-LEVEL AUTHENTICATION COMMAND message is part of service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_COLLISION_SAME_PDU_SESSION",
+      "target": "PROC_UE_REQUESTED_PDU_SESSION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision condition guards the UE-requested PDU session release procedure behavior.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_COLLISION_SAME_PDU_SESSION",
+      "target": "MSG_SERVICE_LEVEL_AUTHENTICATION_COMMAND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision condition involves the SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.5"
+      ]
+    }
+  ]
+}

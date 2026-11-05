@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE indicating attach procedure result",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_IE",
+      "name": "EMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing cause value for EMM procedures",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer used during attach procedures",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer used for tracking area updating procedures",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer used for combined tracking area updating procedures",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "UE state when attempting to update mobility management",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "MM_IDLE",
+      "name": "MM IDLE",
+      "entity_type": "State",
+      "description": "Mobility management idle state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_ATTEMPT_COUNTER",
+      "name": "Tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of tracking area update attempts",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "ATTACH_ATTEMPT_COUNTER",
+      "name": "Attach attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of attach attempts",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for combined tracking area and location area updating with IMSI attach",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "CS_FALLBACK_CALL_PENDING",
+      "name": "CS fallback call pending",
+      "entity_type": "Condition",
+      "description": "Condition when circuit-switched fallback call is pending",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "EMM_CAUSE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message may contain EMM cause IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "target": "T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3411 when tracking area update counter < 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3402 when tracking area update counter = 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "target": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to enter EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TRACKING_AREA_UPDATE_ATTEMPT_COUNTER",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3410 when tracking area update counter is incremented",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TRACKING_AREA_UPDATE_ATTEMPT_COUNTER",
+      "target": "MM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters MM IDLE state when tracking area update counter is incremented",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CS_FALLBACK_CALL_PENDING",
+      "target": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CS fallback call pending condition affects tracking area updating procedure execution",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ATTACH_ATTEMPT_COUNTER",
+      "target": "COMBINED_TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Attach attempt counter value determines next actions in abnormal cases",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.4.2",
+  "title": "Handling of network rejection due to ESM cause #26",
+  "entities": [
+    {
+      "id": "ESM_CAUSE_26",
+      "name": "Insufficient resources",
+      "entity_type": "Condition",
+      "description": "ESM cause value #26 indicating insufficient resources in the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER_VALUE_IE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information Element carrying the timer value for T3396.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REATTEMPT_INDICATOR_IE",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information Element indicating re-attempt behavior, ignored in this clause.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Back-off timer controlling when UE can re-send session management requests after rejection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Session management message to request PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Session management message to modify bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Session management message to allocate bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE is not registered.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_NONZERO",
+      "name": "Timer value neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates a non-zero, active timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_DEACTIVATED",
+      "name": "Timer value deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates timer deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_ZERO",
+      "name": "Timer value zero",
+      "entity_type": "Condition",
+      "description": "Condition where Back-off timer value IE indicates zero timer value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_REQUESTS_UNTIL_TIMER_EXPIRES",
+      "name": "No session management requests until T3396 expires",
+      "entity_type": "Property",
+      "description": "UE behavior prohibiting sending session management requests for the same APN until T3396 expires or is stopped.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_REQUESTS_UNTIL_EVENTS",
+      "name": "No session management requests until specific events",
+      "entity_type": "Property",
+      "description": "UE behavior prohibiting sending session management requests until switch-off, USIM removal, or receipt of specific network messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ESM_CAUSE_26",
+      "target": "BACK_OFF_TIMER_VALUE_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause #26 triggers evaluation of Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_TIMER_VALUE_NONZERO",
+      "target": "TIMER_T3396",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Non-zero timer value condition starts T3396 with provided value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_TIMER_VALUE_NONZERO",
+      "target": "PROPERTY_NO_REQUESTS_UNTIL_TIMER_EXPIRES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-zero timer value condition establishes prohibition of session management requests until T3396 expires.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_TIMER_VALUE_DEACTIVATED",
+      "target": "PROPERTY_NO_REQUESTS_UNTIL_EVENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Deactivated timer value condition establishes prohibition of session management requests until specific events occur.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_TIMER_VALUE_ZERO",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Zero timer value condition stops T3396 if running.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMM_DEREGISTERED",
+      "target": "TIMER_T3396",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3396 continues running if UE enters EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_NO_REQUESTS_UNTIL_TIMER_EXPIRES",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Prohibition property guards sending of PDN CONNECTIVITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROPERTY_NO_REQUESTS_UNTIL_TIMER_EXPIRES",
+      "target": "BEARER_RESOURCE_MODIFICATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Prohibition property guards sending of BEARER RESOURCE MODIFICATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROPERTY_NO_REQUESTS_UNTIL_TIMER_EXPIRES",
+      "target": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Prohibition property guards sending of BEARER RESOURCE ALLOCATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.2"
+      ]
+    }
+  ]
+}

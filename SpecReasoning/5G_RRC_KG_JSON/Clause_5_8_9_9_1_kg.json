@@ -1,0 +1,165 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.9.1",
+  "title": "General UuMessageTransferSidelink",
+  "entities": [
+    {
+      "id": "PROC_UU_MSG_TRANSFER_SIDELINK",
+      "name": "Uu Message Transfer Sidelink",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer Paging message and System Information from the L2 U2N Relay UE to the L2 U2N Remote UE in RRC_IDLE/RRC_INACTIVE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "name": "UuMessageTransferSidelink",
+      "entity_type": "Message",
+      "description": "Message sent from Relay UE to Remote UE containing Paging message and System Information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "IE_PAGING_MESSAGE",
+      "name": "Paging message",
+      "entity_type": "Information Element",
+      "description": "Paging information transferred from Relay UE to Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "IE_SYSTEM_INFORMATION",
+      "name": "System Information",
+      "entity_type": "Information Element",
+      "description": "System Information transferred from Relay UE to Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state of the Remote UE during Uu message transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state of the Remote UE during Uu message transfer.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "ENTITY_RELAY_UE",
+      "name": "L2 U2N Relay UE",
+      "entity_type": "Property",
+      "description": "Relay UE that transfers Paging message and System Information to Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "ENTITY_REMOTE_UE",
+      "name": "L2 U2N Remote UE",
+      "entity_type": "Property",
+      "description": "Remote UE that receives Paging message and System Information from Relay UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UU_MSG_TRANSFER_SIDELINK",
+      "target": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the UuMessageTransferSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "target": "IE_PAGING_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains Paging message information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "target": "IE_SYSTEM_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains System Information information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UU_MSG_TRANSFER_SIDELINK",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure is performed when Remote UE is in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UU_MSG_TRANSFER_SIDELINK",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure is performed when Remote UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ENTITY_RELAY_UE",
+      "target": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Relay UE sends the UuMessageTransferSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_UU_MESSAGE_TRANSFER_SIDELINK",
+      "target": "ENTITY_REMOTE_UE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Remote UE receives the UuMessageTransferSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.9.1",
+        "Figure 5.8.9.9.1"
+      ]
+    }
+  ]
+}

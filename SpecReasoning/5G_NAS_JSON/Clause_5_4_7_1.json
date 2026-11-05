@@ -1,0 +1,91 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------",
+    "The purpose of the network slice-specific authentication and authorization procedure is to enable the authentication, authorization and accounting server (AAA-S) via the Network Slice Specific and SNPN Authentication and Authorization Function (NSSAAF) to (re-)authenticate or (re-)authorize the upper layers of the UE",
+    "The network slice-specific authentication and authorization procedure can be invoked for a UE supporting network slice-specific authentication and authorization procedure and for a HPLMN S-NSSAI or an SNPN S-NSSAI (see subclauses5.15.10 and 5.30.2.9 in 3GPPTS23.501[8] and subclause4.2.9.2 of 3GPPTS23.502[9])",
+    "The network (re-)authenticates the UE using the EAP as specified in IETFRFC3748[34]",
+    "EAP has defined four types of EAP messages",
+    "a) an EAP-request message",
+    "b) an EAP-response message",
+    "c) an EAP-success message; and",
+    "d) an EAP-failure message",
+    "The EAP-request message is transported from the network to the UE using the NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message of the network slice-specific EAP message reliable transport procedure",
+    "The EAP-response message to the EAP-request message is transported from the UE to the network using the NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message of the network slice-specific EAP message reliable transport procedure",
+    "If the (re-)authentication of the UE completes successfully or unsuccessfully, the EAP-success message or the EAP-failure message, respectively, is transported from the network to the UE using the NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message of the network slice-specific result message transport procedure",
+    "There can be several rounds of exchange of an EAP-request message and a related EAP-response message for the AAA-S via the NSSAAF to complete the (re-)authentication and (re-)authorization of the request for an S-NSSAI (see example in figure5.4.7.1.1)",
+    "The AMF shall set the authenticator retransmission timer specified in subclause4.3 of IETFRFC3748[34] to infinite value",
+    "NOTE: The network slice-specific authentication and authorization procedure provides a reliable transport of EAP messages and therefore retransmissions at the EAP layer of the AMF do not occur",
+    "Figure5.4.7.1.1: Network slice-specific authentication and authorization procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.4.7.1.1",
+      "file": "Figure_5_4_7_1_1_p274.png.json",
+      "title": "Network slice-specific authentication and authorization procedure",
+      "content": {
+        "figure_id": "5.4.7.1.1",
+        "title": "Network slice-specific authentication and authorization procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AMF"
+          ],
+          "messages": [
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND",
+              "notes": "<EAP-request message A>; Start T3575"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE",
+              "notes": "<EAP-response message to EAP-request message A>; Stop T3575"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND",
+              "notes": "<EAP-request message B>; Start T3575"
+            },
+            {
+              "from": "UE",
+              "to": "AMF",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE",
+              "notes": "<EAP-response message to EAP-request message B>; Stop T3575"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT",
+              "notes": "<EAP-success message>"
+            },
+            {
+              "from": "AMF",
+              "to": "UE",
+              "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT",
+              "notes": "<EAP-failure message>"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "OR"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

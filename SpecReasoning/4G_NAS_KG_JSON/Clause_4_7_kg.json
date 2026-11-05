@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.7",
+  "title": "EPS mobility management and EPS session management in NB-S1 mode",
+  "entities": [
+    {
+      "id": "UE_NB_S1_MODE",
+      "name": "UE in NB-S1 mode",
+      "entity_type": "Condition",
+      "description": "A UE operating in NB-S1 mode as defined in 3GPP TS 36.331.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "MME_NB_S1_MODE",
+      "name": "MME supporting NB-S1 mode",
+      "entity_type": "Condition",
+      "description": "An MME that supports NB-S1 mode and performs NAS signalling with a UE using NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_CALCULATION",
+      "name": "NAS timer calculation",
+      "entity_type": "Procedure",
+      "description": "Calculation of NAS timer values by adding fixed offsets to base timer values from specified tables. The calculation occurs at NAS procedure start and remains unchanged until procedure completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "TABLE_10_2_1",
+      "name": "Table 10.2.1",
+      "entity_type": "Property",
+      "description": "Table indicating base NAS timer values for UE calculation in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "TABLE_10_3_1",
+      "name": "Table 10.3.1",
+      "entity_type": "Property",
+      "description": "Table indicating base NAS timer values for UE calculation in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "TABLE_10_2_2",
+      "name": "Table 10.2.2",
+      "entity_type": "Property",
+      "description": "Table indicating base NAS timer values for MME calculation in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "TABLE_10_3_2",
+      "name": "Table 10.3.2",
+      "entity_type": "Property",
+      "description": "Table indicating base NAS timer values for MME calculation in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated in EMM-CONNECTED mode where MME can stop implementation-specific supervision timers.",
+      "provenance": [
+        "TS 24.301, Clause 4.7, Note 1"
+      ]
+    },
+    {
+      "id": "EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management connected state.",
+      "provenance": [
+        "TS 24.301, Clause 4.7, Note 1"
+      ]
+    },
+    {
+      "id": "ESM_DATA_TRANSPORT",
+      "name": "ESM DATA TRANSPORT message",
+      "entity_type": "Message",
+      "description": "ESM message that triggers MME to stop implementation-specific supervision timers during tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 4.7, Note 1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NB_S1_MODE",
+      "target": "NAS_TIMER_CALCULATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE in NB-S1 mode triggers NAS timer calculation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MME_NB_S1_MODE",
+      "target": "NAS_TIMER_CALCULATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "MME supporting NB-S1 mode triggers NAS timer calculation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "TABLE_10_2_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS timer calculation uses base values from Table 10.2.1 plus 240s offset.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "TABLE_10_3_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS timer calculation uses base values from Table 10.3.1 plus 180s offset.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "TABLE_10_2_2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS timer calculation uses base values from Table 10.2.2 plus 240s offset.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "TABLE_10_3_2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS timer calculation uses base values from Table 10.3.2 plus 180s offset.",
+      "provenance": [
+        "TS 24.301, Clause 4.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TRACKING_AREA_UPDATING",
+      "target": "EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure requires EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.7, Note 1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TRACKING_AREA_UPDATING",
+      "target": "ESM_DATA_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "ESM DATA TRANSPORT message triggers MME to stop supervision timers during tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 4.7, Note 1"
+      ]
+    }
+  ]
+}

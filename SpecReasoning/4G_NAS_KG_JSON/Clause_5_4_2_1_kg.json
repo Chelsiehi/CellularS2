@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_EPS_AKA",
+      "name": "EPS Authentication and Key Agreement",
+      "entity_type": "Procedure",
+      "description": "Provides mutual authentication between the user and the network and agrees on key KASME. Initiated and controlled by the network, but UE can reject the authentication challenge.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_KASME",
+      "name": "KASME",
+      "entity_type": "Information Element",
+      "description": "Key derived from CK and IK, stored in EPS security contexts, and serves as root for EPS integrity protection and ciphering key hierarchy.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_CK",
+      "name": "CK",
+      "entity_type": "Information Element",
+      "description": "Ciphering key computed by USIM during EPS authentication, used as key material to compute KASME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_IK",
+      "name": "IK",
+      "entity_type": "Information Element",
+      "description": "Integrity key computed by USIM during EPS authentication, used as key material to compute KASME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "COND_USIM_PRESENT",
+      "name": "USIM present",
+      "entity_type": "Condition",
+      "description": "Condition that UE shall proceed with EPS authentication challenge only if a USIM is present.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "PROP_SECURITY_CONTEXT",
+      "name": "Partial native EPS security context",
+      "entity_type": "Property",
+      "description": "Established in UE and network when EPS authentication is successfully performed.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_AKA",
+      "target": "IE_KASME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EPS AKA procedure results in agreement on KASME key.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_AKA",
+      "target": "COND_USIM_PRESENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS AKA procedure requires USIM to be present for UE to proceed.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_EPS_AKA",
+      "target": "PROP_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful EPS authentication establishes partial native EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_KASME",
+      "target": "IE_CK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "KASME is derived from CK and IK key material.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_KASME",
+      "target": "IE_IK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "KASME is derived from CK and IK key material.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_KASME",
+      "target": "PROP_SECURITY_CONTEXT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "KASME is stored in the EPS security contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.1"
+      ]
+    }
+  ]
+}

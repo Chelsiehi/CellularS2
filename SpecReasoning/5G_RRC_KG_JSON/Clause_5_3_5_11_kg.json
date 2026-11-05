@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.11",
+  "title": "Full configuration",
+  "entities": [
+    {
+      "id": "FULL_CONFIG_PROCEDURE",
+      "name": "Full Configuration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE releases/clears most current dedicated radio configurations and applies default configurations, except for certain preserved elements like MCG C-RNTI and security configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "MCG_C_RNTI",
+      "name": "MCG C-RNTI",
+      "entity_type": "Identifier",
+      "description": "Cell Radio Network Temporary Identifier for the Master Cell Group, preserved during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_CONFIG",
+      "name": "AS Security Configurations",
+      "entity_type": "Property",
+      "description": "Access Stratum security configurations associated with the master key, preserved during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "SRB1_SRB2_CONFIG",
+      "name": "SRB1/SRB2 Configurations",
+      "entity_type": "Property",
+      "description": "Signaling Radio Bearer configurations for SRB1 and SRB2, preserved during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "RECONFIG_WITH_SYNC",
+      "name": "Reconfiguration with Sync",
+      "entity_type": "Condition",
+      "description": "Condition where spCellConfig in masterCellGroup includes reconfigurationWithSync, triggering release of common radio configurations and use of default timer values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer used in radio link failure procedures, set to default value during full configuration if reconfiguration with sync is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "TIMER_T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer used in connection re-establishment procedures, set to default value during full configuration if reconfiguration with sync is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "SRB_TO_ADD_MOD_LIST",
+      "name": "srb-ToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of SRB identities to add or modify, used to establish RLC entities and apply default SRB configurations during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU Session",
+      "entity_type": "Property",
+      "description": "Protocol Data Unit session, part of current UE configuration; SDAP entity and associated DRBs are released during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "TMGI",
+      "name": "TMGI",
+      "entity_type": "Property",
+      "description": "Temporary Mobile Group Identity, part of current UE configuration; SDAP entity and associated multicast MRBs are released during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE",
+      "name": "L2 U2N Remote UE",
+      "entity_type": "Condition",
+      "description": "Condition where UE is connected with a L2 U2N Relay UE via PC5-RRC connection, affecting timer values used during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "FULL_CONFIG_PROCEDURE",
+      "target": "MCG_C_RNTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Full configuration procedure preserves MCG C-RNTI.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "FULL_CONFIG_PROCEDURE",
+      "target": "AS_SECURITY_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Full configuration procedure preserves AS security configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FULL_CONFIG_PROCEDURE",
+      "target": "SRB1_SRB2_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Full configuration procedure preserves SRB1/SRB2 configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RECONFIG_WITH_SYNC",
+      "target": "TIMER_T310",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If reconfiguration with sync is included, timer T310 is set to default value.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RECONFIG_WITH_SYNC",
+      "target": "TIMER_T311",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If reconfiguration with sync is included, timer T311 is set to default value.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SRB_TO_ADD_MOD_LIST",
+      "target": "FULL_CONFIG_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "srb-ToAddModList guides establishment of RLC entities and application of default SRB configurations during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "FULL_CONFIG_PROCEDURE",
+      "target": "PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Full configuration procedure releases SDAP entity and associated DRBs for each PDU session.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "FULL_CONFIG_PROCEDURE",
+      "target": "TMGI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Full configuration procedure releases SDAP entity and associated multicast MRBs for each TMGI.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "L2_U2N_REMOTE_UE",
+      "target": "FULL_CONFIG_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If UE is L2 U2N Remote UE, specific timer values from SIB1 are used during full configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.11"
+      ]
+    }
+  ]
+}

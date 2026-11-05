@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.13.3",
+  "title": "Authorization of C2 communication",
+  "entities": [
+    {
+      "id": "PROC_C2_AUTHORIZATION",
+      "name": "C2 communication authorization",
+      "entity_type": "Procedure",
+      "description": "Network procedure for authorizing pairing between UAV and UAV-C before enabling user plane connectivity for C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "PROC_UUAA_SM",
+      "name": "UUAA-SM procedure",
+      "entity_type": "Procedure",
+      "description": "UAS Unmanned Aerial System Authentication and Authorization procedure used to authorize C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "IE_UAV_C_ID",
+      "name": "UAV-C identification information",
+      "entity_type": "Information Element",
+      "description": "Identification information of UAV-C provided by UE via protocol configuration options for pairing authorization.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "COND_PAIRING_AUTHORIZED",
+      "name": "Pairing authorization successful",
+      "entity_type": "Condition",
+      "description": "Condition where pairing of UAV and UAV-C has been successfully authorized by USS.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "COND_PAIRING_REVOKED",
+      "name": "Pairing revoked",
+      "entity_type": "Condition",
+      "description": "Condition where pairing of UAV and UAV-C has been revoked.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "PROP_ENABLE_C2_COMM",
+      "name": "Enable C2 communication",
+      "entity_type": "Property",
+      "description": "Network enables user plane connectivity for C2 communication after successful authorization.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_C2_COMM",
+      "name": "Disable C2 communication",
+      "entity_type": "Property",
+      "description": "Network disables C2 communication when pairing is revoked, either by removing packet filters or deactivating EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "SCENARIO_COMMON_PDN",
+      "name": "Common PDN connectivity scenario",
+      "entity_type": "Condition",
+      "description": "Scenario where UE uses common PDN connectivity for both USS communication and C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "SCENARIO_SEPARATE_PDN",
+      "name": "Separate PDN connectivity scenario",
+      "entity_type": "Condition",
+      "description": "Scenario where UE uses separate PDN connectivity for USS communication and C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_C2_AUTHORIZATION",
+      "target": "COND_PAIRING_AUTHORIZED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "C2 communication authorization requires successful pairing authorization by USS.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PAIRING_AUTHORIZED",
+      "target": "PROP_ENABLE_C2_COMM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful pairing authorization establishes enabled C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_PAIRING_REVOKED",
+      "target": "PROP_DISABLE_C2_COMM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Pairing revocation establishes disabled C2 communication.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_C2_AUTHORIZATION",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "C2 communication authorization uses UUAA-SM procedure for authorization.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_C2_AUTHORIZATION",
+      "target": "IE_UAV_C_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "C2 communication authorization may include UAV-C identification information provided by UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SCENARIO_COMMON_PDN",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In common PDN scenario, UUAA-SM procedure is performed during PDN connectivity or bearer resource modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SCENARIO_SEPARATE_PDN",
+      "target": "PROC_UUAA_SM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In separate PDN scenario, UUAA-SM procedure is performed during PDN connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.13.3"
+      ]
+    }
+  ]
+}

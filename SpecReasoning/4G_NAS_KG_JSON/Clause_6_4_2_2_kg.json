@@ -1,0 +1,202 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.2.2",
+  "title": "Dedicated EPS bearer context activation initiated by the network",
+  "entities": [
+    {
+      "id": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to activate a dedicated EPS bearer context. In WB-S1 mode, the MME initiates this procedure by sending an ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message, starting timer T3485, and entering the BEARER CONTEXT ACTIVE PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the MME to initiate dedicated EPS bearer context activation. Contains EPS bearer identity, linked EPS bearer identity, and optionally PTI if triggered by UE procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept the dedicated EPS bearer context activation request. Stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject the dedicated EPS bearer context activation request. Stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the dedicated EPS bearer being activated. Allocated by MME according to clause 9.3.2 and included in the ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_IDENTITY",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "EPS bearer identity of the associated default bearer, included in the ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_PROCEDURE_TRANSACTION_IDENTITY",
+      "name": "Procedure transaction identity (PTI)",
+      "entity_type": "Information Element",
+      "description": "Optional IE included in ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST when procedure was initiated by UE requested bearer resource allocation or modification procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3485",
+      "name": "T3485",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when sending ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST. Stopped when receiving ACCEPT or REJECT response from UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE_PENDING",
+      "name": "BEARER CONTEXT ACTIVE PENDING",
+      "entity_type": "State",
+      "description": "State entered by MME after sending ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST and starting timer T3485.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_WB_S1_MODE",
+      "name": "WB-S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition specifying that the procedure applies when operating in WB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message as its first step.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "TIMER_T3485",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3485 when initiating the activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires entering the BEARER CONTEXT ACTIVE PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROCEDURE_TRANSACTION_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may contain the PTI IE when triggered by UE procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving the ACCEPT message stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "target": "TIMER_T3485",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving the REJECT message stops timer T3485.",
+      "provenance": [
+        "TS 24.301, Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "target": "CONDITION_WB_S1_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure is guarded by the condition that it applies in WB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.2"
+      ]
+    }
+  ]
+}

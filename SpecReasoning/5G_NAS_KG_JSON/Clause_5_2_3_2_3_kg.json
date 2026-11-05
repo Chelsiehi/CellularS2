@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.3.2.3",
+  "title": "ATTEMPTING-REGISTRATION-UPDATE",
+  "entities": [
+    {
+      "id": "STATE_ATTEMPTING_REG_UPDATE",
+      "name": "ATTEMPTING-REGISTRATION-UPDATE",
+      "entity_type": "State",
+      "description": "UE state where registration update is being attempted. UE cannot send user data and must initiate registration procedures under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for mobility and periodic registration update initiated by UE in various conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3511",
+      "name": "Timer T3511",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that restricts certain registration procedures when running.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_5U2_NOT_UPDATED",
+      "name": "5GS update status 5U2 NOT UPDATED",
+      "entity_type": "Condition",
+      "description": "Condition where 5GS update status indicates not updated, requiring registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_NEW_PLMN",
+      "name": "Entering new PLMN",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE enters a new PLMN that meets specific criteria.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGED",
+      "name": "Current TAI changed",
+      "entity_type": "Condition",
+      "description": "Condition triggered when tracking area identity changes.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU",
+      "name": "Request for emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers request establishment of emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_PAGING",
+      "name": "Reception of paging",
+      "entity_type": "Condition",
+      "description": "Condition triggered upon reception of paging message.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_MMTEL_REQUEST",
+      "name": "Request for MMTEL service",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers request MMTEL voice/video call or IMS registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "PROP_NO_USER_DATA",
+      "name": "No user data transmission",
+      "entity_type": "Property",
+      "description": "UE shall not send any user data while in ATTEMPTING-REGISTRATION-UPDATE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "PROP_NO_USER_DATA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in ATTEMPTING-REGISTRATION-UPDATE state shall not send user data.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in this state initiates registration procedure under various conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3502",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3502 timer starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3511",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3511 timer starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3346",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Running T3346 timer restricts certain registration procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_5U2_NOT_UPDATED",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "5U2 NOT UPDATED status condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NEW_PLMN",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Entering new PLMN condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_TAI_CHANGED",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "TAI changed condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMERGENCY_PDU",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Emergency PDU session request condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_PAGING",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Paging reception condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_MMTEL_REQUEST",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MMTEL service request condition starts registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.3"
+      ]
+    }
+  ]
+}

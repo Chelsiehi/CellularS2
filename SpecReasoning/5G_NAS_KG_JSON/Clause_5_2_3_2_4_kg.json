@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.3.2.4",
+  "title": "LIMITED-SERVICE",
+  "entities": [
+    {
+      "id": "LIMITED_SERVICE_STATE",
+      "name": "LIMITED-SERVICE state",
+      "entity_type": "State",
+      "description": "A NAS state where the UE has limited service capabilities, allowing only emergency services and eCall functionality.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "CELL_SELECTION_RESELECTION",
+      "name": "Cell selection/reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE in LIMITED-SERVICE state to select or reselect a suitable cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_LOCAL",
+      "name": "Local de-registration",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE may de-register locally and initiate an initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "ECALL_INACTIVITY_PROCEDURE",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when configured for eCall only mode at expiry of timer T3444 or T3445.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers the eCall inactivity procedure when configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers the eCall inactivity procedure when configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "ECALL_ONLY_MODE",
+      "name": "eCall only mode",
+      "entity_type": "Condition",
+      "description": "Configuration condition where the UE is set to operate only for eCall services as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LIMITED_SERVICE_STATE",
+      "target": "CELL_SELECTION_RESELECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, the UE shall perform cell selection/reselection.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LIMITED_SERVICE_STATE",
+      "target": "DEREGISTRATION_LOCAL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, the UE may perform local de-registration and initiate initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LIMITED_SERVICE_STATE",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "In LIMITED-SERVICE state, if configured for eCall only mode, the UE shall perform eCall inactivity procedure at timer expiry.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ECALL_INACTIVITY_PROCEDURE",
+      "target": "TIMER_T3444",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "eCall inactivity procedure is triggered at expiry of timer T3444.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ECALL_INACTIVITY_PROCEDURE",
+      "target": "TIMER_T3445",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "eCall inactivity procedure is triggered at expiry of timer T3445.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ECALL_INACTIVITY_PROCEDURE",
+      "target": "ECALL_ONLY_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "eCall inactivity procedure is performed only if the UE is configured for eCall only mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.3.2.4"
+      ]
+    }
+  ]
+}

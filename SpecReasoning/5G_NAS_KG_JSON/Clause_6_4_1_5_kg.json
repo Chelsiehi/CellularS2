@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.5",
+  "title": "Handling the maximum number of established PDU sessions",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a new PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request establishment of a PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE_65",
+      "name": "5GMM cause #65",
+      "entity_type": "Information Element",
+      "description": "Cause value indicating maximum number of PDU sessions reached",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "name": "Maximum number of PDU sessions reached",
+      "entity_type": "Condition",
+      "description": "Condition where the network cannot establish more PDU sessions due to reaching maximum limit",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_PLMN_MAX_PDU_SESSIONS",
+      "name": "PLMN's maximum number of PDU sessions",
+      "entity_type": "Property",
+      "description": "Maximum number of PDU sessions allowed by the PLMN",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_SNPN_MAX_PDU_SESSIONS",
+      "name": "SNPN's maximum number of PDU sessions",
+      "entity_type": "Property",
+      "description": "Maximum number of PDU sessions allowed by the SNPN",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_UE_MAX_PDU_SESSIONS",
+      "name": "UE's implementation-specific maximum number of PDU sessions",
+      "entity_type": "Property",
+      "description": "Maximum number of PDU sessions supported by UE implementation",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Special PDU session for emergency services that should not be released",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PDU_SESSION_RELEASE",
+      "name": "PDU session release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release an established PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION_UPDATE",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure to update PDU session status to network after local release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDU session establishment procedure is guarded by maximum sessions reached condition",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "IE_5GMM_CAUSE_65",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum sessions reached condition is indicated by 5GMM cause #65",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "PROPERTY_PLMN_MAX_PDU_SESSIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE determines PLMN's maximum PDU sessions when cause #65 is received",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "PROPERTY_SNPN_MAX_PDU_SESSIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE determines SNPN's maximum PDU sessions when cause #65 is received",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE shall not send PDU SESSION ESTABLISHMENT REQUEST when maximum sessions reached",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "PROCEDURE_PDU_SESSION_RELEASE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE must release an established PDU session before requesting new session when maximum reached",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_PDU_SESSION_RELEASE",
+      "target": "CONDITION_EMERGENCY_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE shall not release emergency PDU session when selecting which session to release",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_PDU_SESSION_RELEASE",
+      "target": "PROCEDURE_REGISTRATION_UPDATE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU session release procedure includes registration update to indicate session status to network",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.5"
+      ]
+    }
+  ]
+}

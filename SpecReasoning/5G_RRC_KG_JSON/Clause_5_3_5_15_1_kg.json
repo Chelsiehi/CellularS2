@@ -1,0 +1,136 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.15.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "L2_U2N_RELAY_UE",
+      "name": "L2 U2N Relay UE",
+      "entity_type": "Property",
+      "description": "A UE configured by the network to operate as a Layer 2 User-to-Network relay. It receives relay operation configurations including parameters for connected remote UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "SL_L2RELAYUECONFIG",
+      "name": "sl-L2RelayUEConfig",
+      "entity_type": "Information Element",
+      "description": "A configuration message sent by the network to configure L2 U2N Relay UE operations. It contains lists for releasing and adding/modifying remote UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "SL_REMOTEUE_TORELEASELIST",
+      "name": "sl-RemoteUE-ToReleaseList",
+      "entity_type": "Information Element",
+      "description": "A list within sl-L2RelayUEConfig indicating which L2 U2N Remote UEs should be released.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "SL_REMOTEUE_TOADDMODLIST",
+      "name": "sl-RemoteUE-ToAddModList",
+      "entity_type": "Information Element",
+      "description": "A list within sl-L2RelayUEConfig indicating which L2 U2N Remote UEs should be added or modified.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE_RELEASE",
+      "name": "L2 U2N Remote UE release",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE when sl-RemoteUE-ToReleaseList is present in sl-L2RelayUEConfig, as specified in clause 5.3.5.15.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE_ADDITION_MODIFICATION",
+      "name": "L2 U2N Remote UE addition/modification",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE when sl-RemoteUE-ToAddModList is present in sl-L2RelayUEConfig, as specified in clause 5.3.5.15.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "CONDITION_RELEASELIST_PRESENT",
+      "name": "sl-RemoteUE-ToReleaseList present",
+      "entity_type": "Condition",
+      "description": "Condition where the sl-L2RelayUEConfig contains the sl-RemoteUE-ToReleaseList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ADDMODLIST_PRESENT",
+      "name": "sl-RemoteUE-ToAddModList present",
+      "entity_type": "Condition",
+      "description": "Condition where the sl-L2RelayUEConfig contains the sl-RemoteUE-ToAddModList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_L2RELAYUECONFIG",
+      "target": "SL_REMOTEUE_TORELEASELIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The sl-L2RelayUEConfig may contain the sl-RemoteUE-ToReleaseList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_L2RELAYUECONFIG",
+      "target": "SL_REMOTEUE_TOADDMODLIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The sl-L2RelayUEConfig may contain the sl-RemoteUE-ToAddModList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_RELEASELIST_PRESENT",
+      "target": "L2_U2N_REMOTE_UE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the condition that sl-RemoteUE-ToReleaseList is present is met, the UE performs the L2 U2N Remote UE release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ADDMODLIST_PRESENT",
+      "target": "L2_U2N_REMOTE_UE_ADDITION_MODIFICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the condition that sl-RemoteUE-ToAddModList is present is met, the UE performs the L2 U2N Remote UE addition/modification procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "L2_U2N_RELAY_UE",
+      "target": "SL_L2RELAYUECONFIG",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The L2 U2N Relay UE is configured by the network using the sl-L2RelayUEConfig information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.15.1"
+      ]
+    }
+  ]
+}

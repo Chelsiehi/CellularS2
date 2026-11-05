@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.13.2",
+  "title": "Conditional reconfiguration removal",
+  "entities": [
+    {
+      "id": "CONDITIONAL_RECONFIG_REMOVAL_PROCEDURE",
+      "name": "Conditional reconfiguration removal",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE removes conditional reconfiguration entries based on the condReconfigToRemoveList.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "CONDRECONFIGTOREMOVELIST",
+      "name": "condReconfigToRemoveList",
+      "entity_type": "Information Element",
+      "description": "List containing condReconfigId values that should be removed from the UE's conditional reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "CONDRECONFIGID",
+      "name": "condReconfigId",
+      "entity_type": "Identifier",
+      "description": "Identifier for conditional reconfiguration entries in the UE's storage.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "VARCONDITIONALRECONFIG",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Property",
+      "description": "UE variable storing the current conditional reconfiguration entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "CONDRECONFIGID_IN_LIST_AND_VAR",
+      "name": "condReconfigId in both condReconfigToRemoveList and VarConditionalReconfig",
+      "entity_type": "Condition",
+      "description": "Condition where a condReconfigId value exists in both the removal list and the current UE conditional reconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "REMOVE_ENTRY_FROM_VAR",
+      "name": "Remove entry from VarConditionalReconfig",
+      "entity_type": "Property",
+      "description": "Action where the UE removes the conditional reconfiguration entry with matching condReconfigId from VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITIONAL_RECONFIG_REMOVAL_PROCEDURE",
+      "target": "CONDRECONFIGTOREMOVELIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The conditional reconfiguration removal procedure uses the condReconfigToRemoveList information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDRECONFIGTOREMOVELIST",
+      "target": "CONDRECONFIGID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The condReconfigToRemoveList contains condReconfigId values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITIONAL_RECONFIG_REMOVAL_PROCEDURE",
+      "target": "CONDRECONFIGID_IN_LIST_AND_VAR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure is guarded by the condition that condReconfigId must be in both the removal list and current configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDRECONFIGID_IN_LIST_AND_VAR",
+      "target": "REMOVE_ENTRY_FROM_VAR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When the condition is met, the UE establishes the removal of the entry from VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REMOVE_ENTRY_FROM_VAR",
+      "target": "VARCONDITIONALRECONFIG",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The removal action is defined to operate on the VarConditionalReconfig variable.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.13.2"
+      ]
+    }
+  ]
+}

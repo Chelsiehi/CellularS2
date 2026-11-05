@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "NAS_TRANSPORT_PROCEDURE",
+      "name": "NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Provides transport of payload between the UE and the AMF. The payload type is identified by the Payload container type IE and can include various message types and containers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_TYPE_IE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Identifies the type of payload being transported in the NAS transport procedure. Includes various payload types such as 5GSM messages, LPP messages, and other containers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_IE",
+      "name": "Payload container IE",
+      "entity_type": "Information Element",
+      "description": "Contains the actual payload and optional associated information. For multiple payloads, it consists of a list of payload container entries.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "MULTIPLE_PAYLOADS_TYPE",
+      "name": "Multiple payloads type",
+      "entity_type": "Condition",
+      "description": "Payload type set to 'Multiple payloads' when more than one payload needs to be transported using NAS transport procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_ENTRY",
+      "name": "Payload container entry",
+      "entity_type": "Information Element",
+      "description": "Individual entry within the Payload container IE when multiple payloads are transported. Contains payload and optional associated information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_TRANSPORT_PROCEDURE",
+      "target": "PAYLOAD_CONTAINER_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS transport procedure uses the Payload container type IE to identify the type of payload being transported.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NAS_TRANSPORT_PROCEDURE",
+      "target": "PAYLOAD_CONTAINER_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS transport procedure carries the Payload container IE which contains the actual payload and optional associated information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAYLOAD_CONTAINER_TYPE_IE",
+      "target": "MULTIPLE_PAYLOADS_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container type IE can be set to 'Multiple payloads' condition when multiple payloads need transport.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PAYLOAD_CONTAINER_IE",
+      "target": "PAYLOAD_CONTAINER_ENTRY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Payload container IE contains payload container entries when multiple payloads are transported.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.1"
+      ]
+    }
+  ]
+}

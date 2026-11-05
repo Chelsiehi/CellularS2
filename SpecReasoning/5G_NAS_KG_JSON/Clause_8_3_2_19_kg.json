@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.2.19",
+  "title": "Service-level-AA container",
+  "entities": [
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "An information element included by the SMF when the service-level authentication and authorization procedure is completed successfully by the external DN.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_LEVEL_AA",
+      "name": "Service-level authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure performed by the external DN for service-level authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "CONDITION_AA_SUCCESS",
+      "name": "Service-level AA procedure completed successfully",
+      "entity_type": "Condition",
+      "description": "Condition indicating the service-level authentication and authorization procedure has been completed successfully by the external DN.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "ENTITY_SMF",
+      "name": "SMF",
+      "entity_type": "Property",
+      "description": "Session Management Function that includes the Service-level-AA container IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "ENTITY_EXTERNAL_DN",
+      "name": "External DN",
+      "entity_type": "Property",
+      "description": "External Data Network that performs the service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ENTITY_SMF",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF includes the Service-level-AA container IE when the service-level AA procedure is successfully completed.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_AA_SUCCESS",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of the Service-level-AA container IE is conditional on successful completion of the service-level AA procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_SERVICE_LEVEL_AA",
+      "target": "CONDITION_AA_SUCCESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of the service-level AA procedure establishes the condition for including the Service-level-AA container IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ENTITY_EXTERNAL_DN",
+      "target": "PROCEDURE_SERVICE_LEVEL_AA",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The external DN performs the service-level authentication and authorization procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.2.19"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.2",
+  "title": "Normal and periodic tracking area updating procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_TRACKING_AREA_UPDATING",
+      "name": "Tracking Area Updating Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE in EMM-REGISTERED state to update tracking area information with MME. Can be normal or periodic updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2",
+        "Figure 5.5.3.2.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state where tracking area updating procedure can be initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_TRACKING_AREA_UPDATING_INITIATED",
+      "name": "EMM-TRACKING-AREA-UPDATING-INITIATED",
+      "entity_type": "State",
+      "description": "UE state entered after sending TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "T3430",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2",
+        "Figure 5.5.3.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3412",
+      "name": "T3412",
+      "entity_type": "Timer",
+      "description": "Periodic tracking area updating timer whose expiration triggers procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_UPDATE_TYPE",
+      "name": "EPS update type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of update: periodic updating or TA updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_UE_RADIO_CAPABILITY_INFO_UPDATE_NEEDED",
+      "name": "UE radio capability information update needed",
+      "entity_type": "Information Element",
+      "description": "IE included when UE radio capability changes.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "IE_OLD_GUTI",
+      "name": "Old GUTI",
+      "entity_type": "Information Element",
+      "description": "IE containing previous GUTI or mapped GUTI from P-TMSI/RAI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition triggering tracking area updating when UE detects current TAI is not in registered TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "COND_T3412_EXPIRES",
+      "name": "T3412 timer expires",
+      "entity_type": "Condition",
+      "description": "Condition triggering periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "PROP_INTEGRITY_PROTECTION",
+      "name": "Integrity protection required",
+      "entity_type": "Property",
+      "description": "Property requiring TRACKING AREA UPDATE REQUEST to be integrity protected with current EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TRACKING_AREA_UPDATING",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiated by sending TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TRACKING_AREA_UPDATING",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be initiated when UE is in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "STATE_EMM_TRACKING_AREA_UPDATING_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sending TRACKING AREA UPDATE REQUEST causes UE to enter EMM-TRACKING-AREA-UPDATING-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "TIMER_T3430",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending TRACKING AREA UPDATE REQUEST starts timer T3430.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2",
+        "Figure 5.5.3.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition where current TAI not in list triggers procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_T3412_EXPIRES",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition where T3412 expiration triggers periodic updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_EPS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST contains EPS update type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_UE_RADIO_CAPABILITY_INFO_UPDATE_NEEDED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST contains UE radio capability information update needed IE when radio capability changes.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_OLD_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST contains Old GUTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "PROP_INTEGRITY_PROTECTION",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST requires integrity protection with current EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.18",
+  "title": "Restricted local operator services",
+  "entities": [
+    {
+      "id": "PROCEDURE_RLOS_ATTACH",
+      "name": "EPS RLOS attach",
+      "entity_type": "Procedure",
+      "description": "An attach procedure where the UE requests access to restricted local operator services by setting the attach type to EPS RLOS attach in the ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "MESSAGE_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by the UE to initiate attach procedures, including RLOS attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "IE_ATTACH_TYPE",
+      "name": "Attach type",
+      "entity_type": "Information Element",
+      "description": "Information element in ATTACH REQUEST message indicating the type of attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "CONDITION_RLOS_SUPPORTED",
+      "name": "PLMN supports RLOS",
+      "entity_type": "Condition",
+      "description": "Condition where the PLMN is configured to support access to restricted local operator services, determined from broadcast system information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "CONDITION_UE_AUTHENTICATED",
+      "name": "UE authenticated",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has been successfully authenticated by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "CONDITION_UE_UNAUTHENTICATED",
+      "name": "UE unauthenticated",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has not been authenticated by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "STATE_LIMITED_SERVICE",
+      "name": "Limited service state",
+      "entity_type": "State",
+      "description": "EMM state where the UE has limited service capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "PROPERTY_MME_RLOS_CONFIG",
+      "name": "MME configured for RLOS",
+      "entity_type": "Property",
+      "description": "Property indicating the MME is configured to support access to restricted local operator services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "PROPERTY_RLOS_ORIGINATED_ONLY",
+      "name": "UE originated RLOS only",
+      "entity_type": "Property",
+      "description": "Property restricting RLOS access to only UE-originated requests, with no mobile terminated access or network triggered service requests allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "CONDITION_WB_S1_MODE",
+      "name": "WB-S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is operating in WB-S1 mode, required for RLOS access.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_RLOS_ATTACH",
+      "target": "MESSAGE_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RLOS attach procedure involves sending an ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MESSAGE_ATTACH_REQUEST",
+      "target": "IE_ATTACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains the attach type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ATTACH_TYPE",
+      "target": "CONDITION_RLOS_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Setting attach type to EPS RLOS attach is guarded by the condition that the PLMN supports RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RLOS_ATTACH",
+      "target": "STATE_LIMITED_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RLOS attach procedure requires the UE to be in limited service state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_MME_RLOS_CONFIG",
+      "target": "CONDITION_UE_UNAUTHENTICATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If MME is configured for RLOS, it establishes that unauthenticated UEs can access RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_MME_RLOS_CONFIG",
+      "target": "CONDITION_UE_AUTHENTICATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If MME is configured for RLOS, it establishes that authenticated UEs can also access RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_RLOS_ORIGINATED_ONLY",
+      "target": "PROCEDURE_RLOS_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Property establishes that only UE-originated RLOS requests are supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_RLOS_ATTACH",
+      "target": "CONDITION_WB_S1_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RLOS attach procedure requires the UE to be in WB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.18"
+      ]
+    }
+  ]
+}

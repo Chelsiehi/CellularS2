@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a PDU session between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "name": "PDU SESSION ESTABLISHMENT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "MSG_DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message carrying PDU session establishment accept.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "IE_SM_PDU_DN_REQUEST_CONTAINER",
+      "name": "SM PDU DN request container",
+      "entity_type": "Information Element",
+      "description": "Information element containing PDU session authentication and authorization information for external DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "COND_INITIAL_EMERGENCY_REQUEST_EXISTING_EMERGENCY",
+      "name": "Initial emergency request with existing emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where received request type is initial emergency request and another emergency PDU session already exists for UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "COND_PDU_DN_AUTH_NON_COMPLIANT",
+      "name": "PDU DN authentication information non-compliant",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session authentication/authorization information in SM PDU DN request container is not compliant with local policy and subscription data.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "COND_DUPLICATE_PDU_SESSION_ID",
+      "name": "Duplicate PDU session ID with initial request",
+      "entity_type": "Condition",
+      "description": "Condition where PDU SESSION ESTABLISHMENT REQUEST has PDU session ID identical to existing PDU session and request type is initial request or initial emergency request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "COND_NON_EXISTENT_PDU_SESSION",
+      "name": "Non-existent PDU session for existing request",
+      "entity_type": "Condition",
+      "description": "Condition where request type is existing PDU session or existing emergency PDU session but SMF has no information about that PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "COND_DL_NAS_TRANSPORT_NOT_FORWARDED",
+      "name": "DL NAS TRANSPORT message not forwarded",
+      "entity_type": "Condition",
+      "description": "Condition where SMF determines DL NAS TRANSPORT message carrying PDU SESSION ESTABLISHMENT ACCEPT was not forwarded to UE by 5G access network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "PROP_SMF_REJECTS_PDU_SESSION",
+      "name": "SMF rejects PDU session establishment",
+      "entity_type": "Property",
+      "description": "SMF behavior to reject PDU session establishment with specific 5GSM cause.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "PROP_SMF_RELEASES_EXISTING_PDU_SESSION",
+      "name": "SMF releases existing PDU session",
+      "entity_type": "Property",
+      "description": "SMF behavior to locally release existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_INITIAL_EMERGENCY_REQUEST_EXISTING_EMERGENCY",
+      "target": "PROP_SMF_REJECTS_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where initial emergency request with existing emergency PDU session leads to SMF rejecting PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_PDU_DN_AUTH_NON_COMPLIANT",
+      "target": "PROP_SMF_REJECTS_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where non-compliant PDU DN authentication information leads to SMF rejecting PDU session establishment with cause #29.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_DUPLICATE_PDU_SESSION_ID",
+      "target": "PROP_SMF_RELEASES_EXISTING_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where duplicate PDU session ID with initial request leads to SMF releasing existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_NON_EXISTENT_PDU_SESSION",
+      "target": "PROP_SMF_REJECTS_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where non-existent PDU session for existing request leads to SMF rejecting PDU session establishment with cause #54.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_DL_NAS_TRANSPORT_NOT_FORWARDED",
+      "target": "PROP_SMF_REJECTS_PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where DL NAS TRANSPORT message not forwarded leads to SMF rejecting PDU session establishment with cause #26.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_SM_PDU_DN_REQUEST_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REQUEST message contains SM PDU DN request container IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REJECT",
+      "target": "PROP_SMF_REJECTS_PDU_SESSION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION ESTABLISHMENT REJECT message is used when SMF rejects PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "PROC_PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message is part of PDU session establishment procedure carrying PDU SESSION ESTABLISHMENT ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.7"
+      ]
+    }
+  ]
+}

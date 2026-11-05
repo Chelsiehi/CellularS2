@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.4.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "AUTHENTICATION_FAILURE_MSG",
+      "name": "AUTHENTICATION FAILURE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network when authentication fails, particularly with 5GMM cause #71 'ngKSI already in use'.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESPONSE_MSG",
+      "name": "AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network in response to successful authentication validation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST_MSG",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message from network containing EAP-request message and ngKSI for authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "T3520",
+      "name": "Timer T3520",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending AUTHENTICATION FAILURE message with cause #71.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "T3510_T3517_T3521",
+      "name": "Retransmission timers T3510, T3517, T3521",
+      "entity_type": "Timer",
+      "description": "Retransmission timers that are stopped and potentially restarted during authentication procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "NGKSI_ALREADY_IN_USE",
+      "name": "5GMM cause #71 'ngKSI already in use'",
+      "entity_type": "Condition",
+      "description": "Authentication failure condition where the ngKSI provided by network is already in use.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "NETWORK_AUTH_FAILURE",
+      "name": "Network authentication check failure",
+      "entity_type": "Condition",
+      "description": "Condition where UE deems that network has failed authentication check.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current Tracking Area Identity is not present in UE's TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for mobility and periodic registration update initiated by UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "EAP_AUTH_PROCEDURE",
+      "name": "EAP based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP protocol for primary authentication and key agreement.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when network passes authentication check during emergency service.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICE_REGISTERED",
+      "name": "Registered for emergency services",
+      "entity_type": "Property",
+      "description": "UE property indicating it is registered for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NGKSI_ALREADY_IN_USE",
+      "target": "AUTHENTICATION_FAILURE_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Authentication failure with ngKSI already in use triggers sending AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_FAILURE_MSG",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message starts timer T3520.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTHENTICATION_FAILURE_MSG",
+      "target": "T3510_T3517_T3521",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message stops running retransmission timers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_REQUEST_MSG",
+      "target": "T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving valid AUTHENTICATION REQUEST message stops timer T3520 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AUTHENTICATION_REQUEST_MSG",
+      "target": "AUTHENTICATION_RESPONSE_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Valid AUTHENTICATION REQUEST message triggers sending AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AUTHENTICATION_RESPONSE_MSG",
+      "target": "T3510_T3517_T3521",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending AUTHENTICATION RESPONSE message starts previously stopped retransmission timers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TAI_NOT_IN_LIST",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI not in list condition establishes initiation of registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NETWORK_AUTH_FAILURE",
+      "target": "T3510_T3517_T3521",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network authentication failure condition starts previously stopped retransmission timers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "T3520",
+      "target": "NETWORK_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3520 expiration guards network authentication failure condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SECURITY_MODE_CONTROL",
+      "target": "T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Security mode control procedure stops timer T3520.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EAP_AUTH_PROCEDURE",
+      "target": "EMERGENCY_SERVICE_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EAP authentication procedure during emergency service establishes UE registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.19",
+  "title": "Handling of congestion control for transport of user data via the control plane",
+  "entities": [
+    {
+      "id": "CONGESTION_CONTROL_CP_DATA",
+      "name": "Congestion control for transport of user data via control plane",
+      "entity_type": "Procedure",
+      "description": "Network-initiated congestion control mechanism for user data transport via control plane. The network can activate this control and provide a back-off timer T3448 to UEs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Control plane data back-off timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when network includes T3448 value in REGISTRATION ACCEPT, SERVICE ACCEPT or SERVICE REJECT message. Prevents UE from initiating user data transport via control plane while running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message that can contain T3448 value IE to start the timer or be sent without T3448 to stop the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_ACCEPT",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message that can contain T3448 value IE to start the timer or be sent without T3448 to stop the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message that can contain T3448 value IE to start the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "IE_T3448_VALUE",
+      "name": "T3448 value",
+      "entity_type": "Information Element",
+      "description": "Information element containing the timer value for control plane data back-off timer T3448.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "5GMM idle state where UE does not initiate user data transport via control plane while T3448 is running, except for allowed exceptions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state that causes stopping of timer T3448 when entered.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "CONDITION_T3448_RUNNING",
+      "name": "Timer T3448 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3448 is active, restricting UE from initiating user data transport via control plane.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "EXCEPTION_DATA_REPORTING",
+      "name": "Exception data reporting allowed",
+      "entity_type": "Condition",
+      "description": "Condition where UE is allowed to send user data via control plane even when T3448 is running, for exceptional events.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message that UE can send for emergency services or to respond to paging without uplink data even when T3448 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "PROPERTY_STOP_T3448",
+      "name": "Stop timer T3448",
+      "entity_type": "Property",
+      "description": "Behavior where UE stops timer T3448 upon entering 5GMM-DEREGISTERED state, switching to non-equivalent PLMN, or being switched off.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONGESTION_CONTROL_CP_DATA",
+      "target": "TIMER_T3448",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network activation of congestion control includes starting timer T3448 in UE via messages containing T3448 value IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message can contain T3448 value IE to start the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT message can contain T3448 value IE to start the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message can contain T3448 value IE to start the timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message sent without T3448 value IE stops timer T3448.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SERVICE ACCEPT message sent without T3448 value IE stops timer T3448.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_T3448_RUNNING",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When T3448 is running, UE in 5GMM-IDLE mode does not initiate user data transport via control plane.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EXCEPTION_DATA_REPORTING",
+      "target": "CONDITION_T3448_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Exception data reporting condition allows UE to send user data via control plane even when T3448 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "CONDITION_T3448_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST can be sent for emergency services or paging response even when T3448 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "PROPERTY_STOP_T3448",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering 5GMM-DEREGISTERED state establishes the property of stopping timer T3448.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.19"
+      ]
+    }
+  ]
+}

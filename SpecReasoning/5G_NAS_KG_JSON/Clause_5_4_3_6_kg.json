@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.3.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network requests identity information from the UE using IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "T3570",
+      "name": "Timer T3570",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of IDENTITY REQUEST messages during identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to request identity information from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE_INITIAL",
+      "name": "Registration procedure for initial registration",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE initial registration to the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_PROCEDURE_UE_INITIATED",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition where lower layer communication fails before IDENTITY RESPONSE is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "T3570_EXPIRY_FIFTH",
+      "name": "Fifth expiry of timer T3570",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3570 expires for the fifth time during identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REGISTRATION_TYPE_IE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of registration (initial, emergency, mobility, periodic).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_TYPE_IE",
+      "name": "De-registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of de-registration (e.g., switch off).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ABORT",
+      "name": "Procedure abort",
+      "entity_type": "Property",
+      "description": "Network behavior of aborting ongoing procedures under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "T3570",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Identification procedure starts timer T3570 for retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Identification procedure uses IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "PROCEDURE_ABORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure condition leads to procedure abort.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3570_EXPIRY_FIFTH",
+      "target": "PROCEDURE_ABORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3570 leads to procedure abort.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REGISTRATION_REQUEST",
+      "target": "REGISTRATION_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "DEREGISTRATION_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains De-registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DEREGISTRATION_PROCEDURE_UE_INITIATED",
+      "target": "DEREGISTRATION_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure uses DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_PROCEDURE_INITIAL",
+      "target": "REGISTRATION_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure for initial registration uses REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.6"
+      ]
+    }
+  ]
+}

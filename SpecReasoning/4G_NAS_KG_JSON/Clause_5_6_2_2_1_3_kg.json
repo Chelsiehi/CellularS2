@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.1.3",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PAGING_INDICATION",
+      "name": "Paging indication",
+      "entity_type": "Message",
+      "description": "A network-initiated message used to page a UE for incoming communication or signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    },
+    {
+      "id": "UE_ATTACHED_RLOS",
+      "name": "UE attached for access to RLOS",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is attached specifically for access to RLOS (Restricted Local Operator Services).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    },
+    {
+      "id": "ONGOING_EMM_PROCEDURE",
+      "name": "Ongoing UE-initiated EMM specific procedure or service request procedure",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is currently executing a UE-initiated EMM specific procedure or service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    },
+    {
+      "id": "IGNORE_PAGING",
+      "name": "Ignore paging indication",
+      "entity_type": "Property",
+      "description": "Behavior where the UE disregards a received paging indication from the network under specific abnormal conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_ATTACHED_RLOS",
+      "target": "IGNORE_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where UE is attached for RLOS access establishes the behavior to ignore paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ONGOING_EMM_PROCEDURE",
+      "target": "IGNORE_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of ongoing UE-initiated EMM procedure or service request establishes the behavior to ignore paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAGING_INDICATION",
+      "target": "IGNORE_PAGING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging indication is guarded by the ignore behavior under abnormal conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.3"
+      ]
+    }
+  ]
+}

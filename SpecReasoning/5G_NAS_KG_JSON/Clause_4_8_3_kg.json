@@ -1,0 +1,225 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.8.3",
+  "title": "Dual-registration mode",
+  "entities": [
+    {
+      "id": "DUAL_REG_MODE",
+      "name": "Dual-registration mode",
+      "entity_type": "Procedure",
+      "description": "Mode where UE maintains independent contexts for 5GMM and EMM with independent equivalent PLMN lists. UE can register to N1 mode only, S1 mode only, or both.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "N1_MODE",
+      "name": "N1 mode",
+      "entity_type": "State",
+      "description": "5GMM registration mode for 5G connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "S1_MODE",
+      "name": "S1 mode",
+      "entity_type": "State",
+      "description": "EMM registration mode for EPS connectivity.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered to the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered to the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "EPS_ATTACH_PROC",
+      "name": "EPS attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to attach to EPS network, with or without PDN connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "INITIAL_REG_PROC",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to register to 5G network in N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_EST_PROC",
+      "name": "PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDU sessions in 5GS, can transfer existing PDN connections with request type 'existing PDU session'.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_PROC",
+      "name": "PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDN connections in EPS, can transfer PDU sessions with request type 'handover'.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST message",
+      "entity_type": "Message",
+      "description": "Message used in PDN connectivity procedure with request type parameter.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "HANDOVER_REQUEST_TYPE",
+      "name": "Request type handover",
+      "entity_type": "Condition",
+      "description": "Condition where request type is set to 'handover' for transferring PDU sessions from N1 to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "EXISTING_PDU_SESSION_REQUEST_TYPE",
+      "name": "Request type existing PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where request type is set to 'existing PDU session' for transferring PDN connections from S1 to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "EMM_NO_PDN_SUPPORT",
+      "name": "EMM-REGISTERED without PDN connection support",
+      "entity_type": "Property",
+      "description": "MME capability to support EMM-REGISTERED state without active PDN connections.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DUAL_REG_MODE",
+      "target": "N1_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Dual-registration mode can involve registration to N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DUAL_REG_MODE",
+      "target": "S1_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Dual-registration mode can involve registration to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EPS_ATTACH_PROC",
+      "target": "S1_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EPS attach procedure establishes registration in S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INITIAL_REG_PROC",
+      "target": "N1_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Initial registration procedure establishes registration in N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDN_CONNECTIVITY_PROC",
+      "target": "PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN connectivity procedure uses PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDN_CONNECTIVITY_REQUEST",
+      "target": "HANDOVER_REQUEST_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message uses request type 'handover' for PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PDU_SESSION_EST_PROC",
+      "target": "EXISTING_PDU_SESSION_REQUEST_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDU session establishment procedure uses request type 'existing PDU session' for PDN connection transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMM_NO_PDN_SUPPORT",
+      "target": "EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If MME supports EMM-REGISTERED without PDN connection, UE stays in EMM-REGISTERED after transferring all PDN connections.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EMM_NO_PDN_SUPPORT",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If MME does not support EMM-REGISTERED without PDN connection, UE enters EMM-DEREGISTERED after transferring all PDN connections.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.3"
+      ]
+    }
+  ]
+}

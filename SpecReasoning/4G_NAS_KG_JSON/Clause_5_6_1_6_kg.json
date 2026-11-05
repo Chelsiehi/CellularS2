@@ -1,0 +1,287 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of bearers and signaling connection for services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "UE state when service request procedure has been initiated but not yet completed.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+      "entity_type": "State",
+      "description": "UE state when EPS update status is set to EU2 NOT UPDATED and UE attempts to update.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "Normal registered state where UE can initiate and receive services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "Timer T3417",
+      "entity_type": "Timer",
+      "description": "Timer used during service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3417EXT",
+      "name": "Timer T3417ext",
+      "entity_type": "Timer",
+      "description": "Extended timer used during service request procedure for specific cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3417EXT_MT",
+      "name": "Timer T3417ext-mt",
+      "entity_type": "Timer",
+      "description": "Extended timer used during service request procedure for mobile terminated cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3325",
+      "name": "Timer T3325",
+      "entity_type": "Timer",
+      "description": "Timer started when service request attempt counter reaches 5, preventing further service requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer started with Extended wait time value, preventing service request initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer used for control plane data transfer in NB-S1 mode with Extended wait time CP data.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_BARRED",
+      "name": "Access Barred Condition",
+      "entity_type": "Condition",
+      "description": "Condition where network access is barred due to access class barring, EAB, ACDC, or network rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_LOWER_LAYER_FAILURE",
+      "name": "Lower Layer Failure",
+      "entity_type": "Condition",
+      "description": "Condition where NAS signaling connection fails or is released without Extended wait time.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_CSFB_CANCELLATION_RECEIVED",
+      "name": "CS Fallback Cancellation Received",
+      "entity_type": "Condition",
+      "description": "Condition where UE receives cancellation request for CS fallback procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "name": "Abort Service Request Procedure",
+      "entity_type": "Property",
+      "description": "UE behavior to abort the service request procedure and release allocated resources.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_CELL_RESELECTION",
+      "name": "Normal Cell Reselection",
+      "entity_type": "Property",
+      "description": "UE behavior to stay in current serving cell and apply normal cell reselection process.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_ACCESS_BARRED",
+      "target": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access barred condition leads to service request procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_LOWER_LAYER_FAILURE",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes UE to enter EMM-REGISTERED.ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_CSFB_CANCELLATION_RECEIVED",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CS fallback cancellation received causes UE to enter EMM-REGISTERED.ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Service request procedure starts timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Service request abortion stops timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "target": "TIMER_T3417EXT",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Service request abortion stops timer T3417ext.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "target": "TIMER_T3417EXT_MT",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Service request abortion stops timer T3417ext-mt.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROPERTY_ABORT_SERVICE_REQUEST",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request abortion causes UE to enter EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3325",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3325 running prevents service request procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "TIMER_T3346",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running prevents service request procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "TIMER_T3448",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3448 running prevents service request procedure for control plane data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "CONDITION_ACCESS_BARRED",
+      "target": "PROPERTY_CELL_RESELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access barred condition leads to normal cell reselection behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.6"
+      ]
+    }
+  ]
+}

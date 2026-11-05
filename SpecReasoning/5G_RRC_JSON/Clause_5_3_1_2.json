@@ -1,0 +1,28 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.1.2",
+  "title": "AS Security",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "---------",
+    "AS security comprises of the integrity protection and ciphering of RRC signalling (SRBs) and user data (DRBs).",
+    "RRC handles the configuration of the AS security parameters which are part of the AS configuration: the integrity protection algorithm, the ciphering algorithm, if integrity protection and/or ciphering is enabled for a DRB and two parameters, namely the keySetChangeIndicator and the nextHopChainingCount, which are used by the UE to determine the AS security keys upon reconfiguration with sync (with key change), connection re-establishment and/or connection",
+    "NOTE 0: All DRBs related to the same PDU session have the same enable/disable setting for ciphering and the same enable/disable setting for integrity protection, as specified in TS 33.501 .",
+    "RRC integrity protection and ciphering are always activated together, i.e. in one message/procedure. RRC integrity protection and ciphering for SRBs are never de-activated. However, it is possible to switch to a 'NULL' ciphering algorithm (nea0).",
+    "The 'NULL' integrity protection algorithm (nia0) is used only for SRBs and for the UE in lim ited service mode, see TS 33.501 and when used for SRBs, integrity protection is disabled for DRBs. In case the NULL' integrity protection algorithm is used, 'NULL' ciphering algorithm is also used.",
+    "NOTE 1: Lower layers discard RRC messages for which the integrity protection check has failed and indicate the integrity protection verification check failure to RRC.",
+    "The AS applies four different security keys: one for the integrity protection of RRC signalling (K ), one for the RRCint ciphering of RRC signalling (K ), one for integrity protection of user data (K ) and one for the ciphering of user RRCenc UPint data (K ). All four AS keys are derived from the K key. The K key is based on the K key (as specified in UPenc gNB gNB AMF TS 33.501 ), which is handled by upper layers.",
+    "The integrity protection and ciphering algorithms can only be changed with reconfiguration with sync. The AS keys (K , K , K , K and K ) change upon reconfiguration with sync (if masterKeyUpdate is included), and gNB RRCint RRCenc UPint UPenc upon connection re-establishment and connection resume.",
+    "For each radio bearer an independent counter (COUNT, as specified in TS 38.323 ) is maintained for each direction.",
+    "For each radio bearer, the COUNT is used as input for ciphering and integrity protection.",
+    "It is not allowed to use the same COUNT value more than once for a given security key. As specified in TS 33.501 clause 6.9.4.1 , the network is responsible for avoiding reuse of the COUNT with the same RB identity and with the same key, e.g. due to the transfer of large volumes of data, release and establishment of new RBs, and multiple termination point changes for RLC-UM bearers and multiple termination point changes for RLC-AM bearer with SN terminated PDCP re-establishment (COUNT reset) due to SN only full configuration whilst the key stream inputs (i.e.bearer ID, security key) at MN have not been updated. In order to avoid such re-use, the network may e.g. use different RB identities for RB establishments, change the AS security key, or an RRC_CONNECTED to RRC_IDLE/RRC_INACTIVE and then to RRC_CONNECTED transition.",
+    "In order to limit the signalling overhead, individual messages/ packets include a short sequence number (PDCP SN, as specified in TS 38.323 ). In addition, an overflow counter mechanism is used: the hyper frame number (HFN, as specified in TS 38.323 ). The HFN needs to be synchronized between the UE and the network.",
+    "For each SRB, the value provided by RRC to lower layers to derive the 5-bit BEARER parameter used as input for ciphering and for integrity protection is the value of the corresponding srb-Identity with the MSBs padded with zeroes.",
+    "For a UE provided with an sk-counter, keyToUse indicates whether the UE uses the master key (K ) or the secondary gNB key (S-K or S-K ) for a particular DRB. The secondary key is derived from the master key and sk-Counter, as eNB gNB defined in TS 33.501. Whenever there is a need to refresh the secondary key, e.g. upon change of MN with K gNB change or to avoid COUNT reuse, the security key update is used (see 5.3.5.7). When the UE is in NR-DC, the network may provide a UE configured with an SCG with an sk-Counter even when no DRB is setup using the secondary key (S- K ) in order to allow the configuration of SRB3. The network can also provide the UE with an sk-Counter, even if no gNB SCG is configured, when using SN terminated MCG bearers.",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

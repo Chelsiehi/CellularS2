@@ -1,0 +1,145 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.1.14",
+  "title": "Ethernet header compression configuration",
+  "entities": [
+    {
+      "id": "IE_ETH_HC_CONFIG",
+      "name": "Ethernet header compression configuration IE",
+      "entity_type": "Information Element",
+      "description": "Information element for configuring Ethernet header compression in 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_TYPE",
+      "name": "PDU session type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAPABILITY",
+      "name": "5GMM capability IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE capabilities for 5GMM.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "IE_5GS_NETWORK_SUPPORT",
+      "name": "5GS network support feature IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating network supported features for 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept registration request.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_TYPE_ETHERNET",
+      "name": "PDU session type is Ethernet",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session type IE value is set to Ethernet.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_CP_CIOT_ETH_HC",
+      "name": "UE supports control plane CIoT 5GS optimization and Ethernet header compression",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicates support for control plane CIoT 5GS optimization and Ethernet header compression in 5GMM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_SUPPORTS_CP_CIOT_ETH_HC",
+      "name": "Network supports control plane CIoT 5GS optimization and Ethernet header compression",
+      "entity_type": "Condition",
+      "description": "Condition where network indicates support for control plane CIoT 5GS optimization and Ethernet header compression in 5GS network support feature IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the 5GMM capability IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_5GS_NETWORK_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains the 5GS network support feature IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "COND_PDU_SESSION_TYPE_ETHERNET",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Ethernet header compression configuration IE is guarded by PDU session type being Ethernet.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "COND_UE_SUPPORTS_CP_CIOT_ETH_HC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Ethernet header compression configuration IE is guarded by UE support for control plane CIoT 5GS optimization and Ethernet header compression.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_ETH_HC_CONFIG",
+      "target": "COND_NETWORK_SUPPORTS_CP_CIOT_ETH_HC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Ethernet header compression configuration IE is guarded by network support for control plane CIoT 5GS optimization and Ethernet header compression.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.1.14"
+      ]
+    }
+  ]
+}

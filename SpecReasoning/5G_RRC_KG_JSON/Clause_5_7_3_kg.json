@@ -1,0 +1,150 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.3",
+  "title": "SCG failure information",
+  "entities": [
+    {
+      "id": "PROC_SCG_FAILURE_INFO",
+      "name": "SCG failure information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to inform NR MN about an SCG failure on E-UTRA SN the UE has experienced, such as SCG radio link failure or SCG change failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3a.1"
+      ]
+    },
+    {
+      "id": "PROC_MCG_FAILURE_INFO",
+      "name": "MCG failure information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to inform the network about an MCG failure the UE has experienced, specifically MCG radio link failure. Allows UE to initiate fast MCG link recovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG",
+      "name": "RRC reconfiguration",
+      "entity_type": "Message",
+      "description": "Message sent from network to UE for reconfiguring RRC connection parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3a.1",
+        "Figure 5.7.3b.1"
+      ]
+    },
+    {
+      "id": "MSG_SCG_FAILURE_INFO_EUTRA",
+      "name": "SCGFailureInformationEUTRA",
+      "entity_type": "Message",
+      "description": "Message sent from UE to network to report SCG failure on E-UTRA secondary node.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3a.1"
+      ]
+    },
+    {
+      "id": "MSG_MCG_FAILURE_INFO",
+      "name": "MCGFailureInformation",
+      "entity_type": "Message",
+      "description": "Message sent from UE to network to report MCG failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_ACTIVATED",
+      "name": "AS security activated with SRB2 and DRB/MRB",
+      "entity_type": "Condition",
+      "description": "Condition where AS security is activated with SRB2 and at least one DRB or multicast MRB setup, or for IAB with SRB2.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    },
+    {
+      "id": "PROP_FAST_MCG_RECOVERY",
+      "name": "Fast MCG link recovery",
+      "entity_type": "Property",
+      "description": "Property allowing UE to continue RRC connection without re-establishment after MCG failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SCG_FAILURE_INFO",
+      "target": "MSG_SCG_FAILURE_INFO_EUTRA",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SCG failure information procedure includes sending SCGFailureInformationEUTRA message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3a.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MCG_FAILURE_INFO",
+      "target": "MSG_MCG_FAILURE_INFO",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MCG failure information procedure includes sending MCGFailureInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MCG_FAILURE_INFO",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MCG failure information procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MCG_FAILURE_INFO",
+      "target": "COND_AS_SECURITY_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MCG failure information procedure requires AS security to be activated with SRB2 and DRB/MRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_MCG_FAILURE_INFO",
+      "target": "PROP_FAST_MCG_RECOVERY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MCG failure information procedure enables fast MCG link recovery property.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.3",
+        "Figure 5.7.3b.1 notes"
+      ]
+    }
+  ]
+}

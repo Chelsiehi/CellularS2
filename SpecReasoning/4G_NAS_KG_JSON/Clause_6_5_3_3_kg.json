@@ -1,0 +1,311 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.3",
+  "title": "UE requested bearer resource allocation procedure accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_BEARER_RESOURCE_ALLOCATION",
+      "name": "UE requested bearer resource allocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests bearer resource allocation and network accepts it, leading to either dedicated EPS bearer context activation or EPS bearer context modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request bearer resource allocation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE containing the EPS bearer identity to verify against active default EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_CONTEXT_MODIFICATION",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to modify an existing EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to modify an existing EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3480",
+      "name": "T3480",
+      "entity_type": "Timer",
+      "description": "Timer started by UE during bearer resource allocation procedure; stopped upon receiving ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST or MODIFY EPS BEARER CONTEXT REQUEST with matching PTI.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after stopping timer T3480 upon receiving matching ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST or MODIFY EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Identifier",
+      "description": "Identifier assigned to the procedure; used to match messages and manage retransmissions.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_ID",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "IE used in ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST and MODIFY EPS BEARER CONTEXT REQUEST to identify the EPS bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_ACTIVE_DEFAULT_EPS_BEARER",
+      "name": "Active default EPS bearer context",
+      "entity_type": "Condition",
+      "description": "Condition checked by MME to verify if Linked EPS bearer identity IE matches any active default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_EPS_BEARER_ID_NOT_USED",
+      "name": "EPS bearer identity not already used",
+      "entity_type": "Condition",
+      "description": "Condition verified by UE upon receiving ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST to ensure EPS bearer identity is not already used.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "COND_EPS_BEARER_ID_ACTIVE",
+      "name": "EPS bearer identity is active",
+      "entity_type": "Condition",
+      "description": "Condition verified by UE upon receiving MODIFY EPS BEARER CONTEXT REQUEST to ensure EPS bearer identity matches an active EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_BEARER_RESOURCE_ALLOCATION",
+      "target": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Bearer resource allocation procedure involves sending BEARER RESOURCE ALLOCATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IE_LINKED_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REQUEST message contains Linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_BEARER_RESOURCE_ALLOCATION",
+      "target": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Bearer resource allocation procedure may initiate dedicated EPS bearer context activation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_BEARER_RESOURCE_ALLOCATION",
+      "target": "PROC_EPS_BEARER_CONTEXT_MODIFICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Bearer resource allocation procedure may initiate EPS bearer context modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "TIMER_T3480",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST with matching PTI stops timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "TIMER_T3480",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving MODIFY EPS BEARER CONTEXT REQUEST with matching PTI stops timer T3480.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST with matching PTI causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving MODIFY EPS BEARER CONTEXT REQUEST with matching PTI causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_LINKED_EPS_BEARER_ID",
+      "target": "COND_ACTIVE_DEFAULT_EPS_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Linked EPS bearer identity IE is verified against condition of being an active default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_EPS_BEARER_ID",
+      "target": "COND_EPS_BEARER_ID_NOT_USED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer identity IE in ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST is verified against condition of not being already used.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_EPS_BEARER_ID",
+      "target": "COND_EPS_BEARER_ID_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer identity IE in MODIFY EPS BEARER CONTEXT REQUEST is verified against condition of being an active EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "target": "IDENTIFIER_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REQUEST message includes procedure transaction identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IDENTIFIER_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message includes procedure transaction identity for matching.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IDENTIFIER_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message includes procedure transaction identity for matching.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.3"
+      ]
+    }
+  ]
+}

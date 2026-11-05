@@ -1,0 +1,196 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.4",
+  "title": "Secondary cell group release",
+  "entities": [
+    {
+      "id": "SCG_RELEASE_PROCEDURE",
+      "name": "Secondary Cell Group Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE to release SCG configuration, including resetting MAC, releasing RLC bearers and BH RLC channels, and stopping various timers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "SCG_MAC",
+      "name": "SCG MAC",
+      "entity_type": "Property",
+      "description": "MAC entity associated with the Secondary Cell Group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "RLC_BEARER_RELEASE_PROCEDURE",
+      "name": "RLC Bearer Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing RLC bearers as specified in clause 5.3.5.5.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "BH_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "name": "BH RLC Channel Release Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing BH RLC channels as specified in clause 5.3.5.5.10.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "SCG_CONFIGURATION",
+      "name": "SCG Configuration",
+      "entity_type": "Property",
+      "description": "Configuration parameters for the Secondary Cell Group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "CPC_CONFIGURED",
+      "name": "Conditional PSCell Change Configured",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether Conditional PSCell Change (CPC) was configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "VAR_CONDITIONAL_RECONFIG",
+      "name": "VarConditionalReconfig",
+      "entity_type": "Property",
+      "description": "Variable storing conditional reconfiguration entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer associated with the corresponding SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "TIMER_T312",
+      "name": "Timer T312",
+      "entity_type": "Timer",
+      "description": "Timer associated with the corresponding SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "TIMER_T304",
+      "name": "Timer T304",
+      "entity_type": "Timer",
+      "description": "Timer associated with the corresponding SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "SPCELL",
+      "name": "SpCell",
+      "entity_type": "Property",
+      "description": "Special Cell associated with the SCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "SCG_MAC",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG release procedure resets SCG MAC if configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "RLC_BEARER_RELEASE_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SCG release procedure includes performing RLC bearer release for each RLC bearer in SCG configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "BH_RLC_CHANNEL_RELEASE_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "SCG release procedure includes performing BH RLC channel release for each BH RLC channel in SCG configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "SCG_CONFIGURATION",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG release procedure releases the SCG configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CPC_CONFIGURED",
+      "target": "VAR_CONDITIONAL_RECONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If CPC was configured, SCG release procedure removes all entries in VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "TIMER_T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG release procedure stops timer T310 for the corresponding SpCell if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "TIMER_T312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG release procedure stops timer T312 for the corresponding SpCell if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SCG_RELEASE_PROCEDURE",
+      "target": "TIMER_T304",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SCG release procedure stops timer T304 for the corresponding SpCell if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.4"
+      ]
+    }
+  ]
+}

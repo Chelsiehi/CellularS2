@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.5",
+  "title": "Handling of the periodic tracking area update timer and mobile reachable timer (S1 mode only)",
+  "entities": [
+    {
+      "id": "PROC_PERIODIC_TAU",
+      "name": "Periodic Tracking Area Updating Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to periodically notify UE availability to the network. Controlled by timer T3412 in the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3412",
+      "name": "Timer T3412",
+      "entity_type": "Timer",
+      "description": "Periodic tracking area update timer in UE. Value sent by network in ATTACH ACCEPT or TRACKING AREA UPDATE ACCEPT messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_MOBILE_REACHABLE",
+      "name": "Mobile Reachable Timer",
+      "entity_type": "Timer",
+      "description": "Network timer supervising UE periodic tracking area updates. Typically 4 minutes longer than T3412 for non-emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_IMPLICIT_DETACH",
+      "name": "Implicit Detach Timer",
+      "entity_type": "Timer",
+      "description": "Network timer started after mobile reachable timer expiry. If expires before UE contact, network implicitly detaches UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3423",
+      "name": "Timer T3423",
+      "entity_type": "Timer",
+      "description": "Timer started when T3412 expires and T3346 is running or UE is in specific states. Used for delayed TAU procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "UE state where normal EMM services are available. Periodic TAU procedure requires this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "UE state with active NAS signalling connection. T3412 is stopped in this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "UE state without active NAS signalling connection. T3412 is reset and started when entering this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state where UE is not registered with network. T3412 is stopped in this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACHED",
+      "name": "UE attached for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached specifically for emergency services. Affects T3412 behavior and mobile reachable timer settings.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "IE_T3412_EXTENDED_VALUE",
+      "name": "T3412 extended value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing extended value for timer T3412, sent in ATTACH ACCEPT or TRACKING AREA UPDATE ACCEPT messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DETACH",
+      "name": "Local detach from network",
+      "entity_type": "Property",
+      "description": "Behavior where UE or network locally detaches without explicit detach procedure. Occurs when T3412 expires for emergency-attached UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PERIODIC_TAU",
+      "target": "TIMER_T3412",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Periodic TAU procedure is controlled by timer T3412",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TIMER_T3412",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3412 is reset and started when UE changes to EMM-IDLE mode",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3412",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3412 is stopped when UE enters EMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3412",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "T3412 is stopped when UE enters EMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_EMERGENCY_ATTACHED",
+      "target": "PROP_LOCAL_DETACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is attached for emergency services and T3412 expires, UE locally detaches",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TIMER_T3412",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Periodic TAU procedure is delayed until UE returns to EMM-REGISTERED.NORMAL-SERVICE",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_T3412",
+      "target": "TIMER_T3423",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When T3412 expires and certain conditions are met, T3423 is started",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_MOBILE_REACHABLE",
+      "target": "TIMER_IMPLICIT_DETACH",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Upon expiry of mobile reachable timer, implicit detach timer is started",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_T3412_EXTENDED_VALUE",
+      "target": "TIMER_T3412",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3412 extended value IE provides the value for timer T3412",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_ATTACHED",
+      "target": "TIMER_MOBILE_REACHABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Mobile reachable timer is set equal to T3412 when UE is attached for emergency services",
+      "provenance": [
+        "TS 24.301, Clause 5.3.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.3.2",
+  "title": "Network-initiated NAS transport procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_NAS_TRANSPORT",
+      "name": "Network-initiated NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where AMF initiates NAS transport by sending DL NAS TRANSPORT message to UE in 5GMM-CONNECTED mode. The procedure handles various payload types including 5GSM messages, SMS, LPP messages, SOR information, UE policy containers, and other payloads.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2",
+        "Figure 5.4.5.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message sent from AMF to UE to transport various payload types including 5GSM messages, SMS, LPP messages, and other container types.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2",
+        "Figure 5.4.5.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of payload being transported in the DL NAS TRANSPORT message. Values include 'N1 SM information', 'SMS', 'LTE Positioning Protocol (LPP) message container', 'SOR transparent container', 'UE policy container', etc.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container IE",
+      "entity_type": "Information Element",
+      "description": "Information element that contains the actual payload being transported, such as 5GSM messages, SMS payload, LPP message payload, steering of roaming information, UE policy container, etc.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element that contains the PDU session identifier, included when transporting 5GSM messages or CIoT user data containers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the reason for failure when 5GSM messages or CIoT user data containers cannot be forwarded. Contains cause values like #90 'payload was not forwarded', #91 'DNN not supported or not subscribed in the slice', #22 'Congestion', etc.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Optional information element included with certain 5GMM cause values to indicate back-off timer duration for congestion control or resource limitations.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_INFORMATION",
+      "name": "Additional information IE",
+      "entity_type": "Information Element",
+      "description": "Information element used for routing information, such as LCS correlation identifier for LPP messages or routing information for Location services messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5GMM connection state where the UE has an active connection with the network, required for initiating the NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_TYPE_SELECTION",
+      "name": "Access type selection condition",
+      "entity_type": "Condition",
+      "description": "Condition for selecting between 3GPP access and non-3GPP access when delivering DL NAS TRANSPORT message, considering factors like dual registration, SMS over NAS allowance, MICO mode, and current connection states.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_NAS_TRANSPORT",
+      "target": "MSG_DL_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The network-initiated NAS transport procedure involves sending the DL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2",
+        "Figure 5.4.5.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NETWORK_INITIATED_NAS_TRANSPORT",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The network-initiated NAS transport procedure requires the UE to be in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_PAYLOAD_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains the Payload container type IE to indicate the type of payload being transported.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains the Payload container IE to carry the actual payload content.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains the PDU session ID IE when transporting 5GSM messages or CIoT user data containers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message contains the 5GMM cause IE to indicate reasons for failure when payloads cannot be forwarded.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message may contain the Back-off timer value IE for congestion control or resource limitation scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DL_NAS_TRANSPORT",
+      "target": "IE_ADDITIONAL_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message may contain the Additional information IE for routing purposes in certain scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_ACCESS_TYPE_SELECTION",
+      "target": "MSG_DL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access type selection condition determines which access type (3GPP or non-3GPP) is used to deliver the DL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.3.2"
+      ]
+    }
+  ]
+}

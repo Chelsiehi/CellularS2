@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.1.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish a PDU session, including emergency sessions and handovers between access types.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3580",
+      "name": "Timer T3580",
+      "entity_type": "Timer",
+      "description": "Timer used during PDU session establishment procedure. Expiry triggers retransmission or procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "name": "PDU SESSION ESTABLISHMENT REQUEST",
+      "entity_type": "Message",
+      "description": "5GSM message sent by UE to initiate PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of PDU session request (initial emergency, existing emergency, existing PDU session, etc.).",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Information Element",
+      "description": "Identifier for the PDU session used in various 5GSM messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered when PDU session establishment procedure is aborted.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_REQUEST",
+      "name": "Emergency request type condition",
+      "entity_type": "Condition",
+      "description": "Condition where request type is set to initial emergency request or existing emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "CONDITION_FIFTH_EXPIRY",
+      "name": "Fifth T3580 expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3580 expires for the fifth time during PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "PROPERTY_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Behavior where UE aborts the PDU session establishment procedure and releases resources.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Network-initiated message to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PDU_SESSION_RELEASE",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "TIMER_T3580",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "PDU session establishment procedure starts timer T3580.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending PDU SESSION ESTABLISHMENT REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_ESTABLISHMENT_REQUEST",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PDU session ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EMERGENCY_REQUEST",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency request type condition may lead to procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_FIFTH_EXPIRY",
+      "target": "PROPERTY_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3580 expiry condition leads to procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROPERTY_ABORT_PROCEDURE",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure abortion results in entering PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROPERTY_ABORT_PROCEDURE",
+      "target": "TIMER_T3580",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure abortion stops timer T3580.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "PROCEDURE_PDU_SESSION_RELEASE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message is part of network-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PDU session ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.1.6"
+      ]
+    }
+  ]
+}

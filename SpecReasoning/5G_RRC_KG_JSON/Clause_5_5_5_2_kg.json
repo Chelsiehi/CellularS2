@@ -1,0 +1,247 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.5.2",
+  "title": "Reporting of beam measurement information",
+  "entities": [
+    {
+      "id": "BEAM_MEASUREMENT_REPORTING",
+      "name": "Beam measurement reporting",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to include beam measurement information in a measurement report by selecting sorting quantities and including beam indexes/results based on configured parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REPORT_TYPE_EVENT_TRIGGERED",
+      "name": "Event-triggered report type",
+      "entity_type": "Condition",
+      "description": "Condition where reportType is set to eventTriggered, determining the sorting quantity selection logic.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REPORT_TYPE_PERIODICAL",
+      "name": "Periodical report type",
+      "entity_type": "Condition",
+      "description": "Condition where reportType is set to periodical, determining the sorting quantity selection logic.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "SORTING_QUANTITY",
+      "name": "Sorting quantity",
+      "entity_type": "Property",
+      "description": "The measurement quantity used to sort beams in decreasing order for reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "RSRP",
+      "name": "RSRP",
+      "entity_type": "Property",
+      "description": "Reference Signal Received Power, used as sorting quantity when available.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "RSRQ",
+      "name": "RSRQ",
+      "entity_type": "Property",
+      "description": "Reference Signal Received Quality, used as sorting quantity when available.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "SINR",
+      "name": "SINR",
+      "entity_type": "Property",
+      "description": "Signal to Interference plus Noise Ratio, used as sorting quantity when available.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "RS_INDEX_RESULTS",
+      "name": "rsIndexResults",
+      "entity_type": "Information Element",
+      "description": "Information element containing up to maxNrofRS-IndexesToReport SS/PBCH block indexes or CSI-RS indexes in order of decreasing sorting quantity.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "RESULTS_SSB_INDEXES",
+      "name": "resultsSSB-Indexes",
+      "entity_type": "Information Element",
+      "description": "Information element containing SS/PBCH block indexes and associated measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "RESULTS_CSI_RS_INDEXES",
+      "name": "resultsCSI-RS-Indexes",
+      "entity_type": "Information Element",
+      "description": "Information element containing CSI-RS indexes and associated measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "ABS_THRESH_SS_BLOCKS_CONSOLIDATION",
+      "name": "absThreshSS-BlocksConsolidation",
+      "entity_type": "Condition",
+      "description": "Absolute threshold for SS/PBCH block consolidation, included in VarMeasConfig for the associated measObject.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "ABS_THRESH_CSI_RS_CONSOLIDATION",
+      "name": "absThreshCSI-RS-Consolidation",
+      "entity_type": "Condition",
+      "description": "Absolute threshold for CSI-RS consolidation, included in VarMeasConfig for the associated measObject.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "INCLUDE_BEAM_MEASUREMENTS",
+      "name": "includeBeamMeasurements",
+      "entity_type": "Condition",
+      "description": "Condition that when set to true, includes beam measurement results for each SS/PBCH block or CSI-RS index.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BEAM_MEASUREMENT_REPORTING",
+      "target": "REPORT_TYPE_EVENT_TRIGGERED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Beam measurement reporting procedure is guarded by event-triggered report type condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BEAM_MEASUREMENT_REPORTING",
+      "target": "REPORT_TYPE_PERIODICAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Beam measurement reporting procedure is guarded by periodical report type condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REPORT_TYPE_EVENT_TRIGGERED",
+      "target": "SORTING_QUANTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Event-triggered report type establishes sorting quantity selection from trigger quantity, RSRP, RSRQ, or SINR.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REPORT_TYPE_PERIODICAL",
+      "target": "SORTING_QUANTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Periodical report type establishes sorting quantity selection based on configured single quantity or RSRP/RSRQ.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "BEAM_MEASUREMENT_REPORTING",
+      "target": "RS_INDEX_RESULTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Beam measurement reporting procedure contains rsIndexResults information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RS_INDEX_RESULTS",
+      "target": "RESULTS_SSB_INDEXES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "rsIndexResults contains resultsSSB-Indexes for SS/PBCH block based measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RS_INDEX_RESULTS",
+      "target": "RESULTS_CSI_RS_INDEXES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "rsIndexResults contains resultsCSI-RS-Indexes for CSI-RS based measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RESULTS_SSB_INDEXES",
+      "target": "ABS_THRESH_SS_BLOCKS_CONSOLIDATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "resultsSSB-Indexes inclusion is guarded by absThreshSS-BlocksConsolidation threshold condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RESULTS_CSI_RS_INDEXES",
+      "target": "ABS_THRESH_CSI_RS_CONSOLIDATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "resultsCSI-RS-Indexes inclusion is guarded by absThreshCSI-RS-Consolidation threshold condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RESULTS_SSB_INDEXES",
+      "target": "INCLUDE_BEAM_MEASUREMENTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "resultsSSB-Indexes inclusion of beam measurement results is guarded by includeBeamMeasurements condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RESULTS_CSI_RS_INDEXES",
+      "target": "INCLUDE_BEAM_MEASUREMENTS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "resultsCSI-RS-Indexes inclusion of beam measurement results is guarded by includeBeamMeasurements condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.2"
+      ]
+    }
+  ]
+}

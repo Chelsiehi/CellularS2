@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "name": "Bearer Resource Modification Reject Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the network when a UE-requested bearer resource modification cannot be accepted. The MME sends a BEARER RESOURCE MODIFICATION REJECT message with appropriate ESM cause.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "name": "BEARER RESOURCE MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by the network to reject a UE-requested bearer resource modification. Contains PTI and ESM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the procedure transaction associated with the bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM Cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the reason for rejecting the bearer resource modification request. Contains values like #30, #31, #32, etc.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template",
+      "entity_type": "Information Element",
+      "description": "Defines packet filters for traffic flow aggregation. Subject to semantic and syntactical error checks during modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "Optional IE included in BEARER RESOURCE MODIFICATION REJECT to control re-attempt timing.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "Optional IE indicating whether UE is allowed to re-attempt modification in same/equivalent PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3481",
+      "name": "T3481",
+      "entity_type": "Timer",
+      "description": "Timer associated with bearer resource modification procedure. Stopped upon receipt of BEARER RESOURCE MODIFICATION REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "ESM state entered by UE after receiving BEARER RESOURCE MODIFICATION REJECT and stopping T3481.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "COND_LIPA_SIPTO_PDN",
+      "name": "LIPA PDN connection or SIPTO at the local network",
+      "entity_type": "Condition",
+      "description": "Condition where bearer resource modification is for LIPA or SIPTO PDN connection, leading to rejection with cause #60.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local deactivation of EPS bearer context",
+      "entity_type": "Property",
+      "description": "UE behavior when ESM cause #43 is received: locally deactivates EPS bearer context without ESM signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the BEARER RESOURCE MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Procedure Transaction Identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the ESM Cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may optionally contain the Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may optionally contain the Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_LIPA_SIPTO_PDN",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If modification is for LIPA/SIPTO PDN connection, ESM cause #60 is used.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "TIMER_T3481",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receipt of the message, UE stops timer T3481.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters PROCEDURE TRANSACTION INACTIVE state after receiving the message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_ESM_CAUSE",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If ESM cause is #43, UE locally deactivates EPS bearer context without signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_TFT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TFT semantic/syntactical errors lead to specific ESM cause values (#41, #42, #44, #45).",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4.1"
+      ]
+    }
+  ]
+}

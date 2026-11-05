@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.12A.2",
+  "title": "Receiving a REGISTRATION ACCEPT message via non-3GPP access",
+  "entities": [
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message received by UE via non-3GPP access that may contain emergency number lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "LOCAL_EMERGENCY_NUMBERS_LIST",
+      "name": "Local emergency numbers list",
+      "entity_type": "Information Element",
+      "description": "List of emergency numbers valid in the current country, received via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "name": "Extended local emergency numbers list",
+      "entity_type": "Information Element",
+      "description": "Extended list of emergency numbers with PLMN-specific validity, received via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "EENLV_FIELD",
+      "name": "EENLV field",
+      "entity_type": "Information Element",
+      "description": "Field within Extended emergency number list IE indicating whether the list is valid only in the PLMN from which it was received.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "CURRENT_COUNTRY_CONDITION",
+      "name": "Current country determination condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE can determine current country and has not been registered/attached via 3GPP access in that country.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "NON_3GPP_ACCESS_CONDITION",
+      "name": "Non-3GPP access condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is neither registered nor attached over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "PLMN_DIFFERENT_CONDITION",
+      "name": "Different PLMN condition",
+      "entity_type": "Condition",
+      "description": "Condition where REGISTRATION ACCEPT is received from a PLMN different from which the stored list was received.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "STORE_EMERGENCY_NUMBERS",
+      "name": "Store emergency numbers",
+      "entity_type": "Property",
+      "description": "UE stores local emergency numbers list or extended local emergency numbers list received via non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REPLACE_EMERGENCY_NUMBERS",
+      "name": "Replace emergency numbers",
+      "entity_type": "Property",
+      "description": "UE replaces previously stored emergency numbers lists with new lists received via non-3GPP access under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "DISCARD_EXTENDED_LIST",
+      "name": "Discard extended emergency numbers list",
+      "entity_type": "Property",
+      "description": "UE discards stored extended local emergency numbers list when no new list is received and specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "LOCAL_EMERGENCY_NUMBERS_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain local emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain extended local emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EXTENDED_LOCAL_EMERGENCY_NUMBERS_LIST",
+      "target": "EENLV_FIELD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended emergency number list IE contains EENLV field.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CURRENT_COUNTRY_CONDITION",
+      "target": "STORE_EMERGENCY_NUMBERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Current country determination condition establishes UE storing emergency numbers lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NON_3GPP_ACCESS_CONDITION",
+      "target": "REPLACE_EMERGENCY_NUMBERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-3GPP access condition establishes UE replacing stored emergency numbers lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PLMN_DIFFERENT_CONDITION",
+      "target": "REPLACE_EMERGENCY_NUMBERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Different PLMN condition establishes UE replacing stored emergency numbers lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EENLV_FIELD",
+      "target": "REPLACE_EMERGENCY_NUMBERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EENLV field value guards the replacement of extended emergency numbers lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NON_3GPP_ACCESS_CONDITION",
+      "target": "DISCARD_EXTENDED_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-3GPP access condition establishes UE discarding extended emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PLMN_DIFFERENT_CONDITION",
+      "target": "DISCARD_EXTENDED_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Different PLMN condition establishes UE discarding extended emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EENLV_FIELD",
+      "target": "DISCARD_EXTENDED_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EENLV field value guards the discarding of extended emergency numbers list.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12A.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "UE_INITIATED_DEREGISTRATION",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to deregister from 5G network",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_ACCEPT",
+      "name": "DEREGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to accept de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "T3521",
+      "name": "Timer T3521",
+      "entity_type": "Timer",
+      "description": "Timer used during de-registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "5GMM_NULL",
+      "name": "5GMM-NULL state",
+      "entity_type": "State",
+      "description": "5GMM state entered when 5GS services are disabled",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "5GMM state entered after normal de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition where N1 NAS signalling connection fails before DEREGISTRATION ACCEPT reception",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRED",
+      "name": "Access barred indication",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate access attempt is barred",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE",
+      "name": "TAI change condition",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is not in stored TAI list",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "LOCAL_DEREGISTRATION",
+      "name": "Local de-registration",
+      "entity_type": "Property",
+      "description": "UE performs de-registration locally without network signaling",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_INITIATED_DEREGISTRATION",
+      "target": "DEREGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-initiated de-registration procedure involves sending DEREGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "UE_INITIATED_DEREGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Lower layer failure causes de-registration procedure to be aborted",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "5GMM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure with disabling of 5GS services leads to 5GMM-NULL state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure with normal de-registration leads to 5GMM-DEREGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACCESS_BARRED",
+      "target": "UE_INITIATED_DEREGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barred indication prevents starting de-registration signaling procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACCESS_BARRED",
+      "target": "LOCAL_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access barred indication may trigger local de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_INITIATED_DEREGISTRATION",
+      "target": "T3521",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "De-registration procedure starts timer T3521",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_INITIATED_DEREGISTRATION",
+      "target": "T3521",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "De-registration procedure resets and restarts timer T3521 on retransmission",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_INITIATED_DEREGISTRATION",
+      "target": "T3521",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "De-registration procedure stops timer T3521 in certain abnormal cases",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TAI_CHANGE",
+      "target": "UE_INITIATED_DEREGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI change condition may cause de-registration procedure to be aborted",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "TAI_CHANGE",
+      "target": "LOCAL_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change with specific conditions triggers local de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.6"
+      ]
+    }
+  ]
+}

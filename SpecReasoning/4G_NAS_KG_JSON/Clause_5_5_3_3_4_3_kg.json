@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.4.3",
+  "title": "Combined tracking area updating successful for EPS services only",
+  "entities": [
+    {
+      "id": "PROCEDURE_COMBINED_TA_UPDATE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for combined tracking area and location area updating with IMSI attach",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message received by UE during tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for EMM procedure outcome",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "Timer T3430",
+      "entity_type": "Timer",
+      "description": "Timer used during tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter is less than 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter equals 5",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state indicating normal service operation",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is attempting to update MM",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "STATE_MM_IDLE",
+      "name": "MM IDLE",
+      "entity_type": "State",
+      "description": "Mobility Management idle state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EMM_CAUSE_2",
+      "name": "EMM cause #2 (IMSI unknown in HSS)",
+      "entity_type": "Condition",
+      "description": "Condition when IMSI is unknown in HSS",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EMM_CAUSE_16",
+      "name": "EMM cause #16 (MSC temporarily not reachable)",
+      "entity_type": "Condition",
+      "description": "Condition when MSC is temporarily not reachable",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_EMM_CAUSE_18",
+      "name": "EMM cause #18 (CS domain not available)",
+      "entity_type": "Condition",
+      "description": "Condition when CS domain is not available",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "PROPERTY_DISABLE_EUTRA_CAPABILITY",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Property",
+      "description": "UE action to disable E-UTRA capability and select GERAN/UTRAN",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains EMM cause IE",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_EMM_CAUSE_2",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "EMM cause #2 stops timer T3430",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EMM_CAUSE_2",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause #2 establishes EMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_EMM_CAUSE_16",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "EMM cause #16 stops timer T3430",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EMM_CAUSE_16",
+      "target": "TIMER_T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "EMM cause #16 with attempt counter < 5 starts timer T3411",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_EMM_CAUSE_16",
+      "target": "TIMER_T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "EMM cause #16 with attempt counter = 5 starts timer T3402",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_EMM_CAUSE_16",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause #16 establishes EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_EMM_CAUSE_18",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "EMM cause #18 stops timer T3430",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_EMM_CAUSE_18",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause #18 establishes EMM-REGISTERED.NORMAL-SERVICE state",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_EMM_CAUSE_18",
+      "target": "PROPERTY_DISABLE_EUTRA_CAPABILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause #18 with IMS voice not available establishes disable E-UTRA capability",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.3"
+      ]
+    }
+  ]
+}

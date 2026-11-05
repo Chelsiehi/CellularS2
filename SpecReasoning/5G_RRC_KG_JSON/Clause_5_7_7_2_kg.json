@@ -1,0 +1,119 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.7.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_UL_RRC_SEGMENTATION",
+      "name": "UL RRC message segmentation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by a UE in RRC_CONNECTED state when uplink RRC message segmentation is enabled and the RRC message exceeds PDCP SDU size limits.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where the UE has an established RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "IE_RRC_SEG_ALLOWED",
+      "name": "rrc-SegAllowed",
+      "entity_type": "Information Element",
+      "description": "Field indicating whether RRC message segmentation is enabled.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "COND_SEGMENTATION_ENABLED",
+      "name": "RRC message segmentation enabled",
+      "entity_type": "Condition",
+      "description": "Condition where rrc-SegAllowed field indicates segmentation is allowed.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "COND_MESSAGE_OVERSIZED",
+      "name": "RRC message larger than PDCP SDU maximum",
+      "entity_type": "Condition",
+      "description": "Condition where the encoded RRC message exceeds the maximum PDCP SDU size specified in TS 38.323.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "name": "UL Dedicated Message Segment",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE when initiating UL RRC message segmentation procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2",
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UL_RRC_SEGMENTATION",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UL RRC message segmentation procedure requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UL_RRC_SEGMENTATION",
+      "target": "COND_SEGMENTATION_ENABLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition that RRC message segmentation is enabled.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UL_RRC_SEGMENTATION",
+      "target": "COND_MESSAGE_OVERSIZED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition that RRC message exceeds PDCP SDU maximum size.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SEGMENTATION_ENABLED",
+      "target": "IE_RRC_SEG_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition is established based on the value of rrc-SegAllowed field.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UL_RRC_SEGMENTATION",
+      "target": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of UL Dedicated Message Segment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.2"
+      ]
+    }
+  ]
+}

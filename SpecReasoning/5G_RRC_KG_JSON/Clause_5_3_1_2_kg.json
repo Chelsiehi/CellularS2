@@ -1,0 +1,280 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.1.2",
+  "title": "AS Security",
+  "entities": [
+    {
+      "id": "AS_SECURITY",
+      "name": "AS Security",
+      "entity_type": "Procedure",
+      "description": "Access Stratum security comprising integrity protection and ciphering for RRC signalling (SRBs) and user data (DRBs). Handles configuration of security parameters including algorithms and keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "RRC_INTEGRITY_PROTECTION",
+      "name": "RRC Integrity Protection",
+      "entity_type": "Property",
+      "description": "Integrity protection mechanism for RRC signalling messages using security keys and algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "RRC_CIPHERING",
+      "name": "RRC Ciphering",
+      "entity_type": "Property",
+      "description": "Ciphering/encryption mechanism for RRC signalling messages using security keys and algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "DRB_INTEGRITY_PROTECTION",
+      "name": "DRB Integrity Protection",
+      "entity_type": "Property",
+      "description": "Integrity protection mechanism for user data over DRBs, with enable/disable settings per PDU session.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "DRB_CIPHERING",
+      "name": "DRB Ciphering",
+      "entity_type": "Property",
+      "description": "Ciphering/encryption mechanism for user data over DRBs, with enable/disable settings per PDU session.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "K_RRCINT",
+      "name": "K_RRCint",
+      "entity_type": "Identifier",
+      "description": "Security key used for integrity protection of RRC signalling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "K_RRCENC",
+      "name": "K_RRCenc",
+      "entity_type": "Identifier",
+      "description": "Security key used for ciphering of RRC signalling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "K_UPINT",
+      "name": "K_UPint",
+      "entity_type": "Identifier",
+      "description": "Security key used for integrity protection of user data.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "K_UPENC",
+      "name": "K_UPenc",
+      "entity_type": "Identifier",
+      "description": "Security key used for ciphering of user data.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "K_GNB",
+      "name": "K_gNB",
+      "entity_type": "Identifier",
+      "description": "Master security key from which all AS security keys are derived, based on K_AMF from upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "COUNT",
+      "name": "COUNT",
+      "entity_type": "Identifier",
+      "description": "Independent counter maintained for each radio bearer and direction, used as input for ciphering and integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "NULL_ALGORITHM_CONDITION",
+      "name": "NULL Algorithm Usage Condition",
+      "entity_type": "Condition",
+      "description": "Conditions under which NULL integrity protection (nia0) and NULL ciphering (nea0) algorithms are used, including limited service mode UE and SRB usage.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "SECURITY_KEY_UPDATE",
+      "name": "Security Key Update",
+      "entity_type": "Procedure",
+      "description": "Procedure to refresh secondary keys and avoid COUNT reuse, triggered by reconfiguration with sync, connection re-establishment, or connection resume.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AS_SECURITY",
+      "target": "RRC_INTEGRITY_PROTECTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AS security includes RRC integrity protection as a fundamental component.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AS_SECURITY",
+      "target": "RRC_CIPHERING",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AS security includes RRC ciphering as a fundamental component.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AS_SECURITY",
+      "target": "DRB_INTEGRITY_PROTECTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AS security includes DRB integrity protection for user data.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AS_SECURITY",
+      "target": "DRB_CIPHERING",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AS security includes DRB ciphering for user data.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "K_GNB",
+      "target": "K_RRCINT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "K_gNB master key is used to derive K_RRCint for RRC integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "K_GNB",
+      "target": "K_RRCENC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "K_gNB master key is used to derive K_RRCenc for RRC ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "K_GNB",
+      "target": "K_UPINT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "K_gNB master key is used to derive K_UPint for user data integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "K_GNB",
+      "target": "K_UPENC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "K_gNB master key is used to derive K_UPenc for user data ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COUNT",
+      "target": "RRC_INTEGRITY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "COUNT value is used as input for RRC integrity protection algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COUNT",
+      "target": "RRC_CIPHERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "COUNT value is used as input for RRC ciphering algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "NULL_ALGORITHM_CONDITION",
+      "target": "RRC_INTEGRITY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NULL integrity protection algorithm (nia0) is used under specific conditions including limited service mode.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "NULL_ALGORITHM_CONDITION",
+      "target": "RRC_CIPHERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NULL ciphering algorithm (nea0) is used when NULL integrity protection is used.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "SECURITY_KEY_UPDATE",
+      "target": "K_GNB",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Security key update procedure changes AS security keys including K_gNB upon reconfiguration with sync, connection re-establishment, or connection resume.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "RRC_INTEGRITY_PROTECTION",
+      "target": "RRC_CIPHERING",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "RRC integrity protection and ciphering are always activated together in one message/procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.1.2"
+      ]
+    }
+  ]
+}

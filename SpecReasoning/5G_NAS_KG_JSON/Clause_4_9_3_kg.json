@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.9.3",
+  "title": "Disabling and re-enabling of UE's N1 mode capability for non-3GPP access",
+  "entities": [
+    {
+      "id": "N1_MODE_CAPABILITY_NON3GPP",
+      "name": "N1 mode capability for non-3GPP access",
+      "entity_type": "Property",
+      "description": "UE capability to use N1 mode over non-3GPP access networks. Can be disabled or re-enabled based on conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "DISABLE_CONDITION_IMS_VOICE",
+      "name": "IMS voice not available over non-3GPP access in 5GS",
+      "entity_type": "Condition",
+      "description": "Condition where IMS voice service is unavailable over non-3GPP access in 5GS, leading to disabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "USAGE_SETTING_VOICE_CENTRIC",
+      "name": "Voice centric usage setting",
+      "entity_type": "Property",
+      "description": "UE configuration prioritizing voice services, affecting N1 mode capability decisions.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "USAGE_SETTING_DATA_CENTRIC",
+      "name": "Data centric usage setting",
+      "entity_type": "Property",
+      "description": "UE configuration prioritizing data services, triggering re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "PLMN_SELECTION",
+      "name": "PLMN or SNPN selection over non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE selects a new PLMN or SNPN over non-3GPP access, triggering re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "NO_NETWORK_SLICE_AVAILABLE",
+      "name": "No network slice available for camped PLMN/SNPN",
+      "entity_type": "Condition",
+      "description": "Condition where no network slice is available for the currently camped PLMN or SNPN, potentially leading to disabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "TIMER_REENABLE_N1_MODE",
+      "name": "Timer for re-enabling N1 mode capability",
+      "entity_type": "Timer",
+      "description": "Optional timer started after disabling N1 mode capability; on expiry, UE should re-enable the capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURES_NON3GPP",
+      "name": "5GS NAS procedures over non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "NAS procedures initiated by UE towards network over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "N1_MODE_CAPABILITY_NON3GPP",
+      "target": "NAS_PROCEDURES_NON3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When N1 mode capability is disabled, UE shall not initiate NAS procedures over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DISABLE_CONDITION_IMS_VOICE",
+      "target": "N1_MODE_CAPABILITY_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where IMS voice is unavailable leads to disabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "USAGE_SETTING_VOICE_CENTRIC",
+      "target": "DISABLE_CONDITION_IMS_VOICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Voice centric usage setting is required for IMS voice unavailability condition to trigger disabling.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "USAGE_SETTING_DATA_CENTRIC",
+      "target": "N1_MODE_CAPABILITY_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Change to data centric usage setting triggers re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PLMN_SELECTION",
+      "target": "N1_MODE_CAPABILITY_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "New PLMN or SNPN selection over non-3GPP access triggers re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NO_NETWORK_SLICE_AVAILABLE",
+      "target": "N1_MODE_CAPABILITY_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no network slice available may lead to disabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_REENABLE_N1_MODE",
+      "target": "N1_MODE_CAPABILITY_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Timer expiry triggers re-enabling of N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.9.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.3",
+  "title": "Generic UE configuration update accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE processes CONFIGURATION UPDATE COMMAND message to update stored configuration information and may send CONFIGURATION UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to update UE configuration parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMPLETE",
+      "name": "CONFIGURATION UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE when acknowledgement is requested in CONFIGURATION UPDATE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_CONFIG_UPDATE_INDICATION",
+      "name": "Configuration update indication IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing Acknowledgement bit and Registration requested bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Information Element",
+      "description": "5G Globally Unique Temporary Identifier used for UE identification.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "Tracking Area Identity list defining UE's registration area.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network Slice Selection Assistance Information allowed for UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_CAG_INFO_LIST",
+      "name": "CAG information list IE",
+      "entity_type": "Information Element",
+      "description": "Closed Access Group information list defining CAG access permissions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer stopped when UE receives CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3519",
+      "name": "T3519",
+      "entity_type": "Timer",
+      "description": "Timer stopped when UE receives new 5G-GUTI in CONFIGURATION UPDATE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_LIMITED_SERVICE",
+      "name": "5GMM-REGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "State entered when UE cannot access normal services due to CAG restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "COND_ACK_REQUESTED",
+      "name": "Acknowledgement requested",
+      "entity_type": "Condition",
+      "description": "Condition when Acknowledgement bit is set in Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "PROP_UPDATE_STORED_INFO",
+      "name": "Update stored UE information",
+      "entity_type": "Property",
+      "description": "UE updates appropriate stored information based on CONFIGURATION UPDATE COMMAND contents.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "MSG_CONFIG_UPDATE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receiving CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_CONFIG_UPDATE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND contains Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ACK_REQUESTED",
+      "target": "MSG_CONFIG_UPDATE_COMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When acknowledgement is requested, UE sends CONFIGURATION UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "TIMER_T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3346 upon receiving CONFIGURATION UPDATE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "PROP_UPDATE_STORED_INFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE updates stored information based on CONFIGURATION UPDATE COMMAND contents.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND may contain 5G-GUTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND may contain TAI list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND may contain Allowed NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND may contain CAG information list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_CAG_INFO_LIST",
+      "target": "STATE_5GMM_REGISTERED_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Based on CAG information list content, UE may enter LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.3"
+      ]
+    }
+  ]
+}

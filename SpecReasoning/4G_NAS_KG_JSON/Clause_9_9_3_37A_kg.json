@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.37A",
+  "title": "Extended emergency number list",
+  "entities": [
+    {
+      "id": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "name": "Extended emergency number list",
+      "entity_type": "Information Element",
+      "description": "Encodes one or more local emergency numbers together with a sub-services field containing zero or more sub-services of the associated emergency service URN and a validity indication.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "EMERGENCY_SERVICE_URN",
+      "name": "Emergency service URN",
+      "entity_type": "Property",
+      "description": "A service URN with top level service type of 'sos' as specified in IETF RFC 5031. Can be country-specific as defined in 3GPP TS 24.229.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "SUB_SERVICES_FIELD",
+      "name": "Sub-services field",
+      "entity_type": "Information Element",
+      "description": "Contains zero or more sub-services of the associated emergency service URN. Characters coded in GSM 7 bit default alphabet.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "NUMBER_DIGITS",
+      "name": "Number digits",
+      "entity_type": "Information Element",
+      "description": "Encodes the emergency number digits. First digit entered is located in octet 6, bits 1-4. Contents coded as per table 10.5.118/3GPP TS 24.008.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "END_MARK",
+      "name": "End mark",
+      "entity_type": "Property",
+      "description": "Fills bits 5-8 of last octet with '1111' when emergency number contains odd number of digits.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "target": "SUB_SERVICES_FIELD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Extended emergency number list IE contains the sub-services field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "target": "NUMBER_DIGITS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Extended emergency number list IE contains the number digits field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SUB_SERVICES_FIELD",
+      "target": "EMERGENCY_SERVICE_URN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The sub-services field contains sub-services of the associated emergency service URN.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NUMBER_DIGITS",
+      "target": "END_MARK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The number digits field uses end mark when emergency number contains odd number of digits.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.37A"
+      ]
+    }
+  ]
+}

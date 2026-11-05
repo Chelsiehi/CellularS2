@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing security between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to register with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request service from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TAI",
+      "name": "Tracking Area Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for tracking area in 5G system.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Property",
+      "description": "List of tracking area identities stored in UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TRANSMISSION_FAILURE",
+      "name": "Transmission failure indication",
+      "entity_type": "Condition",
+      "description": "Lower layer indication of message transmission failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE",
+      "name": "Change in current TAI",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI has changed.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TAI_NOT_IN_LIST",
+      "name": "TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is not in stored TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "TAI_IN_LIST",
+      "name": "TAI in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is still in stored TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TRANSMISSION_FAILURE",
+      "target": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transmission failure triggers abortion of security mode control procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Security mode control procedure abortion leads to registration procedure initiation when triggered by registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Security mode control procedure is triggered by service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TAI_CHANGE",
+      "target": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI change condition affects security mode control procedure behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TAI_NOT_IN_LIST",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI not in list condition leads to registration procedure initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TAI_IN_LIST",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI in list condition allows UE to re-run service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SECURITY_MODE_COMPLETE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Security mode control procedure involves SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "SECURITY_MODE_REJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Security mode control procedure involves SECURITY MODE REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.2.6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.1.4",
+  "title": "5GMM-CONNECTED mode with RRC inactive indication",
+  "entities": [
+    {
+      "id": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "name": "5GMM-CONNECTED mode with RRC inactive indication",
+      "entity_type": "State",
+      "description": "UE state where NAS layer is in 5GMM-CONNECTED mode over 3GPP access and AS layer is in RRC_INACTIVE state. UE applies mobility restrictions and performs PLMN selection procedures as in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode over 3GPP access",
+      "entity_type": "State",
+      "description": "Normal connected state at NAS layer over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode over 3GPP access",
+      "entity_type": "State",
+      "description": "Idle state at NAS layer over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_RRC_SUSPENDED",
+      "name": "RRC connection suspended indication",
+      "entity_type": "Condition",
+      "description": "Indication from lower layers that RRC connection has been suspended.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_RRC_CONNECTED",
+      "name": "Transition to RRC_CONNECTED state",
+      "entity_type": "Condition",
+      "description": "Indication from lower layers that UE has transitioned to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_FALLBACK_INDICATION",
+      "name": "Fallback indication from lower layers",
+      "entity_type": "Condition",
+      "description": "Indication from lower layers triggering fallback procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_RRC_RESUME_FAILED",
+      "name": "RRC connection resumption failed",
+      "entity_type": "Condition",
+      "description": "Indication from lower layers that resumption of RRC connection has failed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_PLMN_SELECTION_NON_EQUIVALENT",
+      "name": "Selection of non-equivalent PLMN",
+      "entity_type": "Condition",
+      "description": "UE selects a PLMN that is not equivalent to the registered PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "COND_AMF_PAGING",
+      "name": "AMF paging indication",
+      "entity_type": "Condition",
+      "description": "AMF paging indication received from lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Registration procedure for mobility and periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Service request procedure for establishing signaling or user-plane resources.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "IE_5GS_UPDATE_TYPE",
+      "name": "5GS update type IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing NG-RAN-RCU bit indicating UE radio capability update needed.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating request type in service request messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating PDU sessions with pending user data.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_5GMM_CONNECTED",
+      "target": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "relation_type": "state_transition",
+      "family": "core",
+      "description": "UE transitions from 5GMM-CONNECTED to 5GMM-CONNECTED with RRC inactive upon RRC suspension indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "state_transition",
+      "family": "core",
+      "description": "UE transitions back to 5GMM-CONNECTED upon indication of transition to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "state_transition",
+      "family": "core",
+      "description": "UE transitions to 5GMM-IDLE mode upon various triggers including PLMN selection, fallback indication, or RRC resume failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RRC_SUSPENDED",
+      "target": "STATE_5GMM_CONNECTED_RRC_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC suspension indication establishes 5GMM-CONNECTED with RRC inactive state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RRC_CONNECTED",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connected indication re-establishes normal 5GMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_FALLBACK_INDICATION",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fallback indication triggers transition to 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_PLMN_SELECTION_NON_EQUIVALENT",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Selection of non-equivalent PLMN triggers transition to 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_AMF_PAGING",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF paging indication triggers transition to 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_REGISTRATION",
+      "target": "IE_5GS_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure uses 5GS update type IE with NG-RAN-RCU bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Service request procedure uses UE request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Service request procedure may include Uplink data status IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_RRC_RESUME_FAILED",
+      "target": "PROCEDURE_REGISTRATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "RRC resume failure triggers registration procedure for connection recovery.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.4"
+      ]
+    }
+  ]
+}

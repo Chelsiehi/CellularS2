@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.4.2",
+  "title": "UE is using 5GS services with control plane CIoT 5GS optimization",
+  "entities": [
+    {
+      "id": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "Control Plane Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request control plane services using CIoT 5GS optimization, involving message exchange between UE and AMF for data/signaling transport.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate control plane service request procedure for CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_ACCEPT",
+      "name": "SERVICE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to accept service request, may contain various IEs like PDU session reactivation result.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "name": "CIoT small data container IE",
+      "entity_type": "Information Element",
+      "description": "IE containing small data payload for CIoT, with Data type field indicating content type (control plane user data, SMS, Location services).",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container IE",
+      "entity_type": "Information Element",
+      "description": "IE containing payload data, with Payload container type indicating content type.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "name": "PDU session reactivation result IE",
+      "entity_type": "Information Element",
+      "description": "IE in SERVICE ACCEPT message indicating user-plane resources re-establishment result for PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status IE",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE's uplink data status, used to determine if user-plane resources should be re-established.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status IE",
+      "entity_type": "Information Element",
+      "description": "IE indicating which PDU sessions are allowed for user-plane resource re-establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_T3448_VALUE",
+      "name": "T3448 value IE",
+      "entity_type": "Information Element",
+      "description": "IE containing timer value for congestion control of user data transport via control plane.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "Timer T3448",
+      "entity_type": "Timer",
+      "description": "Timer for congestion control of user data transport via control plane, started/stopped based on T3448 value IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3517",
+      "name": "Timer T3517",
+      "entity_type": "Timer",
+      "description": "Timer for service request procedure, stopped upon successful completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state entered by UE upon successful completion of service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_NB_N1_MODE",
+      "name": "UE in NB-N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE is operating in Narrowband IoT N1 mode, affecting user-plane resource establishment limits.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "PROP_AMF_FORWARDS_DATA",
+      "name": "AMF forwards data to network functions",
+      "entity_type": "Property",
+      "description": "AMF behavior to decipher and forward data from CIoT small data container or Payload container IE to SMF, SMSF, or LMF based on data type.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves UE sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves AMF sending SERVICE ACCEPT message after processing request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST may contain CIoT small data container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_PAYLOAD_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST may contain Payload container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT may contain PDU session reactivation result IE to indicate user-plane re-establishment status.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "IE_T3448_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE ACCEPT may contain T3448 value IE for congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_AMF_FORWARDS_DATA",
+      "target": "IE_CIOT_SMALL_DATA_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF forwarding behavior is conditioned on presence and content of CIoT small data container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NB_N1_MODE",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "User-plane resource re-establishment decisions are guarded by NB-N1 mode condition and uplink data status.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of procedure establishes UE in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T3517 upon successful completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_T3448_VALUE",
+      "target": "TIMER_T3448",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Presence of T3448 value IE in SERVICE ACCEPT starts timer T3448 in UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SERVICE_ACCEPT",
+      "target": "TIMER_T3448",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "SERVICE ACCEPT without T3448 value IE stops timer T3448 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.4.2"
+      ]
+    }
+  ]
+}

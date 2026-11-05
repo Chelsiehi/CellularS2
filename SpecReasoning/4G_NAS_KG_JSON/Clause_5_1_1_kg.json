@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "EMM_PROCEDURES",
+      "name": "EMM Procedures",
+      "entity_type": "Procedure",
+      "description": "Mobility management procedures for EPS services at the LTE-Uu radio interface. Main functions include supporting UE mobility, location reporting, user identity confidentiality, and providing connection management services to SM and SMS sublayers.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    },
+    {
+      "id": "NAS_SIGNALLING_CONNECTION",
+      "name": "NAS Signalling Connection",
+      "entity_type": "Condition",
+      "description": "A prerequisite connection that must be established between UE and network before any EMM procedures can be performed.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    },
+    {
+      "id": "EMM_SUBLAYER",
+      "name": "EMM Sublayer",
+      "entity_type": "Property",
+      "description": "The mobility management sublayer responsible for initiating NAS signalling connection establishment when required.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    },
+    {
+      "id": "SATELLITE_EUTRAN_ACCESS",
+      "name": "Satellite E-UTRAN Access",
+      "entity_type": "Condition",
+      "description": "Access scenario where GNSS fix time in lower layers can delay initial UL NAS message transmission by up to 100 seconds in cold state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EMM_PROCEDURES",
+      "target": "NAS_SIGNALLING_CONNECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EMM procedures can only be performed if a NAS signalling connection has been established between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EMM_SUBLAYER",
+      "target": "NAS_SIGNALLING_CONNECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM sublayer initiates establishment of NAS signalling connection when required for EMM procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SATELLITE_EUTRAN_ACCESS",
+      "target": "NAS_SIGNALLING_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "In satellite E-UTRAN access, GNSS fix time can delay initial UL NAS message transmission by up to 100 seconds.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.2.3",
+  "title": "Network-requested PDU session modification procedure accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network initiates PDU session modification by sending PDU SESSION MODIFICATION COMMAND message, and UE accepts the modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MOD_COMMAND",
+      "name": "PDU SESSION MODIFICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to request PDU session modification, containing various IEs for QoS rules, EPS bearer contexts, and other parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MOD_COMPLETE",
+      "name": "PDU SESSION MODIFICATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to confirm successful completion of PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MOD_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate PDU session modification, used for error recovery when detecting issues in mapped EPS bearer contexts.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_RULES",
+      "name": "Authorized QoS rules IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing authorized QoS rules that UE processes sequentially during PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_MAPPED_EPS_BEARER_CONTEXTS",
+      "name": "Mapped EPS bearer contexts IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing mapped EPS bearer contexts that UE processes and checks for various types of errors.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "name": "Authorized QoS flow descriptions IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing authorized QoS flow descriptions that UE processes sequentially during PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing cause values for PDU session modification requests, used when UE detects errors in mapped EPS bearer contexts.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION MODIFICATION COMMAND message, associated with DNN or no DNN depending on PDU session establishment conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3584",
+      "name": "Timer T3584",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION MODIFICATION COMMAND message, associated with S-NSSAI and DNN combinations depending on PDU session establishment conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3585",
+      "name": "Timer T3585",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION MODIFICATION COMMAND message, associated with S-NSSAI or no S-NSSAI depending on PDU session establishment conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3581",
+      "name": "Timer T3581",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE when PDU SESSION MODIFICATION COMMAND message contains PTI value allocated in UE-requested PDU session modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU session condition",
+      "entity_type": "Condition",
+      "description": "Condition where PDU SESSION MODIFICATION COMMAND message is received for an emergency PDU session, affecting timer stopping behavior.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "PROP_QOS_RULES_REPLACED",
+      "name": "QoS rules replacement property",
+      "entity_type": "Property",
+      "description": "UE replaces stored authorized QoS rules, authorized QoS flow descriptions and session-AMBR of the PDU session with received values from PDU SESSION MODIFICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "target": "MSG_PDU_SESSION_MOD_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-requested PDU session modification procedure involves sending PDU SESSION MODIFICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NW_REQ_PDU_SESSION_MOD",
+      "target": "MSG_PDU_SESSION_MOD_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE completes the procedure by sending PDU SESSION MODIFICATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_RULES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND message may contain Authorized QoS rules IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "IE_MAPPED_EPS_BEARER_CONTEXTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND message may contain Mapped EPS bearer contexts IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "IE_AUTHORIZED_QOS_FLOW_DESCRIPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION COMMAND message may contain Authorized QoS flow descriptions IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receipt of PDU SESSION MODIFICATION COMMAND message, UE stops timer T3396 under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "TIMER_T3584",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receipt of PDU SESSION MODIFICATION COMMAND message, UE stops timer T3584 under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "TIMER_T3585",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receipt of PDU SESSION MODIFICATION COMMAND message, UE stops timer T3585 under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMERGENCY_PDU_SESSION",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If PDU SESSION MODIFICATION COMMAND message is received for emergency PDU session, UE does not stop timer T3396.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_PDU_SESSION",
+      "target": "TIMER_T3585",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If PDU SESSION MODIFICATION COMMAND message is received for emergency PDU session, UE does not stop timer T3585.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "PROP_QOS_RULES_REPLACED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of PDU SESSION MODIFICATION COMMAND message establishes that UE replaces stored authorized QoS rules with received values.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_PDU_SESSION_MOD_COMMAND",
+      "target": "TIMER_T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "If PDU SESSION MODIFICATION COMMAND message contains PTI value allocated in UE-requested procedure, UE stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_PDU_SESSION_MOD_REQUEST",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REQUEST message includes 5GSM cause IE when UE detects errors in mapped EPS bearer contexts.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.2.3"
+      ]
+    }
+  ]
+}

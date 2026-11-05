@@ -1,0 +1,186 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to update UE configuration parameters, request registration procedure, deliver UAV authorization, or update PEIPS assistance information. Requires established 5GMM context and 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE to initiate configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMPLETE",
+      "name": "CONFIGURATION UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to AMF to confirm configuration update completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3555",
+      "name": "T3555",
+      "entity_type": "Timer",
+      "description": "Timer started when CONFIGURATION UPDATE COMMAND is sent, stopped when CONFIGURATION UPDATE COMPLETE is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "UE state where NAS signalling connection is established.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where NAS signalling connection is not established.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "Container IE for service-level authentication and authorization parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "COND_5GMM_CONTEXT_ESTABLISHED",
+      "name": "UE has established 5GMM context",
+      "entity_type": "Condition",
+      "description": "Precondition for initiating generic UE configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "PROP_NEW_5G_GUTI_ASSIGNMENT",
+      "name": "Assign new 5G-GUTI",
+      "entity_type": "Property",
+      "description": "Network behavior to assign new 5G-GUTI after successful service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "MSG_CONFIG_UPDATE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiated by CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "MSG_CONFIG_UPDATE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure completed by CONFIGURATION UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "TIMER_T3555",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND starts timer T3555.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONFIG_UPDATE_COMPLETE",
+      "target": "TIMER_T3555",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMPLETE stops timer T3555.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1",
+        "Figure 5.4.4.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "COND_5GMM_CONTEXT_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to have established 5GMM context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be used when UE is in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND may contain Service-level-AA container IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_5GMM_CONTEXT_ESTABLISHED",
+      "target": "PROP_NEW_5G_GUTI_ASSIGNMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition enables network to assign new 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.1"
+      ]
+    }
+  ]
+}

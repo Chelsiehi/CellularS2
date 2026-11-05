@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for a UE to request modification, release, or re-negotiation of bearer resources for a traffic flow aggregate, change 3GPP PS data off UE status, or transmit C2 authorization information for UAS services.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "name": "Dedicated EPS bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure activated when UE requested bearer resource modification is accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_MODIFICATION",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure activated when UE requested bearer resource modification is accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_DEACTIVATION",
+      "name": "EPS bearer context deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure activated when UE requested bearer resource modification is accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "Timer T3396",
+      "entity_type": "Timer",
+      "description": "Timer that does not prevent initiation of UE requested bearer resource modification procedure for 3GPP PS data off status change.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN_CONNECTION",
+      "name": "PDN connection for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE shall not request modification of bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "COND_PS_DATA_OFF_STATUS_CHANGE",
+      "name": "Change of 3GPP PS data off UE status",
+      "entity_type": "Condition",
+      "description": "Condition that requires UE to initiate bearer resource modification procedure regardless of timer T3396 or back-off timer status.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "target": "PROC_DEDICATED_EPS_BEARER_ACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE requested bearer resource modification procedure may invoke dedicated EPS bearer context activation procedure when accepted by network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "target": "PROC_EPS_BEARER_MODIFICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE requested bearer resource modification procedure may invoke EPS bearer context modification procedure when accepted by network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "target": "PROC_EPS_BEARER_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE requested bearer resource modification procedure may invoke EPS bearer context deactivation procedure when accepted by network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_PDN_CONNECTION",
+      "target": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDN connection for emergency bearer services condition prevents UE from requesting bearer resource modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PS_DATA_OFF_STATUS_CHANGE",
+      "target": "PROC_UE_REQUESTED_BEARER_RESOURCE_MODIFICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Change of 3GPP PS data off UE status condition requires UE to initiate bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_PS_DATA_OFF_STATUS_CHANGE",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Change of 3GPP PS data off UE status condition overrides timer T3396 running or deactivated state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.1"
+      ]
+    }
+  ]
+}

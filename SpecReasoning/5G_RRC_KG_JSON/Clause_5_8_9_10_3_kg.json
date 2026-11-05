@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.10.3",
+  "title": "Actions related to transmission of NotificationMessageSidelink message",
+  "entities": [
+    {
+      "id": "NOTIFICATION_MESSAGE_SIDELINK",
+      "name": "NotificationMessageSidelink",
+      "entity_type": "Message",
+      "description": "A sidelink message transmitted by a U2N Relay UE to notify about various events.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "INDICATION_TYPE",
+      "name": "indicationType",
+      "entity_type": "Information Element",
+      "description": "An information element in the NotificationMessageSidelink that indicates the reason for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "COND_UU_RLF",
+      "name": "Uu RLF condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE initiates transmission due to Uu Radio Link Failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "COND_RECONFIG_SYNC",
+      "name": "Reconfiguration with sync condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE initiates transmission due to reconfiguration with synchronization.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "COND_CELL_RESELECTION",
+      "name": "Cell reselection condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE initiates transmission due to cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "COND_UU_RRC_FAILURE",
+      "name": "Uu RRC connection establishment failure condition",
+      "entity_type": "Condition",
+      "description": "Condition when UE initiates transmission due to Uu RRC connection establishment failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "VALUE_RELAYUE_UU_RLF",
+      "name": "relayUE-UuRLF",
+      "entity_type": "Property",
+      "description": "Value set for indicationType when transmission is due to Uu RLF.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "VALUE_RELAYUE_HO",
+      "name": "relayUE-HO",
+      "entity_type": "Property",
+      "description": "Value set for indicationType when transmission is due to reconfiguration with sync.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "VALUE_RELAYUE_CELL_RESELECTION",
+      "name": "relayUE-CellReselection",
+      "entity_type": "Property",
+      "description": "Value set for indicationType when transmission is due to cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "VALUE_RELAYUE_UU_RRC_FAILURE",
+      "name": "relayUE-UuRRCFailure",
+      "entity_type": "Property",
+      "description": "Value set for indicationType when transmission is due to Uu RRC connection establishment failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NOTIFICATION_MESSAGE_SIDELINK",
+      "target": "INDICATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The NotificationMessageSidelink message contains the indicationType information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_UU_RLF",
+      "target": "VALUE_RELAYUE_UU_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When transmission is due to Uu RLF, the indicationType is set to relayUE-UuRLF.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_RECONFIG_SYNC",
+      "target": "VALUE_RELAYUE_HO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When transmission is due to reconfiguration with sync, the indicationType is set to relayUE-HO.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CELL_RESELECTION",
+      "target": "VALUE_RELAYUE_CELL_RESELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When transmission is due to cell reselection, the indicationType is set to relayUE-CellReselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UU_RRC_FAILURE",
+      "target": "VALUE_RELAYUE_UU_RRC_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When transmission is due to Uu RRC connection establishment failure, the indicationType is set to relayUE-UuRRCFailure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "INDICATION_TYPE",
+      "target": "COND_UU_RLF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of indicationType is determined by the condition of Uu RLF.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "INDICATION_TYPE",
+      "target": "COND_RECONFIG_SYNC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of indicationType is determined by the condition of reconfiguration with sync.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "INDICATION_TYPE",
+      "target": "COND_CELL_RESELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of indicationType is determined by the condition of cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "INDICATION_TYPE",
+      "target": "COND_UU_RRC_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of indicationType is determined by the condition of Uu RRC connection establishment failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.3"
+      ]
+    }
+  ]
+}

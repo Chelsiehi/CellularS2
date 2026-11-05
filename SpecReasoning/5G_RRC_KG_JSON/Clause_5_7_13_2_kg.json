@@ -1,0 +1,129 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.13.2",
+  "title": "Relaxed measurement criterion for good serving cell quality",
+  "entities": [
+    {
+      "id": "RLM_GOOD_CELL_CRITERION",
+      "name": "RLM good serving cell quality criterion",
+      "entity_type": "Condition",
+      "description": "Relaxed measurement criterion for Radio Link Monitoring that starts evaluation after configuration reception and is fulfilled when downlink radio link quality on RLM-RS resource is better than threshold Q + XdB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "BFD_GOOD_CELL_CRITERION",
+      "name": "BFD good serving cell quality criterion",
+      "entity_type": "Condition",
+      "description": "Relaxed measurement criterion for Beam Failure Detection that starts evaluation after configuration reception and is fulfilled when downlink radio link quality on BFD-RS resource is better than threshold Q + XdB.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "GOOD_CELL_CONFIG",
+      "name": "Good serving cell quality criterion configuration",
+      "entity_type": "Property",
+      "description": "Configuration that triggers the start of evaluation for relaxed measurement criteria for both RLM and BFD.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "PARAM_OFFSET_RLM",
+      "name": "offset in goodServingCellEvaluationRLM",
+      "entity_type": "Property",
+      "description": "Parameter X used in RLM good serving cell quality criterion calculation as offset to threshold Q.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "PARAM_OFFSET_BFD",
+      "name": "offset in goodServingCellEvaluationBFD",
+      "entity_type": "Property",
+      "description": "Parameter X used in BFD good serving cell quality criterion calculation as offset to threshold Q.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "THRESHOLD_Q",
+      "name": "Threshold Q",
+      "entity_type": "Property",
+      "description": "Base threshold specified in TS 38.133 clause 8.1 used for good serving cell quality evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "GOOD_CELL_CONFIG",
+      "target": "RLM_GOOD_CELL_CRITERION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving the good serving cell quality criterion configuration starts the evaluation of RLM relaxed measurement criterion.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "GOOD_CELL_CONFIG",
+      "target": "BFD_GOOD_CELL_CRITERION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving the good serving cell quality criterion configuration starts the evaluation of BFD relaxed measurement criterion.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RLM_GOOD_CELL_CRITERION",
+      "target": "PARAM_OFFSET_RLM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLM criterion fulfillment is determined by comparing radio link quality to threshold Q plus the offset parameter from goodServingCellEvaluationRLM.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "BFD_GOOD_CELL_CRITERION",
+      "target": "PARAM_OFFSET_BFD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BFD criterion fulfillment is determined by comparing radio link quality to threshold Q plus the offset parameter from goodServingCellEvaluationBFD.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RLM_GOOD_CELL_CRITERION",
+      "target": "THRESHOLD_Q",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLM criterion uses threshold Q from TS 38.133 as base for quality comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "BFD_GOOD_CELL_CRITERION",
+      "target": "THRESHOLD_Q",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BFD criterion uses threshold Q from TS 38.133 as base for quality comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.13.2"
+      ]
+    }
+  ]
+}

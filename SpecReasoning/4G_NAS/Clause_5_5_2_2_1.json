@@ -1,0 +1,73 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.1",
+  "title": "UE initiated detach procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "---------------------------------------------------",
+    "The detach procedure is initiated by the UE by sending a DETACH REQUEST message (see example in figure 5.5.2.2.1.1). The Detach type IE included in the message indicates whether detach is due to a \"switch off\" or not. The Detach type IE also indicates whether the detach is for EPS services only, for non-EPS services only, or for both. If the UE has a mapped EPS security context as the current EPS security context, the UE shall set the type of security context flag to \"mapped security context\". Otherwise, the UE shall set the type of security context flag to \"native security context\"",
+    "If the UE has a valid GUTI, the UE shall populate the EPS mobile identity IE with the valid GUTI. If the UE does not have a valid GUTI, the UE shall populate the EPS mobile identity IE with its IMSI",
+    "If the UE does not have a valid GUTI and it does not have a valid IMSI, then the UE shall populate the EPS mobile identity IE with its IMEI",
+    "NOTE: During the attach for emergency bearer services or attach for access to RLOS when the UE (with no USIM or invalid USIM) is in EMM-REGISTERED-INITIATED STATE, the UE has neither a valid GUTI nor a valid IMSI",
+    "If the detach is not due to switch off and the UE is in the state EMM-REGISTERED or EMM-REGISTERED-INITIATED, timer T3421 shall be started in the UE after the DETACH REQUEST message has been sent. If the detach type indicates that the detach is for non-EPS services only the UE shall enter the state EMM-REGISTERED.IMSI-DETACH-INITIATED, otherwise the UE shall enter the state EMM-DEREGISTERED-INITIATED. If the detach type indicates that the detach is for non-EPS services or both EPS and non-EPS services, the UE shall enter the state MM IMSI DETACH PENDING",
+    "If the UE to be switched off is not operating in NB-S1 mode and not operating in WB-S1 mode in any enhanced coverage CE mode, the UE shall try for a period of 5 seconds to send the DETACH REQUEST message. If the UE to be switched off",
+    "- is operating in NB-S1 mode, then the UE should try for at least a period of 85 seconds to send the DETACH REQUEST; or",
+    "- is operating in WB-S1 mode in any enhanced coverage CE mode, then the UE should try for at least a period of 14 seconds to send the DETACH REQUEST",
+    "During this period, the UE may be switched off as soon as the DETACH REQUEST message has been sent",
+    "After the last DETACH REQUEST message is sent, the UE shall proceed as follows",
+    "- if the current EPS security context is a native EPS security context, then the UE shall store the current EPS security context as specified in annex C and mark it as valid",
+    "- else if the current EPS security context is a mapped EPS security context and a non-current full native EPS security context exists, then the UE shall store the non-current EPS security context as specified in annex C and mark it as valid, and finally the UE shall delete any mapped EPS security context or partial native EPS security context",
+    "Figure 5.5.2.2.1.1: UE initiated detach procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.5.2.2.1.1",
+      "file": "Figure_5_5_2_2_1_1_p160.png.json",
+      "title": "UE initiated detach procedure",
+      "content": {
+        "figure_id": "5.5.2.2.1.1",
+        "title": "UE initiated detach procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "DETACH REQUEST",
+              "notes": "Start T3421"
+            },
+            {
+              "from": "MME",
+              "to": "UE",
+              "name": "DETACH ACCEPT",
+              "notes": "Stop T3421"
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "DETACH REQUEST",
+              "notes": "or UE at switch off"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Timer T3421 is started when UE sends DETACH REQUEST",
+            "Timer T3421 is stopped when UE receives DETACH ACCEPT",
+            "Alternative flow shows DETACH REQUEST sent at UE switch off without DETACH ACCEPT response"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

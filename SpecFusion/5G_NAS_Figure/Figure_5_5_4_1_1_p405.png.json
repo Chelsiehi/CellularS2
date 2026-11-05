@@ -1,0 +1,68 @@
+{
+  "figure_id": "5.5.4.1.1",
+  "title": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+  "type": "PROCEDURE_FLOW",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [
+      "UE",
+      "AMF"
+    ],
+    "messages": [
+      {
+        "from": "UE",
+        "to": "AMF",
+        "name": "RELAY KEY REQUEST",
+        "notes": "Start T35xx"
+      },
+      {
+        "from": "AMF",
+        "to": "UE",
+        "name": "RELAY KEY REJECT",
+        "notes": "Stop T35xx, <Key request is rejected>"
+      },
+      {
+        "from": "AMF",
+        "to": "UE",
+        "name": "RELAY AUTHENTICATION REQUEST",
+        "notes": "Stop T35xx, <EAP-request message A>"
+      },
+      {
+        "from": "UE",
+        "to": "AMF",
+        "name": "RELAY AUTHENTICATION RESPONSE",
+        "notes": "Start T35xx, <EAP-response message to EAP-request message A>"
+      },
+      {
+        "from": "AMF",
+        "to": "UE",
+        "name": "RELAY AUTHENTICATION REQUEST",
+        "notes": "Stop T35xx, <EAP-request message B>"
+      },
+      {
+        "from": "UE",
+        "to": "AMF",
+        "name": "RELAY AUTHENTICATION RESPONSE",
+        "notes": "Start T35xx, <EAP-response message to EAP-request message B>"
+      },
+      {
+        "from": "AMF",
+        "to": "UE",
+        "name": "RELAY KEY ACCEPT",
+        "notes": "Stop T35xx, <EAP-success message>"
+      },
+      {
+        "from": "AMF",
+        "to": "UE",
+        "name": "RELAY KEY REJECT",
+        "notes": "Stop T35xx, <EAP-failure message>"
+      }
+    ],
+    "fields": [],
+    "notes": [
+      "OR condition between RELAY KEY REJECT and RELAY AUTHENTICATION REQUEST after initial RELAY KEY REQUEST",
+      "OR condition between RELAY KEY ACCEPT and RELAY KEY REJECT at the end of the procedure"
+    ]
+  }
+}

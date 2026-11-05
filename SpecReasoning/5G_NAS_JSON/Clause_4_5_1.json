@@ -1,0 +1,108 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 1,
+  "text": [
+    "-------------",
+    "When the UE needs to access the 5GS, the UE not operating as an IAB-node (see 3GPPTS23.501[8]) first performs access control checks to determine if the access is allowed. Access control checks shall be performed for the access attempts defined by the following list of events",
+    "NOTE1: Although the UE operating as an IAB-node skips the access control checks, the UE operating as an IAB-node determines an access category and one or more access identities for each access attempt in order to derive an RRC establishment cause. In this case the NAS provides the RRC establishment cause but does not provide the access category and the one or more access identities to the lower layers",
+    "a) the UE is in 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication over 3GPP access and an event that requires a transition to 5GMM-CONNECTED mode occurs; and",
+    "b) the UE is in 5GMM-CONNECTED mode over 3GPP access or 5GMM-CONNECTED mode with RRC inactive indication and one of the following events occurs",
+    "1) 5GMM receives an MO-IMS-registration-related-signalling-started indication, an MO-MMTEL-voice-call-started indication, an MO-MMTEL-video-call-started indication or an MO-SMSoIP-attempt-started indication from upper layers",
+    "2) 5GMM receives a request from upper layers to send a mobile originated SMS over NAS unless the request triggered a service request procedure to transition the UE from 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication to 5GMM-CONNECTED mode",
+    "3) 5GMM receives a request from upper layers to send an UL NAS TRANSPORT message for the purpose of PDU session establishment unless the request triggered a service request procedure to transition the UE from 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication to 5GMM-CONNECTED mode",
+    "4) 5GMM receives a request from upper layers to send an UL NAS TRANSPORT message for the purpose of PDU session modification unless the request triggered a service request procedure to transition the UE from 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication to 5GMM-CONNECTED mode",
+    "5) 5GMM receives a request to re-establish the user-plane resources for an existing PDU session",
+    "6) 5GMM is notified that an uplink user data packet is to be sent for a PDU session with suspended user-plane resources",
+    "7) 5GMM receives a request from upper layers to send a mobile originated location request unless the request triggered a service request procedure to transition the UE from 5GMM-IDLE mode or 5GMM-IDLE mode with suspend indication to 5GMM-CONNECTED mode; and",
+    "8) 5GMM receives a request from upper layers to send a mobile originated signalling transaction towards the PCF by sending an UL NAS TRANSPORT message including a UE policy container (see 3GPPTS24.587[19B]) unless the request triggered a service request procedure to transition the UE from 5GMM-IDLE mode to 5GMM-CONNECTED mode",
+    "NOTE2: 5GMM specific procedures initiated by NAS in 5GMM-CONNECTED mode or 5GMM-CONNECTED mode with RRC inactive indication are not subject to access control, e.g. a registration procedure after PS handover will not be prevented by access control (see subclause5.5)",
+    "NOTE3: LPP messages or location event report messages transported in the UL NAS TRANSPORT message sent in response to a mobile terminating or network induced location request, and the corresponding access attempts are handled as MT access",
+    "NOTE4: Initiating a mobile originated signalling transaction towards the UDM by sending an UL NAS TRANSPORT message including an SOR transparent container is not supported. Therefore, access control for these cases has not been specified",
+    "When the NAS detects one of the above events, the NAS needs to perform the mapping of the kind of request to one or more access identities and one access category and lower layers will perform access barring checks for that request based on the determined access identities and access category",
+    "NOTE5: The NAS is aware of the above events through indications provided by upper layers or through determining the need to start 5GMM procedures through normal NAS behaviour, or both",
+    "To determine the access identities and the access category for a request, the NAS checks the reason for access, types of service requested and profile of the UE including UE configurations, against a set of access identities and access categories defined in 3GPPTS22.261[3], namely",
+    "a) a set of standardized access identities",
+    "b) a set of standardized access categories; and",
+    "c) a set of operator-defined access categories, if available",
+    "For the purpose of determining the applicable access identities from the set of standardized access identities defined in 3GPPTS22.261[3], the NAS shall follow the requirements set out in",
+    "a) subclause4.5.2 and the rules and actions defined in table4.5.2.1, if the UE is not operating in SNPN access mode; or",
+    "b) subclause4.5.2A and the rules and actions defined in table4.5.2A.1, if the UE is operating in SNPN access mode",
+    "In order to enable access barring checks for access attempts identified by lower layers in 5GMM-CONNECTED mode with RRC inactive indication, the UE provides the applicable access identities to lower layers",
+    "NOTE6: When and how the NAS provides the applicable access identities to lower layers is UE implementation specific",
+    "NOTE7: Although the UE operating as an IAB-node skips the access control checks, the UE provides the applicable access identities to lower layers for access attempts identified by lower layers in 5GMM-CONNECTED mode with RRC inactive indication",
+    "For the purpose of determining the applicable access category from the set of standardized access categories and operator-defined access categories defined in 3GPPTS22.261[3], the NAS shall follow the requirements set out in",
+    "a) subclause4.5.2 and the rules and actions defined in table4.5.2.2, if the UE is not operating in SNPN access mode; or",
+    "b) subclause4.5.2A and the rules and actions defined in table4.5.2A.2, if the UE is operating in SNPN access mode",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": [
+    {
+      "table_id": "4.5.1",
+      "file": "Table_4_5_2A_1_p72_p72.png.json",
+      "title": null,
+      "content": {
+        "table_title": "Table 4.5.2A.1: Access identities",
+        "columns": [
+          "Access Identity number",
+          "UE configuration"
+        ],
+        "rows": [
+          [
+            "0",
+            "UE is not configured with any parameters from this table"
+          ],
+          [
+            "1 (NOTE 1)",
+            "UE is configured for multimedia priority service (MPS)."
+          ],
+          [
+            "2 (NOTE 2)",
+            "UE is configured for mission critical service (MCS)."
+          ],
+          [
+            "3-10",
+            "Reserved for future use"
+          ],
+          [
+            "11 (NOTE 3)",
+            "Access Class 11 is configured in the UE."
+          ],
+          [
+            "12 (NOTE 3)",
+            "Access Class 12 is configured in the UE."
+          ],
+          [
+            "13 (NOTE 3)",
+            "Access Class 13 is configured in the UE."
+          ],
+          [
+            "14 (NOTE 3)",
+            "Access Class 14 is configured in the UE."
+          ],
+          [
+            "15 (NOTE 3)",
+            "Access Class 15 is configured in the UE."
+          ],
+          [
+            "NOTE 1:",
+            "Access identity 1 is valid when:\n- the unified access control configuration in the \"list of subscriber data\" stored in the ME (see 3GPP TS 23.122 [5]), if an entry of \"list of subscriber data\" is selected, or in the USIM (see 3GPP TS 31.102 [22]), if the PLMN subscription is selected, indicates the UE is configured for access identity 1 in the selected SNPN, if a new SNPN is selected, or RSNPN; or\n- the UE receives the 5GS network feature support IE with the MPS indicator bit set to \"Access identity 1 valid\" from the RSNPN as described in subclause 5.5.1.2.4 and subclause 5.5.1.3.4; or\n- the UE receives the Priority indicator IE with the MPS indicator bit set to \"Access identity 1 valid\" from the RPLMN as described in subclause 5.4.4.3."
+          ],
+          [
+            "NOTE 2:",
+            "Access identity 2 is used by UEs configured for MCS and is valid when:\n- the unified access control configuration in the \"list of subscriber data\" stored in the ME (see 3GPP TS 23.122 [5]), if an entry of \"list of subscriber data\" is selected, or in the USIM (see 3GPP TS 31.102 [22]), if the PLMN subscription is selected, indicates the UE is configured for access identity 2 in the selected SNPN, if a new SNPN is selected, or RSNPN; or\n- the UE receives the 5GS network feature support IE with the MCS indicator bit set to \"Access identity 2 valid\" from the RSNPN as described in subclause 5.5.1.2.4 and subclause 5.5.1.3.4."
+          ],
+          [
+            "NOTE 3:",
+            "Access identities 11 to 15 are valid if indicated as configured for the UE in the unified access control configuration in the \"list of subscriber data\" stored in the ME (see 3GPP TS 23.122 [5]), if an entry of \"list of subscriber data\" is selected, or in the USIM (see 3GPP TS 31.102 [22]), if the PLMN subscription is selected, in the selected SNPN, if a new SNPN is selected, or RSNPN."
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.12",
+  "title": "Handling of local emergency numbers",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "UE registration or attach procedures via 3GPP access and non-3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Network message that may contain emergency number list IEs",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "IE_EMERGENCY_NUMBER_LIST",
+      "name": "Emergency number list IE",
+      "entity_type": "Information Element",
+      "description": "Contains the local emergency numbers list provided by the network",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "name": "Extended emergency number list IE",
+      "entity_type": "Information Element",
+      "description": "Contains the extended local emergency numbers list with validity field",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "FIELD_EENLV",
+      "name": "Extended Emergency Number List Validity field",
+      "entity_type": "Property",
+      "description": "Field within Extended emergency number list IE indicating validity scope",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "COND_EENLV_COUNTRY_VALID",
+      "name": "Extended Local Emergency Numbers List is valid in the country",
+      "entity_type": "Condition",
+      "description": "EENLV field indicates list is valid in country of the PLMN",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "COND_EENLV_PLMN_VALID",
+      "name": "Extended Local Emergency Numbers List is valid only in the PLMN",
+      "entity_type": "Condition",
+      "description": "EENLV field indicates list is valid only in the PLMN from which IE is received",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROP_STORE_EMERGENCY_LISTS",
+      "name": "UE stores emergency number lists",
+      "entity_type": "Property",
+      "description": "UE stores local and extended local emergency numbers lists from network",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_EMERGENCY_LISTS",
+      "name": "UE deletes emergency number lists",
+      "entity_type": "Property",
+      "description": "UE deletes stored emergency number lists at switch off or USIM removal",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "COND_DIFFERENT_COUNTRY",
+      "name": "UE in different country",
+      "entity_type": "Condition",
+      "description": "UE successfully registered to PLMN in country different from stored list's country",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_EMERGENCY_NUMBER_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain Emergency number list IE",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain Extended emergency number list IE",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EXTENDED_EMERGENCY_NUMBER_LIST",
+      "target": "FIELD_EENLV",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Extended emergency number list IE contains EENLV field",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_EENLV",
+      "target": "COND_EENLV_COUNTRY_VALID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EENLV field guards by country validity condition",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_EENLV",
+      "target": "COND_EENLV_PLMN_VALID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EENLV field guards by PLMN-only validity condition",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EENLV_PLMN_VALID",
+      "target": "PROP_STORE_EMERGENCY_LISTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PLMN-only validity condition establishes UE storage of emergency lists",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_DIFFERENT_COUNTRY",
+      "target": "PROP_DELETE_EMERGENCY_LISTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Different country condition establishes deletion of stored emergency lists",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_REGISTRATION",
+      "target": "MSG_REGISTRATION_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes receiving REGISTRATION ACCEPT message",
+      "provenance": [
+        "TS 24.501, Clause 5.3.12"
+      ]
+    }
+  ]
+}

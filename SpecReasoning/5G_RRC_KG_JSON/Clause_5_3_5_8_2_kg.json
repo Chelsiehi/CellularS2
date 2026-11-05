@@ -1,0 +1,225 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.8.2",
+  "title": "Inability to comply with RRCReconfiguration",
+  "entities": [
+    {
+      "id": "RRCReconfiguration",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "RRC message used to reconfigure UE connection parameters",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "ConditionalReconfiguration",
+      "name": "ConditionalReconfiguration",
+      "entity_type": "Procedure",
+      "description": "Procedure where RRCReconfiguration is stored and applied when conditions are met",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "SCG_Failure_Information_Procedure",
+      "name": "SCG failure information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated to report SCG reconfiguration error",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "Connection_Reestablishment_Procedure",
+      "name": "Connection re-establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-establish RRC connection after failure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_Transition",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure to transition UE to RRC_IDLE state with specified release cause",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "UE_Inability_Condition",
+      "name": "UE unable to comply with configuration",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot apply (part of) the configuration in RRCReconfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "NGEN_DC_Condition",
+      "name": "UE in (NG)EN-DC",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE is operating in (NG)EN-DC dual connectivity mode",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "NR_Standalone_Condition",
+      "name": "RRCReconfiguration received via NR",
+      "entity_type": "Condition",
+      "description": "Condition where RRCReconfiguration is received in NR standalone, NE-DC, or NR-DC",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "Other_RAT_Condition",
+      "name": "RRCReconfiguration received via other RAT",
+      "entity_type": "Condition",
+      "description": "Condition where RRCReconfiguration is received during handover to NR from other RAT",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "MCG_Transmission_Not_Suspended",
+      "name": "MCG transmission not suspended",
+      "entity_type": "Condition",
+      "description": "Condition indicating Master Cell Group transmission is active",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "AS_Security_Not_Activated",
+      "name": "AS security not activated",
+      "entity_type": "Condition",
+      "description": "Condition where Access Stratum security has not been activated",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "SRB2_DRB_Not_Setup",
+      "name": "SRB2 and DRB not setup",
+      "entity_type": "Condition",
+      "description": "Condition where SRB2 and at least one DRB have not been established",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "Previous_Configuration_Usage",
+      "name": "Continue using previous configuration",
+      "entity_type": "Property",
+      "description": "UE behavior to maintain configuration used prior to RRCReconfiguration reception or inability detection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_Inability_Condition",
+      "target": "SCG_Failure_Information_Procedure",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE inability to comply with SRB3 configuration triggers SCG failure information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_Inability_Condition",
+      "target": "Connection_Reestablishment_Procedure",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE inability to comply with SRB1 configuration triggers connection re-establishment procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ConditionalReconfiguration",
+      "target": "Previous_Configuration_Usage",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RRCReconfiguration is part of ConditionalReconfiguration, UE continues using previous configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MCG_Transmission_Not_Suspended",
+      "target": "SCG_Failure_Information_Procedure",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MCG transmission not being suspended guards the initiation of SCG failure information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AS_Security_Not_Activated",
+      "target": "RRC_IDLE_Transition",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AS security not being activated triggers transition to RRC_IDLE with release cause 'other'",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SRB2_DRB_Not_Setup",
+      "target": "RRC_IDLE_Transition",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SRB2 and DRB not being setup triggers transition to RRC_IDLE with release cause 'RRC connection failure'",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NGEN_DC_Condition",
+      "target": "UE_Inability_Condition",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE being in (NG)EN-DC guards the inability condition handling for SRB3/SRB1 configurations",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "NR_Standalone_Condition",
+      "target": "UE_Inability_Condition",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRCReconfiguration received via NR guards the inability condition handling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "Other_RAT_Condition",
+      "target": "UE_Inability_Condition",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRCReconfiguration received via other RAT guards the inability condition handling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.8.2"
+      ]
+    }
+  ]
+}

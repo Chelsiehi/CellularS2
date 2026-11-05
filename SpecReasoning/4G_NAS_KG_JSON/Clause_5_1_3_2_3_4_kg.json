@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.3.4",
+  "title": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+  "entities": [
+    {
+      "id": "STATE_EMM_DEREG_ATTEMPTING_ATTACH",
+      "name": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "A substate of EMM-DEREGISTERED entered by the UE when the attach or combined attach procedure fails due to missing network response or specific failure conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Initial registration procedure where UE attempts to attach to the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure combining EPS attach with non-EPS services attachment.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "CONDITION_MISSING_RESPONSE",
+      "name": "Missing network response",
+      "entity_type": "Condition",
+      "description": "Condition where the UE does not receive expected response from the network during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "CONDITION_SPECIFIC_FAILURES",
+      "name": "Specific attach failure conditions",
+      "entity_type": "Condition",
+      "description": "Failure conditions described in clauses 5.5.1.2.5, 5.5.1.2.6, 5.5.1.3.5 and 5.5.2.3.4 that trigger entry to ATTEMPTING-TO-ATTACH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_MISSING_RESPONSE",
+      "target": "STATE_EMM_DEREG_ATTEMPTING_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Missing network response during attach procedure causes UE to enter ATTEMPTING-TO-ATTACH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_SPECIFIC_FAILURES",
+      "target": "STATE_EMM_DEREG_ATTEMPTING_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific attach failure conditions cause UE to enter ATTEMPTING-TO-ATTACH state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_ATTACH",
+      "target": "CONDITION_MISSING_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Attach procedure can be guarded by condition of missing network response.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_COMBINED_ATTACH",
+      "target": "CONDITION_MISSING_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Combined attach procedure can be guarded by condition of missing network response.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.4"
+      ]
+    }
+  ]
+}

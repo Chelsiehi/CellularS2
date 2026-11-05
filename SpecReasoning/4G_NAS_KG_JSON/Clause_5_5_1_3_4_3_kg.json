@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.3.4.3",
+  "title": "Combined attach successful for EPS services only",
+  "entities": [
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message received by UE during attach procedure containing EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE",
+      "name": "EMM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element in ATTACH ACCEPT message indicating the reason for network response.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "T3410",
+      "name": "Timer T3410",
+      "entity_type": "Timer",
+      "description": "Timer used during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter is less than 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter equals 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state entered when UE is successfully registered with normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "EMM state entered when UE is attempting to update MM.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "MM_IDLE",
+      "name": "MM IDLE",
+      "entity_type": "State",
+      "description": "MM state entered after certain EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "UPDATE_STATUS_U3",
+      "name": "Update status U3 ROAMING NOT ALLOWED",
+      "entity_type": "Condition",
+      "description": "Update status set when IMSI is unknown in HSS.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "UPDATE_STATUS_U2",
+      "name": "Update status U2 NOT UPDATED",
+      "entity_type": "Condition",
+      "description": "Update status set when CS domain is not available.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "EPS_UPDATE_STATUS_EU1",
+      "name": "EPS update status EU1 UPDATED",
+      "entity_type": "Condition",
+      "description": "EPS update status set during various UE actions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "name": "Tracking area updating attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of tracking area updating attempts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT message contains EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EMM_CAUSE",
+      "target": "T3410",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "EMM cause value #2, #16, #18 trigger stopping timer T3410.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMM_CAUSE",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause value #2 and #18 lead to entering EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMM_CAUSE",
+      "target": "MM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause value #2, #16, #18 lead to entering MM IDLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EMM_CAUSE",
+      "target": "UPDATE_STATUS_U3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause value #2 establishes update status U3 ROAMING NOT ALLOWED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMM_CAUSE",
+      "target": "UPDATE_STATUS_U2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause value #18 establishes update status U2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "target": "T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When tracking area updating attempt counter is less than 5, timer T3411 is started.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TRACKING_AREA_UPDATING_ATTEMPT_COUNTER",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When tracking area updating attempt counter equals 5, timer T3402 is started.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "T3411",
+      "target": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3411 expiration triggers combined tracking area updating procedure in EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "T3402",
+      "target": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3402 expiration triggers combined tracking area updating procedure in EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EMM_CAUSE",
+      "target": "EPS_UPDATE_STATUS_EU1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause values #16 and #18 establish EPS update status EU1 UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.3.4.3"
+      ]
+    }
+  ]
+}

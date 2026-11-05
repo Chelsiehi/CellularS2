@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.7",
+  "title": "Network sending EAP-success message",
+  "entities": [
+    {
+      "id": "EAP_SUCCESS_MESSAGE",
+      "name": "EAP-success message",
+      "entity_type": "Message",
+      "description": "EAP success message sent by AUSF/AAA server upon successful EAP authentication procedure completion",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_NOTIFICATION",
+      "name": "EAP-response/AKA'-notification message",
+      "entity_type": "Message",
+      "description": "EAP response message that triggers the sending of EAP-success message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "EAP_REQUEST_AKA_CHALLENGE",
+      "name": "EAP-request/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "EAP challenge message whose successful handling precedes EAP-success transmission",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "AUSF",
+      "name": "AUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function that sends EAP-success and provides KSEAF to SEAF",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "AAA_SERVER",
+      "name": "AAA server",
+      "entity_type": "Property",
+      "description": "AAA server in CH or DCS that can send EAP-success message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "EAP_SUCCESS_CONDITION",
+      "name": "Successful EAP-request/AKA'-challenge handling",
+      "entity_type": "Condition",
+      "description": "Condition where earlier procedures for handling EAP-request/AKA'-challenge message were successful",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMPLETE",
+      "name": "Procedure complete",
+      "entity_type": "Property",
+      "description": "State where the authentication procedure is considered complete after EAP-success transmission",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_RESPONSE_AKA_NOTIFICATION",
+      "target": "EAP_SUCCESS_CONDITION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Reception of EAP-response/AKA'-notification triggers evaluation of EAP-success condition",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_SUCCESS_CONDITION",
+      "target": "EAP_SUCCESS_MESSAGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Successful EAP-request/AKA'-challenge handling condition guards the sending of EAP-success message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUSF",
+      "target": "EAP_SUCCESS_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AUSF sends EAP-success message when conditions are met",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AAA_SERVER",
+      "target": "EAP_SUCCESS_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AAA server sends EAP-success message when conditions are met",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EAP_SUCCESS_MESSAGE",
+      "target": "PROCEDURE_COMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sending EAP-success message establishes that the procedure is complete",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.7"
+      ]
+    }
+  ]
+}

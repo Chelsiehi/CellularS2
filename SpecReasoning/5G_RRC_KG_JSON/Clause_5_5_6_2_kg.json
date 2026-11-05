@@ -1,0 +1,145 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.6.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROCEDURE_INDICATE_START",
+      "name": "Procedure to indicate start",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to indicate start of location measurements or timing detection when measurement gaps are insufficient.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_INDICATE_STOP",
+      "name": "Procedure to indicate stop",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to indicate stop of location measurements or timing detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "CONDITION_MEASUREMENT_GAPS_NEEDED",
+      "name": "Measurement gaps needed and insufficient",
+      "entity_type": "Condition",
+      "description": "Condition where UE requires measurement gaps for location measurements or timing detection but gaps are either not configured or not sufficient.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PRECONFIGURED_GAPS_AVAILABLE",
+      "name": "Preconfigured measurement gaps available",
+      "entity_type": "Condition",
+      "description": "Condition where preconfigured measurement gaps are configured and UE considers at least one meets measurement gap requirements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "CONDITION_STOP_INDICATION",
+      "name": "Stop indication from upper layers",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers indicate to stop performing location measurements or timing detection and preConfigGapID is not activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PRECONFIG_GAPID_ACTIVATED",
+      "name": "preConfigGapID activated",
+      "entity_type": "Condition",
+      "description": "Condition where preConfigGapID is currently activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "ACTION_MEASUREMENT_GAP_ACTIVATION",
+      "name": "Measurement gap activation request",
+      "entity_type": "Procedure",
+      "description": "Action to trigger lower layers to initiate measurement gap activation request using UL MAC CE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "ACTION_MEASUREMENT_GAP_DEACTIVATION",
+      "name": "Measurement gap deactivation",
+      "entity_type": "Procedure",
+      "description": "Action to trigger lower layers to deactivate current active measurement gap.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_GAP_VERIFICATION_ON_INDICATION",
+      "name": "Gap verification only on upper layer indication",
+      "entity_type": "Property",
+      "description": "UE verifies measurement gap situation only upon receiving indication from upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_MEASUREMENT_GAPS_NEEDED",
+      "target": "PROCEDURE_INDICATE_START",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure to indicate start is guarded by condition that measurement gaps are needed and insufficient.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_PRECONFIGURED_GAPS_AVAILABLE",
+      "target": "ACTION_MEASUREMENT_GAP_ACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Measurement gap activation is guarded by condition that preconfigured gaps are available.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_STOP_INDICATION",
+      "target": "PROCEDURE_INDICATE_STOP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure to indicate stop is guarded by condition that upper layers indicate stop and preConfigGapID is not activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_PRECONFIG_GAPID_ACTIVATED",
+      "target": "ACTION_MEASUREMENT_GAP_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Measurement gap deactivation is guarded by condition that preConfigGapID is activated and upper layers request modification or indicate gap not needed.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROPERTY_GAP_VERIFICATION_ON_INDICATION",
+      "target": "PROCEDURE_INDICATE_START",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Property establishes that UE only initiates procedure when gaps are insufficient upon upper layer indication.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.6.2"
+      ]
+    }
+  ]
+}

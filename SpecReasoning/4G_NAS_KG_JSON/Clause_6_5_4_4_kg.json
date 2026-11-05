@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.4",
+  "title": "UE requested bearer resource modification procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_UE_BEARER_MOD_REQ_NOT_ACCEPTED",
+      "name": "UE requested bearer resource modification procedure not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when the network does not accept a UE's request for bearer resource modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "name": "BEARER RESOURCE MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to reject a UE's bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejection of the bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_REJECTION",
+      "name": "Network rejection condition",
+      "entity_type": "Condition",
+      "description": "Condition where the network decides not to accept the UE's bearer resource modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_BEARER_MOD_REQ_NOT_ACCEPTED",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes the network sending a BEARER RESOURCE MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The BEARER RESOURCE MODIFICATION REJECT message contains the EMM cause IE indicating the rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NETWORK_REJECTION",
+      "target": "PROC_UE_BEARER_MOD_REQ_NOT_ACCEPTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The network rejection condition triggers the UE requested bearer resource modification procedure not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.4"
+      ]
+    }
+  ]
+}

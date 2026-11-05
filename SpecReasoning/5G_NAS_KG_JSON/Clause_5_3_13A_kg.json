@@ -1,0 +1,133 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.13A",
+  "title": "Forbidden PLMN lists",
+  "entities": [
+    {
+      "id": "FORBIDDEN_PLMNS_3GPP",
+      "name": "Forbidden PLMNs for 3GPP access",
+      "entity_type": "Property",
+      "description": "List of forbidden PLMNs applicable for 3GPP access in N1 mode, used by 5GMM, EMM, GMM and MM protocols regardless of single or dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A",
+        "3GPP TS 23.122"
+      ]
+    },
+    {
+      "id": "FORBIDDEN_PLMNS_NON3GPP",
+      "name": "Forbidden PLMNs for non-3GPP access to 5GCN",
+      "entity_type": "Property",
+      "description": "List of forbidden PLMNs applicable for non-3GPP access in N1 mode, used by 5GMM for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A",
+        "3GPP TS 24.502"
+      ]
+    },
+    {
+      "id": "FORBIDDEN_PLMNS_GPRS",
+      "name": "Forbidden PLMNs for GPRS service",
+      "entity_type": "Property",
+      "description": "List of forbidden PLMNs for GPRS service applicable for 3GPP access in N1 mode, used by 5GMM, EMM and GMM protocols.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A",
+        "3GPP TS 23.122",
+        "3GPP TS 24.008"
+      ]
+    },
+    {
+      "id": "N1_MODE",
+      "name": "N1 mode operation",
+      "entity_type": "Condition",
+      "description": "UE operating in N1 mode with separate forbidden PLMN lists managed per access type (3GPP access or non-3GPP access).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Property",
+      "description": "Distinction between 3GPP access and non-3GPP access for managing forbidden PLMN lists independently.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REGISTRATION_MODE",
+      "name": "Registration mode",
+      "entity_type": "Condition",
+      "description": "UE operating in either single-registration mode or dual-registration mode, which does not affect the forbidden PLMN lists usage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "N1_MODE",
+      "target": "FORBIDDEN_PLMNS_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "N1 mode operation establishes the use of forbidden PLMNs list for 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "N1_MODE",
+      "target": "FORBIDDEN_PLMNS_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "N1 mode operation establishes the use of forbidden PLMNs list for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ACCESS_TYPE",
+      "target": "FORBIDDEN_PLMNS_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access type guards which forbidden PLMN list is applicable (3GPP access uses forbidden PLMNs for 3GPP access).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACCESS_TYPE",
+      "target": "FORBIDDEN_PLMNS_NON3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access type guards which forbidden PLMN list is applicable (non-3GPP access uses forbidden PLMNs for non-3GPP access).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REGISTRATION_MODE",
+      "target": "FORBIDDEN_PLMNS_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration mode guards that the forbidden PLMN list for 3GPP access is used regardless of single or dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "REGISTRATION_MODE",
+      "target": "FORBIDDEN_PLMNS_GPRS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration mode guards that the forbidden PLMN list for GPRS service is used regardless of single or dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13A"
+      ]
+    }
+  ]
+}

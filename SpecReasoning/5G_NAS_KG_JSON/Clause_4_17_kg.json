@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.17",
+  "title": "5GS mobility management in NB-N1 mode",
+  "entities": [
+    {
+      "id": "NB_N1_MODE",
+      "name": "NB-N1 mode",
+      "entity_type": "Property",
+      "description": "A mode of operation for UE and AMF in 5GS mobility management as defined in 3GPP TS 36.331.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "UE_NB_N1",
+      "name": "UE in NB-N1 mode",
+      "entity_type": "Property",
+      "description": "A UE operating in NB-N1 mode that calculates NAS timer values with an additional 240 seconds.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "AMF_NB_N1",
+      "name": "AMF supporting NB-N1 mode",
+      "entity_type": "Property",
+      "description": "An AMF that supports NB-N1 mode and calculates NAS timer values with an additional 240 seconds when communicating with a UE in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_CALCULATION",
+      "name": "NAS timer calculation",
+      "entity_type": "Procedure",
+      "description": "The process of calculating NAS timer values by adding 240 seconds to the base timer values specified in table 10.2.1 (for UE) or table 10.2.2 (for AMF). This calculation occurs at the start of a NAS procedure and remains unchanged until the procedure completes, restarts, or aborts.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "A generic NAS procedure during which NAS timer values are calculated and used as specified in the appropriate procedure subclause.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NB_N1",
+      "target": "NAS_TIMER_CALCULATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "A UE in NB-N1 mode triggers NAS timer calculation at the start of a NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AMF_NB_N1",
+      "target": "NAS_TIMER_CALCULATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "An AMF supporting NB-N1 mode triggers NAS timer calculation when performing NAS signalling with a UE in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "NAS_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NAS timer calculation is performed at the start of a NAS procedure and the timer value is used throughout the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_TIMER_CALCULATION",
+      "target": "NB_N1_MODE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "NAS timer calculation with 240s addition is defined for NB-N1 mode operation.",
+      "provenance": [
+        "TS 24.501, Clause 4.17"
+      ]
+    }
+  ]
+}

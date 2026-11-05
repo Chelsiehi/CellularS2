@@ -1,0 +1,148 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.1.10",
+  "title": "Sidelink reset configuration",
+  "entities": [
+    {
+      "id": "PROC_SIDELINK_RESET",
+      "name": "Sidelink reset configuration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE releases/clears current sidelink radio configuration, releases sidelink DRBs, and resets sidelink specific MAC for a specific destination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "MSG_RRCReconfigurationSidelink",
+      "name": "RRCReconfigurationSidelink",
+      "entity_type": "Message",
+      "description": "RRC message used to configure sidelink parameters including sidelink reset configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "IE_SL_RESET_CONFIG",
+      "name": "sl-ResetConfig",
+      "entity_type": "Information Element",
+      "description": "Information element in RRCReconfigurationSidelink that triggers sidelink reset configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "PROC_SIDELINK_DRB_RELEASE",
+      "name": "Sidelink DRB release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to release sidelink DRBs according to specified conditions and operations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1"
+      ]
+    },
+    {
+      "id": "COND_SL_RESET_CONFIG_INCLUDED",
+      "name": "sl-ResetConfig included in RRCReconfigurationSidelink",
+      "entity_type": "Condition",
+      "description": "Condition where sl-ResetConfig IE is present in RRCReconfigurationSidelink message, triggering sidelink reset.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1.1"
+      ]
+    },
+    {
+      "id": "PROP_RELEASE_SIDELINK_CONFIG",
+      "name": "Release sidelink radio configuration",
+      "entity_type": "Property",
+      "description": "Behavior where UE releases/clears current sidelink radio configuration received in RRCReconfigurationSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "PROP_RESET_SIDELINK_MAC",
+      "name": "Reset sidelink specific MAC",
+      "entity_type": "Property",
+      "description": "Behavior where UE resets the sidelink specific MAC entity for the destination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "COND_SL_RLF_DETECTED",
+      "name": "Sidelink radio link failure detected",
+      "entity_type": "Condition",
+      "description": "Condition where sidelink radio link failure is detected for a specific destination, triggering DRB/SRB release.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1.1",
+        "TS 38.331, Clause 5.8.9.1a.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SIDELINK_RESET",
+      "target": "PROP_RELEASE_SIDELINK_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Sidelink reset procedure includes releasing sidelink radio configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SIDELINK_RESET",
+      "target": "PROC_SIDELINK_DRB_RELEASE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Sidelink reset procedure includes releasing sidelink DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SIDELINK_RESET",
+      "target": "PROP_RESET_SIDELINK_MAC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Sidelink reset procedure includes resetting sidelink specific MAC.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_RRCReconfigurationSidelink",
+      "target": "IE_SL_RESET_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfigurationSidelink message may contain sl-ResetConfig IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SL_RESET_CONFIG_INCLUDED",
+      "target": "PROC_SIDELINK_DRB_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of sl-ResetConfig in RRCReconfigurationSidelink triggers sidelink DRB release.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SL_RLF_DETECTED",
+      "target": "PROC_SIDELINK_DRB_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink RLF detection triggers sidelink DRB release.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1a.1.1"
+      ]
+    }
+  ]
+}

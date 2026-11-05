@@ -1,0 +1,289 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.8.3",
+  "title": "Reception of RemoteUEInformationSidelink message by the L2 U2N Relay UE",
+  "entities": [
+    {
+      "id": "RemoteUEInformationSidelink",
+      "name": "RemoteUEInformationSidelink message",
+      "entity_type": "Message",
+      "description": "Message received by L2 U2N Relay UE containing remote UE information elements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_PagingInfo_RemoteUE",
+      "name": "sl-PagingInfo-RemoteUE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating paging configuration for remote UE, with setup or release values.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_Requested_SI_List",
+      "name": "sl-Requested-SI-List",
+      "entity_type": "Information Element",
+      "description": "Information element containing requested system information list for remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection with the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is not actively connected but can be paged.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is inactive but maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "Paging_message_monitoring",
+      "name": "Paging message monitoring",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE monitors paging occasions for incoming paging messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "SidelinkUEInformationNR_transmission",
+      "name": "SidelinkUEInformationNR transmission",
+      "entity_type": "Procedure",
+      "description": "Procedure for transmitting sidelink UE information to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "System_information_acquisition",
+      "name": "System information acquisition",
+      "entity_type": "Procedure",
+      "description": "Procedure for acquiring system information blocks as requested.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_PagingInfo_setup",
+      "name": "sl-PagingInfo-RemoteUE set to setup",
+      "entity_type": "Condition",
+      "description": "Condition where sl-PagingInfo-RemoteUE IE indicates setup operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_PagingInfo_release",
+      "name": "sl-PagingInfo-RemoteUE set to release",
+      "entity_type": "Condition",
+      "description": "Condition where sl-PagingInfo-RemoteUE IE indicates release operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_SI_List_setup",
+      "name": "sl-Requested-SI-List set to setup",
+      "entity_type": "Condition",
+      "description": "Condition where sl-Requested-SI-List IE indicates setup operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "sl_SI_List_release",
+      "name": "sl-Requested-SI-List set to release",
+      "entity_type": "Condition",
+      "description": "Condition where sl-Requested-SI-List IE indicates release operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "pagingSearchSpace_configured",
+      "name": "pagingSearchSpace configured",
+      "entity_type": "Condition",
+      "description": "Condition where active BWP has common search space with pagingSearchSpace configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RemoteUEInformationSidelink",
+      "target": "sl_PagingInfo_RemoteUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RemoteUEInformationSidelink message contains sl-PagingInfo-RemoteUE IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RemoteUEInformationSidelink",
+      "target": "sl_Requested_SI_List",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RemoteUEInformationSidelink message contains sl-Requested-SI-List IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "sl_PagingInfo_RemoteUE",
+      "target": "sl_PagingInfo_setup",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "sl-PagingInfo-RemoteUE IE guards behavior based on setup condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "sl_PagingInfo_RemoteUE",
+      "target": "sl_PagingInfo_release",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "sl-PagingInfo-RemoteUE IE guards behavior based on release condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "sl_Requested_SI_List",
+      "target": "sl_SI_List_setup",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "sl-Requested-SI-List IE guards behavior based on setup condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "sl_Requested_SI_List",
+      "target": "sl_SI_List_release",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "sl-Requested-SI-List IE guards behavior based on release condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "sl_PagingInfo_setup",
+      "target": "Paging_message_monitoring",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "sl-PagingInfo setup condition establishes paging message monitoring procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "sl_PagingInfo_release",
+      "target": "Paging_message_monitoring",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "sl-PagingInfo release condition stops paging message monitoring.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "sl_SI_List_setup",
+      "target": "System_information_acquisition",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "sl-Requested-SI-List setup condition establishes system information acquisition procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "sl_SI_List_release",
+      "target": "System_information_acquisition",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "sl-Requested-SI-List release condition stops system information acquisition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "Paging_message_monitoring",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging message monitoring requires RRC_CONNECTED state with pagingSearchSpace configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "Paging_message_monitoring",
+      "target": "RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging message monitoring requires RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "Paging_message_monitoring",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging message monitoring requires RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "SidelinkUEInformationNR_transmission",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SidelinkUEInformationNR transmission requires RRC_CONNECTED state without pagingSearchSpace.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.3"
+      ]
+    }
+  ]
+}

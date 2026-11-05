@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.14.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROCEDURE_ASSOCIATION_INFO",
+      "name": "Association between UL SRS Resource for positioning and UE Tx TEG ID procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by a UE in RRC_CONNECTED to provide association information between UL SRS Resource for positioning and UE Tx TEG ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "UE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "UE state where the procedure for providing association information can be initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "CONFIGURED_ASSOCIATION_INFO",
+      "name": "Configured to provide association information",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured to provide association between UL SRS Resource for positioning and UE Tx TEG ID.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "IE_SRS_CONFIG",
+      "name": "SRS-Config IE",
+      "entity_type": "Information Element",
+      "description": "Information Element containing configuration for SRS resources.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "FIELD_UE_TXTEG_REQUESTUL_TDOA_CONFIG",
+      "name": "ue-TxTEG-RequestUL-TDOA-Config",
+      "entity_type": "Property",
+      "description": "Field in SRS-Config IE configured to request association between UL SRS Resource for positioning and Tx TEG.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "MSG_UEPOSITIONINGASSISTANCEINFO",
+      "name": "UEPositioningAssistanceInfo message",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE to provide positioning assistance information including association data.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_ASSOCIATION_INFO",
+      "target": "UE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure initiation requires UE to be in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_ASSOCIATION_INFO",
+      "target": "CONFIGURED_ASSOCIATION_INFO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by UE being configured to provide association information.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SRS_CONFIG",
+      "target": "FIELD_UE_TXTEG_REQUESTUL_TDOA_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SRS-Config IE contains the ue-TxTEG-RequestUL-TDOA-Config field.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_UE_TXTEG_REQUESTUL_TDOA_CONFIG",
+      "target": "MSG_UEPOSITIONINGASSISTANCEINFO",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When ue-TxTEG-RequestUL-TDOA-Config is configured, UE initiates transmission of UEPositioningAssistanceInfo message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_ASSOCIATION_INFO",
+      "target": "MSG_UEPOSITIONINGASSISTANCEINFO",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of UEPositioningAssistanceInfo message as a step.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.14.2"
+      ]
+    }
+  ]
+}

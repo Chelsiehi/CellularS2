@@ -1,0 +1,191 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.14.2",
+  "title": "NR sidelink U2N Relay UE threshold conditions",
+  "entities": [
+    {
+      "id": "NR_SIDELINK_U2N_RELAY_UE",
+      "name": "NR sidelink U2N Relay UE",
+      "entity_type": "Procedure",
+      "description": "Operation for UE capable of NR sidelink U2N Relay functionality, involving evaluation of threshold conditions based on RSRP measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "THRESH_HIGH_RELAY",
+      "name": "threshHighRelay",
+      "entity_type": "Property",
+      "description": "High threshold parameter for RSRP measurement comparison, used to determine if threshold conditions are met or not.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "THRESH_LOW_RELAY",
+      "name": "threshLowRelay",
+      "entity_type": "Property",
+      "description": "Low threshold parameter for RSRP measurement comparison, used to determine if threshold conditions are met or not.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "HYST_MAX_RELAY",
+      "name": "hystMaxRelay",
+      "entity_type": "Property",
+      "description": "Hysteresis value applied to threshHighRelay for condition evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "HYST_MIN_RELAY",
+      "name": "hystMinRelay",
+      "entity_type": "Property",
+      "description": "Hysteresis value applied to threshLowRelay for condition evaluation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "RSRP_MEASUREMENT",
+      "name": "RSRP measurement",
+      "entity_type": "Property",
+      "description": "Reference Signal Received Power measurement of the PCell or the camping cell, used to evaluate threshold conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "CONDITION_ENTRY",
+      "name": "Threshold conditions met (entry)",
+      "entity_type": "Condition",
+      "description": "Condition is met when RSRP is below threshHighRelay by hystMaxRelay (if configured) and above threshLowRelay by hystMinRelay (if configured), or if thresholds are not configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "CONDITION_LEAVE",
+      "name": "Threshold conditions not met (leave)",
+      "entity_type": "Condition",
+      "description": "Condition is not met when RSRP is above threshHighRelay or below threshLowRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NR_SIDELINK_U2N_RELAY_UE",
+      "target": "CONDITION_ENTRY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE considers threshold conditions met (entry) when specified RSRP comparisons hold.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NR_SIDELINK_U2N_RELAY_UE",
+      "target": "CONDITION_LEAVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE considers threshold conditions not met (leave) when RSRP is above threshHighRelay or below threshLowRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_ENTRY",
+      "target": "THRESH_HIGH_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Entry condition depends on threshHighRelay configuration and RSRP comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ENTRY",
+      "target": "THRESH_LOW_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Entry condition depends on threshLowRelay configuration and RSRP comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_ENTRY",
+      "target": "HYST_MAX_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Entry condition uses hystMaxRelay hysteresis with threshHighRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_ENTRY",
+      "target": "HYST_MIN_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Entry condition uses hystMinRelay hysteresis with threshLowRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_LEAVE",
+      "target": "THRESH_HIGH_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Leave condition is triggered if RSRP is above threshHighRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_LEAVE",
+      "target": "THRESH_LOW_RELAY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Leave condition is triggered if RSRP is below threshLowRelay.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_ENTRY",
+      "target": "RSRP_MEASUREMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Entry condition evaluation is based on RSRP measurement of PCell or camping cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_LEAVE",
+      "target": "RSRP_MEASUREMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Leave condition evaluation is based on RSRP measurement of PCell or camping cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.14.2"
+      ]
+    }
+  ]
+}

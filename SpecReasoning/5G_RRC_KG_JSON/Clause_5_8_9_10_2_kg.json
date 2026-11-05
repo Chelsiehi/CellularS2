@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.10.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_U2N_RELAY_INITIATION",
+      "name": "U2N Relay UE Initiation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the U2N Relay UE when specific conditions are met, including Uu RLF, reception of RRCReconfiguration with reconfigurationWithSync, cell reselection, or various RRC connection failures.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "COND_UU_RLF",
+      "name": "Uu Radio Link Failure",
+      "entity_type": "Condition",
+      "description": "Condition met upon Uu radio link failure as specified in clause 5.3.10.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "COND_RRC_RECONFIG_WITH_SYNC",
+      "name": "Reception of RRCReconfiguration with reconfigurationWithSync",
+      "entity_type": "Condition",
+      "description": "Condition met when the UE receives an RRCReconfiguration message including the reconfigurationWithSync configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "COND_CELL_RESELECTION",
+      "name": "Cell Reselection",
+      "entity_type": "Condition",
+      "description": "Condition met upon cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "COND_RRC_CONNECTION_FAILURE",
+      "name": "RRC Connection Failure",
+      "entity_type": "Condition",
+      "description": "Condition met upon L2 U2N Relay UE's RRC connection failure, including RRC connection reject, T300 expiry, and RRC resume failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "TIMER_T300",
+      "name": "T300",
+      "entity_type": "Timer",
+      "description": "Timer used in RRC connection establishment procedures; expiry indicates connection failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_U2N_RELAY_INITIATION",
+      "target": "COND_UU_RLF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition of Uu radio link failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_U2N_RELAY_INITIATION",
+      "target": "COND_RRC_RECONFIG_WITH_SYNC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition of receiving RRCReconfiguration with reconfigurationWithSync.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_U2N_RELAY_INITIATION",
+      "target": "COND_CELL_RESELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition of cell reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_U2N_RELAY_INITIATION",
+      "target": "COND_RRC_CONNECTION_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is guarded by the condition of RRC connection failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RRC_CONNECTION_FAILURE",
+      "target": "TIMER_T300",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC connection failure condition includes T300 expiry.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.2"
+      ]
+    }
+  ]
+}

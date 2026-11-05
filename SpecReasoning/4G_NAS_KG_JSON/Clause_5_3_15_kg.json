@@ -1,0 +1,240 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.15",
+  "title": "CIoT EPS optimizations",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE indicates support and preference for CIoT EPS optimizations.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "PROC_TAU",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE indicates support and preference for CIoT EPS optimizations.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "IE_CIOT_SUPPORT",
+      "name": "CIoT EPS optimization support indication",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE support for control plane CIoT EPS optimization, user plane CIoT EPS optimization, EMM-REGISTERED without PDN connection, S1-U data transfer, and header compression.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "IE_CIOT_PREFERENCE",
+      "name": "CIoT EPS optimization preference indication",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE preference for control plane or user plane CIoT EPS optimization, considered as a request to use.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "OPT_CP_CIOT",
+      "name": "Control plane CIoT EPS optimization",
+      "entity_type": "Property",
+      "description": "Enables efficient transport of user data or SMS over control plane via MME without triggering data radio bearer establishment.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "OPT_UP_CIOT",
+      "name": "User plane CIoT EPS optimization",
+      "entity_type": "Property",
+      "description": "Enables change from EMM-IDLE to EMM-CONNECTED mode without service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "PROP_EMM_REG_NO_PDN",
+      "name": "EMM-REGISTERED without PDN connection",
+      "entity_type": "Property",
+      "description": "UE remains EPS attached even after releasing all PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "PROP_S1U_TRANSFER",
+      "name": "S1-U data transfer",
+      "entity_type": "Property",
+      "description": "Support for S1-U data transfer, required if UE supports user plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "STATE_NB_S1",
+      "name": "NB-S1 mode",
+      "entity_type": "State",
+      "description": "UE mode where control plane CIoT EPS optimization is always indicated and certain restrictions apply.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "STATE_WB_S1",
+      "name": "WB-S1 mode",
+      "entity_type": "State",
+      "description": "UE mode where CIoT EPS optimizations can be optionally indicated.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "COND_MT_EDT_SUPPORT",
+      "name": "MT-EDT support indication",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicates support for control plane or user plane MT-EDT during attach or TAU.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "IE_CIOT_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Attach procedure contains IE for CIoT EPS optimization support indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU",
+      "target": "IE_CIOT_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area updating procedure contains IE for CIoT EPS optimization support indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_ATTACH",
+      "target": "IE_CIOT_PREFERENCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Attach procedure contains IE for CIoT EPS optimization preference indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_TAU",
+      "target": "IE_CIOT_PREFERENCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area updating procedure contains IE for CIoT EPS optimization preference indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_CIOT_SUPPORT",
+      "target": "OPT_CP_CIOT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CIoT support IE guards by indicating support for control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_CIOT_SUPPORT",
+      "target": "OPT_UP_CIOT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CIoT support IE guards by indicating support for user plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_CIOT_SUPPORT",
+      "target": "PROP_EMM_REG_NO_PDN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CIoT support IE guards by indicating support for EMM-REGISTERED without PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_CIOT_SUPPORT",
+      "target": "PROP_S1U_TRANSFER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CIoT support IE guards by indicating support for S1-U data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_NB_S1",
+      "target": "OPT_CP_CIOT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Control plane CIoT EPS optimization requires UE to be in NB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "OPT_UP_CIOT",
+      "target": "PROP_S1U_TRANSFER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "User plane CIoT EPS optimization requires support for S1-U data transfer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_MT_EDT_SUPPORT",
+      "target": "OPT_CP_CIOT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MT-EDT support condition guards by indicating support for control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_MT_EDT_SUPPORT",
+      "target": "OPT_UP_CIOT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MT-EDT support condition guards by indicating support for user plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.15"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.1",
+  "title": "NORMAL-SERVICE",
+  "entities": [
+    {
+      "id": "NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "UE state where normal network services are available and UE performs various mobility management procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING",
+      "name": "Tracking Area Updating",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE location in the network, including normal, combined, and periodic variants.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "PAGING_RESPONSE",
+      "name": "Paging Response",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE responds to network paging messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "ECALL_INACTIVITY_PROCEDURE",
+      "name": "eCall Inactivity Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE configured for eCall only mode when specific timers expire.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers eCall inactivity procedure in eCall only mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "EMERGENCY_BEARER_SERVICES",
+      "name": "Emergency Bearer Services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached for emergency services, which exempts it from periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "ECALL_ONLY_MODE",
+      "name": "eCall Only Mode",
+      "entity_type": "Condition",
+      "description": "UE configuration for emergency call services only as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NORMAL_SERVICE",
+      "target": "TRACKING_AREA_UPDATING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in NORMAL-SERVICE state initiates tracking area updating procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NORMAL_SERVICE",
+      "target": "PAGING_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE in NORMAL-SERVICE state responds to paging messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3411",
+      "target": "TRACKING_AREA_UPDATING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3411 initiates tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T3444",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3444 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "T3445",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of timer T3445 triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMERGENCY_BEARER_SERVICES",
+      "target": "TRACKING_AREA_UPDATING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency bearer services condition exempts UE from periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ECALL_ONLY_MODE",
+      "target": "ECALL_INACTIVITY_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "eCall only mode configuration is required for performing eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.1"
+      ]
+    }
+  ]
+}

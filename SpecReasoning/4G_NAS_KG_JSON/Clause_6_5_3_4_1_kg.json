@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_BEARER_RESOURCE_ALLOCATION",
+      "name": "Bearer Resource Allocation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request bearer resource allocation from network",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "name": "BEARER RESOURCE ALLOCATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE when bearer resource allocation request cannot be accepted",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Information Element",
+      "description": "Identifies the procedure transaction between UE and network",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM Cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the reason for rejecting the bearer resource allocation request",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "Optional IE indicating timer value for re-attempt restrictions",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator",
+      "entity_type": "Information Element",
+      "description": "Indicates whether UE is allowed to re-attempt the procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_TFT",
+      "name": "Traffic Flow Template",
+      "entity_type": "Information Element",
+      "description": "Defines packet filters for traffic flow aggregation",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3480",
+      "name": "T3480",
+      "entity_type": "Timer",
+      "description": "Timer associated with bearer resource allocation procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after receiving BEARER RESOURCE ALLOCATION REJECT",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_LIPA_SIPTO_CONNECTION",
+      "name": "LIPA PDN connection or SIPTO at local network",
+      "entity_type": "Condition",
+      "description": "Condition where bearer resource allocation is for LIPA or SIPTO local network connection",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "PROP_RELEASE_TFAD",
+      "name": "Release traffic flow aggregate description",
+      "entity_type": "Property",
+      "description": "UE action to release traffic flow aggregate description associated with PTI",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains PTI IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains ESM cause IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "IE_BACK_OFF_TIMER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message may contain Back-off timer value IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message may contain Re-attempt indicator IE",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_LIPA_SIPTO_CONNECTION",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "LIPA/SIPTO connection condition requires ESM cause #60",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "TIMER_T3480",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of BEARER RESOURCE ALLOCATION REJECT stops timer T3480",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "PROP_RELEASE_TFAD",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of BEARER RESOURCE ALLOCATION REJECT causes UE to release traffic flow aggregate description",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of BEARER RESOURCE ALLOCATION REJECT causes UE to enter PROCEDURE TRANSACTION INACTIVE state",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_TFT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TFT errors determine specific ESM cause values (#41, #42, #44, #45)",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.1"
+      ]
+    }
+  ]
+}

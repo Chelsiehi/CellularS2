@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.1A.2",
+  "title": "Service-level authentication and authorization procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_LEVEL_AUTH",
+      "name": "Service-level authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the SMF for service-level authentication and authorization, involving sending a SERVICE-LEVEL AUTHENTICATION COMMAND message to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "name": "SERVICE-LEVEL AUTHENTICATION COMMAND",
+      "entity_type": "Message",
+      "description": "Message created by the SMF to initiate service-level authentication and authorization, containing the Service-level-AA container IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity information element in the SERVICE-LEVEL AUTHENTICATION COMMAND message, set to 'No procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container IE",
+      "entity_type": "Information Element",
+      "description": "Information element in the SERVICE-LEVEL AUTHENTICATION COMMAND message that carries the service-level-AA payload provided by the DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3XYZ",
+      "name": "Timer T3xyz",
+      "entity_type": "Timer",
+      "description": "Timer started by the SMF upon sending the SERVICE-LEVEL AUTHENTICATION COMMAND message; exact specification is pending.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "COND_PTI_NO_ASSIGNED",
+      "name": "PTI set to 'No procedure transaction identity assigned'",
+      "entity_type": "Condition",
+      "description": "Condition where the PTI IE in the SERVICE-LEVEL AUTHENTICATION COMMAND message is set to indicate no procedure transaction identity is assigned.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "PROP_SMF_SENDS_MSG",
+      "name": "SMF sends SERVICE-LEVEL AUTHENTICATION COMMAND",
+      "entity_type": "Property",
+      "description": "Action where the SMF transmits the SERVICE-LEVEL AUTHENTICATION COMMAND message to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "PROP_UE_PASSES_PAYLOAD",
+      "name": "UE passes service-level-AA payload to upper layers",
+      "entity_type": "Property",
+      "description": "Action where the UE, upon receiving the SERVICE-LEVEL AUTHENTICATION COMMAND message, forwards the service-level-AA payload from the Service-level-AA container IE to upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_LEVEL_AUTH",
+      "target": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The service-level authentication and authorization procedure includes sending the SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The SERVICE-LEVEL AUTHENTICATION COMMAND message contains the PTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_LEVEL_AUTH_CMD",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The SERVICE-LEVEL AUTHENTICATION COMMAND message contains the Service-level-AA container IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_PTI",
+      "target": "COND_PTI_NO_ASSIGNED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The PTI IE is set to the condition 'No procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_SMF_SENDS_MSG",
+      "target": "TIMER_T3XYZ",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The SMF starts timer T3xyz when sending the SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SERVICE_LEVEL_AUTH",
+      "target": "PROP_SMF_SENDS_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes the SMF sending the SERVICE-LEVEL AUTHENTICATION COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SERVICE_LEVEL_AUTH",
+      "target": "PROP_UE_PASSES_PAYLOAD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes the UE passing the service-level-AA payload to upper layers upon message receipt.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.1A.2"
+      ]
+    }
+  ]
+}

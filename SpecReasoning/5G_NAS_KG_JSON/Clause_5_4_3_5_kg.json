@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.3.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to identity request during identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE registration with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where network requests identity information from UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "IDENTITY_UNAVAILABLE",
+      "name": "Requested identity not available",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot provide requested identity due to missing USIM or other reasons.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "NO_IDENTITY_ENCODING",
+      "name": "Encode identity type as No identity",
+      "entity_type": "Property",
+      "description": "UE behavior when requested identity is unavailable - encodes identity type as 'No identity' in IDENTITY RESPONSE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REREGISTRATION",
+      "name": "Re-initiate registration procedure",
+      "entity_type": "Property",
+      "description": "UE behavior to restart registration procedure after IDENTITY RESPONSE transmission failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message is part of the identification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Identification procedure can be triggered during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IDENTITY_UNAVAILABLE",
+      "target": "NO_IDENTITY_ENCODING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When requested identity is unavailable, UE encodes identity type as 'No identity'.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IDENTITY_RESPONSE",
+      "target": "IDENTITY_UNAVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IDENTITY RESPONSE message behavior is guarded by identity availability condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IDENTITY_RESPONSE",
+      "target": "REREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Transmission failure of IDENTITY RESPONSE leads to re-initiation of registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.3.5"
+      ]
+    }
+  ]
+}

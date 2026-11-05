@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.3.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3493",
+      "name": "Timer T3493",
+      "entity_type": "Timer",
+      "description": "Timer used in the Remote UE Report procedure. On expiry, triggers retransmission of REMOTE UE REPORT message or procedure abortion after third expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT",
+      "entity_type": "Message",
+      "description": "Message sent by UE in Remote UE Report procedure. Retransmitted on first and second T3493 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "PROC_REMOTE_UE_REPORT",
+      "name": "Remote UE Report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reporting remote UE information. Can be aborted on third T3493 expiry and restarted by UE implementation.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "COND_FIRST_EXPIRY",
+      "name": "First expiry of T3493",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3493 expires for the first time. UE resends REMOTE UE REPORT and resets/restarts T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "COND_THIRD_EXPIRY",
+      "name": "Third expiry of T3493",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3493 expires for the third time. UE aborts Remote UE Report procedure and releases resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_RELEASE",
+      "name": "Release procedure resources",
+      "entity_type": "Property",
+      "description": "Behavior where UE releases any resources allocated for the Remote UE Report procedure after abortion.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_FIRST_EXPIRY",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "First expiry of T3493 triggers resending of REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_FIRST_EXPIRY",
+      "target": "TIMER_T3493",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "First expiry of T3493 causes UE to reset and restart timer T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_THIRD_EXPIRY",
+      "target": "PROC_REMOTE_UE_REPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Third expiry of T3493 triggers abortion of Remote UE Report procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_THIRD_EXPIRY",
+      "target": "PROP_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Third expiry of T3493 establishes release of procedure resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Remote UE Report procedure includes sending REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.5"
+      ]
+    }
+  ]
+}

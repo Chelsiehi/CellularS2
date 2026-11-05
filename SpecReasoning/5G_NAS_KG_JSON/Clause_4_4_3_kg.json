@@ -1,0 +1,69 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.3",
+  "title": "Handling of NAS COUNT and NAS sequence number",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter value used in NAS security procedures to ensure freshness and prevent replay attacks.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    },
+    {
+      "id": "NAS_SEQUENCE_NUMBER",
+      "name": "NAS sequence number",
+      "entity_type": "Property",
+      "description": "Sequence number included in NAS messages to maintain order and detect duplication.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_PROCEDURE",
+      "name": "NAS security procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that utilizes NAS COUNT and NAS sequence number for security mechanisms like integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_SECURITY_PROCEDURE",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS security procedure uses NAS COUNT for protection against replay attacks.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NAS_SECURITY_PROCEDURE",
+      "target": "NAS_SEQUENCE_NUMBER",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS security procedure uses NAS sequence number to ensure message order and integrity.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_COUNT",
+      "target": "NAS_SEQUENCE_NUMBER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NAS COUNT may influence the handling or validation of NAS sequence number.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3"
+      ]
+    }
+  ]
+}

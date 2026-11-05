@@ -1,0 +1,324 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.5.3",
+  "title": "EPS session management",
+  "entities": [
+    {
+      "id": "PROC_UE_ERROR_HANDLING",
+      "name": "UE error handling procedure for mandatory IE errors",
+      "entity_type": "Procedure",
+      "description": "UE procedure for handling errors encountered with mandatory information elements in ESM messages. Specifies different rejection messages based on the received request type.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "PROC_NW_ERROR_HANDLING",
+      "name": "Network error handling procedure for mandatory IE errors",
+      "entity_type": "Procedure",
+      "description": "Network procedure for handling errors encountered with mandatory information elements in ESM messages. Specifies different rejection messages based on the received request type.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element used to indicate the cause of ESM procedure failure. Value #96 indicates 'invalid mandatory information'.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by UE to reject an ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by UE to reject an ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "name": "MODIFY EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by UE to reject a MODIFY EPS BEARER CONTEXT REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "DEACTIVATE EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "ESM message sent by UE in response to DEACTIVATE EPS BEARER CONTEXT REQUEST when mandatory IE error is detected, causing release of all associated EPS bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REJECT",
+      "name": "PDN CONNECTIVITY REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by network to reject a PDN CONNECTIVITY REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REJECT",
+      "name": "PDN DISCONNECT REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by network to reject a PDN DISCONNECT REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "name": "BEARER RESOURCE ALLOCATION REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by network to reject a BEARER RESOURCE ALLOCATION REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "name": "BEARER RESOURCE MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "ESM message sent by network to reject a BEARER RESOURCE MODIFICATION REQUEST when mandatory IE error is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "COND_MANDATORY_IE_ERROR",
+      "name": "Mandatory IE error condition",
+      "entity_type": "Condition",
+      "description": "Condition where a mandatory information element in an ESM message contains an error.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "PROP_RESOURCE_RELEASE",
+      "name": "EPS bearer resource release",
+      "entity_type": "Property",
+      "description": "Property where all resources associated with an EPS bearer are released when DEACTIVATE EPS BEARER CONTEXT ACCEPT is sent due to mandatory IE error.",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_ERROR_HANDLING",
+      "target": "COND_MANDATORY_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE error handling procedure is triggered by mandatory IE error condition",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NW_ERROR_HANDLING",
+      "target": "COND_MANDATORY_IE_ERROR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network error handling procedure is triggered by mandatory IE error condition",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_ERROR_HANDLING",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE procedure includes sending ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_ERROR_HANDLING",
+      "target": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE procedure includes sending ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_ERROR_HANDLING",
+      "target": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE procedure includes sending MODIFY EPS BEARER CONTEXT REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UE_ERROR_HANDLING",
+      "target": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE procedure includes sending DEACTIVATE EPS BEARER CONTEXT ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NW_ERROR_HANDLING",
+      "target": "MSG_PDN_CONNECTIVITY_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network procedure includes sending PDN CONNECTIVITY REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_NW_ERROR_HANDLING",
+      "target": "MSG_PDN_DISCONNECT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network procedure includes sending PDN DISCONNECT REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_NW_ERROR_HANDLING",
+      "target": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network procedure includes sending BEARER RESOURCE ALLOCATION REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_NW_ERROR_HANDLING",
+      "target": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network procedure includes sending BEARER RESOURCE MODIFICATION REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_MODIFY_EPS_BEARER_CONTEXT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "MSG_PDN_DISCONNECT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "MSG_BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_17",
+      "source": "MSG_BEARER_RESOURCE_MODIFICATION_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REJECT message contains ESM cause IE with value #96",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    },
+    {
+      "id": "REL_18",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_CONTEXT_ACCEPT",
+      "target": "PROP_RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sending DEACTIVATE EPS BEARER CONTEXT ACCEPT message establishes EPS bearer resource release",
+      "provenance": [
+        "TS 24.301, Clause 7.5.3"
+      ]
+    }
+  ]
+}

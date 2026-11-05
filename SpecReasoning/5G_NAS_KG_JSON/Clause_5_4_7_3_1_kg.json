@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.3.1",
+  "title": "Network slice-specific EAP result message transport procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NSS_EAP_RESULT_TRANSPORT",
+      "name": "Network slice-specific EAP result message transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for transporting EAP authentication results (success/failure) for specific network slices between AMF and UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "MSG_NSS_AUTH_RESULT",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT",
+      "entity_type": "Message",
+      "description": "Message used to transport EAP authentication results for specific network slices from AMF to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "IE containing either EAP-success or EAP-failure message provided by AAA-S via NSSAAF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "IE_S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing either HPLMN S-NSSAI or SNPN S-NSSAI to which the EAP result is related.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "COND_EAP_SUCCESS",
+      "name": "EAP-success message",
+      "entity_type": "Condition",
+      "description": "EAP authentication success message provided by AAA-S via NSSAAF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "COND_EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Condition",
+      "description": "EAP authentication failure message provided by AAA-S via NSSAAF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "PROP_AUTH_RESULT_RETENTION",
+      "name": "Authentication result retention",
+      "entity_type": "Property",
+      "description": "AMF retains authentication result for UE and HPLMN S-NSSAI/SNPN S-NSSAI while UE is registered to PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "PROC_UPPER_LAYER_PASS",
+      "name": "Upper layer passing",
+      "entity_type": "Procedure",
+      "description": "UE passes EAP result and S-NSSAI to upper layers upon receiving NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NSS_EAP_RESULT_TRANSPORT",
+      "target": "MSG_NSS_AUTH_RESULT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiation involves creating and sending NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_NSS_AUTH_RESULT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_NSS_AUTH_RESULT",
+      "target": "IE_S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message contains S-NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EAP_MESSAGE",
+      "target": "COND_EAP_SUCCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP message IE can contain EAP-success message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EAP_MESSAGE",
+      "target": "COND_EAP_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP message IE can contain EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_NSS_EAP_RESULT_TRANSPORT",
+      "target": "PROP_AUTH_RESULT_RETENTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes that AMF retains authentication result while UE is registered.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_NSS_AUTH_RESULT",
+      "target": "PROC_UPPER_LAYER_PASS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of NETWORK SLICE-SPECIFIC AUTHENTICATION RESULT message triggers UE to pass EAP result and S-NSSAI to upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.3.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1632 @@
+{
+  "type": "Multi-Unit",
+  "count": 150,
+  "results": [
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-01",
+      "question": "TS 24.301 - 4.4.4.2 - Integrity checking of NAS signalling messages in the UE: Except the messages listed below, no NAS signalling messages shall be processed by the receiving EMM entity in the UE or forwarded to the ESM entity, unless the network has established secure exchange of NAS messages for the NAS signalling connection: IDENTITY REQUEST (if requested identification parameter is IMSI); AUTHENTICATION REQUEST; AUTHENTICATION REJECT; ATTACH REJECT (if the EMM cause is not #25); DETACH ACCEPT (for non switch off); TRACKING AREA UPDATE REJECT (if the EMM cause is not #25); SERVICE REJECT (if the EMM cause is not #25). NOTE: These messages are accepted by the UE without integrity protection, as in certain situations they are sent by the network before security can be activated. All ESM messages are integrity protected. Once the secure exchange of NAS messages has been established, the receiving EMM or ESM entity in the UE shall not process any NAS signalling messages unless they have been successfully integrity checked by the NAS. If NAS signalling messages, having not successfully passed the integrity check, are received, then the NAS in the UE shall discard that message. The processing of the SECURITY MODE COMMAND message that has not successfully passed the integrity check is specified in clause 5.4.3.5. If any NAS signalling message is received as not integrity protected even though the secure exchange of NAS messages has been established by the network, then the NAS shall discard this message.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Fake Reject / Unauthorized Deregistration / DoS",
+        "Identity Exposure / Privacy Leakage"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-02",
+      "question": "TS 24.301 - 4.4.5 - Ciphering of NAS signalling messages: The UE shall send the TRACKING AREA UPDATE REQUEST message always unciphered.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Ciphering Bypass / Null Encryption"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Ciphering Bypass / Null Encryption"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-03",
+      "question": "TS 24.301 - 4.4.4.3 - Integrity checking of NAS signalling messages in the MME: Except the messages listed below, no NAS signalling messages shall be processed by the receiving EMM entity in the MME or forwarded to the ESM entity, unless the secure exchange of NAS messages has been established for the NAS signalling connection: EMM messages: ATTACH REQUEST; IDENTITY RESPONSE (if requested identification parameter is IMSI); AUTHENTICATION RESPONSE; AUTHENTICATION FAILURE; SECURITY MODE REJECT; DETACH REQUEST; DETACH ACCEPT; TRACKING AREA UPDATE REQUEST. NOTE 1: The TRACKING AREA UPDATE REQUEST message is sent by the UE without integrity protection, if the tracking area updating procedure is initiated due to an inter-system change in idle mode and no current EPS security context is available in the UE. The other messages are accepted by the MME without integrity protection, as in certain situations they are sent by the UE before security can be activated. The specification clearly states that the Attach Request is not integrity protected when there is no valid NAS security context.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Identity Exposure / Privacy Leakage"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass",
+        "Identity Exposure / Privacy Leakage"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-04",
+      "question": "TS 24.301 - 5.5.1.2.2 - Attach procedure initiation: When the UE does not have a valid NAS security context, the ATTACH REQUEST message combined with the PDN CONNECTIVITY REQUEST message is not integrity protected.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "IMSI/IMEI Exposure"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-05",
+      "question": "TS 24.301 - 6.5.3.1 - General: The protocol allows the UE to repeatedly request bearer resources for a traffic flow aggregate. No limitation is imposed on the frequency or rate of such requests, and the network does not detect whether the UE is repeatedly abusing bearer establishment or modification procedures.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Resource Exhaustion",
+        "DoS"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Resource Exhaustion"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-06",
+      "question": "TS 24.301 - 5.4.4.3 - Identification response by the UE: A UE shall be ready to respond to an IDENTITY REQUEST message at any time whilst in EMM-CONNECTED mode. Upon receipt of the IDENTITY REQUEST message the UE shall send an IDENTITY RESPONSE message to the network. The IDENTITY RESPONSE message shall contain the identification parameters as requested by the network.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Exposure / Privacy Leakage",
+        "Fake Reject / Unauthorized Deregistration / DoS"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-07",
+      "question": "TS 24.301 - 5.5.1.2.2 - Attach procedure initiation: the UE does not hold a valid GUTI, P-TMSI or RAI, the UE shall include the IMSI in the EPS mobile identity IE",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-08",
+      "question": "TS 24.301 - 4.4.4.1 - General: The use of null integrity protection algorithm EIA0 (see subclause 9.9.3.23) in the current security context is only allowed for an unauthenticated UE for which establishment of emergency bearer services is allowed.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Emergency-Exception Abuse"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-09",
+      "question": "TS 24.301 - 5.4.3.2 - NAS security mode control initiation by the network: The MME shall create a locally generated K ASME and send the SECURITY MODE COMMAND message including a KSI value in the NAS key set identifier IE set to \"000\" and EIA0 and EEA0 as the selected NAS security algorithms only when the security mode control procedure is initiated: - during an attach procedure for emergency bearer services if no shared EPS security context is available; - during a tracking area updating procedure for a UE that has a PDN connection for emergency bearer services if no shared EPS security context is available; - during a service request procedure for a UE that has a PDN connection for emergency bearer services if no shared EPS security context is available; or - after a failed authentication procedure for a UE that has a PDN connection for emergency bearer services or that is establishing a PDN connection for emergency bearer services, if continued usage of a shared security context is not possible.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Ciphering Bypass / Null Encryption",
+        "Emergency-Exception Abuse"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Ciphering Bypass / Null Encryption"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-10",
+      "question": "TS 24.301 - 5.5.1.2.4 - Attach accepted by the network: If the UE has included the UE network capability IE or the MS network capability IE or both in the ATTACH REQUEST message, the MME shall store all octets received from the UE, up to the maximum length defined for the respective information element.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-11",
+      "question": "TS 24.301 - 6.5.3.1 - General: The purpose of the UE requested bearer resource allocation procedure is for a UE to request an allocation of bearer resources for a traffic flow aggregate. The UE requests a specific QoS demand (QCI) and optionally sends a GBR requirement for a new traffic flow aggregate. If accepted by the network, this procedure invokes a dedicated EPS bearer context activation procedure (see subclause 6.4.2) or an EPS bearer context modification procedure (see subclause 6.4.3).",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-12",
+      "question": "TS 24.301 - 6.5.4.2 - UE requested bearer resource modification procedure initiation: In order to request the modification of bearer resources for one traffic flow aggregate, the UE shall send a BEARER RESOURCE MODIFICATION REQUEST message to the MME, start timer T3481 and enter the state PROCEDURE TRANSACTION PENDING (see example in figure 6.5.4.2.1).",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Plaintext Identifier Leakage"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-13",
+      "question": "TS 24.301 - 5.4.2.6 - Authentication not accepted by the UE (c): If the UE finds the SQN (supplied by the core network in the AUTN parameter) to be out of range, the UE shall send an AUTHENTICATION FAILURE message to the network, with the EMM cause #21 synch failure and a re-synchronization token AUTS provided by the USIM (see 3GPP TS 33.102 [18]). The UE shall then follow the procedure described in subclause 5.4.2.7, item e.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-14",
+      "question": "TS 24.301 - Figure 6.5.3.2.1 - UE requested bearer resource allocation procedure: Bearer setup involves multiple signaling messages: Start T3480 -> BEARER RESOURCE ALLOCATION REQUEST (UE -> Network); Network -> ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST (Stop T3480); OR Network -> MODIFY EPS BEARER CONTEXT REQUEST (Stop T3480); OR Network -> BEARER RESOURCE ALLOCATION REJECT (Stop T3480); Figure 6.5.3.2.1: UE requested bearer resource allocation procedure.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-15",
+      "question": "TS 24.301 - 6.2.2 - IP address allocation via NAS signalling: On receipt of the PDN CONNECTIVITY REQUEST message sent by the UE, the network when allocating an IP address shall take into account the PDN type IE, the operator policies of the home and visited network, and the user's subscription data.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-16",
+      "question": "TS24.301 - 5.4.4.2 - Identification initiation by the network: The network initiates the identification procedure by sending an IDENTITY REQUEST message to the UE and starting the timer T3470 (see example in figure 5.4.4.2.1). The IDENTITY REQUEST message specifies the requested identification parameters in the Identity type information element.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-17",
+      "question": "TS 24.301 - 5.4.5.1 - General: The purpose of sending the EMM INFORMATION message is to allow the network to provide information to the UE. The message implementation is optional in the network. The UE may use the received information if the UE supports implementing this message. The EMM information procedure may be invoked by the network at any time during an established EMM context.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-18",
+      "question": "TS 24.301 - 5.4.2.3 - Authentication not accepted by the network: If the AUTHENTICATION REJECT message is received by the UE, the UE shall abort any EMM signalling procedure, stop any of the timers T3410, T3417, T3430, T3418 or T3420 (if they were running) and enter state EMMDEREGISTERED.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-19",
+      "question": "TS 24.301 - 5.6.1.5 Service request procedure not accepted by the network - NOTE 1: A service request can only be rejected before the network has initiated any procedure which will be interpreted by the UE as successful completion of the service request procedure and which will trigger a transition from state EMM-SERVICE-REQUEST-INITIATED to EMM-REGISTERED on the UE side",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-20",
+      "question": "TS 24.301 - 5.5.1.2.4 - Attach accepted by the network: After successful completion of the attach procedure, the UE shall enter state EMM-REGISTERED.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Ciphering Bypass"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-21",
+      "question": "TS 24.301 - 5.5.1.2.4 - Attach accepted by the network: When the MME sends the ATTACH ACCEPT message, it shall start timer T3413.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-22",
+      "question": "TS 24.301 - 5.5.1.2.4 - Attach accepted by the network: Upon receipt of the ATTACH ACCEPT message, the UE shall send an ATTACH COMPLETE message to the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-23",
+      "question": "TS 24.301 - 5.3.5 - Handling of the periodic tracking area update timer: The UE shall start timer T3412 when entering the EMM-REGISTERED state.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-24",
+      "question": "TS 24.301 - 5.4.1.1 - GUTI reallocation procedure: The network may initiate the GUTI reallocation procedure during an established EMM context.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-25",
+      "question": "TS 24.301 - 5.4.1.3 - GUTI reallocation completion by the UE: Upon receipt of a GUTI REALLOCATION COMMAND message, the UE shall store the new GUTI and send a GUTI REALLOCATION COMPLETE message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Replay / Message Injection"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-26",
+      "question": "TS 24.301 - 5.4.2.1 - Authentication procedure: The authentication procedure is used to authenticate the UE and establish an EPS security context.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-27",
+      "question": "TS 24.301 - 5.4.2.3 - Authentication response by the UE: The UE shall respond to the authentication challenge by sending an AUTHENTICATION RESPONSE message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-28",
+      "question": "TS 24.301 - 5.4.3.1 - Security mode control: The security mode control procedure is used to establish NAS security between the UE and the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-29",
+      "question": "TS 24.301 - 4.4.4.1 - General: After successful completion of the security mode control procedure, NAS signalling messages shall be integrity protected.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Timer Manipulation / Backoff Abuse"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-30",
+      "question": "TS 24.301 - 5.6.1.4 - Service request procedure accepted by the network: The network shall respond to a SERVICE REQUEST message with either a SERVICE ACCEPT or SERVICE REJECT message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Plaintext Identifier Leakage"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-31",
+      "question": "TS 24.301 - 5.6.1.4 - Service request procedure accepted by the network: Upon receipt of the SERVICE ACCEPT message, the UE shall stop timer T3417.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-32",
+      "question": "TS 24.301 - 5.5.3.1 - Tracking area updating procedure: The tracking area updating procedure is used to inform the network of the UE's current tracking area.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-33",
+      "question": "TS 24.301 - 5.5.3.2.4 - Tracking area updating accepted by the network: Upon receipt of a TRACKING AREA UPDATE ACCEPT message, the UE shall update the stored tracking area information.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-34",
+      "question": "TS 24.301 - 5.5.3.2.2 - Normal tracking area updating: After sending a TRACKING AREA UPDATE REQUEST message, the UE shall enter state EMM-TRACKING-AREA-UPDATING-INITIATED.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-35",
+      "question": "TS 24.301 - 5.5.2.1 - UE initiated detach procedure: The UE initiated detach procedure is used to explicitly deregister the UE from the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-36",
+      "question": "TS 24.301 - 5.5.2.2.1 - UE initiated detach procedure initiation: To initiate the detach procedure, the UE shall send a DETACH REQUEST message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated RRC Message"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-37",
+      "question": "TS 24.301 - 5.5.2.2.2 - UE initiated detach procedure completion: Upon receipt of the DETACH ACCEPT message, the UE shall enter state EMM-DEREGISTERED.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-38",
+      "question": "TS 24.301 - 5.6.2.1 - Paging procedure: The paging procedure is used by the network to notify the UE of incoming signalling or data.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated RRC Message"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-39",
+      "question": "TS 24.301 - 5.6.2.2 - Paging for EPS services: The UE shall monitor paging according to its configured discontinuous reception parameters.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-40",
+      "question": "TS 24.301 - 5.6.3.1 - Transport of NAS messages: The transport of NAS messages procedure is used to convey NAS signalling between the UE and the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-41",
+      "question": "TS 24.301 - 5.6.3.2 - UE initiated transport of NAS messages: The UE shall send an UPLINK NAS TRANSPORT message to convey NAS information to the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-42",
+      "question": "TS 24.301 - 5.7 - EMM status procedure: The EMM STATUS message is used to report protocol errors.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-43",
+      "question": "TS 24.301 - 7.4 - Unknown or unforeseen message type: If an unknown or unforeseen message type is received, the receiving entity shall ignore the message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-44",
+      "question": "TS 24.301 - 7.5 - Non-semantic mandatory information element errors: If a mandatory information element is missing, the receiver shall handle the error according to defined rules.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated RRC Message"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-45",
+      "question": "TS 24.301 - 6.1 - Overview: The EPS session management procedures control the establishment, modification, and release of EPS bearer contexts.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-46",
+      "question": "TS 24.301 - 6.5.3.2 - UE requested bearer resource allocation initiation: The UE shall start timer T3480 when sending a BEARER RESOURCE ALLOCATION REQUEST message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-47",
+      "question": "TS 24.301 - 6.5.3.3 - UE requested bearer resource allocation accepted by the network: If the request is accepted, the network shall activate a dedicated EPS bearer context.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-48",
+      "question": "TS 24.301 - 6.1.3.2 - ESM sublayer states in the UE: The UE shall enter the BEARER CONTEXT ACTIVE state after successful bearer context activation.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-49",
+      "question": "TS 24.301 - 6.4.4.1 - EPS bearer context deactivation: The network may deactivate an EPS bearer context when it is no longer required.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Replay / Message Injection"
+      ]
+    },
+    {
+      "dataset": "4G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-50",
+      "question": "TS 24.301 - 6.4.4.3 - EPS bearer context deactivation accepted by the UE: Upon receipt of a DEACTIVATE EPS BEARER CONTEXT REQUEST message, the UE shall release the bearer resources.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-01",
+      "question": "TS 24.501 - 5.4.4.3 - Generic UE configuration update accepted by the UE: If acknowledgement requested is indicated in the Acknowledgement bit of the Configuration update indication IE in the CONFIGURATION UPDATE COMMAND message, the UE shall send a CONFIGURATION UPDATE COMPLETE message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-02",
+      "question": "TS 24.501 - 5.4.4.3 - Generic UE configuration update accepted by the UE: Upon receiving the CONFIGURATION UPDATE COMMAND message, the UE shall stop timer T3346 if running and use the contents to update appropriate information stored within the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Timer Manipulation / Backoff Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-03",
+      "question": "TS 24.501 - 4.4.3.2 Replay protection: Replay protection shall be supported for received NAS messages both in the AMF and the UE. However, since the realization of replay protection does not affect the interoperability between nodes, no specific mechanism is required for implementation.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Replay Protection Underspecified",
+        "Implementation-Dependent Behavior"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Implementation-Dependent Behavior",
+        "Replay Protection Underspecified"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-04",
+      "question": "TS 24.501 - 4.4.3.1 - General: If the receiver can guarantee that this NAS message was not previously accepted, then the receiver may select the estimated NAS overflow counter so that the estimated NAS COUNT value is lower than the stored NAS COUNT value; otherwise, the receiver selects the estimated NAS overflow counter so that the estimated NAS COUNT value is higher than the stored NAS COUNT value.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-05",
+      "question": "TS 24.501 - 5.4.2.3 - NAS security mode command accepted by the UE: The UE shall in addition reset the uplink NAS COUNT counter if: a) the SECURITY MODE COMMAND message is received in order to take a 5G NAS security context into use created after a successful execution of the 5G AKA based primary authentication and key agreement procedure or the EAP based primary authentication and key agreement procedure; or b) the SECURITY MODE COMMAND message received includes the type of security context flag set to mapped security context in the NAS key set identifier IE the ngKSI does not match the current 5G NAS security context, if it is a mapped 5G NAS security context.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-06",
+      "question": "TS 24.501 - 9.1.1 - NAS message format: If the message is a security protected 5GS NAS message: a) extended protocol discriminator; b) security header type associated with a half spare octet; c) message authentication code; d) sequence number; e) plain 5GS NAS message, as defined in item 1.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Replay / Message Injection"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-07",
+      "question": "TS 24.501 - 4.4.4.1 - General: For the UE, integrity protected signalling is mandatory for the 5GMM NAS messages once a valid 5G NAS security context exists and has been taken into use",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-08",
+      "question": "TS 24.501 - 4.4.4.3 - Integrity checking of NAS signalling messages in the AMF: Except the messages listed below, no NAS signalling messages shall be processed by the receiving 5GMM entity in the AMF or forwarded to the 5GSM entity, unless the secure exchange of NAS messages has been established for the NAS signalling connection: a) REGISTRATION REQUEST; b) IDENTITY RESPONSE (if requested identification parameter is SUCI); c) AUTHENTICATION RESPONSE; d) AUTHENTICATION FAILURE; e) SECURITY MODE REJECT; f) DEREGISTRATION REQUEST; and g) DEREGISTRATION ACCEPT.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Unauthenticated Message Acceptance"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass",
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-09",
+      "question": "TS 24.501 - 5.5.2.2.2 - UE-initiated de-registration procedure completion: When the DEREGISTRATION REQUEST message is received by the AMF, the AMF shall send a DEREGISTRATION ACCEPT message to the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-10",
+      "question": "TS 24.501 - 4.4.6 - Protection of initial NAS signalling messages: When the initial NAS message is a DEREGISTRATION REQUEST message, the UE always sends the NAS message unciphered.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Ciphering Bypass",
+        "Plaintext Identifier/Message Exposure"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass",
+        "Plaintext Identifier/Message Exposure"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-11",
+      "question": "TS 24.501 - 4.4.3.1 - General - The NAS COUNT counters use 24-bit internal representation and are independently maintained by UE and AMF.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-12",
+      "question": "TS 24.501 - 5.4.3.3 - Identification response by the UE: A UE shall be ready to respond to an IDENTITY REQUEST message at any time whilst in 5GMM-CONNECTED mode. 1. if timer T3519 is not running, generate a fresh SUCI as specified in 3GPP TS 33.501, send an IDENTITY RESPONSE message with the SUCI, start timer T3519 and store the value of the SUCI sent in the IDENTITY RESPONSE message;",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Replay / Message Injection"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-13",
+      "question": "TS24.501 - 5.4.3.1 - General: The purpose of this procedure is to request a particular UE to provide specific identification parameters, e.g. the SUCI, the IMEI, the IMEISV, the EUI-64 or the MAC address.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Identification Request Surface",
+        "Privacy/Tracking"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-14",
+      "question": "TS 24.501 - 5.4.3.3 - Identification response by the UE: A UE shall be ready to respond to an IDENTITY REQUEST message at any time whilst in 5GMM-CONNECTED mode.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Timer Manipulation / Backoff Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-15",
+      "question": "TS 24.501 - 5.4.3.3 - Identification response by the UE: if the Identity type IE in the IDENTITY REQUEST message is not set to \"SUCI\", the UE shall send an IDENTITY RESPONSE message to the network. The IDENTITY RESPONSE message shall contain the identification parameters as requested by the network;",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Plaintext Identifier Leakage",
+        "IMSI/IMEI Exposure",
+        "Privacy/Tracking"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-16",
+      "question": "TS 24.501 - 5.4.3.3 - Identification response by the UE: if the Identity type IE in the IDENTITY REQUEST message is set to \"SUCI\"  the UE shall: 1) if timer T3519 is not running, generate a fresh SUCI as specified in 3GPP TS 33.501 [24], send an IDENTITY RESPONSE message with the SUCI, start timer T3519 and store the value of the SUCI sent in the IDENTITY RESPONSE message; and 2) if timer T3519 is running, send an IDENTITY RESPONSE message with the stored SUCI.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-17",
+      "question": " TS 24.501 - 5.4.1.3.6 - Authentication not accepted by the UE: The UE may reject the core network due to an incorrect AUTN or ngKSI parameter. If the UE has to reject the 5G authentication challenge, the UE shall return AUTHENTICATION FAILURE message to the network with a cause value indicating the reason for the failure.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Error-Code Oracle",
+        "Privacy/Tracking"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass",
+        "Error-Code Oracle"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-18",
+      "question": "TS 24.501 - 5.5.1.3.5 - Mobility and periodic registration update not accepted by the network: the AMF shall send REGISTRATION REJECT message including 5GMM cause #9 'UE identity cannot be derived by the network'.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Error-Code Oracle",
+        "Privacy/Tracking",
+        "DoS"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking",
+        "Error-Code Oracle"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-19",
+      "question": "TS 24.501 - 5.5.1.2.5 - Initial registration not accepted by the network: If 5GMM cause #76 is received from: 1. a CAG cell, and if the UE receives a 'CAG information list' in the CAG information list IE included in the REGISTRATION REJECT message, the UE shall delete any stored 'CAG information list' and shall store the received 'CAG information list'. Otherwise, then the UE shall delete the CAG-ID(s) of the cell from the 'allowed CAG list' for the current PLMN.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS",
+        "Replay / Message Injection",
+        "Anomaly Detection Missing"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Fake Reject / Unauthorized Deregistration / DoS",
+        "Anomaly Detection Missing"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-20",
+      "question": "TS 24.501 - 5.5.1.2.5 - Initial registration not accepted by the network: If the REGISTRATION REJECT message is not integrity protected, the UE shall start timer T3346 with a random value from the default range specified in 3GPP TS 24.008.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Timer Manipulation / Backoff Abuse"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-21",
+      "question": "TS 24.501 - 8.2.18 - Service rejectThe SERVICE REJECT message is sent by the AMF to the UE in order to reject the service request procedure.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Fake Reject / Unauthorized Deregistration / DoS",
+        "Replay / Message Injection"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Replay / Message Injection"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-22",
+      "question": "TS 24.501 - 5.5.2.1 - General: When upper layers indicate that emergency services are no longer required, the UE if still registered for emergency services, may perform UE-initiated de-registration procedure followed by a re-registration to regain normal services, if the UE is in or moves to a suitable cell",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Emergency-Exception Abuse",
+        "Identity Procedure Abuse"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-23",
+      "question": "TS 24.501 - 4.5.2 - Determination of the access identities and access category associated with a request for access for UEs not operating in SNPN access mode: NOTE5: The UE configured for NAS signalling low priority is not supported in this release of specification.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-24",
+      "question": "TS 38.331 - 4.2.1 - UE states and state transitions including inter RAT: Acquires system information, while SDT procedure is not ongoing, and can send SI request (if configured);",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Timer Manipulation / Backoff Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-25",
+      "question": "TS 24.501 - 5.3.1.4 - 5GMM-CONNECTED mode with RRC inactive indication: If the UE in 5GMM-CONNECTED mode with RRC inactive indication receives an indication from the lower layers about RAN paging and the MUSIM UE decides to reject the RAN paging, the UE shall initiate the service request procedure and set request type to \"NAS signalling connection release\" in the UE request type IE and service type to \"signalling\" in the SERVICE REQUEST message as specified in subclause5.6.1.2 for case o of subclause5.6.1.1. The UE may include its paging restriction preferences in the Paging restriction IE in the SERVICE REQUEST message as specified in subclause5.6.1.2 for case o of subclause5.6.1.1",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-26",
+      "question": "TS 24.501 - 5.6.1.1 - General: the UE in 5GMM-IDLE mode over 3GPP access has to request resources for V2X communication over PC5 (see 3GPP TS 23.287 [6C])",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-27",
+      "question": "TS 24.501 - 5.1.3 - 5GMM sublayer states: The UE shall be in one of the following 5GMM sublayer states: 5GMM-DEREGISTERED, 5GMM-REGISTERED or 5GMM-CONNECTED, depending on the progress of mobility management procedures.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-28",
+      "question": "TS 24.501 - 5.2.2.2 - UE behaviour in 5GMM-DEREGISTERED state: The UE shall select a suitable cell and attempt registration when entering coverage or when triggered by upper layers.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-29",
+      "question": "TS 24.501 - 5.2.2.3 - UE behaviour in 5GMM-DEREGISTERED state: If no suitable cell is available, the UE shall enter the substate NO-CELL-AVAILABLE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-30",
+      "question": "TS 24.501 - 5.3.2 - Registration management: The UE shall store the registration parameters provided by the network upon successful registration.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-31",
+      "question": "TS 24.501 - 5.3.4 - Registration areas: The UE shall store the registration area information received in the REGISTRATION ACCEPT message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-32",
+      "question": "TS 24.501 - 5.3.7 - Handling of the periodic registration update timer: The UE shall start timer T3512 upon successful registration.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-33",
+      "question": "TS 24.501 - 5.3.9 - Handling of NAS level mobility management congestion control: The UE may defer mobility management procedures when congestion control is indicated.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-34",
+      "question": "TS 24.501 - 5.3.13 - Lists of 5GS forbidden tracking areas: The UE shall store and update the list of forbidden tracking areas for the current PLMN.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-35",
+      "question": "TS 24.501 - 5.3.14 - List of equivalent PLMNs: The UE shall store the list of equivalent PLMNs provided by the network.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Timer Manipulation / Backoff Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-36",
+      "question": "TS 24.501 - 5.3.16 - Extended DRX cycle: The UE may apply an extended DRX cycle as indicated by the network to reduce power consumption.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-37",
+      "question": "TS 24.501 - 5.4.1.1 - Authentication procedure: The UE shall initiate the authentication procedure upon receiving an AUTHENTICATION REQUEST message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Ciphering Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-38",
+      "question": "TS 24.501 - 5.4.2.1 - NAS security mode control: The UE shall apply the negotiated NAS security algorithms after successful security mode control.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-39",
+      "question": "TS 24.501 - 5.4.3.1 - Identification procedure: The UE shall provide the requested identification parameters according to the identification type indicated.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-40",
+      "question": "TS 24.501 - 5.4.6 - 5GMM status procedure: The UE shall send a STATUS message to indicate protocol errors when required.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-41",
+      "question": "TS 24.501 - 5.5.1.1 - Initial registration: The UE shall initiate the initial registration procedure when powered on or when entering a new tracking area.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-42",
+      "question": "TS 24.501 - 5.5.1.2 - Registration update: The UE shall perform mobility or periodic registration update as required.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-43",
+      "question": "TS 24.501 - 5.5.2.1 - Deregistration general: The UE may initiate deregistration when upper layers request service termination.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-44",
+      "question": "TS 24.501 - 5.6.1.1 - Service request procedure: The UE shall initiate the service request procedure to establish NAS signalling connection when required.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-45",
+      "question": "TS 24.501 - 5.6.1.5 - Service request procedure not accepted by the network: The UE shall follow the backoff and retry behaviour as specified when service request is rejected.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-46",
+      "question": "TS 24.501 - 5.6.2 - Paging procedure: The UE shall respond to paging by initiating the service request procedure when appropriate.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-47",
+      "question": "TS 24.501 - 5.6.3 - Notification procedure: The UE shall process the notification message as specified.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-48",
+      "question": "TS 24.501 - 7.2 - Message too short or too long: The UE shall discard messages that are too short or too long according to protocol rules.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-49",
+      "question": "TS 24.501 - 7.4 - Unknown or unforeseen message type: The UE shall handle unknown message types according to error handling procedures.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_NAS_stage3-Multi-Unit.json",
+      "id": "VD-50",
+      "question": "TS 24.501 - 7.6 - Unknown and unforeseen information elements: The UE shall ignore or handle unknown information elements as specified without aborting the procedure.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-01",
+      "question": "TS 38.331 - 5.3.3.3 - Actions related to transmission of RRCSetupRequest message: if upper layers provide a 5G-S-TMSI: set the ue-Identity to ng-5G-S-TMSI-Part1; else: draw a 39-bit random value in the range 0..2^39-1 and set the ue-Identity to this value;",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Linkability / Tracking"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS",
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-02",
+      "question": "TS 38.331 - B.1 Protection of RRC messages: RRCSetupRequest, can_be_sent_unprotected_prior_AS_security: true, can_be_sent_without_integrity_after_AS_security: NA, can_be_sent_unciphered_after_AS_security: NA",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Unauthenticated RRC Message"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated RRC Message"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-03",
+      "question": "TS 38.331 - 5.3.4.3 - Reception of the SecurityModeCommand by the UE: continue using the configuration used prior to the reception of the SecurityModeCommand message, i.e. neither apply integrity protection nor ciphering.",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Integrity Bypass",
+        "Ciphering Bypass"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-04",
+      "question": "TS 38.331 - 5.3.11 - UE actions upon going to RRC_IDLE - if going to RRC_IDLE was triggered by reception of the RRCRelease message including a waitTime:",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-05",
+      "question": "TS 38.331 - B.1 Protection of RRC message: RRCReject, can_be_sent_unprotected_prior_AS_security: true, can_be_sent_without_integrity_after_AS_security: NA, can_be_sent_unciphered_after_AS_security: NA",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Unauthenticated RRC Message",
+        "Integrity Bypass"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-06",
+      "question": "TS 38.331 - B.1 Protection of RRC message: RRCRelease, can_be_sent_unprotected_prior_AS_security: true, can_be_sent_without_integrity_after_AS_security: NA, can_be_sent_unciphered_after_AS_security: NA",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Unauthenticated RRC Message"
+      ],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-07",
+      "question": "TS 38.331 - B.1 Protection of RRC messages: MeasurementReport, can_be_sent_unprotected_prior_AS_security: false, can_be_sent_without_integrity_after_AS_security: false, can_be_sent_unciphered_after_AS_security: false",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated Message Acceptance"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-08",
+      "question": "TS 38.331 - B.1 Protection of RRC messages: UEInformationResponse, can_be_sent_unprotected_prior_AS_security: false, can_be_sent_without_integrity_after_AS_security: false, can_be_sent_unciphered_after_AS_security: false",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-09",
+      "question": "TS 38.331 - B.1 Protection of RRC messages: RRCReconfiguration, can_be_sent_unprotected_prior_AS_security: true, can_be_sent_without_integrity_after_AS_security: false, can_be_sent_unciphered_after_AS_security: false",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Unauthenticated RRC Message"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-10",
+      "question": "TS 38.331 - 5.3.1.1 - RRC connection control: Consequently, AS security is not activated during the initial phase of the RRC connection.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-11",
+      "question": "TS 38.331 - B.1 Protection of RRC messages: Paging, can_be_sent_unprotected_prior_AS_security: true, can_be_sent_without_integrity_after_AS_security: true, can_be_sent_unciphered_after_AS_security: true",
+      "reference_binary": "Vulnerable",
+      "reference_multi": [
+        "Unauthenticated RRC Message",
+        "Unencrypted Broadcast",
+        "Privacy / Tracking",
+        "Spoofing / False Paging"
+      ],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Ciphering Bypass / Null Encryption",
+        "Spoofing / False Paging",
+        "Unencrypted Broadcast"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-12",
+      "question": "TS 38.331 - 5.3.3.4 - Reception of the RRCSetup by the UE: the UE shall discard any stored UE Inactive AS context and release radio resources for all established RBs except SRB0.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-13",
+      "question": "TS 38.331 - 5.3.3.5 - Reception of the RRCReject by the UE: the UE shall stop timer T300 and remain in RRC_IDLE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Plaintext Identifier Leakage"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-14",
+      "question": "TS 38.331 - 5.3.3.7 - T300 expiry: upon expiry of T300, the UE shall perform cell selection and may attempt RRC connection establishment again.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-15",
+      "question": "TS 38.331 - 5.3.4.1 - Initial AS security activation: the UE shall derive AS security keys upon successful reception of the SecurityModeCommand.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-16",
+      "question": "TS 38.331 - 5.3.5.3 - Reception of RRCReconfiguration by the UE: the UE shall apply the configuration included in the message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "IMSI/IMEI Exposure"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-17",
+      "question": "TS 38.331 - 5.3.5.8 - Reconfiguration failure: if the UE cannot comply with the configuration, it shall initiate the reconfiguration failure procedure.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-18",
+      "question": "TS 38.331 - 5.3.7.1 - RRC connection re-establishment: the procedure is used to re-establish the RRC connection after radio link failure.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-19",
+      "question": "TS 38.331 - 5.3.7.4 - Actions related to transmission of RRCReestablishmentRequest message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-20",
+      "question": "TS 38.331 - 5.3.7.6 - T311 expiry: upon expiry, the UE shall return to RRC_IDLE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Procedure Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-21",
+      "question": "TS 38.331 - 5.3.8.3 - Reception of the RRCRelease by the UE: the UE shall stop all timers associated with the RRC connection.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-22",
+      "question": "TS 38.331 - 5.3.8.5 - UE actions upon expiry of DataInactivityTimer.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-23",
+      "question": "TS 38.331 - 5.3.13.1 - RRC connection resume: the UE may resume a suspended RRC connection.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-24",
+      "question": "TS 38.331 - 5.3.13.3 - Actions related to transmission of RRCResumeRequest message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Unauthenticated RRC Message"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-25",
+      "question": "TS 38.331 - 5.3.13.4 - Reception of the RRCResume by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-26",
+      "question": "TS 38.331 - 5.3.14.5 - Access barring check: the UE shall perform access barring check prior to initiating RRC connection.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Privacy/Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-27",
+      "question": "TS 38.331 - 5.3.15.2 - Reception of the RRCReject by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-28",
+      "question": "TS 38.331 - 5.5.2.1 - Measurement configuration: the network may configure measurement objects and reporting configurations.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-29",
+      "question": "TS 38.331 - 5.5.3.1 - Performing measurements: the UE shall perform measurements according to the configured parameters.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Linkability / Tracking"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-30",
+      "question": "TS 38.331 - 5.5.5.1 - Measurement reporting: the UE shall send MeasurementReport messages when reporting criteria are fulfilled.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-31",
+      "question": "TS 38.331 - 5.6.1.3 - Reception of the UECapabilityEnquiry by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-32",
+      "question": "TS 38.331 - 5.6.1.4 - UE capability information transfer.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-33",
+      "question": "TS 38.331 - 5.7.1.3 - Reception of the DLInformationTransfer by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-34",
+      "question": "TS 38.331 - 5.7.2.3 - Actions related to transmission of ULInformationTransfer message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Procedure Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-35",
+      "question": "TS 38.331 - 5.7.5.3 - Actions related to transmission of FailureInformation message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Emergency-Exception Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-36",
+      "question": "TS 38.331 - 5.7.10.3 - Reception of the UEInformationRequest message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-37",
+      "question": "TS 38.331 - 5.7.10.4 - Actions upon successful completion of a random access procedure.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "IMSI/IMEI Exposure"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-38",
+      "question": "TS 38.331 - 5.7.12.3 - Actions related to transmission of IABOtherInformation message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-39",
+      "question": "TS 38.331 - 5.7.14.3 - Actions related to transmission of UEPositioningAssistanceInfo message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-40",
+      "question": "TS 38.331 - 5.7.15.2 - Actions related to SRS for positioning at cell reselection in RRC_INACTIVE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-41",
+      "question": "TS 38.331 - 5.8.2 - Conditions for NR sidelink communication operation.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-42",
+      "question": "TS 38.331 - 5.8.3.3 - Actions related to transmission of SidelinkUEInformationNR message.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-43",
+      "question": "TS 38.331 - 5.8.9.1.3 - Reception of an RRCReconfigurationSidelink by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Integrity Bypass"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-44",
+      "question": "TS 38.331 - 5.8.9.1.9 - Reception of an RRCReconfigurationCompleteSidelink by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-45",
+      "question": "TS 38.331 - 5.8.10.3 - Performing NR sidelink measurements.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "DoS"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-46",
+      "question": "TS 38.331 - 5.9.1.2 - MCCH scheduling for MBS broadcast.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Plaintext Identifier Leakage"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-47",
+      "question": "TS 38.331 - 5.9.2.3 - MCCH information acquisition by the UE.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Procedure Abuse"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-48",
+      "question": "TS 38.331 - 5.9.3.4 - Broadcast MRB release.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": [
+        "Identity Exposure / Privacy Leakage"
+      ]
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-49",
+      "question": "TS 38.331 - 5.9.4.3 - MBS frequencies of interest determination.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    },
+    {
+      "dataset": "5G_RRC_stage3-Multi-Unit.json",
+      "id": "VD-50",
+      "question": "TS 38.331 - 6.2.2 - General message definitions for NR RRC.",
+      "reference_binary": "Not Vulnerable",
+      "reference_multi": [],
+      "model_label_binary": "non-Vulnerable",
+      "model_label_multi": []
+    }
+  ]
+}

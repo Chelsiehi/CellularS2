@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.2.2",
+  "title": "UE initiated detach procedure completion for EPS services only",
+  "entities": [
+    {
+      "id": "PROC_UE_DETACH_COMPLETION",
+      "name": "UE initiated detach procedure completion",
+      "entity_type": "Procedure",
+      "description": "Procedure for completing UE-initiated detach for EPS services only, involving message exchange and state transitions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept detach request, unless Detach type indicates switch off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of detach, e.g., switch off or not.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3421",
+      "name": "T3421",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receiving DETACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State entered by network and UE after detach procedure completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_NULL",
+      "name": "EMM-NULL",
+      "entity_type": "State",
+      "description": "State entered by UE if detach was due to disabling of EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_DETACH_TYPE_NOT_SWITCH_OFF",
+      "name": "Detach type not switch off",
+      "entity_type": "Condition",
+      "description": "Condition where Detach type IE does not indicate switch off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_DISABLE_EPS_SERVICES",
+      "name": "Detach due to disabling EPS services",
+      "entity_type": "Condition",
+      "description": "Condition where detach procedure was performed due to disabling of EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "PROP_DEACTIVATE_EPS_BEARERS",
+      "name": "Deactivate EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "Network and UE deactivate EPS bearer contexts locally without peer-to-peer signalling.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "PROP_MARK_UE_INACTIVE",
+      "name": "Mark UE as inactive for EPS services",
+      "entity_type": "Property",
+      "description": "Network marks UE as inactive for EPS services after detach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DETACH_COMPLETION",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves receiving DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_DETACH_COMPLETION",
+      "target": "MSG_DETACH_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending DETACH ACCEPT message if Detach type not switch off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DETACH_ACCEPT",
+      "target": "COND_DETACH_TYPE_NOT_SWITCH_OFF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sending DETACH ACCEPT is guarded by Detach type not indicating switch off.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DETACH_ACCEPT",
+      "target": "TIMER_T3421",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3421 upon receiving DETACH ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UE_DETACH_COMPLETION",
+      "target": "PROP_DEACTIVATE_EPS_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes deactivation of EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_UE_DETACH_COMPLETION",
+      "target": "PROP_MARK_UE_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes marking UE as inactive for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_UE_DETACH_COMPLETION",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes EMM-DEREGISTERED state in network and UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_DISABLE_EPS_SERVICES",
+      "target": "STATE_EMM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of disabling EPS services establishes EMM-NULL state in UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.3.3",
+  "title": "Integrity protection and verification",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter value used as input to integrity protection and verification algorithms. Sender uses locally stored NAS COUNT, receiver estimates NAS COUNT from sequence number and overflow counter.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "SECURITY_PROTECTED_5GS_NAS_MESSAGE",
+      "name": "SECURITY PROTECTED 5GS NAS MESSAGE",
+      "entity_type": "Message",
+      "description": "NAS message that undergoes integrity protection including octet 7 to n (Sequence number IE and NAS message IE).",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTION_ALGORITHM",
+      "name": "Integrity protection algorithm",
+      "entity_type": "Procedure",
+      "description": "Algorithm specified in 3GPP TS 33.501 that calculates integrity protection information using BEARER ID, DIRECTION bit, NAS COUNT, and 5G NAS integrity key as inputs.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_VERIFICATION",
+      "name": "Integrity verification",
+      "entity_type": "Procedure",
+      "description": "Process of validating integrity protection using NAS COUNT estimate. Not applicable when 5G-IA0 is used.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "5G_IA0",
+      "name": "5G-IA0",
+      "entity_type": "Condition",
+      "description": "Condition where integrity algorithm 5G-IA0 is used, making integrity verification not applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "NAS_TRANSPARENT_CONTAINER_IE",
+      "name": "NAS transparent container IE",
+      "entity_type": "Information Element",
+      "description": "Information element where integrity protection includes all octets of the value part starting from octet 7.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_PROTECTED_5GS_NAS_MESSAGE",
+      "target": "INTEGRITY_PROTECTION_ALGORITHM",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY PROTECTED 5GS NAS MESSAGE requires integrity protection by the integrity protection algorithm.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTEGRITY_PROTECTION_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Integrity protection algorithm uses NAS COUNT as input parameter.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INTEGRITY_VERIFICATION",
+      "target": "NAS_COUNT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Integrity verification uses estimated NAS COUNT as input and updates local NAS COUNT after successful validation.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5G_IA0",
+      "target": "INTEGRITY_VERIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Integrity verification is not applicable when 5G-IA0 condition is true.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_TRANSPARENT_CONTAINER_IE",
+      "target": "INTEGRITY_PROTECTION_ALGORITHM",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS transparent container IE requires integrity protection including all octets from octet 7.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.3"
+      ]
+    }
+  ]
+}

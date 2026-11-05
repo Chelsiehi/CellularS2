@@ -1,0 +1,256 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to attach to an EPC for packet services in EPS. Establishes context for the UE in MME and may establish default bearer for IP connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure. Contains attach type parameter.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept attach request. May contain network feature indications.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject attach request. Contains EMM cause codes.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "IE_ATTACH_TYPE",
+      "name": "Attach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of attach requested, including EPS emergency attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "name": "EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH",
+      "entity_type": "State",
+      "description": "EMM substate where UE is attempting to attach.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "COUNTER_ATTACH_ATTEMPT",
+      "name": "Attach attempt counter",
+      "entity_type": "Property",
+      "description": "Counter that limits number of subsequently rejected attach attempts. Incremented and reset under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3245",
+      "name": "T3245",
+      "entity_type": "Timer",
+      "description": "Timer started when UE receives ATTACH REJECT with certain EMM causes and stores PLMN in forbidden list.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "T3402",
+      "entity_type": "Timer",
+      "description": "Timer whose expiration resets attach attempt counter in EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer whose start resets attach attempt counter in EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "COND_EMM_CAUSE_11",
+      "name": "EMM cause #11 PLMN not allowed",
+      "entity_type": "Condition",
+      "description": "Condition when ATTACH REJECT contains EMM cause #11, causing UE to store PLMN in forbidden list and start T3245.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "COND_EMM_CAUSE_14",
+      "name": "EMM cause #14 EPS services not allowed in this PLMN",
+      "entity_type": "Condition",
+      "description": "Condition when ATTACH REJECT contains EMM cause #14, causing UE to store PLMN in forbidden list and start T3245.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "PROP_DEFAULT_BEARER_ESTABLISHED",
+      "name": "Default bearer established",
+      "entity_type": "Property",
+      "description": "Property indicating establishment of default bearer between UE and PDN GW for always-on IP connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Attach procedure begins with UE sending ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_ATTACH_REQUEST",
+      "target": "IE_ATTACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains attach type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_ATTACH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful attach procedure establishes EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_ATTACH",
+      "target": "PROP_DEFAULT_BEARER_ESTABLISHED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful attach procedure with PDN connectivity request establishes default bearer.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "COND_EMM_CAUSE_11",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH REJECT message may contain EMM cause #11 condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "COND_EMM_CAUSE_14",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ATTACH REJECT message may contain EMM cause #14 condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_EMM_CAUSE_11",
+      "target": "TIMER_T3245",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #11 starts timer T3245.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EMM_CAUSE_14",
+      "target": "TIMER_T3245",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #14 starts timer T3245.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "target": "TIMER_T3402",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Timer T3402 expiration resets attach attempt counter in EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STATE_EMM_DEREGISTERED_ATTEMPTING_TO_ATTACH",
+      "target": "TIMER_T3346",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Timer T3346 start resets attach attempt counter in EMM-DEREGISTERED.ATTEMPTING-TO-ATTACH substate.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_ATTACH",
+      "target": "COUNTER_ATTACH_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Successful attach procedure resets attach attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.5A",
+  "title": "Service request procedure for initiating a PDN connection for emergency bearer services not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "name": "Service request procedure for initiating PDN connection for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish PDN connection for emergency bearer services when network does not accept the request.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "PROC_5_6_1_5",
+      "name": "Service request procedure completion",
+      "entity_type": "Procedure",
+      "description": "Procedures described in clause 5.6.1.5 that UE performs when emergency service request is not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "PROC_5_6_1_6",
+      "name": "Service request procedure abnormal cases",
+      "entity_type": "Procedure",
+      "description": "Procedures described in clause 5.6.1.6 that UE performs when emergency service request fails due to abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same PLMN where the last service request was attempted.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "ACTION_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE action to notify upper layers about the failure of the emergency service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "ACTION_DETACH_LOCAL_ATTACH_EMERGENCY",
+      "name": "Local detach and EPS attach for emergency bearer services",
+      "entity_type": "Property",
+      "description": "UE action to perform local detach (if not already detached) and attempt EPS attach specifically for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "ABNORMAL_CASE_A",
+      "name": "Abnormal case a from clause 5.6.1.6",
+      "entity_type": "Condition",
+      "description": "Specific abnormal case condition causing service request failure for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "ABNORMAL_CASES_BCE",
+      "name": "Abnormal cases b, c, or e from clause 5.6.1.6",
+      "entity_type": "Condition",
+      "description": "Set of abnormal case conditions causing service request failure for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "PROC_5_6_1_5",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs procedures from clause 5.6.1.5 when emergency service request is not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "PROC_5_6_1_6",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs procedures from clause 5.6.1.6 when emergency service request fails due to abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SERVICE_REQUEST_EMERGENCY",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE actions are conditional on being in the same PLMN where last service request was attempted.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it informs upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_DETACH_LOCAL_ATTACH_EMERGENCY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it performs local detach and EPS attach for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ABNORMAL_CASE_A",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When service request fails due to abnormal case a, UE informs upper layers of network access failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ABNORMAL_CASES_BCE",
+      "target": "PROC_5_6_1_6",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When service request fails due to abnormal cases b, c, or e, UE performs procedures from clause 5.6.1.6.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5A"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.6.1",
+  "title": "General CounterCheck CounterCheckResponse",
+  "entities": [
+    {
+      "id": "PROC_COUNTER_CHECK",
+      "name": "Counter Check Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by the network to request the UE to verify the amount of data sent/received on each DRB. The UE checks if the most significant bits of the COUNT match with values indicated by the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1",
+        "Figure 5.3.6.1"
+      ]
+    },
+    {
+      "id": "MSG_COUNTER_CHECK",
+      "name": "CounterCheck",
+      "entity_type": "Message",
+      "description": "Message sent from network to UE to initiate counter check procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1",
+        "Figure 5.3.6.1"
+      ]
+    },
+    {
+      "id": "MSG_COUNTER_CHECK_RESPONSE",
+      "name": "CounterCheckResponse",
+      "entity_type": "Message",
+      "description": "Message sent from UE to network in response to CounterCheck message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1",
+        "Figure 5.3.6.1"
+      ]
+    },
+    {
+      "id": "IE_DRB_COUNT",
+      "name": "DRB COUNT values",
+      "entity_type": "Information Element",
+      "description": "COUNT values for each DRB used to verify data amount sent/received.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1"
+      ]
+    },
+    {
+      "id": "COND_PACKET_INSERTION_DETECTION",
+      "name": "Packet insertion detection",
+      "entity_type": "Condition",
+      "description": "Condition where the procedure enables detection of packet insertion by an intruder (man in the middle).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COUNTER_CHECK",
+      "target": "MSG_COUNTER_CHECK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Counter check procedure includes sending CounterCheck message from network to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1",
+        "Figure 5.3.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_COUNTER_CHECK",
+      "target": "MSG_COUNTER_CHECK_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Counter check procedure includes sending CounterCheckResponse message from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1",
+        "Figure 5.3.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_COUNTER_CHECK",
+      "target": "IE_DRB_COUNT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CounterCheck message contains DRB COUNT values for verification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_COUNTER_CHECK_RESPONSE",
+      "target": "IE_DRB_COUNT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CounterCheckResponse message contains DRB COUNT values from UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_COUNTER_CHECK",
+      "target": "COND_PACKET_INSERTION_DETECTION",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Counter check procedure enables detection of packet insertion by intruders.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.1"
+      ]
+    }
+  ]
+}

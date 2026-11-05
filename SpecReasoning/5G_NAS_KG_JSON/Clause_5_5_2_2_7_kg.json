@@ -1,0 +1,231 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.7",
+  "title": "Abnormal cases in the network side",
+  "entities": [
+    {
+      "id": "PROC_DEREGISTRATION",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for de-registering a UE from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to initiate de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for network actions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "COND_SNPN_NON_GLOBAL_NO_SUB",
+      "name": "SNPN non-globally-unique identity with no valid subscription",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in SNPN with non-globally-unique identity and has no valid subscription.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "COND_SNPN_GLOBAL_NO_SUB",
+      "name": "SNPN globally-unique identity with no valid subscription",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in SNPN with globally-unique identity and has no valid subscription.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "COND_CAG_NOT_ALLOWED",
+      "name": "CAG cell not in allowed CAG list",
+      "entity_type": "Condition",
+      "description": "Condition where CAG cell's broadcast CAG ID is not in UE's allowed CAG list.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "COND_NON_CAG_UE_CAG_ONLY",
+      "name": "UE only allowed via CAG cells in non-CAG cell",
+      "entity_type": "Condition",
+      "description": "Condition where UE is only allowed to access via CAG cells but is in a non-CAG cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "COND_REGISTRATION_COLLISION",
+      "name": "Registration request collision during de-registration",
+      "entity_type": "Condition",
+      "description": "Condition where network receives REGISTRATION REQUEST during ongoing de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_DEREGISTRATION",
+      "name": "Abort de-registration procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to abort the de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "PROP_PROGRESS_REGISTRATION",
+      "name": "Progress registration procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to continue with the registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_SNPN_NON_GLOBAL_NO_SUB",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers network to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEREGISTRATION",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "De-registration procedure includes sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REESSAGE contains 5GMM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SNPN_NON_GLOBAL_NO_SUB",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines 5GMM cause value #74.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SNPN_GLOBAL_NO_SUB",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers network to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SNPN_GLOBAL_NO_SUB",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines 5GMM cause value #75.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_CAG_NOT_ALLOWED",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers network to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_CAG_NOT_ALLOWED",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines 5GMM cause value #76.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NON_CAG_UE_CAG_ONLY",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers network to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_NON_CAG_UE_CAG_ONLY",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition determines 5GMM cause value #76.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_REGISTRATION_COLLISION",
+      "target": "PROP_ABORT_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers abort of de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_REGISTRATION_COLLISION",
+      "target": "PROP_PROGRESS_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition triggers progress of registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.7"
+      ]
+    }
+  ]
+}

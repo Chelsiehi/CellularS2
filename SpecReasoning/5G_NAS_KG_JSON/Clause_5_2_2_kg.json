@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.2",
+  "title": "UE behaviour in state 5GMM-DEREGISTERED",
+  "entities": [
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state where it is not registered with the network and has no established 5GMM context.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Initial Registration",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to register with the network and transition from 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Condition",
+      "description": "Condition where UE performs PLMN selection according to TS 23.122 procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_CELL_SELECTION",
+      "name": "Cell selection",
+      "entity_type": "Condition",
+      "description": "Condition where UE performs cell selection according to TS 38.304 procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_ATTEMPT_REGISTRATION",
+      "name": "UE attempts registration",
+      "entity_type": "Property",
+      "description": "UE behavior where it attempts to register with the selected PLMN using initial registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "CONDITION_PLMN_SELECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in 5GMM-DEREGISTERED state performs PLMN selection",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "CONDITION_CELL_SELECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in 5GMM-DEREGISTERED state performs cell selection",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "PROPERTY_ATTEMPT_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in 5GMM-DEREGISTERED state attempts registration with selected PLMN",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROPERTY_ATTEMPT_REGISTRATION",
+      "target": "PROCEDURE_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration attempt involves performing initial registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2"
+      ]
+    }
+  ]
+}

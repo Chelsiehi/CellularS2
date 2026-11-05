@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.5",
+  "title": "Combined tracking area updating procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_COMBINED_TA_UPDATE",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for tracking area update that may be rejected by the network with various EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "MSG_TA_UPDATE_REJECT",
+      "name": "TRACKING AREA UPDATE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE when combined tracking area updating procedure is not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause value",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejection of tracking area update request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3430",
+      "name": "Timer T3430",
+      "entity_type": "Timer",
+      "description": "Timer used during tracking area updating procedure that is stopped upon receiving TRACKING AREA UPDATE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer assigned by network for congestion control, started by UE upon receiving TRACKING AREA UPDATE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "STATE_MM_IDLE",
+      "name": "MM IDLE",
+      "entity_type": "State",
+      "description": "State entered by UE after receiving TRACKING AREA UPDATE REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by UE for various EMM cause values in TRACKING AREA UPDATE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Message integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition where TRACKING AREA UPDATE REJECT message has integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_GUTI",
+      "name": "Delete GUTI and related parameters",
+      "entity_type": "Property",
+      "description": "UE action to delete GUTI, last visited registered TAI, TAI List and eKSI for certain EMM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "PROP_SET_EPS_UPDATE_STATUS",
+      "name": "Set EPS update status",
+      "entity_type": "Property",
+      "description": "UE action to set EPS update status to various values (EU2 NOT UPDATED, EU3 ROAMING NOT ALLOWED) based on EMM cause.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COMBINED_TA_UPDATE",
+      "target": "MSG_TA_UPDATE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure results in TRACKING AREA UPDATE REJECT message when not accepted by network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_TA_UPDATE_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT message includes EMM cause value indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TA_UPDATE_REJECT",
+      "target": "TIMER_T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Upon receiving TRACKING AREA UPDATE REJECT, UE stops timer T3430.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TA_UPDATE_REJECT",
+      "target": "STATE_MM_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters MM IDLE state after receiving TRACKING AREA UPDATE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EMM_CAUSE",
+      "target": "PROP_DELETE_GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Certain EMM cause values trigger UE to delete GUTI and related parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_EMM_CAUSE",
+      "target": "PROP_SET_EPS_UPDATE_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EMM cause value determines which EPS update status UE should set.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_EMM_CAUSE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Certain EMM cause values cause UE to enter EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_TA_UPDATE_REJECT",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3346 when TRACKING AREA UPDATE REJECT includes T3346 value IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "MSG_TA_UPDATE_REJECT",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "Integrity protection condition determines UE behavior for TRACKING AREA UPDATE REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.5"
+      ]
+    }
+  ]
+}

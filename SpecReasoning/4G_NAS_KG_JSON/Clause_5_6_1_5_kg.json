@@ -1,0 +1,249 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.5",
+  "title": "Service request procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of bearers for data transfer or signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Network response message indicating service request rejection, containing EMM cause value.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM Cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for service request rejection.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "UE state when service request procedure has been initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state when registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state when not registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "T3417",
+      "entity_type": "Timer",
+      "description": "Timer used during service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer for congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3442",
+      "name": "T3442",
+      "entity_type": "Timer",
+      "description": "Timer for CS service temporary unavailability.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "T3448",
+      "entity_type": "Timer",
+      "description": "Control plane data back-off timer for CIoT optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Integrity Protected Message",
+      "entity_type": "Condition",
+      "description": "Condition where SERVICE REJECT message is integrity protected.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "PROP_UE_RESET_SERVICE_REQUEST_COUNTER",
+      "name": "UE resets service request attempt counter",
+      "entity_type": "Property",
+      "description": "UE behavior to reset service request attempt counter upon receiving SERVICE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending SERVICE REJECT message when not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains EMM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3417",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of SERVICE REJECT stops timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "PROP_UE_RESET_SERVICE_REQUEST_COUNTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SERVICE REJECT message triggers UE to reset service request attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SERVICE REJECT with EMM cause #22 starts back-off timer T3346.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3442",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SERVICE REJECT with EMM cause #39 starts timer T3442 if value not zero.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3448",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SERVICE REJECT with EMM cause #22 starts control plane data back-off timer T3448 for CIoT optimization.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Integrity protection condition determines how T3346 timer value is set.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_EMM_CAUSE",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific EMM cause values trigger transition to EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_EMM_CAUSE",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Specific EMM cause values trigger transition to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "COND_INTEGRITY_PROTECTED",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SERVICE REJECT message requires integrity protection for certain operations.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.5"
+      ]
+    }
+  ]
+}

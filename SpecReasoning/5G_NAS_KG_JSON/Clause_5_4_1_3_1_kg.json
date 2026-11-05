@@ -1,0 +1,240 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Provides mutual authentication between UE and network and agrees on keys KAUSF, KSEAF, and KAMF. Initiated and controlled by the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate 5G AKA authentication procedure. Does not contain EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "IE_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Information Element",
+      "description": "Key Set Identifier included in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "IE_ABBA",
+      "name": "ABBA",
+      "entity_type": "Information Element",
+      "description": "ABBA parameter included in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "KEY_KAUSF",
+      "name": "KAUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function key computed during 5G AKA procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "KEY_KSEAF",
+      "name": "KSEAF",
+      "entity_type": "Property",
+      "description": "Security Anchor Function key computed during 5G AKA procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "KEY_KAMF",
+      "name": "KAMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function key stored in 5G NAS security contexts. Root for 5GS integrity protection and ciphering key hierarchy.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "KEY_CK_IK",
+      "name": "CK and IK",
+      "entity_type": "Property",
+      "description": "Cipher Key and Integrity Key computed by USIM and used as key material to compute KAUSF, KSEAF, and KAMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "CONTEXT_PARTIAL_NATIVE",
+      "name": "Partial native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context established in UE and network when 5G authentication is successfully performed.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "COND_USIM_PRESENT",
+      "name": "USIM present condition",
+      "entity_type": "Condition",
+      "description": "UE shall proceed with 5G authentication challenge only if a USIM is present.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "PROC_SECURITY_MODE_CONTROL",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF after successful 5G AKA authentication to take new partial native 5G NAS security context into use.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5G AKA procedure is initiated by AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message includes ngKSI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_ABBA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message includes ABBA IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "KEY_KAUSF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5G AKA procedure establishes KAUSF key.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "KEY_KSEAF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5G AKA procedure establishes KSEAF key.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "KEY_KAMF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5G AKA procedure establishes KAMF key.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "KEY_CK_IK",
+      "target": "KEY_KAUSF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CK and IK are used as key material to compute KAUSF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "KEY_CK_IK",
+      "target": "KEY_KSEAF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CK and IK are used as key material to compute KSEAF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "KEY_CK_IK",
+      "target": "KEY_KAMF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CK and IK are used as key material to compute KAMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "CONTEXT_PARTIAL_NATIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful 5G AKA procedure establishes partial native 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_USIM_PRESENT",
+      "target": "PROC_5G_AKA_AUTH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE proceeds with 5G authentication challenge only if USIM is present.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "PROC_SECURITY_MODE_CONTROL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "AMF initiates security mode control procedure after successful 5G AKA authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.1"
+      ]
+    }
+  ]
+}

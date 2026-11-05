@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.3.5",
+  "title": "Abnormal cases on the UE side",
+  "entities": [
+    {
+      "id": "NOTIFICATION_MESSAGE",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "A 5GMM message that can be received by the UE via non-3GPP access with access type indicating 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "UE_INITIATED_5GMM_PROCEDURE",
+      "name": "UE-initiated 5GMM specific procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure initiated by the UE over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure initiated by the UE over 3GPP access to request services.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRED_CONDITION",
+      "name": "Access attempt is barred",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate that the access attempt is barred.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "SIGNALLING_CONNECTION_ESTABLISHED",
+      "name": "Signalling connection established",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers confirm the establishment of the signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "HANDLE_NOTIFICATION_PROPERTY",
+      "name": "Handle pending NOTIFICATION message",
+      "entity_type": "Property",
+      "description": "UE behavior to handle the pending NOTIFICATION message as specified in subclause 5.6.3.2.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "IGNORE_NOTIFICATION_PROPERTY",
+      "name": "Ignore NOTIFICATION message",
+      "entity_type": "Property",
+      "description": "UE behavior to ignore the NOTIFICATION message once signalling connection is established.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NOTIFICATION_MESSAGE",
+      "target": "ACCESS_BARRED_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NOTIFICATION message handling is guarded by the access barred condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_BARRED_CONDITION",
+      "target": "HANDLE_NOTIFICATION_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If access is barred, the UE shall handle the pending NOTIFICATION message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIGNALLING_CONNECTION_ESTABLISHED",
+      "target": "IGNORE_NOTIFICATION_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If signalling connection is established and access is not barred, the UE shall ignore the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE_INITIATED_5GMM_PROCEDURE",
+      "target": "NOTIFICATION_MESSAGE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE-initiated 5GMM procedure is ongoing when NOTIFICATION message is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "NOTIFICATION_MESSAGE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure is ongoing when NOTIFICATION message is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.14.5",
+  "title": "Access barring check",
+  "entities": [
+    {
+      "id": "ACCESS_BARRING_CHECK",
+      "name": "Access barring check",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE to determine if an access attempt is allowed or barred based on access identities and barring parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "UAC_BARRING_PARAMETER",
+      "name": "UAC barring parameter",
+      "entity_type": "Information Element",
+      "description": "Contains barring configuration parameters including uac-BarringForAccessIdentity, uac-BarringFactorForAI3, uac-BarringFactor, and uac-BarringTime.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITY",
+      "name": "Access Identity",
+      "entity_type": "Identifier",
+      "description": "Identifies the type of access attempt, with specific identities like Access Identity 1 and Access Identity 3 having special barring rules.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "ACCESS_ALLOWED",
+      "name": "Access attempt allowed",
+      "entity_type": "Condition",
+      "description": "Condition where UE determines the access attempt is permitted to proceed.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "ACCESS_BARRED",
+      "name": "Access attempt barred",
+      "entity_type": "Condition",
+      "description": "Condition where UE determines the access attempt is not permitted and barring procedures apply.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "T390",
+      "name": "Timer T390",
+      "entity_type": "Timer",
+      "description": "Timer started when access is barred, with duration calculated from uac-BarringTime parameter.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "RANDOM_NUMBER",
+      "name": "Random number rand",
+      "entity_type": "Property",
+      "description": "Random value drawn uniformly between 0 and 1 used for probabilistic barring decisions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "UAC_BARRING_PARAMETER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access barring check procedure uses parameters from UAC barring parameter IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "ACCESS_IDENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access barring check evaluates based on Access Identity values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "ACCESS_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes access allowed condition when barring criteria are not met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "ACCESS_BARRED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes access barred condition when barring criteria are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACCESS_BARRED",
+      "target": "T390",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Access barred condition triggers starting of timer T390.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACCESS_BARRING_CHECK",
+      "target": "RANDOM_NUMBER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure uses random number generation for probabilistic barring decisions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.14.5"
+      ]
+    }
+  ]
+}

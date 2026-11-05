@@ -1,0 +1,279 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.1",
+  "title": "Overview",
+  "entities": [
+    {
+      "id": "PLAIN_NAS_MSG",
+      "name": "Plain NAS message",
+      "entity_type": "Message",
+      "description": "Standard L3 message structure consisting of protocol discriminator, EPS bearer identity/security header type, procedure transaction identity, message type, and other information elements.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "SEC_PROT_NAS_MSG",
+      "name": "Security protected NAS message",
+      "entity_type": "Message",
+      "description": "NAS message with security protection, consisting of security header type, protocol discriminator, message authentication code, sequence number, and plain NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Exception message that is not a standard L3 message as defined in 3GPP TS 24.007.",
+      "provenance": [
+        "TS 24.301, Clause 9.1"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_DISCRIMINATOR",
+      "name": "Protocol discriminator",
+      "entity_type": "Information Element",
+      "description": "Field in octet 1, bits 4-1, identifying the protocol type.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_ID_SEC_HDR",
+      "name": "EPS bearer identity or Security header type",
+      "entity_type": "Information Element",
+      "description": "Field in octet 1, bits 8-5, indicating either EPS bearer identity or security header type depending on message type.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "IE_PROC_TRANS_ID",
+      "name": "Procedure transaction identity",
+      "entity_type": "Information Element",
+      "description": "Field in octet 1a, used only in messages with protocol discriminator EPS session management.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "IE_MSG_TYPE",
+      "name": "Message type",
+      "entity_type": "Information Element",
+      "description": "Field in octets 2-3 identifying the specific message type.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "IE_OTHER_IES",
+      "name": "Other information elements",
+      "entity_type": "Information Element",
+      "description": "Additional information elements as required by the message, located in octet n.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "IE_SEC_HDR_TYPE",
+      "name": "Security header type",
+      "entity_type": "Information Element",
+      "description": "Field in octet 1, bits 8-5, indicating the security header type in protected messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "IE_MAC",
+      "name": "Message authentication code",
+      "entity_type": "Information Element",
+      "description": "Field in octets 2-5 providing integrity protection for security protected NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "IE_SEQ_NUM",
+      "name": "Sequence number",
+      "entity_type": "Information Element",
+      "description": "Field in octets 6-7 providing replay protection in security protected NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "PROP_IE_UNIQUENESS",
+      "name": "Information element uniqueness",
+      "entity_type": "Property",
+      "description": "Unless specified otherwise, a particular information element shall not be present more than once in a given message.",
+      "provenance": [
+        "TS 24.301, Clause 9.1"
+      ]
+    },
+    {
+      "id": "PROP_BIT_ORDERING",
+      "name": "Multi-octet field bit ordering",
+      "entity_type": "Property",
+      "description": "When a field extends over more than one octet, the most significant bit is the highest numbered bit of the lowest numbered octet, and the least significant bit is the lowest numbered bit of the highest numbered octet.",
+      "provenance": [
+        "TS 24.301, Clause 9.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PLAIN_NAS_MSG",
+      "target": "IE_PROTOCOL_DISCRIMINATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Plain NAS message contains protocol discriminator field.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PLAIN_NAS_MSG",
+      "target": "IE_EPS_BEARER_ID_SEC_HDR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Plain NAS message contains EPS bearer identity or security header type field.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PLAIN_NAS_MSG",
+      "target": "IE_PROC_TRANS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Plain NAS message contains procedure transaction identity field when applicable.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PLAIN_NAS_MSG",
+      "target": "IE_MSG_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Plain NAS message contains message type field.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PLAIN_NAS_MSG",
+      "target": "IE_OTHER_IES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Plain NAS message contains other information elements as required.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SEC_PROT_NAS_MSG",
+      "target": "IE_SEC_HDR_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Security protected NAS message contains security header type field.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SEC_PROT_NAS_MSG",
+      "target": "IE_PROTOCOL_DISCRIMINATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Security protected NAS message contains protocol discriminator field.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SEC_PROT_NAS_MSG",
+      "target": "IE_MAC",
+      "relation_type": "contains_IE",
+      "family": "sec",
+      "description": "Security protected NAS message contains message authentication code for integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SEC_PROT_NAS_MSG",
+      "target": "IE_SEQ_NUM",
+      "relation_type": "contains_IE",
+      "family": "sec",
+      "description": "Security protected NAS message contains sequence number for replay protection.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SEC_PROT_NAS_MSG",
+      "target": "PLAIN_NAS_MSG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Security protected NAS message contains the plain NAS message as its payload.",
+      "provenance": [
+        "TS 24.301, Clause 9.1",
+        "Figure 9.1.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_IE_UNIQUENESS",
+      "target": "PLAIN_NAS_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Information element uniqueness property applies to plain NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROP_BIT_ORDERING",
+      "target": "PLAIN_NAS_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Multi-octet field bit ordering property applies to plain NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 9.1"
+      ]
+    }
+  ]
+}

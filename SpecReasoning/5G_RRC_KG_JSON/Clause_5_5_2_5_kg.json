@@ -1,0 +1,247 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.2.5",
+  "title": "Measurement object addition/modification",
+  "entities": [
+    {
+      "id": "PROC_MEAS_OBJ_MOD",
+      "name": "Measurement Object Addition/Modification Procedure",
+      "entity_type": "Procedure",
+      "description": "UE procedure for processing measurement object configuration received in measObjectToAddModList. It handles addition, modification, and removal of measurement objects and their associated parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJ_TO_ADD_MOD_LIST",
+      "name": "measObjectToAddModList",
+      "entity_type": "Information Element",
+      "description": "List containing measurement objects to be added or modified, each identified by measObjectId.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "IE_MEAS_OBJECT",
+      "name": "measObject",
+      "entity_type": "Information Element",
+      "description": "Measurement object configuration containing various lists for cell management, exclusion, and transmission resource pools.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG",
+      "name": "VarMeasConfig",
+      "entity_type": "Property",
+      "description": "UE variable storing the current measurement configuration including measObjectList and measIdList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_CELLS_TO_REMOVE",
+      "name": "cellsToRemoveList",
+      "entity_type": "Information Element",
+      "description": "List of physical cell IDs to be removed from the cellsToAddModList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_CELLS_TO_ADD_MOD",
+      "name": "cellsToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of cells to be added or modified in the measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_EXCLUDED_CELLS",
+      "name": "excludedCellsToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of PCI ranges for cells to be excluded from measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_ALLOWED_CELLS",
+      "name": "allowedCellsToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of PCI ranges for cells allowed for measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_TX_POOL_MEAS",
+      "name": "tx-PoolMeasToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of transmission resource pools for measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "LIST_SSB_POSITION_QCL",
+      "name": "ssb-PositionQCL-CellsToAddModList",
+      "entity_type": "Information Element",
+      "description": "List of SSB position quasi-colocation cells for measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T321",
+      "name": "T321",
+      "entity_type": "Timer",
+      "description": "Periodical reporting timer for measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T322",
+      "name": "T322",
+      "entity_type": "Timer",
+      "description": "Measurement reporting timer.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST",
+      "name": "VarMeasReportList",
+      "entity_type": "Property",
+      "description": "UE variable storing the current measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEAS_OBJ_MOD",
+      "target": "IE_MEAS_OBJ_TO_ADD_MOD_LIST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure processes each measObjectId in the received measObjectToAddModList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MEAS_OBJ_MOD",
+      "target": "VAR_MEAS_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure accesses and modifies the VarMeasConfig variable.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_CELLS_TO_REMOVE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include cellsToRemoveList for cell removal operations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_CELLS_TO_ADD_MOD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include cellsToAddModList for cell addition/modification.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_EXCLUDED_CELLS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include excludedCellsToAddModList for cell exclusion management.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_ALLOWED_CELLS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include allowedCellsToAddModList for cell allowance management.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_TX_POOL_MEAS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include tx-PoolMeasToAddModList for transmission resource pool management.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_MEAS_OBJECT",
+      "target": "LIST_SSB_POSITION_QCL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measObject may include ssb-PositionQCL-CellsToAddModList for SSB position QCL cell management.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_MEAS_OBJ_MOD",
+      "target": "TIMER_T321",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T321 when measurement reporting entries are removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_MEAS_OBJ_MOD",
+      "target": "TIMER_T322",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T322 when measurement reporting entries are removed.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_MEAS_OBJ_MOD",
+      "target": "VAR_MEAS_REPORT_LIST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure removes measurement reporting entries from VarMeasReportList.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.2.5"
+      ]
+    }
+  ]
+}

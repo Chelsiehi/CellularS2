@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.1.4.1",
+  "title": "Coordination between 5GSM and ESM with N26 interface",
+  "entities": [
+    {
+      "id": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for transitioning from 5GS (N1 mode) to EPS (S1 mode) while maintaining PDU session continuity through mapped EPS bearer contexts.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for transitioning from EPS (S1 mode) to 5GS (N1 mode) while maintaining PDN connection continuity through mapped PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU Session",
+      "entity_type": "Property",
+      "description": "A 5GS session that can be mapped to EPS bearer contexts for inter-system mobility.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "MAPPED_EPS_BEARER_CONTEXTS",
+      "name": "Mapped EPS bearer contexts",
+      "entity_type": "Information Element",
+      "description": "EPS bearer context information mapped from 5GS PDU sessions for inter-system change to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "QOS_FLOW",
+      "name": "QoS Flow",
+      "entity_type": "Property",
+      "description": "5GS QoS flow that can be mapped to EPS bearer contexts with specific QoS parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT",
+      "name": "EPS Bearer Context",
+      "entity_type": "Property",
+      "description": "EPS bearer context created from mapped EPS bearer contexts or QoS flow associations during inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "MA_PDU_SESSION",
+      "name": "MA PDU Session",
+      "entity_type": "Property",
+      "description": "Multi-access PDU session that can be established over both 3GPP and non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_TYPE_MAPPING",
+      "name": "PDU session type to PDN type mapping",
+      "entity_type": "Condition",
+      "description": "Mapping rules between 5GS PDU session types and EPS PDN types for inter-system mobility.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "QOS_RULE",
+      "name": "QoS Rule",
+      "entity_type": "Information Element",
+      "description": "QoS rules that define packet filtering and QoS treatment for PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "QOS_FLOW_DESCRIPTION",
+      "name": "QoS Flow Description",
+      "entity_type": "Information Element",
+      "description": "Parameters describing QoS characteristics of a QoS flow for inter-system mobility.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "EPS message used to modify EPS bearer context parameters, including QoS rules and QoS flow descriptions.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "EPS message used to activate default EPS bearer context with QoS rules and QoS flow descriptions.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "MAPPED_EPS_BEARER_CONTEXTS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change from N1 to S1 mode requires mapped EPS bearer contexts for PDU session continuity.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "target": "EPS_BEARER_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE creates default and dedicated EPS bearer contexts based on mapped EPS bearer contexts during inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PDU_SESSION",
+      "target": "MAPPED_EPS_BEARER_CONTEXTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session contains mapped EPS bearer contexts for interworking with EPS.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "QOS_FLOW",
+      "target": "EPS_BEARER_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "QoS flows are mapped to EPS bearer contexts with specific EPS bearer identities and QoS parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_TYPE_MAPPING",
+      "target": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDU session type to PDN type mapping rules govern the inter-system change procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "QOS_RULE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains QoS rules parameter.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MODIFY_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "QOS_FLOW_DESCRIPTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MODIFY EPS BEARER CONTEXT REQUEST message contains QoS flow descriptions parameter.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "QOS_RULE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message contains QoS rules parameter.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "QOS_FLOW_DESCRIPTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message contains QoS flow descriptions parameter.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "INTERSYSTEM_CHANGE_S1_TO_N1",
+      "target": "PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change from S1 to N1 mode creates corresponding PDU sessions from PDN connections.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MA_PDU_SESSION",
+      "target": "INTERSYSTEM_CHANGE_N1_TO_S1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MA PDU session behavior affects the inter-system change procedure, particularly for 3GPP access handling.",
+      "provenance": [
+        "TS 24.501, Clause 6.1.4.1"
+      ]
+    }
+  ]
+}

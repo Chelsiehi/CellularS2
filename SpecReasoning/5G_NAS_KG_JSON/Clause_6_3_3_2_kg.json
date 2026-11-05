@@ -1,0 +1,222 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.3.2",
+  "title": "Network-requested PDU session release procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network (SMF) to release a PDU session. The SMF creates and sends a PDU SESSION RELEASE COMMAND message to the UE with appropriate cause values and information elements.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2",
+        "Figure 6.3.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to UE to initiate PDU session release. Contains various IEs including 5GSM cause, PTI, Access type, Back-off timer value, and Service-level-AA container.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2",
+        "Figure 6.3.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for PDU session release. Contains specific cause values like #8, #26, #29, #39, #46, #67, #69.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity IE used to correlate messages between UE and network during PDU session procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type (3GPP access) for the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "Timer value IE that may be included with certain 5GSM cause values to control UE behavior after session release.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "Container for service-level authentication and authorization responses, including SLAR and C2AR fields.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3592",
+      "name": "T3592",
+      "entity_type": "Timer",
+      "description": "Timer started by SMF when sending PDU SESSION RELEASE COMMAND message. Stopped upon receipt of PDU SESSION RELEASE COMPLETE.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2",
+        "Figure 6.3.3.2.1"
+      ]
+    },
+    {
+      "id": "COND_UE_OUT_OF_LADN",
+      "name": "UE out of LADN service area",
+      "entity_type": "Condition",
+      "description": "Condition where UE is outside LADN service area, triggering PDU session release with cause #46.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "COND_HIGH_PRIORITY_ACCESS",
+      "name": "High priority access UE",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for high priority access or emergency services, affecting Back-off timer inclusion.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "PROP_REMOVE_FROM_MBS_SESSIONS",
+      "name": "UE removed from MBS sessions",
+      "entity_type": "Property",
+      "description": "Behavior where SMF considers UE removed from associated MBS sessions when PDU session is released under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the PDU SESSION RELEASE COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the 5GSM cause IE indicating release reason",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains PTI IE for procedure correlation",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may contain Access type IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may contain Back-off timer value IE for certain cause values",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may contain Service-level-AA container for UAS services",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NETWORK_REQUESTED_PDU_SESSION_RELEASE",
+      "target": "TIMER_T3592",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3592 when sending release command",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2",
+        "Figure 6.3.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_UE_OUT_OF_LADN",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE being out of LADN service area requires cause #46 in 5GSM cause IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_HIGH_PRIORITY_ACCESS",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "High priority access UE condition prevents inclusion of Back-off timer value IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_UE_OUT_OF_LADN",
+      "target": "PROP_REMOVE_FROM_MBS_SESSIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE out of LADN with specific access conditions leads to removal from MBS sessions",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.2"
+      ]
+    }
+  ]
+}

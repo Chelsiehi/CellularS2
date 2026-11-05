@@ -1,0 +1,176 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.1.3",
+  "title": "Suspend and resume of the NAS signalling connection",
+  "entities": [
+    {
+      "id": "PROC_SUSPEND_RESUME",
+      "name": "Suspend and Resume of NAS Signalling Connection",
+      "entity_type": "Procedure",
+      "description": "Procedure for suspending and resuming NAS signalling connection when user plane CIoT EPS optimization is used. Initiated by network for suspend and by UE for resume.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EMM state where UE has an active NAS signalling connection with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE_SUSPEND",
+      "name": "EMM-IDLE mode with suspend indication",
+      "entity_type": "State",
+      "description": "EMM state where UE is idle but NAS signalling connection is suspended, not released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE_NO_SUSPEND",
+      "name": "EMM-IDLE mode without suspend indication",
+      "entity_type": "State",
+      "description": "Normal EMM idle state without suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "IE_URC_UPDATE_NEEDED",
+      "name": "UE radio capability information update needed IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating UE radio capability information needs update.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "COND_RRC_SUSPENDED",
+      "name": "RRC connection suspended",
+      "entity_type": "Condition",
+      "description": "Condition when lower layers indicate RRC connection has been suspended.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "COND_RRC_RESUMED",
+      "name": "RRC connection resumed",
+      "entity_type": "Condition",
+      "description": "Condition when lower layers indicate RRC connection has been resumed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "PROP_SECURE_NAS_CONTINUES",
+      "name": "Secure exchange of NAS messages not terminated",
+      "entity_type": "Property",
+      "description": "Property indicating secure NAS message exchange continues despite suspension.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "ACTION_CIPHER_MESSAGE",
+      "name": "Cipher NAS message",
+      "entity_type": "Property",
+      "description": "Action to cipher NAS message as specified in clause 4.4.5 before sending.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SUSPEND_RESUME",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Suspend procedure requires UE to be in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_RRC_SUSPENDED",
+      "target": "STATE_EMM_IDLE_SUSPEND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection suspended indication causes UE to enter EMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_RRC_SUSPENDED",
+      "target": "PROP_SECURE_NAS_CONTINUES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC suspension does not terminate secure NAS message exchange.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TAU_REQUEST",
+      "target": "IE_URC_UPDATE_NEEDED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message may contain UE radio capability information update needed IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_URC_UPDATE_NEEDED",
+      "target": "STATE_EMM_IDLE_NO_SUSPEND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of UE radio capability update needed IE causes transition to EMM-IDLE without suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RRC_RESUMED",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC connection resumed indication causes UE to enter EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_RRC_RESUMED",
+      "target": "ACTION_CIPHER_MESSAGE",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "RRC resume triggers ciphering of pending initial NAS message before sending.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.3"
+      ]
+    }
+  ]
+}

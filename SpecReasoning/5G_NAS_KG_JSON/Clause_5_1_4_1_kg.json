@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "UE_SINGLE_REGISTRATION",
+      "name": "UE operating in single-registration mode",
+      "entity_type": "Condition",
+      "description": "A UE that maintains one common registration for both 5GMM for 3GPP access and EMM when both 5GMM and EMM are enabled.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    },
+    {
+      "id": "UE_DUAL_REGISTRATION",
+      "name": "UE operating in dual-registration mode",
+      "entity_type": "Condition",
+      "description": "A UE capable of N1 mode and S1 mode that does not require coordination between 5GMM for 3GPP access and EMM, except as specified in subclause 4.8.3.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    },
+    {
+      "id": "COORDINATION_5GMM_EMM",
+      "name": "Coordination between 5GMM for 3GPP access and EMM",
+      "entity_type": "Procedure",
+      "description": "The coordination procedure that applies only to UEs operating in single-registration mode as specified in subclauses 5.1.4.2 and 5.1.4.3.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    },
+    {
+      "id": "SIM_USIM_INVALID_COORDINATION",
+      "name": "Coordination of SIM/USIM considered invalid",
+      "entity_type": "Procedure",
+      "description": "Coordination procedure for handling SIM/USIM invalid status between various mobility management entities as specified in subclause 5.1.5.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COORDINATION_5GMM_EMM",
+      "target": "UE_SINGLE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The coordination between 5GMM for 3GPP access and EMM only applies to UEs operating in single-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_DUAL_REGISTRATION",
+      "target": "COORDINATION_5GMM_EMM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Coordination between 5GMM for 3GPP access and EMM is not needed for UEs operating in dual-registration mode, except as specified in subclause 4.8.3.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIM_USIM_INVALID_COORDINATION",
+      "target": "COORDINATION_5GMM_EMM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The coordination of SIM/USIM considered invalid is a separate coordination procedure referenced from the general coordination clause.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.4.1"
+      ]
+    }
+  ]
+}

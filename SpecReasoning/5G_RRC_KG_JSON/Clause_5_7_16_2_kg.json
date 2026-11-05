@@ -1,0 +1,227 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.16.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_APPLICATION_LAYER_MEASUREMENT_REPORTING",
+      "name": "Application Layer Measurement Reporting Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to report application layer measurements in RRC_CONNECTED state when configured with application layer measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "name": "MeasurementReportAppLayer",
+      "entity_type": "Message",
+      "description": "RRC message used to report application layer measurements from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_MEAS_CONFIG_APP_LAYER_ID",
+      "name": "measConfigAppLayerId",
+      "entity_type": "Information Element",
+      "description": "Identifier for application layer measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_MEAS_REPORT_APP_LAYER_CONTAINER",
+      "name": "measReportAppLayerContainer",
+      "entity_type": "Information Element",
+      "description": "Container for application layer measurement report received from upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_APP_LAYER_SESSION_STATUS",
+      "name": "appLayerSessionStatus",
+      "entity_type": "Information Element",
+      "description": "Indicates session start or stop status for application layer measurement.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_APP_LAYER_BUFFER_LEVEL_LIST",
+      "name": "appLayerBufferLevelList",
+      "entity_type": "Information Element",
+      "description": "List of application layer buffer level values in chronological order.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_INITIAL_PLAYOUT_DELAY",
+      "name": "initialPlayoutDelay",
+      "entity_type": "Information Element",
+      "description": "Initial playout delay value from RAN visible application layer measurement report.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID_LIST",
+      "name": "pdu-SessionIdList",
+      "entity_type": "Information Element",
+      "description": "List of PDU session IDs indicated in RAN visible application layer measurement report.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "COND_MEASUREMENT_REPORTING_NOT_SUSPENDED",
+      "name": "Application Layer Measurement Reporting Not Suspended",
+      "entity_type": "Condition",
+      "description": "Condition that application layer measurement reporting has not been suspended for the measConfigAppLayerId.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "COND_RRC_SEGMENTATION_REQUIRED",
+      "name": "RRC Message Segmentation Required",
+      "entity_type": "Condition",
+      "description": "Condition when RRC message segmentation is enabled and encoded message exceeds PDCP SDU maximum size.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "PROC_UL_MESSAGE_SEGMENT_TRANSFER",
+      "name": "UL Message Segment Transfer Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for transferring uplink message segments when RRC message segmentation is required.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC connected state where UE can perform application layer measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_APPLICATION_LAYER_MEASUREMENT_REPORTING",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be initiated when UE is in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_APPLICATION_LAYER_MEASUREMENT_REPORTING",
+      "target": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes submitting MeasurementReportAppLayer message to lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_MEAS_CONFIG_APP_LAYER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains measConfigAppLayerId IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_MEAS_REPORT_APP_LAYER_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains measReportAppLayerContainer IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_APP_LAYER_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains appLayerSessionStatus IE when session status information is received.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_APP_LAYER_BUFFER_LEVEL_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains appLayerBufferLevelList IE when RAN visible buffer level reports are received.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_INITIAL_PLAYOUT_DELAY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains initialPlayoutDelay IE when received in RAN visible measurement report.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_MEASUREMENT_REPORT_APP_LAYER",
+      "target": "IE_PDU_SESSION_ID_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReportAppLayer message contains pdu-SessionIdList IE when PDU session IDs are indicated.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_APPLICATION_LAYER_MEASUREMENT_REPORTING",
+      "target": "COND_MEASUREMENT_REPORTING_NOT_SUSPENDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is guarded by condition that measurement reporting is not suspended.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_RRC_SEGMENTATION_REQUIRED",
+      "target": "PROC_UL_MESSAGE_SEGMENT_TRANSFER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RRC segmentation is required, UL message segment transfer procedure is initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.16.2"
+      ]
+    }
+  ]
+}

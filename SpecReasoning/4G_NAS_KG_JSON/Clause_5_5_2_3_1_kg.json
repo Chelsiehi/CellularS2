@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.1",
+  "title": "Network initiated detach procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_DETACH",
+      "name": "Network initiated detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network initiates detach by sending a DETACH REQUEST message to the UE, starting timer T3422, and handling security context and EPS bearer contexts based on detach type and EMM cause.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate the detach procedure. It may include an EMM cause IE and detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to accept the detach request, which stops timer T3422.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "IE included in DETACH REQUEST to specify the reason for detach. Values include #2 'IMSI unknown in HSS' and #78 'PLMN not allowed to operate at the present UE location'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether re-attach is required or not required, influencing security context handling and state transitions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3422",
+      "name": "T3422",
+      "entity_type": "Timer",
+      "description": "Timer started by the network upon sending DETACH REQUEST and stopped upon receiving DETACH ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED_INITIATED",
+      "name": "EMM-DEREGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by the network after sending DETACH REQUEST with specific detach type and EMM cause conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_AND_NOT_CAUSE2",
+      "name": "Detach type indicates re-attach and EMM cause not #2",
+      "entity_type": "Condition",
+      "description": "Condition where detach type is 're-attach required' or 're-attach not required' and EMM cause is not #2 'IMSI unknown in HSS'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "PROP_STORE_NATIVE_SECURITY_CONTEXT",
+      "name": "Store native EPS security context",
+      "entity_type": "Property",
+      "description": "Behavior where the MME stores the current EPS security context if it is native, performed under specific detach conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_MAPPED_SECURITY_CONTEXT",
+      "name": "Delete mapped EPS security context",
+      "entity_type": "Property",
+      "description": "Behavior where the MME deletes the current EPS security context if it is mapped, performed under specific detach conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "PROP_DEACTIVATE_EPS_BEARERS",
+      "name": "Deactivate EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "Behavior where the network deactivates EPS bearer contexts locally for the UE under specific detach conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST may include the EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST includes the detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "TIMER_T3422",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3422 upon sending DETACH REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_DETACH_ACCEPT",
+      "target": "TIMER_T3422",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving DETACH ACCEPT stops timer T3422.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1",
+        "Figure 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_REATTACH_AND_NOT_CAUSE2",
+      "target": "PROP_STORE_NATIVE_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to storing native EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REATTACH_AND_NOT_CAUSE2",
+      "target": "PROP_DELETE_MAPPED_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to deleting mapped EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_REATTACH_AND_NOT_CAUSE2",
+      "target": "PROP_DEACTIVATE_EPS_BEARERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to deactivating EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_REATTACH_AND_NOT_CAUSE2",
+      "target": "STATE_EMM_DEREGISTERED_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to entering state EMM-DEREGISTERED-INITIATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_REATTACH_AND_NOT_CAUSE2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE values guard the condition for re-attach and EMM cause not #2.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_EMM_CAUSE",
+      "target": "COND_REATTACH_AND_NOT_CAUSE2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause IE value guards the condition for not being #2.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.1"
+      ]
+    }
+  ]
+}

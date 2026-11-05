@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.4",
+  "title": "Attach accepted by the network",
+  "entities": [
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE when attach request is accepted. Contains various information elements including GUTI, TAI list, EPS network feature support, and ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure. Contains UE network capability, ESM message container, and other IEs.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "T3450",
+      "name": "Timer T3450",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when sending ATTACH ACCEPT message. Stopped when ATTACH COMPLETE is received.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "State entered by UE and MME after successful attach procedure completion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity assigned by MME to UE. Included in ATTACH ACCEPT when reallocated.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "ESM_MESSAGE_CONTAINER",
+      "name": "ESM message container",
+      "entity_type": "Information Element",
+      "description": "IE containing ESM messages like ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST or ESM DUMMY MESSAGE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "EPS_NETWORK_FEATURE_SUPPORT",
+      "name": "EPS network feature support",
+      "entity_type": "Information Element",
+      "description": "IE in ATTACH ACCEPT indicating network support for various features like EMM-REGISTERED without PDN connection, control plane CIoT EPS optimization, etc.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "UE_RADIO_CAPABILITY_DELETION",
+      "name": "UE radio capability information deletion",
+      "entity_type": "Property",
+      "description": "MME deletes stored UE radio capability information or UE radio capability ID when attach is accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "List of tracking areas assigned to UE in ATTACH ACCEPT. UE replaces old TAI list with new one.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "ATTACH_COMPLETE",
+      "name": "ATTACH COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to confirm successful attach. Contains ESM message container with responses.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_ACCEPT",
+      "target": "T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME starts timer T3450 when sending ATTACH ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_ACCEPT",
+      "target": "GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT may contain a new GUTI when reallocated by MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_ACCEPT",
+      "target": "TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT contains assigned TAI list for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ATTACH_ACCEPT",
+      "target": "ESM_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT contains ESM message container with ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_ACCEPT",
+      "target": "EPS_NETWORK_FEATURE_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH ACCEPT contains EPS network feature support IE indicating supported features.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_COMPLETE",
+      "target": "T3450",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "MME stops timer T3450 upon receiving ATTACH COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ATTACH_COMPLETE",
+      "target": "EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MME enters EMM-REGISTERED state upon receiving ATTACH COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ATTACH_ACCEPT",
+      "target": "UE_RADIO_CAPABILITY_DELETION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When attach is accepted, MME deletes stored UE radio capability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ATTACH_REQUEST",
+      "target": "ATTACH_ACCEPT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "ATTACH ACCEPT is sent by MME in response to ATTACH REQUEST when accepted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ATTACH_ACCEPT",
+      "target": "ATTACH_COMPLETE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends ATTACH COMPLETE in response to ATTACH ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.4"
+      ]
+    }
+  ]
+}

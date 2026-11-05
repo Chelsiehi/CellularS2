@@ -1,0 +1,227 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.6.3",
+  "title": "Reception of the CounterCheck message by the UE",
+  "entities": [
+    {
+      "id": "PROC_COUNTER_CHECK",
+      "name": "Counter Check Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE responds to network's CounterCheck message by reporting COUNT values for DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "MSG_COUNTER_CHECK",
+      "name": "CounterCheck message",
+      "entity_type": "Message",
+      "description": "Message sent by network to trigger UE COUNT value reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "MSG_COUNTER_CHECK_RESPONSE",
+      "name": "CounterCheckResponse message",
+      "entity_type": "Message",
+      "description": "UE response message containing DRB COUNT values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "IE_DRB_COUNTMSB_INFOLIST",
+      "name": "drb-CountMSB-InfoList",
+      "entity_type": "Information Element",
+      "description": "Information element in CounterCheck message containing most significant bits of COUNT values for DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "IE_DRB_COUNTINFOLIST",
+      "name": "drb-CountInfoList",
+      "entity_type": "Information Element",
+      "description": "Information element in CounterCheckResponse message containing complete COUNT values for DRBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "IE_DRB_IDENTITY",
+      "name": "drb-Identity",
+      "entity_type": "Information Element",
+      "description": "Identifier for a specific Data Radio Bearer.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "IE_COUNT_UPLINK",
+      "name": "count-Uplink",
+      "entity_type": "Information Element",
+      "description": "Uplink COUNT value for a DRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "IE_COUNT_DOWNLINK",
+      "name": "count-Downlink",
+      "entity_type": "Information Element",
+      "description": "Downlink COUNT value for a DRB.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "COND_DRB_ESTABLISHED",
+      "name": "DRB is established",
+      "entity_type": "Condition",
+      "description": "Condition where a Data Radio Bearer is currently established.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "COND_DRB_NOT_IN_MSBLIST",
+      "name": "DRB not in drb-CountMSB-InfoList",
+      "entity_type": "Condition",
+      "description": "Condition where DRB identity is not included in the drb-CountMSB-InfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "COND_COUNT_MSB_MISMATCH",
+      "name": "COUNT MSB mismatch",
+      "entity_type": "Condition",
+      "description": "Condition where most significant bits of COUNT differ from values in drb-CountMSB-InfoList.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "PROP_SUBMIT_RESPONSE",
+      "name": "Submit CounterCheckResponse",
+      "entity_type": "Property",
+      "description": "UE action to submit CounterCheckResponse message to lower layers for transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_COUNTER_CHECK",
+      "target": "MSG_COUNTER_CHECK",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Counter Check procedure begins with reception of CounterCheck message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_COUNTER_CHECK",
+      "target": "IE_DRB_COUNTMSB_INFOLIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CounterCheck message contains drb-CountMSB-InfoList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_COUNTER_CHECK_RESPONSE",
+      "target": "IE_DRB_COUNTINFOLIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CounterCheckResponse message contains drb-CountInfoList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_DRB_COUNTINFOLIST",
+      "target": "IE_DRB_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "drb-CountInfoList contains drb-Identity IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_DRB_COUNTINFOLIST",
+      "target": "IE_COUNT_UPLINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "drb-CountInfoList contains count-Uplink IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_DRB_COUNTINFOLIST",
+      "target": "IE_COUNT_DOWNLINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "drb-CountInfoList contains count-Downlink IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_DRB_ESTABLISHED",
+      "target": "PROP_SUBMIT_RESPONSE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "DRB being established establishes the condition for including it in CounterCheckResponse.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_DRB_NOT_IN_MSBLIST",
+      "target": "PROP_SUBMIT_RESPONSE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "DRB not in drb-CountMSB-InfoList establishes the condition for including it with TX_NEXT/RX_NEXT values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_COUNT_MSB_MISMATCH",
+      "target": "PROP_SUBMIT_RESPONSE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "COUNT MSB mismatch establishes the condition for including DRB with TX_NEXT/RX_NEXT values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_COUNTER_CHECK",
+      "target": "PROP_SUBMIT_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Counter Check procedure includes submitting CounterCheckResponse message to lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.6.3"
+      ]
+    }
+  ]
+}

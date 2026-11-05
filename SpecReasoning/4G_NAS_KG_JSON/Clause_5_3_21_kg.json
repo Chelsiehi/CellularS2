@@ -1,0 +1,180 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.21",
+  "title": "Wake-up signal assistance",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE indicates WUS assistance capability and may include UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "PROC_TAU",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which UE indicates WUS assistance capability and may include UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_WUS_ASSISTANCE",
+      "name": "Requested WUS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "Information element that may contain UE paging probability information provided by the UE during attach or tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "name": "Negotiated WUS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the negotiated UE paging probability information provided by the network when accepting attach or tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "PROP_UE_PAGING_PROBABILITY",
+      "name": "UE paging probability information",
+      "entity_type": "Property",
+      "description": "Assistance information used to determine the WUS group for paging the UE. Negotiated between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACH",
+      "name": "UE attached for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached for emergency bearer services, which prohibits inclusion of UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "PROP_WUS_ASSISTANCE_USE",
+      "name": "Use of WUS assistance",
+      "entity_type": "Property",
+      "description": "Property indicating whether UE and network can use WUS assistance based on negotiated information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "PROC_EMERGENCY_PDN_CONNECTION",
+      "name": "PDN connection for emergency bearer service",
+      "entity_type": "Procedure",
+      "description": "Procedure that, when established, suspends WUS assistance usage until emergency connection is released.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "IE_REQUESTED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Attach procedure may contain Requested WUS assistance information IE with UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU",
+      "target": "IE_REQUESTED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Tracking area updating procedure may contain Requested WUS assistance information IE with UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_REQUESTED_WUS_ASSISTANCE",
+      "target": "PROP_UE_PAGING_PROBABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Requested WUS assistance information IE may contain UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_ATTACH",
+      "target": "IE_REQUESTED_WUS_ASSISTANCE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE shall not include Requested WUS assistance information IE when attached for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_ATTACH",
+      "target": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network includes Negotiated WUS assistance information IE when accepting attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_TAU",
+      "target": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network includes Negotiated WUS assistance information IE when accepting tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "target": "PROP_UE_PAGING_PROBABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Negotiated WUS assistance information IE contains the negotiated UE paging probability information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "target": "PROP_WUS_ASSISTANCE_USE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of Negotiated WUS assistance information IE establishes that UE can use WUS assistance.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_EMERGENCY_PDN_CONNECTION",
+      "target": "PROP_WUS_ASSISTANCE_USE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Establishment of PDN connection for emergency bearer service suspends WUS assistance usage.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.21"
+      ]
+    }
+  ]
+}

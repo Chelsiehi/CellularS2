@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.8.2",
+  "title": "Actions related to transmission of RemoteUEInformationSidelink message",
+  "entities": [
+    {
+      "id": "RemoteUEInformationSidelink",
+      "name": "RemoteUEInformationSidelink message",
+      "entity_type": "Message",
+      "description": "Message transmitted by L2 U2N Remote UE containing sidelink information including requested SIBs and paging identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "sl_Requested_SI_List",
+      "name": "sl-Requested-SI-List",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the requested SIB(s) when UE has not stored valid versions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "sl_PagingIdentity_RemoteUE",
+      "name": "sl-PagingIdentity-RemoteUE",
+      "entity_type": "Information Element",
+      "description": "Information element containing paging identity (ng-5G-S-TMSI and/or fullI-RNTI) for the remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "sl_PagingCycle_RemoteUE",
+      "name": "sl-PagingCycle-RemoteUE",
+      "entity_type": "Information Element",
+      "description": "Information element containing UE specific DRX cycle configuration for paging.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is idle and not actively connected.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where UE is inactive but maintains some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "RRC state where UE is actively connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "NO_VALID_SIB_STORED",
+      "name": "UE has not stored valid SIB version",
+      "entity_type": "Condition",
+      "description": "Condition where UE lacks valid stored versions of required System Information Blocks.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "ENTER_RRC_CONNECTED",
+      "name": "Entering RRC_CONNECTED state",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE transitions to RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "IE_RELEASE",
+      "name": "Information Element release",
+      "entity_type": "Property",
+      "description": "Property of setting information elements to release value when entering connected state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RemoteUEInformationSidelink",
+      "target": "sl_Requested_SI_List",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RemoteUEInformationSidelink message contains sl-Requested-SI-List IE when UE lacks valid SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RemoteUEInformationSidelink",
+      "target": "sl_PagingIdentity_RemoteUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RemoteUEInformationSidelink message contains sl-PagingIdentity-RemoteUE IE for paging identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RemoteUEInformationSidelink",
+      "target": "sl_PagingCycle_RemoteUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RemoteUEInformationSidelink message contains sl-PagingCycle-RemoteUE IE for DRX cycle configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NO_VALID_SIB_STORED",
+      "target": "sl_Requested_SI_List",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of no valid SIB stored guards the inclusion of sl-Requested-SI-List IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_IDLE",
+      "target": "sl_PagingIdentity_RemoteUE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC_IDLE state requires inclusion of ng-5G-S-TMSI in sl-PagingIdentity-RemoteUE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRC_INACTIVE",
+      "target": "sl_PagingIdentity_RemoteUE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC_INACTIVE state requires inclusion of ng-5G-S-TMSI and fullI-RNTI in sl-PagingIdentity-RemoteUE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTER_RRC_CONNECTED",
+      "target": "IE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering RRC_CONNECTED state establishes the property of releasing sl-Requested-SI-List and sl-PagingInfo-RemoteUE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_RELEASE",
+      "target": "sl_Requested_SI_List",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE release property guards the setting of sl-Requested-SI-List to release value.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_RELEASE",
+      "target": "sl_PagingIdentity_RemoteUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE release property guards the setting of sl-PagingInfo-RemoteUE to release value.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.8.2"
+      ]
+    }
+  ]
+}

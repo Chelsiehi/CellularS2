@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.24",
+  "title": "WUS assistance",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which WUS assistance information capability is indicated and UE paging probability information may be negotiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_WUS_ASSISTANCE",
+      "name": "Requested WUS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION REQUEST message that may contain UE paging probability information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "name": "Negotiated WUS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION ACCEPT message that contains negotiated UE paging probability information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE that may include Requested WUS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network that may include Negotiated WUS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "PROP_UE_PAGING_PROBABILITY",
+      "name": "UE paging probability information",
+      "entity_type": "Property",
+      "description": "Assistance information used to determine the WUS group for paging UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "COND_NO_EMERGENCY_PDU_SESSION",
+      "name": "No emergency PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not have an active emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_SESSION_ACTIVE",
+      "name": "Emergency PDU session active",
+      "entity_type": "Condition",
+      "description": "Condition where UE has an active emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "PROP_WUS_ASSISTANCE_USAGE",
+      "name": "WUS assistance information usage",
+      "entity_type": "Property",
+      "description": "Property indicating whether UE can use WUS assistance information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Requested WUS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message may contain Negotiated WUS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_REQUESTED_WUS_ASSISTANCE",
+      "target": "PROP_UE_PAGING_PROBABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Requested WUS assistance information IE may contain UE paging probability information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "target": "PROP_UE_PAGING_PROBABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Negotiated WUS assistance information IE contains negotiated UE paging probability information.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NO_EMERGENCY_PDU_SESSION",
+      "target": "PROC_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Registration procedure for WUS assistance negotiation requires no emergency PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EMERGENCY_PDU_SESSION_ACTIVE",
+      "target": "PROP_WUS_ASSISTANCE_USAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency PDU session active condition prevents WUS assistance information usage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_NEGOTIATED_WUS_ASSISTANCE",
+      "target": "PROP_WUS_ASSISTANCE_USAGE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of Negotiated WUS assistance information IE enables WUS assistance usage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.24"
+      ]
+    }
+  ]
+}

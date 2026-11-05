@@ -1,0 +1,163 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.2.7",
+  "title": "EMM-SERVICE-REQUEST-INITIATED",
+  "entities": [
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "State entered by a UE after starting the service request procedure while waiting for a response from the MME.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "Main EMM state where the UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to request establishment of bearers for user data transfer or signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "TS 24.301, Clause 5.6.1"
+      ]
+    },
+    {
+      "id": "CONDITION_SR_INITIATED",
+      "name": "SR initiated",
+      "entity_type": "Condition",
+      "description": "Condition triggered when the UE initiates the service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "CONDITION_SR_ACCEPTED",
+      "name": "SR accepted",
+      "entity_type": "Condition",
+      "description": "Condition when the service request is accepted by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "CONDITION_SR_FAILED",
+      "name": "SR failed",
+      "entity_type": "Condition",
+      "description": "Condition when the service request procedure fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "CONDITION_SR_REJECTED",
+      "name": "SR rejected (#13, #15, #18, #25, #39)",
+      "entity_type": "Condition",
+      "description": "Condition when the service request is rejected with specific EMM causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_EMM_REGISTERED",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Transition from EMM-REGISTERED to EMM-SERVICE-REQUEST-INITIATED when service request is initiated.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_SR_INITIATED",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SR initiated condition establishes the EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Transition back to EMM-REGISTERED when SR is accepted, failed, or rejected with specific causes.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_SR_ACCEPTED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SR accepted condition re-establishes the EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_SR_FAILED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SR failed condition re-establishes the EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_SR_REJECTED",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SR rejected condition re-establishes the EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "Figure 5.1.3.2.2.7.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request procedure initiation establishes the EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.2.7",
+        "TS 24.301, Clause 5.6.1"
+      ]
+    }
+  ]
+}

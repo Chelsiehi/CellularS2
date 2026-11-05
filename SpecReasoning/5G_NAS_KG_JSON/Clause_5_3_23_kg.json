@@ -1,0 +1,220 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.23",
+  "title": "Forbidden wireline access area",
+  "entities": [
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that enforces forbidden wireline access area restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject registration when wireline access area is forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to reject service when wireline access area is forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.23"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to request deregistration when wireline access area is forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "CAUSE_77",
+      "name": "5GMM cause #77",
+      "entity_type": "Information Element",
+      "description": "Cause value indicating 'wireline access area not allowed'.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "FORBIDDEN_AREA_CONDITION",
+      "name": "Forbidden area enforcement condition",
+      "entity_type": "Condition",
+      "description": "Conditions specified in 3GPP TS 23.316 for AMF's enforcement of forbidden area.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "5G_RG",
+      "name": "5G-RG",
+      "entity_type": "Property",
+      "description": "5G Residential Gateway that is restricted from accessing 5GCN when forbidden area condition is met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "W_AGF_FN_CRG",
+      "name": "W-AGF acting on behalf of FN-CRG",
+      "entity_type": "Property",
+      "description": "Wireline Access Gateway Function representing Fixed Network Customer Residential Gateway.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "W_AGF_N5GC",
+      "name": "W-AGF acting on behalf of N5GC device",
+      "entity_type": "Property",
+      "description": "Wireline Access Gateway Function representing N5GC device.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "ACCESS_RESTRICTION",
+      "name": "Access restriction behavior",
+      "entity_type": "Condition",
+      "description": "Condition where devices are prevented from accessing 5GCN over wireline access network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "REGISTRATION_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF sends REGISTRATION REJECT when forbidden area conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AMF",
+      "target": "SERVICE_REJECT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF sends SERVICE REJECT when forbidden area conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AMF",
+      "target": "DEREGISTRATION_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF sends DEREGISTRATION REQUEST when forbidden area conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_REJECT",
+      "target": "CAUSE_77",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message contains 5GMM cause #77.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SERVICE_REJECT",
+      "target": "CAUSE_77",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains 5GMM cause #77.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "CAUSE_77",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains 5GMM cause #77.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AMF",
+      "target": "FORBIDDEN_AREA_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF enforcement is guarded by forbidden area conditions from TS 23.316.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CAUSE_77",
+      "target": "ACCESS_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of cause #77 establishes access restriction conditions for devices.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "ACCESS_RESTRICTION",
+      "target": "5G_RG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access restriction prevents 5G-RG from accessing 5GCN until specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ACCESS_RESTRICTION",
+      "target": "W_AGF_FN_CRG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access restriction prevents W-AGF (FN-CRG) from accessing 5GCN until FN-CRG is switched off.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "ACCESS_RESTRICTION",
+      "target": "W_AGF_N5GC",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Access restriction prevents W-AGF (N5GC) from accessing 5GCN until FN-CRG serving it is switched off.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.23"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.3.2",
+  "title": "Derivation of NR sidelink measurement results",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The UE that performs NR sidelink measurements and derives measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "PEER_UE",
+      "name": "Peer UE",
+      "entity_type": "Property",
+      "description": "The UE that configures the measurement UE for NR sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "NR_SIDELINK_MEASUREMENT",
+      "name": "NR sidelink measurement procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deriving NR sidelink measurement results including RSRP measurements based on configured parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "PC5_RRC_CONNECTION",
+      "name": "PC5-RRC connection",
+      "entity_type": "Property",
+      "description": "The sidelink RRC connection between UEs over which measurements are performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "SL_MEASOBJECT",
+      "name": "sl-MeasObject",
+      "entity_type": "Information Element",
+      "description": "Configuration object containing parameters for NR sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "SL_REPORTCONFIG",
+      "name": "sl-ReportConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration object containing reporting parameters for NR sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "NR_SIDELINK_RSRP",
+      "name": "NR sidelink RSRP measurement",
+      "entity_type": "Property",
+      "description": "Reference Signal Received Power measurement for NR sidelink communications.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "NR_SIDELINK_DMRS",
+      "name": "NR sidelink DMRS",
+      "entity_type": "Property",
+      "description": "Demodulation Reference Signals used for NR sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "LAYER3_FILTERING",
+      "name": "Layer 3 filtering",
+      "entity_type": "Procedure",
+      "description": "Filtering procedure applied to measurement results as described in clause 5.5.3.2.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PEER_UE",
+      "target": "UE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Peer UE configures the UE to perform NR sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "PC5_RRC_CONNECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NR sidelink measurements are performed per PC5-RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "SL_MEASOBJECT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Measurement procedure uses parameters from sl-MeasObject configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "SL_REPORTCONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Measurement procedure uses parameters from sl-ReportConfig configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "NR_SIDELINK_RSRP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Measurement procedure derives NR sidelink RSRP measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "NR_SIDELINK_DMRS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Measurement procedure derives measurement quantities based on NR sidelink DMRS.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NR_SIDELINK_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Measurement procedure applies layer 3 filtering to measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.3.2"
+      ]
+    }
+  ]
+}

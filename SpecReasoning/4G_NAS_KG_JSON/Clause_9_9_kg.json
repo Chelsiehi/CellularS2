@@ -1,0 +1,208 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9",
+  "title": "Other information elements",
+  "entities": [
+    {
+      "id": "IE_APN_AMBR",
+      "name": "APN aggregate maximum bit rate",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the aggregate maximum bit rate for an APN in both downlink and uplink directions. It has variable length (4, 6, or 8 octets) with optional extended fields for higher bit rates.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.2.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_QOS",
+      "name": "EPS quality of service",
+      "entity_type": "Information Element",
+      "description": "Information element specifying QoS parameters for EPS bearers including QCI, maximum bit rates, and guaranteed bit rates. It supports extended bit rate values with optional fields.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.3.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for session management request rejection. Contains cause values defined in annex B of the specification.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.4.1",
+        "Table 9.9.4.4.1"
+      ]
+    },
+    {
+      "id": "IE_ESM_INFO_TRANSFER_FLAG",
+      "name": "ESM information transfer flag",
+      "entity_type": "Information Element",
+      "description": "Type 1 information element indicating whether security protected ESM information transfer is required. Bit 1 value determines the security requirement.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.5.1",
+        "Table 9.9.4.5.1"
+      ]
+    },
+    {
+      "id": "IE_LINKED_EPS_BEARER_ID",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Type 1 information element identifying the default bearer associated with a dedicated EPS bearer or the EPS bearer with which packet filters are associated.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.6.1",
+        "Table 9.9.4.6.1"
+      ]
+    },
+    {
+      "id": "IE_NOTIFICATION_INDICATOR",
+      "name": "Notification indicator",
+      "entity_type": "Information Element",
+      "description": "Information element used to inform the UE about events relevant for upper layers, such as SRVCC handover cancellation and IMS session re-establishment requirement.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.7A.1",
+        "Table 9.9.4.7A.1"
+      ]
+    },
+    {
+      "id": "IE_PDN_ADDRESS",
+      "name": "PDN address",
+      "entity_type": "Information Element",
+      "description": "Information element containing PDN type and address information, supporting IPv4, IPv6, IPv4v6, non-IP, and Ethernet address types with variable length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.9.1",
+        "Table 9.9.4.9.1"
+      ]
+    },
+    {
+      "id": "IE_USER_DATA_CONTAINER",
+      "name": "User data container",
+      "entity_type": "Information Element",
+      "description": "Type 6 information element used to encapsulate user data transferred between UE and MME. Contains the actual user data payload.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.24.1",
+        "Table 9.9.4.24.1"
+      ]
+    },
+    {
+      "id": "IE_RELEASE_ASSISTANCE_IND",
+      "name": "Release assistance indication",
+      "entity_type": "Information Element",
+      "description": "Type 1 information element informing the network about expected data transmission patterns to assist with connection release decisions.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.25.1",
+        "Table 9.9.4.25.1"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_APN_AMBR",
+      "name": "Extended APN aggregate maximum bit rate",
+      "entity_type": "Information Element",
+      "description": "Information element providing extended APN-AMBR values with unit indicators supporting very high bit rates up to 256 Pbps.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.29.1",
+        "Table 9.9.4.29.1"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_QOS",
+      "name": "Extended quality of service",
+      "entity_type": "Information Element",
+      "description": "Information element indicating maximum and guaranteed bit rates for EPS bearer contexts with values higher than 10 Gbps, supporting rates up to 256 Pbps.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.30.1",
+        "Table 9.9.4.30.1"
+      ]
+    },
+    {
+      "id": "COND_SECURITY_PROTECTED_ESM",
+      "name": "Security protected ESM information transfer required",
+      "entity_type": "Condition",
+      "description": "Condition determined by ESM information transfer flag value (bit 1) indicating whether security protection is required for ESM information transfer.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Table 9.9.4.5.1"
+      ]
+    },
+    {
+      "id": "COND_DDX_EXPECTED",
+      "name": "Downlink data expected condition",
+      "entity_type": "Condition",
+      "description": "Condition indicated by release assistance indication specifying whether further uplink/downlink data transmission is expected after current transmission.",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Table 9.9.4.25.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_ESM_INFO_TRANSFER_FLAG",
+      "target": "COND_SECURITY_PROTECTED_ESM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM information transfer flag bit value determines whether security protected ESM information transfer is required",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Table 9.9.4.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_RELEASE_ASSISTANCE_IND",
+      "target": "COND_DDX_EXPECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Release assistance indication DDX bits specify the expected data transmission pattern for connection release decisions",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Table 9.9.4.25.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_APN_AMBR",
+      "target": "IE_EXTENDED_APN_AMBR",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Extended APN-AMBR provides higher capacity version of APN-AMBR with extended bit rate ranges",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.29.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EPS_QOS",
+      "target": "IE_EXTENDED_QOS",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Extended QoS provides higher capacity version of EPS QoS with extended bit rate ranges beyond 10 Gbps",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.30.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_USER_DATA_CONTAINER",
+      "target": "IE_ESM_DATA_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "User data container is carried within ESM DATA TRANSPORT messages for user data transfer between UE and MME",
+      "provenance": [
+        "TS 24.301, Clause 9.9",
+        "Figure 9.9.4.24.1"
+      ]
+    }
+  ]
+}

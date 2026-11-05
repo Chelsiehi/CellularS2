@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.12",
+  "title": "Extended idle-mode DRX cycle",
+  "entities": [
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE attachment to the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROC_TAU",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_DRX_PARAMS",
+      "name": "Extended DRX parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element used to negotiate extended idle-mode DRX cycle parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_BEARER",
+      "name": "PDN connection for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition indicating the UE has an active PDN connection for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROP_USE_eDRX",
+      "name": "Use extended DRX",
+      "entity_type": "Property",
+      "description": "Property indicating the UE or network is using extended idle-mode DRX cycle.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROP_STORE_DRX_PARAM",
+      "name": "Stored UE specific DRX parameter",
+      "entity_type": "Property",
+      "description": "Property indicating the UE or network has stored UE-specific DRX parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROC_PDN_DISCONNECT",
+      "name": "PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for disconnecting a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_DEACT",
+      "name": "EPS bearer context deactivation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deactivating EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to request services from the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "IDENT_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identifier used to identify the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH",
+      "target": "IE_EXTENDED_DRX_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE may include extended DRX parameters IE during attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU",
+      "target": "IE_EXTENDED_DRX_PARAMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE may include extended DRX parameters IE during tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_USE_eDRX",
+      "target": "COND_EMERGENCY_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Use of eDRX is prohibited if UE has PDN connection for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PDN_DISCONNECT",
+      "target": "PROP_USE_eDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful PDN disconnect procedure for emergency services resumes eDRX.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_EPS_BEARER_DEACT",
+      "target": "PROP_USE_eDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful EPS bearer context deactivation for emergency services resumes eDRX.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "PROP_USE_eDRX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful service request procedure enables eDRX use after local emergency connection release.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_STORE_DRX_PARAM",
+      "target": "PROP_USE_eDRX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Stored UE specific DRX parameter is used if eDRX is not accepted or emergency bearer exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IDENT_GUTI",
+      "target": "PROP_STORE_DRX_PARAM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network uses stored DRX parameter with old GUTI and eDRX with new GUTI during GUTI reassignment.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.12"
+      ]
+    }
+  ]
+}

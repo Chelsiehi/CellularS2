@@ -1,0 +1,73 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.3.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------",
+    "The network may initiate the paging procedure for CS fallback when the UE is IMSI attached for non-EPS services (see example in figure 5.6.2.3.1.1)",
+    "The network should not initiate the paging procedure for CS fallback for a UE if the MME has stored paging restriction of the UE and the Paging restriction type in the stored paging restriction preferences is set to",
+    "a) \"All paging is restricted\"; or",
+    "b) \"All paging is restricted except for specified PDN connection(s)\"",
+    "Figure 5.6.2.3.1.1: Paging procedure for CS fallback to A/Gb or Iu mode",
+    "To initiate the procedure when no NAS signalling connection exists and no paging restriction applied in the network for that paging, the EMM entity in the network requests the lower layer to start paging (see 3GPP S 36.300 [20], 3GPP S 36.413 [23]). The EMM entity may provide the lower layer with a list of CSG IDs, including the CSG IDs of both the expired and the not expired subscriptions. If there is a PDN connection for emergency bearer services established, the EMM entity in the network shall not provide the list of CSG IDs to the lower layer. The paging message includes a UE Paging Identity set to either the UE 's S-TMSI or the UE 's IMSI, and a CN domain indicator set to \"CS\" in order to indicate that this is paging for CS fallback",
+    "NOTE: The timers T3413 and T3415 are not started in the network when the paging procedure is initiated for CS fallback",
+    "To notify the UE about an incoming mobile terminating CS service excluding SMS over SGs when a NAS signalling connection exists, the EMM entity in the network shall send a CS SERVICE NOTIFICATION message. This message may also include CS service related parameters (e.g. Calling Line Identification, SS or LCS related parameters)",
+    "Upon reception of a paging indication, a UE that is IMSI attached for non-EPS services shall initiate a service request procedure or combined tracking area updating procedure as specified in clause 5.5.3.3.2. If the paging is received in EMM-IDLE mode, the UE shall respond immediately",
+    "Upon reception of a paging indication, if the network supports the reject paging request feature and the MUSIM UE decides not to accept the paging the UE may initiate a service request procedure to reject the paging as specified in clause 5.6.1.1",
+    "If the paging is received as a CS SERVICE NOTIFICATION message in EMM-CONNECTED mode, the UE may request upper layers input i.e. to accept or reject CS fallback before responding with an EXTENDED SERVICE REQUEST. The response is indicated in the CSFB response information element in the EXTENDED SERVICE REQUEST message in both EMM-IDLE and EMM-CONNECTED modes",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.2.3.1.1",
+      "file": "Figure_5_6_2_3_1_1_p261.png.json",
+      "title": "Paging procedure for CS fallback to A/Gb or Iu mode",
+      "content": {
+        "figure_id": "5.6.2.3.1.1",
+        "title": "Paging procedure for CS fallback to A/Gb or Iu mode",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "AS",
+              "name": "Request paging",
+              "notes": ""
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "Paging",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "EXTENDED SERVICE REQUEST",
+              "notes": ""
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Network initiates paging procedure for CS fallback when UE is IMSI attached for non-EPS services",
+            "MME sends Request paging to AS",
+            "AS pages the UE",
+            "UE responds with EXTENDED SERVICE REQUEST message"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

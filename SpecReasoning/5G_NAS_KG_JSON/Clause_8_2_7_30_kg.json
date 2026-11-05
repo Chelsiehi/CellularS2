@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.30",
+  "title": "T3324 value",
+  "entities": [
+    {
+      "id": "IE_T3324_VALUE",
+      "name": "T3324 value",
+      "entity_type": "Information Element",
+      "description": "Information element representing the active time value for MICO mode operation.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function responsible for including the T3324 value IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "UE_REQUEST_ACTIVE_TIME",
+      "name": "UE requested active time value",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has requested active time value in the REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "AMF_ACCEPTS_MICO",
+      "name": "AMF accepts MICO mode and active time",
+      "entity_type": "Condition",
+      "description": "Condition where the AMF decides to accept both MICO mode and the use of active time.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "MICO_MODE",
+      "name": "MICO mode",
+      "entity_type": "Property",
+      "description": "Mobile Initiated Connection Only mode allowing UE to remain in power saving state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "IE_T3324_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AMF includes the T3324 value IE when specified conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AMF_ACCEPTS_MICO",
+      "target": "IE_T3324_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of T3324 value IE is guarded by AMF acceptance of MICO mode and active time.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_REQUEST_ACTIVE_TIME",
+      "target": "IE_T3324_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of T3324 value IE is guarded by UE requesting active time value.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AMF_ACCEPTS_MICO",
+      "target": "MICO_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF acceptance establishes the use of MICO mode.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.30"
+      ]
+    }
+  ]
+}

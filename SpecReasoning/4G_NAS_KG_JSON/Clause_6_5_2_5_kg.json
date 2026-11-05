@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.2.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3492",
+      "name": "Timer T3492",
+      "entity_type": "Timer",
+      "description": "Timer used during UE requested PDN disconnect procedure. On expiry, UE resends PDN DISCONNECT REQUEST and restarts timer. After fifth expiry, procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "PROC_PDN_DISCONNECT",
+      "name": "UE requested PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to disconnect a PDN connection. Includes sending PDN DISCONNECT REQUEST and handling abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN disconnection. Retransmitted on T3492 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered after aborting PDN disconnect procedure on fifth T3492 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "COND_T3492_FIFTH_EXPIRY",
+      "name": "Fifth expiry of timer T3492",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3492 expires for the fifth time, leading to procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_DEACTIVATION",
+      "name": "Local deactivation of EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "Behavior where UE deactivates all EPS bearer contexts for the PDN connection locally without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to synchronize EPS bearer context status with MME when returning to E-UTRAN coverage.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "name": "EPS bearer context status IE",
+      "entity_type": "Information Element",
+      "description": "Information element included in TRACKING AREA UPDATE REQUEST to synchronize bearer context status.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_DEDICATED_ACTIVATION",
+      "name": "Collision with dedicated EPS bearer activation",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST during PDN disconnect procedure for same PDN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_BEARER_MODIFICATION",
+      "name": "Collision with EPS bearer modification",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives MODIFY EPS BEARER CONTEXT REQUEST during PDN disconnect procedure for same PDN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_BEARER_DEACTIVATION",
+      "name": "Collision with EPS bearer deactivation",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives DEACTIVATE EPS BEARER CONTEXT REQUEST during PDN disconnect procedure for dedicated bearer of same PDN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_DISCONNECT",
+      "target": "TIMER_T3492",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "PDN disconnect procedure starts timer T3492.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN disconnect procedure includes sending PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3492_FIFTH_EXPIRY",
+      "target": "PROP_LOCAL_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3492 expiry establishes local deactivation of EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3492_FIFTH_EXPIRY",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth T3492 expiry establishes transition to PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_COLLISION_DEDICATED_ACTIVATION",
+      "target": "PROC_PDN_DISCONNECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision with dedicated bearer activation guards PDN disconnect procedure to ignore activation request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_COLLISION_BEARER_MODIFICATION",
+      "target": "PROC_PDN_DISCONNECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision with bearer modification guards PDN disconnect procedure to ignore modification request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_COLLISION_BEARER_DEACTIVATION",
+      "target": "PROC_PDN_DISCONNECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision with bearer deactivation guards PDN disconnect procedure to proceed with both procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.5"
+      ]
+    }
+  ]
+}

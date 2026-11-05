@@ -1,0 +1,298 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.2.4",
+  "title": "Substate when back to state 5GMM-DEREGISTERED from another 5GMM state",
+  "entities": [
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "Main state in 5GMM protocol where UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_NO_CELL_AVAILABLE",
+      "name": "NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate when no cell has been found during cell selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_NO_SUPI",
+      "name": "NO-SUPI",
+      "entity_type": "State",
+      "description": "Substate when no USIM is present or the inserted USIM is considered invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_NORMAL_SERVICE",
+      "name": "NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "Substate when a suitable cell is found and PLMN/tracking area is not forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_ATTEMPTING_REGISTRATION",
+      "name": "ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "Substate when an initial registration shall be performed.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_PLMN_SEARCH",
+      "name": "PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Substate when PLMN reselection or SNPN reselection is needed.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_LIMITED_SERVICE",
+      "name": "LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "Substate when selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "SUBSTATE_ECALL_INACTIVE",
+      "name": "eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Substate when UE is configured for eCall only mode and conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_NO_CELL_FOUND",
+      "name": "No cell found",
+      "entity_type": "Condition",
+      "description": "Condition when cell selection procedure finds no available cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_NO_USIM",
+      "name": "No USIM or invalid USIM",
+      "entity_type": "Condition",
+      "description": "Condition when no USIM is present or USIM is considered invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_SUITABLE_CELL",
+      "name": "Suitable cell found",
+      "entity_type": "Condition",
+      "description": "Condition when suitable cell is found and PLMN/tracking area not forbidden.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_INITIAL_REGISTRATION",
+      "name": "Initial registration required",
+      "entity_type": "Condition",
+      "description": "Condition when initial registration shall be performed.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_PLMN_RESELECTION",
+      "name": "PLMN reselection needed",
+      "entity_type": "Condition",
+      "description": "Condition when PLMN or SNPN reselection is required.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_CELL_LIMITED_SERVICE",
+      "name": "Cell provides limited service",
+      "entity_type": "Condition",
+      "description": "Condition when selected cell cannot provide normal service.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_ECALL_ONLY_MODE",
+      "name": "eCall only mode conditions",
+      "entity_type": "Condition",
+      "description": "Condition when UE is configured for eCall only mode and timers T3444/T3445 have expired or are not running.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NO_CELL_FOUND",
+      "target": "SUBSTATE_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no cell found establishes NO-CELL-AVAILABLE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NO_USIM",
+      "target": "SUBSTATE_NO_SUPI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no USIM or invalid USIM establishes NO-SUPI substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SUITABLE_CELL",
+      "target": "SUBSTATE_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of suitable cell found establishes NORMAL-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_INITIAL_REGISTRATION",
+      "target": "SUBSTATE_ATTEMPTING_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of initial registration required establishes ATTEMPTING-REGISTRATION substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PLMN_RESELECTION",
+      "target": "SUBSTATE_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of PLMN reselection needed establishes PLMN-SEARCH substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_CELL_LIMITED_SERVICE",
+      "target": "SUBSTATE_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of cell providing limited service establishes LIMITED-SERVICE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ECALL_ONLY_MODE",
+      "target": "SUBSTATE_ECALL_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of eCall only mode with timer conditions establishes eCALL-INACTIVE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_NO_CELL_AVAILABLE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate NO-CELL-AVAILABLE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_NO_SUPI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate NO-SUPI.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_NORMAL_SERVICE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_ATTEMPTING_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate ATTEMPTING-REGISTRATION.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_PLMN_SEARCH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate PLMN-SEARCH.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_LIMITED_SERVICE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate LIMITED-SERVICE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "STATE_5GMM_DEREGISTERED",
+      "target": "SUBSTATE_ECALL_INACTIVE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "5GMM-DEREGISTERED state has substate eCALL-INACTIVE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.4"
+      ]
+    }
+  ]
+}

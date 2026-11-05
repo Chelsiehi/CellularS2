@@ -1,0 +1,253 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.3",
+  "title": "List of forbidden PLMNs for attach in S101 mode",
+  "entities": [
+    {
+      "id": "FORBIDDEN_PLMNS_S101",
+      "name": "Forbidden PLMNs for attach in S101 mode",
+      "entity_type": "Property",
+      "description": "A list stored by the UE supporting S101 mode containing PLMN identities where attach is forbidden. The list is erased when the UE is switched off or when the USIM is removed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "A network message that rejects an attach attempt, containing EMM cause codes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_PLMN_NOT_ALLOWED",
+      "name": "EMM cause #11 PLMN not allowed",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating the PLMN is not allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_TRACKING_AREA_NOT_ALLOWED",
+      "name": "EMM cause #12 tracking area not allowed",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating the tracking area is not allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_ROAMING_NOT_ALLOWED",
+      "name": "EMM cause #13 roaming not allowed in this tracking area",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating roaming is not allowed in the tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED",
+      "name": "EMM cause #14 EPS services not allowed in this PLMN",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating EPS services are not allowed in the PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_NO_SUITABLE_CELLS",
+      "name": "EMM cause #15 no suitable cells in tracking area",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating no suitable cells are available in the tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "EMM_CAUSE_SERVICE_OPTION_NOT_AUTHORIZED",
+      "name": "EMM cause #35 Requested service option not authorized in this PLMN",
+      "entity_type": "Condition",
+      "description": "A condition in ATTACH REJECT message indicating the requested service option is not authorized in the PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "S101_MODE",
+      "name": "S101 mode",
+      "entity_type": "State",
+      "description": "A mode of operation for the UE supporting handover between S101 and S1 modes.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "PLMN_IDENTITY",
+      "name": "PLMN identity",
+      "entity_type": "Identifier",
+      "description": "An identifier for a Public Land Mobile Network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "S101_MODE",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The UE must be in S101 mode to maintain the forbidden PLMNs list for attach in S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_PLMN_NOT_ALLOWED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #11 indicating PLMN not allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_TRACKING_AREA_NOT_ALLOWED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #12 indicating tracking area not allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_ROAMING_NOT_ALLOWED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #13 indicating roaming not allowed in this tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #14 indicating EPS services not allowed in this PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_NO_SUITABLE_CELLS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #15 indicating no suitable cells in tracking area.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ATTACH_REJECT",
+      "target": "EMM_CAUSE_SERVICE_OPTION_NOT_AUTHORIZED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REJECT message contains EMM cause #35 indicating requested service option not authorized in this PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMM_CAUSE_PLMN_NOT_ALLOWED",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #11 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EMM_CAUSE_TRACKING_AREA_NOT_ALLOWED",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #12 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EMM_CAUSE_ROAMING_NOT_ALLOWED",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #13 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #14 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "EMM_CAUSE_NO_SUITABLE_CELLS",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #15 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "EMM_CAUSE_SERVICE_OPTION_NOT_AUTHORIZED",
+      "target": "FORBIDDEN_PLMNS_S101",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving ATTACH REJECT with EMM cause #35 establishes that the PLMN identity is added to the forbidden PLMNs list for S101 mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "FORBIDDEN_PLMNS_S101",
+      "target": "PLMN_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The forbidden PLMNs list for S101 mode contains PLMN identities.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.3"
+      ]
+    }
+  ]
+}

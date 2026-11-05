@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.2",
+  "title": "Authentication initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_AUTH_NETWORK_INITIATED",
+      "name": "Authentication procedure initiated by network",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure initiated by the network when a NAS signalling connection exists. The network sends AUTHENTICATION REQUEST message and starts timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to initiate authentication procedure. Contains parameters necessary for authentication response calculation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network in response to AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REJECT",
+      "name": "AUTHENTICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE when authentication fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3460",
+      "name": "T3460",
+      "entity_type": "Timer",
+      "description": "Timer started by network when sending AUTHENTICATION REQUEST and stopped when receiving AUTHENTICATION RESPONSE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_eKSI",
+      "name": "eKSI",
+      "entity_type": "Information Element",
+      "description": "Enhanced Key Set Identifier included in AUTHENTICATION REQUEST message. Must be different from eKSI in initial NAS message during EMM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_NAS_CONNECTION_EXISTS",
+      "name": "NAS signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Precondition for network to initiate authentication procedure. Required for authentication initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_AUTH_FAILED",
+      "name": "Authentication failed",
+      "entity_type": "Condition",
+      "description": "Condition that triggers sending of AUTHENTICATION REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTH_NETWORK_INITIATED",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes sending AUTHENTICATION REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_AUTH_NETWORK_INITIATED",
+      "target": "MSG_AUTH_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes receiving AUTHENTICATION RESPONSE message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_AUTH_NETWORK_INITIATED",
+      "target": "TIMER_T3460",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Authentication procedure starts timer T3460 when sending AUTHENTICATION REQUEST",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTH_RESPONSE",
+      "target": "TIMER_T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving AUTHENTICATION RESPONSE stops timer T3460",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "IE_eKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains eKSI information element",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_AUTH_NETWORK_INITIATED",
+      "target": "COND_NAS_CONNECTION_EXISTS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Authentication procedure requires NAS signalling connection to exist",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_AUTH_FAILED",
+      "target": "MSG_AUTH_REJECT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Authentication failure condition triggers sending of AUTHENTICATION REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.2",
+        "Figure 5.4.2.2.1"
+      ]
+    }
+  ]
+}

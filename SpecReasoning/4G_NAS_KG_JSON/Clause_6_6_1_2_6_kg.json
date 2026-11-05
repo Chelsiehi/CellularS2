@@ -1,0 +1,129 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.1.2.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "T3489",
+      "name": "Timer T3489",
+      "entity_type": "Timer",
+      "description": "Timer used during ESM information request procedure. On expiry, the MME resends ESM INFORMATION REQUEST message and restarts timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "ESM_INFORMATION_REQUEST",
+      "name": "ESM INFORMATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by MME to request ESM information from UE. Retransmitted on T3489 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "PDN_CONNECTIVITY_REJECT",
+      "name": "PDN CONNECTIVITY REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by MME to reject PDN connectivity procedure when ESM information is not received.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_53",
+      "name": "ESM cause #53",
+      "entity_type": "Condition",
+      "description": "ESM cause value indicating 'ESM information not received' used in PDN CONNECTIVITY REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ABORT",
+      "name": "Procedure abort",
+      "entity_type": "Procedure",
+      "description": "Action taken by MME on third T3489 expiry to abort ESM information procedure and release resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "RESOURCE_RELEASE",
+      "name": "Resource release",
+      "entity_type": "Property",
+      "description": "MME releases any resources allocated for the ESM information procedure when procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "T3489",
+      "target": "ESM_INFORMATION_REQUEST",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3489 expiry triggers resending of ESM INFORMATION REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "T3489",
+      "target": "T3489",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "MME resets and restarts timer T3489 on first and second expiry",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "T3489",
+      "target": "PROCEDURE_ABORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Third expiry of timer T3489 triggers procedure abort",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_ABORT",
+      "target": "RESOURCE_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure abort causes release of resources for the ESM information procedure",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_ABORT",
+      "target": "PDN_CONNECTIVITY_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure abort leads to rejection of associated PDN connectivity procedure via PDN CONNECTIVITY REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDN_CONNECTIVITY_REJECT",
+      "target": "ESM_CAUSE_53",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message includes ESM cause #53 'ESM information not received'",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.6"
+      ]
+    }
+  ]
+}

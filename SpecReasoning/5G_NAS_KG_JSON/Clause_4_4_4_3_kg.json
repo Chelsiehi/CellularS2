@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.4.3",
+  "title": "Integrity checking of NAS signalling messages in the AMF",
+  "entities": [
+    {
+      "id": "PROC_INTEGRITY_CHECKING",
+      "name": "Integrity checking of NAS signalling messages",
+      "entity_type": "Procedure",
+      "description": "Procedure for handling NAS message integrity verification in the AMF, including exceptions for unprotected messages and actions when integrity checks fail.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_IDENTITY_RESPONSE",
+      "name": "IDENTITY RESPONSE",
+      "entity_type": "Message",
+      "description": "NAS message used to provide identity information, accepted without integrity protection when SUCI is requested.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SECURITY_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "NAS message rejecting security mode setup, accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message initiating deregistration, accepted without integrity protection in certain cases.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for registration procedures, may be sent without integrity protection in specific scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for service initiation, processed even if integrity check fails under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message for control plane service initiation, processed even if integrity check fails under certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_5G_SECURITY_INFO",
+      "name": "Additional 5G security information",
+      "entity_type": "Information Element",
+      "description": "IE included in SECURITY MODE COMMAND with RINMR bit set to request retransmission of initial NAS message.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange of NAS messages established",
+      "entity_type": "Condition",
+      "description": "Condition indicating that NAS security context is active and secure message exchange is enabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state where UE is deregistered from the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "PROP_DISCARD_UNPROTECTED_MSG",
+      "name": "Discard unprotected messages after security established",
+      "entity_type": "Property",
+      "description": "Behavior where AMF discards NAS messages that are not integrity protected after secure exchange is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_IDENTITY_RESPONSE",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "IDENTITY RESPONSE message may be accepted without integrity protection when SUCI is requested.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_SECURITY_MODE_REJECT",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SECURITY MODE REJECT message may be accepted without integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "DEREGISTRATION REQUEST message may be accepted without integrity protection in specific cases.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_INTEGRITY_CHECKING",
+      "target": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Integrity checking procedure requires secure exchange to be established for processing protected messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SECURE_EXCHANGE_ESTABLISHED",
+      "target": "PROP_DISCARD_UNPROTECTED_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Once secure exchange is established, unprotected messages are discarded.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ADDITIONAL_5G_SECURITY_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND includes Additional 5G security information IE when integrity check fails for REGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "DEREGISTRATION REQUEST may lead to transition to 5GMM-DEREGISTERED state, but AMF may remain in 5GMM-REGISTERED if integrity fails.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SERVICE REQUEST processing depends on UE being in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST processing depends on UE being in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.3"
+      ]
+    }
+  ]
+}

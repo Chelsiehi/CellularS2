@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking Area Update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating tracking area and location area information between UE and network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT message",
+      "entity_type": "Message",
+      "description": "Network response message in tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "name": "TRACKING AREA UPDATE COMPLETE message",
+      "entity_type": "Message",
+      "description": "UE response message sent to complete tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_EPS_UPDATE_RESULT",
+      "name": "EPS update result IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the result of EPS update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_COMBINED_TA_LA_UPDATED",
+      "name": "Combined TA/LA updated condition",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result IE indicates successful tracking and location area updating for EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_TA_UPDATED",
+      "name": "TA updated condition",
+      "entity_type": "Condition",
+      "description": "Condition when EPS update result IE indicates successful tracking area updating but unsuccessful location area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "COND_GUTI_TMSI_PRESENT",
+      "name": "GUTI or TMSI present condition",
+      "entity_type": "Condition",
+      "description": "Condition when TRACKING AREA UPDATE ACCEPT message contains GUTI or TMSI or both.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity used to identify the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "IE_TMSI",
+      "name": "TMSI",
+      "entity_type": "Identifier",
+      "description": "Temporary Mobile Subscriber Identity used to identify the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_EPS_UPDATE_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains the EPS update result IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_UPDATE_RESULT",
+      "target": "COND_COMBINED_TA_LA_UPDATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS update result IE value guards the condition for combined TA/LA update.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_UPDATE_RESULT",
+      "target": "COND_TA_UPDATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS update result IE value guards the condition for TA update only.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "COND_GUTI_TMSI_PRESENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of GUTI or TMSI in TRACKING AREA UPDATE ACCEPT guards the condition for sending TRACKING AREA UPDATE COMPLETE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message may contain TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_GUTI_TMSI_PRESENT",
+      "target": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of GUTI or TMSI presence establishes the requirement to send TRACKING AREA UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.3.4.1"
+      ]
+    }
+  ]
+}

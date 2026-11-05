@@ -1,0 +1,187 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.7",
+  "title": "Sidelink communication reception",
+  "entities": [
+    {
+      "id": "PROC_SL_COMM_RECEPTION",
+      "name": "Sidelink Communication Reception",
+      "entity_type": "Procedure",
+      "description": "Procedure for a UE configured to receive NR sidelink communication to monitor sidelink control information and corresponding data using configured resource pools.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "COND_SL_OPERATION_MET",
+      "name": "Conditions for NR sidelink communication operation met",
+      "entity_type": "Condition",
+      "description": "Precondition defined in clause 5.8.2 that must be satisfied for sidelink communication operation.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "COND_FREQ_IN_CONFIG",
+      "name": "Frequency included in sl-FreqInfoToAddModList or sl-FreqInfoList",
+      "entity_type": "Condition",
+      "description": "Condition that the frequency used for NR sidelink communication is included in sl-FreqInfoToAddModList in RRCReconfiguration or sl-FreqInfoList in SIB12.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "COND_RECONFIG_WITH_SYNC",
+      "name": "UE configured with sl-RxPool in RRCReconfiguration with reconfigurationWithSync",
+      "entity_type": "Condition",
+      "description": "Condition that the UE is configured with sl-RxPool included in RRCReconfiguration message with reconfigurationWithSync (handover).",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "COND_SIB12_PROVIDED",
+      "name": "Cell provides SIB12",
+      "entity_type": "Condition",
+      "description": "Condition that the cell chosen for NR sidelink communication provides SIB12.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "IE_SL_RXPOOL",
+      "name": "sl-RxPool",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the pool of resources for sidelink reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIGURATION",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "RRC message that may contain sl-FreqInfoToAddModList and sl-RxPool configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "SIB_SIB12",
+      "name": "SIB12",
+      "entity_type": "Information Element",
+      "description": "System Information Block 12 containing sidelink communication configuration including sl-FreqInfoList and sl-RxPool.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "CONFIG_SL_PRECONFIGURATION",
+      "name": "SL-PreconfigurationNR",
+      "entity_type": "Property",
+      "description": "Preconfiguration for sidelink communication defined in clause 9.3, containing preconfigured sl-RxPool.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "ACTION_MONITOR_SL",
+      "name": "Monitor sidelink control information and data",
+      "entity_type": "Property",
+      "description": "Action where UE configures lower layers to monitor sidelink control information and corresponding data using specified resource pools.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SL_COMM_RECEPTION",
+      "target": "COND_SL_OPERATION_MET",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink communication reception procedure requires that conditions for NR sidelink communication operation are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SL_COMM_RECEPTION",
+      "target": "COND_FREQ_IN_CONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Sidelink communication reception procedure requires that frequency is included in configured lists.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_RECONFIG_WITH_SYNC",
+      "target": "ACTION_MONITOR_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is configured with sl-RxPool in RRCReconfiguration with reconfigurationWithSync, it establishes monitoring using that pool.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SIB12_PROVIDED",
+      "target": "ACTION_MONITOR_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When cell provides SIB12, it establishes monitoring using sl-RxPool in SIB12.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONFIG_SL_PRECONFIGURATION",
+      "target": "ACTION_MONITOR_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Preconfiguration establishes monitoring using preconfigured sl-RxPool in SL-PreconfigurationNR.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_RRC_RECONFIGURATION",
+      "target": "IE_SL_RXPOOL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfiguration message may contain sl-RxPool information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SIB_SIB12",
+      "target": "IE_SL_RXPOOL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SIB12 contains sl-RxPool information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONFIG_SL_PRECONFIGURATION",
+      "target": "IE_SL_RXPOOL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SL-PreconfigurationNR contains preconfigured sl-RxPool.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.7"
+      ]
+    }
+  ]
+}

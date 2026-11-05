@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.7.4",
+  "title": "Maximum number of supported packet filters",
+  "entities": [
+    {
+      "id": "IE_MAX_PACKET_FILTERS",
+      "name": "Maximum number of supported packet filters",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the maximum number of packet filters a UE can support for a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification",
+      "entity_type": "Procedure",
+      "description": "Procedure where the UE requests modification of PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_INTERSYSTEM_CHANGE",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE moves from S1 mode to N1 mode in single-registration mode with N26 interface support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_PDU_TYPE",
+      "name": "PDU session type condition",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session type is IPv4, IPv6, IPv4v6, or Ethernet.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_FILTER_SUPPORT",
+      "name": "UE supports more than 16 packet filters",
+      "entity_type": "Condition",
+      "description": "Condition where UE can support more than 16 packet filters for the PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "COND_PREVIOUS_MODIFICATION",
+      "name": "No previous successful PDU session modification",
+      "entity_type": "Condition",
+      "description": "Condition where UE has not previously successfully performed UE-requested PDU session modification to provide this capability.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_MAX_PACKET_FILTERS",
+      "target": "COND_INTERSYSTEM_CHANGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by inter-system change condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_MAX_PACKET_FILTERS",
+      "target": "COND_PDU_TYPE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by PDU session type condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MAX_PACKET_FILTERS",
+      "target": "COND_FILTER_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by UE packet filter support condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MAX_PACKET_FILTERS",
+      "target": "COND_PREVIOUS_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by condition of no previous successful PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_MODIFICATION",
+      "target": "IE_MAX_PACKET_FILTERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session modification procedure may contain the maximum packet filters IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.4"
+      ]
+    }
+  ]
+}

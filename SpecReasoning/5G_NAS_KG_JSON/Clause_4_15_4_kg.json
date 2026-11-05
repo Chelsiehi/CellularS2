@@ -1,0 +1,182 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.15.4",
+  "title": "User plane node management",
+  "entities": [
+    {
+      "id": "PROCEDURE_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "name": "UE-requested PDU session establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests establishment of a PDU session and can indicate support for port management information container transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4",
+        "TS 24.501, Subclause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify an established PDU session, used for exchanging port management information containers.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4",
+        "TS 24.501, Subclause 6.3.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to modify an established PDU session, used for exchanging port management information containers.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4",
+        "TS 24.501, Subclause 6.4.2"
+      ]
+    },
+    {
+      "id": "IE_PORT_MANAGEMENT_INFO_CONTAINER",
+      "name": "Port management information container",
+      "entity_type": "Information Element",
+      "description": "Container exchanged between DS-TT and TSN AF/TSCTSF for user plane node management.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "IE_DS_TT_ETHERNET_PORT_MAC_ADDRESS",
+      "name": "DS-TT Ethernet port MAC address",
+      "entity_type": "Information Element",
+      "description": "MAC address provided by UE during PDU session establishment if PDU session type is Ethernet.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "IE_UE_DS_TT_RESIDENCE_TIME",
+      "name": "UE-DS-TT residence time",
+      "entity_type": "Information Element",
+      "description": "Residence time information provided by UE to network if available during PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "CONDITION_UE_SUPPORTS_PORT_MANAGEMENT",
+      "name": "UE supports transfer of port management information containers",
+      "entity_type": "Condition",
+      "description": "Condition where UE indicates support for port management information container transfer during PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "PROPERTY_UE_FORWARDS_CONTAINER_TO_DS_TT",
+      "name": "UE forwards port management information container to DS-TT",
+      "entity_type": "Property",
+      "description": "Behavior where UE receiving port management information container from network shall forward it to DS-TT.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "PROPERTY_SMF_HANDLES_CONTAINER_FROM_UE",
+      "name": "SMF handles port management information container from UE",
+      "entity_type": "Property",
+      "description": "Behavior where SMF receiving port management information container from UE operates as specified in TS 23.502.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4",
+        "3GPP TS 23.502"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "CONDITION_UE_SUPPORTS_PORT_MANAGEMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE-requested PDU session establishment procedure is guarded by condition that UE supports port management information container transfer.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_DS_TT_ETHERNET_PORT_MAC_ADDRESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE-requested PDU session establishment procedure contains DS-TT Ethernet port MAC address IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_PORT_MANAGEMENT_INFO_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE-requested PDU session establishment procedure contains port management information container IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_ESTABLISHMENT",
+      "target": "IE_UE_DS_TT_RESIDENCE_TIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE-requested PDU session establishment procedure contains UE-DS-TT residence time IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IE_PORT_MANAGEMENT_INFO_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE-requested PDU session modification procedure contains port management information container IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "IE_PORT_MANAGEMENT_INFO_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network-requested PDU session modification procedure contains port management information container IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_UE_SUPPORTS_PORT_MANAGEMENT",
+      "target": "PROPERTY_UE_FORWARDS_CONTAINER_TO_DS_TT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition that UE supports port management container transfer establishes UE forwarding behavior.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_UE_SUPPORTS_PORT_MANAGEMENT",
+      "target": "PROPERTY_SMF_HANDLES_CONTAINER_FROM_UE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition that UE supports port management container transfer establishes SMF handling behavior.",
+      "provenance": [
+        "TS 24.501, Clause 4.15.4"
+      ]
+    }
+  ]
+}

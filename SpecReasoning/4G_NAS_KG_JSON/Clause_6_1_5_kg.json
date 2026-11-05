@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.5",
+  "title": "Coordination between ESM and EMM for supporting ISR",
+  "entities": [
+    {
+      "id": "ISR",
+      "name": "Idle mode Signalling Reduction",
+      "entity_type": "Property",
+      "description": "ISR is a mechanism to reduce signalling during idle mode mobility between different 3GPP access technologies.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "TIN",
+      "name": "Temporary Identity used in Next update",
+      "entity_type": "Identifier",
+      "description": "TIN is a temporary identity used by the UE to indicate which identity to use in the next location update.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "T3312",
+      "name": "Periodic routing area update timer",
+      "entity_type": "Timer",
+      "description": "Timer T3312 is used for periodic routing area updates in A/Gb or Iu mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "T3323",
+      "name": "Periodic tracking area update timer",
+      "entity_type": "Timer",
+      "description": "Timer T3323 is used for periodic tracking area updates in S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT_MODIFICATION",
+      "name": "EPS bearer context modification",
+      "entity_type": "Condition",
+      "description": "Modification of any EPS bearer context that was activated before ISR activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "MODE_CHANGE_TO_AGB_IU",
+      "name": "Change from S1 mode to A/Gb or Iu mode",
+      "entity_type": "Condition",
+      "description": "UE changes from S1 mode to A/Gb or Iu mode not due to PS handover, with EPS bearer contexts activated after ISR activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "LAST_NON_EMERGENCY_EPS_DEACTIVATION",
+      "name": "Deactivation of last non-emergency EPS bearer context",
+      "entity_type": "Condition",
+      "description": "Deactivation of the last non-emergency EPS bearer context when only emergency PDN connection remains.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "ISR_LOCAL_DEACTIVATION",
+      "name": "Local ISR deactivation",
+      "entity_type": "Procedure",
+      "description": "UE procedure to locally deactivate ISR by changing TIN to GUTI and stopping periodic update timers.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ISR_LOCAL_DEACTIVATION",
+      "target": "TIN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Local ISR deactivation procedure changes TIN to GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ISR_LOCAL_DEACTIVATION",
+      "target": "T3312",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Local ISR deactivation stops timer T3312 if running.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ISR_LOCAL_DEACTIVATION",
+      "target": "T3323",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Local ISR deactivation stops timer T3323 if running.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_BEARER_CONTEXT_MODIFICATION",
+      "target": "ISR_LOCAL_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer context modification triggers local ISR deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MODE_CHANGE_TO_AGB_IU",
+      "target": "ISR_LOCAL_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Mode change to A/Gb or Iu mode triggers local ISR deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "LAST_NON_EMERGENCY_EPS_DEACTIVATION",
+      "target": "ISR_LOCAL_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Deactivation of last non-emergency EPS bearer context triggers local ISR deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.14.3",
+  "title": "Public network integrated non-public network (PNI-NPN)",
+  "entities": [
+    {
+      "id": "PNI_NPN",
+      "name": "Public network integrated non-public network",
+      "entity_type": "Property",
+      "description": "A network made available by dedicated DNNs or S-NSSAIs, optionally using CAG to restrict access.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "CAG",
+      "name": "Closed Access Group",
+      "entity_type": "Property",
+      "description": "Mechanism to prevent UEs not allowed to access a PNI-NPN from accessing it.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "CAG_INFO_LIST",
+      "name": "CAG information list",
+      "entity_type": "Information Element",
+      "description": "List provisioned by network and stored in UE's non-volatile memory, containing allowed CAG lists and access indications.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to provision CAG information list from network to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROC",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to provision CAG information list from network to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROC",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to provision CAG information list from network to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "NETWORK_DEREG_PROC",
+      "name": "Network-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to provision CAG information list from network to UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED state",
+      "entity_type": "State",
+      "description": "UE state where CAG information list is preserved in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "USIM_INSERTION_COND",
+      "name": "USIM insertion condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE stores CAG information list from USIM to ME if no list exists or SUPI doesn't match.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "EMERGENCY_REG_COND",
+      "name": "Emergency registration condition",
+      "entity_type": "Condition",
+      "description": "Condition allowing UE to perform initial registration for emergency services via non-CAG cell or CAG cell not in allowed list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "AMF_BEHAVIOR_COND",
+      "name": "AMF behavior condition",
+      "entity_type": "Condition",
+      "description": "Condition where AMF behaves as specified when UE camps on CAG cell with no allowed CAG-IDs or non-CAG cell with CAG-only indication.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PNI_NPN",
+      "target": "CAG",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PNI-NPN optionally uses CAG to prevent unauthorized UE access.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE_CONFIG_UPDATE",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Generic UE configuration update procedure provisions CAG information list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_PROC",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration procedure provisions CAG information list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SERVICE_REQUEST_PROC",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Service request procedure provisions CAG information list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NETWORK_DEREG_PROC",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network-initiated de-registration procedure provisions CAG information list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CAG_INFO_LIST",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "CAG information list is preserved when UE enters 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "USIM_INSERTION_COND",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "USIM insertion condition establishes storage of CAG information list from USIM to ME.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMERGENCY_REG_COND",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency registration is allowed when CAG cell is not in allowed CAG list.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AMF_BEHAVIOR_COND",
+      "target": "CAG_INFO_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF behavior condition establishes specific AMF behavior based on CAG information list content.",
+      "provenance": [
+        "TS 24.501, Clause 4.14.3"
+      ]
+    }
+  ]
+}

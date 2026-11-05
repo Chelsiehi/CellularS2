@@ -1,0 +1,165 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4.19",
+  "title": "Actions upon reception of SIB17",
+  "entities": [
+    {
+      "id": "SIB17",
+      "name": "System Information Block 17",
+      "entity_type": "Message",
+      "description": "A system information block that is segmented and requires assembly from multiple segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "SIB17_SEGMENT",
+      "name": "SIB17 Segment",
+      "entity_type": "Information Element",
+      "description": "A partial segment of SIB17 that needs to be stored and assembled with other segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "SIB17_IES",
+      "name": "SIB17 Information Elements",
+      "entity_type": "Information Element",
+      "description": "The complete assembled information elements from all SIB17 segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "VALUE_TAG_CHANGED",
+      "name": "Value Tag Changed Condition",
+      "entity_type": "Condition",
+      "description": "Condition where the value tag of SIB17 has changed since previous segments were stored.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "ALL_SEGMENTS_RECEIVED",
+      "name": "All Segments Received Condition",
+      "entity_type": "Condition",
+      "description": "Condition where all segments of SIB17 have been successfully received.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "THREE_HOUR_TIMEOUT",
+      "name": "3 Hour Timeout Condition",
+      "entity_type": "Condition",
+      "description": "Condition where complete SIB17 has not been assembled within 3 hours.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION",
+      "name": "Cell Reselection Condition",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE performs cell (re-)selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "DISCARD_SEGMENTS",
+      "name": "Discard Stored Segments",
+      "entity_type": "Property",
+      "description": "Action to discard all stored SIB17 segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "STORE_SEGMENT",
+      "name": "Store Segment",
+      "entity_type": "Property",
+      "description": "Action to store a received SIB17 segment.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "ASSEMBLE_SIB17",
+      "name": "Assemble SIB17",
+      "entity_type": "Property",
+      "description": "Action to assemble SIB17-IEs from all received segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "VALUE_TAG_CHANGED",
+      "target": "DISCARD_SEGMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Value tag change condition triggers discarding of stored segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIB17",
+      "target": "STORE_SEGMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of SIB17 triggers storage of segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ALL_SEGMENTS_RECEIVED",
+      "target": "ASSEMBLE_SIB17",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "All segments received condition triggers assembly of SIB17-IEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "THREE_HOUR_TIMEOUT",
+      "target": "DISCARD_SEGMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "3 hour timeout condition triggers discarding of stored segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CELL_RESELECTION",
+      "target": "DISCARD_SEGMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Cell reselection condition triggers discarding of stored segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ASSEMBLE_SIB17",
+      "target": "SIB17_IES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Assembly action produces the complete SIB17 Information Elements.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4.19"
+      ]
+    }
+  ]
+}

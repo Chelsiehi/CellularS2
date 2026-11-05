@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "DE_REGISTRATION_PROCEDURE",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by UE or network to deregister for 5GS services over 3GPP access, non-3GPP access, or both. Can be initiated by UE or network under various conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "UE_INITIATED_DE_REGISTRATION",
+      "name": "UE-initiated de-registration",
+      "entity_type": "Procedure",
+      "description": "De-registration procedure initiated by the UE under conditions such as switch off, eCall inactivity, USIM removal, or when needing to deregister specific access types.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "NETWORK_INITIATED_DE_REGISTRATION",
+      "name": "Network-initiated de-registration",
+      "entity_type": "Procedure",
+      "description": "De-registration procedure initiated by the network to inform UE about deregistration or to request re-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_TYPE_IE",
+      "name": "De-registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of de-registration, such as 'switch off' when triggered by USIM removal.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE during network-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that can be running while UE initiates de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "NON_3GPP_DE_REGISTRATION_TIMER",
+      "name": "Non-3GPP de-registration timer",
+      "entity_type": "Timer",
+      "description": "Timer provided by AMF to UE for non-3GPP de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State entered by AMF for 3GPP access during de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE",
+      "name": "5GMM-IDLE",
+      "entity_type": "State",
+      "description": "State where UE is considered idle by AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "State where UE is connected to the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "SWITCH_OFF_CONDITION",
+      "name": "Switch off condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is switched off, triggering UE-initiated de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "USIM_REMOVAL_CONDITION",
+      "name": "USIM removal condition",
+      "entity_type": "Condition",
+      "description": "Condition where USIM is removed from UE, triggering de-registration with 'switch off' type.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDU_SESSION_CONDITION",
+      "name": "Emergency PDU session condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has emergency PDU session, affecting network-initiated de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "UE_RADIO_CAPABILITY_DELETION",
+      "name": "UE radio capability deletion",
+      "entity_type": "Property",
+      "description": "Property where AMF deletes stored UE radio capability information when entering 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DE_REGISTRATION_PROCEDURE",
+      "target": "UE_INITIATED_DE_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-initiated de-registration is a variant of the general de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DE_REGISTRATION_PROCEDURE",
+      "target": "NETWORK_INITIATED_DE_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-initiated de-registration is a variant of the general de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NETWORK_INITIATED_DE_REGISTRATION",
+      "target": "DEREGISTRATION_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network-initiated de-registration procedure involves sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DEREGISTRATION_TYPE_IE",
+      "target": "SWITCH_OFF_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "De-registration type IE indicates 'switch off' when triggered by USIM removal condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SWITCH_OFF_CONDITION",
+      "target": "UE_INITIATED_DE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Switch off condition requires UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "USIM_REMOVAL_CONDITION",
+      "target": "UE_INITIATED_DE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "USIM removal condition requires UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMERGENCY_PDU_SESSION_CONDITION",
+      "target": "NETWORK_INITIATED_DE_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDU session condition prevents AMF from sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "5GMM_DEREGISTERED",
+      "target": "UE_RADIO_CAPABILITY_DELETION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering 5GMM-DEREGISTERED state establishes the property of UE radio capability deletion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_INITIATED_DE_REGISTRATION",
+      "target": "T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE-initiated de-registration can be started even when timer T3346 is running.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "NETWORK_INITIATED_DE_REGISTRATION",
+      "target": "NON_3GPP_DE_REGISTRATION_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF provides non-3GPP de-registration timer during network-initiated de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "5GMM_IDLE",
+      "target": "NETWORK_INITIATED_DE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When UE is in 5GMM-IDLE state, AMF locally deregisters UE without sending DEREGISTRATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "5GMM_CONNECTED",
+      "target": "NETWORK_INITIATED_DE_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When UE is in 5GMM-CONNECTED state, AMF initiates network-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.1"
+      ]
+    }
+  ]
+}

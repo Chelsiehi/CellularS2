@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.2",
+  "title": "Generic UE configuration update procedure initiated by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to update UE configuration parameters. AMF sends CONFIGURATION UPDATE COMMAND message to UE with various parameters or indications.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE to initiate configuration update procedure. Contains various IEs for parameter updates or registration requests.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_CONFIGURATION_UPDATE_INDICATION",
+      "name": "Configuration update indication",
+      "entity_type": "Information Element",
+      "description": "IE containing Registration requested bit and Acknowledgement bit. Used to request UE registration or acknowledgement.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing allowed network slice selection assistance information. Updated during configuration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE containing rejected network slices. Can be in Rejected NSSAI IE or Extended rejected NSSAI IE based on UE capability.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_REJECTED_NSSAI",
+      "name": "Extended rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "IE for rejected network slices when UE supports extended rejected NSSAI capability.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_CAG_INFORMATION_LIST",
+      "name": "CAG information list",
+      "entity_type": "Information Element",
+      "description": "IE containing Closed Access Group information. Can be in CAG information list IE or Extended CAG information list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_RESULT",
+      "name": "5GS registration result",
+      "entity_type": "Information Element",
+      "description": "IE indicating registration status, including \"Registered for emergency services\" value.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_CONFIGURATION_INDICATION",
+      "name": "Additional configuration indication",
+      "entity_type": "Information Element",
+      "description": "IE containing Signalling connection maintain request bit to indicate if N1 NAS signalling connection release is required.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3555",
+      "name": "T3555",
+      "entity_type": "Timer",
+      "description": "Timer started by AMF when acknowledgement is requested from UE in CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5GMM connected state where UE has active NAS signalling connection with network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_ACK_REQUESTED",
+      "name": "Acknowledgement requested",
+      "entity_type": "Condition",
+      "description": "Condition where AMF requests acknowledgement from UE by setting Acknowledgement bit in Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_REGISTRATION_REQUESTED",
+      "name": "Registration requested",
+      "entity_type": "Condition",
+      "description": "Condition where AMF requests UE to initiate registration procedure by setting Registration requested bit in Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_UE_SUPPORTS_EXTENDED_REJECTED_NSSAI",
+      "name": "UE supports extended rejected NSSAI",
+      "entity_type": "Property",
+      "description": "UE capability to support extended rejected NSSAI IE format.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_GENERIC_UE_CONFIG_UPDATE",
+      "target": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "AMF initiates generic UE configuration update procedure by sending CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_CONFIGURATION_UPDATE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message contains Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Allowed NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Rejected NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_EXTENDED_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Extended rejected NSSAI IE when UE supports it.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_CAG_INFORMATION_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain CAG information list IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_5GS_REGISTRATION_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain 5GS registration result IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "IE_ADDITIONAL_CONFIGURATION_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Additional configuration indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_ACK_REQUESTED",
+      "target": "TIMER_T3555",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When acknowledgement is requested, AMF starts timer T3555.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_CONFIGURATION_UPDATE_INDICATION",
+      "target": "CONDITION_REGISTRATION_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Configuration update indication IE guards registration requested condition via Registration requested bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_CONFIGURATION_UPDATE_INDICATION",
+      "target": "CONDITION_ACK_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Configuration update indication IE guards acknowledgement requested condition via Acknowledgement bit.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROPERTY_UE_SUPPORTS_EXTENDED_REJECTED_NSSAI",
+      "target": "IE_EXTENDED_REJECTED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If UE supports extended rejected NSSAI, rejected S-NSSAIs are included in Extended rejected NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "STATE_5GMM_CONNECTED",
+      "target": "PROCEDURE_GENERIC_UE_CONFIG_UPDATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Generic UE configuration update procedure can be performed when UE is in 5GMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.2"
+      ]
+    }
+  ]
+}

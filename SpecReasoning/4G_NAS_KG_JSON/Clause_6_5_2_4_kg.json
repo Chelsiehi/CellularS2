@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.2.4",
+  "title": "UE requested PDN disconnection procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_PDN_DISCONNECT_REJECTED",
+      "name": "UE requested PDN disconnection procedure not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when the network rejects a PDN disconnection request from the UE. The MME sends a PDN DISCONNECT REJECT message and the UE handles the rejection according to the received ESM cause.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQUEST",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request disconnection of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REJECT",
+      "name": "PDN DISCONNECT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by the MME to reject a PDN disconnection request from the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity used to identify the transaction.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for ESM procedure rejection. Contains values like #35, #43, #49, #95-111.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3492",
+      "name": "T3492",
+      "entity_type": "Timer",
+      "description": "Timer associated with the PDN disconnection procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by the UE after receiving PDN DISCONNECT REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection supported",
+      "entity_type": "Condition",
+      "description": "Condition where both UE and MME support EMM-REGISTERED state without any PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_EPS_BEARER_DEACTIVATION",
+      "name": "Local EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "UE locally deactivates EPS bearer contexts without peer-to-peer signaling.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_DISCONNECT_REJECTED",
+      "target": "MSG_PDN_DISCONNECT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receipt of PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_DISCONNECT_REJECTED",
+      "target": "MSG_PDN_DISCONNECT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MME sends PDN DISCONNECT REJECT message when request is not accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_DISCONNECT_REJECT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REJECT message contains PTI IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_DISCONNECT_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN DISCONNECT REJECT message contains ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PDN_DISCONNECT_REJECTED",
+      "target": "TIMER_T3492",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3492 upon receipt of PDN DISCONNECT REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_PDN_DISCONNECT_REJECTED",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters PROCEDURE TRANSACTION INACTIVE state after receiving PDN DISCONNECT REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_ESM_CAUSE",
+      "target": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ESM cause #49 applicability is guarded by EMM-REGISTERED without PDN connection support condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_ESM_CAUSE",
+      "target": "PROP_LOCAL_EPS_BEARER_DEACTIVATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause value determines whether UE performs local EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.2.4"
+      ]
+    }
+  ]
+}

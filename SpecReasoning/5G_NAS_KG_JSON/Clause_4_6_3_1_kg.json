@@ -1,0 +1,168 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.3.1",
+  "title": "Session management based network slice admission control",
+  "entities": [
+    {
+      "id": "PROCEDURE_NSAC",
+      "name": "Network Slice Admission Control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by SMF to monitor and control the total number of established PDU sessions per network slice based on S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU Session Establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing a PDU session where network slice admission control is performed.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status IE",
+      "entity_type": "Information Element",
+      "description": "Information element used when UE requests to transfer a session from non-3GPP access to 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1",
+        "TS 24.501, Clause 5.6.1.4"
+      ]
+    },
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Identifier",
+      "description": "Single Network Slice Selection Assistance Information used to identify network slices.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "name": "Maximum PDU sessions reached",
+      "entity_type": "Condition",
+      "description": "Condition where the maximum number of PDU sessions on a network slice associated with an S-NSSAI has been reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_SMF_REJECTS_REQUEST",
+      "name": "SMF rejects request",
+      "entity_type": "Property",
+      "description": "Behavior where SMF rejects PDU session establishment request or user-plane resource establishment request when maximum PDU sessions are reached.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_SERVICES",
+      "name": "PDU session for emergency services",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session is used for emergency services, making network slice admission control not applicable or its result ignored.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_PRIORITY_SERVICES",
+      "name": "PDU session for priority services",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session is used for priority services, making network slice admission control not applicable or its result ignored.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ONBOARDING_SERVICES_SNPN",
+      "name": "PDU session for onboarding services in SNPN",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session is established for onboarding services in SNPN, making network slice admission control not applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_PDU_SESSION_ESTABLISHMENT",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network slice admission control is performed during PDU session establishment procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_NSAC",
+      "target": "S_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control is performed on S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_MAX_PDU_SESSIONS_REACHED",
+      "target": "PROPERTY_SMF_REJECTS_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When maximum PDU sessions are reached, SMF rejects the request.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control is performed when UE requests session transfer using Allowed PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_EMERGENCY_SERVICES",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control is not applicable or its result is ignored for emergency services PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_PRIORITY_SERVICES",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control is not applicable or its result is ignored for priority services PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_ONBOARDING_SERVICES_SNPN",
+      "target": "PROCEDURE_NSAC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network slice admission control is not applicable for onboarding services PDU sessions in SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.3.1"
+      ]
+    }
+  ]
+}

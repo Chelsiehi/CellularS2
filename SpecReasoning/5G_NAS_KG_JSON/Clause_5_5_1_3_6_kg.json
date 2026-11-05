@@ -1,0 +1,169 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.6",
+  "title": "Mobility and periodic registration update for initiating an emergency PDU session not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_MOB_PER_REG_UPDATE_EMERGENCY",
+      "name": "Mobility and periodic registration update for initiating an emergency PDU session",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE attempts to register for emergency PDU session initiation through mobility and periodic registration update",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "PROC_EMERGENCY_REG_FAILURE_HANDLING",
+      "name": "Emergency registration failure handling procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when mobility and periodic registration update for emergency PDU session is not accepted by network",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN",
+      "name": "UE in same selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE remains in the same PLMN where the last registration attempt was made",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "ACTION_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "Action where UE notifies upper layers about the failure of the registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "ACTION_LOCAL_DEREGISTRATION",
+      "name": "Perform local de-registration",
+      "entity_type": "Property",
+      "description": "Action where UE performs de-registration locally if not already de-registered",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "PROC_INITIAL_REG_EMERGENCY",
+      "name": "Initial registration for emergency services",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE attempts initial registration specifically for emergency services",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_CASE_B",
+      "name": "Abnormal case b failure condition",
+      "entity_type": "Condition",
+      "description": "Failure condition corresponding to abnormal case b as defined in subclause 5.5.1.3.7",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_CASES_CD",
+      "name": "Abnormal cases c or d failure condition",
+      "entity_type": "Condition",
+      "description": "Failure condition corresponding to abnormal cases c or d as defined in subclause 5.5.1.3.7",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EMERGENCY_REG_FAILURE_HANDLING",
+      "target": "PROC_MOB_PER_REG_UPDATE_EMERGENCY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Emergency registration failure handling procedure includes steps from mobility and periodic registration update procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EMERGENCY_REG_FAILURE_HANDLING",
+      "target": "COND_SAME_PLMN",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Emergency registration failure handling requires UE to be in same selected PLMN for certain actions",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it establishes the action to inform upper layers of procedure failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SAME_PLMN",
+      "target": "ACTION_LOCAL_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE is in same PLMN, it establishes the action to perform local de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACTION_LOCAL_DEREGISTRATION",
+      "target": "PROC_INITIAL_REG_EMERGENCY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Local de-registration action includes attempting initial registration for emergency services",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ABNORMAL_CASE_B",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal case b failure condition establishes the action to inform upper layers of network access failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_ABNORMAL_CASES_CD",
+      "target": "ACTION_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal cases c or d failure condition establishes the action to inform upper layers of procedure failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_ABNORMAL_CASES_CD",
+      "target": "ACTION_LOCAL_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal cases c or d failure condition establishes the action to perform local de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6"
+      ]
+    }
+  ]
+}

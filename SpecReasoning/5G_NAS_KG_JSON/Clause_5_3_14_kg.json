@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.14",
+  "title": "List of equivalent PLMNs",
+  "entities": [
+    {
+      "id": "EQUIVALENT_PLMNS_LIST",
+      "name": "List of equivalent PLMNs",
+      "entity_type": "Property",
+      "description": "A stored list of PLMNs that the UE regards as equivalent for PLMN selection and cell selection/re-selection. The same list is used by 5GMM, EMM, GMM and MM except when the UE operates in dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure during which the UE updates or deletes the list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REGISTERED_PLMN",
+      "name": "Registered PLMN",
+      "entity_type": "Property",
+      "description": "The PLMN code of the registered PLMN that downloaded the list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "USIM_REMOVAL",
+      "name": "USIM removal",
+      "entity_type": "Condition",
+      "description": "Condition where the USIM is removed from the UE, triggering deletion of the stored list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_EMERGENCY",
+      "name": "5GMM-DEREGISTERED state for emergency services",
+      "entity_type": "State",
+      "description": "State where the UE registered for emergency services enters 5GMM-DEREGISTERED, triggering deletion of the stored list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "MAX_ENTRIES_16",
+      "name": "Maximum 16 entries",
+      "entity_type": "Property",
+      "description": "The maximum number of possible entries in the stored list of equivalent PLMNs is 16.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "EQUIVALENT_PLMNS_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The registration procedure updates or deletes the list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EQUIVALENT_PLMNS_LIST",
+      "target": "REGISTERED_PLMN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The stored list consists of equivalent PLMNs downloaded by the network plus the PLMN code of the registered PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "USIM_REMOVAL",
+      "target": "EQUIVALENT_PLMNS_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "USIM removal triggers deletion of the stored list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5GMM_DEREGISTERED_EMERGENCY",
+      "target": "EQUIVALENT_PLMNS_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Entering 5GMM-DEREGISTERED state for emergency services triggers deletion of the stored list of equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EQUIVALENT_PLMNS_LIST",
+      "target": "MAX_ENTRIES_16",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The stored list of equivalent PLMNs is limited to a maximum of 16 entries.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.14"
+      ]
+    }
+  ]
+}

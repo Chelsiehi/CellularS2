@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.1.2.3",
+  "title": "ESM information request completion by the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_ESM_INFO_REQUEST_COMPLETION",
+      "name": "ESM information request completion",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE responds to network's ESM INFORMATION REQUEST message by sending ESM INFORMATION RESPONSE message with required information elements.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "MSG_ESM_INFO_REQUEST",
+      "name": "ESM INFORMATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to request ESM information from UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "MSG_ESM_INFO_RESPONSE",
+      "name": "ESM INFORMATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to ESM INFORMATION REQUEST, containing protocol configuration options, APN if required, EPS bearer identity set to 'no EPS bearer identity assigned', and PTI from request.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "Information elements that need to be transferred security protected to the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_APN",
+      "name": "APN",
+      "entity_type": "Information Element",
+      "description": "Access Point Name included in ESM INFORMATION RESPONSE if required.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Set to 'no EPS bearer identity assigned' in ESM INFORMATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity included from the ESM INFORMATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_SECURITY_PROTECTION",
+      "name": "Security protection required",
+      "entity_type": "Condition",
+      "description": "Condition that protocol configuration options need to be transferred security protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_ESM_INFO_REQUEST_COMPLETION",
+      "target": "MSG_ESM_INFO_REQUEST",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure is triggered by receipt of ESM INFORMATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_ESM_INFO_REQUEST_COMPLETION",
+      "target": "MSG_ESM_INFO_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ESM INFORMATION RESPONSE message to network.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_ESM_INFO_RESPONSE",
+      "target": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains protocol configuration options.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_ESM_INFO_RESPONSE",
+      "target": "IE_APN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains APN if required.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ESM_INFO_RESPONSE",
+      "target": "IE_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains EPS bearer identity set to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ESM_INFO_RESPONSE",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM INFORMATION RESPONSE message contains PTI from the ESM INFORMATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "target": "CONDITION_SECURITY_PROTECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Protocol configuration options are guarded by security protection requirement.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.1.2.3"
+      ]
+    }
+  ]
+}

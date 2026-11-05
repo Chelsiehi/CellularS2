@@ -1,0 +1,107 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.6.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "SIDELINK_DRX_ASSISTANCE_INFO_PROCEDURE",
+      "name": "Sidelink DRX Assistance Information Transmission",
+      "entity_type": "Procedure",
+      "description": "Procedure where an RX UE sends sidelink DRX assistance information to its peer TX UE for sidelink unicast communication when both UEs are DRX-capable and the information is new or changed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "RX_UE",
+      "name": "Receiving UE",
+      "entity_type": "Property",
+      "description": "UE that receives sidelink communication and is capable of sending sidelink DRX assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "TX_UE",
+      "name": "Transmitting UE",
+      "entity_type": "Property",
+      "description": "Peer UE that transmits sidelink communication and is capable of receiving sidelink DRX assistance information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "SIDELINK_UNICAST",
+      "name": "Sidelink Unicast Communication",
+      "entity_type": "Condition",
+      "description": "Communication direction between two UEs where both are capable of sidelink DRX.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "UE_ASSISTANCE_INFO_SIDELINK",
+      "name": "UEAssistanceInformationSidelink",
+      "entity_type": "Information Element",
+      "description": "Information element containing sidelink DRX assistance information sent from RX UE to TX UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "INFO_NOT_SENT_OR_CHANGED",
+      "name": "Information Not Sent or Changed",
+      "entity_type": "Condition",
+      "description": "Condition where sidelink DRX assistance information has not been sent previously or the previously transmitted information has changed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SIDELINK_DRX_ASSISTANCE_INFO_PROCEDURE",
+      "target": "RX_UE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Procedure is initiated by the RX UE when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SIDELINK_DRX_ASSISTANCE_INFO_PROCEDURE",
+      "target": "SIDELINK_UNICAST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires sidelink unicast communication with both UEs DRX-capable.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SIDELINK_DRX_ASSISTANCE_INFO_PROCEDURE",
+      "target": "UE_ASSISTANCE_INFO_SIDELINK",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure involves sending the UEAssistanceInformationSidelink IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SIDELINK_DRX_ASSISTANCE_INFO_PROCEDURE",
+      "target": "INFO_NOT_SENT_OR_CHANGED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is guarded by the condition that information has not been sent or has changed.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.6.2"
+      ]
+    }
+  ]
+}

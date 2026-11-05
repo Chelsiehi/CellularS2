@@ -1,0 +1,151 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.3.3",
+  "title": "Change of UE's usage setting",
+  "entities": [
+    {
+      "id": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "name": "Change of UE's usage setting procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE in single-registration mode when UE's usage setting changes. Involves enabling/disabling N1 mode capability based on usage setting change and access type.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "UE_USAGE_SETTING",
+      "name": "UE usage setting",
+      "entity_type": "Property",
+      "description": "UE configuration parameter that can be either 'voice centric' or 'data centric'.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_AVAILABILITY",
+      "name": "IMS voice availability",
+      "entity_type": "Condition",
+      "description": "Condition indicating whether IMS voice service is available over the access type.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "N1_MODE_3GPP",
+      "name": "N1 mode capability for 3GPP access",
+      "entity_type": "Property",
+      "description": "UE capability for N1 mode operation over 3GPP access, which can be enabled or disabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "N1_MODE_NON3GPP",
+      "name": "N1 mode capability for non-3GPP access",
+      "entity_type": "Property",
+      "description": "UE capability for N1 mode operation over non-3GPP access, which can be enabled or disabled.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REGISTRATION_STATUS",
+      "name": "UE registration status",
+      "entity_type": "Condition",
+      "description": "Condition describing whether UE is registered over 3GPP access only, non-3GPP access only, or both access types.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "PERSISTENT_PDU_SESSION",
+      "name": "Persistent PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where UE has an ongoing persistent PDU session that requires special handling during capability changes.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1 NOTE"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "UE_USAGE_SETTING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is triggered by changes in UE usage setting.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "IMS_VOICE_AVAILABILITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior depends on IMS voice availability condition.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "N1_MODE_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure can disable or re-enable N1 mode capability for 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "N1_MODE_NON3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure can disable or re-enable N1 mode capability for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "REGISTRATION_STATUS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution depends on UE's current registration status over access types.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "USAGE_SETTING_CHANGE_PROCEDURE",
+      "target": "PERSISTENT_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution may be delayed if UE has persistent PDU session until radio bearer is released.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.3",
+        "Table 4.3.3.1 NOTE"
+      ]
+    }
+  ]
+}

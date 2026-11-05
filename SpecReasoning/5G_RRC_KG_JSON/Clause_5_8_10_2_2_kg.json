@@ -1,0 +1,127 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.10.2.2",
+  "title": "Sidelink measurement identity removal",
+  "entities": [
+    {
+      "id": "SL_MEAS_ID_REMOVAL_PROCEDURE",
+      "name": "Sidelink measurement identity removal procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for removing sidelink measurement identities from UE configuration when instructed by the network via sl-MeasIdToRemoveList.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID_TO_REMOVE_LIST",
+      "name": "sl-MeasIdToRemoveList",
+      "entity_type": "Information Element",
+      "description": "List of sidelink measurement identities to be removed from UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID",
+      "name": "sl-MeasId",
+      "entity_type": "Identifier",
+      "description": "Sidelink measurement identity used to identify specific sidelink measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_CONFIG_SL",
+      "name": "VarMeasConfigSL",
+      "entity_type": "Property",
+      "description": "UE variable storing the current sidelink measurement configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "SL_MEAS_ID_LIST",
+      "name": "sl-MeasIdList",
+      "entity_type": "Property",
+      "description": "List of configured sidelink measurement identities within VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "VAR_MEAS_REPORT_LIST_SL",
+      "name": "VarMeasReportListSL",
+      "entity_type": "Property",
+      "description": "UE variable storing NR sidelink measurement reporting entries.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "CONFIGURED_SL_MEAS_ID",
+      "name": "Configured sl-MeasId condition",
+      "entity_type": "Condition",
+      "description": "Condition where sl-MeasId is part of current UE configuration in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_MEAS_ID_REMOVAL_PROCEDURE",
+      "target": "SL_MEAS_ID_TO_REMOVE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The removal procedure operates on the sl-MeasIdToRemoveList received from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_MEAS_ID_REMOVAL_PROCEDURE",
+      "target": "CONFIGURED_SL_MEAS_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure only processes sl-MeasIds that are currently configured in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_MEAS_ID_REMOVAL_PROCEDURE",
+      "target": "SL_MEAS_ID_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure removes entries with matching sl-MeasId from sl-MeasIdList in VarMeasConfigSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_MEAS_ID_REMOVAL_PROCEDURE",
+      "target": "VAR_MEAS_REPORT_LIST_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure removes NR sidelink measurement reporting entries for the removed sl-MeasId from VarMeasReportListSL.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "VAR_MEAS_CONFIG_SL",
+      "target": "SL_MEAS_ID_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "VarMeasConfigSL contains the sl-MeasIdList which stores configured sidelink measurement identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.10.2.2"
+      ]
+    }
+  ]
+}

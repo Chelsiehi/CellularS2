@@ -1,0 +1,158 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.7.3",
+  "title": "Actions related to transmission of ULDedicatedMessageSegment message",
+  "entities": [
+    {
+      "id": "PROC_UL_DEDICATED_MSG_SEGMENT",
+      "name": "UL Dedicated Message Segmentation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for segmenting UL DCCH messages into ULDedicatedMessageSegment messages based on PDCP SDU size constraints and transmitting them in order.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "name": "ULDedicatedMessageSegment",
+      "entity_type": "Message",
+      "description": "RRC message segment containing a portion of a segmented UL DCCH message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "IE_SEGMENT_NUMBER",
+      "name": "segmentNumber",
+      "entity_type": "Information Element",
+      "description": "Indicates the sequence number of the message segment, starting from 0 and incrementing for each subsequent segment.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "IE_RRC_MESSAGE_SEGMENT_CONTAINER",
+      "name": "rrc-MessageSegmentContainer",
+      "entity_type": "Information Element",
+      "description": "Contains the actual segment data of the UL DCCH message corresponding to the segmentNumber.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "IE_RRC_MESSAGE_SEGMENT_TYPE",
+      "name": "rrc-MessageSegmentType",
+      "entity_type": "Information Element",
+      "description": "Indicates whether the segment is the last segment (lastSegment) or not (notLastSegment) of the UL DCCH message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "COND_LAST_SEGMENT",
+      "name": "Last segment condition",
+      "entity_type": "Condition",
+      "description": "Condition that is true when the current segment is the last segment of the UL DCCH message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "PROP_MINIMIZE_SEGMENTS",
+      "name": "Minimize number of segments",
+      "entity_type": "Property",
+      "description": "UE behavior requirement to minimize the number of segments when segmenting the UL DCCH message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "PROP_SEGMENT_ORDER_TRANSMISSION",
+      "name": "Ascending order transmission",
+      "entity_type": "Property",
+      "description": "Requirement to transmit ULDedicatedMessageSegment messages in ascending order based on segmentNumber.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UL_DEDICATED_MSG_SEGMENT",
+      "target": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The segmentation procedure involves generating ULDedicatedMessageSegment messages.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "target": "IE_SEGMENT_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULDedicatedMessageSegment contains the segmentNumber IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "target": "IE_RRC_MESSAGE_SEGMENT_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULDedicatedMessageSegment contains the rrc-MessageSegmentContainer IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UL_DEDICATED_MESSAGE_SEGMENT",
+      "target": "IE_RRC_MESSAGE_SEGMENT_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ULDedicatedMessageSegment contains the rrc-MessageSegmentType IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_RRC_MESSAGE_SEGMENT_TYPE",
+      "target": "COND_LAST_SEGMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The value of rrc-MessageSegmentType is determined by whether the segment is the last segment.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_UL_DEDICATED_MSG_SEGMENT",
+      "target": "PROP_MINIMIZE_SEGMENTS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure requires minimizing the number of segments.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_UL_DEDICATED_MSG_SEGMENT",
+      "target": "PROP_SEGMENT_ORDER_TRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure requires transmitting segments in ascending order based on segmentNumber.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.7.3"
+      ]
+    }
+  ]
+}

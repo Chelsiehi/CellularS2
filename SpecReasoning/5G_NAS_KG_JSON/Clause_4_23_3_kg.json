@@ -1,0 +1,111 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.23.3",
+  "title": "5GS mobility management via a satellite NG-RAN cell",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The user equipment that performs 5GS mobility management via satellite NG-RAN cells.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "Access and Mobility Management Function",
+      "entity_type": "Property",
+      "description": "The network function that manages access and mobility for UEs, including support for satellite NG-RAN cells.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_SATELLITE",
+      "name": "NAS timer for satellite access",
+      "entity_type": "Timer",
+      "description": "Timer value applicable for NAS procedures when accessing via satellite NG-RAN cells, as specified in table 10.2.1 for UE and table 10.2.2 for AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3",
+        "Table 10.2.1",
+        "Table 10.2.2"
+      ]
+    },
+    {
+      "id": "SATELLITE_ACCESS_INDICATION",
+      "name": "Satellite access indication",
+      "entity_type": "Condition",
+      "description": "Condition indicating that access is via a satellite NG-RAN cell, provided by lower layers to the AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "A non-access stratum procedure during which NAS timer values are calculated at start and remain unchanged until completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE applies the NAS timer value for satellite access at the start of a NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AMF",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "AMF calculates the NAS timer value for satellite access at the start of a NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SATELLITE_ACCESS_INDICATION",
+      "target": "AMF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF stores the satellite access indication provided by lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NAS timer value is calculated at the start of the NAS procedure and not re-calculated until the procedure ends.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AMF",
+      "target": "SATELLITE_ACCESS_INDICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF stores the satellite access indication when performing NAS signalling via satellite NG-RAN cells.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.3"
+      ]
+    }
+  ]
+}

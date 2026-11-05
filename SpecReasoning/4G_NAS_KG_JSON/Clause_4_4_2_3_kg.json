@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.2.3",
+  "title": "Establishment of secure exchange of NAS messages",
+  "entities": [
+    {
+      "id": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to establish secure NAS message exchange by selecting security algorithms and activating integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE during tracking area updating procedure, used to trigger security context establishment during inter-system handovers.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message for attach procedure, used to establish secure NAS message exchange with various security contexts.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "EPS_SECURITY_CONTEXT",
+      "name": "EPS security context",
+      "entity_type": "Property",
+      "description": "Security context used for integrity protection and ciphering of NAS messages in EPS network.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "MAPPED_EPS_SECURITY_CONTEXT",
+      "name": "Mapped EPS security context",
+      "entity_type": "Property",
+      "description": "Security context derived from 5G NAS security context during inter-system change from N1 mode to S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "EKSI",
+      "name": "eKSI",
+      "entity_type": "Identifier",
+      "description": "EPS Key Set Identifier used to indicate the security context value in NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_PROTECTION",
+      "name": "Integrity protection",
+      "entity_type": "Property",
+      "description": "Security feature ensuring NAS message integrity using EPS security algorithms.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "CIPHERING",
+      "name": "Ciphering",
+      "entity_type": "Property",
+      "description": "Security feature encrypting NAS messages using EPS security algorithms, except for messages specified in clause 4.4.5.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "EMM_IDLE_MODE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE has no active NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "EMM_CONNECTED_MODE",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "EPS Mobility Management state where UE has an active NAS signalling connection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "INTEGRITY_PROTECTION",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Security mode control procedure establishes integrity protection for NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "target": "CIPHERING",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Security mode control procedure establishes ciphering for NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TRACKING_AREA_UPDATE_REQUEST",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "TRACKING AREA UPDATE REQUEST message requires integrity protection using mapped EPS security context during inter-system handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ATTACH_REQUEST",
+      "target": "EKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ATTACH REQUEST message contains eKSI information element indicating security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TRACKING_AREA_UPDATE_REQUEST",
+      "target": "EKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains eKSI information element indicating security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EMM_IDLE_MODE",
+      "target": "SECURITY_MODE_CONTROL_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Security mode control procedure may be initiated when UE is in EMM-IDLE mode with valid security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMM_CONNECTED_MODE",
+      "target": "TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message transmission during inter-system change requires EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "INTEGRITY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Mapped EPS security context requires integrity protection for NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "CIPHERING",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "Mapped EPS security context requires ciphering for NAS messages except those specified in clause 4.4.5.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.3"
+      ]
+    }
+  ]
+}

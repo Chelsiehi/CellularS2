@@ -1,0 +1,234 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.2.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to request activation of a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "name": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to reject activation of a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for EPS bearer contexts, used to distinguish between default and dedicated bearers.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "LINKED_EPS_BEARER_IDENTITY",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Identifier linking a dedicated EPS bearer to its default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_43",
+      "name": "ESM cause #43",
+      "entity_type": "Property",
+      "description": "ESM cause value indicating 'invalid EPS bearer identity'.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "DEDICATED_EPS_BEARER_ACTIVATION_PROCEDURE",
+      "name": "Dedicated EPS bearer context activation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to activate a dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_DUPLICATE_DEFAULT_EPS_BEARER_ID",
+      "name": "Duplicate EPS bearer identity for default bearer",
+      "entity_type": "Condition",
+      "description": "Condition where ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST has EPS bearer identity identical to an already activated default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_DUPLICATE_DEDICATED_EPS_BEARER_ID",
+      "name": "Duplicate EPS bearer identity for dedicated bearer",
+      "entity_type": "Condition",
+      "description": "Condition where ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST has EPS bearer identity identical to an already activated dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_MATCHING_DEFAULT_EPS_BEARER",
+      "name": "No matching default EPS bearer context",
+      "entity_type": "Condition",
+      "description": "Condition where linked EPS bearer identity does not match any activated default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_MAX_EPS_BEARERS_REACHED",
+      "name": "PLMN maximum EPS bearer contexts reached",
+      "entity_type": "Condition",
+      "description": "Condition where PLMN's maximum number of EPS bearer contexts in S1 mode is reached at the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_LOCAL_DEACTIVATION_DEFAULT",
+      "name": "Local deactivation of default EPS bearer context",
+      "entity_type": "Property",
+      "description": "UE behavior to locally deactivate existing default EPS bearer context and associated dedicated bearers when duplicate EPS bearer identity is detected.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_LOCAL_DEACTIVATION_DEDICATED",
+      "name": "Local deactivation of dedicated EPS bearer context",
+      "entity_type": "Property",
+      "description": "UE behavior to locally deactivate existing dedicated EPS bearer context when duplicate EPS bearer identity is detected.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_SEND_REJECT",
+      "name": "Send ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT",
+      "entity_type": "Property",
+      "description": "UE behavior to send reject message with ESM cause #43 when no matching default EPS bearer context exists.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_CLEAR_MAX_EPS_BEARER_LIMIT",
+      "name": "Clear PLMN maximum EPS bearer contexts determination",
+      "entity_type": "Property",
+      "description": "UE behavior to clear the determination representing PLMN's maximum number of EPS bearer contexts and proceed with activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_DUPLICATE_DEFAULT_EPS_BEARER_ID",
+      "target": "BEHAVIOR_LOCAL_DEACTIVATION_DEFAULT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Duplicate EPS bearer identity for default bearer condition establishes local deactivation of default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_DUPLICATE_DEDICATED_EPS_BEARER_ID",
+      "target": "BEHAVIOR_LOCAL_DEACTIVATION_DEDICATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Duplicate EPS bearer identity for dedicated bearer condition establishes local deactivation of dedicated EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_NO_MATCHING_DEFAULT_EPS_BEARER",
+      "target": "BEHAVIOR_SEND_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "No matching default EPS bearer context condition establishes sending of ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_MAX_EPS_BEARERS_REACHED",
+      "target": "BEHAVIOR_CLEAR_MAX_EPS_BEARER_LIMIT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PLMN maximum EPS bearer contexts reached condition establishes clearing of maximum determination and proceeding with activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message contains EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "LINKED_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message contains linked EPS bearer identity IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "target": "ESM_CAUSE_43",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message contains ESM cause #43 IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DEDICATED_EPS_BEARER_ACTIVATION_PROCEDURE",
+      "target": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Dedicated EPS bearer context activation procedure has step involving ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DEDICATED_EPS_BEARER_ACTIVATION_PROCEDURE",
+      "target": "ACTIVATE_DEDICATED_EPS_BEARER_CONTEXT_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Dedicated EPS bearer context activation procedure has step involving ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message in abnormal cases.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.2.5"
+      ]
+    }
+  ]
+}

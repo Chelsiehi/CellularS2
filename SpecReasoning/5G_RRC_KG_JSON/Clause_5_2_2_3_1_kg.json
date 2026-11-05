@@ -1,0 +1,205 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.3.1",
+  "title": "Acquisition of MIB and SIB1",
+  "entities": [
+    {
+      "id": "PROC_ACQUIRE_MIB_SIB1",
+      "name": "Acquisition of MIB and SIB1",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to acquire Master Information Block (MIB) and System Information Block 1 (SIB1) based on UE state and conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "IE_MIB",
+      "name": "Master Information Block",
+      "entity_type": "Information Element",
+      "description": "Broadcast system information block containing essential cell access parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "IE_SIB1",
+      "name": "System Information Block 1",
+      "entity_type": "Information Element",
+      "description": "Broadcast system information block containing cell access information and scheduling of other SIBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE is not connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE maintains connection context but is not actively communicating.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active connection to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T311",
+      "name": "T311",
+      "entity_type": "Timer",
+      "description": "Timer running during connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "COND_MIB_ACQUISITION_REQUIRED",
+      "name": "MIB acquisition required conditions",
+      "entity_type": "Condition",
+      "description": "Conditions requiring MIB acquisition: UE in RRC_IDLE, RRC_INACTIVE, or RRC_CONNECTED with T311 running.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "COND_SIB1_ACQUISITION_REQUIRED",
+      "name": "SIB1 acquisition required conditions",
+      "entity_type": "Condition",
+      "description": "Multiple conditions requiring SIB1 acquisition including UE states, system information changes, and missing valid SIB versions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "COND_SSB_INDICATES_SIB1",
+      "name": "SSB subcarrier offset indicates SIB1 transmission",
+      "entity_type": "Condition",
+      "description": "Condition where SSB subcarrier offset parameter indicates whether SIB1 is transmitted in the cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "PROP_APPLY_BCCH_CONFIG",
+      "name": "Apply BCCH configuration",
+      "entity_type": "Property",
+      "description": "UE applies specified BCCH configuration as defined in specification.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "PROC_SIB1_ACQUISITION_FAILURE",
+      "name": "SIB1 acquisition failure handling",
+      "entity_type": "Procedure",
+      "description": "Actions performed when UE is unable to acquire SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ACQUIRE_MIB_SIB1",
+      "target": "PROP_APPLY_BCCH_CONFIG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure requires UE to apply BCCH configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ACQUIRE_MIB_SIB1",
+      "target": "COND_MIB_ACQUISITION_REQUIRED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MIB acquisition requires specific UE states or timer conditions",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_MIB_ACQUISITION_REQUIRED",
+      "target": "IE_MIB",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When MIB acquisition conditions are met, UE acquires MIB",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_ACQUIRE_MIB_SIB1",
+      "target": "COND_SIB1_ACQUISITION_REQUIRED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SIB1 acquisition requires specific UE states and conditions",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SIB1_ACQUISITION_REQUIRED",
+      "target": "COND_SSB_INDICATES_SIB1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SIB1 acquisition is guarded by SSB subcarrier offset condition",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SSB_INDICATES_SIB1",
+      "target": "IE_SIB1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SSB indicates SIB1 transmission and acquisition is required, UE acquires SIB1",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SSB_INDICATES_SIB1",
+      "target": "PROC_SIB1_ACQUISITION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When SSB indicates SIB1 is not scheduled, UE performs acquisition failure actions",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "TIMER_T311",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "RRC_CONNECTED state with T311 running triggers MIB acquisition",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.3.1"
+      ]
+    }
+  ]
+}

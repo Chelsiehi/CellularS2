@@ -1,0 +1,171 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.4.2",
+  "title": "Event A1 (Serving becomes better than threshold)",
+  "entities": [
+    {
+      "id": "EVENT_A1",
+      "name": "Event A1",
+      "entity_type": "Procedure",
+      "description": "Measurement event triggered when serving cell becomes better than threshold. UE evaluates entering and leaving conditions based on measurement results and configured parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_A1_1",
+      "name": "Entering condition A1-1",
+      "entity_type": "Condition",
+      "description": "Condition satisfied when Ms + Hys > Thresh, where Ms is serving cell measurement, Hys is hysteresis, Thresh is threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "CONDITION_A1_2",
+      "name": "Leaving condition A1-2",
+      "entity_type": "Condition",
+      "description": "Condition satisfied when Ms - Hys < Thresh, where Ms is serving cell measurement, Hys is hysteresis, Thresh is threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PARAM_MS",
+      "name": "Ms (Measurement result)",
+      "entity_type": "Property",
+      "description": "Measurement result of the serving cell without offsets, expressed in dBm for RSRP or dB for RSRQ/RS-SINR.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PARAM_HYS",
+      "name": "Hys (Hysteresis)",
+      "entity_type": "Property",
+      "description": "Hysteresis parameter for Event A1 defined in reportConfigNR, expressed in dB.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PARAM_THRESH",
+      "name": "Thresh (Threshold)",
+      "entity_type": "Property",
+      "description": "Threshold parameter for Event A1 (a1-Threshold) defined in reportConfigNR, expressed in same unit as Ms.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "MEASOBJECTNR",
+      "name": "measObjectNR",
+      "entity_type": "Property",
+      "description": "Measurement object NR associated with Event A1 that identifies the serving cell to be measured.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EVENT_A1",
+      "target": "CONDITION_A1_1",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Event A1 entering condition is guarded by condition A1-1 (Ms + Hys > Thresh)",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EVENT_A1",
+      "target": "CONDITION_A1_2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Event A1 leaving condition is guarded by condition A1-2 (Ms - Hys < Thresh)",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_A1_1",
+      "target": "PARAM_MS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-1 requires measurement result Ms from serving cell",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_A1_1",
+      "target": "PARAM_HYS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-1 requires hysteresis parameter Hys",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_A1_1",
+      "target": "PARAM_THRESH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-1 requires threshold parameter Thresh",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_A1_2",
+      "target": "PARAM_MS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-2 requires measurement result Ms from serving cell",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_A1_2",
+      "target": "PARAM_HYS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-2 requires hysteresis parameter Hys",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_A1_2",
+      "target": "PARAM_THRESH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Condition A1-2 requires threshold parameter Thresh",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EVENT_A1",
+      "target": "MEASOBJECTNR",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Event A1 requires measObjectNR to identify the serving cell to be measured",
+      "provenance": [
+        "TS 38.331, Clause 5.5.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.6.1.3",
+  "title": "Reception of the UECapabilityEnquiry by the UE",
+  "entities": [
+    {
+      "id": "PROC_UECAPABILITYENQUIRY_RECEPTION",
+      "name": "Reception of UECapabilityEnquiry",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE upon receiving UECapabilityEnquiry message to determine which UE capabilities to include in response.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "MSG_UECAPABILITYINFORMATION",
+      "name": "UECapabilityInformation",
+      "entity_type": "Message",
+      "description": "RRC message sent by UE in response to UECapabilityEnquiry, containing UE radio capability information.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "IE_UECAPABILITYRAT_REQUESTLIST",
+      "name": "ue-CapabilityRAT-RequestList",
+      "entity_type": "Information Element",
+      "description": "Information element in UECapabilityEnquiry message specifying which RAT capabilities are requested.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "name": "ue-CapabilityRAT-ContainerList",
+      "entity_type": "Information Element",
+      "description": "Information element in UECapabilityInformation message containing UE capability containers for different RATs.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_RAT_TYPE_NR",
+      "name": "rat-Type set to nr",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE-CapabilityRAT-Request has rat-Type set to NR.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_RAT_TYPE_EUTRA_NR",
+      "name": "rat-Type set to eutra-nr",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE-CapabilityRAT-Request has rat-Type set to E-UTRA-NR.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_RAT_TYPE_EUTRA",
+      "name": "rat-Type set to eutra",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE-CapabilityRAT-Request has rat-Type set to E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_RAT_TYPE_UTRA_FDD",
+      "name": "rat-Type set to utra-fdd",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE-CapabilityRAT-Request has rat-Type set to UTRA-FDD.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_ENDC_NEDC",
+      "name": "UE supports (NG)EN-DC or NE-DC",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE supports EN-DC, NGEN-DC, or NE-DC dual connectivity.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_EUTRA",
+      "name": "UE supports E-UTRA",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE supports E-UTRA capabilities.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_UE_SUPPORTS_UTRA_FDD",
+      "name": "UE supports UTRA-FDD",
+      "entity_type": "Condition",
+      "description": "Condition checking if UE supports UTRA-FDD capabilities.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "COND_RRC_SEGMENTATION_REQUIRED",
+      "name": "RRC message segmentation required",
+      "entity_type": "Condition",
+      "description": "Condition checking if RRC message segmentation is enabled and encoded message exceeds PDCP SDU size limit.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "PROC_UL_SEGMENT_TRANSFER",
+      "name": "UL message segment transfer procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for segmenting and transmitting large RRC messages when segmentation is required.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UECAPABILITYENQUIRY_RECEPTION",
+      "target": "MSG_UECAPABILITYINFORMATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes constructing and transmitting UECapabilityInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UECAPABILITYENQUIRY_RECEPTION",
+      "target": "IE_UECAPABILITYRAT_REQUESTLIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution depends on contents of ue-CapabilityRAT-RequestList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UECAPABILITYINFORMATION",
+      "target": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UECapabilityInformation message contains ue-CapabilityRAT-ContainerList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_RAT_TYPE_NR",
+      "target": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When rat-Type is nr, UE includes NR capability container in ue-CapabilityRAT-ContainerList.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RAT_TYPE_EUTRA_NR",
+      "target": "COND_UE_SUPPORTS_ENDC_NEDC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of E-UTRA-NR capability container requires UE support for EN-DC/NE-DC.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_UE_SUPPORTS_ENDC_NEDC",
+      "target": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE supports EN-DC/NE-DC, includes MRDC capability container in ue-CapabilityRAT-ContainerList.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_RAT_TYPE_EUTRA",
+      "target": "COND_UE_SUPPORTS_EUTRA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of E-UTRA capability container requires UE support for E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_UE_SUPPORTS_EUTRA",
+      "target": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE supports E-UTRA, includes E-UTRA capability container in ue-CapabilityRAT-ContainerList.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_RAT_TYPE_UTRA_FDD",
+      "target": "COND_UE_SUPPORTS_UTRA_FDD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of UTRA-FDD capability container requires UE support for UTRA-FDD.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_UE_SUPPORTS_UTRA_FDD",
+      "target": "IE_UECAPABILITYRAT_CONTAINERLIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE supports UTRA-FDD, includes UTRA-FDD capability container in ue-CapabilityRAT-ContainerList.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_RRC_SEGMENTATION_REQUIRED",
+      "target": "PROC_UL_SEGMENT_TRANSFER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RRC message segmentation is required, UE initiates UL message segment transfer procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.6.1.3"
+      ]
+    }
+  ]
+}

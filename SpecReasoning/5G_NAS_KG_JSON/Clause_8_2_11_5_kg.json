@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.11.5",
+  "title": "Back-off timer value",
+  "entities": [
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function responsible for including the Back-off timer value IE under specific congestion or subscription conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value",
+      "entity_type": "Information Element",
+      "description": "IE included by AMF when uplink 5GSM message forwarding fails due to congestion control or subscription issues.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER",
+      "name": "Payload container",
+      "entity_type": "Information Element",
+      "description": "IE containing the uplink 5GSM message that may not be forwarded due to congestion or subscription reasons.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type",
+      "entity_type": "Information Element",
+      "description": "IE indicating the type of payload container, with value not set to 'Multiple payloads' in this context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "COND_CONGESTION_OR_SUBSCRIPTION",
+      "name": "Congestion or subscription condition",
+      "entity_type": "Condition",
+      "description": "Condition where uplink 5GSM message is not forwarded due to DNN based congestion control, S-NSSAI and DNN based congestion control, S-NSSAI only based congestion control, or DNN not supported/subscribed in a slice.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AMF includes the Back-off timer value IE when specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PAYLOAD_CONTAINER",
+      "target": "COND_CONGESTION_OR_SUBSCRIPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container IE is associated with conditions where uplink 5GSM message forwarding fails due to congestion or subscription issues.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_PAYLOAD_CONTAINER_TYPE",
+      "target": "COND_CONGESTION_OR_SUBSCRIPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Payload container type IE not set to 'Multiple payloads' is part of the condition for including Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_CONGESTION_OR_SUBSCRIPTION",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Congestion or subscription condition establishes the need for including the Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.11.5"
+      ]
+    }
+  ]
+}

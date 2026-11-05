@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.1.3",
+  "title": "Default EPS bearer context activation accepted by the UE",
+  "entities": [
+    {
+      "id": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "name": "Default EPS bearer context activation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE accepts default EPS bearer context activation and transitions to BEARER CONTEXT ACTIVE state",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Network-initiated message to activate default EPS bearer context",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_ACCEPT",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT",
+      "entity_type": "Message",
+      "description": "UE response message accepting default EPS bearer context activation",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3396",
+      "name": "T3396",
+      "entity_type": "Timer",
+      "description": "Timer associated with APN connectivity requests",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "State entered when default EPS bearer context is successfully activated",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "IE_WLAN_OFFLOAD_INDICATION",
+      "name": "WLAN offload indication",
+      "entity_type": "Information Element",
+      "description": "IE indicating WLAN offload acceptability values for PDN connection",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "IE_SERVING_PLMN_RATE_CONTROL",
+      "name": "Serving PLMN rate control",
+      "entity_type": "Information Element",
+      "description": "IE containing maximum allowed limit for uplink User data container IEs",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "IE containing various configuration parameters including rate control and MTU parameters",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN_CONNECTION",
+      "name": "Emergency PDN connection condition",
+      "entity_type": "Condition",
+      "description": "Condition where PDN connection is for emergency services",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "PROP_STORE_RATE_CONTROL_PARAMS",
+      "name": "Store rate control parameters",
+      "entity_type": "Property",
+      "description": "UE behavior to store and use various rate control parameters for uplink data limits",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receipt of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes BEARER CONTEXT ACTIVE state",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "TIMER_T3396",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T3396 under certain conditions",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_WLAN_OFFLOAD_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain WLAN offload indication IE",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_SERVING_PLMN_RATE_CONTROL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain serving PLMN rate control IE",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_CONTEXT_REQUEST",
+      "target": "IE_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains protocol configuration options IE",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EMERGENCY_PDN_CONNECTION",
+      "target": "TIMER_T3396",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDN connection condition prevents stopping timer T3396",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_DEFAULT_EPS_BEARER_ACTIVATION",
+      "target": "PROP_STORE_RATE_CONTROL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes behavior to store rate control parameters",
+      "provenance": [
+        "TS 24.301, Clause 6.4.1.3"
+      ]
+    }
+  ]
+}

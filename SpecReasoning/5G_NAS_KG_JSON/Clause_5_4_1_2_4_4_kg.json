@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.4.4",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3560",
+      "name": "Timer T3560",
+      "entity_type": "Timer",
+      "description": "Timer used during EAP-based primary authentication and key agreement procedure. Expiry triggers retransmission of AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used in EAP-based primary authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "PROC_EAP_AUTH",
+      "name": "EAP based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP method.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "COND_T3560_EXPIRY",
+      "name": "Expiry of timer T3560",
+      "entity_type": "Condition",
+      "description": "Condition when timer T3560 expires, triggering retransmission or procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "COND_HANDOVER_NON_DELIVERY",
+      "name": "Lower layers indication of non-delivered NAS PDU due to handover",
+      "entity_type": "Condition",
+      "description": "Condition where NAS PDU cannot be delivered due to intra-AMF handover.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_AUTH",
+      "name": "Abort authentication procedure",
+      "entity_type": "Property",
+      "description": "AMF behavior to abort EAP-based primary authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "PROP_RELEASE_N1",
+      "name": "Release N1 NAS signalling connection",
+      "entity_type": "Property",
+      "description": "AMF behavior to release the N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "PROP_RETRANSMIT_AUTH_REQ",
+      "name": "Retransmit AUTHENTICATION REQUEST",
+      "entity_type": "Property",
+      "description": "AMF behavior to retransmit the AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_T3560_EXPIRY",
+      "target": "PROP_RETRANSMIT_AUTH_REQ",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "First expiry of T3560 triggers retransmission of AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_T3560_EXPIRY",
+      "target": "TIMER_T3560",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On first expiry, AMF resets and starts timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3560_EXPIRY",
+      "target": "TIMER_T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "On first expiry, AMF starts timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_T3560_EXPIRY",
+      "target": "PROP_ABORT_AUTH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3560 triggers abortion of authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_T3560_EXPIRY",
+      "target": "PROP_RELEASE_N1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3560 triggers release of N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_HANDOVER_NON_DELIVERY",
+      "target": "PROP_RETRANSMIT_AUTH_REQ",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-delivery due to handover triggers retransmission of AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_EAP_AUTH",
+      "target": "MSG_AUTHENTICATION_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message is used in EAP authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.4.4"
+      ]
+    }
+  ]
+}

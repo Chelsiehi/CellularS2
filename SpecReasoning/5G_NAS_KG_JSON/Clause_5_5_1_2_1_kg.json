@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROCEDURE_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used by a UE for initial registration for 5GS services, including emergency services, SNPN onboarding, and disaster roaming services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of registration being performed by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate the registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the network in response to a registration request.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_EMERGENCY_REGISTRATION_MUSIM",
+      "name": "MUSIM UE emergency registration condition",
+      "entity_type": "Condition",
+      "description": "Condition where a MUSIM UE initiates registration with emergency registration type.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_NETWORK_RESTRICTIONS",
+      "name": "Network feature restrictions",
+      "entity_type": "Property",
+      "description": "Network shall not indicate support for N1 NAS signalling connection release, paging indication for voice services, reject paging request, or paging restriction in REGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The initial registration procedure involves sending a REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REGISTRATION REQUEST message contains the 5GS registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EMERGENCY_REGISTRATION_MUSIM",
+      "target": "PROPERTY_NETWORK_RESTRICTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When a MUSIM UE performs emergency registration, the network shall apply feature restrictions in the REGISTRATION ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "PROPERTY_NETWORK_RESTRICTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REGISTRATION ACCEPT message contains the network feature restrictions when the condition is met.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.1"
+      ]
+    }
+  ]
+}

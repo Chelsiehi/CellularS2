@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.17.4",
+  "title": "PDU session reactivation result error cause",
+  "entities": [
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "name": "PDU session reactivation result error cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the cause of failure to re-establish user-plane resources for PDU sessions during reactivation when included with the PDU session reactivation result IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.17.4"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "name": "PDU session reactivation result",
+      "entity_type": "Information Element",
+      "description": "Contains the result of PDU session reactivation procedures, indicating which sessions were successfully reactivated.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.17.4"
+      ]
+    },
+    {
+      "id": "COND_FAILED_REACTIVATION",
+      "name": "Failed PDU session reactivation",
+      "entity_type": "Condition",
+      "description": "Condition where one or more PDU sessions cannot have their user-plane resources re-established during reactivation.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.17.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "target": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The error cause IE is included conditionally when the PDU session reactivation result IE is present.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.17.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "target": "COND_FAILED_REACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The error cause IE is included only if there are PDU sessions with failed user-plane resource re-establishment.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.17.4"
+      ]
+    }
+  ]
+}

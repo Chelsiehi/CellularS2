@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.5",
+  "title": "Ciphering of NAS signalling messages",
+  "entities": [
+    {
+      "id": "CIPHERING_PROCEDURE",
+      "name": "NAS Ciphering Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for applying ciphering to NAS signaling messages between UE and AMF after secure exchange is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "NULL_CIPHERING_ALGORITHM",
+      "name": "Null Ciphering Algorithm 5G-EA0",
+      "entity_type": "Property",
+      "description": "Ciphering algorithm indicating no ciphering is applied, used when network operates without ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND message",
+      "entity_type": "Message",
+      "description": "NAS message sent unciphered by AMF even after ciphering has started.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "N1_NAS_SIGNALLING_CONNECTION",
+      "name": "N1 NAS signalling connection",
+      "entity_type": "Property",
+      "description": "Connection over which NAS messages are exchanged between UE and AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "SECURE_EXCHANGE_ESTABLISHED",
+      "name": "Secure exchange of NAS messages established",
+      "entity_type": "Condition",
+      "description": "Condition indicating that secure exchange is established for an N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1",
+      "name": "Inter-system change to S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition that stops ciphering when UE changes to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "DISCARD_UNCIPHERED_MESSAGES",
+      "name": "Discard unciphered NAS messages",
+      "entity_type": "Property",
+      "description": "Behavior where receiver discards unciphered messages once ciphering has started.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CIPHERING_PROCEDURE",
+      "target": "SECURE_EXCHANGE_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Ciphering starts when secure exchange of NAS messages is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CIPHERING_PROCEDURE",
+      "target": "NULL_CIPHERING_ALGORITHM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Null ciphering algorithm is used when network operates without ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SECURITY_MODE_COMMAND",
+      "target": "CIPHERING_PROCEDURE",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message is sent unciphered even after ciphering starts.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CIPHERING_PROCEDURE",
+      "target": "N1_NAS_SIGNALLING_CONNECTION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Ciphering applies until N1 NAS signalling connection is released.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTER_SYSTEM_CHANGE_S1",
+      "target": "CIPHERING_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Ciphering stops when UE performs inter-system change to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DISCARD_UNCIPHERED_MESSAGES",
+      "target": "CIPHERING_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Once ciphering starts, unciphered messages are discarded.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.5"
+      ]
+    }
+  ]
+}

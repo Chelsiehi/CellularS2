@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.3.4",
+  "title": "Ciphering and deciphering",
+  "entities": [
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Input parameter used for NAS ciphering and deciphering algorithms. The sender uses locally stored NAS COUNT, while the receiver reconstructs it from NAS sequence number and overflow counter estimate.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "NAS_CIPHERING_ALGORITHM",
+      "name": "NAS ciphering algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm used for ciphering NAS messages. Takes inputs including BEARER ID, DIRECTION bit, NAS COUNT, NAS encryption key, and key stream length.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "NAS_DECIPHERING_ALGORITHM",
+      "name": "NAS deciphering algorithm",
+      "entity_type": "Property",
+      "description": "Algorithm used for deciphering NAS messages. Uses reconstructed NAS COUNT from received message sequence number and overflow counter estimate.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial plain NAS message for transport of user data via control plane that may be partially ciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "ESM_MESSAGE_CONTAINER_IE",
+      "name": "ESM message container IE",
+      "entity_type": "Information Element",
+      "description": "Information element whose value part may be ciphered in CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "Container whose value part may be ciphered in CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_CIPHERING_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS ciphering algorithm uses NAS COUNT as input parameter for protection",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NAS_DECIPHERING_ALGORITHM",
+      "target": "NAS_COUNT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS deciphering algorithm uses reconstructed NAS COUNT as input parameter",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "ESM_MESSAGE_CONTAINER_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains ESM message container IE",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message contains NAS message container",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_CIPHERING_ALGORITHM",
+      "target": "CONTROL_PLANE_SERVICE_REQUEST",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "NAS ciphering algorithm may partially cipher CONTROL PLANE SERVICE REQUEST message",
+      "provenance": [
+        "TS 24.301, Clause 4.4.3.4"
+      ]
+    }
+  ]
+}

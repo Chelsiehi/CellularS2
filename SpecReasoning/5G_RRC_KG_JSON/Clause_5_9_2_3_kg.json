@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.2.3",
+  "title": "MCCH information acquisition by the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_MCCH_ACQUISITION",
+      "name": "MCCH information acquisition",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by an MBS capable UE to acquire MBS broadcast configuration information from MCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_MCCH_CHANGE_NOTIFICATION",
+      "name": "MCCH information change notification",
+      "entity_type": "Condition",
+      "description": "Trigger condition when the UE receives an MCCH information change notification.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "CONDITION_ENTER_SIB20_CELL",
+      "name": "UE enters a cell broadcasting SIB20",
+      "entity_type": "Condition",
+      "description": "Trigger condition when the UE enters a cell that broadcasts SIB20.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "MESSAGE_MBSBROADCASTCONFIGURATION",
+      "name": "MBSBroadcastConfiguration message",
+      "entity_type": "Message",
+      "description": "Message containing MBS broadcast configuration information transmitted on MCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "CHANNEL_MCCH",
+      "name": "MCCH",
+      "entity_type": "Property",
+      "description": "Multicast Control Channel used for transmitting MBS broadcast configuration information.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "UE_MBS_CAPABLE",
+      "name": "MBS capable UE",
+      "entity_type": "Property",
+      "description": "UE that supports MBS broadcast services and is interested in or receiving such services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_MCCH_ACQUISITION",
+      "target": "CONDITION_MCCH_CHANGE_NOTIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MCCH information acquisition procedure is triggered by MCCH information change notification.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_MCCH_ACQUISITION",
+      "target": "CONDITION_ENTER_SIB20_CELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MCCH information acquisition procedure is triggered when UE enters a cell broadcasting SIB20.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_MCCH_ACQUISITION",
+      "target": "MESSAGE_MBSBROADCASTCONFIGURATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MCCH information acquisition procedure involves acquiring the MBSBroadcastConfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MESSAGE_MBSBROADCASTCONFIGURATION",
+      "target": "CHANNEL_MCCH",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "MBSBroadcastConfiguration message is transmitted on MCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_MCCH_ACQUISITION",
+      "target": "UE_MBS_CAPABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MCCH information acquisition procedure is performed by MBS capable UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.3"
+      ]
+    }
+  ]
+}

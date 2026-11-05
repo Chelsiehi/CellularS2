@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.5",
+  "title": "UPDATE-NEEDED",
+  "entities": [
+    {
+      "id": "STATE_UPDATE_NEEDED",
+      "name": "UPDATE-NEEDED state",
+      "entity_type": "State",
+      "description": "UE state where certain restrictions apply to user data and signaling transmission, and specific procedures are allowed.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service Request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered in response to paging to establish signaling connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TAU",
+      "name": "Tracking Area Updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating UE location in the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_EMERGENCY_PDN",
+      "name": "PDN connection for emergency bearer services",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish PDN connection for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_MMTEL_CALL",
+      "name": "MMTEL voice/video call procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for initiating MMTEL voice or video calls.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SMS",
+      "name": "SMS procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures for SMS over IP, SMS over NAS, or SMS over S102.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ECALL_INACTIVITY",
+      "name": "eCall inactivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when eCall only mode is configured and timers T3444 or T3445 expire.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3444",
+      "name": "Timer T3444",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode for inactivity procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3445",
+      "name": "Timer T3445",
+      "entity_type": "Timer",
+      "description": "Timer used in eCall only mode for inactivity procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "CONDITION_ECALL_MODE",
+      "name": "eCall only mode configured",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for eCall only mode as specified in 3GPP TS 31.102.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_UPDATE_NEEDED",
+      "target": "PROCEDURE_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UPDATE-NEEDED state allows Service Request procedure when triggered by paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_UPDATE_NEEDED",
+      "target": "PROCEDURE_TAU",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UPDATE-NEEDED state allows Tracking Area Updating procedure when triggered by paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_UPDATE_NEEDED",
+      "target": "PROCEDURE_EMERGENCY_PDN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UPDATE-NEEDED state allows PDN connection for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_UPDATE_NEEDED",
+      "target": "PROCEDURE_MMTEL_CALL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UPDATE-NEEDED state allows MMTEL voice/video call procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_UPDATE_NEEDED",
+      "target": "PROCEDURE_SMS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UPDATE-NEEDED state allows SMS procedures (SMSoIP, SMS over NAS, SMS over S102).",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_ECALL_MODE",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "eCall only mode configuration requires performing eCall inactivity procedure at timer expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TIMER_T3444",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3444 expiry triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3445",
+      "target": "PROCEDURE_ECALL_INACTIVITY",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3445 expiry triggers eCall inactivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.5"
+      ]
+    }
+  ]
+}

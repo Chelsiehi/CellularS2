@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.3.2.1.3.7",
+  "title": "5GMM-DEREGISTERED.NO-CELL-AVAILABLE",
+  "entities": [
+    {
+      "id": "STATE_5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "name": "5GMM-DEREGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "Substate entered when no 5G cell can be selected after intensive search failure. Cells are searched at low rhythm and no 5GS services are offered.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Previous substate from which 5GMM-DEREGISTERED.NO-CELL-AVAILABLE is entered after search failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_5G_CELL_AVAILABLE",
+      "name": "No 5G cell available",
+      "entity_type": "Condition",
+      "description": "Condition where no 5G cell can be selected after intensive search.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_5GS_SERVICES",
+      "name": "No 5GS services offered",
+      "entity_type": "Property",
+      "description": "Property indicating that no 5GS services are available in this substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_LOW_RHYTHM_SEARCH",
+      "name": "Low rhythm cell search",
+      "entity_type": "Property",
+      "description": "Property indicating cells are searched at a low rhythm in this substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_NO_5G_CELL_AVAILABLE",
+      "target": "STATE_5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no 5G cell available after intensive search establishes entry into NO-CELL-AVAILABLE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "target": "STATE_5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Transition from PLMN-SEARCH substate to NO-CELL-AVAILABLE substate after search failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "target": "PROPERTY_NO_5GS_SERVICES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NO-CELL-AVAILABLE substate establishes that no 5GS services are offered.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_5GMM_DEREGISTERED_NO_CELL_AVAILABLE",
+      "target": "PROPERTY_LOW_RHYTHM_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NO-CELL-AVAILABLE substate establishes that cells are searched at low rhythm.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.3.3",
+  "title": "Network initiated transport of NAS messages",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "name": "Network initiated transport of NAS messages",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network sends a DOWNLINK NAS TRANSPORT message to transport NAS messages to the UE. The UE's EMM entity forwards the NAS message container contents to the SMS entity.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_DOWNLINK_NAS_TRANSPORT",
+      "name": "DOWNLINK NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate transport of NAS messages to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "IE_NAS_MESSAGE_CONTAINER",
+      "name": "NAS message container",
+      "entity_type": "Information Element",
+      "description": "Information element containing NAS messages to be transported to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "ENTITY_EMM",
+      "name": "EMM entity",
+      "entity_type": "Property",
+      "description": "EMM entity in the UE that processes NAS messages.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "ENTITY_SMS",
+      "name": "SMS entity",
+      "entity_type": "Property",
+      "description": "SMS entity in the UE that receives forwarded NAS message contents.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "COND_CIOT_EPS_OPTIMIZATION",
+      "name": "EPS services with control plane CIoT EPS optimization",
+      "entity_type": "Condition",
+      "description": "Condition where UE is using EPS services with control plane CIoT EPS optimization, allowing network to initiate downlink transport even without PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "target": "MSG_DOWNLINK_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure is initiated by sending a DOWNLINK NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DOWNLINK_NAS_TRANSPORT",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The DOWNLINK NAS TRANSPORT message contains the NAS message container IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ENTITY_EMM",
+      "target": "IE_NAS_MESSAGE_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The EMM entity forwards the contents of the NAS message container IE to the SMS entity.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ENTITY_EMM",
+      "target": "ENTITY_SMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The EMM entity forwards NAS message contents to the SMS entity.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_CIOT_EPS_OPTIMIZATION",
+      "target": "PROC_NETWORK_INITIATED_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When UE is using EPS services with control plane CIoT EPS optimization, the network can initiate downlink transport even without PDN connections.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.3.3"
+      ]
+    }
+  ]
+}

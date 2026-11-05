@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.3.1",
+  "title": "Procedure transaction identity",
+  "entities": [
+    {
+      "id": "PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier used in ESM messages to correlate request and response messages for a specific procedure transaction.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_81",
+      "name": "ESM cause #81",
+      "entity_type": "Property",
+      "description": "Invalid PTI value cause code used in reject messages when an unassigned or reserved PTI value is received.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_47",
+      "name": "ESM cause #47",
+      "entity_type": "Property",
+      "description": "PTI mismatch cause code used when an assigned PTI value does not match any ongoing transaction.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "COND_INVALID_PTI",
+      "name": "Invalid PTI condition",
+      "entity_type": "Condition",
+      "description": "Condition where received PTI is unassigned, reserved, or does not match any ongoing transaction.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_MSG",
+      "name": "Ignore message",
+      "entity_type": "Property",
+      "description": "Behavior where the receiver discards the message without further processing.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "PROP_SEND_REJECT",
+      "name": "Send reject message",
+      "entity_type": "Property",
+      "description": "Behavior where the receiver responds with a reject message containing appropriate ESM cause.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_INVALID_PTI",
+      "target": "PROP_IGNORE_MSG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Invalid PTI condition leads to message being ignored in specified scenarios.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_INVALID_PTI",
+      "target": "PROP_SEND_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Invalid PTI condition leads to sending reject message with ESM cause.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_SEND_REJECT",
+      "target": "ESM_CAUSE_81",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Reject messages contain ESM cause #81 for invalid PTI values.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROP_SEND_REJECT",
+      "target": "ESM_CAUSE_47",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Reject messages contain ESM cause #47 for PTI mismatch conditions.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PTI",
+      "target": "COND_INVALID_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PTI value is checked against invalid conditions (unassigned, reserved, or mismatch).",
+      "provenance": [
+        "TS 24.301, Clause 7.3.1"
+      ]
+    }
+  ]
+}

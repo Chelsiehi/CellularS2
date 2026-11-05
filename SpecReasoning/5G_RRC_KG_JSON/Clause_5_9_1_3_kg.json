@@ -1,0 +1,148 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.1.3",
+  "title": "MCCH information validity and notification of changes",
+  "entities": [
+    {
+      "id": "MCCH",
+      "name": "Multicast Control Channel",
+      "entity_type": "Information Element",
+      "description": "Channel carrying multicast control information for MBS services. Its information changes only at specific modification periods.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "MODIFICATION_PERIOD",
+      "name": "Modification Period",
+      "entity_type": "Property",
+      "description": "Time period during which MCCH information remains unchanged. Changes occur only at specific radio frames within this period.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REPETITION_PERIOD",
+      "name": "Repetition Period",
+      "entity_type": "Property",
+      "description": "Scheduling period defining how many times the same MCCH information is transmitted within a modification period.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "CHANGE_NOTIFICATION",
+      "name": "MCCH Change Notification",
+      "entity_type": "Message",
+      "description": "Notification sent via PDCCH to inform UEs about changes in MCCH information. Uses a 2-bit bitmap to indicate different change types.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_BITMAP",
+      "name": "2-bit Notification Bitmap",
+      "entity_type": "Information Element",
+      "description": "Bitmap where MSB=1 indicates start of new MBS service(s) and LSB=1 indicates modification of MCCH information excluding new service starts.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3",
+        "TS 38.212 clause 7.3.1.2.1"
+      ]
+    },
+    {
+      "id": "MBS_SERVICE_START",
+      "name": "MBS Service Start",
+      "entity_type": "Condition",
+      "description": "Condition indicated when MSB of notification bitmap is set to '1', signaling the start of new MBS service(s).",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "MCCH_MODIFICATION",
+      "name": "MCCH Information Modification",
+      "entity_type": "Condition",
+      "description": "Condition indicated when LSB of notification bitmap is set to '1', covering configuration changes, session stops, or neighboring cell information modifications.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "UE_MBS_RECEIVER",
+      "name": "UE Receiving MBS Services",
+      "entity_type": "State",
+      "description": "State where UE is currently receiving or interested in receiving MBS services via broadcast.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MCCH",
+      "target": "MODIFICATION_PERIOD",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MCCH information changes only occur at specific radio frames within modification periods.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MCCH",
+      "target": "REPETITION_PERIOD",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MCCH information scheduling is based on repetition periods within modification periods.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CHANGE_NOTIFICATION",
+      "target": "NOTIFICATION_BITMAP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Change notification message contains the 2-bit bitmap indicating change types.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NOTIFICATION_BITMAP",
+      "target": "MBS_SERVICE_START",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MSB=1 in bitmap indicates start of new MBS service(s).",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NOTIFICATION_BITMAP",
+      "target": "MCCH_MODIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "LSB=1 in bitmap indicates MCCH information modification excluding new service starts.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_MBS_RECEIVER",
+      "target": "CHANGE_NOTIFICATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE receiving or interested in MBS services acquires new MCCH information upon receiving change notification.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.3"
+      ]
+    }
+  ]
+}

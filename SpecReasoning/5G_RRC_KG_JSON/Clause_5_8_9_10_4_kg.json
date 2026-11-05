@@ -1,0 +1,156 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.10.4",
+  "title": "Actions related to reception of NotificationMessageSidelink message",
+  "entities": [
+    {
+      "id": "NOTIFICATION_MESSAGE_SIDELINK",
+      "name": "NotificationMessageSidelink",
+      "entity_type": "Message",
+      "description": "A sidelink message received by U2N Remote UE that triggers specific actions based on UE type and state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "INDICATION_TYPE",
+      "name": "indicationType",
+      "entity_type": "Information Element",
+      "description": "An optional information element included in NotificationMessageSidelink that determines the required actions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE_RRC_CONNECTED",
+      "name": "L2 U2N Remote UE in RRC_CONNECTED",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is an L2 U2N Remote UE in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "L3_U2N_REMOTE_UE",
+      "name": "L3 U2N Remote UE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is an L3 U2N Remote UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "L2_U2N_REMOTE_UE_IDLE_INACTIVE",
+      "name": "L2 U2N Remote UE in RRC_IDLE or RRC_INACTIVE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is an L2 U2N Remote UE in RRC_IDLE or RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "PC5_RRC_CONNECTION_RELEASED",
+      "name": "PC5-RRC connection released",
+      "entity_type": "Condition",
+      "description": "Condition where the PC5-RRC connection with the U2N Relay UE is determined to be released.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_REESTABLISHMENT",
+      "name": "RRC connection re-establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by L2 U2N Remote UE in RRC_CONNECTED when indicationType is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "PC5_RRC_CONNECTION_RELEASE",
+      "name": "PC5-RRC connection release",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when PC5-RRC connection is determined to be released for L3 U2N Remote UE or L2 U2N Remote UE in RRC_IDLE/RRC_INACTIVE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "MAINTAIN_PC5_RRC_CONNECTION",
+      "name": "Maintain PC5-RRC connection",
+      "entity_type": "Property",
+      "description": "Behavior where the UE maintains the PC5-RRC connection when release condition is not met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NOTIFICATION_MESSAGE_SIDELINK",
+      "target": "INDICATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NotificationMessageSidelink may contain the indicationType information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "L2_U2N_REMOTE_UE_RRC_CONNECTED",
+      "target": "RRC_CONNECTION_REESTABLISHMENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of L2 U2N Remote UE in RRC_CONNECTED establishes initiation of RRC connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "L3_U2N_REMOTE_UE",
+      "target": "PC5_RRC_CONNECTION_RELEASED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of L3 U2N Remote UE guards the check for PC5-RRC connection release determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "L2_U2N_REMOTE_UE_IDLE_INACTIVE",
+      "target": "PC5_RRC_CONNECTION_RELEASED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of L2 U2N Remote UE in RRC_IDLE/RRC_INACTIVE guards the check for PC5-RRC connection release determination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PC5_RRC_CONNECTION_RELEASED",
+      "target": "PC5_RRC_CONNECTION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of PC5-RRC connection being released establishes the PC5-RRC connection release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PC5_RRC_CONNECTION_RELEASED",
+      "target": "MAINTAIN_PC5_RRC_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Negation of PC5-RRC connection release condition guards the maintenance of PC5-RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.10.4"
+      ]
+    }
+  ]
+}

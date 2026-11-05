@@ -1,0 +1,232 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.3.2",
+  "title": "Notification procedure initiation",
+  "entities": [
+    {
+      "id": "NOTIFICATION_PROCEDURE",
+      "name": "Notification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to notify the UE, involving NOTIFICATION message transmission and timer T3565 management.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2",
+        "Figure 5.6.3.2.1"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_MSG",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate the notification procedure, triggering UE actions based on access type and UE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2",
+        "Figure 5.6.3.2.1"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_RESPONSE_MSG",
+      "name": "NOTIFICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent by the UE in response to NOTIFICATION when unable to initiate service request or registration procedures over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "T3565",
+      "name": "Timer T3565",
+      "entity_type": "Timer",
+      "description": "Timer started by the network when sending NOTIFICATION message, stopped upon receiving UE response.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2",
+        "Figure 5.6.3.2.1"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer stopped by the UE upon reception of NOTIFICATION message if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE upon NOTIFICATION reception to request service establishment over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE for registration updates over 3GPP access when in specific states.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_STATUS_IE",
+      "name": "PDU session status information element",
+      "entity_type": "Information Element",
+      "description": "IE included in NOTIFICATION RESPONSE to indicate PDU session status and local release information.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "COND_5GMM_REGISTERED_NORMAL",
+      "name": "UE in 5GMM-REGISTERED.NORMAL-SERVICE state",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registered with normal service capability over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "COND_5GMM_IDLE_NO_SUSPEND",
+      "name": "UE in 5GMM-IDLE mode without suspend indication",
+      "entity_type": "Condition",
+      "description": "Condition where UE is in idle mode without suspension indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "COND_CP_CIOT_NOT_USED",
+      "name": "Control plane CIoT 5GS optimization not used",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not use control plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_RELEASE",
+      "name": "Local release of PDU sessions and user plane resources",
+      "entity_type": "Property",
+      "description": "Behavior where UE locally releases single access PDU sessions and 3GPP access user plane resources of MA PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NOTIFICATION_PROCEDURE",
+      "target": "NOTIFICATION_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Notification procedure includes sending NOTIFICATION message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2",
+        "Figure 5.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NOTIFICATION_PROCEDURE",
+      "target": "T3565",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3565 when initiating notification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2",
+        "Figure 5.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NOTIFICATION_MSG",
+      "target": "T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops timer T3346 upon reception of NOTIFICATION message if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NOTIFICATION_MSG",
+      "target": "SERVICE_REQUEST_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "NOTIFICATION message triggers UE to initiate service request procedure under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NOTIFICATION_MSG",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "NOTIFICATION message triggers UE to initiate registration procedure under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "COND_5GMM_REGISTERED_NORMAL",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in 5GMM-REGISTERED.NORMAL-SERVICE or similar states.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "COND_5GMM_IDLE_NO_SUSPEND",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure requires UE to be in 5GMM-IDLE mode without suspend indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "COND_CP_CIOT_NOT_USED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedure initiation is guarded by condition that control plane CIoT optimization is not used.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "NOTIFICATION_RESPONSE_MSG",
+      "target": "PDU_SESSION_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NOTIFICATION RESPONSE message contains PDU session status IE to indicate session status and local release.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "NOTIFICATION_RESPONSE_MSG",
+      "target": "PROP_LOCAL_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "NOTIFICATION RESPONSE message establishes that local release of PDU sessions and user plane resources was performed.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.2"
+      ]
+    }
+  ]
+}

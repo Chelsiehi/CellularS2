@@ -1,0 +1,188 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.2.4",
+  "title": "Establishment of an EPS security context during inter-system change from N1 mode to S1 mode in 5GMM-CONNECTED mode",
+  "entities": [
+    {
+      "id": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "name": "Inter-system change from N1 mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing from 5G NAS (N1 mode) to EPS NAS (S1 mode) while in 5GMM-CONNECTED mode in single-registration mode with N26 interface support.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "MAPPED_EPS_SECURITY_CONTEXT",
+      "name": "Mapped EPS security context",
+      "entity_type": "Property",
+      "description": "Security context derived from 5G NAS security context for use in EPS during inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "K_ASME_DERIVED",
+      "name": "K'ASME key",
+      "entity_type": "Property",
+      "description": "Derived key for EPS security context created from KAMF and downlink NAS COUNT.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "IE_N1_TO_S1_TRANSPARENT_CONTAINER",
+      "name": "N1 mode to S1 mode NAS transparent container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing NAS sequence number for inter-system change security context derivation.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4",
+        "TS 24.501, Subclause 9.11.2.7"
+      ]
+    },
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Property",
+      "description": "Counter value used in NAS security context for key derivation and sequence management.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "NAS_ALGORITHMS",
+      "name": "NAS algorithms identifiers",
+      "entity_type": "Property",
+      "description": "Encryption and integrity protection algorithms selected for use in target MME after inter-system change.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "EKSI",
+      "name": "eKSI",
+      "entity_type": "Identifier",
+      "description": "EPS Key Set Identifier derived from ngKSI with type field indicating mapped security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_INVALID_NAS_COUNT",
+      "name": "Invalid NAS COUNT condition",
+      "entity_type": "Condition",
+      "description": "Condition where received NAS transparent container IE does not have a valid NAS COUNT.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "CONDITION_CHANGE_FAILURE",
+      "name": "Inter-system change failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where inter-system change from N1 mode to S1 mode is not completed successfully.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "5G Mobility Management connected state from which inter-system change is performed.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change procedure establishes a mapped EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_S1",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change requires the UE to be in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "K_ASME_DERIVED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapped EPS security context contains the derived K'ASME key.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_N1_TO_S1_TRANSPARENT_CONTAINER",
+      "target": "NAS_COUNT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "N1 mode to S1 mode NAS transparent container IE contains NAS sequence number (COUNT).",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_INVALID_NAS_COUNT",
+      "target": "IE_N1_TO_S1_TRANSPARENT_CONTAINER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Invalid NAS COUNT condition guards the processing of the NAS transparent container IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_CHANGE_FAILURE",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change failure condition establishes deletion of the mapped EPS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "NAS_ALGORITHMS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapped EPS security context contains NAS algorithms identifiers for encryption and integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "EKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapped EPS security context contains the eKSI identifier derived from ngKSI.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.2.4"
+      ]
+    }
+  ]
+}

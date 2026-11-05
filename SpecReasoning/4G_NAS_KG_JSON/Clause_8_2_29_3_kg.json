@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.29.3",
+  "title": "GPRS ciphering key sequence number",
+  "entities": [
+    {
+      "id": "IE_GPRS_CIPHERING_KEY_SEQ_NUM",
+      "name": "GPRS ciphering key sequence number",
+      "entity_type": "Information Element",
+      "description": "Information element containing the GPRS ciphering key sequence number used in security context.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    },
+    {
+      "id": "COND_INTER_SYSTEM_CHANGE",
+      "name": "Inter-system change condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE performs A/Gb mode or Iu mode to S1 mode inter-system change in EMM-IDLE mode and TIN indicates P-TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state where UE is registered but has no active signaling connection.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_TIN",
+      "name": "Temporary Identity used in Next update (TIN)",
+      "entity_type": "Identifier",
+      "description": "Temporary identity parameter used by UE to indicate which identity to use.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_GPRS_CIPHERING_KEY_SEQ_NUM",
+      "target": "COND_INTER_SYSTEM_CHANGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of GPRS ciphering key sequence number IE is conditional upon inter-system change with specific TIN value.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Inter-system change condition requires UE to be in EMM-IDLE state.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_INTER_SYSTEM_CHANGE",
+      "target": "IDENTIFIER_TIN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inter-system change condition requires TIN to indicate P-TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.29.3"
+      ]
+    }
+  ]
+}

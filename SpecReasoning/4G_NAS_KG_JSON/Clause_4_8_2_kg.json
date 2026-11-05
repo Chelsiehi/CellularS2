@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.8.2",
+  "title": "UE using satellite E-UTRAN access",
+  "entities": [
+    {
+      "id": "UE_SATELLITE_ACCESS",
+      "name": "UE satellite E-UTRAN access",
+      "entity_type": "Condition",
+      "description": "Condition where UE operates via satellite E-UTRAN access in WB-S1 mode. Specifies special NAS timer value handling for this access type.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_WB_S1_CE",
+      "name": "NAS timer for WB-S1/CE mode",
+      "entity_type": "Timer",
+      "description": "Applicable NAS timer values indicated in tables 10.2.1 and 10.3.1 for WB-S1/CE mode. Used by UE when accessing via satellite E-UTRAN.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_MME_WB_S1_CE",
+      "name": "MME NAS timer for WB-S1/CE mode",
+      "entity_type": "Timer",
+      "description": "Applicable NAS timer values indicated in tables 10.2.2 and 10.3.2 for WB-S1/CE mode. Used by MME when performing NAS signalling with UE via satellite E-UTRAN access.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "Generic NAS procedure during which NAS timer values are calculated at start and remain unchanged until completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "MME_WB_S1_SUPPORT",
+      "name": "MME supporting WB-S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where MME supports WB-S1 mode and performs NAS signalling with UE via satellite E-UTRAN access.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "ENHANCED_COVERAGE_RESTRICTION",
+      "name": "Enhanced coverage indication restriction",
+      "entity_type": "Property",
+      "description": "Property stating that enhanced coverage indication from network is not considered when determining applicable NAS timers for satellite E-UTRAN access.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_SATELLITE_ACCESS",
+      "target": "NAS_TIMER_WB_S1_CE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in satellite E-UTRAN access condition requires using specific NAS timer values for WB-S1/CE mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MME_WB_S1_SUPPORT",
+      "target": "NAS_TIMER_MME_WB_S1_CE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MME supporting WB-S1 mode requires using specific NAS timer values when performing NAS signalling via satellite E-UTRAN access.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_WB_S1_CE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "NAS procedure starts with calculation of NAS timer value at procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_MME_WB_S1_CE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "NAS procedure starts with calculation of NAS timer value at procedure initiation.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_SATELLITE_ACCESS",
+      "target": "ENHANCED_COVERAGE_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Satellite E-UTRAN access establishes that enhanced coverage indication restriction is not considered for NAS timer determination.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.2"
+      ]
+    }
+  ]
+}

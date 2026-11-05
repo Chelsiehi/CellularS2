@@ -1,0 +1,282 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.3.2.3",
+  "title": "Change of voice domain preference for E-UTRAN",
+  "entities": [
+    {
+      "id": "VOICE_DOMAIN_PREF_CHANGE",
+      "name": "Change of voice domain preference for E-UTRAN",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the UE when the voice domain preference for E-UTRAN changes, involving mode transitions and capability management.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3"
+      ]
+    },
+    {
+      "id": "PS_MODE_1",
+      "name": "PS mode 1",
+      "entity_type": "State",
+      "description": "UE operating mode for packet-switched services only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "PS_MODE_2",
+      "name": "PS mode 2",
+      "entity_type": "State",
+      "description": "UE operating mode for packet-switched services only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "CS_PS_MODE_1",
+      "name": "CS/PS mode 1",
+      "entity_type": "State",
+      "description": "UE operating mode supporting both circuit-switched and packet-switched services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "CS_PS_MODE_2",
+      "name": "CS/PS mode 2",
+      "entity_type": "State",
+      "description": "UE operating mode supporting both circuit-switched and packet-switched services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "COMBINED_TAU_IMSI_ATTACH",
+      "name": "Combined tracking area update with IMSI attach",
+      "entity_type": "Procedure",
+      "description": "Procedure combining tracking area update and IMSI attach for UE registration.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "DETACH_NON_EPS",
+      "name": "Detach for non-EPS services",
+      "entity_type": "Procedure",
+      "description": "Procedure to detach from non-EPS services when transitioning to IMS PS voice only.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "EUTRA_CAPABILITY_DISABLE",
+      "name": "Disable E-UTRA capability",
+      "entity_type": "Property",
+      "description": "Action to disable E-UTRA capability when transitioning to CS voice only under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "EUTRA_CAPABILITY_REENABLE",
+      "name": "Re-enable E-UTRA capability",
+      "entity_type": "Property",
+      "description": "Action to re-enable E-UTRA capability when transitioning from CS voice only, delayed if RR/RRC connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "CSFB_NOT_AVAILABLE",
+      "name": "CS fallback not available",
+      "entity_type": "Condition",
+      "description": "Condition where CS fallback is not available, including EMM causes #16, #17, and #18.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "CSFB_NOT_PREFERRED",
+      "name": "CS fallback not preferred",
+      "entity_type": "Condition",
+      "description": "Condition where CS fallback is not preferred, indicated during combined attach or TAU.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "SMS_ONLY",
+      "name": "SMS only",
+      "entity_type": "Condition",
+      "description": "Condition where only SMS services are indicated during combined attach or TAU.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "RR_RRC_CONNECTION",
+      "name": "RR or RRC connection exists",
+      "entity_type": "Condition",
+      "description": "Condition where an RR or RRC connection is active, delaying E-UTRA capability re-enablement.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "COMBINED_TAU_IMSI_ATTACH",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Change from IMS PS voice only to CS voice preferences requires combined TAU with IMSI attach.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "DETACH_NON_EPS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Change to IMS PS voice only may require detach for non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "EUTRA_CAPABILITY_DISABLE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Change to CS voice only under CSFB not available or not preferred conditions requires disabling E-UTRA capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "EUTRA_CAPABILITY_REENABLE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Change from CS voice only to any configuration requires re-enabling E-UTRA capability.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EUTRA_CAPABILITY_REENABLE",
+      "target": "RR_RRC_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-enabling E-UTRA capability is delayed if an RR or RRC connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EUTRA_CAPABILITY_DISABLE",
+      "target": "CSFB_NOT_AVAILABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA capability is triggered when CS fallback is not available.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EUTRA_CAPABILITY_DISABLE",
+      "target": "CSFB_NOT_PREFERRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA capability is triggered when CS fallback is not preferred.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EUTRA_CAPABILITY_DISABLE",
+      "target": "SMS_ONLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Disabling E-UTRA capability is triggered when SMS only indication is received.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "PS_MODE_1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution depends on UE operating in PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "PS_MODE_2",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution depends on UE operating in PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "CS_PS_MODE_1",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution depends on UE operating in CS/PS mode 1.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "VOICE_DOMAIN_PREF_CHANGE",
+      "target": "CS_PS_MODE_2",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure execution depends on UE operating in CS/PS mode 2.",
+      "provenance": [
+        "TS 24.301, Clause 4.3.2.3",
+        "Table 4.3.2.3.2"
+      ]
+    }
+  ]
+}

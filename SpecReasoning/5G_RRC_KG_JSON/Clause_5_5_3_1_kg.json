@@ -1,0 +1,236 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "UE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED UE",
+      "entity_type": "State",
+      "description": "UE in RRC_CONNECTED state that performs measurements according to network configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "CELL_MEASUREMENT",
+      "name": "Cell Measurement",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE derives measurement results by measuring beams per cell as configured by network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "LAYER3_FILTERING",
+      "name": "Layer 3 Filtering",
+      "entity_type": "Procedure",
+      "description": "Filtering applied to cell measurement results before using them for evaluation of reporting criteria, measurement reporting, or conditional reconfiguration execution.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "BEAM_MEASUREMENT",
+      "name": "Beam Measurement",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE derives measurement results per beam with beam identifiers as configured by network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "MEASCONFIG",
+      "name": "measConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration that triggers UE to perform RSRP and RSRQ measurements for each serving cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REPORTCONFIG",
+      "name": "reportConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration that specifies report type, trigger quantities, and reporting quantities for measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "MEASIDLIST",
+      "name": "measIdList",
+      "entity_type": "Information Element",
+      "description": "List of measurement identities within VarMeasConfig that associate measObjects with reportConfigs.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "TRIGGER_QUANTITIES",
+      "name": "Trigger Quantities",
+      "entity_type": "Property",
+      "description": "Quantities that trigger measurements including RSRP, RSRQ, SINR, RSCP, EcN0 for cells and SRS-RSRP, CLI-RSSI for CLI measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REPORTING_QUANTITIES",
+      "name": "Reporting Quantities",
+      "entity_type": "Property",
+      "description": "Quantities reported in measurements including combinations of RSRP, RSRQ, SINR, RSCP, EcN0 for cells and SRS-RSRP, CLI-RSSI for CLI measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_RECONFIG_EXECUTION",
+      "name": "Conditional Reconfiguration Execution",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE evaluates criteria for conditional reconfiguration execution using up to 2 quantities with same RS type.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "CBR_MEASUREMENT",
+      "name": "CBR Measurement",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE performs Channel Busy Ratio measurements without layer 3 filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "RX_TX_TIME_DIFF_MEASUREMENT",
+      "name": "Rx-Tx Time Difference Measurement",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE performs Rx-Tx time difference measurements without layer 3 filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "S_MEASURECONFIG",
+      "name": "s-MeasureConfig",
+      "entity_type": "Condition",
+      "description": "Condition that determines if UE performs measurements based on SpCell RSRP compared to configured threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CELL_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Cell measurement procedure includes layer 3 filtering step for most measurement results.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BEAM_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Beam measurement procedure includes layer 3 beam filtering when beam measurement information is configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE_RRC_CONNECTED",
+      "target": "MEASCONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE in RRC_CONNECTED state requires measConfig to perform serving cell measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REPORTCONFIG",
+      "target": "TRIGGER_QUANTITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "reportConfig contains configuration for trigger quantities like RSRP, RSRQ, SINR.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REPORTCONFIG",
+      "target": "REPORTING_QUANTITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "reportConfig contains configuration for reporting quantities combinations.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITIONAL_RECONFIG_EXECUTION",
+      "target": "TRIGGER_QUANTITIES",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Conditional reconfiguration execution requires up to 2 trigger quantities with same RS type.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CBR_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CBR measurements do not apply layer 3 filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RX_TX_TIME_DIFF_MEASUREMENT",
+      "target": "LAYER3_FILTERING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Rx-Tx time difference measurements do not apply layer 3 filtering.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "S_MEASURECONFIG",
+      "target": "CELL_MEASUREMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "s-MeasureConfig condition determines whether UE performs cell measurements based on SpCell RSRP.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MEASIDLIST",
+      "target": "REPORTCONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measIdList contains associations between measurement identities and reportConfigs.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.3.1"
+      ]
+    }
+  ]
+}

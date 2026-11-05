@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.2.3.2.2",
+  "title": "ATTEMPTING-TO-UPDATE",
+  "entities": [
+    {
+      "id": "STATE_ATTEMPTING_TO_UPDATE",
+      "name": "ATTEMPTING-TO-UPDATE state",
+      "entity_type": "State",
+      "description": "UE state where tracking area updating procedures are initiated under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry triggers tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that affects tracking area updating initiation conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_NEW_PLMN",
+      "name": "New PLMN condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE enters a new PLMN that is not equivalent to the PLMN where T3346 started.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_TA_CHANGED",
+      "name": "Tracking area changed condition",
+      "entity_type": "Condition",
+      "description": "Condition where tracking area of serving cell has changed.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_EPS_UPDATE_EU2",
+      "name": "EPS update status EU2 condition",
+      "entity_type": "Condition",
+      "description": "Condition where EPS update status is set to EU2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_USER_DATA",
+      "name": "No user data transmission",
+      "entity_type": "Property",
+      "description": "UE shall not send any user data in ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ATTEMPTING_TO_UPDATE",
+      "target": "PROPERTY_NO_USER_DATA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in ATTEMPTING-TO-UPDATE state shall not send user data.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TIMER_T3411",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3411 starts tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3402",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Expiry of T3402 starts tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_NEW_PLMN",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "New PLMN entry condition guards tracking area updating initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_TA_CHANGED",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Tracking area change condition guards tracking area updating initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_EPS_UPDATE_EU2",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS update status EU2 condition guards tracking area updating initiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_ATTEMPTING_TO_UPDATE",
+      "target": "PROCEDURE_TRACKING_AREA_UPDATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure requires UE to be in ATTEMPTING-TO-UPDATE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.2.3.2.2"
+      ]
+    }
+  ]
+}

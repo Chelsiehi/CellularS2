@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.1.1",
+  "title": "Establishment of the NAS signalling connection",
+  "entities": [
+    {
+      "id": "PROC_NAS_CONN_EST",
+      "name": "NAS signalling connection establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing NAS signalling connection when UE needs to transmit initial NAS message. Involves requesting RRC connection establishment and providing parameters to lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where no NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "UE state entered when NAS signalling connection is successfully established.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message for tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_EXT_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message for extended service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CP_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message for control plane service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_S_TMSI",
+      "name": "S-TMSI",
+      "entity_type": "Identifier",
+      "description": "Short Temporary Mobile Subscriber Identity used for MME routing.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_GUMMEI",
+      "name": "Globally Unique MME Identifier",
+      "entity_type": "Identifier",
+      "description": "MME identifier consisting of PLMN ID, MME group ID, and MME code.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity used for UE identification.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "IE_DCN_ID",
+      "name": "DCN-ID",
+      "entity_type": "Identifier",
+      "description": "Dedicated Core Network Identifier used for network selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "COND_SUSPEND_IND",
+      "name": "Suspend indication",
+      "entity_type": "Condition",
+      "description": "Condition when UE is in EMM-IDLE mode with suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "COND_TIN_GUTI",
+      "name": "TIN indicates GUTI or RAT-related TMSI",
+      "entity_type": "Condition",
+      "description": "Condition where Temporary Identity used in Next update indicates GUTI or RAT-related TMSI.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "PROP_RRC_EST_REQ",
+      "name": "Request RRC connection establishment",
+      "entity_type": "Property",
+      "description": "UE NAS requests lower layer to establish RRC connection with establishment cause and call type.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-IDLE mode without suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "PROP_RRC_EST_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes requesting RRC connection establishment from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "MSG_TAU_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve sending TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "MSG_EXT_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve sending EXTENDED SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "MSG_CP_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve sending CONTROL PLANE SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "IE_S_TMSI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve providing S-TMSI to lower layers for MME routing.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "IE_GUMMEI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve providing GUMMEI to lower layers for MME routing.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "IE_DCN_ID",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure may involve providing DCN-ID to lower layers for network selection.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_NAS_CONN_EST",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful procedure establishment results in UE entering EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_SUSPEND_IND",
+      "target": "PROC_NAS_CONN_EST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior differs when UE has suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_TIN_GUTI",
+      "target": "IE_S_TMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TIN condition determines whether S-TMSI is provided to lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.1.1"
+      ]
+    }
+  ]
+}

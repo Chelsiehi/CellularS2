@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.2.4",
+  "title": "UE-initiated NAS transport of messages not accepted by the network",
+  "entities": [
+    {
+      "id": "UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message used to carry various payload types including N1 SM information, CIoT user data, SMS, and LPP messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload being transported (N1 SM information, CIoT user data container, SMS, LPP message container).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REQUEST_TYPE",
+      "name": "Request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of request (initial request, existing PDU session, MA PDU request, modification request).",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "DNN_CONGESTION",
+      "name": "DNN based congestion control",
+      "entity_type": "Condition",
+      "description": "Condition where congestion control is activated for a specific DNN, preventing message forwarding.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "S_NSSAI_DNN_CONGESTION",
+      "name": "S-NSSAI and DNN based congestion control",
+      "entity_type": "Condition",
+      "description": "Condition where congestion control is activated for specific S-NSSAI and DNN combination, preventing message forwarding.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "S_NSSAI_CONGESTION",
+      "name": "S-NSSAI only based congestion control",
+      "entity_type": "Condition",
+      "description": "Condition where congestion control is activated for specific S-NSSAI only, preventing message forwarding.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "T3447_RUNNING",
+      "name": "Timer T3447 running",
+      "entity_type": "Condition",
+      "description": "Condition where timer T3447 is active and UE does not support service gap control.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "MAX_PDU_SESSIONS",
+      "name": "Maximum PDU sessions reached",
+      "entity_type": "Condition",
+      "description": "Condition where PLMN's maximum number of PDU sessions has been reached for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "CIOT_USER_PLANE_LIMIT",
+      "name": "CIoT user plane resources limit",
+      "entity_type": "Condition",
+      "description": "Condition where UE has reached maximum number of supported user-plane resources in NB-N1 mode with user plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "NSSAA_PENDING",
+      "name": "NSSAA pending",
+      "entity_type": "Condition",
+      "description": "Condition where AMF is performing Network Slice-Specific Authentication and Authorization for the S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "UAS_NOT_ALLOWED",
+      "name": "UAS services not allowed",
+      "entity_type": "Condition",
+      "description": "Condition where UE is marked in 5GMM context as not allowed to request UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "AMF_REJECT_ACTION",
+      "name": "AMF rejection action",
+      "entity_type": "Procedure",
+      "description": "Procedure where AMF sends back the message that was not forwarded with appropriate 5GMM cause and optionally a back-off timer.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "PROCEDURE_ABORT",
+      "name": "Procedure abort",
+      "entity_type": "Procedure",
+      "description": "Procedure where AMF aborts the NAS transport procedure without forwarding the message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "PAYLOAD_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Payload container type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AMF_REJECT_ACTION",
+      "target": "DNN_CONGESTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when DNN based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AMF_REJECT_ACTION",
+      "target": "S_NSSAI_DNN_CONGESTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when S-NSSAI and DNN based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AMF_REJECT_ACTION",
+      "target": "S_NSSAI_CONGESTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when S-NSSAI only based congestion control is activated.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AMF_REJECT_ACTION",
+      "target": "T3447_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when timer T3447 is running and UE does not support service gap control.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AMF_REJECT_ACTION",
+      "target": "MAX_PDU_SESSIONS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when maximum number of PDU sessions is reached.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "AMF_REJECT_ACTION",
+      "target": "CIOT_USER_PLANE_LIMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when CIoT user plane resources limit is reached.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AMF_REJECT_ACTION",
+      "target": "NSSAA_PENDING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when NSSAA is pending for the S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "AMF_REJECT_ACTION",
+      "target": "UAS_NOT_ALLOWED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AMF rejection action is triggered when UE is not allowed to request UAS services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROCEDURE_ABORT",
+      "target": "T3447_RUNNING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure abort is triggered when timer T3447 is running for SMS or LPP messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.4"
+      ]
+    }
+  ]
+}

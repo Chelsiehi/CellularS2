@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_DETACH",
+      "name": "Network initiated detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to detach a UE from the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_ACCEPT",
+      "name": "DETACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to accept detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of detach: IMSI detach, re-attach required, or re-attach not required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "IE indicating EMM cause value, e.g., #2 'IMSI unknown in HSS'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3422",
+      "name": "T3422",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is deregistered from the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_IMSI_DETACH_OR_REATTACH_NOT_REQD_WITH_CAUSE2",
+      "name": "IMSI detach or re-attach not required with EMM cause #2",
+      "entity_type": "Condition",
+      "description": "Condition where detach type is IMSI detach or re-attach not required and EMM cause is #2 'IMSI unknown in HSS'.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_NOT_REQD_NO_CAUSE_OR_OTHER_CAUSE",
+      "name": "Re-attach not required with no EMM cause or other cause",
+      "entity_type": "Condition",
+      "description": "Condition where detach type is re-attach not required with no EMM cause IE or EMM cause other than #2.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_REATTACH_REQUIRED",
+      "name": "Re-attach required",
+      "entity_type": "Condition",
+      "description": "Condition where detach type indicates re-attach required.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_DETACH",
+      "name": "Abort detach procedure",
+      "entity_type": "Property",
+      "description": "Behavior where the network aborts the ongoing detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "PROP_CHANGE_TO_EMM_DEREGISTERED",
+      "name": "Change to EMM-DEREGISTERED state",
+      "entity_type": "Property",
+      "description": "Behavior where the network changes the EMM state to EMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network initiated detach procedure involves sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message may contain EMM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NETWORK_DETACH",
+      "target": "TIMER_T3422",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3422 on retransmission of DETACH REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_NETWORK_DETACH",
+      "target": "TIMER_T3422",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3422 when detach procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_IMSI_DETACH_OR_REATTACH_NOT_REQD_WITH_CAUSE2",
+      "target": "PROP_ABORT_DETACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to aborting detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_REATTACH_NOT_REQD_NO_CAUSE_OR_OTHER_CAUSE",
+      "target": "PROP_CHANGE_TO_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition leads to changing to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_DETACH_TYPE",
+      "target": "COND_IMSI_DETACH_OR_REATTACH_NOT_REQD_WITH_CAUSE2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE value guards condition for state change.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_EMM_CAUSE",
+      "target": "COND_IMSI_DETACH_OR_REATTACH_NOT_REQD_WITH_CAUSE2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EMM cause IE value guards condition for state change.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_NETWORK_DETACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Detach procedure may require transition to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3.5"
+      ]
+    }
+  ]
+}

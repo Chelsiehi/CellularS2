@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.3.4.3",
+  "title": "Handling of network rejection due to ESM cause other than ESM cause #26",
+  "entities": [
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_PROCEDURE",
+      "name": "Bearer Resource Allocation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests bearer resource allocation from network.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "name": "BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request bearer resource allocation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "name": "BEARER RESOURCE ALLOCATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject bearer resource allocation request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER_VALUE_IE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing back-off timer value for bearer resource allocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REATTEMPT_INDICATOR_IE",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether re-attempt is allowed in different modes.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the cause for ESM procedure rejection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "BACK_OFF_TIMER",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer that prevents UE from sending another BEARER RESOURCE ALLOCATION REQUEST message for same APN and PLMN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_NOT_ZERO",
+      "name": "Timer value indicates neither zero nor deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer value is neither zero nor deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_DEACTIVATED",
+      "name": "Timer value indicates deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer is deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "CONDITION_TIMER_VALUE_ZERO",
+      "name": "Timer value indicates zero",
+      "entity_type": "Condition",
+      "description": "Condition where back-off timer value is zero.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "PROPERTY_NO_BEARER_REQUEST",
+      "name": "UE does not send BEARER RESOURCE ALLOCATION REQUEST",
+      "entity_type": "Property",
+      "description": "UE behavior where it refrains from sending BEARER RESOURCE ALLOCATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "BACK_OFF_TIMER_VALUE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "REATTEMPT_INDICATOR_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "BEARER_RESOURCE_ALLOCATION_REJECT",
+      "target": "ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BEARER RESOURCE ALLOCATION REJECT message contains ESM cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_TIMER_VALUE_NOT_ZERO",
+      "target": "BACK_OFF_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer value is neither zero nor deactivated, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_TIMER_VALUE_NOT_ZERO",
+      "target": "PROPERTY_NO_BEARER_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer value is neither zero nor deactivated, UE does not send BEARER RESOURCE ALLOCATION REQUEST until timer expires.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_TIMER_VALUE_DEACTIVATED",
+      "target": "PROPERTY_NO_BEARER_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When timer is deactivated, UE does not send BEARER RESOURCE ALLOCATION REQUEST until UE is switched off or USIM removed.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_TIMER_VALUE_ZERO",
+      "target": "BEARER_RESOURCE_ALLOCATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When timer value is zero, UE may send another BEARER RESOURCE ALLOCATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "BACK_OFF_TIMER_VALUE_IE",
+      "target": "CONDITION_TIMER_VALUE_NOT_ZERO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards condition for timer value being neither zero nor deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "BACK_OFF_TIMER_VALUE_IE",
+      "target": "CONDITION_TIMER_VALUE_DEACTIVATED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards condition for timer being deactivated.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "BACK_OFF_TIMER_VALUE_IE",
+      "target": "CONDITION_TIMER_VALUE_ZERO",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE guards condition for timer value being zero.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.3.4.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.5.1",
+  "title": "Common procedures",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives messages and performs error diagnosis procedures.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "Network entity that receives messages and performs error handling procedures.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "STATUS_MSG",
+      "name": "5GMM STATUS or 5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Status message sent in response to invalid messages, with cause #96 \"invalid mandatory information\".",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_IMPERATIVE",
+      "name": "Imperative message part error",
+      "entity_type": "Condition",
+      "description": "Error condition diagnosed when an imperative message part error is detected.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_MISSING_MANDATORY_IE",
+      "name": "Missing mandatory IE error",
+      "entity_type": "Condition",
+      "description": "Error condition diagnosed when a mandatory information element is missing.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_SYNTACTIC_MANDATORY_IE",
+      "name": "Syntactically incorrect mandatory IE",
+      "entity_type": "Condition",
+      "description": "Error condition when a mandatory IE is syntactically incorrect.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_UNKNOWN_COMPREHENSION_REQUIRED",
+      "name": "Unknown IE with comprehension required",
+      "entity_type": "Condition",
+      "description": "Error condition when an unknown IE encoded as comprehension required is received.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "ERROR_OUT_OF_SEQUENCE_COMPREHENSION_REQUIRED",
+      "name": "Out of sequence IE with comprehension required",
+      "entity_type": "Condition",
+      "description": "Error condition when an out of sequence IE encoded as comprehension required is received.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "CAUSE_96",
+      "name": "Cause #96 invalid mandatory information",
+      "entity_type": "Property",
+      "description": "Cause value indicating invalid mandatory information in status messages.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "ERROR_IMPERATIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses imperative message part error condition.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "ERROR_MISSING_MANDATORY_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses missing mandatory IE error condition.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "ERROR_SYNTACTIC_MANDATORY_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses syntactically incorrect mandatory IE condition.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "UE",
+      "target": "ERROR_UNKNOWN_COMPREHENSION_REQUIRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses unknown IE with comprehension required condition.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE",
+      "target": "ERROR_OUT_OF_SEQUENCE_COMPREHENSION_REQUIRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE diagnoses out of sequence IE with comprehension required condition.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends status message when error conditions are met and message is not in exception list.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NETWORK",
+      "target": "STATUS_MSG",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Network may send status message when error conditions are met and message is not in exception list.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "STATUS_MSG",
+      "target": "CAUSE_96",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Status message contains cause #96 invalid mandatory information.",
+      "provenance": [
+        "TS 24.501, Clause 7.5.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.4.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "IDENTIFICATION_PROCEDURE",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to request identity information from UE using IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3470",
+      "name": "Timer T3470",
+      "entity_type": "Timer",
+      "description": "Supervises the identification procedure on network side. Retransmits IDENTITY REQUEST on expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "IDENTITY_REQUEST",
+      "name": "IDENTITY REQUEST",
+      "entity_type": "Message",
+      "description": "Network to UE message requesting identity information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Detection of failure in lower layers before IDENTITY RESPONSE is received.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure for network attachment.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "UE to network message initiating attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "DETACH_PROCEDURE",
+      "name": "Detach procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure for network detachment.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "UE to network message initiating detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "DETACH_TYPE_SWITCH_OFF",
+      "name": "Detach type switch off",
+      "entity_type": "Condition",
+      "description": "Detach type information element with cause 'switch off'.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_PROCEDURE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure for tracking area update.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST_PROCEDURE",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure for service request.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "HANDOVER_NON_DELIVERY",
+      "name": "Handover non-delivery",
+      "entity_type": "Condition",
+      "description": "Lower layer indication of non-delivered NAS PDU due to handover.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "TIMER_T3470",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Identification procedure is supervised by timer T3470.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IDENTIFICATION_PROCEDURE",
+      "target": "IDENTITY_REQUEST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Identification procedure uses IDENTITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Lower layer failure causes network to abort identification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3470",
+      "target": "IDENTITY_REQUEST",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3470 expiry triggers retransmission of IDENTITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3470",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Fifth expiry of timer T3470 causes network to abort identification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_REQUEST",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "ATTACH REQUEST message causes network to proceed with attach procedure and abort identification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "DETACH_REQUEST",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "DETACH REQUEST with switch off cause causes network to abort identification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DETACH_TYPE_SWITCH_OFF",
+      "target": "DETACH_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Detach type IE with switch off cause determines network behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TRACKING_AREA_UPDATE_PROCEDURE",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network progresses both tracking area update and identification procedures concurrently.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "SERVICE_REQUEST_PROCEDURE",
+      "target": "IDENTIFICATION_PROCEDURE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network progresses both service request and identification procedures concurrently.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "HANDOVER_NON_DELIVERY",
+      "target": "IDENTITY_REQUEST",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Handover non-delivery condition triggers retransmission of IDENTITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.4.6"
+      ]
+    }
+  ]
+}

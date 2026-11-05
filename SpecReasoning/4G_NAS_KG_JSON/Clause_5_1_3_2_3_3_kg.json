@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.3.3",
+  "title": "EMM-DEREGISTERED.LIMITED-SERVICE",
+  "entities": [
+    {
+      "id": "STATE_EMM_DEREGISTERED_LIMITED_SERVICE",
+      "name": "EMM-DEREGISTERED.LIMITED-SERVICE",
+      "entity_type": "State",
+      "description": "A substate of EMM-DEREGISTERED chosen when the UE knows that a selected cell cannot provide normal service due to various restrictions.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.3"
+      ]
+    },
+    {
+      "id": "COND_CELL_NO_NORMAL_SERVICE",
+      "name": "Cell unable to provide normal service",
+      "entity_type": "Condition",
+      "description": "Condition where the selected cell is in a forbidden PLMN, forbidden tracking area, or is a CSG cell not in the UE's Allowed CSG list or Operator CSG List.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.3"
+      ]
+    },
+    {
+      "id": "PROP_UE_KNOWN_CELL_RESTRICTION",
+      "name": "UE knows cell restriction",
+      "entity_type": "Property",
+      "description": "The UE is aware that the selected cell cannot provide normal service due to specific restrictions.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_CELL_NO_NORMAL_SERVICE",
+      "target": "STATE_EMM_DEREGISTERED_LIMITED_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition that a selected cell cannot provide normal service leads to the UE entering the EMM-DEREGISTERED.LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROP_UE_KNOWN_CELL_RESTRICTION",
+      "target": "STATE_EMM_DEREGISTERED_LIMITED_SERVICE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UE's knowledge of the cell restriction is a guard condition for entering the EMM-DEREGISTERED.LIMITED-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.3.3"
+      ]
+    }
+  ]
+}

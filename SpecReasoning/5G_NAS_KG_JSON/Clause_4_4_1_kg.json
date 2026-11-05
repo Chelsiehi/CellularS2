@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "NAS_SECURITY_CONTEXT",
+      "name": "5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context stored in UE and AMF for NAS security operations including integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_PROTECTION",
+      "name": "NAS security protection",
+      "entity_type": "Procedure",
+      "description": "Procedures for security protection of NAS messages between UE and AMF, and protection of NAS IEs between UE and UDM. Includes integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "5GMM_MESSAGE",
+      "name": "5GMM message",
+      "entity_type": "Message",
+      "description": "NAS messages that are directly security protected through integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "5GSM_MESSAGE",
+      "name": "5GSM message",
+      "entity_type": "Message",
+      "description": "NAS session management messages that are indirectly protected by being piggybacked in security protected 5GMM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message that carries 5GSM messages and is security protected.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "DL_NAS_TRANSPORT",
+      "name": "DL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Downlink NAS transport message that carries 5GSM messages and is security protected.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "NULL_CIPHERING_ALGORITHM",
+      "name": "Null ciphering algorithm (5G-EA0)",
+      "entity_type": "Property",
+      "description": "Ciphering algorithm that provides no encryption, used when ciphering is not required in the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "NAS_SECURITY_CONTROL_PROCEDURES",
+      "name": "NAS security control procedures",
+      "entity_type": "Procedure",
+      "description": "Signalling procedures for control of NAS security, part of the 5GMM protocol.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_SECURITY_PROTECTION",
+      "target": "5GMM_MESSAGE",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "5GMM messages require security protection through integrity protection and ciphering.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UL_NAS_TRANSPORT",
+      "target": "5GSM_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message carries 5GSM messages as piggybacked content.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DL_NAS_TRANSPORT",
+      "target": "5GSM_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DL NAS TRANSPORT message carries 5GSM messages as piggybacked content.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5GSM_MESSAGE",
+      "target": "5GMM_MESSAGE",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "5GSM messages are indirectly protected by being carried within security protected 5GMM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_SECURITY_CONTROL_PROCEDURES",
+      "target": "NAS_SECURITY_PROTECTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS security control procedures include steps for NAS security protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NULL_CIPHERING_ALGORITHM",
+      "target": "NAS_SECURITY_PROTECTION",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "When null ciphering algorithm is used, NAS messages may be transmitted without ciphering protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.1"
+      ]
+    }
+  ]
+}

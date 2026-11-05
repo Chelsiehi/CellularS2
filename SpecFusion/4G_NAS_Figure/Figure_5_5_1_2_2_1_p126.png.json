@@ -1,0 +1,51 @@
+{
+  "figure_id": "5.5.1.2.2.1",
+  "title": "Attach procedure and combined attach procedure",
+  "type": "PROCEDURE_FLOW",
+  "content": {
+    "states": [],
+    "transitions": [],
+    "entities": [
+      "UE",
+      "MME"
+    ],
+    "messages": [
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "ATTACH REQUEST",
+        "notes": "Start T3410"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "ATTACH ACCEPT",
+        "notes": "Stop T3410, Start T3450"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "ATTACH COMPLETE",
+        "notes": "Stop T3450"
+      },
+      {
+        "from": "UE",
+        "to": "MME",
+        "name": "ATTACH REQUEST",
+        "notes": "Start T3410 (alternative path)"
+      },
+      {
+        "from": "MME",
+        "to": "UE",
+        "name": "ATTACH REJECT",
+        "notes": "Stop T3410 (alternative path)"
+      }
+    ],
+    "fields": [],
+    "notes": [
+      "Two alternative flows shown: successful attach (ATTACH REQUEST -> ATTACH ACCEPT -> ATTACH COMPLETE) and rejected attach (ATTACH REQUEST -> ATTACH REJECT)",
+      "Timer T3410 started when UE sends ATTACH REQUEST and stopped when receiving response",
+      "Timer T3450 started when MME sends ATTACH ACCEPT and stopped when receiving ATTACH COMPLETE"
+    ]
+  }
+}

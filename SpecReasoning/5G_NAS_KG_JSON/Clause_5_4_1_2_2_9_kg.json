@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.9",
+  "title": "Network not successfully authenticates UE",
+  "entities": [
+    {
+      "id": "EAP_RESPONSE_AKA_CHALLENGE",
+      "name": "EAP-response/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "EAP message sent by UE during authentication procedure containing challenge response.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "EAP_REQUEST_AKA_NOTIFICATION_FAILURE",
+      "name": "EAP-request/AKA'-notification message with failure",
+      "entity_type": "Message",
+      "description": "EAP message sent by network to indicate authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_FAILURE_CONDITION",
+      "name": "EAP-response/AKA'-challenge handling unsuccessful",
+      "entity_type": "Condition",
+      "description": "Condition where procedures for handling EAP-response/AKA'-challenge message as specified in IETF RFC 5448 are not successful.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "AUSF",
+      "name": "AUSF",
+      "entity_type": "Property",
+      "description": "Authentication Server Function in the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "AAA_SERVER_CH",
+      "name": "AAA server of the CH",
+      "entity_type": "Property",
+      "description": "AAA server in the Credentials Holder network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "AAA_SERVER_DCS",
+      "name": "AAA server of the DCS",
+      "entity_type": "Property",
+      "description": "AAA server in the De-Coupling Server network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_FAILURE_CONDITION",
+      "target": "EAP_REQUEST_AKA_NOTIFICATION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EAP-response/AKA'-challenge handling is unsuccessful, the network sends EAP-request/AKA'-notification message indicating failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUSF",
+      "target": "EAP_REQUEST_AKA_NOTIFICATION_FAILURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AUSF sends EAP-request/AKA'-notification message upon authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AAA_SERVER_CH",
+      "target": "EAP_REQUEST_AKA_NOTIFICATION_FAILURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AAA server of the CH sends EAP-request/AKA'-notification message upon authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AAA_SERVER_DCS",
+      "target": "EAP_REQUEST_AKA_NOTIFICATION_FAILURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AAA server of the DCS sends EAP-request/AKA'-notification message upon authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.9"
+      ]
+    }
+  ]
+}

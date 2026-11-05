@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.3",
+  "title": "UE requested PDN connectivity procedure accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "UE requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE requests PDN connectivity and network accepts it, leading to default EPS bearer context activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN connectivity, containing parameters like APN, PDN type, and request type.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "name": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to activate default EPS bearer context when PDN connectivity is accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_ESM_INFO_TRANSFER_FLAG",
+      "name": "ESM information transfer flag",
+      "entity_type": "Information Element",
+      "description": "Flag in PDN CONNECTIVITY REQUEST indicating if ESM information transfer procedure is needed.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_APN",
+      "name": "APN",
+      "entity_type": "Information Element",
+      "description": "Access Point Name identifying the PDN to connect to. May be default, emergency, or RLOS configured.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type",
+      "entity_type": "Information Element",
+      "description": "Indicates type of request: initial, emergency, handover of emergency bearer services, RLOS, etc.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_CONNECTIVITY_TYPE",
+      "name": "Connectivity type IE",
+      "entity_type": "Information Element",
+      "description": "IE indicating if PDN connection is LIPA PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause",
+      "entity_type": "Information Element",
+      "description": "Cause values like #50 (PDN type IPv4 only allowed), #51 (PDN type IPv6 only allowed), #52 (single address bearers only allowed).",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_HEADER_COMPRESSION_CONFIG",
+      "name": "Header compression configuration IE",
+      "entity_type": "Information Element",
+      "description": "IE for header compression configuration, optionally included in PDN CONNECTIVITY REQUEST and ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "IE_CONTROL_PLANE_ONLY_INDICATION",
+      "name": "Control plane only indication",
+      "entity_type": "Information Element",
+      "description": "Indication that PDN connection is only for control plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "TIMER_T3482",
+      "name": "Timer T3482",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after stopping timer T3482 upon receipt of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REQUEST",
+      "name": "Emergency request type condition",
+      "entity_type": "Condition",
+      "description": "Condition when request type is emergency or handover of emergency bearer services, triggering use of emergency APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "PROP_LIPA_INDICATION",
+      "name": "LIPA PDN connection indication",
+      "entity_type": "Property",
+      "description": "Property indicating PDN connection is LIPA, stored in EPS bearer context and indicated to UE upper layers.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN connectivity procedure starts with receipt of PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST when connectivity accepted.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_ESM_INFO_TRANSFER_FLAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST may contain ESM information transfer flag.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_APN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST may contain APN IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST contains request type IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "IE_CONNECTIVITY_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST may contain Connectivity type IE for LIPA indication.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST may contain ESM cause for IP version restrictions.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "IE_HEADER_COMPRESSION_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST may include Header compression configuration IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "IE_CONTROL_PLANE_ONLY_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST may include Control plane only indication.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "TIMER_T3482",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST stops timer T3482.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_ACTIVATE_DEFAULT_EPS_BEARER_REQUEST",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE enters PROCEDURE TRANSACTION INACTIVE state after receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_EMERGENCY_REQUEST",
+      "target": "IE_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency request type condition determines use of emergency APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "IE_CONNECTIVITY_TYPE",
+      "target": "PROP_LIPA_INDICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Connectivity type IE indicating LIPA establishes LIPA PDN connection property.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.3"
+      ]
+    }
+  ]
+}

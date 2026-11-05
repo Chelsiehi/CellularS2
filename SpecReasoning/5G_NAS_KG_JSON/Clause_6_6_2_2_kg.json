@@ -1,0 +1,162 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.6.2.2",
+  "title": "Remote UE report procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_REMOTE_UE_REPORT",
+      "name": "5G ProSe remote UE report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where a UE reports newly connected or disconnected 5G ProSe remote UEs to the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT",
+      "entity_type": "Message",
+      "description": "NAS message used to report remote UE connection/disconnection events to the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_REMOTE_UE_CONTEXT_CONNECTED",
+      "name": "Remote UE context connected IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing identities of newly connected 5G ProSe remote UEs.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "IE_REMOTE_UE_CONTEXT_DISCONNECTED",
+      "name": "Remote UE context disconnected IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing identities of newly disconnected 5G ProSe remote UEs.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session ID IE",
+      "entity_type": "Information Element",
+      "description": "Information element identifying the PDU session associated with the remote UE connection/disconnection.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the allocated procedure transaction identity value.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3586",
+      "name": "T3586",
+      "entity_type": "Timer",
+      "description": "Timer started when the REMOTE UE REPORT message is sent.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "PROC_NAS_TRANSPORT",
+      "name": "NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to transport the REMOTE UE REPORT message and PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure involves sending the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_REMOTE_UE_CONTEXT_CONNECTED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Remote UE context connected IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_REMOTE_UE_CONTEXT_DISCONNECTED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the Remote UE context disconnected IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the PDU session ID IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message contains the PTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "TIMER_T3586",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The procedure starts timer T3586 when the message is sent.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2",
+        "Figure 6.6.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_REMOTE_UE_REPORT",
+      "target": "PROC_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure uses NAS transport to send the message and PDU session ID.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.2"
+      ]
+    }
+  ]
+}

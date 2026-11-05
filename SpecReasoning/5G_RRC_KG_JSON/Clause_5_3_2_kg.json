@@ -1,0 +1,98 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.2",
+  "title": "Paging",
+  "entities": [
+    {
+      "id": "PAGING_PROCEDURE",
+      "name": "Paging",
+      "entity_type": "Procedure",
+      "description": "Network-initiated procedure to notify UEs in RRC_IDLE or RRC_INACTIVE state about incoming calls, system information changes, or other events.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "PAGING_MESSAGE",
+      "name": "Paging message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to page UEs, containing paging records and potentially system information modification indicators.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "PAGING_RECORD",
+      "name": "Paging record",
+      "entity_type": "Information Element",
+      "description": "Information element within paging message identifying a specific UE being paged using UE identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_STATE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE monitors paging messages but has no active connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE_STATE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE monitors paging messages while maintaining some connection context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PAGING_PROCEDURE",
+      "target": "PAGING_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Paging procedure involves sending paging messages to UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PAGING_MESSAGE",
+      "target": "PAGING_RECORD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message contains one or more paging records to identify UEs being paged.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAGING_PROCEDURE",
+      "target": "RRC_IDLE_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure targets UEs in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PAGING_PROCEDURE",
+      "target": "RRC_INACTIVE_STATE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure also targets UEs in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2"
+      ]
+    }
+  ]
+}

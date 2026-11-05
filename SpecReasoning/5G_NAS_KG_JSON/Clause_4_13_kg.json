@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.13",
+  "title": "Support of NAS signalling using wireline access network",
+  "entities": [
+    {
+      "id": "WIRELINE_ACCESS",
+      "name": "Wireline access network",
+      "entity_type": "Property",
+      "description": "A type of non-3GPP access network used by 5G-RG, W-AGF acting on behalf of FN-RG, or W-AGF acting on behalf of N5GC device to access 5GCN using NAS signalling procedures.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "5G_RG",
+      "name": "5G Residential Gateway",
+      "entity_type": "Property",
+      "description": "A device that can connect to 5GCN simultaneously over 3GPP and wireline access, maintaining N1 NAS signalling connection over wireline after PDU sessions are released or handed over.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "W_AGF_FN_RG",
+      "name": "W-AGF acting on behalf of FN-RG",
+      "entity_type": "Property",
+      "description": "Wireline Access Gateway Function representing Fixed Network Residential Gateway, exchanges NAS signalling with AMF and follows UE requirements for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "W_AGF_N5GC",
+      "name": "W-AGF acting on behalf of N5GC device",
+      "entity_type": "Property",
+      "description": "Wireline Access Gateway Function representing N5GC device, exchanges NAS signalling with AMF, establishes one PDU session per device upon registration without PDU session authentication.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "N1_NAS_CONNECTION",
+      "name": "N1 NAS signalling connection",
+      "entity_type": "Property",
+      "description": "NAS signalling connection maintained between 5G-RG and AMF over wireline access network even after PDU sessions are released or handed over.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU session establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure where W-AGF acting on behalf of N5GC device requests PDU session establishment upon registration, supporting only one session per device without authentication.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "UE_POLICY_CLASSMARK_IE",
+      "name": "UE policy classmark IE",
+      "entity_type": "Information Element",
+      "description": "Information element used in UE-initiated UE state indication procedure to indicate 'ANDSP not supported by the UE' when sent by 5G-RG or W-AGF acting on behalf of FN-RG.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "NON_3GPP_ACCESS_NETWORK",
+      "name": "Non-3GPP access network",
+      "entity_type": "Property",
+      "description": "Access network provided by 5G-RG or FN-RG to UEs, allowing UE access to 5GCN via N3IWF or TNGF.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "5G_RG",
+      "target": "WIRELINE_ACCESS",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "5G-RG uses wireline access network for NAS signalling to access 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "5G_RG",
+      "target": "N1_NAS_CONNECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5G-RG maintains N1 NAS signalling connection with AMF over wireline access after PDU sessions are released or handed over.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "W_AGF_N5GC",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "W-AGF acting on behalf of N5GC device requests PDU session establishment upon registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5G_RG",
+      "target": "UE_POLICY_CLASSMARK_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5G-RG indicates 'ANDSP not supported by the UE' in UE policy classmark IE during UE-initiated UE state indication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "W_AGF_FN_RG",
+      "target": "UE_POLICY_CLASSMARK_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "W-AGF acting on behalf of FN-RG indicates 'ANDSP not supported by the UE' in UE policy classmark IE during UE-initiated UE state indication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "5G_RG",
+      "target": "NON_3GPP_ACCESS_NETWORK",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "5G-RG provides non-3GPP access network to UEs for accessing 5GCN via N3IWF or TNGF.",
+      "provenance": [
+        "TS 24.501, Clause 4.13"
+      ]
+    }
+  ]
+}

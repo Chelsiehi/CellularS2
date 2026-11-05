@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.3",
+  "title": "Sidelink radio link failure related actions",
+  "entities": [
+    {
+      "id": "SL_RLF_DETECTION",
+      "name": "Sidelink Radio Link Failure Detection",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when UE detects sidelink radio link failure for a specific destination based on various failure indications.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "T400",
+      "name": "Timer T400",
+      "entity_type": "Timer",
+      "description": "Timer used for sidelink communication that when expired triggers sidelink radio link failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "MAX_RETRANSMISSIONS_REACHED",
+      "name": "Maximum number of retransmissions reached",
+      "entity_type": "Condition",
+      "description": "Condition where sidelink RLC entity indicates maximum retransmissions for a specific destination have been reached.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "MAX_HARQ_DTX_REACHED",
+      "name": "Maximum number of consecutive HARQ DTX reached",
+      "entity_type": "Condition",
+      "description": "Condition where MAC entity indicates maximum consecutive HARQ DTX for a specific destination have been reached.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "INTEGRITY_CHECK_FAILURE",
+      "name": "Integrity check failure",
+      "entity_type": "Condition",
+      "description": "Condition where sidelink PDCP entity indicates integrity check failure for SL-SRB2 or SL-SRB3 for a specific destination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "DRB_RELEASE",
+      "name": "DRB release",
+      "entity_type": "Property",
+      "description": "Property where UE releases DRBs of the destination according to specified clause.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "SRB_RELEASE",
+      "name": "SRB release",
+      "entity_type": "Property",
+      "description": "Property where UE releases SRBs of the destination according to specified clause.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "PC5_RRC_CONNECTION_RELEASED",
+      "name": "PC5-RRC connection released",
+      "entity_type": "Property",
+      "description": "Property where UE considers PC5-RRC connection is released for the destination.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_REESTABLISHMENT",
+      "name": "RRC connection re-establishment procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when UE is connected with L2 U2N Relay UE via PC5-RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "SIDELINK_UE_INFO_PROCEDURE",
+      "name": "Sidelink UE information for NR sidelink communication procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by UE after sidelink radio link failure detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTED",
+      "name": "RRC_CONNECTED state",
+      "entity_type": "State",
+      "description": "UE RRC state where UE is connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SL_RLF_DETECTION",
+      "target": "MAX_RETRANSMISSIONS_REACHED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink RLF detection is triggered by maximum retransmissions reached indication",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SL_RLF_DETECTION",
+      "target": "T400",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink RLF detection is triggered by T400 expiry",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SL_RLF_DETECTION",
+      "target": "MAX_HARQ_DTX_REACHED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Sidelink RLF detection is triggered by maximum HARQ DTX reached indication",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SL_RLF_DETECTION",
+      "target": "INTEGRITY_CHECK_FAILURE",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "Sidelink RLF detection is triggered by integrity check failure indication",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SL_RLF_DETECTION",
+      "target": "DRB_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sidelink RLF detection establishes DRB release",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SL_RLF_DETECTION",
+      "target": "SRB_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sidelink RLF detection establishes SRB release",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SL_RLF_DETECTION",
+      "target": "PC5_RRC_CONNECTION_RELEASED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sidelink RLF detection establishes PC5-RRC connection release",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SL_RLF_DETECTION",
+      "target": "RRC_CONNECTION_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Sidelink RLF detection includes RRC connection re-establishment procedure when UE is connected with L2 U2N Relay UE",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SL_RLF_DETECTION",
+      "target": "SIDELINK_UE_INFO_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Sidelink RLF detection includes sidelink UE information procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RRC_CONNECTION_REESTABLISHMENT",
+      "target": "RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC connection re-establishment procedure requires UE to be in RRC_CONNECTED state",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.3"
+      ]
+    }
+  ]
+}

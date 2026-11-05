@@ -1,0 +1,470 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.33",
+  "title": "Tracking area identity list",
+  "has_text": true,
+  "figures_count": 4,
+  "tables_count": 1,
+  "text": [
+    "-------------------------------------",
+    "The purpose of the Tracking area identity list information element is to transfer a list of tracking areas from the network to the UE",
+    "The coding of the information element allows combining different types of lists. The lists of type \"00\" and \"01\" allow a more compact encoding, when the different TAIs are sharing the PLMN identity",
+    "The Tracking area identity list information element is coded as shown in figure 9.9.3.33.1, figure 9.9.3.33.2, figure 9.9.3.33.3, figure 9.9.3.33.4 and table 9.9.3.33.1",
+    "The Tracking area identity list is a type 4 information element, with a minimum length of 8 octets and a maximum length of 98 octets. The list can contain a maximum of 16 different tracking area identities",
+    "The value part of the Tracking area identity list information element consists of one or several partial tracking area identity lists. The length of each partial tracking area identity list can be determined from the 'type of list ' field and the 'number of elements ' field in the first octet of the partial tracking area identity list",
+    "The UE shall store the complete list received. If more than 16 TAIs are included in this information element, the UE shall store the first 16 TAIs and ignore the remaining octets of the information element",
+    "Partial tracking area identity list",
+    "TAC, Tracking area code",
+    "In the TAC field bit 8 of the first octet is the most significant bit and bit 1 of second octet the least significant bit",
+    "The coding of the tracking area code is the responsibility of each administration. Coding using full hexadecimal representation may be used. The tracking area code consists of 2 octets",
+    "NOTE: If the \"list of TAIs belonging to different PLMNs\" is used, the PLMNs included in the list need to be present in the list of \"equivalent PLMNs\"",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "9.9.3.33.1",
+      "file": "Figure_9_9_3_33_1_p460.png.json",
+      "title": "Tracking area identity list information element",
+      "content": {
+        "figure_id": "9.9.3.33.1",
+        "title": "Tracking area identity list information element",
+        "type": "BIT_LAYOUT",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [],
+          "messages": [],
+          "fields": [
+            {
+              "name": "Tracking area identity list IEI",
+              "bit_range": "8-5",
+              "octet_range": "1",
+              "description": "Information Element Identifier for tracking area identity list"
+            },
+            {
+              "name": "Length of tracking area identity list contents",
+              "bit_range": "",
+              "octet_range": "2",
+              "description": "Length of the tracking area identity list contents"
+            },
+            {
+              "name": "Partial tracking area identity list 1",
+              "bit_range": "",
+              "octet_range": "3, octet i, octet i+1*",
+              "description": "First partial tracking area identity list"
+            },
+            {
+              "name": "Partial tracking area identity list 2",
+              "bit_range": "",
+              "octet_range": "octet i*, octet i+1*",
+              "description": "Second partial tracking area identity list"
+            },
+            {
+              "name": "...",
+              "bit_range": "",
+              "octet_range": "octet m*, octet m+1*",
+              "description": "Additional partial tracking area identity lists"
+            },
+            {
+              "name": "Partial tracking area identity list p",
+              "bit_range": "",
+              "octet_range": "octet n*",
+              "description": "Last partial tracking area identity list"
+            }
+          ],
+          "notes": [
+            "The Tracking area identity list is a type 4 information element, with a minimum length of 8 octets and a maximum length of 98 octets.",
+            "The list can contain a maximum of 16 different tracking area identities."
+          ]
+        }
+      }
+    },
+    {
+      "figure_id": "9.9.3.33.3",
+      "file": "Figure_9_9_3_33_3_p461.png.json",
+      "title": "Partial tracking area identity list – type of list = \"01\"",
+      "content": {
+        "figure_id": "9.9.3.33.3",
+        "title": "Partial tracking area identity list – type of list = \"01\"",
+        "type": "BIT_LAYOUT",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [],
+          "messages": [],
+          "fields": [
+            {
+              "name": "Spare",
+              "bit_range": "8",
+              "octet_range": "1",
+              "description": "Spare bit (0)"
+            },
+            {
+              "name": "Type of list",
+              "bit_range": "7-6",
+              "octet_range": "1",
+              "description": "Type of list identifier"
+            },
+            {
+              "name": "Number of elements",
+              "bit_range": "5-1",
+              "octet_range": "1",
+              "description": "Number of elements in the list"
+            },
+            {
+              "name": "MCC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 2"
+            },
+            {
+              "name": "MCC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 1"
+            },
+            {
+              "name": "MNC digit 3",
+              "bit_range": "8-5",
+              "octet_range": "3",
+              "description": "Mobile Network Code digit 3"
+            },
+            {
+              "name": "MCC digit 3",
+              "bit_range": "4-1",
+              "octet_range": "3",
+              "description": "Mobile Country Code digit 3"
+            },
+            {
+              "name": "MNC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 2"
+            },
+            {
+              "name": "MNC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 1"
+            },
+            {
+              "name": "TAC 1",
+              "bit_range": "",
+              "octet_range": "5",
+              "description": "Tracking Area Code 1"
+            },
+            {
+              "name": "TAC 1 (continued)",
+              "bit_range": "",
+              "octet_range": "6",
+              "description": "Tracking Area Code 1 continued"
+            }
+          ],
+          "notes": [
+            "This figure shows the bit layout for partial tracking area identity list with type of list = '01'",
+            "The structure contains MCC, MNC digits and TAC information"
+          ]
+        }
+      }
+    },
+    {
+      "figure_id": "9.9.3.33.2",
+      "file": "Figure_9_9_3_33_2_p460.png.json",
+      "title": "Partial tracking area identity list – type of list = \"00\"",
+      "content": {
+        "figure_id": "9.9.3.33.2",
+        "title": "Partial tracking area identity list – type of list = \"00\"",
+        "type": "BIT_LAYOUT",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [],
+          "messages": [],
+          "fields": [
+            {
+              "name": "0 Spare",
+              "bit_range": "8",
+              "octet_range": "1",
+              "description": "Spare bit set to 0"
+            },
+            {
+              "name": "Type of list",
+              "bit_range": "7-6",
+              "octet_range": "1",
+              "description": "Indicates the type of list"
+            },
+            {
+              "name": "Number of elements",
+              "bit_range": "5-1",
+              "octet_range": "1",
+              "description": "Number of elements in the list"
+            },
+            {
+              "name": "MCC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 2"
+            },
+            {
+              "name": "MCC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 1"
+            },
+            {
+              "name": "MNC digit 3",
+              "bit_range": "8-5",
+              "octet_range": "3",
+              "description": "Mobile Network Code digit 3"
+            },
+            {
+              "name": "MCC digit 3",
+              "bit_range": "4-1",
+              "octet_range": "3",
+              "description": "Mobile Country Code digit 3"
+            },
+            {
+              "name": "MNC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 2"
+            },
+            {
+              "name": "MNC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 1"
+            },
+            {
+              "name": "TAC 1",
+              "bit_range": "",
+              "octet_range": "5",
+              "description": "Tracking Area Code 1 (first octet)"
+            },
+            {
+              "name": "TAC 1 (continued)",
+              "bit_range": "",
+              "octet_range": "6",
+              "description": "Tracking Area Code 1 (second octet)"
+            },
+            {
+              "name": "TAC k",
+              "bit_range": "",
+              "octet_range": "2k+3",
+              "description": "Tracking Area Code k (first octet)"
+            },
+            {
+              "name": "TAC k (continued)",
+              "bit_range": "",
+              "octet_range": "2k+4",
+              "description": "Tracking Area Code k (second octet)"
+            }
+          ],
+          "notes": [
+            "This figure shows the structure of a partial tracking area identity list when type of list = '00'",
+            "The list contains MCC, MNC, and multiple TAC values",
+            "TAC values are 2 octets each and can be repeated k times"
+          ]
+        }
+      }
+    },
+    {
+      "figure_id": "9.9.3.33.4",
+      "file": "Figure_9_9_3_33_4_p461.png.json",
+      "title": "Partial tracking area identity list – type of list = \"10\"",
+      "content": {
+        "figure_id": "9.9.3.33.4",
+        "title": "Partial tracking area identity list – type of list = \"10\"",
+        "type": "BIT_LAYOUT",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [],
+          "messages": [],
+          "fields": [
+            {
+              "name": "Spare",
+              "bit_range": "8",
+              "octet_range": "1",
+              "description": "Spare bit set to 0"
+            },
+            {
+              "name": "Type of list",
+              "bit_range": "7-6",
+              "octet_range": "1",
+              "description": "Type of list field"
+            },
+            {
+              "name": "Number of elements",
+              "bit_range": "5-1",
+              "octet_range": "1",
+              "description": "Number of elements in the list"
+            },
+            {
+              "name": "MCC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 2"
+            },
+            {
+              "name": "MCC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "2",
+              "description": "Mobile Country Code digit 1"
+            },
+            {
+              "name": "MNC digit 3",
+              "bit_range": "8-5",
+              "octet_range": "3",
+              "description": "Mobile Network Code digit 3"
+            },
+            {
+              "name": "MCC digit 3",
+              "bit_range": "4-1",
+              "octet_range": "3",
+              "description": "Mobile Country Code digit 3"
+            },
+            {
+              "name": "MNC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 2"
+            },
+            {
+              "name": "MNC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "4",
+              "description": "Mobile Network Code digit 1"
+            },
+            {
+              "name": "TAC 1",
+              "bit_range": "",
+              "octet_range": "5",
+              "description": "Tracking Area Code 1"
+            },
+            {
+              "name": "TAC 1 (continued)",
+              "bit_range": "",
+              "octet_range": "6",
+              "description": "Tracking Area Code 1 continuation"
+            },
+            {
+              "name": "MCC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "7*",
+              "description": "Mobile Country Code digit 2 for additional element"
+            },
+            {
+              "name": "MCC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "7*",
+              "description": "Mobile Country Code digit 1 for additional element"
+            },
+            {
+              "name": "MNC digit 3",
+              "bit_range": "8-5",
+              "octet_range": "8*",
+              "description": "Mobile Network Code digit 3 for additional element"
+            },
+            {
+              "name": "MCC digit 3",
+              "bit_range": "4-1",
+              "octet_range": "8*",
+              "description": "Mobile Country Code digit 3 for additional element"
+            },
+            {
+              "name": "MNC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "9*",
+              "description": "Mobile Network Code digit 2 for additional element"
+            },
+            {
+              "name": "MNC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "9*",
+              "description": "Mobile Network Code digit 1 for additional element"
+            },
+            {
+              "name": "TAC 2",
+              "bit_range": "",
+              "octet_range": "10*",
+              "description": "Tracking Area Code 2"
+            },
+            {
+              "name": "TAC 2 (continued)",
+              "bit_range": "",
+              "octet_range": "11*",
+              "description": "Tracking Area Code 2 continuation"
+            },
+            {
+              "name": "MCC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "5k-3*",
+              "description": "Mobile Country Code digit 2 for k-th element"
+            },
+            {
+              "name": "MCC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "5k-3*",
+              "description": "Mobile Country Code digit 1 for k-th element"
+            },
+            {
+              "name": "MNC digit 3",
+              "bit_range": "8-5",
+              "octet_range": "5k-2*",
+              "description": "Mobile Network Code digit 3 for k-th element"
+            },
+            {
+              "name": "MCC digit 3",
+              "bit_range": "4-1",
+              "octet_range": "5k-2*",
+              "description": "Mobile Country Code digit 3 for k-th element"
+            },
+            {
+              "name": "MNC digit 2",
+              "bit_range": "8-5",
+              "octet_range": "5k-1*",
+              "description": "Mobile Network Code digit 2 for k-th element"
+            },
+            {
+              "name": "MNC digit 1",
+              "bit_range": "4-1",
+              "octet_range": "5k-1*",
+              "description": "Mobile Network Code digit 1 for k-th element"
+            },
+            {
+              "name": "TAC k",
+              "bit_range": "",
+              "octet_range": "5k*",
+              "description": "Tracking Area Code k"
+            },
+            {
+              "name": "TAC k (continued)",
+              "bit_range": "",
+              "octet_range": "5k+1*",
+              "description": "Tracking Area Code k continuation"
+            }
+          ],
+          "notes": [
+            "This figure shows the bit layout for partial tracking area identity list with type of list = '10'",
+            "Each element contains full MCC, MNC and TAC information",
+            "Pattern repeats for k elements as indicated by the number of elements field"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": [
+    {
+      "table_id": "9.9.3.33.1",
+      "file": "Table_9_9_3_33_1_p462-464.png.json",
+      "title": null,
+      "content": {
+        "table_title": "Table 9.9.3.33.1: Tracking area identity list information element",
+        "columns": [],
+        "rows": []
+      }
+    }
+  ]
+}

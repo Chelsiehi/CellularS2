@@ -1,0 +1,101 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.6.1",
+  "title": "General DLDedicatedMessageSegment",
+  "entities": [
+    {
+      "id": "PROC_DL_SEGMENT_TRANSFER",
+      "name": "DL message segment transfer",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer segments of DL DCCH messages from the network to the UE. Segmentation is only applicable to RRCReconfiguration and RRCResume messages in this release.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1",
+        "Figure 5.7.6.1"
+      ]
+    },
+    {
+      "id": "MSG_DLDEDICATEDMESSAGESEGMENT",
+      "name": "DLDedicatedMessageSegment",
+      "entity_type": "Message",
+      "description": "Message used to transfer segments of DL DCCH messages from network to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1",
+        "Figure 5.7.6.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRECONFIGURATION",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "DL DCCH message that can be segmented using the DLDedicatedMessageSegment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRESUME",
+      "name": "RRCResume",
+      "entity_type": "Message",
+      "description": "DL DCCH message that can be segmented using the DLDedicatedMessageSegment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    },
+    {
+      "id": "COND_SEGMENTATION_APPLICABLE",
+      "name": "Segmentation applicable condition",
+      "entity_type": "Condition",
+      "description": "Condition that segmentation is only applicable to RRCReconfiguration and RRCResume messages in this release.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_DL_SEGMENT_TRANSFER",
+      "target": "MSG_DLDEDICATEDMESSAGESEGMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The DL message segment transfer procedure uses the DLDedicatedMessageSegment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1",
+        "Figure 5.7.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_DL_SEGMENT_TRANSFER",
+      "target": "COND_SEGMENTATION_APPLICABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The procedure is guarded by the condition that segmentation only applies to specific message types.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_SEGMENTATION_APPLICABLE",
+      "target": "MSG_RRCRECONFIGURATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition establishes that RRCReconfiguration messages can be segmented.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SEGMENTATION_APPLICABLE",
+      "target": "MSG_RRCRESUME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition establishes that RRCResume messages can be segmented.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.6.1"
+      ]
+    }
+  ]
+}

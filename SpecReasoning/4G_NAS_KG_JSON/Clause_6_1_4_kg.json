@@ -1,0 +1,247 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.4",
+  "title": "Coordination between ESM and SM",
+  "entities": [
+    {
+      "id": "INTER_SYSTEM_CHANGE_S1_TO_AGB_IU",
+      "name": "Inter-system change from S1 mode to A/Gb mode or Iu mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing from S1 mode to A/Gb mode or Iu mode where SM maps parameters from active EPS bearer contexts to PDP contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_AGB_IU_TO_S1",
+      "name": "Inter-system change from A/Gb mode or Iu mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for changing from A/Gb mode or Iu mode to S1 mode where ESM maps parameters from active PDP contexts to EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT",
+      "name": "EPS bearer context",
+      "entity_type": "Property",
+      "description": "Active EPS bearer context containing parameters like EPS bearer identity, linked EPS bearer identity, PDN address, APN, TFT, and GERAN/UTRAN parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "PDP_CONTEXT",
+      "name": "PDP context",
+      "entity_type": "Property",
+      "description": "Active PDP context containing parameters like NSAPI, PDP address, APN, and TFT.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_IDENTITY",
+      "name": "EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for EPS bearer context, mapped to NSAPI during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "NSAPI",
+      "name": "NSAPI",
+      "entity_type": "Identifier",
+      "description": "Network Service Access Point Identifier, mapped to EPS bearer identity during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "LINKED_EPS_BEARER_IDENTITY",
+      "name": "Linked EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Linked EPS bearer identity mapped to linked TI during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "PDN_ADDRESS",
+      "name": "PDN address",
+      "entity_type": "Property",
+      "description": "Packet Data Network address of default EPS bearer context, mapped to PDP address.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "APN",
+      "name": "APN",
+      "entity_type": "Property",
+      "description": "Access Point Name of default EPS bearer context, mapped to APN of default PDP context.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "TFT",
+      "name": "TFT",
+      "entity_type": "Property",
+      "description": "Traffic Flow Template, mapped between EPS bearer contexts and PDP contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "GERAN_UTRAN_PARAMETERS",
+      "name": "GERAN/UTRAN parameters",
+      "entity_type": "Property",
+      "description": "Parameters provided by MME including R99 QoS, LLC SAPI, radio priority, packet flow identifier, transaction identifier, and BCM.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "TRANSACTION_IDENTIFIER",
+      "name": "Transaction identifier",
+      "entity_type": "Identifier",
+      "description": "Parameter required for PDP context activation during inter-system change to A/Gb mode or Iu mode.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "QOS_MAPPING",
+      "name": "QoS mapping",
+      "entity_type": "Procedure",
+      "description": "Mapping of QoS parameters between EPS and R99 systems performed by MME and UE according to 3GPP TS 23.401.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTER_SYSTEM_CHANGE_S1_TO_AGB_IU",
+      "target": "EPS_BEARER_CONTEXT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change procedure uses parameters from active EPS bearer contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTER_SYSTEM_CHANGE_AGB_IU_TO_S1",
+      "target": "PDP_CONTEXT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Inter-system change procedure uses parameters from active PDP contexts.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context contains EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "LINKED_EPS_BEARER_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context may contain linked EPS bearer identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "PDN_ADDRESS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context contains PDN address.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "APN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context contains APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "TFT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context may contain TFT.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EPS_BEARER_CONTEXT",
+      "target": "GERAN_UTRAN_PARAMETERS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context may contain GERAN/UTRAN parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "INTER_SYSTEM_CHANGE_S1_TO_AGB_IU",
+      "target": "TRANSACTION_IDENTIFIER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PDP context activation requires transaction identifier during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "QOS_MAPPING",
+      "target": "EPS_BEARER_CONTEXT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "QoS mapping procedure involves EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "QOS_MAPPING",
+      "target": "PDP_CONTEXT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "QoS mapping procedure involves PDP context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.4"
+      ]
+    }
+  ]
+}

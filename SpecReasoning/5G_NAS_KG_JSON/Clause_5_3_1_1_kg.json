@@ -1,0 +1,245 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.1.1",
+  "title": "Establishment of the N1 NAS signalling connection",
+  "entities": [
+    {
+      "id": "PROC_N1_CONN_ESTABLISHMENT",
+      "name": "N1 NAS signalling connection establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing N1 NAS signalling connection when UE needs to transmit initial NAS messages. Involves requesting RRC connection establishment and transitioning to 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where no NAS signalling connection exists. UE transitions from this state to 5GMM-CONNECTED when N1 connection is established.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "UE state where N1 NAS signalling connection is established. UE enters this state after successful connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for registration procedures. Triggers N1 connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for deregistration procedures. Triggers N1 connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for service request procedures. Triggers N1 connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "MSG_CP_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Initial NAS message used for control plane service requests. Triggers N1 connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "ID_5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Identifier",
+      "description": "5G Globally Unique Temporary Identifier used for UE identification. Provided to lower layers for routing in certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "ID_4G_GUTI",
+      "name": "4G-GUTI",
+      "entity_type": "Identifier",
+      "description": "4G Globally Unique Temporary Identifier used for UE identification in EPS. Can be mapped to 5G-GUTI for inter-system changes.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "ID_5G_S_TMSI",
+      "name": "5G-S-TMSI",
+      "entity_type": "Identifier",
+      "description": "5G Short Temporary Mobile Subscriber Identity used for UE identification. Provided to lower layers for routing in certain conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "ID_GUAMI",
+      "name": "GUAMI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique AMF Identifier used for AMF identification and routing. Provided to lower layers in various scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "ID_SUCI",
+      "name": "SUCI",
+      "entity_type": "Identifier",
+      "description": "Subscription Concealed Identifier used for privacy protection. Provided to lower layers when no GUTI is available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "COND_TRACKING_AREA_IN_RA",
+      "name": "Tracking area in registration area",
+      "entity_type": "Condition",
+      "description": "Condition where current cell's tracking area is within UE's registration area. Determines which identifier to provide to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "PROP_PROVIDE_ID_TO_LOWER_LAYERS",
+      "name": "Provide identity to lower layers",
+      "entity_type": "Property",
+      "description": "UE NAS behavior of providing UE identity information to lower layers for routing and connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_N1_CONN_ESTABLISHMENT",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "N1 connection establishment procedure requires UE to be in 5GMM-IDLE mode initially",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_N1_CONN_ESTABLISHMENT",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful N1 connection establishment results in UE entering 5GMM-CONNECTED mode",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "PROC_N1_CONN_ESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Registration Request message triggers N1 connection establishment procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROC_N1_CONN_ESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Deregistration Request message triggers N1 connection establishment procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "PROC_N1_CONN_ESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Service Request message triggers N1 connection establishment procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CP_SERVICE_REQUEST",
+      "target": "PROC_N1_CONN_ESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Control Plane Service Request message triggers N1 connection establishment procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_TRACKING_AREA_IN_RA",
+      "target": "PROP_PROVIDE_ID_TO_LOWER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition of tracking area being in registration area determines which identity is provided to lower layers",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_PROVIDE_ID_TO_LOWER_LAYERS",
+      "target": "ID_5G_S_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE NAS provides 5G-S-TMSI to lower layers when tracking area is in registration area",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROP_PROVIDE_ID_TO_LOWER_LAYERS",
+      "target": "ID_GUAMI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE NAS provides GUAMI to lower layers when tracking area is not in registration area",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_PROVIDE_ID_TO_LOWER_LAYERS",
+      "target": "ID_SUCI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE NAS provides SUCI to lower layers when no GUTI is available on trusted non-3GPP access",
+      "provenance": [
+        "TS 24.501, Clause 5.3.1.1"
+      ]
+    }
+  ]
+}

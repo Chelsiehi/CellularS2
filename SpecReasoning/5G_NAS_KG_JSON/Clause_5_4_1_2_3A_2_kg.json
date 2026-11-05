@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.3A.2",
+  "title": "EAP-TTLS with two phases of authentication",
+  "entities": [
+    {
+      "id": "EAP_TTLS_TWO_PHASE_AUTH",
+      "name": "EAP-TTLS with two phases of authentication",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP-TTLS with two phases as specified in 3GPP TS 33.501, used for primary authentication and key agreement in SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "UE_EAP_PEER",
+      "name": "UE acting as EAP peer",
+      "entity_type": "Property",
+      "description": "UE supports acting as EAP peer for EAP-TTLS with two phases of authentication and as peer for legacy authentication protocols.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "AUSF_EAP_SERVER",
+      "name": "AUSF acting as EAP server",
+      "entity_type": "Property",
+      "description": "AUSF supports acting as EAP server for EAP-TTLS with two phases of authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "AAA_SERVER_CH",
+      "name": "AAA server of CH",
+      "entity_type": "Property",
+      "description": "AAA server of CH supports acting as server for legacy authentication protocols.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "MSK_INDICATION_EXCLUSION",
+      "name": "MSK indication exclusion",
+      "entity_type": "Condition",
+      "description": "Indication to use MSK for KAUSF derivation is not included in default UE credentials for onboarding services or in selected subscriber data entry when not onboarding.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "SUPI_NSI_FORMAT",
+      "name": "SUPI with network specific identifier",
+      "entity_type": "Property",
+      "description": "SUPI of the UE is in the form of a SUPI with SUPI format 'network specific identifier' containing a network-specific identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "ONBOARDING_SERVICES",
+      "name": "Onboarding services in SNPN",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registering or registered for onboarding services in SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "SUBSCRIBER_DATA_LIST",
+      "name": "List of subscriber data",
+      "entity_type": "Property",
+      "description": "Credentials stored in the selected entry of the list of subscriber data when UE is not registering or registered for onboarding services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_TTLS_TWO_PHASE_AUTH",
+      "target": "UE_EAP_PEER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EAP-TTLS procedure requires UE to act as EAP peer.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EAP_TTLS_TWO_PHASE_AUTH",
+      "target": "AUSF_EAP_SERVER",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EAP-TTLS procedure requires AUSF to act as EAP server.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EAP_TTLS_TWO_PHASE_AUTH",
+      "target": "AAA_SERVER_CH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "EAP-TTLS procedure requires AAA server of CH to support legacy authentication protocols.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EAP_TTLS_TWO_PHASE_AUTH",
+      "target": "MSK_INDICATION_EXCLUSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP-TTLS procedure is guarded by the condition that MSK indication for KAUSF derivation is excluded.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSK_INDICATION_EXCLUSION",
+      "target": "ONBOARDING_SERVICES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MSK indication exclusion condition is guarded by whether UE is registering or registered for onboarding services.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSK_INDICATION_EXCLUSION",
+      "target": "SUBSCRIBER_DATA_LIST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MSK indication exclusion condition is guarded by credentials in the selected entry of subscriber data list when not onboarding.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EAP_TTLS_TWO_PHASE_AUTH",
+      "target": "SUPI_NSI_FORMAT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EAP-TTLS procedure establishes that SUPI is in network specific identifier format.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.3A.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.2A",
+  "title": "Handling of NAS signalling low priority indication",
+  "entities": [
+    {
+      "id": "IE_DEVICE_PROPERTIES",
+      "name": "Device properties IE",
+      "entity_type": "Information Element",
+      "description": "Information Element used by UE to indicate NAS signalling low priority configuration. Contains a low priority indicator field.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "PROP_LOW_PRIORITY_INDICATOR",
+      "name": "Low priority indicator",
+      "entity_type": "Property",
+      "description": "Field within Device properties IE that indicates whether MS is configured for NAS signalling low priority or not.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACH",
+      "name": "UE performing attach for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDN",
+      "name": "UE has PDN connection for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets low priority indicator to 'MS is not configured for NAS signalling low priority' during EPS mobility management or PDN connection establishment.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_DUAL_PRIORITY_REQUEST",
+      "name": "Dual priority UE requested for non-low priority PDN connection",
+      "entity_type": "Condition",
+      "description": "Condition where UE configured for dual priority sets low priority indicator to 'MS is not configured for NAS signalling low priority' when upper layers request PDN connection without low priority.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_CS_FALLBACK_EMERGENCY",
+      "name": "UE performing service request for CS fallback emergency call",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_AC11_15",
+      "name": "UE configured to use AC11-15 in selected PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "COND_RESPONDING_TO_PAGING",
+      "name": "UE responding to paging",
+      "entity_type": "Condition",
+      "description": "Condition where UE sets low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message that may contain NAS signalling low priority indication in Device properties IE.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "PROP_STORED_LOW_PRIORITY_INDICATION",
+      "name": "Stored NAS signalling low priority indication",
+      "entity_type": "Property",
+      "description": "NAS signalling low priority indication stored by MME within default EPS bearer context after PDN connectivity request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "PROC_CONNECTION_CONTROL",
+      "name": "NAS level mobility management congestion control",
+      "entity_type": "Procedure",
+      "description": "Network procedure that may use NAS signalling low priority indication for congestion control.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_DEVICE_PROPERTIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message may contain Device properties IE with low priority indication.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_DEVICE_PROPERTIES",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Device properties IE contains low priority indicator field.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_EMERGENCY_ATTACH",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency attach condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_EMERGENCY_PDN",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDN connection condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_DUAL_PRIORITY_REQUEST",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Dual priority request condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_CS_FALLBACK_EMERGENCY",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CS fallback emergency condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_AC11_15",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AC11-15 usage condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_RESPONDING_TO_PAGING",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging response condition forces low priority indicator to 'MS is not configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "PROP_STORED_LOW_PRIORITY_INDICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REQUEST message with low priority indication causes MME to store this indication in default EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_CONNECTION_CONTROL",
+      "target": "PROP_LOW_PRIORITY_INDICATOR",
+      "relation_type": "uses",
+      "family": "core",
+      "description": "Network uses NAS signalling low priority indication for congestion control procedures.",
+      "provenance": [
+        "TS 24.301, Clause 4.2A"
+      ]
+    }
+  ]
+}

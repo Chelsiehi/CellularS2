@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.3.2.1.3.9",
+  "title": "5GMM-DEREGISTERED.INITIAL-REGISTRATION-NEEDED",
+  "entities": [
+    {
+      "id": "STATE_5GMM_DEREGISTERED_INITIAL_REGISTRATION_NEEDED",
+      "name": "5GMM-DEREGISTERED.INITIAL-REGISTRATION-NEEDED",
+      "entity_type": "State",
+      "description": "A substate of 5GMM-DEREGISTERED where valid subscriber data are available and an initial registration procedure must be performed as soon as possible.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "PROCEDURE_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Registration procedure for initial registration that must be performed when entering the INITIAL-REGISTRATION-NEEDED substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "CONDITION_ACCESS_BARRED",
+      "name": "Access barred due to unified access control",
+      "entity_type": "Condition",
+      "description": "Condition where access is barred due to unified access control as specified in subclause 4.5.4.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "CONDITION_N1_CONNECTION_REJECTED",
+      "name": "N1 NAS signalling connection establishment rejected",
+      "entity_type": "Condition",
+      "description": "Condition where the network rejects the N1 NAS signalling connection establishment.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "PROPERTY_VALID_SUBSCRIBER_DATA",
+      "name": "Valid subscriber data available",
+      "entity_type": "Property",
+      "description": "Property indicating that valid subscriber data are available for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_5GMM_DEREGISTERED_INITIAL_REGISTRATION_NEEDED",
+      "target": "PROCEDURE_INITIAL_REGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The INITIAL-REGISTRATION-NEEDED substate requires performing the initial registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_5GMM_DEREGISTERED_INITIAL_REGISTRATION_NEEDED",
+      "target": "PROPERTY_VALID_SUBSCRIBER_DATA",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The INITIAL-REGISTRATION-NEEDED substate requires that valid subscriber data are available.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_ACCESS_BARRED",
+      "target": "STATE_5GMM_DEREGISTERED_INITIAL_REGISTRATION_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barred due to unified access control can cause entry into the INITIAL-REGISTRATION-NEEDED substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_N1_CONNECTION_REJECTED",
+      "target": "STATE_5GMM_DEREGISTERED_INITIAL_REGISTRATION_NEEDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Rejection of N1 NAS signalling connection establishment can cause entry into the INITIAL-REGISTRATION-NEEDED substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.3.9"
+      ]
+    }
+  ]
+}

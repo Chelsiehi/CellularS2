@@ -1,0 +1,173 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_SL_RRC_RECONFIG",
+      "name": "Sidelink RRC Reconfiguration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to modify a PC5-RRC connection, including establishment/modification/release of sidelink DRBs, configuration of NR sidelink measurement and reporting, configuration of sidelink CSI reference signal resources and CSI reporting latency bound, and configuration of sidelink DRX.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG_SL",
+      "name": "RRCReconfigurationSidelink",
+      "entity_type": "Message",
+      "description": "Message sent to initiate sidelink RRC reconfiguration procedure between UEs over PC5 interface.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG_COMPLETE_SL",
+      "name": "RRCReconfigurationCompleteSidelink",
+      "entity_type": "Message",
+      "description": "Message sent to indicate successful completion of sidelink RRC reconfiguration procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RECONFIG_FAILURE_SL",
+      "name": "RRCReconfigurationFailureSidelink",
+      "entity_type": "Message",
+      "description": "Message sent to indicate failure of sidelink RRC reconfiguration procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE applies NR sidelink communications parameters provided in RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE applies NR sidelink communications parameters provided in system information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE applies NR sidelink communications parameters provided in system information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "CONFIG_SL_PARAMS",
+      "name": "NR Sidelink Communications Parameters",
+      "entity_type": "Property",
+      "description": "Configuration parameters for sidelink communication that are applied based on UE RRC state and provided via RRCReconfiguration, system information, or SidelinkPreconfigNR.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "COND_STATE_TRANSITION",
+      "name": "State Transition Between RRC States",
+      "entity_type": "Condition",
+      "description": "Condition when UE transitions between RRC_CONNECTED, RRC_IDLE, and RRC_INACTIVE states, requiring application of new sidelink parameters after acquisition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SL_RRC_RECONFIG",
+      "target": "MSG_RRC_RECONFIG_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The sidelink RRC reconfiguration procedure involves sending RRCReconfigurationSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SL_RRC_RECONFIG",
+      "target": "MSG_RRC_RECONFIG_COMPLETE_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Successful completion of the procedure involves sending RRCReconfigurationCompleteSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SL_RRC_RECONFIG",
+      "target": "MSG_RRC_RECONFIG_FAILURE_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure failure involves sending RRCReconfigurationFailureSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1",
+        "Figure 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "CONFIG_SL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "In RRC_CONNECTED state, UE applies NR sidelink communications parameters provided in RRCReconfiguration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_RRC_IDLE",
+      "target": "CONFIG_SL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "In RRC_IDLE state, UE applies NR sidelink communications parameters provided in system information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "CONFIG_SL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "In RRC_INACTIVE state, UE applies NR sidelink communications parameters provided in system information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_STATE_TRANSITION",
+      "target": "CONFIG_SL_PARAMS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "During state transition, UE applies new sidelink parameters after acquisition while continuing old parameters until new ones are acquired.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.1.1"
+      ]
+    }
+  ]
+}

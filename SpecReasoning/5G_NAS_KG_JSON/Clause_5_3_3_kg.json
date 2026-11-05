@@ -1,0 +1,278 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.3",
+  "title": "Temporary identities",
+  "entities": [
+    {
+      "id": "5G_GUTI",
+      "name": "5G-GUTI",
+      "entity_type": "Identifier",
+      "description": "Temporary user identity for 5GS-based services used for identification within signalling procedures. Globally unique in PLMN and unique within SNPN. Consists of GUAMI and 5G-TMSI components.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "5G_S_TMSI",
+      "name": "5G-S-TMSI",
+      "entity_type": "Identifier",
+      "description": "Shortened form of 5G-GUTI used in paging and service request procedures for more efficient radio signalling. Provides identity confidentiality.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "GUAMI",
+      "name": "GUAMI",
+      "entity_type": "Identifier",
+      "description": "Main component of 5G-GUTI that identifies the AMF(s).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "5G_TMSI",
+      "name": "5G-TMSI",
+      "entity_type": "Identifier",
+      "description": "Main component of 5G-GUTI that provides unambiguous identity of the UE within the AMF(s) identified by GUAMI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message where UE includes valid 5G-GUTI if available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message where UE includes valid 5G-GUTI if available.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message where UE includes valid 5G-S-TMSI as user identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which AMF assigns new 5G-GUTI upon successful completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "MOBILITY_REGISTRATION_UPDATE",
+      "name": "Mobility registration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which AMF assigns new 5G-GUTI upon successful completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "PERIODIC_REGISTRATION_UPDATE",
+      "name": "Periodic registration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which AMF should assign new 5G-GUTI upon successful completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure that AMF may use to assign new 5G-GUTI at any time.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "T3519",
+      "name": "Timer T3519",
+      "entity_type": "Timer",
+      "description": "Timer that UE stops when receiving new 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "DELETE_SUCI",
+      "name": "Delete stored SUCI",
+      "entity_type": "Property",
+      "description": "UE action to delete any stored SUCI when receiving new 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "5GMM_IDLE_SUSPEND",
+      "name": "5GMM-IDLE mode with suspend indication",
+      "entity_type": "State",
+      "description": "State entered when N1 NAS signalling connection is suspended due to user plane CIoT 5GS optimization.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "5G_GUTI",
+      "target": "GUAMI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5G-GUTI contains GUAMI as one of its main components.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "5G_GUTI",
+      "target": "5G_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5G-GUTI contains 5G-TMSI as one of its main components.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "5G_S_TMSI",
+      "target": "5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5G-S-TMSI is a shortened form derived from 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REGISTRATION_REQUEST",
+      "target": "5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains 5G-GUTI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "SERVICE_REQUEST",
+      "target": "5G_S_TMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains 5G-S-TMSI as user identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "INITIAL_REGISTRATION",
+      "target": "5G_GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful initial registration procedure establishes new 5G-GUTI assignment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MOBILITY_REGISTRATION_UPDATE",
+      "target": "5G_GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful mobility registration update procedure establishes new 5G-GUTI assignment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PERIODIC_REGISTRATION_UPDATE",
+      "target": "5G_GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful periodic registration update procedure should establish new 5G-GUTI assignment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "GENERIC_UE_CONFIG_UPDATE",
+      "target": "5G_GUTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Generic UE configuration update procedure may establish new 5G-GUTI assignment.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "5G_GUTI",
+      "target": "T3519",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of new 5G-GUTI stops timer T3519 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "5G_GUTI",
+      "target": "DELETE_SUCI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of new 5G-GUTI establishes deletion of any stored SUCI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "5GMM_IDLE_SUSPEND",
+      "target": "5G_GUTI",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "5G-GUTI assignment timing is constrained by 5GMM-IDLE mode with suspend indication state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.3"
+      ]
+    }
+  ]
+}

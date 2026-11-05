@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.3.6A",
+  "title": "Mobility and periodic registration update for an emergency services fallback not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_EMERGENCY_FALLBACK_REG_UPDATE",
+      "name": "Mobility and periodic registration update for emergency services fallback",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated by UE for emergency services fallback",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_CASE_B",
+      "name": "Abnormal case b failure",
+      "entity_type": "Condition",
+      "description": "Specific abnormal case from subclause 5.5.1.3.7 that causes registration failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_CASE_C_D",
+      "name": "Abnormal cases c or d failure",
+      "entity_type": "Condition",
+      "description": "Specific abnormal cases from subclause 5.5.1.3.7 that cause registration failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_NOT_ACCEPT",
+      "name": "Network does not accept registration",
+      "entity_type": "Condition",
+      "description": "Network rejection of registration request as described in subclause 5.5.1.3.5",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "COND_NO_EUTRA_EPC_ATTEMPT",
+      "name": "No E-UTRA EPC cell selection attempt",
+      "entity_type": "Condition",
+      "description": "UE does not attempt to select E-UTRA cell connected to EPC or 5GCN",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "COND_SAME_PLMN_CAMPED",
+      "name": "Camped on same PLMN",
+      "entity_type": "Condition",
+      "description": "UE is camped on NR or E-UTRA cell connected to 5GCN in same PLMN where last registration was attempted",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS",
+      "name": "Inform upper layers of failure",
+      "entity_type": "Property",
+      "description": "UE informs upper layers about registration failure for emergency services fallback",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "PROC_5_5_1_3_7",
+      "name": "Abnormal case procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures defined in subclause 5.5.1.3.7 for handling abnormal cases",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "PROC_5_5_1_3_5",
+      "name": "Network rejection procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures defined in subclause 5.5.1.3.5 for handling network rejection",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EMERGENCY_FALLBACK_REG_UPDATE",
+      "target": "PROC_5_5_1_3_7",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs procedures from subclause 5.5.1.3.7 when registration fails due to abnormal cases",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EMERGENCY_FALLBACK_REG_UPDATE",
+      "target": "PROC_5_5_1_3_5",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE performs procedures from subclause 5.5.1.3.5 when network does not accept registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ABNORMAL_CASE_B",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal case b failure triggers UE to inform upper layers of network access failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ABNORMAL_CASE_C_D",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal cases c or d failure triggers UE to inform upper layers when combined with other conditions",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NETWORK_NOT_ACCEPT",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network rejection triggers UE to inform upper layers when combined with other conditions",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NO_EUTRA_EPC_ATTEMPT",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "No E-UTRA EPC cell selection attempt is a condition for informing upper layers",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SAME_PLMN_CAMPED",
+      "target": "PROP_INFORM_UPPER_LAYERS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Being camped on same PLMN is a condition for informing upper layers",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.3.6A"
+      ]
+    }
+  ]
+}

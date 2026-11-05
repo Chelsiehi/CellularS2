@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.3.2.4.8",
+  "title": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+  "entities": [
+    {
+      "id": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "A substate of EMM-REGISTERED indicating the UE is attempting to update mobility management context. Reached when a combined attach or combined tracking area updating procedure succeeds for EPS services only.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_ATTACH",
+      "name": "Combined attach procedure",
+      "entity_type": "Procedure",
+      "description": "Registration procedure for both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_COMBINED_TAU",
+      "name": "Combined tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to update tracking area and possibly other parameters for both EPS and non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "CONDITION_EPS_ONLY_SUCCESS",
+      "name": "EPS services only success",
+      "entity_type": "Condition",
+      "description": "Condition where combined procedure succeeds for EPS services but not for non-EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_DATA_COMMUNICATION_ALLOWED",
+      "name": "User data and signalling communication allowed",
+      "entity_type": "Property",
+      "description": "Property indicating user data and signalling information may be sent and received in this state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_COMBINED_ATTACH",
+      "target": "CONDITION_EPS_ONLY_SUCCESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful combined attach procedure for EPS services only establishes the EPS-only success condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_COMBINED_TAU",
+      "target": "CONDITION_EPS_ONLY_SUCCESS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful combined tracking area updating procedure for EPS services only establishes the EPS-only success condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_EPS_ONLY_SUCCESS",
+      "target": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "EPS-only success condition leads to entering the EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_EMM_REGISTERED_ATTEMPTING_TO_UPDATE_MM",
+      "target": "PROPERTY_DATA_COMMUNICATION_ALLOWED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM state allows user data and signalling communication.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.3.2.4.8"
+      ]
+    }
+  ]
+}

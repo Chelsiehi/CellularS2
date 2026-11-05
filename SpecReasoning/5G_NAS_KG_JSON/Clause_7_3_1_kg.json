@@ -1,0 +1,200 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "7.3.1",
+  "title": "Procedure transaction identity",
+  "entities": [
+    {
+      "id": "PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Identifier",
+      "description": "Identifier used in 5GSM messages to correlate transactions between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "5GSM_STATUS",
+      "name": "5GSM STATUS message",
+      "entity_type": "Message",
+      "description": "Message used to report errors or status in 5G session management procedures.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "CAUSE_47",
+      "name": "5GSM cause #47 PTI mismatch",
+      "entity_type": "Condition",
+      "description": "Error cause indicating a mismatch in procedure transaction identity values.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "CAUSE_81",
+      "name": "5GSM cause #81 invalid PTI value",
+      "entity_type": "Condition",
+      "description": "Error cause indicating an invalid procedure transaction identity value.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "NETWORK_PTI_HANDLING",
+      "name": "Network PTI handling procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure followed by the network when receiving 5GSM messages with unknown, erroneous, or unforeseen PTI values.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "UE_PTI_HANDLING",
+      "name": "UE PTI handling procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure followed by the UE when receiving 5GSM messages with unknown, erroneous, or unforeseen PTI values.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "RESERVED_PTI",
+      "name": "Reserved PTI value",
+      "entity_type": "Condition",
+      "description": "Condition where PTI value is reserved, leading to message being ignored.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "UNASSIGNED_PTI",
+      "name": "Unassigned PTI value",
+      "entity_type": "Condition",
+      "description": "Condition where PTI value is unassigned, leading to specific error handling.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "ASSIGNED_PTI_MISMATCH",
+      "name": "Assigned PTI value mismatch",
+      "entity_type": "Condition",
+      "description": "Condition where assigned PTI value does not match any PTI in use.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NETWORK_PTI_HANDLING",
+      "target": "5GSM_STATUS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network responds with 5GSM STATUS message for PTI errors.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NETWORK_PTI_HANDLING",
+      "target": "CAUSE_47",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network includes cause #47 for PTI mismatch cases.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NETWORK_PTI_HANDLING",
+      "target": "CAUSE_81",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Network includes cause #81 for invalid PTI value cases.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NETWORK_PTI_HANDLING",
+      "target": "RESERVED_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network ignores messages with reserved PTI values.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UE_PTI_HANDLING",
+      "target": "5GSM_STATUS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE responds with 5GSM STATUS message for PTI errors.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UE_PTI_HANDLING",
+      "target": "CAUSE_47",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes cause #47 for PTI mismatch cases.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_PTI_HANDLING",
+      "target": "CAUSE_81",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes cause #81 for invalid PTI value cases.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_PTI_HANDLING",
+      "target": "RESERVED_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE ignores messages with reserved PTI values.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "UE_PTI_HANDLING",
+      "target": "UNASSIGNED_PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE ignores messages with unassigned PTI values in specific cases.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "ASSIGNED_PTI_MISMATCH",
+      "target": "CAUSE_47",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Assigned PTI value mismatch condition leads to cause #47.",
+      "provenance": [
+        "TS 24.501, Clause 7.3.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the network sends CONFIGURATION UPDATE COMMAND to update UE configuration parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by network to update UE configuration parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMPLETE",
+      "name": "CONFIGURATION UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to confirm successful configuration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3555",
+      "name": "Timer T3555",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "IE_5G_GUTI",
+      "name": "5G-GUTI IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing 5G Globally Unique Temporary Identifier.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "IE_UPDATED_PEIPS",
+      "name": "Updated PEIPS assistance information IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing updated Paging Early Indication for Power Saving assistance information.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition when lower layer failure is detected before CONFIGURATION UPDATE COMPLETE is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Behavior where the network aborts the ongoing procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "MSG_CONFIG_UPDATE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Generic UE configuration update procedure involves sending CONFIGURATION UPDATE COMMAND message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "TIMER_T3555",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3555 when sending CONFIGURATION UPDATE COMMAND.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "target": "TIMER_T3555",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Network resets and starts timer T3555 on first expiry for retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3555",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3555 causes procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_5G_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain 5G-GUTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_UPDATED_PEIPS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message may contain Updated PEIPS assistance information IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "PROC_GENERIC_UE_CONFIG_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Lower layer failure condition affects the generic UE configuration update procedure behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of DEREGISTRATION REQUEST causes abortion of generic UE configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of REGISTRATION REQUEST causes abortion of generic UE configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of SERVICE REQUEST with NAS signalling connection release causes abortion of generic UE configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REQUEST message contains UE request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.6"
+      ]
+    }
+  ]
+}

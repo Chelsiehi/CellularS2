@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.0",
+  "title": "General",
+  "entities": [
+    {
+      "id": "EPS_BEARER_CONTEXT_LIMIT",
+      "name": "Maximum number of active EPS bearer contexts",
+      "entity_type": "Property",
+      "description": "The maximum number of simultaneously active EPS bearer contexts in a PLMN is determined by the lowest of: protocol maximum (15 in current version), PLMN's maximum in S1 mode, and UE implementation-specific maximum.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "UE_NETWORK_CAPABILITY_IE",
+      "name": "UE Network Capability IE",
+      "entity_type": "Information Element",
+      "description": "Information Element used by UE to indicate support for maximum 15 EPS bearer contexts via the 15 bearers bit.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "EPS_NETWORK_FEATURE_SUPPORT_IE",
+      "name": "EPS network feature support IE",
+      "entity_type": "Information Element",
+      "description": "Information Element used by network to indicate support for maximum 15 EPS bearer contexts via the 15 bearers bit.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "NB_S1_MODE_DRB_LIMIT",
+      "name": "NB-S1 mode user plane radio bearer limit",
+      "entity_type": "Property",
+      "description": "In NB-S1 mode, UE's implementation-specific maximum number of active user plane radio bearers is 2 when Multiple DRB support bit is set, otherwise 1.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "INTER_SYSTEM_CHANGE_N1_TO_NB_S1",
+      "name": "Inter-system change from N1 mode to NB-S1 mode",
+      "entity_type": "Condition",
+      "description": "Condition triggering local deactivation of default EPS bearer contexts when number exceeds UE's maximum user plane radio bearers and UE is using user plane CIoT EPS optimization.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT_STATUS_IE",
+      "name": "EPS bearer context status IE",
+      "entity_type": "Information Element",
+      "description": "Information Element included in TRACKING AREA UPDATE REQUEST message to indicate EPS bearer context status after local deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used during tracking area updating procedure, carries EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDN_DISCONNECTION",
+      "name": "UE requested PDN disconnection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to disconnect PDN connections during inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PDN_CONNECTIVITY",
+      "name": "UE requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to establish PDN connections after inter-system change.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_NETWORK_CAPABILITY_IE",
+      "target": "EPS_BEARER_CONTEXT_LIMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE indicates support for 15 EPS bearer contexts via 15 bearers bit in UE Network Capability IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "EPS_NETWORK_FEATURE_SUPPORT_IE",
+      "target": "EPS_BEARER_CONTEXT_LIMIT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network indicates support for 15 EPS bearer contexts via 15 bearers bit in EPS network feature support IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_NB_S1",
+      "target": "EPS_BEARER_CONTEXT_STATUS_IE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Inter-system change condition triggers inclusion of EPS bearer context status IE in TRACKING AREA UPDATE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TRACKING_AREA_UPDATE_REQUEST",
+      "target": "EPS_BEARER_CONTEXT_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_NB_S1",
+      "target": "UE_REQUESTED_PDN_DISCONNECTION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Inter-system change condition may trigger UE requested PDN disconnection procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "INTER_SYSTEM_CHANGE_N1_TO_NB_S1",
+      "target": "UE_REQUESTED_PDN_CONNECTIVITY",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Inter-system change condition may trigger UE requested PDN connectivity procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.0"
+      ]
+    }
+  ]
+}

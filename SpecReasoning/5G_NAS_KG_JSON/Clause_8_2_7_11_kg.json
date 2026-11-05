@@ -1,0 +1,69 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.11",
+  "title": "PDU session reactivation result error cause",
+  "entities": [
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "name": "PDU session reactivation result error cause",
+      "entity_type": "Information Element",
+      "description": "Indicates the cause of failure to re-establish user-plane resources for PDU sessions when the PDU session reactivation result IE is included and there are PDU sessions that cannot be reactivated.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "name": "PDU session reactivation result",
+      "entity_type": "Information Element",
+      "description": "Contains the result of PDU session reactivation attempts.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSIONS_FAIL_REACTIVATION",
+      "name": "PDU sessions with failed user-plane re-establishment",
+      "entity_type": "Condition",
+      "description": "Condition where one or more PDU sessions cannot have their user-plane resources re-established during reactivation.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "target": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The error cause IE is included only if the PDU session reactivation result IE is present.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "target": "COND_PDU_SESSIONS_FAIL_REACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The error cause IE is included only if there are PDU sessions for which user-plane resources cannot be re-established.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE",
+      "target": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The error cause IE is defined as part of the PDU session reactivation result IE context.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.11"
+      ]
+    }
+  ]
+}

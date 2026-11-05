@@ -1,0 +1,300 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.1.4",
+  "title": "Coordination between EMM and GMM",
+  "entities": [
+    {
+      "id": "PROC_ATTACH_S1",
+      "name": "Attach or combined attach procedure in S1 mode",
+      "entity_type": "Procedure",
+      "description": "Successful attach procedure performed by UE in S1 mode that results in registration states and counter resets.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROC_GPRS_ATTACH_AGB_IU",
+      "name": "GPRS attach or combined GPRS attach procedure in A/Gb or Iu mode",
+      "entity_type": "Procedure",
+      "description": "Successful GPRS attach procedure performed by UE in A/Gb or Iu mode that results in registration states and counter resets.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROC_INTERSYSTEM_CHANGE",
+      "name": "Intersystem change from A/Gb or Iu mode to S1 mode",
+      "entity_type": "Procedure",
+      "description": "Procedure triggered when UE changes from A/Gb or Iu mode to S1 mode, potentially leading to state changes and subsequent procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROC_ATTACH",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to register with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATING",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state indicating UE is not registered for EPS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_GMM_DEREGISTERED",
+      "name": "GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "GMM state indicating UE is not registered for GPRS services.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM registered substate indicating normal service is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_GMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "GMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "GMM registered substate indicating no cell is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_GMM_REGISTERED_NORMAL_SERVICE",
+      "name": "GMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "GMM registered substate indicating normal service is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "name": "EMM-REGISTERED.NO-CELL-AVAILABLE",
+      "entity_type": "State",
+      "description": "EMM registered substate indicating no cell is available.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "name": "EMM-REGISTERED without PDN connection supported",
+      "entity_type": "Condition",
+      "description": "Condition where both UE and MME support EMM-REGISTERED state without active PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROP_MAINTAIN_REGISTRATION_ISR",
+      "name": "Maintain registration and periodic update timers in both GMM and EMM",
+      "entity_type": "Property",
+      "description": "System behavior where UE maintains registration and related periodic update timers in both GMM and EMM when ISR is activated.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "PROP_RESET_ATTEMPT_COUNTERS",
+      "name": "Reset attach attempt counter and GPRS attach attempt counter",
+      "entity_type": "Property",
+      "description": "System behavior where UE resets both attach attempt counter and GPRS attach attempt counter after successful attach procedures.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_ATTACH_S1",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful attach in S1 mode establishes EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_ATTACH_S1",
+      "target": "STATE_GMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful attach in S1 mode establishes GMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_ATTACH_S1",
+      "target": "PROP_RESET_ATTEMPT_COUNTERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful attach in S1 mode triggers reset of attach attempt counters.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_GPRS_ATTACH_AGB_IU",
+      "target": "STATE_GMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful GPRS attach in A/Gb or Iu mode establishes GMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_GPRS_ATTACH_AGB_IU",
+      "target": "STATE_EMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful GPRS attach in A/Gb or Iu mode establishes EMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_GPRS_ATTACH_AGB_IU",
+      "target": "PROP_RESET_ATTEMPT_COUNTERS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful GPRS attach in A/Gb or Iu mode triggers reset of attach attempt counters.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_INTERSYSTEM_CHANGE",
+      "target": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Intersystem change procedure behavior is guarded by whether EMM-REGISTERED without PDN connection is supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is not supported, UE moves to EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "STATE_GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is not supported, UE moves to GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "PROC_ATTACH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is not supported, UE initiates attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is supported, UE enters EMM-REGISTERED.NORMAL-SERVICE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "STATE_GMM_REGISTERED_NO_CELL_AVAILABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is supported, UE enters GMM-REGISTERED.NO-CELL-AVAILABLE state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_EMM_REGISTERED_NO_PDN_SUPPORTED",
+      "target": "PROC_TRACKING_AREA_UPDATING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When EMM-REGISTERED without PDN connection is supported, UE initiates tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "PROP_MAINTAIN_REGISTRATION_ISR",
+      "target": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Maintaining registration in both GMM and EMM requires EMM registered state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "PROP_MAINTAIN_REGISTRATION_ISR",
+      "target": "STATE_GMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Maintaining registration in both GMM and EMM requires GMM registered state.",
+      "provenance": [
+        "TS 24.301, Clause 5.1.4"
+      ]
+    }
+  ]
+}

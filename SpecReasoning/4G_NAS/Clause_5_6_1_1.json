@@ -1,0 +1,205 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 2,
+  "tables_count": 0,
+  "text": [
+    "----------------",
+    "The purpose of the service request procedure is to transfer the EMM mode from EMM-IDLE to EMM-CONNECTED mode. If the UE is not using EPS services with control plane CIoT EPS optimization, this procedure is used to establish the radio and S1 bearers when user data or signalling is to be sent. If the UE is using EPS services with control plane CIoT EPS optimization, this procedure can be used for UE initiated transfer of user data via the control plane. Another purpose of this procedure is to invoke MO/MT CS fallback or 1xCS fallback procedures",
+    "This procedure is used when",
+    "- the network has downlink signalling pending",
+    "- the UE has uplink signalling pending",
+    "- the UE or the network has user data pending and the UE is in EMM-IDLE mode",
+    "- the UE is in EMM-CONNECTED mode and has a NAS signalling connection only; the UE is using EPS services with control plane CIoT EPS optimization, and it has user data pending which is to be transferred via user plane radio bearers",
+    "- the UE in EMM-IDLE or EMM-CONNECTED mode has requested to perform mobile originating/terminating CS fallback or 1xCS fallback",
+    "- the network has downlink cdma2000 xae signalling pending",
+    "- the UE has uplink cdma2000 xae signalling pending",
+    "- the UE has to request resources for ProSe direct discovery or Prose direct communication",
+    "- the UE has to request resources for V2X communication over PC5",
+    "- the UE that is MUSIM UE and in EMM-IDLE mode requests the network to remove the paging restriction; or",
+    "- to indicate to the network that the MUSIM UE requests the release of the NAS signalling connection or reject paging",
+    "The service request procedure is initiated by the UE, however, for the downlink transfer of signalling, cdma2000 xae signalling or user data in EMM-IDLE mode, the trigger is given by the network by means of the paging procedure (see clause 5.6.2)",
+    "The UE shall invoke the service request procedure when",
+    "a) the UE in EMM-IDLE mode receives a paging request using S-TMSI with CN domain indicator set to \"PS\" from the network",
+    "NOTE: As an implementation option, the MUSIM UE is allowed to not respond to paging based on the information available in the paging message, e.g. voice service indication",
+    "b) the UE, in EMM-IDLE mode, has pending user data to be sent",
+    "c) the UE, in EMM-IDLE mode, has uplink signalling pending",
+    "d) the UE in EMM-IDLE or EMM-CONNECTED mode is configured to use CS fallback and has a mobile originating CS fallback request from the upper layer",
+    "e) the UE in EMM-IDLE mode is configured to use CS fallback and receives a paging request with CN domain indicator set to \"CS\", or the UE in EMM-CONNECTED mode is configured to use CS fallback and receives a CS SERVICE NOTIFICATION message",
+    "f) the UE in EMM-IDLE or EMM-CONNECTED mode is configured to use 1xCS fallback and has a mobile originating 1xCS fallback request from the upper layer",
+    "g) the UE in EMM-CONNECTED mode is configured to use 1xCS fallback and accepts cdma2000 xae signalling messages containing a 1xCS paging request received over E-UTRAN",
+    "h) the UE, in EMM-IDLE mode, has uplink cdma2000 xae signalling pending to be transmitted over E-UTRAN",
+    "i) the UE, in EMM-IDLE or EMM-CONNECTED mode, is configured to use 1xCS fallback, accepts cdma2000 xae signalling messages containing a 1xCS paging request received over cdma2000 xae 1xRTT, and the network supports dual Rx CSFB or provide CS fallback registration parameters (see 3GPP S 36.331 [22])",
+    "j) the UE, in EMM-IDLE or EMM-CONNECTED mode, has uplink cdma2000 xae signalling pending to be transmitted over cdma2000 xae 1xRTT, and the network supports dual Rx CSFB or provide CS fallback registration parameters (see 3GPP S 36.331 [22])",
+    "k) the UE performs an inter-system change from S101 mode to S1 mode and has user data pending",
+    "l) the UE in EMM-IDLE mode has to request resources for ProSe direct discovery or Prose direct communication (see 3GPP S 36.331 [22])",
+    "m) the UE, in EMM-CONNECTED mode and has a NAS signalling connection only, is using EPS services with control plane CIoT EPS optimization and has pending user data to be sent via user plane radio bearers",
+    "n) the UE in EMM-IDLE mode has to request resources for V2X communication over PC5 (see 3GPP S 23.285 [47])",
+    "o) the network supports the paging restriction and the UE that is MUSIM UE and in EMM-IDLE mode is requesting the network to remove the paging restriction",
+    "p) the network supports the NAS signalling connection release and the MUSIM UE in EMM-CONNECTED mode requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restriction; or",
+    "q) the network supports the reject paging request and the MUSIM UE, in EMM-IDLE mode when responding to paging rejects the paging request from the network, requests the network to release the NAS signalling connection and, if the network supports the paging restriction, optionally includes paging restriction",
+    "If one of the above criteria to invoke the service request procedure is fulfilled, then the service request procedure may only be initiated by the UE when the following conditions are fulfilled",
+    "- its EPS update status is EU1 UPDATED, and the current TAI of the current serving cell is included in the TAI list; and",
+    "- no EMM specific procedure is ongoing",
+    "The MUSIM UE shall not initiate service request procedure for requesting the network to release the NAS signalling connection if the UE is attached for emergency bearer services or if the UE has a PDN connection for emergency bearer services established. To enable the emergency call back, the UE shall not initiate service request procedure for requesting the network to release the NAS signalling connection for a UE implementation-specific duration of time after the completion of the emergency bearer services",
+    "NOTE 1: AS indications (indications from lower layers) are results of procedures triggered by MME in service request procedure. Triggered procedures could be e.g. RRC connection reconfiguration procedure (see 3GPP S 36.331 [22]) and inter system PS handover to GERAN or UTRAN procedure as a result of CSFB procedure (see 3GPP S 23.272 [9])",
+    "NOTE 2: For 1xCS fallback, the UE sends the EXTENDED SERVICE REQUEST message and starts timer T3417. The procedure is considered completed upon receiving indication of system change from AS",
+    "Figure 5.6.1.1.1: Service request procedure (part 1)",
+    "NOTE 1: Security protected NAS message: this could be e.g. a SECURITY MODE COMMAND, SERVICE ACCEPT, or ESM DATA TRANSPORT message",
+    "NOTE 2: AS indications (indications from lower layers) are results of procedures triggered by MME in service request procedure. Triggered procedures could be e.g. an RRC connection release procedure or RRC connection reconfiguration procedure (see 3GPP S 36.331 [22])",
+    "Figure 5.6.1.1.2: Service request procedure (part 2)",
+    "A service request attempt counter is used to limit the number of service request attempts and no response from the network. The service request attempt counter shall be incremented as specified in clause 5.6.1.6",
+    "The service request attempt counter shall be reset when",
+    "- a normal or periodic tracking area updating or a combined tracking area updating procedure is successfully completed",
+    "- a service request procedure in order to obtain packet services is successfully completed",
+    "- a service request procedure is rejected as specified in clause 5.6.1.5 or clause 5.3.7b; or",
+    "- the UE moves to EMM-DEREGISTERED state",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.1.1.2",
+      "file": "Figure_5_6_1_1_2_p229.png.json",
+      "title": "Service request procedure (part 2)",
+      "content": {
+        "figure_id": "5.6.1.1.2",
+        "title": "Service request procedure (part 2)",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "AS indication about release of RRC connection",
+              "notes": "Stop T3417"
+            },
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "AS indication about bearer establishment for user plane",
+              "notes": "Stop T3417"
+            },
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "SERVICE REJECT",
+              "notes": "Stop T3417"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Security protected NAS message: this could be e.g. a SECURITY MODE COMMAND, SERVICE ACCEPT, or ESM DATA TRANSPORT message.",
+            "AS indications (indications from lower layers) are results of procedures triggered by MME in service request procedure. Triggered procedures could be e.g. an RRC connection release procedure or RRC connection reconfiguration procedure (see 3GPP TS 36.331 [22]).",
+            "Figure shows four OR-separated scenarios for service request handling",
+            "Timer T3417 is started when UE sends CONTROL PLANE SERVICE REQUEST and stopped upon receiving response"
+          ]
+        }
+      }
+    },
+    {
+      "figure_id": "5.6.1.1.1",
+      "file": "Figure_5_6_1_1_1_p229.png.json",
+      "title": "Service request procedure (part 1)",
+      "content": {
+        "figure_id": "5.6.1.1.1",
+        "title": "Service request procedure (part 1)",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "Security Protected NAS message",
+              "notes": "Stop T3417"
+            },
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417 - Alternative flow (OR)"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "AS indication about release of RRC connection",
+              "notes": "Stop T3417"
+            },
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417 - Alternative flow (OR)"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "AS indication about bearer establishment for user plane",
+              "notes": "Stop T3417"
+            },
+            {
+              "from": "UE",
+              "to": "AS",
+              "name": "CONTROL PLANE SERVICE REQUEST",
+              "notes": "Start T3417 - Alternative flow (OR)"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "SERVICE REJECT",
+              "notes": "Stop T3417"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "AS indications (indications from lower layers) are results of procedures triggered by MME in service request procedure. Triggered procedures could be e.g. RRC connection reconfiguration procedure or inter system PS handover to GERAN or UTRAN procedure as a result of CSFB procedure",
+            "For 1xCS fallback, the UE sends the EXTENDED SERVICE REQUEST message and starts timer T3417. The procedure is considered completed upon receiving indication of system change from AS",
+            "Security protected NAS message: this could be e.g. a SECURITY MODE COMMAND, SERVICE ACCEPT, or ESM DATA TRANSPORT message",
+            "AS indications (indications from lower layers) are results of procedures triggered by MME in service request procedure. Triggered procedures could be e.g. an RRC connection release procedure or RRC connection reconfiguration procedure"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

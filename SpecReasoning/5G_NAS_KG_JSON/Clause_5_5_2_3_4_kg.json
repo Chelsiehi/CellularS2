@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.3.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "DEREGISTRATION_PROCEDURE",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE de-registration from the network",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_ACCEPT",
+      "name": "DEREGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to accept de-registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message initiating de-registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "DEREGISTRATION_TYPE_IE",
+      "name": "De-registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating re-registration requirement",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "5GMM_CAUSE_IE",
+      "name": "5GMM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing cause values for 5GMM procedures",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer started during abnormal de-registration cases",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "State where UE performs PLMN or SNPN selection",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "name": "5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "State where UE attempts registration",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM deregistered state for EPS procedures",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "TRANSMISSION_FAILURE_CONDITION",
+      "name": "Transmission failure of DEREGISTRATION ACCEPT message",
+      "entity_type": "Condition",
+      "description": "Condition when lower layers indicate transmission failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "ABNORMAL_CAUSE_CONDITION",
+      "name": "Abnormal 5GMM cause values condition",
+      "entity_type": "Condition",
+      "description": "Condition when DEREGISTRATION REQUEST contains abnormal 5GMM cause values or no cause IE with re-registration not required",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "PARAMETER_DELETION_PROPERTY",
+      "name": "UE deletes 5GMM/EMM parameters",
+      "entity_type": "Property",
+      "description": "UE behavior to delete stored parameters including 5G-GUTI, TAI list, last visited registered TAI, list of equivalent PLMNs, ngKSI, 4G-GUTI, eKSI",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "STATUS_UPDATE_PROPERTY",
+      "name": "UE updates status to 5U2/EU2 NOT UPDATED",
+      "entity_type": "Property",
+      "description": "UE behavior to set 5GS update status to 5U2 NOT UPDATED and EPS update status to EU2 NOT UPDATED",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TRANSMISSION_FAILURE_CONDITION",
+      "target": "DEREGISTRATION_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transmission failure condition triggers continuation of de-registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TRANSMISSION_FAILURE_CONDITION",
+      "target": "DEREGISTRATION_ACCEPT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Transmission failure condition triggers UE to send DEREGISTRATION ACCEPT message",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "PARAMETER_DELETION_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal cause condition establishes UE parameter deletion behavior",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "STATUS_UPDATE_PROPERTY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Abnormal cause condition establishes UE status update behavior",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "T3502",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Abnormal cause condition starts timer T3502",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "5GMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Abnormal cause condition triggers transition to 5GMM-DEREGISTERED.PLMN-SEARCH state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Abnormal cause condition triggers transition to 5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION state",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ABNORMAL_CAUSE_CONDITION",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Abnormal cause condition triggers transition to EMM-DEREGISTERED state for single-registration mode",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "DEREGISTRATION_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains De-registration type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "DEREGISTRATION_REQUEST",
+      "target": "5GMM_CAUSE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains 5GMM cause IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.4"
+      ]
+    }
+  ]
+}

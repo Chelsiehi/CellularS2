@@ -1,0 +1,284 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.2",
+  "title": "UE requested PDN connectivity procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_PDN_CONNECTIVITY",
+      "name": "UE requested PDN connectivity procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request connectivity to a PDN by sending PDN CONNECTIVITY REQUEST message, starting timer T3482, and entering PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2",
+        "Figure 6.5.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to MME to request PDN connectivity. Contains various IEs including APN, PDN type, request type, ESM information transfer flag, and protocol configuration options.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2",
+        "Figure 6.5.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3482",
+      "name": "Timer T3482",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending PDN CONNECTIVITY REQUEST message. Stopped upon receiving ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST or PDN CONNECTIVITY REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2",
+        "Figure 6.5.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TRANS_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by UE after sending PDN CONNECTIVITY REQUEST message and starting timer T3482.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "IE_APN",
+      "name": "Access point name IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing the access point name. Included in PDN CONNECTIVITY REQUEST or ESM INFORMATION RESPONSE message under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "IE_PDN_TYPE",
+      "name": "PDN type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating IP version capability (IPv4, IPv6, IPv4v6) or non-IP/Ethernet.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating type of request: initial request, emergency, handover, handover of emergency bearer services, or RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing various protocol configuration options including PDU session ID, QoS rules support indicators, APN rate control indicators, and DNS security information.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "IE_ESM_INFO_TRANSFER_FLAG",
+      "name": "ESM information transfer flag",
+      "entity_type": "Information Element",
+      "description": "Flag indicating UE has ESM information (protocol configuration options, APN, or both) to be sent after NAS security activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "COND_ATTACH_WITH_PDN",
+      "name": "PDN CONNECTIVITY REQUEST with ATTACH REQUEST",
+      "entity_type": "Condition",
+      "description": "Condition when PDN CONNECTIVITY REQUEST is sent together with ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_OR_RLOS",
+      "name": "Emergency bearer services or RLOS request",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests PDN connection for emergency bearer services or access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "COND_DEFAULT_APN",
+      "name": "Default APN usage",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests connectivity using default APN, with specific rules for APN IE inclusion.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "COND_SPECIFIC_APN",
+      "name": "Specific APN request",
+      "entity_type": "Condition",
+      "description": "Condition when UE requests connectivity to additional PDN using specific APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_PDN_CONNECTIVITY",
+      "target": "TIMER_T3482",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3482 when UE sends PDN CONNECTIVITY REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2",
+        "Figure 6.5.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_PDN_CONNECTIVITY",
+      "target": "STATE_PROC_TRANS_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to enter PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_APN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Access point name IE under specific conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_PDN_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PDN type IE indicating IP version capability.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains request type IE indicating type of PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain protocol configuration options IE with various parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "target": "IE_ESM_INFO_TRANSFER_FLAG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain ESM information transfer flag to indicate pending ESM information.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_ATTACH_WITH_PDN",
+      "target": "TIMER_T3482",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When PDN CONNECTIVITY REQUEST is sent with ATTACH REQUEST, UE shall not start timer T3482.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_ATTACH_WITH_PDN",
+      "target": "IE_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When PDN CONNECTIVITY REQUEST is sent with ATTACH REQUEST, UE shall not include APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_EMERGENCY_OR_RLOS",
+      "target": "IE_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For emergency bearer services or RLOS requests, UE shall not include APN.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_DEFAULT_APN",
+      "target": "IE_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For default APN usage, UE includes APN IE only if PAP/CHAP is required, otherwise need not include.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_SPECIFIC_APN",
+      "target": "IE_APN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For specific APN requests, UE shall include requested APN in the message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "IE_ESM_INFO_TRANSFER_FLAG",
+      "target": "IE_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM information transfer flag indicates UE has protocol configuration options or APN that needs to be sent after NAS security activation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.2"
+      ]
+    }
+  ]
+}

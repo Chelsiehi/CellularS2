@@ -1,0 +1,225 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.2.3",
+  "title": "Reception of the Paging message by the UE",
+  "entities": [
+    {
+      "id": "PAGING_MESSAGE",
+      "name": "Paging message",
+      "entity_type": "Message",
+      "description": "Message received by UE containing paging records and group lists for paging procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "PAGING_RECORD",
+      "name": "PagingRecord",
+      "entity_type": "Information Element",
+      "description": "Contains ue-Identity for matching against UE identities during paging.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "UE_IDENTITY",
+      "name": "ue-Identity",
+      "entity_type": "Information Element",
+      "description": "Identity field in PagingRecord used for matching against UE's stored identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs paging record matching against upper layer allocated identities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE performs paging record matching against stored fullI-RNTI and may initiate connection resumption.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_RESUMPTION",
+      "name": "RRC connection resumption procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE in RRC_INACTIVE state when paging matches certain conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITY_1",
+      "name": "Access Identity 1",
+      "entity_type": "Condition",
+      "description": "UE configuration condition that triggers RRC connection resumption with mps-PriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITY_2",
+      "name": "Access Identity 2",
+      "entity_type": "Condition",
+      "description": "UE configuration condition that triggers RRC connection resumption with mcs-PriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "ACCESS_IDENTITIES_11_15",
+      "name": "Access Identities 11-15",
+      "entity_type": "Condition",
+      "description": "UE configuration condition that triggers RRC connection resumption with highPriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "PAGING_GROUP_LIST",
+      "name": "pagingGroupList",
+      "entity_type": "Information Element",
+      "description": "Contains TMGI values for MBS session paging.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "TMGI",
+      "name": "TMGI",
+      "entity_type": "Information Element",
+      "description": "Temporary Mobile Group Identity used for MBS session identification in paging.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "L2_U2N_RELAY_UE",
+      "name": "L2 U2N Relay UE",
+      "entity_type": "Condition",
+      "description": "Condition where UE acts as relay and processes paging records for remote UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "UU_MESSAGE_TRANSFER_SIDELINK",
+      "name": "Uu Message transfer in sidelink",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by L2 U2N Relay UE when paging matches remote UE identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PAGING_MESSAGE",
+      "target": "PAGING_RECORD",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message contains one or more PagingRecord information elements.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PAGING_MESSAGE",
+      "target": "PAGING_GROUP_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message may contain pagingGroupList with TMGI values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PAGING_RECORD",
+      "target": "UE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PagingRecord contains ue-Identity field for identity matching.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_CONNECTION_RESUMPTION",
+      "target": "RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC connection resumption procedure requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACCESS_IDENTITY_1",
+      "target": "RRC_CONNECTION_RESUMPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access Identity 1 configuration guards the initiation of RRC connection resumption with mps-PriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACCESS_IDENTITY_2",
+      "target": "RRC_CONNECTION_RESUMPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access Identity 2 configuration guards the initiation of RRC connection resumption with mcs-PriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ACCESS_IDENTITIES_11_15",
+      "target": "RRC_CONNECTION_RESUMPTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access Identities 11-15 configuration guards the initiation of RRC connection resumption with highPriorityAccess.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PAGING_GROUP_LIST",
+      "target": "TMGI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "pagingGroupList contains TMGI values for MBS session identification.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "L2_U2N_RELAY_UE",
+      "target": "UU_MESSAGE_TRANSFER_SIDELINK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "L2 U2N Relay UE condition guards the initiation of Uu Message transfer in sidelink procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.2.3"
+      ]
+    }
+  ]
+}

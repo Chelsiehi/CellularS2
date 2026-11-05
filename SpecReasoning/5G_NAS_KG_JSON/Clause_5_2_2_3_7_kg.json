@@ -1,0 +1,194 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.2.2.3.7",
+  "title": "eCALL-INACTIVE",
+  "entities": [
+    {
+      "id": "STATE_ECALL_INACTIVE",
+      "name": "5GMM-DEREGISTERED.eCALL-INACTIVE",
+      "entity_type": "State",
+      "description": "Substate where UE camps on a suitable/acceptable cell but initiates no 5GMM signalling and ignores paging requests.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "STATE_NO_SUPI",
+      "name": "5GMM-DEREGISTERED.NO-SUPI",
+      "entity_type": "State",
+      "description": "Substate entered when USIM is removed from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "STATE_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Substate entered when UE loses coverage.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "STATE_NULL",
+      "name": "5GMM-NULL",
+      "entity_type": "State",
+      "description": "State entered when UE is deactivated (e.g., powered off).",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "STATE_ATTEMPTING_REGISTRATION",
+      "name": "5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "Substate entered when UE receives request to establish eCall over IMS or non-emergency call.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_USIM_REMOVED",
+      "name": "USIM removed",
+      "entity_type": "Condition",
+      "description": "Condition triggered when USIM is removed from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_COVERAGE_LOST",
+      "name": "Coverage lost",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE loses network coverage.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_UE_DEACTIVATED",
+      "name": "UE deactivated",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE is powered off or deactivated by user.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_ECALL_IMS_REQUEST",
+      "name": "eCall over IMS request",
+      "entity_type": "Condition",
+      "description": "Condition triggered when upper layers request establishment of eCall over IMS.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "COND_NON_EMERGENCY_REQUEST",
+      "name": "Non-emergency call request",
+      "entity_type": "Condition",
+      "description": "Condition triggered when upper layers request call to HPLMN designated non-emergency MSISDN/URI.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "PROP_NO_MM_SIGNALLING",
+      "name": "No 5GMM signalling",
+      "entity_type": "Property",
+      "description": "UE behavior in eCALL-INACTIVE state where no 5GMM signalling is initiated with network.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_PAGING",
+      "name": "Ignore paging requests",
+      "entity_type": "Property",
+      "description": "UE behavior in eCALL-INACTIVE state where paging requests are ignored.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ECALL_INACTIVE",
+      "target": "PROP_NO_MM_SIGNALLING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "eCALL-INACTIVE state establishes no 5GMM signalling behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_ECALL_INACTIVE",
+      "target": "PROP_IGNORE_PAGING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "eCALL-INACTIVE state establishes paging ignore behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_USIM_REMOVED",
+      "target": "STATE_NO_SUPI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "USIM removal condition establishes transition to NO-SUPI state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_COVERAGE_LOST",
+      "target": "STATE_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Coverage loss condition establishes transition to PLMN-SEARCH state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UE_DEACTIVATED",
+      "target": "STATE_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE deactivation condition establishes transition to NULL state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_ECALL_IMS_REQUEST",
+      "target": "STATE_ATTEMPTING_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "eCall over IMS request condition establishes transition to ATTEMPTING-REGISTRATION state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NON_EMERGENCY_REQUEST",
+      "target": "STATE_ATTEMPTING_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-emergency call request condition establishes transition to ATTEMPTING-REGISTRATION state.",
+      "provenance": [
+        "TS 24.501, Clause 5.2.2.3.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.3.2",
+  "title": "Domain selection for UE originating sessions / calls",
+  "entities": [
+    {
+      "id": "DOMAIN_SELECTION_PROCEDURE",
+      "name": "Domain selection procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE domain selection based on UE usage setting, IMS voice availability, and registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "UE_USAGE_SETTING",
+      "name": "UE usage setting",
+      "entity_type": "Property",
+      "description": "UE configuration parameter that can be 'voice centric' or 'data centric'.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_AVAILABLE_3GPP",
+      "name": "IMS voice available over 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition that evaluates to true when UE supports IMS voice over 3GPP access and network supports IMS voice over PS sessions.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_NOT_AVAILABLE_3GPP",
+      "name": "IMS voice not available over 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition that evaluates to true when UE does not support IMS voice, network indicates no support, or upper layers indicate unavailability.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_AVAILABLE_NON3GPP",
+      "name": "IMS voice available over non-3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition that evaluates to true when UE supports IMS voice over non-3GPP access connected to 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "IMS_VOICE_NOT_AVAILABLE_NON3GPP",
+      "name": "IMS voice not available over non-3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition that evaluates to true when UE does not support IMS voice over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "SINGLE_REGISTRATION_MODE",
+      "name": "Single-registration mode",
+      "entity_type": "Property",
+      "description": "UE registration mode where UE maintains registration in only one core network at a time.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "DUAL_REGISTRATION_MODE",
+      "name": "Dual-registration mode",
+      "entity_type": "Property",
+      "description": "UE registration mode where UE can maintain registration in multiple core networks simultaneously.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "N1_MODE_CAPABILITY_DISABLE",
+      "name": "N1 mode capability disable",
+      "entity_type": "Procedure",
+      "description": "Procedure to disable N1 mode capability for 3GPP or non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "PERSISTENT_PDU_SESSION",
+      "name": "Persistent PDU session",
+      "entity_type": "Property",
+      "description": "PDU session that remains active until explicitly released.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT message",
+      "entity_type": "Message",
+      "description": "Network message that indicates whether IMS voice over PS sessions are supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DOMAIN_SELECTION_PROCEDURE",
+      "target": "UE_USAGE_SETTING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Domain selection procedure behavior is determined by UE usage setting.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DOMAIN_SELECTION_PROCEDURE",
+      "target": "IMS_VOICE_AVAILABLE_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Domain selection procedure behavior is determined by IMS voice availability over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DOMAIN_SELECTION_PROCEDURE",
+      "target": "IMS_VOICE_AVAILABLE_NON3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Domain selection procedure behavior is determined by IMS voice availability over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DOMAIN_SELECTION_PROCEDURE",
+      "target": "SINGLE_REGISTRATION_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Domain selection procedure behavior is determined by single-registration mode operation.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IMS_VOICE_NOT_AVAILABLE_3GPP",
+      "target": "N1_MODE_CAPABILITY_DISABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When IMS voice is not available over 3GPP access and UE usage setting is voice centric, UE disables N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IMS_VOICE_NOT_AVAILABLE_NON3GPP",
+      "target": "N1_MODE_CAPABILITY_DISABLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When IMS voice is not available over non-3GPP access and UE usage setting is voice centric, UE disables N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PERSISTENT_PDU_SESSION",
+      "target": "N1_MODE_CAPABILITY_DISABLE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of persistent PDU session delays N1 mode capability disable until radio bearer is released.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REGISTRATION_ACCEPT",
+      "target": "IMS_VOICE_AVAILABLE_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message indicates whether IMS voice over PS sessions are supported.",
+      "provenance": [
+        "TS 24.501, Clause 4.3.2"
+      ]
+    }
+  ]
+}

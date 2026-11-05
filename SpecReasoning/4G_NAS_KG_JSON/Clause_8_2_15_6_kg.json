@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "8.2.15.6",
+  "title": "Paging restriction",
+  "entities": [
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the UE requests the network to restrict paging.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type",
+      "entity_type": "Information Element",
+      "description": "Information element that contains the request type value set by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "COND_NAS_SIG_RELEASE",
+      "name": "Request type is NAS signalling connection release",
+      "entity_type": "Condition",
+      "description": "Condition where the Request type in UE request type IE is set to 'NAS signalling connection release'.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "COND_PAGING_REJECTION",
+      "name": "Request type is Rejection of paging",
+      "entity_type": "Condition",
+      "description": "Condition where the Request type in UE request type IE is set to 'Rejection of paging'.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "COND_UE_REQUESTS_PAGING_RESTRICTION",
+      "name": "UE requests paging restriction",
+      "entity_type": "Condition",
+      "description": "Condition where the UE requests the network to restrict paging.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_UE_REQUEST_TYPE",
+      "target": "COND_NAS_SIG_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UE request type IE can have its Request type set to 'NAS signalling connection release'.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_UE_REQUEST_TYPE",
+      "target": "COND_PAGING_REJECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UE request type IE can have its Request type set to 'Rejection of paging'.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_NAS_SIG_RELEASE",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If Request type is 'NAS signalling connection release' and UE requests paging restriction, the Paging restriction IE shall be included.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_PAGING_REJECTION",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If Request type is 'Rejection of paging' and UE requests paging restriction, the Paging restriction IE shall be included.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_UE_REQUESTS_PAGING_RESTRICTION",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If the UE requests the network to restrict paging, the Paging restriction IE shall be included.",
+      "provenance": [
+        "TS 24.301, Clause 8.2.15.6"
+      ]
+    }
+  ]
+}

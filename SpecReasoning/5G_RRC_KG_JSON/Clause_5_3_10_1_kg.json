@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.10.1",
+  "title": "Detection of physical layer problems in RRC_CONNECTED",
+  "entities": [
+    {
+      "id": "DAPS_BEARER",
+      "name": "DAPS bearer",
+      "entity_type": "Condition",
+      "description": "A bearer configuration where data forwarding is maintained during handover preparation.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "OUT_OF_SYNC_INDICATION",
+      "name": "out-of-sync indication",
+      "entity_type": "Condition",
+      "description": "Indication from lower layers that radio link quality is below a threshold.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "N310",
+      "name": "N310",
+      "entity_type": "Condition",
+      "description": "Counter for consecutive out-of-sync indications from lower layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "SOURCE_SPCELL",
+      "name": "source SpCell",
+      "entity_type": "Property",
+      "description": "The special cell serving as the source in a handover scenario.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "T304",
+      "name": "T304",
+      "entity_type": "Timer",
+      "description": "Timer running during handover execution.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "T310",
+      "name": "T310",
+      "entity_type": "Timer",
+      "description": "Timer started upon detection of physical layer problems.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "DAPS_BEARER",
+      "target": "OUT_OF_SYNC_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DAPS bearer configuration enables the condition for monitoring out-of-sync indications.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "OUT_OF_SYNC_INDICATION",
+      "target": "N310",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Out-of-sync indications are counted by N310.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "N310",
+      "target": "SOURCE_SPCELL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "N310 counter is associated with the source SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "T304",
+      "target": "T310",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T310 start is conditional on T304 running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "N310",
+      "target": "T310",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Receiving N310 consecutive out-of-sync indications starts timer T310.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.1"
+      ]
+    }
+  ]
+}

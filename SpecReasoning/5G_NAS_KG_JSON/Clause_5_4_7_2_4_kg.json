@@ -1,0 +1,234 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.7.2.4",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_NSSAA",
+      "name": "Network slice-specific authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and authorizing network slice access",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "PROC_DEREGISTRATION",
+      "name": "De-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for de-registering from the network",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION_MOBILITY",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Registration procedure indicating mobility registration updating",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "PROC_REGISTRATION_INITIAL",
+      "name": "Registration procedure for initial registration",
+      "entity_type": "Procedure",
+      "description": "Initial registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "MSG_NSSAA_COMPLETE",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message completing network slice-specific authentication",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "MSG_NSSAA_COMMAND",
+      "name": "NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message",
+      "entity_type": "Message",
+      "description": "Message commanding network slice-specific authentication",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message requesting de-registration from the network",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message requesting registration with the network",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating registration type",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED state",
+      "entity_type": "State",
+      "description": "State where UE is registered with 5G network",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current tracking area identity is not in the TAI list",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "COND_SAME_ACCESS_TYPE",
+      "name": "Same access type condition",
+      "entity_type": "Condition",
+      "description": "Condition where access type in DEREGISTRATION REQUEST matches access type of received NSSAA COMMAND",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_NSSAA",
+      "name": "Abort network slice-specific authentication",
+      "entity_type": "Property",
+      "description": "Property of aborting the network slice-specific authentication procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "PROP_IGNORE_NSSAA_COMMAND",
+      "name": "Ignore NSSAA COMMAND message",
+      "entity_type": "Property",
+      "description": "Property of ignoring the NETWORK SLICE-SPECIFIC AUTHENTICATION COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROP_ABORT_NSSAA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI not in list condition leads to aborting NSSAA procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROP_ABORT_NSSAA",
+      "target": "PROC_REGISTRATION_MOBILITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Aborting NSSAA procedure leads to mobility registration procedure when in 5GMM-REGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROP_ABORT_NSSAA",
+      "target": "PROC_REGISTRATION_INITIAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Aborting NSSAA procedure leads to initial registration procedure when not in 5GMM-REGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_REGISTRATION_MOBILITY",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Mobility registration procedure requires UE to be in 5GMM-REGISTERED state",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_REGISTRATION_MOBILITY",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Mobility registration procedure includes sending REGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SAME_ACCESS_TYPE",
+      "target": "PROP_IGNORE_NSSAA_COMMAND",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Same access type condition leads to ignoring NSSAA COMMAND message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_IGNORE_NSSAA_COMMAND",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Ignoring NSSAA COMMAND message leads to continuing de-registration procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_DEREGISTRATION",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "De-registration procedure includes sending DEREGISTRATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.7.2.4"
+      ]
+    }
+  ]
+}

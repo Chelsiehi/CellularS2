@@ -1,0 +1,262 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.2",
+  "title": "UE-requested PDU session modification procedure initiation",
+  "entities": [
+    {
+      "id": "PROC_UE_REQ_PDU_MOD",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify an existing PDU session. The UE creates a PDU SESSION MODIFICATION REQUEST message and starts timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MOD_REQ",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate PDU session modification. Contains various IEs depending on modification type.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure Transaction Identity IE allocated by UE for the modification procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_QOS_RULES",
+      "name": "Requested QoS rules",
+      "entity_type": "Information Element",
+      "description": "IE containing QoS rules requested by UE for specific QoS handling. Includes packet filters and rule operation codes.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_QOS_FLOW_DESC",
+      "name": "Requested QoS flow descriptions",
+      "entity_type": "Information Element",
+      "description": "IE containing QoS flow descriptions with specific QoS parameters requested by UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_MBS_CONTAINER",
+      "name": "Requested MBS container",
+      "entity_type": "Information Element",
+      "description": "IE used to join or leave MBS multicast sessions. Contains MBS operation type and session information.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAPABILITY",
+      "name": "5GSM capability",
+      "entity_type": "Information Element",
+      "description": "IE containing UE capabilities including RQoS bit, MH6-PDU bit, ATSSS-ST bits, and APMQF bit.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "name": "Extended protocol configuration options",
+      "entity_type": "Information Element",
+      "description": "IE used for various purposes including 3GPP PS data off status, ECS configuration, DNS server requests, EAS rediscovery, and EDC support.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_ALWAYS_ON_PDU_SESSION_REQUESTED",
+      "name": "Always-on PDU session requested",
+      "entity_type": "Information Element",
+      "description": "IE used to request that a PDU session be always-on in 5GS.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "name": "Service-level-AA container",
+      "entity_type": "Information Element",
+      "description": "IE used for C2 communication containing service-level device ID and service-level-AA payload.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3581",
+      "name": "T3581",
+      "entity_type": "Timer",
+      "description": "Timer started by UE when sending PDU SESSION MODIFICATION REQUEST. Stopped upon receiving response.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU session restriction",
+      "entity_type": "Condition",
+      "description": "UE shall not perform modification procedure for emergency PDU sessions except for specific cases.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "COND_LADN_OUTSIDE_SERVICE_AREA",
+      "name": "LADN outside service area restriction",
+      "entity_type": "Condition",
+      "description": "UE shall not perform modification procedure for LADN PDU sessions when outside service area except for 3GPP PS data off status change.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_REQ_PDU_MOD",
+      "target": "MSG_PDU_SESSION_MOD_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDU SESSION MODIFICATION REQUEST message",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains PTI IE with allocated procedure transaction identity",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_REQUESTED_QOS_RULES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Requested QoS rules IE for QoS handling requests",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_REQUESTED_QOS_FLOW_DESC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Requested QoS flow descriptions IE for QoS parameters",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_REQUESTED_MBS_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Requested MBS container IE for MBS session operations",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_5GSM_CAPABILITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message contains 5GSM capability IE with various capability indicators",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIG_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Extended protocol configuration options IE for various purposes",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_ALWAYS_ON_PDU_SESSION_REQUESTED",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Always-on PDU session requested IE",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_MOD_REQ",
+      "target": "IE_SERVICE_LEVEL_AA_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Message may contain Service-level-AA container IE for C2 communication",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_UE_REQ_PDU_MOD",
+      "target": "TIMER_T3581",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3581 when sending modification request",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2",
+        "Figure 6.4.2.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_UE_REQ_PDU_MOD",
+      "target": "COND_EMERGENCY_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is restricted for emergency PDU sessions",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROC_UE_REQ_PDU_MOD",
+      "target": "COND_LADN_OUTSIDE_SERVICE_AREA",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is restricted for LADN PDU sessions outside service area",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "INTEGRITY_PROTECTION",
+      "name": "Integrity Protection",
+      "entity_type": "Property",
+      "description": "Mandatory protection mechanism for 5GMM NAS messages once valid security context exists. Responsible for ensuring message authenticity and integrity.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "5G_IA0",
+      "name": "Null Integrity Protection Algorithm 5G-IA0",
+      "entity_type": "Property",
+      "description": "Null integrity protection algorithm that can be used in specific scenarios including unauthenticated UE emergency services, W-AGF acting for FN-RG, and W-AGF acting for N5GC device.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "SECURITY_HEADER_TYPE",
+      "name": "Security Header Type",
+      "entity_type": "Property",
+      "description": "Header field in NAS messages that indicates security protection status. Same rules apply regardless of integrity algorithm selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "NAS_SEQUENCE_NUMBER",
+      "name": "NAS Sequence Number",
+      "entity_type": "Information Element",
+      "description": "Sequence number used in integrity protection calculation along with NAS message content.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "MESSAGE_AUTHENTICATION_CODE",
+      "name": "Message Authentication Code",
+      "entity_type": "Information Element",
+      "description": "MAC calculated for integrity protection of NAS messages using sequence number and message content.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "5GMM_MESSAGE",
+      "name": "5GMM Message",
+      "entity_type": "Message",
+      "description": "NAS mobility management messages that require integrity protection once security context is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "5GSM_MESSAGE",
+      "name": "5GSM Message",
+      "entity_type": "Message",
+      "description": "NAS session management messages that can be piggybacked in 5GMM messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "UNAUTHENTICATED_UE_EMERGENCY",
+      "name": "Unauthenticated UE Emergency Services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is unauthenticated but emergency services establishment is allowed, permitting use of null integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "5GMM_MESSAGE",
+      "target": "INTEGRITY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "5GMM NAS messages require integrity protection once valid security context exists",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UNAUTHENTICATED_UE_EMERGENCY",
+      "target": "5G_IA0",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Unauthenticated UE emergency services condition allows use of null integrity protection algorithm",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "5GMM_MESSAGE",
+      "target": "SECURITY_HEADER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NAS messages contain security header type field indicating protection status",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "INTEGRITY_PROTECTION",
+      "target": "NAS_SEQUENCE_NUMBER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Integrity protection calculation includes NAS sequence number along with message content",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INTEGRITY_PROTECTION",
+      "target": "MESSAGE_AUTHENTICATION_CODE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Integrity protection generates message authentication code for verification",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "5GMM_MESSAGE",
+      "target": "5GSM_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GMM messages can piggyback 5GSM messages with shared sequence number and MAC",
+      "provenance": [
+        "TS 24.501, Clause 4.4.4.1"
+      ]
+    }
+  ]
+}

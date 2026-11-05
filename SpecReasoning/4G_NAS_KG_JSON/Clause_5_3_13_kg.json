@@ -1,0 +1,162 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.13",
+  "title": "Interaction between power saving mode and extended idle mode DRX cycle",
+  "entities": [
+    {
+      "id": "PSM",
+      "name": "Power Saving Mode",
+      "entity_type": "Procedure",
+      "description": "Power saving mode that allows UE to conserve battery by remaining in a low-power state for extended periods.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13",
+        "TS 24.301, Clause 5.3.11"
+      ]
+    },
+    {
+      "id": "EDRX",
+      "name": "Extended idle mode DRX cycle",
+      "entity_type": "Procedure",
+      "description": "Extended Discontinuous Reception cycle that allows UE to extend paging cycles to save power.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13",
+        "TS 24.301, Clause 5.3.12"
+      ]
+    },
+    {
+      "id": "ATTACH_PROC",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE attaches to the network and can request power saving features.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "TAU_PROC",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE updates its tracking area and can request power saving features.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "EXTENDED_DRX_PARAMS_IE",
+      "name": "Extended DRX parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing extended DRX configuration parameters provided by the network to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "ACTIVE_TIMER",
+      "name": "Active timer",
+      "entity_type": "Timer",
+      "description": "Timer that determines the active period during which UE can be paged before entering power saving state.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "NETWORK_DECISION",
+      "name": "Network decision on power saving features",
+      "entity_type": "Condition",
+      "description": "Condition where network decides whether to enable PSM, eDRX, both, or none based on UE request.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ATTACH_PROC",
+      "target": "PSM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE can request PSM during attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ATTACH_PROC",
+      "target": "EDRX",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE can request eDRX during attach procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TAU_PROC",
+      "target": "PSM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE can request PSM during tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TAU_PROC",
+      "target": "EDRX",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE can request eDRX during tracking area updating procedure",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NETWORK_DECISION",
+      "target": "PSM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network decision guards whether PSM is enabled",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NETWORK_DECISION",
+      "target": "EDRX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network decision guards whether eDRX is enabled",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EXTENDED_DRX_PARAMS_IE",
+      "target": "ACTIVE_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Extended DRX parameters IE configuration affects active timer behavior",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PSM",
+      "target": "EDRX",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "When both PSM and eDRX are enabled, they interact to coordinate power saving",
+      "provenance": [
+        "TS 24.301, Clause 5.3.13"
+      ]
+    }
+  ]
+}

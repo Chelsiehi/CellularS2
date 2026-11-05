@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.4",
+  "title": "Registration areas",
+  "entities": [
+    {
+      "id": "REGISTRATION_AREA",
+      "name": "Registration area",
+      "entity_type": "Property",
+      "description": "A set of tracking areas assigned to the UE by the AMF during registration procedure, managed independently per access type (3GPP or non-3GPP).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA",
+      "name": "Tracking area",
+      "entity_type": "Property",
+      "description": "A geographical area consisting of one or more cells, identified by a TAI constructed from TAC and PLMN identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "TAI",
+      "name": "Tracking Area Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier for a tracking area, constructed from TAC and PLMN identity, broadcast in cells.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Property",
+      "description": "List of tracking areas assigned to the UE by the AMF to reduce tracking area update signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function that assigns registration areas and TAI lists to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment that receives and uses the TAI list for mobility management.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the AMF assigns a registration area and TAI list to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "MOBILITY_REGISTRATION_UPDATE",
+      "name": "Mobility registration update",
+      "entity_type": "Procedure",
+      "description": "Registration update with 5GS registration type IE set to 'mobility registration updating' in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "LAST_VISITED_TAI",
+      "name": "Last visited registered TAI",
+      "entity_type": "Property",
+      "description": "The last visited TAI stored in non-volatile memory in USIM or ME, included by UE to AMF.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "REGISTRATION_AREA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF assigns registration area to UE during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_AREA",
+      "target": "TRACKING_AREA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Registration area is defined as a set of tracking areas.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TRACKING_AREA",
+      "target": "TAI",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Tracking area is identified by a TAI.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AMF",
+      "target": "TAI_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF assigns TAI list to UE to reduce tracking area update signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TAI_LIST",
+      "target": "TAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TAI list contains multiple TAIs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MOBILITY_REGISTRATION_UPDATE",
+      "target": "TAI_LIST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "UE does not trigger registration procedure for mobility as long as it stays in TAI list areas.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE",
+      "target": "LAST_VISITED_TAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes last visited registered TAI to AMF, stored in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.4"
+      ]
+    }
+  ]
+}

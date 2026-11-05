@@ -1,0 +1,148 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.50",
+  "title": "HashMME",
+  "entities": [
+    {
+      "id": "IE_HASHMME",
+      "name": "HashMME",
+      "entity_type": "Information Element",
+      "description": "A type 4 information element with a length of 10 octets that transfers a 64-bit hash value to the UE. The UE uses this value to verify whether its ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message was modified.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1",
+        "Table 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "IEI_HASHMME",
+      "name": "HashMME IEI",
+      "entity_type": "Identifier",
+      "description": "Information element identifier for HashMME, located in octet 1 (bits 5-8).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "LENGTH_HASHMME",
+      "name": "Length of HashMME",
+      "entity_type": "Property",
+      "description": "Length indicator field for HashMME, located in octet 2 (bits 1-8).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "VALUE_HASHMME",
+      "name": "HashMME value",
+      "entity_type": "Property",
+      "description": "64-bit hash value field spanning octets 3-10. Bit 8 of octet 3 is the most significant bit, and bit 1 of octet 10 is the least significant bit.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1",
+        "Table 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE that may be verified using the HashMME value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE that may be verified using the HashMME value.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    },
+    {
+      "id": "COND_VERIFY_HASH",
+      "name": "UE verifies HashMME",
+      "entity_type": "Condition",
+      "description": "Condition where the UE checks the MME-calculated HashMME value against its locally calculated value to detect message modification.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_HASHMME",
+      "target": "IEI_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "HashMME information element contains the HashMME IEI identifier field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_HASHMME",
+      "target": "LENGTH_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "HashMME information element contains the Length of HashMME field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_HASHMME",
+      "target": "VALUE_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "HashMME information element contains the HashMME value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50",
+        "Figure 9.9.3.50.1",
+        "Table 9.9.3.50.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_VERIFY_HASH",
+      "target": "MSG_ATTACH_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Hash verification condition applies to the ATTACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_VERIFY_HASH",
+      "target": "MSG_TAU_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Hash verification condition applies to the TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_VERIFY_HASH",
+      "target": "VALUE_HASHMME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Hash verification condition uses the HashMME value for comparison.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.50"
+      ]
+    }
+  ]
+}

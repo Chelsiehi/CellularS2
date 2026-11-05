@@ -1,0 +1,258 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.10.3",
+  "title": "Detection of radio link failure",
+  "entities": [
+    {
+      "id": "PROC_RLF_DETECTION",
+      "name": "Radio Link Failure Detection",
+      "entity_type": "Procedure",
+      "description": "Procedure for detecting radio link failure conditions in source MCG, target PCell, and SCG during various scenarios including DAPS handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "TIMER_T304",
+      "name": "T304",
+      "entity_type": "Timer",
+      "description": "Timer running during DAPS handover configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "T310",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry indicates radio link failure in source SpCell, PCell, or PSCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "TIMER_T312",
+      "name": "T312",
+      "entity_type": "Timer",
+      "description": "Timer whose expiry indicates radio link failure in PCell or PSCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "COND_DAPS_CONFIGURED",
+      "name": "DAPS bearer configured and T304 running",
+      "entity_type": "Condition",
+      "description": "Condition where DAPS bearer is configured and T304 timer is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "COND_RANDOM_ACCESS_PROBLEM",
+      "name": "Random access problem indication from MAC",
+      "entity_type": "Condition",
+      "description": "Condition triggered by random access problem indication from MCG or SCG MAC.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "COND_RLC_MAX_RETRANSMISSIONS",
+      "name": "Maximum RLC retransmissions reached",
+      "entity_type": "Condition",
+      "description": "Condition triggered when RLC indicates maximum number of retransmissions has been reached.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "COND_UPLINK_LBT_FAILURE",
+      "name": "Consistent uplink LBT failure indication",
+      "entity_type": "Condition",
+      "description": "Condition triggered by consistent uplink LBT failure indication from MAC.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "PROP_SOURCE_RLF",
+      "name": "Source RLF detected",
+      "entity_type": "Property",
+      "description": "Property indicating radio link failure is detected for the source MCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "PROP_MCG_RLF",
+      "name": "MCG RLF detected",
+      "entity_type": "Property",
+      "description": "Property indicating radio link failure is detected for the MCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "PROP_SCG_RLF",
+      "name": "SCG RLF detected",
+      "entity_type": "Property",
+      "description": "Property indicating radio link failure is detected for the SCG.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "PROC_CONNECTION_REESTABLISHMENT",
+      "name": "Connection Re-establishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated upon radio link failure detection to re-establish connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "PROC_FAILURE_INFORMATION",
+      "name": "Failure Information Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to report RLC failure when CA duplication is configured and activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RLF_DETECTION",
+      "target": "COND_DAPS_CONFIGURED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RLF detection procedure requires DAPS bearer to be configured and T304 running for source MCG failure scenarios.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TIMER_T310",
+      "target": "PROP_SOURCE_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T310 expiry in source SpCell establishes source RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T310",
+      "target": "PROP_MCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T310 expiry in PCell establishes MCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T312",
+      "target": "PROP_MCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T312 expiry in PCell establishes MCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_RANDOM_ACCESS_PROBLEM",
+      "target": "PROP_MCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Random access problem indication from MCG MAC establishes MCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RLC_MAX_RETRANSMISSIONS",
+      "target": "PROP_MCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RLC maximum retransmissions indication establishes MCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_UPLINK_LBT_FAILURE",
+      "target": "PROP_MCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Consistent uplink LBT failure indication establishes MCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_MCG_RLF",
+      "target": "PROC_CONNECTION_REESTABLISHMENT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MCG RLF detection starts connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_RLC_MAX_RETRANSMISSIONS",
+      "target": "PROC_FAILURE_INFORMATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "RLC maximum retransmissions with CA duplication configuration starts failure information procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T310",
+      "target": "PROP_SCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T310 expiry in PSCell establishes SCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "TIMER_T312",
+      "target": "PROP_SCG_RLF",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "T312 expiry in PSCell establishes SCG RLF detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROP_SCG_RLF",
+      "target": "PROC_CONNECTION_REESTABLISHMENT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SCG RLF detection starts connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.10.3"
+      ]
+    }
+  ]
+}

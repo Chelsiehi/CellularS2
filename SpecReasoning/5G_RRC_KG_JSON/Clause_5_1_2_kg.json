@@ -1,0 +1,145 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.1.2",
+  "title": "General requirements",
+  "entities": [
+    {
+      "id": "UE_PROCESSING",
+      "name": "UE message processing",
+      "entity_type": "Procedure",
+      "description": "UE shall process received RRC messages in order of reception, completing one message before starting the next.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "PROCEDURE_EXECUTION",
+      "name": "Procedure step execution",
+      "entity_type": "Procedure",
+      "description": "UE shall execute procedural steps according to the order specified in the clause description.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "RRC_TRANSACTION_IDENTIFIER",
+      "name": "RRC Transaction Identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier used in RRC messages to correlate requests and responses.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "CHOICE_SETUP",
+      "name": "Choice value setup",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives a choice value set to setup.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "CHOICE_RELEASE",
+      "name": "Choice value release",
+      "entity_type": "Condition",
+      "description": "Condition when UE receives a choice value set to release.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "LIST_EXTENSION",
+      "name": "List extension condition",
+      "entity_type": "Condition",
+      "description": "Condition when the size of a list is extended with additional entries in an extension field.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "CONFIG_APPLY",
+      "name": "Configuration application",
+      "entity_type": "Property",
+      "description": "UE applies received configuration and starts using associated resources when choice value is setup.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "CONFIG_CLEAR",
+      "name": "Configuration clearing",
+      "entity_type": "Property",
+      "description": "UE clears configuration and stops using associated resources when choice value is release.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "COMBINED_LIST",
+      "name": "Combined list creation",
+      "entity_type": "Property",
+      "description": "UE creates combined list by concatenating original and extension entries while maintaining order.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_PROCESSING",
+      "target": "PROCEDURE_EXECUTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Message processing includes executing procedural steps in specified order.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRC_TRANSACTION_IDENTIFIER",
+      "target": "UE_PROCESSING",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "Transaction identifier handling is part of UE message processing requirements.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CHOICE_SETUP",
+      "target": "CONFIG_APPLY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving choice value setup establishes configuration application behavior.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CHOICE_RELEASE",
+      "target": "CONFIG_CLEAR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving choice value release establishes configuration clearing behavior.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "LIST_EXTENSION",
+      "target": "COMBINED_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List extension condition establishes combined list creation behavior.",
+      "provenance": [
+        "TS 38.331, Clause 5.1.2"
+      ]
+    }
+  ]
+}

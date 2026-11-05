@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.4.2",
+  "title": "UE initiated generic transport of NAS messages",
+  "entities": [
+    {
+      "id": "PROCEDURE_UE_GENERIC_TRANSPORT",
+      "name": "UE initiated generic transport of NAS messages",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE EMM entity to transport application messages encapsulated in NAS messages. It involves sending an UPLINK GENERIC NAS TRANSPORT message containing application data.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "name": "UPLINK GENERIC NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "NAS message sent by the UE to transport application messages. Contains the generic message container IE and optionally the Additional information IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "IE_GENERIC_MESSAGE_CONTAINER",
+      "name": "generic message container",
+      "entity_type": "Information Element",
+      "description": "IE that carries the encapsulated application message. Its content, coding and interpretation are application-dependent.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "IE_GENERIC_MESSAGE_CONTAINER_TYPE",
+      "name": "generic message container type",
+      "entity_type": "Information Element",
+      "description": "IE that indicates the application protocol using the generic transport.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "IE_ADDITIONAL_INFORMATION",
+      "name": "Additional information",
+      "entity_type": "Information Element",
+      "description": "Optional IE that carries additional application-requested information. Content, coding and interpretation are application-dependent.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "ENTITY_UE_EMM",
+      "name": "UE EMM entity",
+      "entity_type": "Property",
+      "description": "EMM entity in the UE that initiates the generic transport procedure and sends the UPLINK GENERIC NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "ENTITY_MME_EMM",
+      "name": "MME EMM entity",
+      "entity_type": "Property",
+      "description": "EMM entity in the MME that receives the UPLINK GENERIC NAS TRANSPORT message and provides the contained IEs to the corresponding application.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "APPLICATION_REQUEST",
+      "name": "Application request to send message",
+      "entity_type": "Condition",
+      "description": "Condition triggered by an application request to send a message encapsulated in the generic transport of NAS message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UE_GENERIC_TRANSPORT",
+      "target": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the UPLINK GENERIC NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message includes the generic message container IE carrying the application message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_GENERIC_MESSAGE_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message includes the generic message container type IE indicating the application protocol.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "target": "IE_ADDITIONAL_INFORMATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The message may optionally include the Additional information IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "APPLICATION_REQUEST",
+      "target": "PROCEDURE_UE_GENERIC_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The procedure is initiated upon request from an application to send a message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ENTITY_UE_EMM",
+      "target": "PROCEDURE_UE_GENERIC_TRANSPORT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "The UE EMM entity initiates the generic transport procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ENTITY_MME_EMM",
+      "target": "MSG_UPLINK_GENERIC_NAS_TRANSPORT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The MME EMM entity receives the UPLINK GENERIC NAS TRANSPORT message and provides its contents to the application.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.4.2"
+      ]
+    }
+  ]
+}

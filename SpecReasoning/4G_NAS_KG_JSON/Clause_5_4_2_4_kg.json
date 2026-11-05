@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.4",
+  "title": "Authentication completion by the network",
+  "entities": [
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE containing authentication response RES.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by UE indicating authentication failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to initiate authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "T3460",
+      "name": "Timer T3460",
+      "entity_type": "Timer",
+      "description": "Timer used during authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "RES_CORRECTNESS_CHECK",
+      "name": "RES correctness check",
+      "entity_type": "Condition",
+      "description": "Network checks if RES received from UE matches expected value.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_SUCCESS",
+      "name": "Authentication procedure completed successfully",
+      "entity_type": "Condition",
+      "description": "Condition when authentication procedure completes successfully and eKSI is stored in EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "EKSI_UPDATE",
+      "name": "eKSI update requirement",
+      "entity_type": "Property",
+      "description": "Network shall include different eKSI value in new AUTHENTICATION REQUEST when initiating new authentication procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "SYNCH_FAILURE",
+      "name": "EMM cause #21 synch failure",
+      "entity_type": "Condition",
+      "description": "Authentication failure condition indicating synchronization failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "HSS_RENEGOTIATION",
+      "name": "HSS/AuC renegotiation",
+      "entity_type": "Property",
+      "description": "Network may renegotiate with HSS/AuC and provide UE with new authentication parameters.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3460 upon receipt of AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "RES_CORRECTNESS_CHECK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network performs RES correctness check upon receipt of AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTHENTICATION_SUCCESS",
+      "target": "EKSI_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful authentication completion establishes requirement to use different eKSI in next AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_FAILURE",
+      "target": "T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Network stops timer T3460 upon receipt of AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SYNCH_FAILURE",
+      "target": "HSS_RENEGOTIATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of EMM cause #21 synch failure may trigger HSS/AuC renegotiation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AUTHENTICATION_FAILURE",
+      "target": "SYNCH_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION FAILURE message may contain EMM cause #21 synch failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.4"
+      ]
+    }
+  ]
+}

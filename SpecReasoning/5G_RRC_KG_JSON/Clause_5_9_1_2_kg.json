@@ -1,0 +1,147 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.1.2",
+  "title": "MCCH scheduling",
+  "entities": [
+    {
+      "id": "MCCH",
+      "name": "Multicast Control Channel",
+      "entity_type": "Property",
+      "description": "Channel used for transmitting multicast control information periodically with configurable repetition period and transmission window.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "PDCCH_MCCH_RNTI",
+      "name": "PDCCH addressed to MCCH-RNTI",
+      "entity_type": "Property",
+      "description": "Physical Downlink Control Channel transmissions indicating MCCH transmissions, associated radio resources, and MCS.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "SEARCHSPACE_MCCH",
+      "name": "searchspaceMCCH",
+      "entity_type": "Identifier",
+      "description": "Parameter indicating the common search space for determining PDCCH monitoring occasions for MCCH transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "PDCCH_MONITORING_OCCASIONS",
+      "name": "PDCCH monitoring occasions for MCCH",
+      "entity_type": "Property",
+      "description": "Time instances where UE monitors PDCCH for MCCH message reception, determined based on searchspaceMCCH or SIB1 monitoring occasions.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "SSB",
+      "name": "Synchronization Signal Block",
+      "entity_type": "Property",
+      "description": "Transmitted SSBs used in mapping to PDCCH monitoring occasions for MCCH message reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "MCCH_TRANSMISSION_WINDOW",
+      "name": "MCCH transmission window",
+      "entity_type": "Property",
+      "description": "Configured window during which MCCH information is transmitted periodically.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SEARCHSPACE_ZERO",
+      "name": "searchspaceMCCH set to zero",
+      "entity_type": "Condition",
+      "description": "Condition where PDCCH monitoring occasions for MCCH message reception are the same as for SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "CONDITION_SEARCHSPACE_NONZERO",
+      "name": "searchspaceMCCH not set to zero",
+      "entity_type": "Condition",
+      "description": "Condition where PDCCH monitoring occasions for MCCH message are determined based on search space indicated by searchspaceMCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MCCH",
+      "target": "PDCCH_MCCH_RNTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MCCH transmissions are indicated via PDCCH addressed to MCCH-RNTI.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDCCH_MONITORING_OCCASIONS",
+      "target": "SEARCHSPACE_MCCH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCCH monitoring occasions for MCCH transmission are determined according to the common search space indicated by searchspaceMCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_SEARCHSPACE_ZERO",
+      "target": "PDCCH_MONITORING_OCCASIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If searchspaceMCCH is set to zero, PDCCH monitoring occasions for MCCH message reception are the same as for SIB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_SEARCHSPACE_NONZERO",
+      "target": "PDCCH_MONITORING_OCCASIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If searchspaceMCCH is not set to zero, PDCCH monitoring occasions for MCCH message are determined based on search space indicated by searchspaceMCCH.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDCCH_MONITORING_OCCASIONS",
+      "target": "SSB",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDCCH monitoring occasions for MCCH message are mapped to transmitted SSBs using a specific numbering formula.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDCCH_MONITORING_OCCASIONS",
+      "target": "MCCH_TRANSMISSION_WINDOW",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PDCCH monitoring occasions for MCCH message are sequentially numbered from one in the MCCH transmission window.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.1.2"
+      ]
+    }
+  ]
+}

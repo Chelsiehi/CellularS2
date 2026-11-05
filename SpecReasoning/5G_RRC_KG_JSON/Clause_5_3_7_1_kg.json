@@ -1,0 +1,242 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.1",
+  "title": "General RRCReestablishmentRequest RRCReestablishment RRCReestablishmentComplete RRCReestablishmentRequest RRCSetup RRCSetupComplete",
+  "entities": [
+    {
+      "id": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "name": "RRC Connection Re-establishment",
+      "entity_type": "Procedure",
+      "description": "Procedure to re-establish the RRC connection for a UE in RRC_CONNECTED state with active AS security and established SRB2 and at least one DRB/multicast MRB (or SRB2 for IAB).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "name": "RRCReestablishmentRequest",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate RRC connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT",
+      "name": "RRCReestablishment",
+      "entity_type": "Message",
+      "description": "Message sent by network in response to RRCReestablishmentRequest when UE context is verified.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "name": "RRCReestablishmentComplete",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete the RRC connection re-establishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_SETUP",
+      "name": "RRCSetup",
+      "entity_type": "Message",
+      "description": "Message sent by network when UE context cannot be retrieved, initiating fallback to new RRC connection establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC state where UE has an active RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state where UE does not have an active RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_ACTIVATED",
+      "name": "AS security activated",
+      "entity_type": "Condition",
+      "description": "Condition where AS security has been activated with SRB2 and at least one DRB/multicast MRB setup (or SRB2 for IAB).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_UE_CONTEXT_VERIFIED",
+      "name": "UE context verified",
+      "entity_type": "Condition",
+      "description": "Condition where network is able to find and verify a valid UE context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_UE_CONTEXT_NOT_RETRIEVED",
+      "name": "UE context not retrieved",
+      "entity_type": "Condition",
+      "description": "Condition where network cannot retrieve or verify UE context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "PROP_REACTIVATE_AS_SECURITY",
+      "name": "Re-activate AS security",
+      "entity_type": "Property",
+      "description": "Network action to re-activate AS security without changing algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "PROP_REESTABLISH_RESUME_SRB1",
+      "name": "Re-establish and resume SRB1",
+      "entity_type": "Property",
+      "description": "Network action to re-establish and resume SRB1 during connection re-establishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "PROP_DISCARD_AS_CONTEXT",
+      "name": "Discard stored AS Context",
+      "entity_type": "Property",
+      "description": "Network action to discard stored AS Context and release all RBs and BH RLC channels and Uu Relay RLC channels when UE context cannot be retrieved.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiation step where UE sends RRCReestablishmentRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure step where network responds with RRCReestablishment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure completion step where UE sends RRCReestablishmentComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1",
+        "Figure 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "target": "COND_AS_SECURITY_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires AS security to be activated with SRB2 and at least one DRB/multicast MRB setup.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_RRC_CONNECTION_REESTABLISHMENT",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can only be initiated when UE is in RRC_CONNECTED state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_UE_CONTEXT_VERIFIED",
+      "target": "PROP_REACTIVATE_AS_SECURITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE context is verified, network re-activates AS security without changing algorithms.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_UE_CONTEXT_VERIFIED",
+      "target": "PROP_REESTABLISH_RESUME_SRB1",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE context is verified, network re-establishes and resumes SRB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_UE_CONTEXT_NOT_RETRIEVED",
+      "target": "PROP_DISCARD_AS_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE context cannot be retrieved, network discards stored AS Context and releases all RBs and channels.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_UE_CONTEXT_NOT_RETRIEVED",
+      "target": "MSG_RRC_SETUP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When UE context cannot be retrieved, network falls back to RRCSetup message to establish new RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_AS_SECURITY_ACTIVATED",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "If AS security has not been activated, UE moves to RRC_IDLE directly with release cause 'other'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.1"
+      ]
+    }
+  ]
+}

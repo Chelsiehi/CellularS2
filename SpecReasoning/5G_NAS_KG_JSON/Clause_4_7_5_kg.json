@@ -1,0 +1,161 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.7.5",
+  "title": "NAS signalling using trusted WLAN access network",
+  "entities": [
+    {
+      "id": "TWIF",
+      "name": "Trusted WLAN Interworking Function",
+      "entity_type": "Procedure",
+      "description": "Provides functionalities for non-5G capable over WLAN (N5CW) devices to access 5GCN, including NAS signalling and PDU session management.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "N5CW_DEVICE",
+      "name": "Non-5G Capable over WLAN Device",
+      "entity_type": "Property",
+      "description": "A device that accesses 5GCN via the TWIF using WLAN access, with limited 5G capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration Procedure",
+      "entity_type": "Procedure",
+      "description": "TWIF registers on behalf of the N5CW device to an AMF using implementation-specific default values.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5",
+        "Reference to subclause 5.5.1.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ESTABLISHMENT",
+      "name": "PDU Session Establishment",
+      "entity_type": "Procedure",
+      "description": "TWIF may request to establish a PDU session on behalf of the N5CW device upon receipt of an IP configuration request.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5",
+        "Reference to subclause 6.4.1.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_RELEASE",
+      "name": "UE-requested PDU Session Release",
+      "entity_type": "Procedure",
+      "description": "TWIF initiates PDU session release upon loss of the IP address of the N5CW device.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5",
+        "Reference to subclause 6.4.3"
+      ]
+    },
+    {
+      "id": "SINGLE_PDU_SESSION",
+      "name": "Single PDU Session Support",
+      "entity_type": "Condition",
+      "description": "Only one PDU session is supported when N5CW device accesses 5GC via the TWIF.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "IP_CONFIG_REQUEST",
+      "name": "IP Configuration Request",
+      "entity_type": "Condition",
+      "description": "Trigger for TWIF to establish a PDU session on behalf of the N5CW device.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "IP_ADDRESS_LOSS",
+      "name": "Loss of IP Address",
+      "entity_type": "Condition",
+      "description": "Condition that triggers the TWIF to initiate PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TWIF",
+      "target": "N5CW_DEVICE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "TWIF acts on behalf of the N5CW device for registration and PDU session management.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TWIF",
+      "target": "REGISTRATION_PROCEDURE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "TWIF performs registration on behalf of the N5CW device.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TWIF",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "TWIF may request PDU session establishment upon IP configuration request.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IP_CONFIG_REQUEST",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IP configuration request triggers PDU session establishment.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TWIF",
+      "target": "PDU_SESSION_RELEASE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "TWIF initiates PDU session release upon IP address loss.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IP_ADDRESS_LOSS",
+      "target": "PDU_SESSION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Loss of IP address triggers PDU session release.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "SINGLE_PDU_SESSION",
+      "target": "PDU_SESSION_ESTABLISHMENT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Only one PDU session is supported for N5CW device via TWIF.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.5"
+      ]
+    }
+  ]
+}

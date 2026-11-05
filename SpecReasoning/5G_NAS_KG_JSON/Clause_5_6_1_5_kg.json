@@ -1,0 +1,320 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.5",
+  "title": "Service request procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of a secure connection to the network for data transfer or signaling.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REJECT",
+      "name": "SERVICE REJECT",
+      "entity_type": "Message",
+      "description": "Network response message indicating service request cannot be accepted, containing 5GMM cause value.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for service request rejection.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_STATUS",
+      "name": "PDU session status",
+      "entity_type": "Information Element",
+      "description": "IE indicating which PDU sessions are active in AMF, used for session status synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_CAG_INFO_LIST",
+      "name": "CAG information list",
+      "entity_type": "Information Element",
+      "description": "Information element containing Closed Access Group information for access control.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_EXT_CAG_INFO_LIST",
+      "name": "Extended CAG information list",
+      "entity_type": "Information Element",
+      "description": "Extended version of CAG information list for UEs supporting extended CAG capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "IE_DISASTER_RETURN_WAIT_RANGE",
+      "name": "Disaster return wait range",
+      "entity_type": "Information Element",
+      "description": "IE indicating waiting period before UE can return after disaster condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Back-off timer for general NAS level mobility management congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3448",
+      "name": "T3448",
+      "entity_type": "Timer",
+      "description": "Control plane data back-off timer for CIoT optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3517",
+      "name": "T3517",
+      "entity_type": "Timer",
+      "description": "Service request procedure timer stopped upon SERVICE REJECT reception.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_SERVICE_REQUEST_INITIATED",
+      "name": "5GMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "UE state when service request procedure has been initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state when not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED",
+      "entity_type": "State",
+      "description": "UE state when registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Integrity protected message",
+      "entity_type": "Condition",
+      "description": "Condition where NAS message has been integrity protected by security mechanisms.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_PDU_SESSION_RELEASE",
+      "name": "Local PDU session release",
+      "entity_type": "Property",
+      "description": "UE behavior to locally release PDU sessions based on network indication.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes network sending SERVICE REJECT when not accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT message contains 5GMM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT may contain PDU session status IE for session synchronization.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT may contain CAG information list IE for CAG-related rejections.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_EXT_CAG_INFO_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT may contain Extended CAG information list IE for UEs supporting extended CAG.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "IE_DISASTER_RETURN_WAIT_RANGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SERVICE REJECT may contain Disaster return wait range IE for MINT scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SERVICE REJECT with cause #22 starts T3346 timer for congestion control.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3448",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SERVICE REJECT with cause #22 starts T3448 timer for control plane data congestion.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "TIMER_T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3517 timer upon receiving SERVICE REJECT in 5GMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "STATE_5GMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SERVICE REJECT reception requires UE to be in 5GMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "PROP_LOCAL_PDU_SESSION_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SERVICE REJECT with PDU session status IE establishes local PDU session release behavior.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "PROP_LOCAL_PDU_SESSION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Local PDU session release is guarded by SERVICE REJECT being integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3346 timer value usage is guarded by SERVICE REJECT integrity protection status.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "TIMER_T3448",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3448 timer value usage is guarded by SERVICE REJECT integrity protection status.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "SERVICE REJECT causes UE transition to 5GMM-DEREGISTERED state for certain cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "MSG_SERVICE_REJECT",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "SERVICE REJECT causes UE transition to 5GMM-REGISTERED state for certain cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.8.1",
+  "title": "UE not using satellite E-UTRAN access",
+  "entities": [
+    {
+      "id": "UE_CE_MODE_B",
+      "name": "UE supporting CE mode B",
+      "entity_type": "Property",
+      "description": "A UE that supports CE mode B and operates in WB-S1 mode not using satellite E-UTRAN access. The UE's usage setting is not set to voice centric.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "ENHANCED_COVERAGE_NOT_RESTRICTED",
+      "name": "Enhanced coverage not restricted",
+      "entity_type": "Condition",
+      "description": "Condition where the use of enhanced coverage is not restricted for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "CE_MODE_B_NOT_RESTRICTED",
+      "name": "CE mode B not restricted",
+      "entity_type": "Condition",
+      "description": "Condition where CE mode B is not restricted for the UE.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_WB_S1_CE_MODE",
+      "name": "NAS timer for WB-S1/CE mode",
+      "entity_type": "Timer",
+      "description": "Applicable NAS timer values indicated in tables 10.2.1, 10.3.1 for UE and tables 10.2.2, 10.3.2 for MME for WB-S1/CE mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "MME_CE_MODE_B_SUPPORT",
+      "name": "MME supporting WB-S1 mode with CE mode B UE",
+      "entity_type": "Property",
+      "description": "MME that supports WB-S1 mode and performs NAS signalling with a UE not using satellite E-UTRAN access which supports CE mode B and operates in WB-S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "Generic NAS procedure during which NAS timer values are calculated at start and not re-calculated until completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_CE_MODE_B",
+      "target": "NAS_TIMER_WB_S1_CE_MODE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE applies NAS timer value for WB-S1/CE mode when enhanced coverage is not restricted or CE mode B is not restricted.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ENHANCED_COVERAGE_NOT_RESTRICTED",
+      "target": "UE_CE_MODE_B",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that the use of enhanced coverage is not restricted for the UE guards the application of NAS timer value.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CE_MODE_B_NOT_RESTRICTED",
+      "target": "UE_CE_MODE_B",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that CE mode B is not restricted for the UE guards the application of NAS timer value.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MME_CE_MODE_B_SUPPORT",
+      "target": "NAS_TIMER_WB_S1_CE_MODE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MME calculates NAS timer value for WB-S1/CE mode when enhanced coverage is not restricted or CE mode B is not restricted.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ENHANCED_COVERAGE_NOT_RESTRICTED",
+      "target": "MME_CE_MODE_B_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that the use of enhanced coverage is not restricted for the UE guards the MME's calculation of NAS timer value.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CE_MODE_B_NOT_RESTRICTED",
+      "target": "MME_CE_MODE_B_SUPPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition that CE mode B is not restricted for the UE guards the MME's calculation of NAS timer value.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_WB_S1_CE_MODE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NAS timer value is calculated at start of a NAS procedure and not re-calculated until the procedure is completed, restarted, or aborted.",
+      "provenance": [
+        "TS 24.301, Clause 4.8.1"
+      ]
+    }
+  ]
+}

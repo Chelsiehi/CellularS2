@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.4.4",
+  "title": "Generic UE configuration update completion by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_CONFIG_UPDATE_COMPLETION",
+      "name": "Generic UE configuration update completion",
+      "entity_type": "Procedure",
+      "description": "Network procedure triggered upon receipt of CONFIGURATION UPDATE COMPLETE message where AMF processes updated parameters and performs necessary actions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMPLETE",
+      "name": "CONFIGURATION UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to indicate completion of configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "MSG_CONFIG_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message sent by network to initiate configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "TIMER_T3555",
+      "name": "T3555",
+      "entity_type": "Timer",
+      "description": "Timer used during configuration update procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "IE_CONFIG_UPDATE_INDICATION",
+      "name": "Configuration update indication",
+      "entity_type": "Information Element",
+      "description": "IE containing registration requested bit and other update indications.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "COND_REGISTRATION_REQUESTED",
+      "name": "Registration requested condition",
+      "entity_type": "Condition",
+      "description": "Condition where registration requested bit is set in Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "COND_NO_EMERGENCY_PDU",
+      "name": "No emergency PDU session condition",
+      "entity_type": "Condition",
+      "description": "Condition where no emergency PDU session has been established for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "PROP_NEW_PARAMETERS_VALID",
+      "name": "New parameters become valid",
+      "entity_type": "Property",
+      "description": "Property where AMF considers new configuration parameters as valid and old ones as invalid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "ACTION_RELEASE_N1_CONNECTION",
+      "name": "Release N1 NAS signalling connection",
+      "entity_type": "Property",
+      "description": "Action where AMF initiates release of N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_CONFIG_UPDATE_COMPLETION",
+      "target": "MSG_CONFIG_UPDATE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is triggered by receipt of CONFIGURATION UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_CONFIG_UPDATE_COMPLETION",
+      "target": "TIMER_T3555",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T3555 upon receipt of CONFIGURATION UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "IE_CONFIG_UPDATE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message contains Configuration update indication IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_CONFIG_UPDATE_INDICATION",
+      "target": "COND_REGISTRATION_REQUESTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Configuration update indication IE guards by registration requested condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REGISTRATION_REQUESTED",
+      "target": "ACTION_RELEASE_N1_CONNECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Registration requested condition combined with other conditions establishes release of N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NO_EMERGENCY_PDU",
+      "target": "ACTION_RELEASE_N1_CONNECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "No emergency PDU session condition guards the release of N1 NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_CONFIG_UPDATE_COMMAND",
+      "target": "PROP_NEW_PARAMETERS_VALID",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message establishes that new parameters become valid.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.4.4"
+      ]
+    }
+  ]
+}

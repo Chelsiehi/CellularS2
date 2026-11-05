@@ -1,0 +1,119 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "FIGURE_8.5",
+  "title": "RRC level padding",
+  "entities": [
+    {
+      "id": "RRC_ASN1",
+      "name": "RRC-ASN.1",
+      "entity_type": "Information Element",
+      "description": "Consists of RRC message and Extension components that serve as input to the ASN.1 encoding process.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "ASN1_ENCODER",
+      "name": "ASN.1 encoder",
+      "entity_type": "Procedure",
+      "description": "Encodes RRC-ASN.1 input to produce output that is always a multiple of 8 bits.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "BASIC_PRODUCTION",
+      "name": "Basic production (always a multiple of 8 bits)",
+      "entity_type": "Information Element",
+      "description": "The encoded output from ASN.1 encoder, which is always a multiple of 8 bits and serves as input to the RRC padding process.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "RRC_PADDING",
+      "name": "RRC padding",
+      "entity_type": "Procedure",
+      "description": "Adds RRC level padding to the Basic production to create the final RRC-PDU.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "RRC_PDU",
+      "name": "RRC-PDU",
+      "entity_type": "Message",
+      "description": "The final Protocol Data Unit containing both the Basic production and the RRC level padding.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ASN1_ENCODER",
+      "target": "RRC_ASN1",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "ASN.1 encoder processes RRC-ASN.1 as input.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ASN1_ENCODER",
+      "target": "BASIC_PRODUCTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ASN.1 encoder produces the Basic production as output.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRC_PADDING",
+      "target": "BASIC_PRODUCTION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC padding process uses Basic production as input.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRC_PADDING",
+      "target": "RRC_PDU",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RRC padding process produces the final RRC-PDU.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRC_PDU",
+      "target": "BASIC_PRODUCTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRC-PDU contains the Basic production.",
+      "provenance": [
+        "TS 38.331, FIGURE_8.5",
+        "Figure 8.5"
+      ]
+    }
+  ]
+}

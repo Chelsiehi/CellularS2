@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.1.3",
+  "title": "Derived QoS rules",
+  "entities": [
+    {
+      "id": "DERIVED_QOS_RULE",
+      "name": "Derived QoS rule",
+      "entity_type": "Information Element",
+      "description": "A QoS rule created by reflective QoS in the UE based on downlink user data packets received via a PDU session. Contains a QoS flow identifier (QFI), an uplink packet filter, and a precedence value of 80.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "QFI",
+      "name": "QoS flow identifier",
+      "entity_type": "Identifier",
+      "description": "Identifier for a QoS flow within a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "UL_PACKET_FILTER",
+      "name": "Uplink packet filter",
+      "entity_type": "Information Element",
+      "description": "Packet filter used for uplink direction in derived QoS rules.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "PRECEDENCE_80",
+      "name": "Precedence value 80",
+      "entity_type": "Property",
+      "description": "Fixed precedence value of 80 (decimal) assigned to derived QoS rules in the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "T3583",
+      "name": "Timer T3583",
+      "entity_type": "Timer",
+      "description": "Timer that runs for each derived QoS rule in the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REFLECTIVE_QOS",
+      "name": "Reflective QoS",
+      "entity_type": "Procedure",
+      "description": "Mechanism where the UE creates derived QoS rules based on downlink user data packets received via a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_IP_ETH",
+      "name": "PDU session of IPv4, IPv6, IPv4v6 or Ethernet type",
+      "entity_type": "Condition",
+      "description": "PDU session types where derived QoS rules are applicable.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "NO_NB_N1_MODE",
+      "name": "Not NB-N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where reflective QoS is not supported.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "NO_CONTROL_PLANE_ONLY",
+      "name": "Not control plane only PDU session",
+      "entity_type": "Condition",
+      "description": "Condition where reflective QoS is not applicable.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REFLECTIVE_QOS",
+      "target": "DERIVED_QOS_RULE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reflective QoS procedure creates derived QoS rules in the UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "DERIVED_QOS_RULE",
+      "target": "QFI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains a QoS flow identifier.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "DERIVED_QOS_RULE",
+      "target": "UL_PACKET_FILTER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule contains an uplink packet filter.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "DERIVED_QOS_RULE",
+      "target": "PRECEDENCE_80",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Derived QoS rule has a fixed precedence value of 80.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DERIVED_QOS_RULE",
+      "target": "T3583",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3583 runs for each derived QoS rule.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "REFLECTIVE_QOS",
+      "target": "PDU_SESSION_IP_ETH",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Reflective QoS is only applicable for PDU sessions of IPv4, IPv6, IPv4v6 or Ethernet type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "REFLECTIVE_QOS",
+      "target": "NO_NB_N1_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reflective QoS is not supported in NB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REFLECTIVE_QOS",
+      "target": "NO_CONTROL_PLANE_ONLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Reflective QoS is not applicable for PDU sessions with control plane only indication.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.1.3"
+      ]
+    }
+  ]
+}

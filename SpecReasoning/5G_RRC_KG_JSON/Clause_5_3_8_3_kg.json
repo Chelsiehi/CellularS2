@@ -1,0 +1,258 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.8.3",
+  "title": "Reception of the RRCRelease by the UE",
+  "entities": [
+    {
+      "id": "RRCRelease",
+      "name": "RRCRelease message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to release the RRC connection, potentially including configuration for RRC_INACTIVE state or redirection information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "T380",
+      "name": "Timer T380",
+      "entity_type": "Timer",
+      "description": "Timer related to RRC connection release procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "T320",
+      "name": "Timer T320",
+      "entity_type": "Timer",
+      "description": "Timer for cell reselection priority information validity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "T316",
+      "name": "Timer T316",
+      "entity_type": "Timer",
+      "description": "Timer related to connection re-establishment procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "T350",
+      "name": "Timer T350",
+      "entity_type": "Timer",
+      "description": "Timer used in RRC connection management.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "T346g",
+      "name": "Timer T346g",
+      "entity_type": "Timer",
+      "description": "Timer used in RRC connection management.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_NOT_ACTIVATED",
+      "name": "AS security not activated",
+      "entity_type": "Condition",
+      "description": "Condition where access stratum security is not active, affecting how the UE processes the RRCRelease message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "RRC state where the UE is not connected to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "RRC state where the UE maintains some context but is not actively communicating.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "SUSPEND_CONFIG",
+      "name": "suspendConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration included in RRCRelease to suspend the RRC connection and transition to RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REDIRECTED_CARRIER_INFO",
+      "name": "redirectedCarrierInfo",
+      "entity_type": "Information Element",
+      "description": "Information element indicating carrier redirection, potentially to E-UTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "CELL_RESELECTION_PRIORITIES",
+      "name": "cellReselectionPriorities",
+      "entity_type": "Information Element",
+      "description": "Information element providing cell reselection priority information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "WAIT_TIME",
+      "name": "waitTime",
+      "entity_type": "Information Element",
+      "description": "Time value used for access barring procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCRelease",
+      "target": "T380",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message stops timer T380 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCRelease",
+      "target": "T320",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message stops timer T320 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRCRelease",
+      "target": "T316",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message stops timer T316 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRCRelease",
+      "target": "T350",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message stops timer T350 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRCRelease",
+      "target": "T346g",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "RRCRelease message stops timer T346g if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AS_SECURITY_NOT_ACTIVATED",
+      "target": "RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When AS security is not activated, UE transitions to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRCRelease",
+      "target": "SUSPEND_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCRelease message may contain suspendConfig information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SUSPEND_CONFIG",
+      "target": "RRC_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Presence of suspendConfig leads to transition to RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RRCRelease",
+      "target": "REDIRECTED_CARRIER_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCRelease message may contain redirectedCarrierInfo for E-UTRA redirection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RRCRelease",
+      "target": "CELL_RESELECTION_PRIORITIES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCRelease message may contain cellReselectionPriorities information.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RRCRelease",
+      "target": "WAIT_TIME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCRelease message may contain waitTime information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "WAIT_TIME",
+      "target": "T320",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When t320 is included, UE starts timer T320 with the provided value.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.8.3"
+      ]
+    }
+  ]
+}

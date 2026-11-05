@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.2.4",
+  "title": "UE-initiated de-registration procedure completion for 5GS services over non-3GPP access",
+  "entities": [
+    {
+      "id": "PROC_UE_DEREG_NON3GPP",
+      "name": "UE-initiated de-registration procedure for non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE-initiated de-registration from 5GS services over non-3GPP access, involving PDU session release and state transitions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "MSG_DEREG_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "IE_ACCESS_TYPE",
+      "name": "Access type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type (non-3GPP) for de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "5GMM state indicating the UE is de-registered for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_NULL",
+      "name": "5GMM-NULL",
+      "entity_type": "State",
+      "description": "5GMM state indicating no NAS signaling connection exists for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_DEREG_NOT_SWITCH_OFF",
+      "name": "De-registration not due to switch off",
+      "entity_type": "Condition",
+      "description": "Condition where de-registration is initiated for reasons other than UE switch off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_DISABLING_5GS",
+      "name": "Disabling of 5GS services",
+      "entity_type": "Condition",
+      "description": "Condition where 5GS services are being disabled for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "PROP_UE_INACTIVE",
+      "name": "UE marked as inactive for 5GS services over non-3GPP access",
+      "entity_type": "Property",
+      "description": "Property where AMF marks the UE as inactive for 5GS services over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "PROP_PDU_SESSION_RELEASE",
+      "name": "PDU session release over non-3GPP access",
+      "entity_type": "Property",
+      "description": "Property describing the release of PDU sessions and user plane resources over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_DEREG_NON3GPP",
+      "target": "MSG_DEREG_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is initiated by DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DEREG_REQUEST",
+      "target": "IE_ACCESS_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST contains access type IE indicating non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_UE_DEREG_NON3GPP",
+      "target": "PROP_PDU_SESSION_RELEASE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes release of PDU sessions and user plane resources over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_UE_DEREG_NON3GPP",
+      "target": "PROP_UE_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure results in UE being marked as inactive in AMF for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_UE_DEREG_NON3GPP",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure completion causes AMF to enter 5GMM-DEREGISTERED state for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_DEREG_NOT_SWITCH_OFF",
+      "target": "COND_DISABLING_5GS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If de-registration is not due to switch off, condition for disabling 5GS services determines UE state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_DISABLING_5GS",
+      "target": "STATE_5GMM_NULL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If de-registration is due to disabling 5GS services, UE enters 5GMM-NULL state for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_DEREG_NOT_SWITCH_OFF",
+      "target": "STATE_5GMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If de-registration is not due to switch off and not due to disabling 5GS services, UE enters 5GMM-DEREGISTERED state for non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.2.4"
+      ]
+    }
+  ]
+}

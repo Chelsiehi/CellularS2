@@ -1,0 +1,210 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.5.5.1",
+  "title": "General MeasurementReport",
+  "entities": [
+    {
+      "id": "PROC_MEASUREMENT_REPORTING",
+      "name": "Measurement Reporting Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to transfer measurement results from the UE to the network. The UE initiates this procedure only after successful AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "MSG_MEASUREMENT_REPORT",
+      "name": "MeasurementReport Message",
+      "entity_type": "Message",
+      "description": "RRC message used to transfer measurement results from UE to network.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1",
+        "Figure 5.5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_RESULTS",
+      "name": "measResults",
+      "entity_type": "Information Element",
+      "description": "Main container for measurement results in MeasurementReport message.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_RESULT_SERVING_CELL",
+      "name": "measResultServingCell",
+      "entity_type": "Information Element",
+      "description": "Contains RSRP, RSRQ and available SINR measurements for serving cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_RESULT_NEIGH_CELLS",
+      "name": "measResultNeighCells",
+      "entity_type": "Information Element",
+      "description": "Contains measurement results for neighboring cells.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_RESULT_BEST_NEIGH_CELL",
+      "name": "measResultBestNeighCell",
+      "entity_type": "Information Element",
+      "description": "Contains measurement results for the best non-serving cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "COND_AS_SECURITY_ACTIVATED",
+      "name": "AS security activation",
+      "entity_type": "Condition",
+      "description": "Condition that UE shall initiate measurement reporting only after successful AS security activation.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "TIMER_PERIODICAL_REPORTING",
+      "name": "periodical reporting timer",
+      "entity_type": "Timer",
+      "description": "Timer used for periodical measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "PROP_INCREMENT_REPORTS_SENT",
+      "name": "Increment numberOfReportsSent",
+      "entity_type": "Property",
+      "description": "UE increments the numberOfReportsSent counter by 1 for each measurement report.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "IE_MEAS_ID",
+      "name": "measId",
+      "entity_type": "Information Element",
+      "description": "Measurement identity that triggered the measurement reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MEASUREMENT_REPORTING",
+      "target": "MSG_MEASUREMENT_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Measurement reporting procedure involves sending MeasurementReport message.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_MEASUREMENT_REPORT",
+      "target": "IE_MEAS_RESULTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReport message contains measResults IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_MEAS_RESULTS",
+      "target": "IE_MEAS_RESULT_SERVING_CELL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measResults contains measResultServingCell for serving cell measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_MEAS_RESULTS",
+      "target": "IE_MEAS_RESULT_NEIGH_CELLS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measResults contains measResultNeighCells for neighboring cell measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_MEAS_RESULTS",
+      "target": "IE_MEAS_RESULT_BEST_NEIGH_CELL",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "measResults contains measResultBestNeighCell for best non-serving cell measurements.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_MEASUREMENT_REPORTING",
+      "target": "COND_AS_SECURITY_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Measurement reporting procedure requires AS security to be activated.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_MEASUREMENT_REPORTING",
+      "target": "TIMER_PERIODICAL_REPORTING",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops the periodical reporting timer when triggered.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_MEASUREMENT_REPORTING",
+      "target": "TIMER_PERIODICAL_REPORTING",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts the periodical reporting timer if numberOfReportsSent is less than reportAmount.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_MEASUREMENT_REPORTING",
+      "target": "PROP_INCREMENT_REPORTS_SENT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure increments numberOfReportsSent counter by 1.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_MEASUREMENT_REPORT",
+      "target": "IE_MEAS_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MeasurementReport message includes the measId that triggered the reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.5.5.1"
+      ]
+    }
+  ]
+}

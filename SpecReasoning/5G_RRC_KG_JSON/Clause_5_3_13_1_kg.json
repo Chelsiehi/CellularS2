@@ -1,0 +1,204 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_RRC_CONNECTION_RESUME",
+      "name": "RRC Connection Resume",
+      "entity_type": "Procedure",
+      "description": "Procedure to resume a suspended RRC connection, including resuming SRB(s), DRB(s) and multicast MRB(s) or perform an RNA update. Also used to initiate SDT in RRC_INACTIVE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRESUMEREQUEST",
+      "name": "RRCResumeRequest/RRCResumeRequest1",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to request RRC connection resume.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRESUME",
+      "name": "RRCResume",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE in response to RRCResumeRequest.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "MSG_RRCRESUMECOMPLETE",
+      "name": "RRCResumeComplete",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network to complete RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE can initiate connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1"
+      ]
+    },
+    {
+      "id": "COND_NR_SIDELINK_RESUME",
+      "name": "Conditions for NR sidelink communication/discovery resume",
+      "entity_type": "Condition",
+      "description": "Conditions under which RRC connection is resumed for NR sidelink communication/discovery, including upper layer configuration, data availability, and SIB12 configuration checks.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "COND_L2_U2N_RELAY_RESUME",
+      "name": "Conditions for L2 U2N Relay UE resume",
+      "entity_type": "Condition",
+      "description": "Conditions for RRC connection resume when L2 U2N Relay UE receives messages from L2 U2N Remote UE via SL-RLC0 or SL-RLC1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "COND_V2X_SIDELINK_RESUME",
+      "name": "Conditions for V2X sidelink communication resume",
+      "entity_type": "Condition",
+      "description": "Conditions for RRC connection resume for V2X sidelink communication as specified in TS 36.331.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "COND_SDT_INITIATION",
+      "name": "Conditions for initiating SDT",
+      "entity_type": "Condition",
+      "description": "Conditions for initiating Small Data Transmission in RRC_INACTIVE state, including upper layer request, sdt-Config configuration, pending data mapping, and lower layer conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1b"
+      ]
+    },
+    {
+      "id": "IE_SDT_CONFIG",
+      "name": "sdt-Config",
+      "entity_type": "Information Element",
+      "description": "Configuration parameter for Small Data Transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1b"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_CONNECTION_RESUME",
+      "target": "MSG_RRCRESUMEREQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "RRC connection resume procedure begins with UE sending RRCResumeRequest message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_RRC_CONNECTION_RESUME",
+      "target": "MSG_RRCRESUME",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network responds with RRCResume message during resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_RRC_CONNECTION_RESUME",
+      "target": "MSG_RRCRESUMECOMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE completes resume procedure by sending RRCResumeComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1",
+        "Figure 5.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_CONNECTION_RESUME",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RRC connection resume procedure is initiated when UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_NR_SIDELINK_RESUME",
+      "target": "PROC_RRC_CONNECTION_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "NR sidelink communication/discovery conditions guard when RRC connection resume procedure is initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_L2_U2N_RELAY_RESUME",
+      "target": "PROC_RRC_CONNECTION_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "L2 U2N Relay UE conditions guard when RRC connection resume procedure is initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_V2X_SIDELINK_RESUME",
+      "target": "PROC_RRC_CONNECTION_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "V2X sidelink communication conditions guard when RRC connection resume procedure is initiated.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1a"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_SDT_INITIATION",
+      "target": "PROC_RRC_CONNECTION_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SDT initiation conditions guard when RRC connection resume procedure is used for Small Data Transmission.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1b"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_SDT_INITIATION",
+      "target": "IE_SDT_CONFIG",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SDT initiation condition requires sdt-Config to be configured.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.1b"
+      ]
+    }
+  ]
+}

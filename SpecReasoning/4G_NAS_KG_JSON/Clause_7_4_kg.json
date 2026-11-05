@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.4",
+  "title": "Unknown or unforeseen message type",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that receives and processes EMM/ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "NETWORK",
+      "name": "Network",
+      "entity_type": "Property",
+      "description": "The network infrastructure that receives and processes EMM/ESM messages.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "EMM_STATUS",
+      "name": "EMM STATUS",
+      "entity_type": "Message",
+      "description": "Status message used in EMM protocol to report error conditions.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "ESM_STATUS",
+      "name": "ESM STATUS",
+      "entity_type": "Message",
+      "description": "Status message used in ESM protocol to report error conditions.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "CAUSE_97",
+      "name": "Cause #97",
+      "entity_type": "Condition",
+      "description": "Message type non-existent or not implemented cause value.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "CAUSE_98",
+      "name": "Cause #98",
+      "entity_type": "Condition",
+      "description": "Message type not compatible with protocol state cause value.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "UNKNOWN_MSG_TYPE",
+      "name": "Unknown message type condition",
+      "entity_type": "Condition",
+      "description": "Condition where message type is not defined for the protocol discriminator or not implemented by receiver.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "INCOMPATIBLE_STATE_MSG",
+      "name": "Incompatible protocol state message condition",
+      "entity_type": "Condition",
+      "description": "Condition where message is not compatible with the current protocol state.",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "EMM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends EMM STATUS when receiving unknown EMM message type",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "ESM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends ESM STATUS when receiving unknown ESM message type",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EMM_STATUS",
+      "target": "CAUSE_97",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM STATUS message contains cause #97 for unknown message types",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ESM_STATUS",
+      "target": "CAUSE_97",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "ESM STATUS message contains cause #97 for unknown message types",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UNKNOWN_MSG_TYPE",
+      "target": "CAUSE_97",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Unknown message type condition triggers cause #97",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "INCOMPATIBLE_STATE_MSG",
+      "target": "CAUSE_98",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Incompatible protocol state message condition triggers cause #98",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE",
+      "target": "CAUSE_98",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE sends status message with cause #98 for incompatible protocol state messages",
+      "provenance": [
+        "TS 24.301, Clause 7.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.3.6",
+  "title": "Abnormal cases in the UE",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "-----------------------------------",
+    "The UE shall proceed as follows",
+    "1) if the UE requested the combined tracking area update for EPS services and \"SMS only\" and the TRACKING AREA UPDATE ACCEPT message indicates a combined tracking area updating procedure successful for EPS and non-EPS services, the UE shall behave as if the combined tracking area updating procedure was successful for EPS services and \"SMS only\"",
+    "NOTE: In this case the UE can ignore the CS SERVICE NOTIFICATION message or the Paging with CN domain indicator set to \"CS\", as specified in clause 5.6.2.3.2",
+    "2) if the combined tracking area update was successful for EPS services only and the TRACKING AREA UPDATE ACCEPT message contained an EMM cause value not treated in clause 5.5.3.3.4.3 or the EMM Cause IE is not included in the message, the UE shall proceed as follows",
+    "a) The UE shall stop timer T3430 if still running, and shall enter state MM IDLE. The tracking area updating attempt counter shall be incremented, unless it was already set to 5",
+    "b) If the tracking area updating attempt counter is less than 5",
+    "- the UE shall start timer T3411, shall set the EPS update status to EU1 UPDATED and shall enter state EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM. When timer T3411 expires the combined tracking area updating procedure indicating \"combined TA/LA updating with IMSI attach\" is triggered again",
+    "c) If the tracking area updating attempt counter is equal to 5",
+    "- a UE operating in CS/PS mode 2 of operation and a UE operating in CS/PS mode 1 of operation with \"IMS voice available\" shall start timer T3402, shall set the EPS update status to EU1 UPDATED and shall enter state EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM. When timer T3402 expires the combined tracking area updating procedure indicating \"combined TA/LA updating with IMSI attach\" is triggered again; and",
+    "- a UE operating in CS/PS mode 1 of operation with \"IMS voice not available\" shall attempt to select GERAN, UTRAN or NG-RAN radio access technology, proceed with appropriate MM, GMM or 5GMM specific procedures and disable the E-UTRA capability (see clause 4.5); and",
+    "d) If there is a CS fallback emergency call or CS fallback call pending, or a paging for CS fallback, the UE shall attempt to select GERAN or UTRAN radio access technology. If the UE finds a suitable GERAN or UTRAN cell, it then proceeds with the appropriate MM and CC specific procedures; otherwise, if there is a CS fallback emergency call or CS fallback call pending, the EMM sublayer shall indicate the abort of the EMM procedure to the MM sublayer; and",
+    "3) otherwise, the abnormal cases specified in clause 5.5.3.2.6 apply with the following modification",
+    "If the tracking area updating attempt counter is incremented according to clause 5.5.3.2.6 the next actions depend on the value of the tracking area updating attempt counter",
+    "- If the tracking area updating attempt counter is less than 5, the UE shall set the update status to U2 NOT UPDATED, but shall not delete any LAI, TMSI, ciphering key sequence number and list of equivalent PLMNs and additionally if the tracking area updating procedure was performed due to cases h, m, n, z, zc in clause 5.5.3.3.2 the update status shall be changed to EU2; or",
+    "- if the tracking area updating attempt counter is equal to 5, the UE shall delete any LAI, TMSI and ciphering key sequence number and set the update status to U2 NOT UPDATED",
+    "If there is a CS fallback emergency call pending or CS fallback call pending, or a paging for CS fallback, the UE shall attempt to select GERAN or UTRAN radio access technology. If the UE finds a suitable GERAN or UTRAN cell, it then proceeds with the appropriate MM and CC specific procedures; otherwise if there is a CS fallback emergency call or CS fallback call pending, the EMM sublayer shall indicate the abort of the EMM procedure to the MM sublayer",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

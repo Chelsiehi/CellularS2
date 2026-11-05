@@ -1,0 +1,158 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.3.2.1.4.4",
+  "title": "5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+  "entities": [
+    {
+      "id": "STATE_ATTEMPTING_REG_UPDATE",
+      "name": "5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+      "entity_type": "State",
+      "description": "Substate entered when registration procedure for mobility and periodic registration update failed due to missing network response or specific circumstances. Only registration and deregistration procedures can be initiated in this state.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "PROC_REG_MOBILITY_PERIODIC",
+      "name": "Registration procedure for mobility and periodic registration update",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated with 5GS registration type IE set to mobility registration updating or periodic registration updating in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "PROC_DEREGISTRATION",
+      "name": "Deregistration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for network or UE initiated deregistration.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "IE_5GS_REG_TYPE",
+      "name": "5GS registration type IE",
+      "entity_type": "Information Element",
+      "description": "Information element in REGISTRATION REQUEST message indicating registration type (mobility registration updating or periodic registration updating).",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "MSG_REG_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message used to initiate registration procedures including mobility and periodic registration updates.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "COND_NO_RESPONSE",
+      "name": "Missing response from network",
+      "entity_type": "Condition",
+      "description": "Condition where registration procedure fails due to no response received from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "COND_SPECIFIC_CIRCUMSTANCES",
+      "name": "Specific circumstances failure",
+      "entity_type": "Condition",
+      "description": "Registration procedure failure due to circumstances described in subclauses 5.3.9, 5.5.1.3.5 and 5.5.1.3.7.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "PROP_NO_DATA_TX_RX",
+      "name": "No data transmission or reception",
+      "entity_type": "Property",
+      "description": "Property where UE shall not send or receive any data while in ATTEMPTING-REGISTRATION-UPDATE substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "COND_NO_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State is entered when registration procedure fails due to missing network response.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "COND_SPECIFIC_CIRCUMSTANCES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "State is entered when registration procedure fails due to specific circumstances.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "PROC_REG_MOBILITY_PERIODIC",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure for mobility and periodic registration update can be initiated in this substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Deregistration procedure can be initiated in this substate.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_REG_MOBILITY_PERIODIC",
+      "target": "MSG_REG_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Registration procedure includes sending REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REG_REQUEST",
+      "target": "IE_5GS_REG_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_ATTEMPTING_REG_UPDATE",
+      "target": "PROP_NO_DATA_TX_RX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Being in this substate establishes that no data shall be sent or received.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.3.2.1.4.4"
+      ]
+    }
+  ]
+}

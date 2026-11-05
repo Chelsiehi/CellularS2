@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.2.3",
+  "title": "Network initiated detach procedure",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_DETACH",
+      "name": "Network initiated detach procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to detach a UE from the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "MSG_DETACH_REQUEST",
+      "name": "DETACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate detach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "IE_DETACH_TYPE",
+      "name": "Detach type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of detach (e.g., re-attach required or not).",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where the UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where the UE is not registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "MSG_DETACH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network initiated detach procedure includes sending DETACH REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_DETACH_REQUEST",
+      "target": "IE_DETACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DETACH REQUEST message contains Detach type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network initiated detach procedure requires UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_NETWORK_INITIATED_DETACH",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful completion of network initiated detach procedure establishes EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.2.3"
+      ]
+    }
+  ]
+}

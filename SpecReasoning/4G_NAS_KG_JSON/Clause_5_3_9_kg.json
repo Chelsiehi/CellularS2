@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.3.9",
+  "title": "Handling of NAS level mobility management congestion control",
+  "entities": [
+    {
+      "id": "NAS_MM_CONGESTION_CONTROL",
+      "name": "NAS level mobility management congestion control",
+      "entity_type": "Procedure",
+      "description": "Network procedure to handle EMM signalling congestion through general congestion control and subscribed APN based congestion control. It involves rejecting mobility management requests and managing back-off timers.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "SUBSCRIBED_APN_CONGESTION_CONTROL",
+      "name": "Subscribed APN based congestion control",
+      "entity_type": "Procedure",
+      "description": "Specific congestion control activated for a particular APN where the network may reject attach requests from UEs subscribed to that APN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Mobility management back-off timer included in reject messages during congestion control. UE starts this timer upon receiving reject messages to defer subsequent requests.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where the UE is not registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+      "entity_type": "State",
+      "description": "EMM state entered when UE attempts to update its registration after TAI change and EMM update status change.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "LOW_PRIORITY_INDICATOR",
+      "name": "Low priority indicator",
+      "entity_type": "Information Element",
+      "description": "Indicator in NAS request messages (e.g., ATTACH REQUEST) set to 'MS is configured for NAS signalling low priority'.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "CONGESTION_DETECTION_CONDITION",
+      "name": "NAS signalling congestion detection condition",
+      "entity_type": "Condition",
+      "description": "Condition where network detects NAS signalling congestion based on message rates from UEs with subscription to a particular APN or network management settings.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "PLMN_CHANGE_CONDITION",
+      "name": "PLMN change condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE enters a new PLMN not equivalent to the PLMN where T3346 was started.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "TAI_CHANGE_CONDITION",
+      "name": "TAI change condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE changes TAI which is not part of TAI list, with EMM update status EU1 UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "EMM_UPDATE_STATUS_EU2",
+      "name": "EMM update status EU2 NOT UPDATED",
+      "entity_type": "Property",
+      "description": "EMM update status set to NOT UPDATED after TAI change when T3346 is running and previous status was EU1 UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NAS_MM_CONGESTION_CONTROL",
+      "target": "SUBSCRIBED_APN_CONGESTION_CONTROL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "NAS level mobility management congestion control includes subscribed APN based congestion control as a specific procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NAS_MM_CONGESTION_CONTROL",
+      "target": "T3346",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network includes T3346 value in reject messages during congestion control, causing UE to start the timer.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SUBSCRIBED_APN_CONGESTION_CONTROL",
+      "target": "CONGESTION_DETECTION_CONDITION",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Subscribed APN based congestion control is activated based on congestion detection conditions like message rate thresholds.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EMM_DEREGISTERED",
+      "target": "T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If T3346 is running when UE enters EMM-DEREGISTERED state, the timer continues running until expiry or stop.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PLMN_CHANGE_CONDITION",
+      "target": "T3346",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "UE stops T3346 when initiating mobility management procedures in a new non-equivalent PLMN.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TAI_CHANGE_CONDITION",
+      "target": "EMM_UPDATE_STATUS_EU2",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change condition causes UE to set EMM update status to EU2 NOT UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TAI_CHANGE_CONDITION",
+      "target": "EMM_REGISTERED_ATTEMPTING_TO_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAI change condition causes UE to enter state EMM-REGISTERED.ATTEMPTING-TO-UPDATE.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "LOW_PRIORITY_INDICATOR",
+      "target": "T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T3346 behavior at switch-on is guarded by whether the low priority indicator was set in the original NAS request.",
+      "provenance": [
+        "TS 24.301, Clause 5.3.9"
+      ]
+    }
+  ]
+}

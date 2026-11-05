@@ -1,0 +1,269 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.5",
+  "title": "Handling of failure to resume RRC Connection",
+  "entities": [
+    {
+      "id": "PROCEDURE_RRC_RESUME_FAILURE",
+      "name": "RRC Connection Resume Failure Handling",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE when RRC connection resume fails, involving cleanup of failure reports and transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "VAR_CONN_EST_FAIL_REPORT",
+      "name": "VarConnEstFailReport",
+      "entity_type": "Property",
+      "description": "UE variable storing connection establishment and resume failure information including PLMN identity, cell measurements, and failure count.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "VAR_CONN_EST_FAIL_REPORT_LIST",
+      "name": "VarConnEstFailReportList",
+      "entity_type": "Property",
+      "description": "UE variable storing multiple connection failure reports when multiple CEF report is supported.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "NUMBER_OF_CONN_FAIL",
+      "name": "numberOfConnFail",
+      "entity_type": "Property",
+      "description": "Counter tracking the number of connection failures, incremented up to a maximum of 8.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "TIMER_T319",
+      "name": "T319",
+      "entity_type": "Timer",
+      "description": "Timer running during RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "TIMER_T319A",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer running during RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC state entered upon connection resume failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_PLMN_CHANGE",
+      "name": "PLMN change condition",
+      "entity_type": "Condition",
+      "description": "Condition where RPLMN is not equal to plmn-identity stored in failure report.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_CELL_CHANGE",
+      "name": "Cell change condition",
+      "entity_type": "Condition",
+      "description": "Condition where current cell identity differs from failed cell identity in failure report.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_INTEGRITY_FAILURE",
+      "name": "Integrity check failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where integrity check failure indication is received from lower layers while T319 or T319a is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_RLC_MAX_RETRANSMISSION",
+      "name": "RLC maximum retransmissions condition",
+      "entity_type": "Condition",
+      "description": "Condition where MCG RLC indicates maximum number of retransmissions reached while T319a is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_RANDOM_ACCESS_PROBLEM",
+      "name": "Random access problem condition",
+      "entity_type": "Condition",
+      "description": "Condition where random access problem indication is received from MCG MAC while T319a is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "CONDITION_CG_SDT_TIMER_EXPIRY",
+      "name": "CG-SDT timer expiry condition",
+      "entity_type": "Condition",
+      "description": "Condition where cg-SDT-TimeAlignmentTimer expires before receiving network response for UL CG-SDT transmission while T319a is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "CONDITION_PLMN_CHANGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is conditioned by PLMN change detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "CONDITION_CELL_CHANGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure execution is conditioned by cell change detection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "NUMBER_OF_CONN_FAIL",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Procedure resets numberOfConnFail to 0 under certain conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "VAR_CONN_EST_FAIL_REPORT_LIST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure clears content in VarConnEstFailReportList under PLMN change condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "VAR_CONN_EST_FAIL_REPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure stores connection resume failure information in VarConnEstFailReport.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "NUMBER_OF_CONN_FAIL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure increments numberOfConnFail by 1 if it is smaller than 8.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_RRC_RESUME_FAILURE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure transitions UE to RRC_IDLE state with release cause 'RRC Resume failure'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "CONDITION_INTEGRITY_FAILURE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Integrity check failure condition triggers transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "CONDITION_RLC_MAX_RETRANSMISSION",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "RLC maximum retransmissions condition triggers transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "CONDITION_RANDOM_ACCESS_PROBLEM",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Random access problem condition triggers transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_CG_SDT_TIMER_EXPIRY",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CG-SDT timer expiry condition triggers transition to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_INTEGRITY_FAILURE",
+      "target": "TIMER_T319",
+      "relation_type": "requires_state",
+      "family": "sec",
+      "description": "Integrity check failure condition requires T319 timer to be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "CONDITION_INTEGRITY_FAILURE",
+      "target": "TIMER_T319A",
+      "relation_type": "requires_state",
+      "family": "sec",
+      "description": "Integrity check failure condition requires T319a timer to be running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.5"
+      ]
+    }
+  ]
+}

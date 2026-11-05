@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.5",
+  "title": "Authentication not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_AUTHENTICATION",
+      "name": "Authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Network authentication procedure that may fail if UE response is invalid",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "PROC_IDENTIFICATION",
+      "name": "Identification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to verify UE identity when GUTI was used and authentication failed",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "MSG_AUTHENTICATION_REJECT",
+      "name": "AUTHENTICATION REJECT message",
+      "entity_type": "Message",
+      "description": "Message sent by network when authentication fails and IMSI verification confirms failure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity used by UE for initial NAS message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "IE_IMSI",
+      "name": "IMSI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Subscriber Identity used for UE identification",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "STATE_EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state entered by UE after receiving AUTHENTICATION REJECT message",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3247",
+      "name": "T3247",
+      "entity_type": "Timer",
+      "description": "Timer started when AUTHENTICATION REJECT is received without integrity protection",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_CHECKED",
+      "name": "Message successfully integrity checked",
+      "entity_type": "Condition",
+      "description": "Condition where AUTHENTICATION REJECT message passes NAS integrity verification",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "COND_NO_INTEGRITY",
+      "name": "Message without integrity protection",
+      "entity_type": "Condition",
+      "description": "Condition where AUTHENTICATION REJECT message is received without integrity protection",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "PROP_UPDATE_STATUS_EU3",
+      "name": "Update status set to EU3 ROAMING NOT ALLOWED",
+      "entity_type": "Property",
+      "description": "UE behavior when AUTHENTICATION REJECT is received with integrity protection",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "PROP_DELETE_STORED_DATA",
+      "name": "Delete stored security parameters",
+      "entity_type": "Property",
+      "description": "UE deletes GUTI, TAI list, last visited registered TAI and KSIASME when authentication fails",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_AUTHENTICATION",
+      "target": "PROC_IDENTIFICATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network initiates identification procedure when authentication fails with GUTI",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_AUTHENTICATION",
+      "target": "MSG_AUTHENTICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network sends AUTHENTICATION REJECT when authentication fails and IMSI verification confirms failure",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "STATE_EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE enters EMM-DEREGISTERED state upon receiving AUTHENTICATION REJECT",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_INTEGRITY_CHECKED",
+      "target": "PROP_UPDATE_STATUS_EU3",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When message is integrity checked, UE sets update status to EU3 ROAMING NOT ALLOWED",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_INTEGRITY_CHECKED",
+      "target": "PROP_DELETE_STORED_DATA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When message is integrity checked, UE deletes stored security parameters",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NO_INTEGRITY",
+      "target": "TIMER_T3247",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When message is received without integrity protection, UE starts timer T3247",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "COND_INTEGRITY_CHECKED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message behavior depends on integrity check condition",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "COND_NO_INTEGRITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message behavior depends on integrity protection condition",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message processing involves GUTI identity handling",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_AUTHENTICATION_REJECT",
+      "target": "IE_IMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REJECT message processing involves IMSI identity handling",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.9.2",
+  "title": "URSP",
+  "entities": [
+    {
+      "id": "URSP",
+      "name": "URSP",
+      "entity_type": "Procedure",
+      "description": "UE Route Selection Policy procedure requiring interaction between upper layers and 5GSM entities in the UE for PDU session management.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "UPPER_LAYERS",
+      "name": "Upper layers",
+      "entity_type": "Property",
+      "description": "Protocol layers above 5GSM that interact with 5GSM entities for PDU session establishment and release.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "5GSM_ENTITY",
+      "name": "5GSM entity",
+      "entity_type": "Property",
+      "description": "5G Session Management entity in the UE responsible for handling PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU session",
+      "entity_type": "Property",
+      "description": "Packet Data Unit session established between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ATTRIBUTES",
+      "name": "PDU session attributes",
+      "entity_type": "Property",
+      "description": "Attributes of a PDU session including PDU session identity, SSC mode, S-NSSAI, DNN, PDU session type, access type, and PDU address.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "ESTABLISH_PDU_SESSION",
+      "name": "Establish PDU session",
+      "entity_type": "Procedure",
+      "description": "Procedure to establish a new PDU session with specified attributes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "RELEASE_PDU_SESSION",
+      "name": "Release PDU session",
+      "entity_type": "Procedure",
+      "description": "Procedure to release an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "URSP",
+      "target": "UPPER_LAYERS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "URSP procedure requires interaction with upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "URSP",
+      "target": "5GSM_ENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "URSP procedure requires interaction with 5GSM entities.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "5GSM_ENTITY",
+      "target": "UPPER_LAYERS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "5GSM entity indicates PDU session attributes to upper layers when session is established.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "5GSM_ENTITY",
+      "target": "UPPER_LAYERS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "5GSM entity informs upper layers of released PDU session identity when session is released.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "UPPER_LAYERS",
+      "target": "ESTABLISH_PDU_SESSION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layers can request 5GSM entity to establish a PDU session with specified attributes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "UPPER_LAYERS",
+      "target": "RELEASE_PDU_SESSION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Upper layers can request 5GSM entity to release an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ESTABLISH_PDU_SESSION",
+      "target": "PDU_SESSION_ATTRIBUTES",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU session establishment procedure includes specification of PDU session attributes.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RELEASE_PDU_SESSION",
+      "target": "PDU_SESSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session release procedure terminates an existing PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.9.2"
+      ]
+    }
+  ]
+}

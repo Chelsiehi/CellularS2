@@ -1,0 +1,179 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.5.2",
+  "title": "Determination of the access identities and access category associated with a request for access for UEs not operating in SNPN access mode",
+  "entities": [
+    {
+      "id": "ACCESS_IDENTITY",
+      "name": "Access Identity",
+      "entity_type": "Identifier",
+      "description": "Standardized identifiers (0-15) that determine UE access priority based on configuration and network conditions. Used for access control and barring mechanisms.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "ACCESS_CATEGORY",
+      "name": "Access Category",
+      "entity_type": "Identifier",
+      "description": "Categories (0-32) that classify the type of access attempt based on service type, priority, and network conditions. Used to determine RRC establishment cause.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2A.7"
+      ]
+    },
+    {
+      "id": "ACCESS_ATTEMPT",
+      "name": "Access Attempt",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure to establish network access for various services like emergency calls, MMTEL voice/video, SMS, or data transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    },
+    {
+      "id": "PLMN_SELECTION",
+      "name": "PLMN Selection",
+      "entity_type": "Condition",
+      "description": "Condition where UE selects a new PLMN, RPLMN, or equivalent PLMN which affects applicability of access identities.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    },
+    {
+      "id": "MPS_CONFIGURED",
+      "name": "Multimedia Priority Service Configuration",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for Multimedia Priority Service, making access identity 1 applicable under specific PLMN conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "MCS_CONFIGURED",
+      "name": "Mission Critical Service Configuration",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for Mission Critical Service, making access identity 2 applicable under specific PLMN conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "DISASTER_CONDITION",
+      "name": "Disaster Condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE is registering or registered for disaster roaming services, making access identity 3 applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "ACCESS_CLASS_11_15",
+      "name": "Access Classes 11-15",
+      "entity_type": "Condition",
+      "description": "Special access classes (11-15) configured in UE that provide specific access privileges in HPLMN/EHPLMN or home country visited PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_IDENTITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access attempt requires determination of applicable access identities based on UE configuration and PLMN conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ACCESS_ATTEMPT",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access attempt requires determination of applicable access category based on service type and access attempt characteristics.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "ACCESS_IDENTITY",
+      "target": "PLMN_SELECTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Applicability of access identities 1, 2, 3, 11-15 is guarded by PLMN selection conditions (new PLMN, RPLMN, or equivalent PLMN).",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ACCESS_IDENTITY",
+      "target": "MPS_CONFIGURED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access identity 1 applicability is guarded by MPS configuration and specific PLMN conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ACCESS_IDENTITY",
+      "target": "MCS_CONFIGURED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access identity 2 applicability is guarded by MCS configuration and specific PLMN conditions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ACCESS_IDENTITY",
+      "target": "DISASTER_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access identity 3 applicability is guarded by disaster condition where UE is registering/registered for disaster roaming.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "ACCESS_IDENTITY",
+      "target": "ACCESS_CLASS_11_15",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access identities 11-15 applicability is guarded by specific access class configuration and PLMN restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2",
+        "Table 4.5.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "ACCESS_IDENTITY",
+      "target": "ACCESS_CATEGORY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Access identity determination influences the access category selection process for the access attempt.",
+      "provenance": [
+        "TS 24.501, Clause 4.5.2"
+      ]
+    }
+  ]
+}

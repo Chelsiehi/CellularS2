@@ -1,0 +1,187 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.1.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_GUTI_REALLOCATION",
+      "name": "GUTI reallocation procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for reallocating GUTI to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "PROC_TRACKING_AREA_UPDATE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to update tracking area information.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "name": "GUTI REALLOCATION COMPLETE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGE",
+      "name": "TAI change from lower layers",
+      "entity_type": "Condition",
+      "description": "Condition indicating transmission failure with TAI change from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "COND_NO_TAI_CHANGE",
+      "name": "No TAI change from lower layers",
+      "entity_type": "Condition",
+      "description": "Condition indicating transmission failure without TAI change from lower layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is not present in the TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "COND_TAI_IN_LIST",
+      "name": "Current TAI in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is still part of the TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_GUTI_REALLOCATION",
+      "name": "Abort GUTI reallocation procedure",
+      "entity_type": "Property",
+      "description": "Behavior to abort the ongoing GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "PROP_INITIATE_TRACKING_AREA_UPDATE",
+      "name": "Initiate tracking area updating procedure",
+      "entity_type": "Property",
+      "description": "Behavior to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "PROP_UE_IMPLEMENTATION_RE_RUN",
+      "name": "UE implementation re-run procedure",
+      "entity_type": "Property",
+      "description": "UE implementation-specific behavior to re-run the ongoing procedure that triggered GUTI reallocation.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_TAI_CHANGE",
+      "target": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transmission failure of GUTI REALLOCATION COMPLETE message is guarded by TAI change condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NO_TAI_CHANGE",
+      "target": "MSG_GUTI_REALLOCATION_COMPLETE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Transmission failure of GUTI REALLOCATION COMPLETE message is guarded by no TAI change condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROP_ABORT_GUTI_REALLOCATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where current TAI is not in TAI list establishes aborting GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROP_INITIATE_TRACKING_AREA_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where current TAI is not in TAI list establishes initiating tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_TAI_IN_LIST",
+      "target": "PROP_UE_IMPLEMENTATION_RE_RUN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where current TAI is in TAI list establishes UE implementation re-run behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_NO_TAI_CHANGE",
+      "target": "PROP_UE_IMPLEMENTATION_RE_RUN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no TAI change establishes UE implementation re-run behavior.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_ABORT_GUTI_REALLOCATION",
+      "target": "PROC_GUTI_REALLOCATION",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Abort property stops the GUTI reallocation procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_INITIATE_TRACKING_AREA_UPDATE",
+      "target": "PROC_TRACKING_AREA_UPDATE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Initiate property starts the tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.1.5"
+      ]
+    }
+  ]
+}

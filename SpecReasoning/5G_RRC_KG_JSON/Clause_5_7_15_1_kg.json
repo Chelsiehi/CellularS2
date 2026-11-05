@@ -1,0 +1,103 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.15.1",
+  "title": "General SRS for Positioning can be configured to be transmitted in RRC_INACTIVE mode.",
+  "entities": [
+    {
+      "id": "PROC_SRS_POSITIONING_INACTIVE",
+      "name": "SRS for Positioning Configuration in RRC_INACTIVE Mode",
+      "entity_type": "Procedure",
+      "description": "Procedure for configuring Sounding Reference Signal (SRS) for positioning to be transmitted while UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1",
+        "Figure 5.7.15.1"
+      ]
+    },
+    {
+      "id": "MSG_RRC_RELEASE_SUSPEND",
+      "name": "RRCRelease(SuspendConfig)",
+      "entity_type": "Message",
+      "description": "RRC Release message containing SuspendConfig configuration that enables SRS for positioning transmission in RRC_INACTIVE mode.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1",
+        "Figure 5.7.15.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC state where UE can be configured to transmit SRS for positioning signals.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1"
+      ]
+    },
+    {
+      "id": "IE_SUSPEND_CONFIG",
+      "name": "SuspendConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration information element that includes parameters for SRS positioning transmission in inactive state.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1",
+        "Figure 5.7.15.1"
+      ]
+    },
+    {
+      "id": "PROP_SRS_POSITIONING_TX",
+      "name": "SRS for Positioning Transmission",
+      "entity_type": "Property",
+      "description": "Capability for UE to transmit Sounding Reference Signals specifically for positioning purposes.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SRS_POSITIONING_INACTIVE",
+      "target": "MSG_RRC_RELEASE_SUSPEND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes transmission of RRCRelease message with SuspendConfig",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1",
+        "Figure 5.7.15.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RRC_RELEASE_SUSPEND",
+      "target": "IE_SUSPEND_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCRelease message contains SuspendConfig information element",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1",
+        "Figure 5.7.15.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SRS_POSITIONING_INACTIVE",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure requires UE to be in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_SUSPEND_CONFIG",
+      "target": "PROP_SRS_POSITIONING_TX",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SuspendConfig IE enables SRS for positioning transmission capability",
+      "provenance": [
+        "TS 38.331, Clause 5.7.15.1"
+      ]
+    }
+  ]
+}

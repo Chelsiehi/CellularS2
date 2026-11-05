@@ -1,0 +1,152 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.9",
+  "title": "EMM cause",
+  "entities": [
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM cause",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the reason why an EMM request from the UE is rejected by the network. It is a type 3 information element with 2 octets length.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Figure 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "FIELD_EMM_CAUSE_IEI",
+      "name": "EMM cause IEI",
+      "entity_type": "Identifier",
+      "description": "EMM cause information element identifier field located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Figure 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "FIELD_CAUSE_VALUE",
+      "name": "Cause value",
+      "entity_type": "Property",
+      "description": "EMM cause value field located in bits 8-1 of octet 2, containing the specific rejection reason code.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Figure 9.9.3.9.1",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "COND_PROTOCOL_ERROR_UNSPECIFIED",
+      "name": "Protocol error, unspecified",
+      "entity_type": "Condition",
+      "description": "Default treatment for any unrecognized cause value received by either mobile station or network, mapped to binary value 0110 1111.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "CAUSE_IMSI_UNKNOWN",
+      "name": "IMSI unknown in HSS",
+      "entity_type": "Condition",
+      "description": "EMM cause value 00000010 indicating the IMSI is unknown in the HSS.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "CAUSE_ILLEGAL_UE",
+      "name": "Illegal UE",
+      "entity_type": "Condition",
+      "description": "EMM cause value 00000011 indicating the UE is illegal.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "CAUSE_REDIRECTION_5GCN",
+      "name": "Redirection to 5GCN required",
+      "entity_type": "Condition",
+      "description": "EMM cause value 00011111 indicating redirection to 5GCN is required.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EMM_CAUSE",
+      "target": "FIELD_EMM_CAUSE_IEI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM cause information element contains the EMM cause IEI identifier field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Figure 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EMM_CAUSE",
+      "target": "FIELD_CAUSE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EMM cause information element contains the cause value field.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Figure 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "FIELD_CAUSE_VALUE",
+      "target": "COND_PROTOCOL_ERROR_UNSPECIFIED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cause value field is guarded by the protocol error unspecified condition for unrecognized values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_CAUSE_VALUE",
+      "target": "CAUSE_IMSI_UNKNOWN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cause value field can be guarded by the IMSI unknown in HSS condition.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_CAUSE_VALUE",
+      "target": "CAUSE_ILLEGAL_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cause value field can be guarded by the illegal UE condition.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIELD_CAUSE_VALUE",
+      "target": "CAUSE_REDIRECTION_5GCN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cause value field can be guarded by the redirection to 5GCN required condition.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.9",
+        "Table 9.9.3.9.1"
+      ]
+    }
+  ]
+}

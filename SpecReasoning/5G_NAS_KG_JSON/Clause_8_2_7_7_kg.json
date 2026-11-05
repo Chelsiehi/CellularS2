@@ -1,0 +1,58 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.7",
+  "title": "Configured NSSAI",
+  "entities": [
+    {
+      "id": "IE_CONFIGURED_NSSAI",
+      "name": "Configured NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element that provides the UE with a new configured NSSAI for the current PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.7"
+      ]
+    },
+    {
+      "id": "CONDITION_NOT_REGISTERING_ONBOARDING",
+      "name": "UE is neither registering nor registered for onboarding services in SNPN",
+      "entity_type": "Condition",
+      "description": "Condition that must be satisfied for the network to include the Configured NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.7"
+      ]
+    },
+    {
+      "id": "PROPERTY_PROVIDE_NEW_CONFIGURED_NSSAI",
+      "name": "Network provides new configured NSSAI",
+      "entity_type": "Property",
+      "description": "Network behavior of providing the UE with a new configured NSSAI for the current PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROPERTY_PROVIDE_NEW_CONFIGURED_NSSAI",
+      "target": "IE_CONFIGURED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The network includes the Configured NSSAI IE when providing a new configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROPERTY_PROVIDE_NEW_CONFIGURED_NSSAI",
+      "target": "CONDITION_NOT_REGISTERING_ONBOARDING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The network provides a new configured NSSAI only if the UE is neither registering nor registered for onboarding services in SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.7"
+      ]
+    }
+  ]
+}

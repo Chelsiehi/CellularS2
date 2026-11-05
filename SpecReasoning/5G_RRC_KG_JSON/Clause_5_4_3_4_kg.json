@@ -1,0 +1,187 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.3.4",
+  "title": "Successful completion of the mobility from NR",
+  "entities": [
+    {
+      "id": "MOBILITY_FROM_NR",
+      "name": "Mobility from NR",
+      "entity_type": "Procedure",
+      "description": "Procedure for successful handover completion from NR to another RAT.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "T325",
+      "name": "Timer T325",
+      "entity_type": "Timer",
+      "description": "Timer that continues running after successful handover completion.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "T330",
+      "name": "Timer T330",
+      "entity_type": "Timer",
+      "description": "Timer that continues running after successful handover completion.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "T400",
+      "name": "Timer T400",
+      "entity_type": "Timer",
+      "description": "Timer that continues running after successful handover completion.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "AS_SECURITY_CONTEXT",
+      "name": "AS security context",
+      "entity_type": "Property",
+      "description": "Access Stratum security context including KRRCenc, KRRCint, KUPint, and KUPenc keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "RADIO_RESOURCES",
+      "name": "Radio resources",
+      "entity_type": "Property",
+      "description": "All radio resources including RLC entity and MAC configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "PDCP_SDAP_ENTITIES",
+      "name": "PDCP and SDAP entities",
+      "entity_type": "Property",
+      "description": "PDCP and SDAP entities for all established radio bearers.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "TARGET_RAT_EUTRA",
+      "name": "Target RAT type E-UTRA",
+      "entity_type": "Condition",
+      "description": "Condition where targetRAT-Type is set to eutra and nas-SecurityParamFromNR is included.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "TARGET_RAT_UTRA_FDD",
+      "name": "Target RAT type UTRA-FDD",
+      "entity_type": "Condition",
+      "description": "Condition where targetRAT-Type is set to utra-fdd.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "RRC_CONNECTION_RELEASE",
+      "name": "RRC connection release indication",
+      "entity_type": "Property",
+      "description": "Indication of RRC connection release to upper layers with release cause 'other'.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MOBILITY_FROM_NR",
+      "target": "T325",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops all timers except T325, T330, and T400.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MOBILITY_FROM_NR",
+      "target": "T330",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops all timers except T325, T330, and T400.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MOBILITY_FROM_NR",
+      "target": "T400",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops all timers except T325, T330, and T400.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MOBILITY_FROM_NR",
+      "target": "AS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure releases the AS security context including KRRCenc, KRRCint, KUPint, and KUPenc keys.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MOBILITY_FROM_NR",
+      "target": "RADIO_RESOURCES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure releases all radio resources including RLC entity and MAC configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MOBILITY_FROM_NR",
+      "target": "PDCP_SDAP_ENTITIES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure releases PDCP and SDAP entities for all established RBs.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TARGET_RAT_EUTRA",
+      "target": "RRC_CONNECTION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggers RRC connection release indication to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TARGET_RAT_UTRA_FDD",
+      "target": "RRC_CONNECTION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggers RRC connection release indication to upper layers.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.3.3.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND",
+      "entity_type": "Message",
+      "description": "Message used to release a PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "5GSM_STATUS",
+      "name": "5GSM STATUS",
+      "entity_type": "Message",
+      "description": "Message used to report 5GSM protocol errors",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_ID",
+      "name": "PDU session ID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "ACCESS_TYPE_IE",
+      "name": "Access type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the access type",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE",
+      "entity_type": "State",
+      "description": "State where PDU session is inactive",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "INVALID_PDU_SESSION_IDENTITY",
+      "name": "Invalid PDU session identity",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session ID belongs to an inactive PDU session",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "MA_PDU_SESSION_SINGLE_ACCESS",
+      "name": "MA PDU session single access established",
+      "entity_type": "Condition",
+      "description": "Condition where MA PDU session has user-plane resources established on a single access different from indicated access",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "UE_RELEASES_USER_PLANE",
+      "name": "UE releases user-plane resources",
+      "entity_type": "Property",
+      "description": "UE considers user-plane resources of MA PDU session on indicated access as successfully released",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INVALID_PDU_SESSION_IDENTITY",
+      "target": "5GSM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Invalid PDU session identity condition triggers sending 5GSM STATUS message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "5GSM_STATUS",
+      "target": "UL_NAS_TRANSPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message is sent in UL NAS TRANSPORT message",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PDU_SESSION_RELEASE_COMMAND",
+      "target": "PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message contains PDU session ID",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PDU_SESSION_RELEASE_COMMAND",
+      "target": "ACCESS_TYPE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message contains Access type IE",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "INVALID_PDU_SESSION_IDENTITY",
+      "target": "PDU_SESSION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Invalid PDU session identity condition requires PDU session to be in INACTIVE state",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MA_PDU_SESSION_SINGLE_ACCESS",
+      "target": "UE_RELEASES_USER_PLANE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MA PDU session single access condition establishes UE releasing user-plane resources",
+      "provenance": [
+        "TS 24.501, Clause 6.3.3.6"
+      ]
+    }
+  ]
+}

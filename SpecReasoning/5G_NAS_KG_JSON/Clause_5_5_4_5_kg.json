@@ -1,0 +1,136 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.5",
+  "title": "UE-initiated authentication and key agreement procedure not accepted by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_UE_AUTH_NOT_ACCEPTED",
+      "name": "UE-initiated authentication and key agreement procedure not accepted",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when the network rejects UE-initiated authentication and key agreement. The AMF creates and sends a RELAY KEY REJECT message to the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_REJECT",
+      "name": "RELAY KEY REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF to UE when authentication is rejected. Contains PRTI IE and optionally EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_REQUEST",
+      "name": "RELAY KEY REQUEST",
+      "entity_type": "Message",
+      "description": "Message received from UE initiating authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_AUTH_RESPONSE",
+      "name": "RELAY AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message received from UE containing authentication response.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "IE_PRTI",
+      "name": "PRTI",
+      "entity_type": "Information Element",
+      "description": "Information element containing PRTI value used in RELAY KEY REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element containing EAP-failure message when authentication fails.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "COND_AUTH_FAILED",
+      "name": "Authentication failed",
+      "entity_type": "Condition",
+      "description": "Condition where UE considers authentication has failed upon receiving RELAY KEY REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "PROPERTY_PC5_SIGNALING",
+      "name": "PC5 signalling protocol procedure",
+      "entity_type": "Property",
+      "description": "Procedure specified in 3GPP 24.554 subclause 7.2.2.5 that UE performs after authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_UE_AUTH_NOT_ACCEPTED",
+      "target": "MSG_RELAY_KEY_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "AMF creates and sends RELAY KEY REJECT message as part of the procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RELAY_KEY_REJECT",
+      "target": "IE_PRTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY KEY REJECT message contains PRTI IE",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RELAY_KEY_REJECT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY KEY REJECT message may contain EAP message IE with EAP-failure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_AUTH_FAILED",
+      "target": "PROPERTY_PC5_SIGNALING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Authentication failure condition triggers UE to perform PC5 signalling protocol procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_RELAY_KEY_REJECT",
+      "target": "COND_AUTH_FAILED",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receiving RELAY KEY REJECT message causes UE to consider authentication failed",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.5"
+      ]
+    }
+  ]
+}

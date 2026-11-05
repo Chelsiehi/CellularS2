@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.1.6A",
+  "title": "Service request procedure for an emergency services fallback not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_SERVICE_REQUEST_EMERGENCY_FALLBACK",
+      "name": "Service request procedure for emergency services fallback",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE for emergency services fallback when network does not accept the service request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "COND_NOT_ACCEPTED",
+      "name": "Service request not accepted by network",
+      "entity_type": "Condition",
+      "description": "Condition where network does not accept the service request for emergency services fallback.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "COND_ABNORMAL_CASE_A",
+      "name": "Abnormal case a) from subclause 5.6.1.7",
+      "entity_type": "Condition",
+      "description": "Specific abnormal case causing service request failure for emergency services fallback.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "COND_OTHER_ABNORMAL_CASES",
+      "name": "Other abnormal cases from subclause 5.6.1.7",
+      "entity_type": "Condition",
+      "description": "Abnormal cases other than case a) causing service request failure for emergency services fallback.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS_FAILURE",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE behavior to notify upper layers about the failure of emergency services fallback procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "PROP_SELECT_EUTRA_CELL",
+      "name": "Select E-UTRA cell connected to EPC or 5GCN",
+      "entity_type": "Property",
+      "description": "UE behavior to attempt selection of E-UTRA cell according to domain priority and selection rules.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "PROP_DISABLE_N1_MODE",
+      "name": "Disable N1 mode capability for 3GPP access",
+      "entity_type": "Property",
+      "description": "UE behavior in single-registration mode after changing to S1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "PROC_EMM_5GMM",
+      "name": "Appropriate EMM or 5GMM procedures",
+      "entity_type": "Procedure",
+      "description": "Procedures executed by UE after finding a suitable E-UTRA cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NOT_ACCEPTED",
+      "target": "PROC_SERVICE_REQUEST_EMERGENCY_FALLBACK",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Service request procedure is guarded by the condition that network does not accept the request.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_NOT_ACCEPTED",
+      "target": "PROP_INFORM_UPPER_LAYERS_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When service request is not accepted, UE informs upper layers of procedure failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_ABNORMAL_CASE_A",
+      "target": "PROP_INFORM_UPPER_LAYERS_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When abnormal case a) occurs, UE informs upper layers of emergency services fallback failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_OTHER_ABNORMAL_CASES",
+      "target": "PROP_SELECT_EUTRA_CELL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When other abnormal cases occur, UE may attempt to select E-UTRA cell.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_SELECT_EUTRA_CELL",
+      "target": "PROC_EMM_5GMM",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "After selecting suitable E-UTRA cell, UE proceeds with EMM or 5GMM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_SELECT_EUTRA_CELL",
+      "target": "PROP_DISABLE_N1_MODE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If UE in single-registration mode changes to S1 mode, it disables N1 mode capability.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.1.6A"
+      ]
+    }
+  ]
+}

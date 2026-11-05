@@ -1,0 +1,165 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.18",
+  "title": "Restriction on use of enhanced coverage",
+  "entities": [
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE registers with the network and receives configuration parameters including enhanced coverage restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "PROCEDURE_UE_CONFIG_UPDATE",
+      "name": "Generic UE configuration update procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by AMF to update UE configuration parameters including enhanced coverage restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate registration and indicate support for restriction on use of enhanced coverage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message sent by AMF to accept registration and indicate enhanced coverage restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "IE_ENHANCED_COVERAGE_RESTRICTION_SUPPORT",
+      "name": "Restriction on use of enhanced coverage support",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE support for restriction on use of enhanced coverage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "IE_ENHANCED_COVERAGE_RESTRICTION_INDICATION",
+      "name": "Enhanced coverage restriction indication",
+      "entity_type": "Information Element",
+      "description": "IE indicating whether enhanced coverage, CE mode A, or CE mode B is restricted for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED",
+      "entity_type": "State",
+      "description": "5GMM state where UE has an established NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_ONGOING_REGISTRATION",
+      "name": "No ongoing registration procedure",
+      "entity_type": "Condition",
+      "description": "Condition that there is no registration procedure currently in progress.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "PROPERTY_ENHANCED_COVERAGE_RESTRICTED",
+      "name": "Enhanced coverage restricted",
+      "entity_type": "Property",
+      "description": "Property indicating UE is not allowed to use enhanced coverage in registered PLMN and equivalent PLMNs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "PROPERTY_EXTENDED_NAS_TIMER_SETTING",
+      "name": "Extended NAS timer setting",
+      "entity_type": "Property",
+      "description": "Property indicating NAS timer values calculated for enhanced coverage scenarios.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ENHANCED_COVERAGE_RESTRICTION_SUPPORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains IE indicating UE support for restriction on use of enhanced coverage.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_ENHANCED_COVERAGE_RESTRICTION_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains IE indicating enhanced coverage restrictions for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_UE_CONFIG_UPDATE",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Generic UE configuration update procedure requires UE to be in 5GMM-CONNECTED state.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_UE_CONFIG_UPDATE",
+      "target": "CONDITION_NO_ONGOING_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Generic UE configuration update procedure is guarded by condition that there is no ongoing registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_ENHANCED_COVERAGE_RESTRICTION_INDICATION",
+      "target": "PROPERTY_ENHANCED_COVERAGE_RESTRICTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Enhanced coverage restriction indication establishes whether enhanced coverage is restricted for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_ENHANCED_COVERAGE_RESTRICTION_INDICATION",
+      "target": "PROPERTY_EXTENDED_NAS_TIMER_SETTING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Enhanced coverage restriction indication establishes whether extended NAS timer settings apply.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.18"
+      ]
+    }
+  ]
+}

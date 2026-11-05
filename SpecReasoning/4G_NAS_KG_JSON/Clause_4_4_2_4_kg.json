@@ -1,0 +1,191 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.2.4",
+  "title": "Change of security keys",
+  "entities": [
+    {
+      "id": "Procedure_Reauthentication",
+      "name": "Re-authentication",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to create a new EPS security context. Messages exchanged during authentication are integrity protected and ciphered using current EPS security context if available.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "Procedure_SecurityModeControl",
+      "name": "Security mode control procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to establish new or modified EPS security context. Involves SECURITY MODE COMMAND and SECURITY MODE COMPLETE messages.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "Message_SECURITY_MODE_COMMAND",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by MME to initiate security mode control. Includes eKSI of new EPS security context and may include new NAS security algorithms. Sent integrity protected with new/modified context but unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "Message_SECURITY_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE in response to SECURITY MODE COMMAND. Sent integrity protected and ciphered with the new or modified EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "IE_eKSI",
+      "name": "eKSI",
+      "entity_type": "Information Element",
+      "description": "EPS Key Set Identifier included in SECURITY MODE COMMAND message to indicate which EPS security context to use or modify.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "IE_NAS_Security_Algorithms",
+      "name": "NAS security algorithms",
+      "entity_type": "Information Element",
+      "description": "New set of selected NAS security algorithms included in SECURITY MODE COMMAND when modifying current EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "Context_EPS_Security",
+      "name": "EPS security context",
+      "entity_type": "Property",
+      "description": "Security context used for integrity protection and ciphering of NAS messages. Can be current, new, or modified.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "Condition_CurrentContextUse",
+      "name": "Continue using current EPS security context",
+      "entity_type": "Condition",
+      "description": "Both UE and MME shall continue to use current EPS security context until MME initiates security mode control procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "Procedure_Reauthentication",
+      "target": "Context_EPS_Security",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Re-authentication procedure creates a new EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "Procedure_SecurityModeControl",
+      "target": "Message_SECURITY_MODE_COMMAND",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure involves sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "Procedure_SecurityModeControl",
+      "target": "Message_SECURITY_MODE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure involves receiving SECURITY MODE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "Message_SECURITY_MODE_COMMAND",
+      "target": "IE_eKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message includes eKSI information element.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "Message_SECURITY_MODE_COMMAND",
+      "target": "IE_NAS_Security_Algorithms",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND message may include NAS security algorithms when modifying context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "Message_SECURITY_MODE_COMMAND",
+      "target": "Context_EPS_Security",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message is integrity protected with new/modified EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "Message_SECURITY_MODE_COMMAND",
+      "target": "Context_EPS_Security",
+      "relation_type": "may_be_unprotected",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND message is sent unciphered.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "Message_SECURITY_MODE_COMPLETE",
+      "target": "Context_EPS_Security",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE message is integrity protected with new/modified EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "Message_SECURITY_MODE_COMPLETE",
+      "target": "Context_EPS_Security",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "SECURITY MODE COMPLETE message is ciphered with new/modified EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "Condition_CurrentContextUse",
+      "target": "Context_EPS_Security",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition specifies that current EPS security context should be used until security mode control is initiated.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.4"
+      ]
+    }
+  ]
+}

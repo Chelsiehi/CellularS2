@@ -1,0 +1,276 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.2.3.5",
+  "title": "Abnormal cases in the network side",
+  "entities": [
+    {
+      "id": "PROC_NETWORK_INITIATED_DEREGISTRATION",
+      "name": "Network-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to de-register a UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_ACCEPT",
+      "name": "DEREGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by the network to accept de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request service.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to request control plane service.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "TIMER_T3522",
+      "name": "T3522",
+      "entity_type": "Timer",
+      "description": "Timer used for retransmission of DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "State indicating the UE is de-registered.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of registration (initial, emergency, mobility, periodic).",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE",
+      "name": "5GMM cause",
+      "entity_type": "Information Element",
+      "description": "IE indicating cause for de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_SWITCH_OFF_INDICATION",
+      "name": "Switch off indication",
+      "entity_type": "Condition",
+      "description": "Condition indicating UE is switching off.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Condition indicating lower layer failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "COND_CAG_RESTRICTIONS",
+      "name": "CAG restrictions",
+      "entity_type": "Condition",
+      "description": "Condition related to CAG (Closed Access Group) restrictions.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Abort procedure",
+      "entity_type": "Property",
+      "description": "Property indicating procedure is aborted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "PROP_CHANGE_STATE",
+      "name": "Change state to 5GMM-DEREGISTERED",
+      "entity_type": "Property",
+      "description": "Property indicating state change to 5GMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_INITIATED_DEREGISTRATION",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending DEREGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NETWORK_INITIATED_DEREGISTRATION",
+      "target": "TIMER_T3522",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3522 for retransmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3522",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3522 aborts the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_LOWER_LAYER_FAILURE",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure aborts the procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_SWITCH_OFF_INDICATION",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving DEREGISTRATION REQUEST with switch off indication aborts procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SWITCH_OFF_INDICATION",
+      "target": "MSG_DEREGISTRATION_ACCEPT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving DEREGISTRATION REQUEST without switch off indication triggers sending DEREGISTRATION ACCEPT.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving REGISTRATION REQUEST for initial/emergency registration aborts de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "PROC_NETWORK_INITIATED_DEREGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Receiving SERVICE REQUEST does not abort de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_CAG_RESTRICTIONS",
+      "target": "MSG_DEREGISTRATION_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CAG restrictions condition affects DEREGISTRATION REQUEST message content.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_ABORT_PROCEDURE",
+      "target": "PROP_CHANGE_STATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Aborting procedure leads to state change to 5GMM-DEREGISTERED.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "IE_5GMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains 5GMM cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.2.3.5"
+      ]
+    }
+  ]
+}

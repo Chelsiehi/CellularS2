@@ -1,0 +1,145 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROCEDURE_AKA_5G_PROSE_RELAY",
+      "name": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+      "entity_type": "Procedure",
+      "description": "Procedure for authenticating and establishing keys for 5G ProSe UE-to-network relay functionality.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "PROCEDURE_DEREGISTRATION_UE_INITIATED",
+      "name": "UE-initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to de-register from the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "MESSAGE_RELAY_KEY_AUTHENTICATION_RESPONSE",
+      "name": "RELAY KEY AUTHENTICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message sent during the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "CONDITION_LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure before RELAY KEY AUTHENTICATION RESPONSE message is received",
+      "entity_type": "Condition",
+      "description": "Abnormal condition where lower layer failure occurs before receiving the RELAY KEY AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "CONDITION_COLLISION_DEREGISTRATION",
+      "name": "Collision between authentication and key agreement procedure and de-registration procedure",
+      "entity_type": "Condition",
+      "description": "Condition where authentication and key agreement procedure for 5G ProSe UE-to-network relay collides with UE-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "CONDITION_COLLISION_OTHER_5GMM",
+      "name": "Collision between authentication and key agreement procedure and other 5GMM procedures",
+      "entity_type": "Condition",
+      "description": "Condition where authentication and key agreement procedure for 5G ProSe UE-to-network relay collides with other 5GMM procedures except de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_ABORT_AKA",
+      "name": "Network aborts authentication and key agreement procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to abort the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_PROCEED_DEREGISTRATION",
+      "name": "Network proceeds with UE-initiated de-registration procedure",
+      "entity_type": "Property",
+      "description": "Network behavior to proceed with the UE-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_PROGRESS_BOTH_PROCEDURES",
+      "name": "Network progresses both procedures",
+      "entity_type": "Property",
+      "description": "Network behavior to progress both the authentication and key agreement procedure and other 5GMM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_LOWER_LAYER_FAILURE",
+      "target": "BEHAVIOR_ABORT_AKA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure condition causes the network to abort the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_COLLISION_DEREGISTRATION",
+      "target": "BEHAVIOR_ABORT_AKA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with de-registration procedure causes the network to abort the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_COLLISION_DEREGISTRATION",
+      "target": "BEHAVIOR_PROCEED_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with de-registration procedure causes the network to proceed with the UE-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_COLLISION_OTHER_5GMM",
+      "target": "BEHAVIOR_PROGRESS_BOTH_PROCEDURES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with other 5GMM procedures causes the network to progress both procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_LOWER_LAYER_FAILURE",
+      "target": "MESSAGE_RELAY_KEY_AUTHENTICATION_RESPONSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Lower layer failure condition is defined relative to the RELAY KEY AUTHENTICATION RESPONSE message not being received.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.7"
+      ]
+    }
+  ]
+}

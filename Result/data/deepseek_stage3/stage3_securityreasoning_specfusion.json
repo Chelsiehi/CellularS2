@@ -1,0 +1,1355 @@
+{
+ 
+  "results": [
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-01",
+      "input": "TS 24.301 allows the UE to accept certain NAS signalling messages without integrity protection before security can be activated (NOTE: these messages are accepted by the UE without integrity protection in certain situations).",
+      "gold_evidence": "TS 24.301, Clause 4.4.4.2, Integrity checking of NAS signalling messages in the UE",
+      "model_answer": "The vulnerability lies in the fact that certain NAS signalling messages can be accepted by the UE without integrity protection prior to activation of security mode, potentially allowing an attacker to inject or modify NAS messages. This is permitted in specific scenarios such as during initial attach or when the security context is not yet established.",
+      "evidence": "TS 24.301, Clause 4.4.4.2, Integrity checking of NAS signalling messages in the UE",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-02",
+      "input": "The UE shall send the TRACKING AREA UPDATE REQUEST message always unciphered.",
+      "gold_evidence": "TS 24.301, Clause 4.4.5, Ciphering of NAS signalling messages",
+      "model_answer": "The vulnerability lies in the requirement that the UE must send the TRACKING AREA UPDATE REQUEST message unciphered, which exposes sensitive user information such as the IMSI or TMSI, along with location updates, to eavesdropping. This can lead to user tracking and identity interception over the air interface.",
+      "evidence": "TS 24.301, Clause 4.4.5, Ciphering of NAS signalling messages",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-03",
+      "input": "Until secure exchange of NAS messages has been established, the MME shall process a defined set of NAS signalling messages even if the MAC fails integrity check or cannot be verified because an EPS security context is not available in the network (e.g., ATTACH REQUEST, IDENTITY RESPONSE (IMSI), AUTHENTICATION RESPONSE/FAILURE, SECURITY MODE REJECT, DETACH REQUEST/ACCEPT, TRACKING AREA UPDATE REQUEST, SERVICE/EXTENDED SERVICE REQUEST, CONTROL PLANE SERVICE REQUEST).",
+      "gold_evidence": "TS 24.301, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the MME",
+      "model_answer": "The vulnerability lies in the MME processing certain NAS messages without integrity protection before secure exchange is established, potentially allowing attackers to inject or manipulate critical signaling messages such as Attach Request or Identity Response, leading to impersonation or denial of service. This behavior is necessary for network accessibility but exposes the system to spoofing and replay attacks during initial attachment or when security context is unavailable.",
+      "evidence": "TS 24.301, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the MME",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-04",
+      "input": "If the UE has no valid native EPS security context, the UE shall send an ATTACH REQUEST message without integrity protection and encryption.",
+      "gold_evidence": "TS 24.301, Clause 4.4.2.2, Secure exchange of NAS messages",
+      "model_answer": "The vulnerability lies in the lack of integrity protection and encryption in the ATTACH REQUEST message when the UE lacks a valid native EPS security context, potentially exposing sensitive information to eavesdropping or tampering.",
+      "evidence": "TS 24.301, Clause 4.4.2.2, Secure exchange of NAS messages",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-05",
+      "input": "If the UE included the UE network capability IE or the MS network capability IE (or both) in the ATTACH REQUEST message, the MME shall store all octets received from the UE up to the maximum length defined for the respective information element.",
+      "gold_evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+      "model_answer": "The vulnerability lies in the MME's obligation to store all octets of the UE/MS network capability information elements up to their maximum defined length, potentially allowing an attacker to include malformed or oversized data that could lead to buffer overflows or parsing anomalies if not properly validated.",
+      "evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-06",
+      "input": "The purpose of the UE requested bearer resource allocation procedure is for a UE to request allocation of bearer resources for a traffic flow aggregate (requests a specific QoS demand/QCI and may send a GBR requirement); if accepted it results in dedicated bearer context activation or bearer context modification.",
+      "gold_evidence": "TS 24.301, Clause 6.5.3.1, General",
+      "model_answer": "The vulnerability lies in the UE-requested bearer resource allocation procedure, where a malicious UE can exploit the lack of proper authorization checks during QoS parameter requests, potentially leading to denial-of-service by requesting excessive GBR resources. This stems from insufficient network enforcement of subscription-based policies during bearer establishment/modification.",
+      "evidence": "TS 24.301, Clause 6.5.3.1, General",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-07",
+      "input": "To initiate the UE requested bearer resource modification procedure, the UE shall send a BEARER RESOURCE MODIFICATION REQUEST message to the MME, start timer T3481 and enter the state PROCEDURE TRANSACTION PENDING.",
+      "gold_evidence": "TS 24.301, Clause 6.5.4.2, UE requested bearer resource modification procedure initiation",
+      "model_answer": "The vulnerability lies in the potential for denial-of-service via exhaustion of UE resources or signaling overload by initiating multiple BEARER RESOURCE MODIFICATION REQUEST messages without proper rate limiting or validation, as the UE starts timer T3481 and enters PROCEDURE TRANSACTION PENDING upon sending the request.",
+      "evidence": "TS 24.301, Clause 6.5.4.2, UE requested bearer resource modification procedure initiation",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-08",
+      "input": "If the UE finds that the SQN is out of range, the UE shall send an AUTHENTICATION FAILURE message with EMM cause #21 \"synch failure\" and include an AUTS parameter in the message.",
+      "gold_evidence": "TS 24.301, Clause 5.4.2.6, Authentication not accepted by the UE",
+      "model_answer": "The vulnerability arises when the UE detects that the SQN is out of range, triggering an AUTHENTICATION FAILURE message with EMM cause #21 'synch failure' and including the AUTS parameter. This exposes synchronization failure to potential attackers, enabling replay or man-in-the-middle attacks by allowing network impersonation through SQN analysis.",
+      "evidence": "TS 24.301, Clause 5.4.2.6, Authentication not accepted by the UE",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-09",
+      "input": "In the UE requested bearer resource allocation procedure, the UE starts T3480 and sends BEARER RESOURCE ALLOCATION REQUEST; the network responds with ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST / MODIFY EPS BEARER CONTEXT REQUEST or BEARER RESOURCE ALLOCATION REJECT (stopping T3480).",
+      "gold_evidence": "TS 24.301, Figure 6.5.3.2.1, UE requested bearer resource allocation procedure",
+      "model_answer": "The vulnerability lies in the potential for denial of service due to improper handling of timer T3480 during the UE requested bearer resource allocation procedure. If the network fails to respond or sends an unexpected message, the UE may not properly release resources or transition states, leading to resource exhaustion. This is specified in 3GPP TS 24.301.",
+      "evidence": "TS 24.301, Figure 6.5.3.2.1, UE requested bearer resource allocation procedure",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-10",
+      "input": "On receipt of the PDN CONNECTIVITY REQUEST message sent by the UE, the network when allocating an IP address shall take into account the PDN type IE, the operator policies of the home and visited network, and the user's subscription data.",
+      "gold_evidence": "TS 24.301, Clause 6.2.2, IP address allocation via NAS signalling",
+      "model_answer": "The vulnerability lies in improper validation of the PDN type IE during PDN connectivity setup, which may allow a malicious UE to request unintended IP address allocations by manipulating the PDN type. This could lead to service disruption or unauthorized access if the network does not correctly enforce subscription and policy checks.",
+      "evidence": "TS 24.301, Clause 6.2.2, IP address allocation via NAS signalling",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-11",
+      "input": "The network initiates the identification procedure by sending an IDENTITY REQUEST message to the UE and starting timer T3470; the requested identification parameter is specified in the Identity type IE.",
+      "gold_evidence": "TS 24.301, Clause 5.4.4.2, Identification initiation by the network",
+      "model_answer": "The vulnerability lies in the lack of integrity protection for the IDENTITY REQUEST message, which allows an attacker to initiate a spoofed identification procedure by sending a forged request to the UE, potentially leading to leakage of sensitive identity information such as IMSI. This is exploitable because the UE does not verify the network's authenticity before responding.",
+      "evidence": "TS 24.301, Clause 5.4.4.2, Identification initiation by the network",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-12",
+      "input": "A UE shall be ready to respond to an IDENTITY REQUEST message at any time whilst in EMM-CONNECTED mode; upon receipt it shall send an IDENTITY RESPONSE message containing the identification parameters as requested.",
+      "gold_evidence": "TS 24.301, Clause 5.4.4.3, Identification response by the UE",
+      "model_answer": "The vulnerability lies in the mandatory UE behavior to always respond to an IDENTITY REQUEST in EMM-CONNECTED mode, which can be exploited by a rogue base station to force disclosure of permanent identity (IMSI), enabling user tracking and profiling. This is due to lack of network authentication prior to identity request.",
+      "evidence": "TS 24.301, Clause 5.4.4.3, Identification response by the UE",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-13",
+      "input": "If the UE does not hold a valid GUTI, P-TMSI or RAI, the UE shall include the IMSI in the EPS mobile identity IE.",
+      "gold_evidence": "TS 24.301, Clause 5.5.1.2.2, Attach procedure initiation",
+      "model_answer": "The vulnerability arises when a UE includes the IMSI in the EPS mobile identity IE due to lacking a valid GUTI, P-TMSI, or RAI, exposing the user's permanent identity over the air interface, which can be intercepted and tracked by adversaries.",
+      "evidence": "TS 24.301, Clause 5.5.1.2.2, Attach procedure initiation",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-14",
+      "input": "The EMM information procedure may be invoked by the network at any time during an established EMM context and consists only of the EMM INFORMATION message (message implementation is optional in the network).",
+      "gold_evidence": "TS 24.301, Clause 5.4.5.1, General",
+      "model_answer": "The vulnerability lies in the optional implementation of the EMM INFORMATION message by the network, which can lead to inconsistent or missing delivery of critical network information to the UE, potentially enabling denial-of-service or information spoofing if not properly enforced. This is specified in 3GPP TS 24.301 Clause 5.4.3.6.",
+      "evidence": "TS 24.301, Clause 5.4.5.1, General",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-15",
+      "input": "The use of the null integrity protection algorithm EIA0 in the current security context is only allowed for an unauthenticated UE for which establishment of emergency bearer services is allowed.",
+      "gold_evidence": "TS 24.301, Clause 4.4.4.1, General",
+      "model_answer": "The use of the null integrity protection algorithm EIA0 is only permitted for unauthenticated UEs when emergency bearer services are allowed, as allowing it otherwise would compromise signaling message integrity and expose the system to tampering.",
+      "evidence": "TS 24.301, Clause 4.4.4.1, General",
+      "evidence_correct": true
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-16",
+      "input": "For emergency bearer services, EIA0 and EEA0 can be selected as NAS security algorithms in a SECURITY MODE COMMAND under the conditions described in NAS security mode control initiation by the network (including KSI value \"000\").",
+      "gold_evidence": "TS 24.301, Clause 5.4.3.2, NAS security mode control initiation by the network",
+      "model_answer": "The vulnerability allows the use of null encryption (EEA0) and null integrity protection (EIA0) for emergency bearer services, which exposes NAS messages to eavesdropping and tampering. This is permitted under specific conditions when KSI = '000' and during emergency procedures, as defined in clause 4.4.3.3 of TS 24.301.",
+      "evidence": "TS 24.301, clause 4.4.3.3 states that for emergency bearer services, the network may initiate security mode control with EIA0 and EEA0 if the KSI value is '000', meaning no key is available and no native integrity can be provided.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-17",
+      "input": "If the AUTHENTICATION REJECT message is received by the UE, the UE shall abort any EMM signalling procedure, stop any retransmission timers that are running, and enter state EMM-DEREGISTERED.",
+      "gold_evidence": "TS 24.301, Clause 5.4.2.3, Authentication not accepted by the network",
+      "model_answer": "The vulnerability lies in the UE's mandatory behavior upon receiving an AUTHENTICATION REJECT message, which forces it to abort EMM procedures, stop timers, and transition to EMM-DEREGISTERED without verifying the authenticity of the message. This can be exploited by an attacker to prematurely disconnect the UE from the network via a spoofed AUTHENTICATION REJECT, leading to a denial-of-service (DoS).",
+      "evidence": "3GPP TS 24.301, clause 5.4.2.4: 'If the AUTHENTICATION REJECT message is received by the UE, the UE shall abort any EMM signalling procedure, stop any retransmission timers that are running, and enter state EMM-DEREGISTERED.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-18",
+      "input": "NOTE 1: A service request can only be rejected before the network has initiated any procedure which will be interpreted by the UE as successful completion of the service request procedure and which will trigger a transition from state EMM-SERVICE-REQUEST-INITIATED to EMM-REGISTERED.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.5, Service request procedure not accepted by the network",
+      "model_answer": "The vulnerability lies in the restricted timing window during which a service request can be rejected by the network. If the rejection occurs after the network has initiated procedures interpreted by the UE as successful completion, the UE may transition to EMM-REGISTERED without proper validation, potentially allowing unauthorized service access. This is specified in 3GPP TS 24.301, clause 5.5.1.2.8.",
+      "evidence": "3GPP TS 24.301, clause 5.5.1.2.8 states that a service request can only be rejected before the network initiates any procedure that the UE interprets as successful completion of the service request, which would trigger a state transition from EMM-SERVICE-REQUEST-INITIATED to EMM-REGISTERED.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-19",
+      "input": "The UE shall enter state EMM-REGISTERED after successful completion of the attach procedure.",
+      "gold_evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+      "model_answer": "The vulnerability lies in the assumption that successful completion of the attach procedure inherently ensures secure registration in EMM-REGISTERED state, without explicit verification of integrity protection or authentication confirmation in certain edge cases, potentially allowing rogue UEs to exploit timing or misconfiguration to gain unauthorized network access.",
+      "evidence": "3GPP TS 24.301, clause 5.5.1.2 states that the UE enters EMM-REGISTERED state upon successful attach completion, but does not mandate post-attach integrity validation at the NAS level, creating a potential window for impersonation if lower layers fail.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-20",
+      "input": "The MME shall start timer T3413 when sending the ATTACH ACCEPT message.",
+      "gold_evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+      "model_answer": "The vulnerability lies in the potential for a denial-of-service attack due to improper handling of timer T3413 upon retransmission of ATTACH ACCEPT; if the MME fails to consistently start or restart T3413, an attacker could exploit timing gaps to maintain stale contexts or force unnecessary signaling load.",
+      "evidence": "According to 3GPP TS 24.301, clause 5.5.1.2.4, the MME shall start timer T3413 after sending the ATTACH ACCEPT message when including the GUTI and/or authentication parameters, ensuring proper control of the attach procedure timeout.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-21",
+      "input": "If the UE receives an ATTACH ACCEPT message, it shall send an ATTACH COMPLETE message to the network.",
+      "gold_evidence": "TS 24.301, Clause 5.5.1.2.4, Attach accepted by the network",
+      "model_answer": "The vulnerability lies in the mandatory transmission of an ATTACH COMPLETE message upon receiving an ATTACH ACCEPT, which can be exploited for UE tracking or denial-of-service if spoofed network messages trigger unnecessary signaling. This behavior is defined in NAS procedures without conditional validation of network authenticity.",
+      "evidence": "3GPP TS 24.301, clause 5.5.1.2: 'The UE shall send an ATTACH COMPLETE message when it receives an ATTACH ACCEPT message.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-22",
+      "input": "The UE shall start timer T3412 upon entering EMM-REGISTERED state.",
+      "gold_evidence": "TS 24.301, Clause 5.3.5, Handling of the periodic tracking area update timer",
+      "model_answer": "The vulnerability lies in the potential for network tracking or denial-of-service attacks due to predictable periodic tracking area update (TAU) behavior initiated by the UE upon starting timer T3412 when entering EMM-REGISTERED state. An attacker could exploit the timing of T3412 to infer UE presence or force unnecessary signaling load.",
+      "evidence": "Clause 5.5.3.2 of 3GPP TS 24.301 states that the UE shall start timer T3412 after entering EMM-REGISTERED state to control the periodic TAU procedure, which creates a predictable communication pattern.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-23",
+      "input": "The network may initiate a GUTI reallocation procedure during an established EMM context.",
+      "gold_evidence": "TS 24.301, Clause 5.4.1.1, GUTI reallocation procedure",
+      "model_answer": "The vulnerability lies in the network's ability to initiate a GUTI reallocation during an established EMM context, which may be exploited for tracking or impersonation if not properly secured. This can occur when the network sends an Identity Request or GUTI Reallocation Command, potentially allowing correlation of UE identity over time.",
+      "evidence": "Clause 5.5.1.2 and 5.5.1.3 of 3GPP TS 24.301 specify that the GUTI reallocation procedure may be initiated by the network at any time, including during an established EMM context, to assign a new GUTI to the UE for improved subscriber identity protection.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-24",
+      "input": "Upon receiving a GUTI REALLOCATION COMMAND, the UE shall store the new GUTI and send a GUTI REALLOCATION COMPLETE message.",
+      "gold_evidence": "TS 24.301, Clause 5.4.1.3, GUTI reallocation completion by the UE",
+      "model_answer": "The vulnerability lies in the mandatory storage of a new GUTI upon receiving a GUTI REALLOCATION COMMAND without proper validation of the network's authenticity, potentially enabling impersonation or tracking attacks if an attacker spoofs this message. This behavior is defined in TS 24.301, Clause 5.5.1.2.",
+      "evidence": "3GPP TS 24.301, Clause 5.5.1.2 states that upon receiving a GUTI REALLOCATION COMMAND, the UE shall store the new GUTI and respond with a GUTI REALLOCATION COMPLETE message, implying no optional security check is required by the specification.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-25",
+      "input": "The authentication procedure is used to authenticate the UE and establish a security context.",
+      "gold_evidence": "TS 24.301, Clause 5.4.2.1, Authentication procedure",
+      "model_answer": "The vulnerability lies in the potential for a false base station (IMSI catcher) to exploit the lack of mutual authentication during the initial NAS authentication procedure, where the network authenticates the UE but the UE does not verify the network's identity, enabling man-in-the-middle attacks.",
+      "evidence": "Clause 4.4.2 of 3GPP TS 24.301 specifies that the authentication procedure is initiated by the network to authenticate the UE and cipher the signalling connection, but it does not mandate UE-side verification of the network, leaving a gap in mutual authentication.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-26",
+      "input": "The UE shall verify the authentication challenge and respond with an AUTHENTICATION RESPONSE message.",
+      "gold_evidence": "TS 24.301, Clause 5.4.2.3, Authentication response by the UE",
+      "model_answer": "The vulnerability lies in the potential for a man-in-the-middle attack if the UE does not properly verify the authenticity of the authentication challenge from the network, allowing an attacker to impersonate the network and obtain valid authentication responses. This can occur if the UE fails to validate the freshness or integrity of the RAND and AUTN parameters.",
+      "evidence": "Clause 5.4.2.3 of 3GPP TS 24.301 specifies that the UE shall verify the correctness of the AUTN, including sequence number validation and MAC verification, before sending the AUTHENTICATION RESPONSE. Failure to do so compromises the security of the authentication procedure.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-27",
+      "input": "The security mode control procedure is used to establish NAS security between the UE and the network.",
+      "gold_evidence": "TS 24.301, Clause 5.4.3.1, General",
+      "model_answer": "The vulnerability lies in the potential for downgrading NAS security if integrity protection is not properly enforced during the Security Mode Control procedure. This could allow an attacker to intercept or manipulate NAS messages if the UE or network accepts a weaker security configuration.",
+      "evidence": "Clause 4.4.5 of 3GPP TS 24.301 specifies that the Security Mode Command message initiates the establishment of NAS security, including integrity and ciphering algorithms; however, improper validation of selected algorithms may lead to security downgrade attacks.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-28",
+      "input": "Upon successful completion of the security mode control procedure, NAS signalling messages shall be integrity protected.",
+      "gold_evidence": "TS 24.301, Clause 4.4.4.1, General",
+      "model_answer": "The vulnerability lies in the absence of integrity protection for NAS signalling messages prior to completion of the security mode control procedure, which may allow attackers to modify messages in transit. Upon successful completion, integrity protection must be applied as mandated by the standard.",
+      "evidence": "3GPP TS 24.301, clause 4.4.5: 'After successful completion of the security mode control procedure, all NAS signalling messages shall be integrity protected.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-29",
+      "input": "The UE shall enter state EMM-SERVICE-REQUEST-INITIATED after sending a SERVICE REQUEST message.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.2, Service request procedure initiation",
+      "model_answer": "The vulnerability lies in the potential for a denial-of-service attack where an attacker could force the UE into EMM-SERVICE-REQUEST-INITIATED state by spoofing or triggering unnecessary SERVICE REQUEST procedures, leading to resource exhaustion. This is because the UE must remain in this state until receiving a response, during which it may not handle other signaling efficiently.",
+      "evidence": "Clause 5.3.2 of TS 24.301 specifies that the UE shall enter EMM-SERVICE-REQUEST-INITIATED after sending a SERVICE REQUEST message and shall remain in this state until receiving a SERVICE REJECT or SERVICE ACCEPT.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-30",
+      "input": "The network shall respond to a SERVICE REQUEST with either SERVICE ACCEPT or SERVICE REJECT.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.4, Service request procedure accepted by the network",
+      "model_answer": "The vulnerability lies in the absence of authentication during the SERVICE REQUEST procedure, allowing an unauthenticated attacker to trigger network responses (SERVICE ACCEPT or SERVICE REJECT), potentially leading to denial-of-service or state exhaustion attacks. The network is required to respond without first verifying the UE's identity or NAS integrity, enabling exploitation.",
+      "evidence": "3GPP TS 24.301, Clause 5.3.2 states that the network shall respond to a SERVICE REQUEST message with either a SERVICE ACCEPT or SERVICE REJECT message, without requiring prior authentication or integrity protection of the request.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-31",
+      "input": "The UE shall stop timer T3417 upon receiving a SERVICE ACCEPT message.",
+      "gold_evidence": "TS 24.301, Clause 5.6.1.4, Service request procedure accepted by the network",
+      "model_answer": "The vulnerability lies in the improper handling of timer T3417, where the UE stops the timer upon receiving a SERVICE ACCEPT message, potentially allowing an attacker to manipulate service request procedures or cause premature release of signaling connectivity. This behavior is defined in clause 5.5.3.2.7 of TS 24.301.",
+      "evidence": "3GPP TS 24.301, clause 5.5.3.2.7 states that the UE shall stop timer T3417 when it receives a SERVICE ACCEPT message during the extended service request procedure.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-32",
+      "input": "The tracking area updating procedure is used to inform the network of the UE's current tracking area.",
+      "gold_evidence": "TS 24.301, Clause 5.5.3.1, General",
+      "model_answer": "The vulnerability lies in the lack of integrity protection during the Tracking Area Updating (TAU) procedure initiation, which may allow an attacker to spoof TAU requests and cause location tracking or denial of service. This is due to the fact that NAS messages initiating TAU are not required to be integrity protected before security mode establishment, as permitted under certain conditions in TS 24.301.",
+      "evidence": "Clause 4.4.4.3 of 3GPP TS 24.301 states that the UE may initiate a TAU procedure without having established NAS integrity, allowing unprotected messages to be accepted by the network during initial registration or mobility management.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-33",
+      "input": "Upon receiving a TRACKING AREA UPDATE ACCEPT message, the UE shall update the stored tracking area identity list.",
+      "gold_evidence": "TS 24.301, Clause 5.5.3.2.4, Tracking area updating procedure accepted by the network",
+      "model_answer": "The vulnerability lies in the absence of proper validation by the UE when updating the stored tracking area identity (TAI) list upon receiving a TRACKING AREA UPDATE ACCEPT message. An attacker could manipulate the network to send a maliciously crafted TAU ACCEPT with an invalid or unauthorized TAI list, potentially leading to location spoofing, tracking, or redirection attacks. The specification mandates the update but does not enforce integrity checks on the received TAI list, creating a trust issue.",
+      "evidence": "3GPP TS 24.301, clause 5.5.3.2: 'Upon receiving the TRACKING AREA UPDATE ACCEPT message, the UE shall apply the updated tracking area identity list.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-34",
+      "input": "The UE shall enter state EMM-TRACKING-AREA-UPDATING-INITIATED after sending a TRACKING AREA UPDATE REQUEST.",
+      "gold_evidence": "TS 24.301, Clause 5.5.3.2.2, Normal and periodic TAU initiation",
+      "model_answer": "The vulnerability lies in the fact that the UE may be tracked during the EMM-TRACKING-AREA-UPDATING-INITIATED state after sending a TRACKING AREA UPDATE REQUEST, potentially exposing its location to unauthorized entities if signaling is not properly protected. This state transition creates a window where the UE is identifiable and active in signaling procedures without guaranteed confidentiality or integrity protection on the air interface.",
+      "evidence": "3GPP TS 24.301, clause 5.5.3.2: 'When the UE sends the TRACKING AREA UPDATE REQUEST message, it shall enter the state EMM-TRACKING-AREA-UPDATING-INITIATED.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-35",
+      "input": "The UE initiated detach procedure is used to explicitly deregister the UE from the network.",
+      "gold_evidence": "TS 24.301, Clause 5.5.2.1, General",
+      "model_answer": "The UE-initiated detach procedure allows a UE to explicitly deregister from the network, which can be exploited if not properly authenticated or authorized, potentially enabling denial-of-service or impersonation attacks by malicious UEs. The vulnerability lies in the potential for unauthorized detach requests that may disrupt service for legitimate users.",
+      "evidence": "Clause 5.5.2.2 of 3GPP TS 24.301 specifies the UE initiated detach procedure, stating that the UE can initiate detach to indicate it is switching off or leaving the EPC coverage, but does not inherently include mechanisms to prevent misuse if the UE identity or context is spoofed.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-36",
+      "input": "The UE shall send a DETACH REQUEST message to initiate the UE initiated detach procedure.",
+      "gold_evidence": "TS 24.301, Clause 5.5.2.2.1, UE initiated detach procedure initiation",
+      "model_answer": "The vulnerability lies in the lack of authentication and integrity protection for the DETACH REQUEST message sent by the UE, which may allow an attacker to spoof a detach request and force a legitimate UE offline. This is due to the fact that NAS messages, including DETACH REQUEST, are not required to be integrity-protected prior to security mode completion, making them susceptible to forgery if transmitted over a compromised channel.",
+      "evidence": "Clause 4.4.2 of 3GPP TS 24.301 states that the UE initiated detach procedure begins with the UE sending a DETACH REQUEST message, but integrity protection for NAS messages is only established after successful authentication and security mode control. Prior to that, NAS messages are vulnerable to tampering.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-37",
+      "input": "Upon receiving a DETACH ACCEPT message, the UE shall enter state EMM-DEREGISTERED.",
+      "gold_evidence": "TS 24.301, Clause 5.5.2.2.2, UE initiated detach procedure completion",
+      "model_answer": "The vulnerability lies in the lack of integrity protection for the DETACH ACCEPT message, allowing an attacker to spoof it and force a UE into EMM-DEREGISTERED state, leading to denial of service. The UE transitions state upon receipt without verifying message authenticity.",
+      "evidence": "According to 3GPP TS 24.301, clause 5.5.2.3, upon receiving a DETACH ACCEPT message, the UE shall enter EMM-DEREGISTERED. However, NAS messages like DETACH ACCEPT are not integrity protected when sent by the network during certain states, enabling impersonation attacks.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-38",
+      "input": "The paging procedure is used by the network to notify the UE of incoming signalling or data.",
+      "gold_evidence": "TS 24.301, Clause 5.6.2.1, General",
+      "model_answer": "The paging procedure can be exploited for denial-of-service attacks by triggering repeated paging responses from UEs, leading to resource exhaustion. This vulnerability arises because the network initiates paging without prior knowledge of UE state, and UEs are required to respond upon receiving a paging message for their identity. The lack of rate-limiting or authentication in the paging mechanism allows malicious actors to spoof paging messages or force unnecessary UE responses.",
+      "evidence": "3GPP TS 24.301 Clause 5.3.5 specifies that the network initiates paging to notify UEs of incoming calls or downlink data, and UEs must perform a service request procedure upon receiving a valid paging message containing their identity (e.g., S-TMSI or IMSI).",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-39",
+      "input": "The UE shall monitor the paging channel in idle mode according to DRX parameters.",
+      "gold_evidence": "TS 24.301, Clause 5.6.2.2, Paging for EPS services",
+      "model_answer": "The vulnerability lies in the potential for an attacker to exploit discontinuous reception (DRX) parameters during idle mode paging, enabling denial-of-service or tracking attacks by manipulating or predicting UE wake-up cycles. This arises because the network controls DRX cycle configuration without mutual authentication or integrity protection on system information containing DRX settings.",
+      "evidence": "Clause 5.7.3 of TS 24.301 specifies that the UE shall monitor the paging channel according to DRX parameters broadcast by the network, but does not mandate integrity protection of these parameters, leaving them susceptible to malicious modification.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-40",
+      "input": "The transport of NAS messages procedure is used to convey NAS messages between the UE and the network.",
+      "gold_evidence": "TS 24.301, Clause 5.6.3.1, General",
+      "model_answer": "The vulnerability lies in the lack of mandatory integrity protection for certain NAS messages during transport, potentially allowing tampering if transmitted over an insecure channel. This is particularly relevant before security mode control completion.",
+      "evidence": "Clause 4.4.3 of TS 24.301 states that 'Before the activation of EPS NAS security, NAS messages are not integrity protected', which exposes early signaling messages to potential manipulation by an attacker with access to the radio interface.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-41",
+      "input": "The UE shall send an UPLINK NAS TRANSPORT message to convey NAS information to the network.",
+      "gold_evidence": "TS 24.301, Clause 5.6.3.2, UE initiated transport of NAS messages",
+      "model_answer": "The vulnerability lies in the lack of mandatory integrity protection for the UPLINK NAS TRANSPORT message when carrying certain types of NAS information, potentially allowing an attacker to inject or modify data if not properly secured by higher layers.",
+      "evidence": "According to 3GPP TS 24.301, clause 5.5.1.6, the UPLINK NAS TRANSPORT message is used by the UE to transfer NAS information elements to the network, but integrity protection is not enforced for all contents, depending on the security context and type of transported data.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-42",
+      "input": "The EMM STATUS message is used to report protocol errors.",
+      "gold_evidence": "TS 24.301, Clause 5.7, Reception of an EMM STATUS message",
+      "model_answer": "The EMM STATUS message can be exploited to cause denial-of-service or mislead the network about the UE's state by sending spurious error indications, as it is sent without ciphering and integrity protection even after security is activated, potentially allowing attackers to inject or alter messages.",
+      "evidence": "3GPP TS 24.301, clause 5.4.3.2: 'The EMM STATUS message shall always be sent in unsecured mode (i.e. without integrity protection and without ciphering), even when security has been activated.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-43",
+      "input": "If an unknown message type is received, the receiving entity shall ignore the message.",
+      "gold_evidence": "TS 24.301, Clause 7.4, Unknown or unforeseen message type",
+      "model_answer": "The vulnerability lies in the fact that unknown NAS message types are silently ignored by the receiving entity, which can be exploited to bypass detection or inject invalid messages without triggering alerts. This behavior may allow attackers to probe the system or cause inconsistent states since no error handling or logging is mandated for unknown messages.",
+      "evidence": "3GPP TS 24.301, clause 4.4.2: 'If an unknown message type is received, the receiving entity shall ignore the message.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-44",
+      "input": "If a mandatory information element is missing, the receiver shall handle the error according to defined rules.",
+      "gold_evidence": "TS 24.301, Clause 7.5, Non-semantic mandatory IE errors",
+      "model_answer": "If a mandatory information element is missing in a NAS message, the receiver shall handle the error as per the defined error handling procedures to ensure protocol robustness and security.",
+      "evidence": "Clause 9.2 of 3GPP TS 24.301 states that if a message is received with missing mandatory information elements, the receiver shall apply appropriate error handling, typically by rejecting the message and initiating an error procedure.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-45",
+      "input": "The EPS session management procedures control the establishment, modification, and release of bearer contexts.",
+      "gold_evidence": "TS 24.301, Clause 6.1, Overview",
+      "model_answer": "The vulnerability lies in improper handling of EPS session management procedures, which may allow unauthorized modification or release of bearer contexts if integrity and authentication checks are bypassed during procedure execution.",
+      "evidence": "Clause 6.4 of 3GPP TS 24.301 states that 'The network shall ensure that all ESM procedures are protected by means of integrity protection and executed only after successful authentication.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-46",
+      "input": "The UE shall start timer T3480 when initiating a bearer resource allocation procedure.",
+      "gold_evidence": "TS 24.301, Clause 6.5.3.2, UE requested bearer resource allocation initiation",
+      "model_answer": "The vulnerability lies in the potential for a denial-of-service attack by exploiting the bearer resource allocation procedure, as the UE starts timer T3480 without ensuring network authorization or validation of the request, possibly leading to resource exhaustion if misused. This behavior is specified without sufficient safeguards against malicious initiation.",
+      "evidence": "Clause 6.4.2.2 of 3GPP TS 24.301 states that the UE shall start timer T3480 when initiating a bearer resource allocation procedure, but does not mandate authentication or authorization checks prior to starting the timer, creating a potential vector for abuse.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-47",
+      "input": "If the network accepts the bearer resource allocation request, it shall activate the dedicated bearer context.",
+      "gold_evidence": "TS 24.301, Clause 6.5.3.3, UE requested bearer resource allocation accepted",
+      "model_answer": "The vulnerability lies in the unconditional activation of a dedicated bearer context upon acceptance of a bearer resource allocation request, which may allow an attacker to exhaust network resources or establish unauthorized bearers if proper authorization checks are not enforced. This behavior is defined in TS 24.301 without sufficient emphasis on pre-authorization validation before activation.",
+      "evidence": "Clause 6.4.1.2 of 3GPP TS 24.301 states that upon accepting the Bearer Resource Allocation Request, the network shall activate the dedicated bearer context, implying immediate activation without explicit requirement for prior policy or subscription-based validation.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-48",
+      "input": "The UE shall enter state BEARER CONTEXT ACTIVE after successful bearer activation.",
+      "gold_evidence": "TS 24.301, Clause 6.1.3.2, ESM sublayer states in the UE",
+      "model_answer": "The vulnerability lies in the lack of proper validation or authorization before the UE enters the BEARER CONTEXT ACTIVE state after bearer activation, which could allow an attacker to establish unauthorized bearers if network-side checks are bypassed. This may lead to service abuse or denial of service.",
+      "evidence": "3GPP TS 24.301, Clause 6.1.3.3 states that the UE shall enter the BEARER CONTEXT ACTIVE state upon successful activation of a dedicated bearer, but does not mandate strong network verification mechanisms within the UE to confirm the legitimacy of the activation request.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-49",
+      "input": "The network may deactivate an EPS bearer context when it is no longer required.",
+      "gold_evidence": "TS 24.301, Clause 6.4.4.1, General",
+      "model_answer": "The network may deactivate an EPS bearer context when it is no longer required, which could be exploited if not properly authenticated or authorized, potentially leading to denial of service or disruption of service. This procedure is defined in 3GPP TS 24.301, where the deactivation can be initiated by the network without explicit UE consent.",
+      "evidence": "3GPP TS 24.301 Clause 6.4.4: 'The network may initiate deactivation of an EPS bearer context at any time when the EPS bearer context is no longer needed.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "4G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-50",
+      "input": "Upon receiving a DEACTIVATE EPS BEARER CONTEXT REQUEST, the UE shall release the bearer resources.",
+      "gold_evidence": "TS 24.301, Clause 6.4.4.3, EPS bearer context deactivation accepted by the UE",
+      "model_answer": "The vulnerability lies in the lack of integrity protection for the DEACTIVATE EPS BEARER CONTEXT REQUEST message, allowing an attacker to spoof the network and trigger premature bearer release, leading to denial of service. The UE is required to release bearer resources upon receiving this message without verifying its authenticity.",
+      "evidence": "3GPP TS 24.301, Clause 6.4.4.3: 'Upon receipt of the DEACTIVATE EPS BEARER CONTEXT REQUEST message, the UE shall deactivate the EPS bearer context and initiate the UE requested PDN disconnect procedure.' This action is performed without requiring integrity protection check on the message in certain states.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-01",
+      "input": "If an attacker can send a CONFIGURATION UPDATE COMMAND with the acknowledgement bit set, the UE is required to return CONFIGURATION UPDATE COMPLETE and accept the configuration, enabling unauthorized remote modification and persistent state changes without prior user confirmation.",
+      "gold_evidence": "TS 24.501, Clause 5.4.4.3, Generic UE configuration update accepted by the UE",
+      "model_answer": "The vulnerability lies in the mandatory UE behavior to respond with CONFIGURATION UPDATE COMPLETE and accept configuration changes when the acknowledgement bit is set in CONFIGURATION UPDATE COMMAND, even if initiated by an untrusted source, potentially enabling unauthorized remote configuration persistence without user consent.",
+      "evidence": "3GPP TS 24.501, clause 8.2.29: Upon receiving a CONFIGURATION UPDATE COMMAND with the 'request type' indicating acknowledgement, the UE shall send a CONFIGURATION UPDATE COMPLETE message and apply the provided configuration parameters.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-02",
+      "input": "Upon receiving any CONFIGURATION UPDATE COMMAND, the UE stops T3346 if running and updates stored parameters, which allows a forged or tampered command to neutralize backoff timers and silently inject configuration for tracking or policy manipulation.",
+      "gold_evidence": "TS 24.501, Clause 5.4.4.3, Generic UE configuration update accepted by the UE",
+      "model_answer": "The vulnerability allows an attacker to forge or tamper with a CONFIGURATION UPDATE COMMAND, causing the UE to stop T3346 and apply malicious configurations, potentially enabling tracking or policy manipulation by bypassing access restrictions enforced by backoff timers.",
+      "evidence": "According to 3GPP TS 24.501 clause 5.5.1.3.7, upon receiving a CONFIGURATION UPDATE COMMAND, the UE shall stop timer T3346 if it is running and update the stored network configuration parameters. This behavior does not require integrity protection of the command, allowing an attacker to spoof the message and prematurely terminate the backoff period.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-03",
+      "input": "Replay protection is mandated but left implementation-dependent with no specific mechanism, creating inconsistent defenses across devices and enabling replay, desynchronization, and denial-of-service attacks in practice.",
+      "gold_evidence": "TS 24.501, Clause 4.4.3.2, Replay protection",
+      "model_answer": "Replay protection in 5G NAS is mandated but implementation-dependent, leading to inconsistent security and potential replay, desynchronization, and DoS attacks due to lack of standardized mechanisms.",
+      "evidence": "3GPP TS 24.501 specifies replay protection as a requirement but allows flexibility in implementation (Clause 4.7.2), which can result in inadequate or inconsistent protection across devices.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-04",
+      "input": "Because the receiver may select an overflow counter that yields a lower NAS COUNT than the stored value when it believes a message is fresh, ambiguity in this rule can permit COUNT rollback, counter desynchronization, and replay opportunities.",
+      "gold_evidence": "TS 24.501, Clause 4.4.3.1, General (NAS COUNT estimation rule)",
+      "model_answer": "The vulnerability arises from ambiguous handling of NAS COUNT during overflow counter selection, potentially allowing rollback or replay attacks when the receiver accepts a lower COUNT value under the assumption of message freshness.",
+      "evidence": "TS 24.501 §4.4.3 and §4.4.4 define the NAS COUNT formation using SQN and overflow counters, but do not strictly prevent selection of an overflow counter that results in a lower COUNT, enabling desynchronization if misinterpreted as fresh.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-05",
+      "input": "Resetting the uplink NAS COUNT upon certain SECURITY MODE COMMAND cases can be exploited to force counter resets, creating desynchronization windows that weaken replay protection and introduce race conditions.",
+      "gold_evidence": "TS 24.501, Clause 5.4.2.3, NAS security mode command accepted by the UE",
+      "model_answer": "Resetting the uplink NAS COUNT upon certain SECURITY MODE COMMAND cases can be exploited to force counter resets, creating desynchronization windows that weaken replay protection and introduce race conditions. This occurs when the UE incorrectly reinitializes the uplink count during security mode negotiation, potentially allowing an attacker to induce a lower COUNT value and facilitate replay attacks.",
+      "evidence": "3GPP TS 24.501, clause 4.4.3.2 and clause 6.3.3 specify that the uplink NAS COUNT shall be reset to zero after receiving a SECURITY MODE COMMAND, but only under specific conditions such as initial registration or handover. Improper handling of this reset can lead to desynchronization between UE and network, weakening replay protection mechanisms.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-06",
+      "input": "Because security-protected NAS messages include a visible security header and sequence number, observers can exploit sequence number exposure for traffic analysis, fingerprinting, and potential linkability even when payloads are encrypted.",
+      "gold_evidence": "TS 24.501, Clause 9.1.1, NAS message format (security protected 5GS NAS message fields)",
+      "model_answer": "The exposure of the sequence number in the security header of protected NAS messages allows passive observers to perform traffic analysis, device fingerprinting, and linkability attacks, despite payload encryption, because the sequence number is transmitted in clear.",
+      "evidence": "3GPP TS 24.501, clause 9.9.3.33: 'The COUNT value used for integrity protection and ciphering of a NAS message contains a sequence number which is included in the NAS message as the NAS COUNT part of the security header.' This exposes the sequence number in plaintext, enabling correlation over time.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-07",
+      "input": "Integrity protection is only mandatory once a valid 5G NAS security context is in use, so any implementation gaps during transitions or missing MAC verification can allow unauthenticated messages to be accepted, enabling fake registration or deregistration and signalling denial-of-service.",
+      "gold_evidence": "TS 24.501, Clause 4.4.4.1, General (integrity mandatory once valid 5G NAS security context exists)",
+      "model_answer": "Integrity protection in 5G NAS is only mandatory when a valid security context exists, leaving initial messages unprotected. Implementation flaws during state transitions or failure to verify MAC on protected messages may allow attackers to inject forged Registration Request or Deregistration Request messages, leading to service disruption or impersonation.",
+      "evidence": "Clause 4.4.2.1 of 3GPP TS 24.501 states that integrity protection is required for NAS messages only if a valid 5G NAS security context is established, implying that unauthenticated messages may be processed during initial registration or context setup phases.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-08",
+      "input": "Because the AMF may process several initial NAS messages without an established secure exchange, attackers can submit unauthenticated registration, identity, or security-mode outcomes to induce fake messages, denial-of-service, or unauthorized state changes.",
+      "gold_evidence": "TS 24.501, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the AMF (exception list + MAC-failure processing)",
+      "model_answer": "The vulnerability arises because the AMF processes initial NAS messages before security is established, allowing unauthenticated attackers to inject fake registration, identity, or security-mode messages, potentially causing denial-of-service or unauthorized state transitions.",
+      "evidence": "3GPP TS 24.501, clause 4.7.1 states that the initial NAS messages (e.g., Registration Request) are sent unencrypted and unauthenticated over the air interface, making them susceptible to spoofing and tampering when no valid security context exists.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-09",
+      "input": "Since the AMF shall answer a received DEREGISTRATION REQUEST with DEREGISTRATION ACCEPT, a forged or replayed request can force unauthorized deregistration and denial-of-service if integrity checks are absent or bypassed.",
+      "gold_evidence": "TS 24.501, Clause 5.5.2.2.2, UE-initiated de-registration procedure completion",
+      "model_answer": "A forged or replayed DEREGISTRATION REQUEST can cause unauthorized deregistration and denial-of-service if integrity protection is absent, as the AMF is required to respond with a DEREGISTRATION ACCEPT upon receiving the request.",
+      "evidence": "3GPP TS 24.501, clause 5.5.2.2.2: 'The AMF shall send a DEREGISTRATION ACCEPT message in response to a received DEREGISTRATION REQUEST (from the UE or another entity).' This creates a vulnerability when no integrity check prevents spoofed or replayed requests.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-10",
+      "input": "Because a DEREGISTRATION REQUEST can be sent without integrity protection in certain cases (e.g., emergency services with no valid 5G NAS security context, or cancellation before secure exchange), attackers can inject spoofed deregistration to trigger unauthorized deregistration and denial-of-service.",
+      "gold_evidence": "TS 24.501, Clause 4.4.4.3, Integrity checking of NAS signalling messages in the AMF (NOTE 2 on DEREGISTRATION REQUEST without integrity)",
+      "model_answer": "The vulnerability lies in the ability to send a DEREGISTRATION REQUEST message without integrity protection in specific scenarios, such as during emergency registration or when no valid 5G NAS security context exists, allowing an attacker to inject a spoofed message and cause unauthorized deregistration or denial-of-service.",
+      "evidence": "3GPP TS 24.501 specifies that DEREGISTRATION REQUEST messages may be sent unauthenticated and unencrypted in certain cases (e.g., initial registration for emergency services), which removes integrity protection and enables spoofing attacks (Clause 4.11.1.2 and Clause 5.5.2.2).",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-11",
+      "input": "The NAS COUNT counters are only 24-bit and are maintained independently by UE and AMF, which increases the risk of wraparound, desynchronization, and replay windows if implementations do not handle edge cases robustly.",
+      "gold_evidence": "TS 24.501, Clause 4.4.3.1, General (NAS COUNT is 24-bit and independently maintained)",
+      "model_answer": "The 24-bit NAS COUNT counters in 5G NAS are prone to wraparound due to their limited size and independent maintenance by UE and AMF, increasing the risk of desynchronization and replay attacks if not properly managed during retransmissions or state mismatches.",
+      "evidence": "3GPP TS 24.501, clause 4.4.6 and clause 6.2.2.3 specify the use of a 24-bit COUNT value for integrity protection, where the sequence number (SQN) and hyperframe (HFN) together form COUNT, and note that HFN is incremented when SQN overflows; however, no mechanism beyond modulo arithmetic is mandated to prevent or detect wraparound-induced vulnerabilities.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-12",
+      "input": "A UE must generate and return a fresh SUCI and start T3519 when requested and the timer is not running, which enables forced computation, storage pressure, and potential SUCI-based linkability or resource exhaustion via repeated identity requests.",
+      "gold_evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE",
+      "model_answer": "The vulnerability arises when a UE is repeatedly requested to generate and return a fresh SUCI, forcing it to perform cryptographic computations and consume memory resources each time. If T3519 is not running, the UE must start it upon request, enabling an attacker to trigger repeated identity requests and induce resource exhaustion or enable SUCI-based linkability through forced re-computation. This can lead to denial of service or tracking via observable SUCI patterns.",
+      "evidence": "3GPP TS 24.501 specifies that the UE shall generate a new SUCI and start timer T3519 if it is not running when responding to an Identity Request (clause 5.5.1.2.7). Repeated triggering of this procedure by an attacker can force computational load and storage allocation, creating a potential vector for resource exhaustion and linkability.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-13",
+      "input": "The identification procedure explicitly allows the network to request identifiers such as SUCI, IMEI, IMEISV, EUI-64, or MAC, expanding the surface for identity solicitation that can be misused for tracking and privacy invasion.",
+      "gold_evidence": "TS 24.501, Clause 5.4.3.1, General (identification parameters that may be requested)",
+      "model_answer": "The identification procedure in 5G NAS allows the network to request various user identifiers like SUCI, IMEI, IMEISV, EUI-64, or MAC, which, if exploited, can lead to user tracking and privacy violations. Although intended for legitimate identification, improper access or misuse of these identifiers by compromised or rogue networks increases the risk of identity correlation and surveillance.",
+      "evidence": "3GPP TS 24.501, clause 5.5.1.2.2 specifies that the network may initiate an identification procedure to obtain identifying information such as SUCI, 5G-GUTI, IMEI(SV), or other identities, thereby exposing multiple identity types that could be misused if not properly protected.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-14",
+      "input": "Because the UE must be ready to respond to an IDENTITY REQUEST at any time in 5GMM-CONNECTED mode, spoofed or frequent requests can lead to unbounded identity replies that facilitate tracking and rate-limit abuse.",
+      "gold_evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (ready to respond at any time in 5GMM-CONNECTED)",
+      "model_answer": "The vulnerability arises because the UE is required to always respond to an IDENTITY REQUEST in 5GMM-CONNECTED mode, making it susceptible to tracking and denial-of-service via unbounded identity replies when exposed to spoofed or frequent requests.",
+      "evidence": "3GPP TS 24.501, clause 5.5.1.2.2 specifies that the UE shall respond to an IDENTITY REQUEST message with an IDENTITY RESPONSE at any time in 5GMM-CONNECTED mode, without rate-limiting or spoof detection mechanisms.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-15",
+      "input": "If the IDENTITY REQUEST is not for SUCI, the UE must return the requested identifiers (e.g., IMSI or IMEI) in plaintext, directly enabling active harvesting of permanent identifiers and long-term tracking.",
+      "gold_evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (non-SUCI Identity type handling)",
+      "model_answer": "The vulnerability lies in the requirement for UEs to return permanent identifiers like IMSI or IMEI in plaintext when responding to an IDENTITY REQUEST not using SUCI, enabling long-term tracking and active harvesting of sensitive user identity information.",
+      "evidence": "3GPP TS 24.501 specifies that if the network requests identity without using SUCI (e.g., requesting IMSI directly), the UE shall respond with the requested identity in clear, which exposes permanent identifiers over the air (Clause 5.5.1.2.2).",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-16",
+      "input": "When SUCI is requested, the UE either generates a fresh SUCI or reuses the stored one depending on T3519, which can be exploited as an authentication or linkability oracle and to impose repeated computation costs.",
+      "gold_evidence": "TS 24.501, Clause 5.4.3.3, Identification response by the UE (SUCI generation vs reuse gated by T3519)",
+      "model_answer": "The vulnerability arises because the UE may reuse a stored SUCI or generate a fresh one based on the T3519 timer, enabling attackers to exploit this behavior as an authentication or linkability oracle and to force repeated computationally expensive SUCI derivations, potentially leading to denial-of-service or user tracking.",
+      "evidence": "3GPP TS 24.501, clause 4.10.2.2 specifies that the UE shall include SUCI in the registration request, and clause 5.1.1.2 states that the UE shall use a privacy-preserving identifier unless configured otherwise. The handling of T3519 in clause 5.1.2.3.2 indicates that the UE may reattempt registration using the same or new SUCI depending on timer expiry, creating a timing side-channel.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-17",
+      "input": "By returning AUTHENTICATION FAILURE with a specific cause when rejecting authentication due to incorrect AUTN or ngKSI, the UE exposes an error-code oracle that assists linkability and targeted probing.",
+      "gold_evidence": "TS 24.501, Clause 5.4.1.3.6, Authentication not accepted by the UE (cause value indicates reason)",
+      "model_answer": "The AUTHENTICATION FAILURE message with specific cause values (e.g., #20 'MAC failure' for incorrect AUTN or #26 'Non-5G authentication unacceptable') acts as an error-code oracle, enabling adversaries to distinguish between different authentication failure types. This exposes the UE to linkability and targeted probing attacks by revealing internal authentication state or key mismatches.",
+      "evidence": "3GPP TS 24.501, clause 5.4.2.3 specifies that the AUTHENTICATION FAILURE message includes a cause value indicating the reason for failure, such as 'MAC failure' (cause #20) when AUTN is invalid, and clause 5.4.2.4 defines procedures for handling ngKSI mismatches. These explicit cause codes allow network attackers to infer cryptographic validation outcomes, violating indistinguishability principles required for privacy.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-18",
+      "input": "A REGISTRATION REJECT with cause #9 ('UE identity cannot be derived by the network') acts as an identity-related error oracle that can leak information about identity derivation status and aid tracking or targeted attacks.",
+      "gold_evidence": "TS 24.501, Clause 5.5.1.3.5, Mobility and periodic registration update not accepted by the network (cause #9)",
+      "model_answer": "A REGISTRATION REJECT with cause #9 ('UE identity cannot be derived by the network') serves as an identity-related error oracle, leaking whether the network could derive the UE's identity, which may enable tracking or targeted attacks by revealing internal processing states.",
+      "evidence": "3GPP TS 24.501, clause 6.4.1 and Table 9.9.3.31: Cause #9 is explicitly defined as 'UE identity cannot be derived by the network', and its use in REGISTRATION REJECT exposes the failure point in identity derivation, potentially enabling inference of UE behavior or identity status.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-19",
+      "input": "Upon receiving REGISTRATION REJECT with cause #76 from a CAG cell, the UE overwrites or deletes stored CAG lists based on the message, enabling configuration poisoning, persistent policy changes, and long-lived denial-of-service.",
+      "gold_evidence": "TS 24.501, Clause 5.5.1.2.5, Initial registration not accepted by the network (CAG list handling for cause #76)",
+      "model_answer": "The vulnerability allows an attacker to induce a UE to overwrite or delete its stored CAG list upon receiving a REGISTRATION REJECT (cause #76) from a CAG cell, leading to configuration poisoning, persistent policy manipulation, and long-term denial-of-service by preventing access to authorized CAGs.",
+      "evidence": "3GPP TS 24.501, clause 5.5.1.2.2 specifies that upon receiving REGISTRATION REJECT with cause #76 (Illegal UE), the UE shall abort the procedure and may remove the CAG ID from the allowed CAG list if it was the only one used in the registration attempt. However, no verification is required that the rejection originated from an authorized network, enabling malicious exploitation.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-20",
+      "input": "If a REGISTRATION REJECT is not integrity-protected, the UE must start T3346 with a random backoff value, allowing injected rejects to impose prolonged service denial via timer manipulation.",
+      "gold_evidence": "TS 24.501, Clause 5.5.1.2.5, Initial registration not accepted by the network (T3346 behavior for non-integrity-protected reject)",
+      "model_answer": "If a REGISTRATION REJECT message is not integrity-protected, the UE cannot verify its authenticity, making it vulnerable to maliciously injected messages. Upon receiving such a message, the UE starts timer T3346 with a random backoff value as per clause 5.5.1.2.8 of TS 24.501. An attacker can exploit this by sending forged, non-integrity-protected REGISTRATION REJECT messages, forcing the UE to repeatedly start T3346 and remain in a barred state for an extended, manipulated duration, thereby causing a prolonged denial of service.",
+      "evidence": "3GPP TS 24.501, clause 5.5.1.2.8: 'If the UE receives a REGISTRATION REJECT that is not integrity protected, the UE shall start timer T3346 with a random backoff value between 0 and the value indicated in the 'wait time' information element if present, or apply a default backoff.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-21",
+      "input": "Because the AMF can send SERVICE REJECT to terminate a service request, forged or replayed rejects can be used to block service establishment if integrity protections are bypassed.",
+      "gold_evidence": "TS 24.501, Clause 8.2.18, Service reject (message purpose definition)",
+      "model_answer": "The vulnerability lies in the potential for an attacker to forge or replay SERVICE REJECT messages to deny service establishment, exploiting the absence of mandatory integrity protection on certain NAS messages. If integrity checks are bypassed or misconfigured, the UE may accept a maliciously crafted or replayed SERVICE REJECT from a compromised or impersonated AMF, leading to a denial of service.",
+      "evidence": "3GPP TS 24.501, clause 4.4.6 specifies that the SERVICE REJECT message is not integrity protected when sent by the network, making it susceptible to forgery or replay if proper security mechanisms are not enforced.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-22",
+      "input": "The UE may self-initiate deregistration followed by re-registration when emergency services cease, which can be abused by adversaries manipulating emergency state to cause repeated deregistration and service disruption.",
+      "gold_evidence": "TS 24.501, Clause 5.5.2.1, General (UE behavior after emergency services cease)",
+      "model_answer": "The UE may self-initiate deregistration followed by re-registration upon cessation of emergency services, which can be exploited by adversaries to trigger repeated deregistration and cause service disruption by manipulating the emergency state.",
+      "evidence": "3GPP TS 24.501, clause 5.6.3.4: 'When the UE in emergency registration completes the emergency service, it shall de-register and may perform a new registration.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-23",
+      "input": "Because NAS signalling low priority for the UE is not supported in this release, devices that rely on low-priority access behavior may suffer access failures and encounter denial-of-service in congestion scenarios.",
+      "gold_evidence": "TS 24.501, Clause 4.5.2, Determination of access identities/access category (NOTE: low priority not supported in this release)",
+      "model_answer": "The vulnerability arises because NAS signalling with low priority is not supported in this release, leading to potential access failures and denial-of-service for UEs relying on low-priority access during network congestion.",
+      "evidence": "3GPP TS 24.501 clause 6.1.4 states that handling of low-priority traffic in NAS signalling is not supported in this release, which can result in access barring for UEs without appropriate priority handling.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-24",
+      "input": "While SDT is not ongoing, the UE can acquire system information and send SI requests, which unauthenticated or fake cells can exploit to elicit information, trigger control-plane load, or deny service.",
+      "gold_evidence": "TS 38.331, Clause 4.2.1, UE states and state transitions including inter RAT",
+      "model_answer": "While SDT is not ongoing, the UE can acquire system information and send SI requests, which unauthenticated or fake cells can exploit to elicit information, trigger control-plane load, or deny service.",
+      "evidence": "3GPP TS 24.501 clause 4.10.2.2 states that UEs may initiate System Information (SI) request procedures in absence of a secure connection, enabling exposure to rogue base stations.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-25",
+      "input": "A MUSIM UE that rejects RAN paging in 5GMM-CONNECTED with RRC inactive must initiate a SERVICE REQUEST with specific request types, which can be manipulated to create paging-driven signalling spikes and denial-of-service.",
+      "gold_evidence": "TS 24.501, Clause 5.3.1.4, 5GMM-CONNECTED mode with RRC inactive indication (MUSIM paging rejection behavior)",
+      "model_answer": "A MUSIM UE in 5GMM-CONNECTED with RRC inactive that rejects RAN paging can be exploited to generate excessive signaling by initiating repeated SERVICE REQUESTs with manipulated request types, leading to a denial-of-service via paging-driven signaling spikes.",
+      "evidence": "3GPP TS 24.501, clause 5.5.1.2.2 specifies that upon rejecting RAN paging, the UE shall initiate a SERVICE REQUEST procedure with appropriate request type; however, if this behavior is abused by a malicious UE, it can trigger amplified signaling load.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-26",
+      "input": "Requiring a 5GMM-IDLE UE to request resources for V2X communication over PC5 can be abused to trigger unauthorized resource requests that strain control-plane capacity and cause denial-of-service.",
+      "gold_evidence": "TS 24.501, Clause 5.6.1.1, General (resource request for V2X over PC5 mention)",
+      "model_answer": "Requiring a 5GMM-IDLE UE to request resources for V2X communication over PC5 can be exploited by an attacker to generate excessive service requests, leading to control-plane overload and denial-of-service. This occurs when malicious or compromised UEs repeatedly initiate resource requests without legitimate need, consuming network signaling resources.",
+      "evidence": "3GPP TS 24.501 clause 5.6.1.2 specifies that a 5GMM-IDLE UE shall perform a Service Request procedure to establish connectivity for services like V2X. However, no rate-limiting or authorization check is mandated prior to processing such requests, enabling abuse.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-27",
+      "input": "The UE transitions between defined 5GMM sublayer states such as 5GMM-DEREGISTERED, 5GMM-REGISTERED, and intermediate substates based on explicit procedure outcomes.",
+      "gold_evidence": "TS 24.501, Clause 5.1.3, 5GMM sublayer states",
+      "model_answer": "The vulnerability lies in improper state transition handling within the 5GMM sublayer, potentially allowing unauthorized access or service disruption if the UE does not correctly transition between 5GMM-DEREGISTERED, 5GMM-REGISTERED, and intermediate states after procedure failures or spoofed messages.",
+      "evidence": "3GPP TS 24.501 specifies that UE shall only transition between 5GMM states based on defined procedures and explicit outcomes (e.g., successful authentication, registration acceptance). Incorrect implementation may lead to state mismatches between UE and network, creating attack surfaces.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-28",
+      "input": "The UE selects appropriate registration areas and tracking area lists based on information provided by the network during registration procedures.",
+      "gold_evidence": "TS 24.501, Clause 5.3.4, Registration areas",
+      "model_answer": "The vulnerability lies in the potential for a malicious network to manipulate UE behavior by providing fraudulent tracking area lists (TAL) during registration procedures, leading to location tracking or denial of service. The UE relies on network-provided TAL without sufficient validation, enabling an attacker to force the UE into unnecessary tracking area updates or isolate it from service.",
+      "evidence": "3GPP TS 24.501 clause 5.5.3.2 specifies that the network provides the list of tracking areas (TAIs) during registration accept, and clause 5.5.3.3 states the UE shall use this list to determine registration areas. However, no mandatory integrity check by the UE on the received TAL is required, creating a trust vulnerability.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-29",
+      "input": "The UE stores and updates the list of equivalent PLMNs as provided by the network during registration accept.",
+      "gold_evidence": "TS 24.501, Clause 5.3.14, List of equivalent PLMNs",
+      "model_answer": "The vulnerability lies in the UE storing and updating equivalent PLMN lists provided by the network without sufficient validation, potentially allowing an attacker to inject rogue PLMNs and redirect the UE to a malicious network. This can lead to location tracking or interception.",
+      "evidence": "3GPP TS 24.501, clause 5.5.3.2: 'The UE shall store the list of equivalent PLMNs provided in the Registration Accept message and use it for subsequent cell selection and registration.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-30",
+      "input": "The UE handles periodic registration update timers and mobile reachable timers according to configured values.",
+      "gold_evidence": "TS 24.501, Clause 5.3.7, Handling of the periodic registration update timer",
+      "model_answer": "The vulnerability lies in the UE's handling of periodic registration update and mobile reachable timers based on configured network-provided values, which could be manipulated by an attacker to cause denial of service or track UE presence. If these timers are set to excessively short intervals, the UE may exhaust battery resources due to frequent signaling; if set too long, it delays reachability and impacts service delivery.",
+      "evidence": "3GPP TS 24.501, clause 5.5.2.2 and clause 5.5.3.2, specify that the UE shall apply the periodic registration update timer and mobile reachable timer values as received from the network without sufficient validation, making it vulnerable to misconfiguration or malicious manipulation.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-31",
+      "input": "The UE enters LIMITED-SERVICE or NO-CELL-AVAILABLE substates when radio coverage or PLMN availability is insufficient.",
+      "gold_evidence": "TS 24.501, Clause 5.2.2.3, Detailed description of UE behaviour in state 5GMM-DEREGISTERED",
+      "model_answer": "The vulnerability lies in the UE transitioning to LIMITED-SERVICE or NO-CELL-AVAILABLE substates under poor radio conditions or lack of PLMN availability, potentially enabling denial-of-service attacks or location tracking by forcing the UE into a less secure or unreachable state. This behavior is defined in the NAS state machine handling.",
+      "evidence": "3GPP TS 24.501, clause 5.3.2.2 and clause 5.3.2.3 describe the UE's MM (Mobility Management) states and substates, including LIMITED-SERVICE and NO-CELL-AVAILABLE, which are entered when suitable cell or PLMN is not available.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-32",
+      "input": "The UE coordinates between 5GMM and EMM during interworking with EPC using N26 interface when applicable.",
+      "gold_evidence": "TS 24.501, Clause 5.1.4, Coordination between 5GMM and EMM",
+      "model_answer": "The coordination between 5GMM and EMM during interworking with EPC may lead to inconsistent mobility state management if not properly synchronized, potentially enabling service disruption or location tracking. This vulnerability arises from state mismatches during inter-system mobility when the N26 interface is used.",
+      "evidence": "3GPP TS 24.501, clause 4.7.2 and clause 5.6.1.2 describe the interaction between 5GMM and EMM states during interworking with E-UTRAN via MME, where improper coordination can result in inconsistent NAS signaling state handling.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-33",
+      "input": "The UE maintains lists of forbidden tracking areas and forbidden PLMNs as instructed by the network.",
+      "gold_evidence": "TS 24.501, Clause 5.3.13, Lists of 5GS forbidden tracking areas",
+      "model_answer": "The vulnerability lies in the potential for denial-of-service or location tracking due to predictable handling of forbidden tracking areas (TAs) and PLMNs, where an attacker could manipulate UE behavior by forcing it into or out of service via false configuration. This is defined in the NAS specification where the UE stores and enforces these forbidden lists without sufficient validation mechanisms against malicious network instructions.",
+      "evidence": "3GPP TS 24.501, clause 5.6.3.2 and clause 5.6.4.2 state that the UE shall store and apply forbidden tracking area lists and forbidden PLMN lists as provided by the network, respectively, without requiring integrity protection of the initial configuration message, potentially allowing rogue network entities to enforce service denial.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-34",
+      "input": "The UE may apply extended DRX cycles in IDLE or CONNECTED with RRC inactive indication to reduce power consumption.",
+      "gold_evidence": "TS 24.501, Clause 5.3.16, Extended DRX cycle",
+      "model_answer": "The UE may apply extended DRX cycles in IDLE or CONNECTED with RRC inactive indication to reduce power consumption, which can be exploited if not properly managed, potentially leading to delayed detection of downlink data or signaling, affecting service continuity and security monitoring.",
+      "evidence": "3GPP TS 24.501, clause 5.4.6: The UE may use discontinuous reception (DRX) parameters provided by the network to reduce power consumption while ensuring reachability.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-35",
+      "input": "The UE handles NAS-level congestion control by deferring or limiting certain procedures when congestion indicators are present.",
+      "gold_evidence": "TS 24.501, Clause 5.3.9, Handling of NAS level mobility management congestion control",
+      "model_answer": "The vulnerability lies in the UE's handling of NAS-level congestion control, where deferring or limiting procedures upon congestion indicators may lead to denial-of-service or delayed service establishment for legitimate requests. An attacker could exploit network congestion indications to force UEs into prolonged deferral states, degrading availability.",
+      "evidence": "3GPP TS 24.501 clause 4.5.2 specifies that the UE shall apply congestion control by deferring mobile-originated signaling procedures when a congestion indication is received from the network, which can be abused to delay critical NAS procedures.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-36",
+      "input": "The UE supports operator-defined access categories that influence access control decisions.",
+      "gold_evidence": "TS 24.501, Clause 4.5.3, Operator-defined access categories",
+      "model_answer": "The vulnerability lies in the UE supporting operator-defined access categories, which may allow operators to manipulate access control decisions and potentially enable unauthorized or prioritized access, undermining network security and fairness. This can be exploited if not properly constrained by standardized access control policies.",
+      "evidence": "3GPP TS 24.501, clause 5.4.11 specifies that the UE may apply access control based on operator-defined access categories, which are configured via O&M, indicating a potential risk if operator configuration is misused or improperly validated.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-37",
+      "input": "The UE updates NSSAI information received from the network for network slicing support.",
+      "gold_evidence": "TS 24.501, Clause 4.6.2.2, NSSAI storage",
+      "model_answer": "The vulnerability lies in the potential for a malicious or compromised network to manipulate the UE's configured NSSAI by sending unauthorized or unexpected NSSAI updates during registration or configuration procedures, possibly leading to service disruption or misrouting of traffic across slices. This could be exploited if proper validation mechanisms are not enforced by the UE on received NSSAI configurations.",
+      "evidence": "According to 3GPP TS 24.501, clause 5.6.1.2 and clause 5.6.8, the UE configures its allowed and configured NSSAI based on network-provided information during Registration and Configuration Update procedures. However, insufficient validation by the UE of updated NSSAI from untrusted networks may lead to incorrect slice selection or exposure to rogue slicing configurations.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-38",
+      "input": "The UE follows defined procedures for disabling and re-enabling its N1 mode capability.",
+      "gold_evidence": "TS 24.501, Clause 4.9, Disabling and re-enabling of UE's N1 mode capability",
+      "model_answer": "The vulnerability lies in the potential for unauthorized manipulation of the UE's N1 mode capability, which could lead to denial of service or tracking if an attacker can trigger disabling/re-enabling procedures. This behavior is governed by mobility management state transitions and UE capability handling procedures.",
+      "evidence": "Clause 4.6.2 and Clause 5.5.2.3 of 3GPP TS 24.501 (V17.9.0) specify the conditions under which the UE disables and re-enables N1 mode, including power-off, deregistration, and mobile-originated services, ensuring correct state management to prevent unintended NAS procedure execution.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-39",
+      "input": "The UE processes NAS STATUS messages to report protocol errors or inconsistencies.",
+      "gold_evidence": "TS 24.501, Clause 5.4.6, 5GMM status procedure",
+      "model_answer": "The vulnerability lies in the potential for an attacker to exploit the UE's handling of NAS STATUS messages, which are used to report protocol errors or inconsistencies. Improper validation of these messages may lead to denial-of-service or state desynchronization.",
+      "evidence": "3GPP TS 24.501 clause 4.4.4.6 specifies that the NAS status message is sent by the UE or the network to report upper layer protocol errors, and incorrect processing can result in unintended behavior if malformed or unexpected status messages are accepted.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-40",
+      "input": "The UE applies defined behavior when receiving messages with unknown or unforeseen information elements.",
+      "gold_evidence": "TS 24.501, Clause 7.6, Unknown and unforeseen IEs",
+      "model_answer": "The vulnerability lies in the UE's handling of unknown or unforeseen Information Elements (IEs), where the UE shall ignore such IEs to ensure robustness against malformed or unexpected data. This behavior is defined to prevent denial-of-service or unintended processing due to unrecognized fields.",
+      "evidence": "3GPP TS 24.501, clause 4.4.2: 'If a UE receives a message including an information element which is not defined for that message, or if an IE value is outside the expected range, the UE shall treat the received IE as an unforeseen IE and shall ignore it.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-41",
+      "input": "The UE follows defined rules for handling messages that are too short or too long.",
+      "gold_evidence": "TS 24.501, Clause 7.2, Message too short or too long",
+      "model_answer": "The vulnerability lies in the UE's potential mishandling of NAS messages with invalid lengths, which could lead to unexpected behavior or denial of service if not properly validated. The UE must apply strict length checks on incoming NAS messages according to defined rules.",
+      "evidence": "3GPP TS 24.501, clause 4.4.5: 'The UE shall apply the rules for detecting and handling of messages that are too short or too long.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-42",
+      "input": "The UE coordinates 5GSM and ESM state when interworking with EPC without N26 interface.",
+      "gold_evidence": "TS 24.501, Clause 6.1.4.2, Coordination between 5GSM and ESM without N26",
+      "model_answer": "The vulnerability arises when the UE performs interworking between 5G and EPC without the N26 interface, leading to potential inconsistencies in coordinating 5GSM and ESM session management states. This may result in session state mismatches or loss of active PDU sessions during mobility procedures.",
+      "evidence": "TS 24.501, clause 4.8.3.2 and clause 6.2.2 describe the coordination of 5GSM and ESM states during interworking without N26, where the UE and network must ensure consistent session state handling to avoid unintended session release or duplication.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-43",
+      "input": "The UE processes network-requested PDU session modification procedures according to standardized rules.",
+      "gold_evidence": "TS 24.501, Clause 6.3.2, Network-requested PDU session modification procedure",
+      "model_answer": "The vulnerability lies in the fact that the UE must follow standardized rules for processing network-requested PDU session modification procedures, which may allow an attacker to manipulate session parameters if the network is compromised. This behavior is defined by design but could be exploited if malicious or malformed modifications are accepted without sufficient validation.",
+      "evidence": "3GPP TS 24.501, clause 6.4.2 states that the UE shall process the network-requested PDU session modification procedure as specified, including applying new session rules upon receiving a valid request from the network.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-44",
+      "input": "The UE releases PDU sessions upon network request following defined abnormal-case handling.",
+      "gold_evidence": "TS 24.501, Clause 6.3.3, Network-requested PDU session release procedure",
+      "model_answer": "The vulnerability lies in the potential for denial-of-service attacks where an attacker could spoof or manipulate network-initiated PDU session release messages, causing the UE to abnormally release active PDU sessions. This affects service availability and integrity.",
+      "evidence": "3GPP TS 24.501, clause 4.4.4.3 and clause 6.4.2 state that upon receiving a PDU Session Release Command from the network, the UE shall release the PDU session following abnormal-case handling procedures if no valid cause or security context is verified.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-45",
+      "input": "The UE handles service request rejection due to congestion using standardized backoff and retry rules.",
+      "gold_evidence": "TS 24.501, Clause 5.6.1.5, Service request procedure not accepted by the network",
+      "model_answer": "The vulnerability lies in predictable backoff and retry mechanisms used by the UE when a service request is rejected due to congestion, which can be exploited to sustain denial-of-service or amplify signaling load. The UE follows standardized procedures defined in 3GPP TS 24.501 for handling Service Request rejection, including mobility management (MM) backoff timers, but an attacker may manipulate network conditions to force repeated retries after backoff expiration, especially if the backoff timer values are known or easily inferred.",
+      "evidence": "Clause 5.5.1.3 of 3GPP TS 24.501 specifies that when the UE receives a 'Congestion' rejection (e.g., 5GMM cause #27), it shall apply a backoff mechanism using a locally configured timer (T3514). The UE may re-attempt the service request after the timer expires, but this behavior, while standardized for fairness, introduces predictability that can be exploited under adversarial conditions.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-46",
+      "input": "The UE supports emergency registration procedures with special handling for emergency services.",
+      "gold_evidence": "TS 24.501, Clause 5.5.1.2.6, Initial registration for emergency services",
+      "model_answer": "The vulnerability lies in the potential misuse of emergency registration procedures by allowing unauthorized UEs to exploit special handling for emergency services, possibly leading to denial-of-service or bypass of normal authentication. This is mitigated by strict operator policies and network enforcement.",
+      "evidence": "Clause 4.11.1.2 of TS 24.501 specifies that emergency registration does not require UE identity or credentials but requires the network to validate the request based on local policy and regulatory requirements.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-47",
+      "input": "The UE processes paging messages to re-establish connectivity when services are pending.",
+      "gold_evidence": "TS 24.501, Clause 5.6.2, Paging procedure",
+      "model_answer": "The vulnerability lies in the potential for denial-of-service attacks via malicious paging messages, as the UE automatically processes incoming paging without verifying the authenticity of the source, leading to resource exhaustion. This behavior is defined in the NAS specification where the UE responds to paging to re-establish connectivity upon pending services.",
+      "evidence": "3GPP TS 24.501, clause 5.4.3.2: 'The UE shall respond to a 5GSM page by performing a mobility registration update or service request procedure when it has uplink data or signaling to transmit.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-48",
+      "input": "The UE follows defined rules for notification procedures initiated by the network.",
+      "gold_evidence": "TS 24.501, Clause 5.6.3, Notification procedure",
+      "model_answer": "The vulnerability lies in the UE's mandatory compliance with network-initiated notification procedures without sufficient validation, potentially enabling rogue base station attacks or tracking. The UE must follow predefined rules for paging and other notifications as mandated by the network, which can be exploited if the network is compromised.",
+      "evidence": "3GPP TS 24.501, clause 5.6.1.2: 'The UE shall follow the network's instructions for handling paging and notification procedures.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-49",
+      "input": "The UE handles unknown or unforeseen message types according to standardized error-handling rules.",
+      "gold_evidence": "TS 24.501, Clause 7.4, Unknown or unforeseen message type",
+      "model_answer": "The vulnerability lies in the UE's standardized handling of unknown or unforeseen NAS message types, which may allow attackers to trigger predictable error responses (e.g., 'Message type not compatible with protocol state') that could be exploited for probing or denial-of-service. This behavior is defined by mandatory error-handling procedures in TS 24.501.",
+      "evidence": "3GPP TS 24.501, clause 4.4.6: 'If a UE receives a NAS message with a message type that is not defined for the current state or mode, it shall handle it as an invalid message and apply appropriate error handling.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_NAS_stage3-SecurityReasoning.json",
+      "id": "VD-50",
+      "input": "The UE follows defined abnormal-case handling when NAS procedures fail or are interrupted.",
+      "gold_evidence": "TS 24.501, Clause 5.6.2.2.2, Abnormal cases on the network side",
+      "model_answer": "The vulnerability lies in predictable or insufficient abnormal-case handling by the UE during NAS procedure failures or interruptions, which could be exploited to trigger denial-of-service or state desynchronization. The source is improper implementation of error handling mechanisms defined in 3GPP TS 24.501.",
+      "evidence": "Clause 4.4.3 of 3GPP TS 24.501 specifies that the UE shall follow defined procedures for abnormal cases, including appropriate error detection and recovery actions when NAS procedures fail or are interrupted.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-01",
+      "input": "Because the UE sets RRCSetupRequest.ue-Identity to either ng-5G-S-TMSI-Part1 (if provided by upper layers) or to a 39-bit random value before AS security is active, this pre-security identifier can be observed and correlated (linkability/tracking) and can be replayed/spoofed by an active attacker to induce contention/connection-setup denial-of-service.",
+      "gold_evidence": "TS 38.331, Clause 5.3.3.3, Actions related to transmission of RRCSetupRequest (ue-Identity selection before AS security).",
+      "model_answer": "The vulnerability arises because the UE uses a predictable or random but non-secure identifier (ng-5G-S-TMSI-Part1 or 39-bit random value) in RRCSetupRequest.ue-Identity before AS security is established, enabling tracking (linkability) and replay/spoofing attacks that can lead to denial of service via fake connection attempts.",
+      "evidence": "3GPP TS 38.331, clause 6.2.2 and clause 7.2 specify that the ue-Identity in RRCSetupRequest is set to ng-5G-S-TMSI-Part1 if provided by upper layers, otherwise to a 39-bit random value; however, no integrity protection or anti-replay mechanism is applied before AS security activation, allowing active attackers to observe, correlate, and spoof connection requests.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-02",
+      "input": "RRCSetupRequest is allowed to be sent unprotected prior to AS security activation, so an active attacker (rogue gNB / spoofing UE) can inject/spoof initial connection attempts to create signalling storms or contention-based denial-of-service before integrity/ciphering are available.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCSetupRequest: P=+, A-I=NA, A-C=NA).",
+      "model_answer": "The RRCSetupRequest message is transmitted without AS security protection during initial access, enabling an active attacker to spoof UEs or gNBs and trigger signalling storms or DoS via unauthenticated connection attempts. This vulnerability arises because no integrity or ciphering is applied at this stage, as per design in the initial RRC connection establishment procedure.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.1 states that the RRCSetupRequest is sent on SRB0 using TM (Transparent Mode), which provides no integrity or ciphering protection prior to security activation.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-03",
+      "input": "During the Security Mode procedure, ciphering is not applied immediately (ciphering is applied after completing the procedure), and if integrity verification fails the UE continues using the prior configuration (neither integrity protection nor ciphering). This creates an attack surface where an active attacker can force repeated failures and keep the connection from entering a fully protected state, leading to downgrade-like DoS and extended exposure of pre-security signalling.",
+      "gold_evidence": "TS 38.331, Clause 5.3.4.3 (on integrity failure: continue using prior configuration, neither integrity nor ciphering) and Annex B.1 (SecurityModeCommand/Complete/Failure protection behavior).",
+      "model_answer": "During the Security Mode procedure, ciphering is applied only after successful completion, and if integrity verification fails, the UE reverts to the prior security configuration (without integrity or ciphering). This allows an active attacker to trigger repeated failures, preventing establishment of secure communication and prolonging exposure of unsecured signalling, effectively causing a denial-of-service with reduced security. The vulnerability stems from the lack of mandatory ciphering enforcement during transition and fallback behavior.",
+      "evidence": "3GPP TS 38.331, Clause 5.4.3.2 specifies that ciphering is not applied to the SecurityModeCommand and SecurityModeComplete messages, and Clause 5.4.3.3 states that upon failure, the UE resumes using the previously active security configuration, which may include no ciphering or integrity protection.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-04",
+      "input": "An RRCRelease carrying waitTime can force the UE into RRC_IDLE with a backoff timer. Since RRCRelease may be sent unprotected prior to AS security activation, an attacker can spoof RRCRelease+waitTime to repeatedly push UEs into idle/backoff, causing denial-of-service and energy drain.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11 (UE behavior on RRCRelease with waitTime) and Annex B.1 (RRCRelease: P=+; unprotected prior to AS security).",
+      "model_answer": "An attacker can spoof an unprotected RRCRelease message containing waitTime to force a UE into RRC_IDLE with a backoff timer, causing denial-of-service and energy exhaustion. This is possible because RRCRelease messages may be delivered prior to AS security activation and are not integrity-protected at that stage.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.11 states that the RRCRelease message may be sent by the network to release the RRC connection and transition the UE to RRC_IDLE. Additionally, Clause 9.2.6 specifies that RRC messages prior to security activation are not protected, making them susceptible to spoofing. The waitTime parameter in RRCRelease enforces a suspension of RRC re-establishment attempts, which can be exploited for DoS.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-05",
+      "input": "RRCReject can be sent unprotected (including in SRB0 in RRC_INACTIVE), so a rogue node can reject connection/resume attempts without integrity/ciphering and thereby enforce connection-control abuse and RRC-level denial-of-service.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCReject: P=+, A-I=+, A-C=+; comment notes SRB0 in RRC_INACTIVE).",
+      "model_answer": "The RRCReject message can be transmitted without integrity protection or ciphering, even in SRB0 during RRC_INACTIVE state transitions, enabling a rogue base station to trigger repeated rejections and cause denial-of-service by preventing UE from establishing or resuming connections.",
+      "evidence": "According to 3GPP TS 38.331 Clause 5.3.11, RRCReject is sent on SRB0 which does not require integrity protection or ciphering, making it susceptible to spoofing or injection by malicious nodes.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-06",
+      "input": "RRCRelease may be sent unprotected prior to AS security activation, allowing an attacker to spoof releases to tear down connections or prematurely end signalling-only connections, causing repeated disconnects and signalling/energy-drain denial-of-service.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCRelease: P=+; justification for being sent unprotected).",
+      "model_answer": "The vulnerability lies in the fact that RRCRelease messages can be sent without integrity protection before AS security is activated, enabling an attacker to spoof such messages and force UEs into IDLE mode, leading to denial-of-service via repeated connection releases and associated signalling/energy drain.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.11: 'RRCRelease may be sent unauthenticated and unencrypted over SRB0 before the activation of AS security, making it susceptible to spoofing by an adversary.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-07",
+      "input": "MeasurementReport is specified to be sent only from the UE after successful AS security activation to protect UE privacy; the spec explicitly notes that measurement configuration may be sent earlier but the reporting is delayed until AS security is active.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (MeasurementReport: P=-, A-I=-, A-C=-; privacy note).",
+      "model_answer": "The vulnerability lies in the potential exposure of UE measurement reports before AS security activation, which could leak location or network information. The specification mandates that MeasurementReport messages must only be sent after AS security is activated to protect UE privacy. Sending such reports earlier could enable tracking or fingerprinting attacks.",
+      "evidence": "3GPP TS 38.331, Clause 5.5.2.2 states that 'Measurement reporting shall only be performed after activation of AS security to prevent exposure of UE measurements in unsecured state.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-08",
+      "input": "UEInformationResponse is specified to be sent only from the UE after successful security activation to protect UE privacy.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (UEInformationResponse: P=-, A-I=-, A-C=-; privacy note).",
+      "model_answer": "The vulnerability lies in the potential exposure of UE information if UEInformationResponse is transmitted before successful security activation, which could compromise user privacy. This is because unsecured transmission may allow eavesdropping or interception of sensitive UE data.",
+      "evidence": "3GPP TS 38.331, Clause 5.6.1.2 states that 'The UE shall only transmit the UEInformationResponse message after security has been activated for the connection.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-09",
+      "input": "RRCReconfiguration is permitted to be sent unprotected prior to AS security activation (with explicit restrictions such as not using it unprotected for handover or to establish SRB2/SRB4/multicast MRBs/DRBs). This allows an attacker (rogue gNB) to push unauthenticated configuration changes early in connection setup and disrupt mobility/setup behavior.",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (RRCReconfiguration: P=+; restriction note for HO/SRB2/SRB4/DRBs).",
+      "model_answer": "The vulnerability lies in allowing RRCReconfiguration messages to be sent unprotected before AS security is activated, enabling a rogue gNB to inject unauthenticated configuration changes that can disrupt UE behavior during early connection setup.",
+      "evidence": "TS 38.331, Clause 5.3.10 states that RRCReconfiguration may be sent prior to activation of AS security, but restricts its use for handover or establishment of SRB2/SRB4/MRBs/DRBs; however, other configurations remain susceptible to manipulation if not properly secured.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-10",
+      "input": "AS security is not activated during the initial phase of the RRC connection, which explains why certain initial RRC messages can be unprotected prior to security activation.",
+      "gold_evidence": "TS 38.331, Clause 5.3.1.1, RRC connection control (AS security not activated during the initial phase).",
+      "model_answer": "AS security is not activated during the initial phase of the RRC connection, leaving initial RRC messages unprotected until security is established. This is by design to allow necessary signaling for connection setup before cryptographic protection can be negotiated.",
+      "evidence": "3GPP TS 38.331, Clause 4.2.2 and Clause 7.2 describe that AS security activation occurs after the SecurityModeCommand and SecurityModeComplete procedures, meaning initial messages like RRCSetupRequest/Response are transmitted unsecured.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-11",
+      "input": "Paging can be sent unprotected both prior to AS security activation and after AS security activation (without integrity and without ciphering), enabling spoofed paging and broad privacy/availability abuse (e.g., tracking via induced paging responses or broadcast manipulation).",
+      "gold_evidence": "TS 38.331, Annex B.1, Protection of RRC messages (Paging: P=+, A-I=+, A-C=+).",
+      "model_answer": "Paging messages in 5G can be transmitted without integrity protection or ciphering, both before and after AS security activation, making them susceptible to spoofing, tracking, and denial-of-service attacks through maliciously induced paging responses or broadcast manipulation.",
+      "evidence": "3GPP TS 38.331, clause 9.2.1: 'The Paging message is not integrity protected and not ciphered, even when AS security has been activated.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-12",
+      "input": "If a UE receives an RRCSetup in response to an RRCResumeRequest/RRCResumeRequest1, it must discard the stored UE Inactive AS context and suspendConfig, discard the current AS security context (including K_RRCenc/K_RRCint/K_UPint/K_UPenc), and release RBs except SRB0. A spoofed RRCSetup at this timing can therefore force security-context deletion and state loss, causing RRC-level denial-of-service.",
+      "gold_evidence": "TS 38.331, Clause 5.3.3.4, Reception of the RRCSetup by the UE (on RRCSetup received in response to RRCResumeRequest/RRCResumeRequest1: discard contexts/keys and release RBs except SRB0).",
+      "model_answer": "A spoofed RRCSetup message received after an RRCResumeRequest/RRCResumeRequest1 can trigger the UE to discard its UE Inactive AS context, suspendConfig, and active AS security keys (K_RRCenc/K_RRCint/K_UPint/K_UPenc), leading to loss of security context and forced state reset. This results in an RRC-level denial-of-service as legitimate connections are prematurely terminated without proper authentication of the RRCSetup source.",
+      "evidence": "3GPP TS 38.331, clause 5.3.4.7: Upon receiving RRCSetup in response to RRCResumeRequest or RRCResumeRequest1, the UE shall discard the stored UE Inactive AS context and suspendConfig, delete the current AS security context (including K_RRCenc, K_RRCint, K_UPint, K_UPenc), and release all RBs except SRB0.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-13",
+      "input": "After successful completion of the Security Mode procedure, the UE applies integrity protection and ciphering according to the configured AS security algorithms.",
+      "gold_evidence": "TS 38.331, Clause 5.3.4.4",
+      "model_answer": "The vulnerability lies in the potential delay or misalignment between the completion of the Security Mode procedure and the actual application of integrity protection and ciphering at the UE, which could allow an attacker to exploit unsecured AS messages if executed during the transition window.",
+      "evidence": "3GPP TS 38.331, Clause 5.4.2.2 states that 'After successful completion of the Security Mode procedure, the UE applies integrity protection and ciphering according to the configured AS security algorithms.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-14",
+      "input": "If the Security Mode procedure completes successfully, the UE stores the negotiated AS security parameters for subsequent signalling.",
+      "gold_evidence": "TS 38.331, Clause 5.3.4.4",
+      "model_answer": "The vulnerability lies in the UE storing negotiated AS security parameters after a successful Security Mode procedure, which could be exploited if not properly validated or protected, potentially enabling replay or downgrade attacks.",
+      "evidence": "3GPP TS 38.331, Clause 5.4.3.2 states that upon successful completion of the Security Mode Command procedure, the UE shall store the negotiated AS security configuration for use in subsequent RRC and UP data protection.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-15",
+      "input": "The UE shall start timer T300 upon transmission of RRCSetupRequest to monitor RRC connection establishment.",
+      "gold_evidence": "TS 38.331, Clause 5.3.3.2",
+      "model_answer": "The vulnerability lies in the lack of rate limiting or backoff mechanism when the UE repeatedly transmits RRCSetupRequest and starts T300, potentially enabling denial-of-service through excessive random access attempts. This behavior is specified without safeguards against malicious or abnormal retransmissions.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.1 states: 'The UE shall start timer T300 upon transmission of the RRCSetupRequest message and stop it on reception of the RRCSetup message.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-16",
+      "input": "If timer T300 expires before receiving RRCSetup, the UE shall consider the RRC connection establishment failed.",
+      "gold_evidence": "TS 38.331, Clause 5.3.3.2",
+      "model_answer": "The vulnerability lies in the potential for denial-of-service attacks by exploiting the T300 timer expiration during RRC connection establishment. If an attacker prevents the UE from receiving RRCSetup (e.g., via jamming or spoofing), T300 expiry leads to repeated failed connection attempts, exhausting UE resources and denying service. This behavior is defined in 3GPP TS 38.331 without mitigation mechanisms against malicious delay or suppression of RRCSetup.",
+      "evidence": "3GPP TS 38.331 Clause 5.3.3.3: 'If timer T300 expires before the reception of the RRCSetup message, the UE shall consider the RRC connection establishment procedure as failed and stop the connection establishment.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-17",
+      "input": "Upon reception of RRCSetup, the UE shall transition to RRC_CONNECTED state.",
+      "gold_evidence": "TS 38.331, Clause 5.3.3.4",
+      "model_answer": "The vulnerability lies in the unconditional transition to RRC_CONNECTED upon receiving an RRCSetup message without verifying the integrity or authenticity of the message, potentially allowing an attacker to force state transitions. This could lead to denial-of-service or resource exhaustion attacks on the UE.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.2: 'Upon reception of the RRCSetup message, the UE shall transition to RRC_CONNECTED state and consider the RRC connection establishment as completed.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-18",
+      "input": "The UE shall start timer T301 upon sending RRCResumeRequest to supervise the resume procedure.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13.2",
+      "model_answer": "The vulnerability lies in the potential for a denial-of-service attack where an attacker could exploit the T301 timer supervision during the RRCResumeRequest procedure by causing premature expiration or resource exhaustion if the network does not respond, leading to prolonged UE inactivity or repeated resume attempts. This behavior is defined in TS 38.331 without mechanisms to limit retry counts or enforce stricter timer values, potentially enabling service disruption.",
+      "evidence": "TS 38.331, Clause 5.4.11: 'The UE shall start timer T301 upon sending the RRCResumeRequest message to supervise the resume procedure.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-19",
+      "input": "If timer T301 expires, the UE shall perform actions specified for resume failure handling.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13.2",
+      "model_answer": "The vulnerability arises if timer T301 expires, as the UE may mishandle resume failure procedures, potentially leading to denial of service or unexpected reconnection behavior. This is defined in 3GPP TS 38.331.",
+      "evidence": "TS 38.331, Clause 5.9.2: 'If the timer T301 expires, the UE shall perform the actions specified for resume failure handling.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-20",
+      "input": "When AS security is active, RRC messages shall be integrity protected and ciphered as specified.",
+      "gold_evidence": "TS 38.331, Clause 4.3.2",
+      "model_answer": "If AS security is active but RRC messages are not integrity protected or ciphered as required, it leads to a vulnerability where signaling messages can be tampered with or eavesdropped, compromising the confidentiality and integrity of the control plane communication.",
+      "evidence": "3GPP TS 38.331, Clause 9.2.1: 'When AS security is activated, the RRC shall ensure that all RRC messages are integrity protected and ciphered.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-21",
+      "input": "The UE shall not send MeasurementReport before successful AS security activation.",
+      "gold_evidence": "TS 38.331, Annex B.1",
+      "model_answer": "The vulnerability lies in the UE potentially sending a MeasurementReport before successful AS security activation, which could lead to exposure of measurement data over an unsecured link. This violates the requirement that AS security must be activated prior to any RRC message containing sensitive information being transmitted.",
+      "evidence": "According to 3GPP TS 38.331, clause 5.3.4, the UE shall not transmit any RRC messages containing measurement reports unless AS security has been activated. Sending such reports prematurely may expose network topology and neighbor cell information in cleartext.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-22",
+      "input": "The UE shall only send UEInformationResponse after AS security activation.",
+      "gold_evidence": "TS 38.331, Annex B.1",
+      "model_answer": "The vulnerability lies in the potential for a UE to transmit UEInformationResponse before AS security activation, which may expose sensitive information in unsecured signaling. This violates the requirement that certain RRC messages must only be sent after AS security is activated to ensure confidentiality and integrity.",
+      "evidence": "3GPP TS 38.331, Clause 5.6.1: 'After the AS security activation, the UE shall perform the procedures as specified in this subclause.' This includes transmission of UEInformationResponse, which must not occur prior to AS security activation to prevent exposure of unsecured information.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-23",
+      "input": "If handover is performed, RRCReconfiguration shall be integrity protected and ciphered.",
+      "gold_evidence": "TS 38.331, Annex B.1",
+      "model_answer": "The vulnerability lies in the potential lack of integrity protection and ciphering during handover when RRCReconfiguration is not properly secured, which could allow an attacker to modify or eavesdrop on critical reconfiguration messages. This is mandated to be protected under 3GPP TS 38.331 to ensure secure mobility.",
+      "evidence": "Clause 5.3.5 of TS 38.331 states that 'When the handover is performed, the RRCReconfiguration message shall be integrity protected and ciphered.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-24",
+      "input": "The UE shall apply the received cell reselection priorities only after successful configuration.",
+      "gold_evidence": "TS 38.331, Clause 5.2.4",
+      "model_answer": "The vulnerability lies in the potential delay or failure in applying cell reselection priorities after receiving them, which could lead to suboptimal cell selection or service disruption until proper configuration is completed. This behavior is governed by the requirement that the UE must not apply the received priorities until successful RRC configuration, as specified in 3GPP TS 38.331.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.4.6: 'The UE shall apply the received cell reselection priorities only when the corresponding priority configuration is successfully completed via RRC signaling.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-25",
+      "input": "The UE shall discard invalid or malformed RRC messages.",
+      "gold_evidence": "TS 38.331, Clause 4.3.1",
+      "model_answer": "The vulnerability lies in the UE's handling of invalid or malformed RRC messages, where improper validation could lead to denial of service or unexpected behavior. The UE is required to discard such messages to maintain protocol integrity and prevent exploitation.",
+      "evidence": "3GPP TS 38.331, clause 9.2.1: 'The UE shall discard any RRC message that is not syntactically correct or contains invalid field values.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-26",
+      "input": "Upon entering RRC_IDLE, the UE releases all radio bearers except those explicitly preserved.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11",
+      "model_answer": "The vulnerability lies in the potential for sensitive data to persist on preserved radio bearers after transitioning to RRC_IDLE, which may be exploited if not properly secured. This behavior is defined in 3GPP TS 38.331 but may lead to information leakage if integrity and confidentiality are not maintained.",
+      "evidence": "TS 38.331, Clause 5.2.2.2: Upon entering RRC_IDLE, the UE releases all established RBs except SRBs associated with the setup of split SRB (if any), and DRBs indicated by 'preserved' in the idleMobilityControlInfo.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-27",
+      "input": "The UE shall ignore paging messages that do not match its configured identifiers.",
+      "gold_evidence": "TS 38.331, Clause 7.1",
+      "model_answer": "The vulnerability lies in the UE's handling of paging messages; if not properly validated, an attacker could spoof paging messages with mismatched identifiers, potentially causing denial of service or tracking. The UE must ignore such messages as per configuration to prevent misuse.",
+      "evidence": "3GPP TS 38.331, Clause 9.2.1: The UE shall ignore a paging message if it does not find any of the configured identities (e.g., 5G-S-TMSI, IMSI) within the paging record.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-28",
+      "input": "If a configuration IE is not understood, the UE shall ignore it and continue processing the message.",
+      "gold_evidence": "TS 38.331, Clause 4.3.1",
+      "model_answer": "The vulnerability lies in the UE's behavior of ignoring unknown configuration IEs, which could allow an attacker to inject malicious or misleading configurations that are silently discarded, potentially leading to misbehavior or denial of service. This is defined in 3GPP TS 38.331, Clause 9.2.1, which states that if an IE is not understood, it shall be ignored.",
+      "evidence": "3GPP TS 38.331, Clause 9.2.1: 'If a field or Information Element (IE) is received with a value that is not understood, the UE shall ignore the IE and continue processing the message.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-29",
+      "input": "The UE shall apply suspendConfig only when entering RRC_INACTIVE as specified.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11.2",
+      "model_answer": "The vulnerability lies in the improper application of suspendConfig by the UE, which should only occur upon entering RRC_INACTIVE. If applied otherwise, it may lead to inconsistent state configurations or denial of service. This behavior is specified in 3GPP TS 38.331.",
+      "evidence": "3GPP TS 38.331, Clause 5.7.4: 'When the UE transitions to RRC_INACTIVE state, the UE shall apply the suspendConfig if provided by the network.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-30",
+      "input": "The UE shall release suspendConfig when leaving RRC_INACTIVE.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13",
+      "model_answer": "The vulnerability arises when a UE fails to release the suspendConfig upon leaving RRC_INACTIVE state, potentially allowing an attacker to exploit stale configuration parameters for unauthorized access or context manipulation. This violates the requirement that suspendConfig must be released when transitioning from RRC_INACTIVE.",
+      "evidence": "3GPP TS 38.331, Clause 5.4.11: 'When the UE transitions from RRC_INACTIVE state to RRC_CONNECTED or RRC_IDLE state, the UE shall release the suspendConfig.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-31",
+      "input": "If RRCResume completes successfully, the UE transitions back to RRC_CONNECTED.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13.3",
+      "model_answer": "The vulnerability lies in the potential for an attacker to exploit the RRC state transition logic during RRCResume, possibly leading to service disruption or resource exhaustion if resume procedures are spoofed or replayed. This stems from insufficient safeguards in verifying the authenticity and freshness of the RRCResumeRequest, as the UE transitions to RRC_CONNECTED upon successful completion without mandatory re-authentication.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.11.2 states that upon successful RRCResume, the UE transitions from RRC_INACTIVE to RRC_CONNECTED. However, no explicit requirement mandates cryptographic verification of the resume identity beyond Resume ID mapping, which may be exploited if not properly secured by higher layers.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-32",
+      "input": "The UE shall stop timer T301 upon successful completion of the resume procedure.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13.3",
+      "model_answer": "The vulnerability lies in the potential for a UE to prematurely terminate timer T301 upon resuming from RRC_INACTIVE without ensuring the completion of necessary signaling, which could lead to connection failures or denial of service if exploited. This behavior is defined in clause 5.4.11 of TS 38.331.",
+      "evidence": "TS 38.331, clause 5.4.11 states that the UE shall stop timer T301 upon successful completion of the resume procedure, implying that incorrect handling of the resume process may result in premature timer expiration and disrupted connectivity.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-33",
+      "input": "The UE shall maintain the mapping between SRBs and logical channels as configured.",
+      "gold_evidence": "TS 38.331, Clause 6.2",
+      "model_answer": "The vulnerability lies in the potential for misconfiguration or manipulation of the mapping between Signaling Radio Bearers (SRBs) and logical channels, which could lead to denial of service or misrouting of critical signaling messages if not properly validated by the UE. This is based on the requirement that the UE must maintain the configured mapping as per network configuration without sufficient mandated integrity checks.",
+      "evidence": "3GPP TS 38.331, Clause 9.2.1 - The UE shall maintain the mapping between SRBs and logical channels as configured by the network via radioResourceConfigDedicated.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-34",
+      "input": "The UE shall apply DRX configuration only after receiving a valid configuration message.",
+      "gold_evidence": "TS 38.331, Clause 5.7",
+      "model_answer": "The vulnerability lies in the potential for a UE to apply DRX configuration prior to receiving a valid RRCReconfiguration message, which may lead to inconsistent state between network and UE, causing missed paging or unnecessary power consumption. This violates the requirement that DRX parameters must be applied only upon receipt of a valid configuration.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.10.1 states that the UE shall apply the DRX configuration only after receiving the RRCReconfiguration message including the drx-Configuration element.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-35",
+      "input": "The UE shall reset RRC timers upon transitioning to RRC_IDLE.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11",
+      "model_answer": "The vulnerability arises because the UE resets RRC timers upon transitioning to RRC_IDLE, which may allow an attacker to force state transitions and disrupt connectivity or cause denial of service by manipulating signaling. This behavior is defined in the specification but can be exploited if not properly managed.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.2: 'When the UE transitions to RRC_IDLE, it shall stop and reset all timers.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-36",
+      "input": "The UE shall discard stored measurement configurations when entering RRC_IDLE.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11",
+      "model_answer": "The vulnerability lies in the UE unconditionally discarding stored measurement configurations upon entering RRC_IDLE, potentially leading to loss of critical measurement setup needed for secure and efficient reselection or handover, which could be exploited to force service disruption or induce insecure cell selection. This behavior is mandated by the specification without safeguards for retaining security-relevant measurements.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.11.1: 'When the UE enters RRC_IDLE, it shall discard the stored measurement configurations.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-37",
+      "input": "The UE shall use the most recently received system information that is valid.",
+      "gold_evidence": "TS 38.331, Clause 5.2.2",
+      "model_answer": "The vulnerability lies in the potential for a UE to use outdated or maliciously delayed system information if an attacker prevents the reception of newer valid system information, leading to denial-of-service or misconfiguration. The UE's obligation to use the most recently received valid system information without requiring freshness verification creates a risk if older information is retained and reused under false assumptions of validity.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.2: 'The UE shall use the most recently received system information that is valid.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-38",
+      "input": "If system information becomes invalid, the UE shall trigger acquisition of updated system information.",
+      "gold_evidence": "TS 38.331, Clause 5.2.2",
+      "model_answer": "If system information becomes invalid, the UE must trigger acquisition of updated system information to ensure correct network operation and prevent potential service disruption or misbehavior due to outdated configurations.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.2: 'The UE shall acquire the system information applicable to the cell... If the valid duration of the system information expires, the UE shall re-acquire the system information.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-39",
+      "input": "The UE shall only apply radio bearer configurations that are explicitly configured.",
+      "gold_evidence": "TS 38.331, Clause 6.2",
+      "model_answer": "The vulnerability arises when a UE applies radio bearer configurations not explicitly configured, potentially leading to misconfiguration or unauthorized access. This violates the requirement that UEs must only apply configurations explicitly provided by the network.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.10: 'The UE shall only apply radio bearer configurations which are explicitly configured.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-40",
+      "input": "The UE shall ignore optional IEs that are not present in a received message.",
+      "gold_evidence": "TS 38.331, Clause 4.3.1",
+      "model_answer": "The vulnerability lies in the UE's handling of optional IEs, where missing IEs are ignored instead of being validated, potentially allowing attackers to omit critical security parameters. This behavior is defined to ensure backward compatibility but may be exploited if security-critical IEs are made optional.",
+      "evidence": "3GPP TS 38.331, Clause 9.2.1: 'The UE shall ignore optional IEs that are not present in a received message.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-41",
+      "input": "The UE shall only enter RRC_INACTIVE if configured by the network.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11.2",
+      "model_answer": "The vulnerability lies in the potential for a UE to enter RRC_INACTIVE state without explicit network configuration, which could lead to inconsistent state management or denial of service. This is contrary to the requirement that the UE must only enter RRC_INACTIVE if explicitly configured by the network via appropriate RRC messaging.",
+      "evidence": "3GPP TS 38.331, Clause 5.3.11: 'The UE shall only enter RRC_INACTIVE state if it has received an RRCRelease message including the suspendConfig.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-42",
+      "input": "The UE shall not perform RRC resume if resume is not supported by the network.",
+      "gold_evidence": "TS 38.331, Clause 5.3.13",
+      "model_answer": "The vulnerability lies in the UE potentially attempting an RRC Resume procedure when the network does not support it, leading to unnecessary signaling or connection failures. This can be exploited to force UEs into erroneous states or cause denial of service if not properly validated.",
+      "evidence": "According to 3GPP TS 38.331, clause 5.4.11, the UE shall only perform the RRC Resume procedure if the network has indicated support for resume via the 'resumeIdentity' and corresponding configuration in the RRCRelease message.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-43",
+      "input": "The UE shall apply security configuration only after successful negotiation.",
+      "gold_evidence": "TS 38.331, Clause 4.3.2",
+      "model_answer": "The vulnerability lies in the fact that if a UE applies security configuration before successful negotiation, it may lead to inconsistent security contexts between the UE and the network, potentially enabling replay or man-in-the-middle attacks. This is because security activation must be mutually agreed upon.",
+      "evidence": "According to 3GPP TS 38.331, clause 5.3.9, the UE shall apply the selected security configuration only after successful completion of the security mode command procedure, ensuring both UE and network are synchronized.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-44",
+      "input": "The UE shall not reuse obsolete AS security contexts.",
+      "gold_evidence": "TS 38.331, Clause 4.3.2",
+      "model_answer": "The vulnerability arises if the UE reuses obsolete AS security contexts, which may lead to downgrades in security or exposure to replay attacks. The UE must ensure that once an AS security context is updated (e.g., after a handover or reconfiguration), previous contexts are not reused to maintain integrity and confidentiality. Reuse could allow attackers to exploit outdated keys or parameters.",
+      "evidence": "3GPP TS 38.331, Clause 5.4.4: 'The UE shall not reuse AS security contexts that have been superseded by a new activation of security.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-45",
+      "input": "The UE shall follow the configured priority rules for cell reselection.",
+      "gold_evidence": "TS 38.331, Clause 5.2.4",
+      "model_answer": "The vulnerability lies in the potential for malicious configuration of cell reselection priority rules, which could force a UE to reselect to lower-security or rogue cells, enabling downgrading or tracking attacks. This stems from implicit trust in network-provided priorities without UE-side validation.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.4.4 and Clause 6.3.4 describe cell reselection priority handling and the UE's obligation to follow network-configured priorities via SIBs or RRC signaling, without requiring integrity verification of such configurations.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-46",
+      "input": "The UE shall maintain RRC state consistency across mobility events.",
+      "gold_evidence": "TS 38.331, Clause 5.3",
+      "model_answer": "The vulnerability arises when the UE fails to maintain RRC state consistency during mobility events such as handover, potentially leading to state mismatches between UE and network, causing service disruption or incorrect security context usage. This is required to ensure correct operation of security procedures and signaling integrity.",
+      "evidence": "3GPP TS 38.331, Clause 5.2.2: 'The UE shall maintain the RRC state consistently also during mobility.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-47",
+      "input": "The UE shall process only RRC messages applicable to its current RRC state.",
+      "gold_evidence": "TS 38.331, Clause 4.2",
+      "model_answer": "The vulnerability arises when a UE processes RRC messages not applicable to its current RRC state, potentially leading to state confusion or denial of service. This violates the requirement that UEs must only act on RRC messages valid for their current state.",
+      "evidence": "3GPP TS 38.331, Clause 4.2.1: 'The UE shall process only those RRC messages that are applicable to the current RRC state.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-48",
+      "input": "The UE shall release radio resources upon leaving RRC_CONNECTED.",
+      "gold_evidence": "TS 38.331, Clause 5.3.11",
+      "model_answer": "The vulnerability arises when a UE releases radio resources upon leaving RRC_CONNECTED without proper security context cleanup, potentially enabling replay or impersonation attacks if the security context is not securely invalidated. This behavior is defined in 3GPP TS 38.331 but may lead to security gaps if not coordinated with AS integrity protection mechanisms.",
+      "evidence": "TS 38.331, Clause 5.2.2: 'When the UE leaves RRC_CONNECTED, the UE shall release the RRC connection including any radio resources and, if no other E-UTRA or NR connections exist, transition to RRC_IDLE.'",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-49",
+      "input": "The UE shall only apply network-provided configurations that are valid for the current PLMN.",
+      "gold_evidence": "TS 38.331, Clause 5.2.1",
+      "model_answer": "The vulnerability arises if the UE applies network-provided configurations intended for a different PLMN, potentially leading to misconfiguration or unauthorized access. This violates the requirement that configurations must be valid for the current PLMN to ensure secure and correct operation.",
+      "evidence": "TS 38.331, clause 5.2.2 states that the UE shall verify that the received RRC configuration is valid for the currently selected PLMN and shall not apply configurations not applicable to the current PLMN.",
+      "evidence_correct": false
+    },
+    {
+      "dataset": "5G_RRC_stage3-SecurityReasoning.json",
+      "id": "VD-50",
+      "input": "The UE shall ignore messages that are not syntactically valid according to ASN.1.",
+      "gold_evidence": "TS 38.331, Clause 4.3.1",
+      "model_answer": "The vulnerability lies in the UE's handling of non-syntactically valid messages according to ASN.1, where improper parsing could lead to denial of service or unexpected behavior if malformed messages are not safely discarded. The source is the requirement for UEs to strictly validate RRC message syntax as per ASN.1 rules.",
+      "evidence": "3GPP TS 38.331, Clause 8.1: 'The UE shall ignore messages that are not syntactically correct according to the ASN.1 definition.'",
+      "evidence_correct": false
+    }
+  ]
+}

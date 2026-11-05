@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.20",
+  "title": "5GS session management in WB-N1 mode for IoT",
+  "entities": [
+    {
+      "id": "WB_N1_MODE",
+      "name": "WB-N1 mode",
+      "entity_type": "Property",
+      "description": "Operating mode for UEs in category CE, supporting either CE mode A or CE mode B.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "CE_MODE_B",
+      "name": "CE mode B",
+      "entity_type": "Property",
+      "description": "Coverage enhancement mode B supported by UEs operating in WB-N1 mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "ENHANCED_COVERAGE_RESTRICTION",
+      "name": "Enhanced coverage restriction",
+      "entity_type": "Condition",
+      "description": "Network indication whether use of enhanced coverage is restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "CE_MODE_B_RESTRICTION",
+      "name": "CE mode B restriction",
+      "entity_type": "Condition",
+      "description": "Network indication whether CE mode B is restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_WB_N1_CE_MODE",
+      "name": "NAS timer for WB-N1/CE mode",
+      "entity_type": "Timer",
+      "description": "Applicable NAS timer value indicated in table 10.3.1 for WB-N1/CE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS procedure",
+      "entity_type": "Procedure",
+      "description": "Generic NAS procedure during which NAS timer values are calculated and used.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "EXTENDED_NAS_TIMER_INDICATION",
+      "name": "Extended NAS timer indication",
+      "entity_type": "Condition",
+      "description": "Indication from AMF to use extended NAS timer values.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_TABLE_10_3_2",
+      "name": "NAS timer from table 10.3.2",
+      "entity_type": "Timer",
+      "description": "Applicable NAS timer value indicated in table 10.3.2 for WB-N1/CE mode when extended timer is indicated.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CE_MODE_B",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE applies NAS timer value from table 10.3.1 if CE mode B is supported and not restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "ENHANCED_COVERAGE_RESTRICTION",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE applies NAS timer value from table 10.3.1 if enhanced coverage is not restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CE_MODE_B_RESTRICTION",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE applies NAS timer value from table 10.3.1 if CE mode B is not restricted.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_WB_N1_CE_MODE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "NAS timer value is calculated at start of NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EXTENDED_NAS_TIMER_INDICATION",
+      "target": "NAS_TIMER_TABLE_10_3_2",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SMF calculates NAS timer value from table 10.3.2 if extended NAS timer is indicated by AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_TABLE_10_3_2",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "NAS timer value from table 10.3.2 is calculated at start of NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.20"
+      ]
+    }
+  ]
+}

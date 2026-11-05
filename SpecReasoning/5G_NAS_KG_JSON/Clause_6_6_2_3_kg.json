@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.6.2.3",
+  "title": "Remote UE report procedure accepted by the network",
+  "entities": [
+    {
+      "id": "REMOTE_UE_REPORT_PROCEDURE",
+      "name": "Remote UE report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where the SMF responds to a REMOTE UE REPORT message from the UE with a REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REMOTE_UE_REPORT_MSG",
+      "name": "REMOTE UE REPORT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to initiate the remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "name": "REMOTE UE REPORT RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by the SMF in response to the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "PTI_IE",
+      "name": "PTI",
+      "entity_type": "Information Element",
+      "description": "Procedure transaction identifier included in the REMOTE UE REPORT message and copied to the response.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "EAP_MESSAGE_IE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "IE containing EAP-success or EAP-failure message to be passed to the 5G ProSe layer-3 remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REMOTE_UE_HANDLING_INFO_IE",
+      "name": "Remote UE handling information",
+      "entity_type": "Information Element",
+      "description": "Optional IE included if PDU session authentication and authorization procedure was performed.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "AUTHORIZED_QOS_FLOW_DESC_IE",
+      "name": "Authorized QoS flow description",
+      "entity_type": "Information Element",
+      "description": "Optional IE indicating QoS flow parameters to the 5G ProSe layer-3 relay UE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "T3586",
+      "name": "T3586",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon receipt of REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by the UE after stopping timer T3586 upon receipt of REMOTE UE REPORT RESPONSE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "EAP_SUCCESS_FAILURE_RECEIVED",
+      "name": "EAP-success or EAP-failure received from DN",
+      "entity_type": "Condition",
+      "description": "Condition where SMF receives EAP-success or EAP-failure message from the DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_AUTH_AUTH_PERFORMED",
+      "name": "PDU session authentication and authorization performed",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session authentication and authorization procedure for 5G ProSe layer-3 remote UE was performed.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_AUTH_AUTH_SUCCESSFUL",
+      "name": "PDU session authentication and authorization successful",
+      "entity_type": "Condition",
+      "description": "Condition where PDU session authentication and authorization procedure for 5G ProSe layer-3 remote UE is successful.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REMOTE_UE_REPORT_PROCEDURE",
+      "target": "REMOTE_UE_REPORT_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure is triggered by receipt of REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REMOTE_UE_REPORT_PROCEDURE",
+      "target": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "PTI_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REMOTE UE REPORT RESPONSE message includes PTI IE from the request.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EAP_SUCCESS_FAILURE_RECEIVED",
+      "target": "EAP_MESSAGE_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP message IE is included if EAP-success or EAP-failure is received from DN.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PDU_SESSION_AUTH_AUTH_PERFORMED",
+      "target": "REMOTE_UE_HANDLING_INFO_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Remote UE handling information IE may be included if PDU session authentication and authorization was performed.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PDU_SESSION_AUTH_AUTH_SUCCESSFUL",
+      "target": "AUTHORIZED_QOS_FLOW_DESC_IE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Authorized QoS flow description IE may be included if PDU session authentication and authorization is successful.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "T3586",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of REMOTE UE REPORT RESPONSE message stops timer T3586.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of REMOTE UE REPORT RESPONSE message causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "EAP_MESSAGE_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REMOTE UE REPORT RESPONSE message may contain EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "REMOTE_UE_HANDLING_INFO_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REMOTE UE REPORT RESPONSE message may contain Remote UE handling information IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "REMOTE_UE_REPORT_RESPONSE_MSG",
+      "target": "AUTHORIZED_QOS_FLOW_DESC_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REMOTE UE REPORT RESPONSE message may contain Authorized QoS flow description IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.3"
+      ]
+    }
+  ]
+}

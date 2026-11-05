@@ -1,0 +1,200 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.2.6",
+  "title": "Authentication not accepted by the UE",
+  "entities": [
+    {
+      "id": "EPS_AUTHENTICATION_PROCEDURE",
+      "name": "EPS authentication procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure where UE verifies network authenticity using AUTN parameter from AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message sent by network containing AUTN parameter for authentication challenge.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_FAILURE",
+      "name": "AUTHENTICATION FAILURE message",
+      "entity_type": "Message",
+      "description": "Message sent by UE when authentication fails, containing EMM cause indicating failure reason.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "AUTN_PARAMETER",
+      "name": "AUTN parameter",
+      "entity_type": "Information Element",
+      "description": "Authentication token containing MAC code, AMF field with separation bit, and SQN for network authentication.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "MAC_FAILURE_CONDITION",
+      "name": "MAC code failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE finds MAC code in AUTN parameter to be invalid.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "NON_EPS_AUTH_UNACCEPTABLE_CONDITION",
+      "name": "Non-EPS authentication unacceptable condition",
+      "entity_type": "Condition",
+      "description": "Condition where separation bit in AMF field of AUTN is 0.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "SQN_OUT_OF_RANGE_CONDITION",
+      "name": "SQN out of range condition",
+      "entity_type": "Condition",
+      "description": "Condition where SQN in AUTN parameter is out of acceptable range.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "T3416",
+      "name": "Timer T3416",
+      "entity_type": "Timer",
+      "description": "Timer running during authentication procedure that gets stopped when authentication fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "DELETE_RAND_RES",
+      "name": "Delete stored RAND and RES",
+      "entity_type": "Property",
+      "description": "UE behavior to delete previously stored RAND and RES values when authentication fails.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EPS_AUTHENTICATION_PROCEDURE",
+      "target": "AUTHENTICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure involves receiving AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "AUTN_PARAMETER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains AUTN parameter.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MAC_FAILURE_CONDITION",
+      "target": "AUTHENTICATION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "MAC code failure condition leads to sending AUTHENTICATION FAILURE message with EMM cause #20.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NON_EPS_AUTH_UNACCEPTABLE_CONDITION",
+      "target": "AUTHENTICATION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-EPS authentication unacceptable condition leads to sending AUTHENTICATION FAILURE message with EMM cause #26.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SQN_OUT_OF_RANGE_CONDITION",
+      "target": "AUTHENTICATION_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SQN out of range condition leads to sending AUTHENTICATION FAILURE message with EMM cause #21 and AUTS token.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AUTHENTICATION_FAILURE",
+      "target": "DELETE_RAND_RES",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message triggers deletion of stored RAND and RES.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "AUTHENTICATION_FAILURE",
+      "target": "T3416",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending AUTHENTICATION FAILURE message stops timer T3416 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "AUTN_PARAMETER",
+      "target": "MAC_FAILURE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTN parameter validity is guarded by MAC code verification condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AUTN_PARAMETER",
+      "target": "NON_EPS_AUTH_UNACCEPTABLE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTN parameter AMF field separation bit guards non-EPS authentication acceptability.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "AUTN_PARAMETER",
+      "target": "SQN_OUT_OF_RANGE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "AUTN parameter SQN value guards synchronization condition.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.2.6"
+      ]
+    }
+  ]
+}

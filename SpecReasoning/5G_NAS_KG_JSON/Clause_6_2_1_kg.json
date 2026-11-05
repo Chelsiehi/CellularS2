@@ -1,0 +1,208 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.1",
+  "title": "Principles of PTI handling for 5GSM procedures",
+  "entities": [
+    {
+      "id": "PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Identifier",
+      "description": "Identifier used in 5GSM procedures to correlate request, command, and response messages within a transaction.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1",
+        "Figure 6.2.1.2",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "UE_REQUESTED_PROCEDURE",
+      "name": "UE-requested transaction related procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure initiated by the UE consisting of multiple related messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1",
+        "Figure 6.2.1.2",
+        "Figure 6.2.1.3"
+      ]
+    },
+    {
+      "id": "NETWORK_REQUESTED_PROCEDURE",
+      "name": "Network-requested transaction related procedure",
+      "entity_type": "Procedure",
+      "description": "A procedure initiated by the network consisting of multiple related messages.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "REQUEST_MESSAGE",
+      "name": "Transaction related request message",
+      "entity_type": "Message",
+      "description": "Message initiating a UE-requested transaction procedure, containing a PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1",
+        "Figure 6.2.1.2",
+        "Figure 6.2.1.3"
+      ]
+    },
+    {
+      "id": "COMMAND_MESSAGE",
+      "name": "Transaction related command message",
+      "entity_type": "Message",
+      "description": "Message initiating a network-requested transaction procedure, may contain PTI from request or unassigned value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "RESPONSE_MESSAGE",
+      "name": "Transaction related response message",
+      "entity_type": "Message",
+      "description": "Message responding to a request or command, echoing the received PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.2",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "ACCEPT_MESSAGE",
+      "name": "Transaction related accept message",
+      "entity_type": "Message",
+      "description": "Message accepting a UE-requested procedure, containing the PTI from the request.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1"
+      ]
+    },
+    {
+      "id": "REJECT_MESSAGE",
+      "name": "Transaction related reject message",
+      "entity_type": "Message",
+      "description": "Message rejecting a UE-requested procedure, containing the PTI from the request.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.2"
+      ]
+    },
+    {
+      "id": "PTI_UNASSIGNED",
+      "name": "No procedure transaction identity assigned",
+      "entity_type": "Condition",
+      "description": "Condition where PTI is set to indicate no procedure transaction identity is assigned, used in network-initiated procedures not triggered by UE requests.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_REQUESTED_PROCEDURE",
+      "target": "REQUEST_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested procedure includes sending a request message with PTI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REQUEST_MESSAGE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Request message contains a PTI value.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RESPONSE_MESSAGE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Response message contains the PTI value from the received request or command.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COMMAND_MESSAGE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Command message contains a PTI value, either from request or unassigned.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COMMAND_MESSAGE",
+      "target": "PTI_UNASSIGNED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Command message uses unassigned PTI when not triggered by a UE request.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NETWORK_REQUESTED_PROCEDURE",
+      "target": "COMMAND_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network-requested procedure includes sending a command message.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.3",
+        "Figure 6.2.1.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "UE_REQUESTED_PROCEDURE",
+      "target": "ACCEPT_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested procedure may include an accept message with PTI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "UE_REQUESTED_PROCEDURE",
+      "target": "REJECT_MESSAGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested procedure may include a reject message with PTI.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.1",
+        "Figure 6.2.1.2"
+      ]
+    }
+  ]
+}

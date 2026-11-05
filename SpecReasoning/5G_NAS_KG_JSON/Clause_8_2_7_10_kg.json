@@ -1,0 +1,107 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.10",
+  "title": "PDU session reactivation result",
+  "entities": [
+    {
+      "id": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "name": "PDU session reactivation result",
+      "entity_type": "Information Element",
+      "description": "Information element included in messages when certain conditions regarding uplink data status or allowed PDU session status are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "IE_UPLINK_DATA_STATUS",
+      "name": "Uplink data status",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the status of uplink data.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "name": "Allowed PDU session status",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the status of allowed PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message that may contain Uplink data status IE or Allowed PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "COND_UPLINK_DATA_STATUS_INCLUDED",
+      "name": "Uplink data status IE included",
+      "entity_type": "Condition",
+      "description": "Condition where the Uplink data status IE is included in the REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "COND_ALLOWED_PDU_SESSION_STATUS_INCLUDED",
+      "name": "Allowed PDU session status IE included",
+      "entity_type": "Condition",
+      "description": "Condition where the Allowed PDU session status IE is included in the REGISTRATION REQUEST message and at least one PDU session can have user-plane resources re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_UPLINK_DATA_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Uplink data status IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message may contain Allowed PDU session status IE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "target": "COND_UPLINK_DATA_STATUS_INCLUDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of PDU session reactivation result IE is guarded by the condition that Uplink data status IE is included.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_PDU_SESSION_REACTIVATION_RESULT",
+      "target": "COND_ALLOWED_PDU_SESSION_STATUS_INCLUDED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of PDU session reactivation result IE is guarded by the condition that Allowed PDU session status IE is included and at least one PDU session can be re-established over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.10"
+      ]
+    }
+  ]
+}

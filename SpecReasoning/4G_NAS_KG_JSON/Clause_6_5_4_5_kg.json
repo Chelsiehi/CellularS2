@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.4.5",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "TIMER_T3481",
+      "name": "Timer T3481",
+      "entity_type": "Timer",
+      "description": "Timer used during UE requested bearer resource modification procedure. Controls retransmission of BEARER RESOURCE MODIFICATION REQUEST messages.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_BEARER_RES_MOD",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify bearer resources. Can be aborted due to timer expiry or collision with other procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RES_MOD_REQ",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of bearer resources. Retransmitted on T3481 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RES_MOD_REJ",
+      "name": "BEARER RESOURCE MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message received by UE rejecting bearer resource modification request. Contains ESM cause values.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_DEACTIVATE_EPS_BEARER_REQ",
+      "name": "DEACTIVATE EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message received by UE to deactivate EPS bearer context. Can collide with bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQ",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to synchronize EPS bearer context status with MME. Includes EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "name": "EPS bearer context status IE",
+      "entity_type": "Information Element",
+      "description": "Information element included in TRACKING AREA UPDATE REQUEST message to synchronize bearer context status with MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TRANS_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after aborting bearer resource modification procedure on fifth T3481 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "COND_T3481_EXPIRY_FIFTH",
+      "name": "Fifth expiry of timer T3481",
+      "entity_type": "Condition",
+      "description": "Condition that triggers abortion of bearer resource modification procedure and transition to PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "COND_INVALID_EPS_BEARER_ID",
+      "name": "ESM cause #43 invalid EPS bearer identity",
+      "entity_type": "Condition",
+      "description": "Condition in BEARER RESOURCE MODIFICATION REJECT message indicating unknown EPS bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "COND_REQ_REJECTED_UNSPEC",
+      "name": "ESM cause #31 request rejected, unspecified",
+      "entity_type": "Condition",
+      "description": "Condition in BEARER RESOURCE MODIFICATION REJECT message triggering local bearer deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_BEARER_DEACT",
+      "name": "Local EPS bearer context deactivation",
+      "entity_type": "Property",
+      "description": "Behavior where UE deactivates EPS bearer context locally without peer-to-peer signaling with MME.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_BEARER_RES_MOD",
+      "target": "TIMER_T3481",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE requested bearer resource modification procedure starts timer T3481.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_BEARER_RES_MOD",
+      "target": "MSG_BEARER_RES_MOD_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes sending BEARER RESOURCE MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_T3481_EXPIRY_FIFTH",
+      "target": "STATE_PROC_TRANS_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3481 causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_INVALID_EPS_BEARER_ID",
+      "target": "PROP_LOCAL_BEARER_DEACT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #43 triggers local EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_REQ_REJECTED_UNSPEC",
+      "target": "PROP_LOCAL_BEARER_DEACT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM cause #31 triggers local EPS bearer context deactivation.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQ",
+      "target": "IE_EPS_BEARER_CONTEXT_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains EPS bearer context status IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_BEARER_RES_MOD_REJ",
+      "target": "COND_INVALID_EPS_BEARER_ID",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REJECT message can contain ESM cause #43 condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_BEARER_RES_MOD_REJ",
+      "target": "COND_REQ_REJECTED_UNSPEC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "BEARER RESOURCE MODIFICATION REJECT message can contain ESM cause #31 condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_DEACTIVATE_EPS_BEARER_REQ",
+      "target": "PROC_UE_BEARER_RES_MOD",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "DEACTIVATE EPS BEARER CONTEXT REQUEST message stops UE requested bearer resource modification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROP_LOCAL_BEARER_DEACT",
+      "target": "TIMER_T3481",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Local EPS bearer context deactivation stops timer T3481.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.4.5"
+      ]
+    }
+  ]
+}

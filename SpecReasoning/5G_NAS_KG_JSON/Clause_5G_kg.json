@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5G",
+  "title": "coverage has been lost or MICO mode is active in the UE. If MICO mode is active, the UE can deactivate MICO mode at any time by activating the AS layer when the UE needs to send mobile originated signalling or user data. Otherwise, the UE shall not initiate any 5GMM procedure except for cell and PLMN reselection.",
+  "entities": [
+    {
+      "id": "MICO_MODE",
+      "name": "MICO mode",
+      "entity_type": "State",
+      "description": "Mobile Initiated Connection Only mode where UE conserves power by only initiating connections when needed.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "AS_LAYER_ACTIVATION",
+      "name": "AS layer activation",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE activates the Access Stratum layer to enable communication.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "MO_SIGNALLING",
+      "name": "Mobile originated signalling",
+      "entity_type": "Condition",
+      "description": "Condition where UE needs to send signalling initiated by the mobile device.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "MO_USER_DATA",
+      "name": "Mobile originated user data",
+      "entity_type": "Condition",
+      "description": "Condition where UE needs to send user data initiated by the mobile device.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "CELL_PLMN_RESELECTION",
+      "name": "Cell and PLMN reselection",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE performs cell and Public Land Mobile Network reselection.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "5GMM_PROCEDURE_RESTRICTION",
+      "name": "5GMM procedure restriction",
+      "entity_type": "Property",
+      "description": "Property that UE shall not initiate any 5GMM procedures except cell and PLMN reselection when coverage is lost or MICO mode is active.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AS_LAYER_ACTIVATION",
+      "target": "MICO_MODE",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Activating AS layer deactivates MICO mode.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MO_SIGNALLING",
+      "target": "AS_LAYER_ACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Mobile originated signalling requirement triggers AS layer activation.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MO_USER_DATA",
+      "target": "AS_LAYER_ACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Mobile originated user data requirement triggers AS layer activation.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MICO_MODE",
+      "target": "5GMM_PROCEDURE_RESTRICTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Active MICO mode establishes restriction on 5GMM procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CELL_PLMN_RESELECTION",
+      "target": "5GMM_PROCEDURE_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Cell and PLMN reselection is an exception to the 5GMM procedure restriction.",
+      "provenance": [
+        "TS 24.501, Clause 5G"
+      ]
+    }
+  ]
+}

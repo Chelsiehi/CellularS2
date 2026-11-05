@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.4",
+  "title": "Errors when handling EAP-request/AKA'-challenge message",
+  "entities": [
+    {
+      "id": "EAP_REQUEST_AKA_CHALLENGE",
+      "name": "EAP-request/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "EAP authentication challenge message used in AKA' authentication procedure",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "name": "EAP-response/AKA'-authentication-reject message",
+      "entity_type": "Message",
+      "description": "EAP response sent when SNN check fails or AUTN is not accepted",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_SYNC_FAILURE",
+      "name": "EAP-response/AKA'-synchronization-failure message",
+      "entity_type": "Message",
+      "description": "EAP response sent when sequence number in AUTN is not correct",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "name": "EAP-response/AKA'-client-error message",
+      "entity_type": "Message",
+      "description": "EAP response sent for other errors or when USIM is not present",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "SNN_CHECK_FAILS",
+      "name": "SNN check fails",
+      "entity_type": "Condition",
+      "description": "Condition where Serving Network Name check fails during EAP-request/AKA'-challenge handling",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "AUTN_NOT_ACCEPTED",
+      "name": "AUTN not accepted",
+      "entity_type": "Condition",
+      "description": "Condition where UE does not accept AUTN during EAP-request/AKA'-challenge handling",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "SEQUENCE_NUMBER_INCORRECT",
+      "name": "Sequence number in AUTN not correct",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects incorrect sequence number in AUTN during EAP-request/AKA'-challenge handling",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "OTHER_ERROR_DETECTED",
+      "name": "Other error detected",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects another error during EAP-request/AKA'-challenge handling",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "USIM_NOT_PRESENT",
+      "name": "USIM not present",
+      "entity_type": "Condition",
+      "description": "Condition where USIM is not present in the UE",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "T3520",
+      "name": "Timer T3520",
+      "entity_type": "Timer",
+      "description": "Timer started when AUTHENTICATION RESPONSE message containing EAP-response is sent",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "T3510",
+      "name": "Timer T3510",
+      "entity_type": "Timer",
+      "description": "Timer that may be running and needs to be stopped when sending authentication response",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "T3517",
+      "name": "Timer T3517",
+      "entity_type": "Timer",
+      "description": "Timer that may be running and needs to be stopped when sending authentication response",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "T3521",
+      "name": "Timer T3521",
+      "entity_type": "Timer",
+      "description": "Timer that may be running and needs to be stopped when sending authentication response",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SNN_CHECK_FAILS",
+      "target": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SNN check failure condition leads to sending authentication reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTN_NOT_ACCEPTED",
+      "target": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AUTN not accepted condition leads to sending authentication reject message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SEQUENCE_NUMBER_INCORRECT",
+      "target": "EAP_RESPONSE_AKA_SYNC_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Incorrect sequence number condition leads to sending synchronization failure message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "OTHER_ERROR_DETECTED",
+      "target": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Other error detection condition leads to sending client error message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "USIM_NOT_PRESENT",
+      "target": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "USIM not present condition leads to sending client error message",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending authentication reject message starts timer T3520",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EAP_RESPONSE_AKA_SYNC_FAILURE",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending synchronization failure message starts timer T3520",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "target": "T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending client error message starts timer T3520",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "target": "T3510",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending authentication reject message stops timer T3510 if running",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "target": "T3517",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending authentication reject message stops timer T3517 if running",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "EAP_RESPONSE_AKA_AUTH_REJECT",
+      "target": "T3521",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Sending authentication reject message stops timer T3521 if running",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "EAP_REQUEST_AKA_CHALLENGE",
+      "target": "T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving EAP-request/AKA'-challenge message stops timer T3520 if running",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.4"
+      ]
+    }
+  ]
+}

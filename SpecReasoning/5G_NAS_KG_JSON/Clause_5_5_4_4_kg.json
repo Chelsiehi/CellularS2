@@ -1,0 +1,220 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.4",
+  "title": "UE-initiated authentication and key agreement procedure accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_UE_AUTH_AKA",
+      "name": "UE-initiated authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure for 5G ProSe UE-to-network relay initiated by UE and accepted by network using EAP-AKA' authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_REQUEST",
+      "name": "RELAY KEY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent to AMF to initiate relay authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_AUTH_REQUEST",
+      "name": "RELAY AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message created by AMF containing EAP request for UE authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_AUTH_RESPONSE",
+      "name": "RELAY AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message created by UE containing EAP response from remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "MSG_RELAY_KEY_ACCEPT",
+      "name": "RELAY KEY ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by AMF indicating successful authentication and containing relay key parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "IE_PRTI",
+      "name": "PRTI IE",
+      "entity_type": "Information Element",
+      "description": "ProSe Relay Transaction Identifier information element used to correlate relay authentication messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message IE",
+      "entity_type": "Information Element",
+      "description": "Extensible Authentication Protocol message information element carrying authentication payload.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "IE_RELAY_KEY_RESPONSE",
+      "name": "relay key response parameters IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing Key KNR_ProSe and nonce_2 for relay security.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "TIMER_T35XX",
+      "name": "Timer T35xx",
+      "entity_type": "Timer",
+      "description": "Timer used by UE during relay authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "COND_AUTH_SUCCESS",
+      "name": "Authentication successful",
+      "entity_type": "Condition",
+      "description": "Condition when AUSF indicates successful authentication of the relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_UE_AUTH_AKA",
+      "target": "MSG_RELAY_KEY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with receiving RELAY KEY REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_RELAY_AUTH_REQUEST",
+      "target": "IE_PRTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY AUTHENTICATION REQUEST message contains PRTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RELAY_AUTH_REQUEST",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY AUTHENTICATION REQUEST message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_RELAY_AUTH_RESPONSE",
+      "target": "IE_PRTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY AUTHENTICATION RESPONSE message contains PRTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_RELAY_AUTH_RESPONSE",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY AUTHENTICATION RESPONSE message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_RELAY_KEY_ACCEPT",
+      "target": "IE_PRTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY KEY ACCEPT message contains PRTI IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_RELAY_KEY_ACCEPT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY KEY ACCEPT message contains EAP message IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_RELAY_KEY_ACCEPT",
+      "target": "IE_RELAY_KEY_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RELAY KEY ACCEPT message contains relay key response parameters IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_RELAY_AUTH_REQUEST",
+      "target": "TIMER_T35XX",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving RELAY AUTHENTICATION REQUEST message stops timer T35xx.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_RELAY_AUTH_RESPONSE",
+      "target": "TIMER_T35XX",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending RELAY AUTHENTICATION RESPONSE message starts timer T35xx.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_AUTH_SUCCESS",
+      "target": "MSG_RELAY_KEY_ACCEPT",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Successful authentication condition triggers creation of RELAY KEY ACCEPT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "S_NSSAI",
+      "name": "S-NSSAI",
+      "entity_type": "Identifier",
+      "description": "Network slice identifier comprised of Slice/Service Type (SST) and optional Slice Differentiator (SD). Identifies a network slice within a PLMN or SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "NSSAI",
+      "name": "NSSAI",
+      "entity_type": "Identifier",
+      "description": "A set of one or more S-NSSAIs. Includes subscribed S-NSSAIs and various rejected NSSAI types.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI_CURRENT_PLMN",
+      "name": "Rejected NSSAI for current PLMN/SNPN",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs rejected for the entire registered PLMN or SNPN. Applicable when registration area contains only TAIs from the registered PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI_REGISTRATION_AREA",
+      "name": "Rejected NSSAI for current registration area",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs rejected for the current registration area. Managed per access type independently.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI_NSSAA",
+      "name": "Rejected NSSAI for failed/revoked NSSAA",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs that failed network slice-specific authentication and authorization or had authorization revoked. Applicable for entire registered PLMN/SNPN.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REJECTED_NSSAI_MAX_UE",
+      "name": "Rejected NSSAI for maximum UEs reached",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs rejected due to maximum number of UEs reached. Applicable for entire registered PLMN/SNPN and specific access type.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs that are allowed for the UE. Managed per access type independently and applicable for registration area.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "PENDING_NSSAI",
+      "name": "Pending NSSAI",
+      "entity_type": "Identifier",
+      "description": "NSSAI containing S-NSSAIs for which network slice-specific authentication and authorization procedure is ongoing. Managed regardless of access type.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "CONFIGURED_NSSAI",
+      "name": "Configured NSSAI",
+      "entity_type": "Identifier",
+      "description": "NSSAI configured by serving PLMN/SNPN or HPLMN/credential holder. Includes default configured NSSAI for PLMNs/SNPNs without configured or allowed NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "NSSAA_PROCEDURE",
+      "name": "Network slice-specific authentication and authorization procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication and authorization procedure for network slices. Moves S-NSSAIs from pending NSSAI to allowed or rejected NSSAI based on outcome.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3526",
+      "name": "Timer T3526",
+      "entity_type": "Timer",
+      "description": "Timer associated with S-NSSAIs in rejected NSSAI for maximum UEs reached. UE may remove S-NSSAIs when timer expires.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function. Manages NSSAI allocation, sends allowed/rejected NSSAI to UE, and initiates network slice-specific authentication and authorization.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NSSAI",
+      "target": "S_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NSSAI contains one or more S-NSSAIs",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NSSAA_PROCEDURE",
+      "target": "PENDING_NSSAI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Network slice-specific authentication and authorization procedure involves S-NSSAIs in pending NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NSSAA_PROCEDURE",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful network slice-specific authentication and authorization moves S-NSSAIs to allowed NSSAI",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "NSSAA_PROCEDURE",
+      "target": "REJECTED_NSSAI_NSSAA",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Failed network slice-specific authentication and authorization moves S-NSSAIs to rejected NSSAI for failed/revoked NSSAA",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "AMF",
+      "target": "ALLOWED_NSSAI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF sends updated allowed NSSAI to UE over same access type",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "AMF",
+      "target": "REJECTED_NSSAI_MAX_UE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF sends rejected NSSAI for maximum UEs reached when S-NSSAIs indicate maximum UE limit reached",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "REJECTED_NSSAI_MAX_UE",
+      "target": "TIMER_T3526",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Reception of rejected NSSAI for maximum UEs reached starts timer T3526 for associated S-NSSAIs",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3526",
+      "target": "REJECTED_NSSAI_MAX_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Expiry of timer T3526 allows UE to remove S-NSSAIs from rejected NSSAI for maximum UEs reached",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "AMF",
+      "target": "NSSAA_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "AMF can initiate network slice-specific authentication and authorization procedure based on local policy",
+      "provenance": [
+        "TS 24.501, Clause 4.6.1"
+      ]
+    }
+  ]
+}

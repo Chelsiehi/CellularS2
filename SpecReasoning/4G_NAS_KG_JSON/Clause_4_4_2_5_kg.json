@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "4.4.2.5",
+  "title": "Derivation of keys at CS to PS SRVCC handover from A/Gb mode to S1 mode or from Iu mode to S1 mode",
+  "entities": [
+    {
+      "id": "CS_PS_SRVCC_HANDOVER",
+      "name": "CS to PS SRVCC handover",
+      "entity_type": "Procedure",
+      "description": "Handover procedure from Circuit Switched domain to Packet Switched domain using Single Radio Voice Call Continuity, specifically from A/Gb mode or Iu mode to S1 mode.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "MAPPED_EPS_SECURITY_CONTEXT",
+      "name": "Mapped EPS security context",
+      "entity_type": "Property",
+      "description": "Security context derived for EPS from UMTS CS domain security context during SRVCC handover, containing K'ASME and associated keys.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "K_ASME",
+      "name": "K'ASME",
+      "entity_type": "Property",
+      "description": "Access Security Management Entity key derived by concatenating CK'PS and IK'PS (CK'PS || IK'PS) during SRVCC handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "CK_PS",
+      "name": "CK'PS",
+      "entity_type": "Property",
+      "description": "Cipher key for PS domain derived from CS UMTS ciphering key and NONCEMSC during SRVCC handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "IK_PS",
+      "name": "IK'PS",
+      "entity_type": "Property",
+      "description": "Integrity key for PS domain derived from CS UMTS integrity key and NONCEMSC during SRVCC handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "KSISGSN",
+      "name": "KSISGSN",
+      "entity_type": "Identifier",
+      "description": "Key Set Identifier for SGSN domain, set to KSI'PS value during SRVCC handover and associated with K'ASME.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "NONCEMSC",
+      "name": "NONCEMSC",
+      "entity_type": "Property",
+      "description": "Nonce created by MSC and used in derivation of CK'PS and IK'PS during SRVCC handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "EPS_NAS_KEYS",
+      "name": "EPS NAS keys",
+      "entity_type": "Property",
+      "description": "NAS security keys (CK' and IK') derived from K'ASME and applied after successful SRVCC handover.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "HANDOVER_SUCCESS_CONDITION",
+      "name": "Handover completed successfully",
+      "entity_type": "Condition",
+      "description": "Condition where CS to PS SRVCC handover from A/Gb mode or Iu mode has been completed successfully, triggering security context replacement.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "HANDOVER_FAILURE_CONDITION",
+      "name": "Handover not completed successfully",
+      "entity_type": "Condition",
+      "description": "Condition where CS to PS SRVCC handover from A/Gb mode or Iu mode has not been completed successfully, triggering security context deletion.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CS_PS_SRVCC_HANDOVER",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "CS to PS SRVCC handover procedure establishes a mapped EPS security context for the PS domain.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "K_ASME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapped EPS security context contains K'ASME as its primary key component.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "K_ASME",
+      "target": "CK_PS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "K'ASME is formed by concatenating CK'PS and IK'PS (CK'PS || IK'PS).",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "K_ASME",
+      "target": "IK_PS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "K'ASME is formed by concatenating CK'PS and IK'PS (CK'PS || IK'PS).",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MAPPED_EPS_SECURITY_CONTEXT",
+      "target": "KSISGSN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Mapped EPS security context is associated with KSISGSN identifier.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "K_ASME",
+      "target": "EPS_NAS_KEYS",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "K'ASME is used to derive EPS NAS keys (CK' and IK') for security protection.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "HANDOVER_SUCCESS_CONDITION",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Successful handover completion establishes the mapped EPS security context replacement procedure.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "HANDOVER_FAILURE_CONDITION",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Unsuccessful handover completion establishes the deletion of the mapped EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EPS_NAS_KEYS",
+      "target": "MAPPED_EPS_SECURITY_CONTEXT",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "EPS NAS keys provide integrity protection and ciphering for the mapped EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 4.4.2.5"
+      ]
+    }
+  ]
+}

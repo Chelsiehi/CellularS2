@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.17",
+  "title": "Service Gap Control",
+  "entities": [
+    {
+      "id": "SGC_PROCEDURE",
+      "name": "Service Gap Control",
+      "entity_type": "Procedure",
+      "description": "Network mechanism to control frequency of UE transitions from 5GMM-IDLE to 5GMM-CONNECTED mode using timer T3447.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Service gap timer that restricts UE transitions from idle to connected mode when running.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "IE_T3447_VALUE",
+      "name": "T3447 value IE",
+      "entity_type": "Information Element",
+      "description": "Information element carrying the service gap time value sent from AMF to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used by UE to indicate SGC support during registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message used by AMF to provide T3447 value to UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5GMM state where UE is not connected to the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "5GMM state where UE has an active NAS signalling connection.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "COND_SGC_ACTIVE",
+      "name": "SGC active condition",
+      "entity_type": "Condition",
+      "description": "Condition where network supports SGC and T3447 value is available in UE context.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "COND_EXCEPTION_REQUESTS",
+      "name": "Exception request conditions",
+      "entity_type": "Condition",
+      "description": "Conditions where SGC restrictions do not apply: emergency services, high priority access, exception data reporting.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SGC_PROCEDURE",
+      "target": "TIMER_T3447",
+      "relation_type": "uses",
+      "family": "core",
+      "description": "Service Gap Control procedure utilizes timer T3447 to control UE transitions.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_T3447_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains T3447 value IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "SGC_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "UE indicates SGC support in REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SGC_ACTIVE",
+      "target": "TIMER_T3447",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When SGC is active, network starts timer T3447 after UE transitions to 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_5GMM_IDLE",
+      "target": "TIMER_T3447",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3447 when N1 NAS signalling connection is released and UE enters 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_EXCEPTION_REQUESTS",
+      "target": "TIMER_T3447",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3447 restrictions do not apply to exception requests like emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_5GMM_CONNECTED",
+      "target": "TIMER_T3447",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Timer T3447 continues running when UE transitions from 5GMM-IDLE to 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.17"
+      ]
+    }
+  ]
+}

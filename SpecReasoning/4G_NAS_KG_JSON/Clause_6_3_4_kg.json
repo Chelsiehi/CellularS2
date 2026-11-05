@@ -1,0 +1,127 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.4",
+  "title": "Abnormal cases in the network",
+  "entities": [
+    {
+      "id": "INTRA_MME_HANDOVER",
+      "name": "Intra MME handover",
+      "entity_type": "Procedure",
+      "description": "Handover procedure where the MME remains the same but the UE moves between eNodeBs within the same MME coverage.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "INTER_ENODEB_MOBILITY",
+      "name": "Inter-eNodeB connected mode mobility",
+      "entity_type": "Procedure",
+      "description": "Mobility procedure where the UE moves between eNodeBs while remaining in connected mode, with the MME unchanged.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "ESM_NAS_MESSAGE",
+      "name": "ESM NAS message",
+      "entity_type": "Message",
+      "description": "A NAS message belonging to the EPS Session Management (ESM) protocol used for session management procedures.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "NON_DELIVERED_INDICATION",
+      "name": "Lower layer indication of non-delivered NAS PDU",
+      "entity_type": "Condition",
+      "description": "Condition where the lower layers indicate that a NAS PDU could not be delivered to the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "S1_CONNECTION_EXISTS",
+      "name": "S1 signalling connection exists",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the S1 signalling connection between the eNodeB and MME is still active.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "TARGET_TA_IN_TAI_LIST",
+      "name": "Target TA included in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where the target tracking area is present in the UE's TAI list.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "MME_RETRANSMISSION",
+      "name": "MME retransmission of ESM message",
+      "entity_type": "Property",
+      "description": "Behavior where the MME retransmits a downlink ESM NAS message that could not be delivered.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "INTRA_MME_HANDOVER",
+      "target": "NON_DELIVERED_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-delivery indication occurs due to intra MME handover.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "INTER_ENODEB_MOBILITY",
+      "target": "NON_DELIVERED_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-delivery indication occurs due to inter-eNodeB connected mode mobility.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NON_DELIVERED_INDICATION",
+      "target": "MME_RETRANSMISSION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Non-delivery of ESM message establishes the need for MME retransmission under certain conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TARGET_TA_IN_TAI_LIST",
+      "target": "MME_RETRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Retransmission occurs if the target TA is in the TAI list after successful intra MME handover.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "S1_CONNECTION_EXISTS",
+      "target": "MME_RETRANSMISSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Retransmission occurs if the S1 signalling connection exists after handover/mobility failure.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.4"
+      ]
+    }
+  ]
+}

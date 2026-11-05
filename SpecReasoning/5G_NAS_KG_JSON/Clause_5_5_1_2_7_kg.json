@@ -1,0 +1,387 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.7",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE initial registration to the 5G network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that prevents initial registration when running, except for specific high priority or emergency cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that prevents initial registration with follow-on request pending when running, except for high priority or emergency cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3510",
+      "name": "Timer T3510",
+      "entity_type": "Timer",
+      "description": "Timer stopped during abnormal case handling in initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3511",
+      "name": "Timer T3511",
+      "entity_type": "Timer",
+      "description": "Timer started when registration attempt counter < 5; when expired, registration procedure restarts if needed.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3502",
+      "name": "Timer T3502",
+      "entity_type": "Timer",
+      "description": "Timer started when registration attempt counter = 5; UE enters deregistered state and may perform PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "name": "5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION",
+      "entity_type": "State",
+      "description": "UE state entered when registration attempt counter < 5 and timer T3511 is started.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "name": "5GMM-DEREGISTERED.PLMN-SEARCH",
+      "entity_type": "State",
+      "description": "Optional UE state entered when registration attempt counter = 5; UE performs PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED_INITIATED",
+      "name": "5GMM-REGISTERED-INITIATED",
+      "entity_type": "State",
+      "description": "UE state where initial registration is in progress; collision with de-registration may occur.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message from network that may trigger re-registration or cause procedure collision.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "Message from network accepting registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "Message from network rejecting registration with specific 5GMM cause values.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_COMPLETE",
+      "name": "REGISTRATION COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "IE_5GS_REGISTRATION_TYPE",
+      "name": "5GS registration type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of registration, e.g., initial registration or emergency registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access barred",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate access attempt is barred for certain access categories.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "COND_TAI_CHANGED",
+      "name": "TAI changed",
+      "entity_type": "Condition",
+      "description": "Condition where current Tracking Area Identity changes before registration completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "name": "Registration attempt counter",
+      "entity_type": "Property",
+      "description": "Counter tracking number of registration attempts; incremented on failure up to 5.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "PROC_DEREGISTRATION",
+      "name": "UE initiated de-registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed when UE initiated de-registration is required during initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "PROC_MOBILITY_REGISTRATION_UPDATE",
+      "name": "Registration procedure for mobility registration update",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when initial registration is aborted due to TAI change and current TAI not in TAI list.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "TIMER_T3346",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration shall not start if timer T3346 is running, except for high priority or emergency cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "TIMER_T3447",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration with follow-on request pending shall not start if timer T3447 is running, except for high priority or emergency cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "COND_ACCESS_BARRED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration shall not start if lower layers indicate access is barred.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "COND_TAI_CHANGED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Initial registration shall be aborted and re-initiated if TAI changes before completion.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "STATE_5GMM_REGISTERED_INITIATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Initial registration procedure is performed in state 5GMM-REGISTERED-INITIATED.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Initial registration procedure includes sending REGISTRATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "MSG_REGISTRATION_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Initial registration procedure may include sending REGISTRATION COMPLETE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_5GS_REGISTRATION_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains 5GS registration type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROC_INITIAL_REGISTRATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Receipt of DEREGISTRATION REQUEST with re-registration required indication triggers initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Initial registration failure increments registration attempt counter unless already 5.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "target": "TIMER_T3511",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If registration attempt counter < 5, timer T3511 is started.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "target": "TIMER_T3502",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "If registration attempt counter = 5, timer T3502 is started.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "target": "STATE_5GMM_DEREGISTERED_ATTEMPTING_REGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If registration attempt counter < 5, state changes to 5GMM-DEREGISTERED.ATTEMPTING-REGISTRATION.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "PROP_REGISTRATION_ATTEMPT_COUNTER",
+      "target": "STATE_5GMM_DEREGISTERED_PLMN_SEARCH",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If registration attempt counter = 5, state may change to 5GMM-DEREGISTERED.PLMN-SEARCH for PLMN selection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_15",
+      "source": "TIMER_T3511",
+      "target": "PROC_INITIAL_REGISTRATION",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "When timer T3511 expires, initial registration procedure is restarted if still required.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_16",
+      "source": "COND_TAI_CHANGED",
+      "target": "PROC_MOBILITY_REGISTRATION_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If TAI changes and current TAI not in TAI list, mobility registration update procedure is initiated.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_17",
+      "source": "PROC_INITIAL_REGISTRATION",
+      "target": "PROC_DEREGISTRATION",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "If UE initiated de-registration required, initial registration is aborted and de-registration procedure performed.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_18",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "PROC_INITIAL_REGISTRATION",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "If DEREGISTRATION REQUEST received in state 5GMM-REGISTERED-INITIATED, de-registration is aborted and initial registration progresses.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.12",
+  "title": "EPS mobile identity",
+  "entities": [
+    {
+      "id": "IE_EPS_MOBILE_IDENTITY",
+      "name": "EPS mobile identity",
+      "entity_type": "Information Element",
+      "description": "Information element that provides either the IMSI, GUTI, or IMEI identity. It is a type 4 information element with a minimum length of 3 octets and maximum length of 13 octets.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_IMSI",
+      "name": "IMSI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Subscriber Identity, coded using BCD coding. If number of identity digits is even, bits 5-8 of last octet are filled with end mark '1111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity, with bits 5-8 of octet 3 coded as '1111', contains MCC, MNC, MME Group ID, MME Code, and M-TMSI fields.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "IDENTIFIER_IMEI",
+      "name": "IMEI",
+      "entity_type": "Identifier",
+      "description": "International Mobile Equipment Identity, coded using BCD coding. Format described in 3GPP TS 23.003.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "FIELD_TYPE_OF_IDENTITY",
+      "name": "Type of identity",
+      "entity_type": "Property",
+      "description": "Field in octet 3 bits 1-3 that indicates the identity type: IMSI (001), GUTI (110), or IMEI (011). All other values reserved.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "FIELD_ODD_EVEN_INDIC",
+      "name": "Odd/even indication",
+      "entity_type": "Property",
+      "description": "Field in octet 3 bit 4 that indicates whether there are odd (1) or even (0) number of identity digits. For GUTI, this is set to 0.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "FIELD_IDENTITY_DIGITS",
+      "name": "Identity digits",
+      "entity_type": "Property",
+      "description": "Variable-length field containing the actual identity digits, starting from octet 4. Coding depends on identity type (BCD for IMSI/IMEI, specific structure for GUTI).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "FIELD_MCC",
+      "name": "MCC",
+      "entity_type": "Property",
+      "description": "Mobile Country Code, located in octet 4 and octet 5 bits 1-4 for GUTI. Coded as per ITU-T Recommendation E.212.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "FIELD_MNC",
+      "name": "MNC",
+      "entity_type": "Property",
+      "description": "Mobile Network Code, located in octet 5 bits 5-8 and octet 6 for GUTI. Uses BCD coding and consists of 2 or 3 digits. If only 2 digits, bits 5-8 of octet 5 are '1111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ODD_DIGITS",
+      "name": "Odd number of identity digits",
+      "entity_type": "Condition",
+      "description": "Condition where the number of identity digits is odd, indicated by odd/even indication bit set to 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "CONDITION_EVEN_DIGITS",
+      "name": "Even number of identity digits",
+      "entity_type": "Condition",
+      "description": "Condition where the number of identity digits is even, indicated by odd/even indication bit set to 0. Also used for GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "FIELD_TYPE_OF_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS mobile identity IE contains the type of identity field that specifies whether it carries IMSI, GUTI, or IMEI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "FIELD_ODD_EVEN_INDIC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS mobile identity IE contains the odd/even indication field that specifies the parity of identity digits.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_MOBILE_IDENTITY",
+      "target": "FIELD_IDENTITY_DIGITS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS mobile identity IE contains the identity digits field that carries the actual identity data.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1",
+        "Figure 9.9.3.12.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "FIELD_TYPE_OF_IDENTITY",
+      "target": "IDENTIFIER_IMSI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Type of identity field value '001' indicates the IE contains IMSI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "FIELD_TYPE_OF_IDENTITY",
+      "target": "IDENTIFIER_GUTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Type of identity field value '110' indicates the IE contains GUTI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "FIELD_TYPE_OF_IDENTITY",
+      "target": "IDENTIFIER_IMEI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Type of identity field value '011' indicates the IE contains IMEI.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IDENTIFIER_GUTI",
+      "target": "FIELD_MCC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI identity contains the MCC field for mobile country code.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IDENTIFIER_GUTI",
+      "target": "FIELD_MNC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "GUTI identity contains the MNC field for mobile network code.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Figure 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IDENTIFIER_IMSI",
+      "target": "CONDITION_EVEN_DIGITS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "For IMSI with even number of identity digits, bits 5-8 of last octet are filled with end mark '1111'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IDENTIFIER_GUTI",
+      "target": "CONDITION_EVEN_DIGITS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "GUTI always uses even number of identity digits condition (odd/even indication bit set to 0).",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.12",
+        "Table 9.9.3.12.1"
+      ]
+    }
+  ]
+}

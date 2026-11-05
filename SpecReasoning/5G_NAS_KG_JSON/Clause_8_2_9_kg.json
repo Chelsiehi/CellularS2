@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.9",
+  "title": "Registration reject",
+  "entities": [
+    {
+      "id": "REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "A message sent by the network to reject a registration request from the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "The procedure initiated by the UE to register with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "The state where the UE is registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "The state where the UE is not registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "REGISTRATION_PROCEDURE",
+      "target": "REGISTRATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The registration procedure includes the reception of a REGISTRATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "REGISTRATION_REJECT",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving a REGISTRATION REJECT message causes the UE to enter the EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REGISTRATION_REJECT",
+      "target": "EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The REGISTRATION REJECT message is sent when the UE is in the EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.9"
+      ]
+    }
+  ]
+}

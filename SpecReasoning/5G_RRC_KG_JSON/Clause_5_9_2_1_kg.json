@@ -1,0 +1,141 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.9.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_MCCH_INFO_ACQUISITION",
+      "name": "MCCH information acquisition procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure applied by the UE to acquire MBS broadcast configuration information broadcasted by the network. Used by MBS capable UEs interested in receiving MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1",
+        "Figure 5.9.2.1"
+      ]
+    },
+    {
+      "id": "MSG_MBSBROADCASTCONFIGURATION",
+      "name": "MBSBroadcastConfiguration",
+      "entity_type": "Message",
+      "description": "Message containing MBS broadcast configuration information sent from network to UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1",
+        "Figure 5.9.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC idle state where UE can perform MCCH information acquisition.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC inactive state where UE can perform MCCH information acquisition.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC connected state where UE can perform MCCH information acquisition when specific conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "COND_ACTIVE_BWP_COMMON_SEARCH_SPACE",
+      "name": "Active BWP with common search space configured by searchSpaceMCCH",
+      "entity_type": "Condition",
+      "description": "Condition required for RRC_CONNECTED UEs to apply MCCH information acquisition procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "PROP_MBS_CAPABLE_UE",
+      "name": "MBS capable UE",
+      "entity_type": "Property",
+      "description": "Property indicating UE capability to receive MBS broadcast services.",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_MCCH_INFO_ACQUISITION",
+      "target": "MSG_MBSBROADCASTCONFIGURATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "MCCH information acquisition procedure involves receiving MBSBroadcastConfiguration message",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1",
+        "Figure 5.9.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_MCCH_INFO_ACQUISITION",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be applied when UE is in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_MCCH_INFO_ACQUISITION",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be applied when UE is in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_MCCH_INFO_ACQUISITION",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure can be applied when UE is in RRC_CONNECTED state with specific conditions",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "STATE_RRC_CONNECTED",
+      "target": "COND_ACTIVE_BWP_COMMON_SEARCH_SPACE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC_CONNECTED state requires active BWP with common search space configured by searchSpaceMCCH for MCCH acquisition",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_MCCH_INFO_ACQUISITION",
+      "target": "PROP_MBS_CAPABLE_UE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure applies to MBS capable UEs interested in receiving MBS broadcast services",
+      "provenance": [
+        "TS 38.331, Clause 5.9.2.1"
+      ]
+    }
+  ]
+}

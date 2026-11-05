@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.19",
+  "title": "Network slicing indication",
+  "entities": [
+    {
+      "id": "IE_NETWORK_SLICING_INDICATION",
+      "name": "Network slicing indication",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates when a requested NSSAI is created from the default configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "Registration request message sent by the UE during registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    },
+    {
+      "id": "IE_REQUESTED_NSSAI",
+      "name": "Requested NSSAI",
+      "entity_type": "Information Element",
+      "description": "Network slice selection assistance information requested by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    },
+    {
+      "id": "COND_DEFAULT_CONFIGURED_NSSAI",
+      "name": "Requested NSSAI created from default configured NSSAI",
+      "entity_type": "Condition",
+      "description": "Condition where the requested NSSAI is derived from the default configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_REQUESTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the requested NSSAI information element.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_NETWORK_SLICING_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message contains the network slicing indication IE when the condition is met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_DEFAULT_CONFIGURED_NSSAI",
+      "target": "IE_NETWORK_SLICING_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of network slicing indication IE is guarded by the condition that requested NSSAI is created from default configured NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.19"
+      ]
+    }
+  ]
+}

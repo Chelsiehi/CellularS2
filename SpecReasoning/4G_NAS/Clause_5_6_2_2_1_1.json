@@ -1,0 +1,115 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.1.1",
+  "title": "General",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "--------------------",
+    "The network shall initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" when",
+    "- NAS signalling messages, cdma2000 xae signalling messages or user data is pending to be sent to the UE",
+    "- no NAS signalling connection exists (see example in figure 5.6.2.2.1.1); and",
+    "- there is no paging restriction applied in the network for that paging",
+    "If the network has downlink user data pending for a UE, the MME has stored paging restriction of the UE and the Paging restriction type in the stored paging restriction is set to",
+    "a) \"All paging is restricted\", the network should not initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE",
+    "b) \"All paging is restricted except for voice service\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) the pending downlink user data for the UE is considered as voice service related by the network",
+    "c) \"All paging is restricted except for specified PDN connection(s)\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) for PDN connection(s) that paging is not restricted based on the stored paging restriction, the network has downlink user data pending; or",
+    "d) \"All paging is restricted except for voice service and specified PDN connection(s)\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) the pending downlink user data for the UE is considered as voice service related by the network; or",
+    "2) for PDN connection(s) that paging is not restricted based on the stored paging restriction, the network has downlink user data pending",
+    "If the network has downlink signalling pending for a UE and the MME has stored paging restriction of the UE and the Paging restriction type in the stored paging restriction is set to",
+    "a) \"All paging is restricted\", the network should not initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE",
+    "b) \"All paging is restricted except for voice service\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) the pending downlink signalling for the UE is EMM signalling or ESM signalling of the PDN connection of voice service",
+    "c) \"All paging is restricted except for specified PDN connection(s)\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) the pending downlink signalling for the UE is EMM signalling; or",
+    "2) for PDN connection(s) that paging is not restricted based on the stored paging restriction, the network has downlink ESM signalling pending; or",
+    "d) \"All paging is restricted except for voice service and specified PDN connection(s)\", the network should initiate the paging procedure for EPS services using S-TMSI with CN domain indicator set to \"PS\" for the UE only when",
+    "1) the pending downlink signalling for the UE is EMM signalling or ESM signalling of the PDN connection of voice service; or",
+    "2) for PDN connection(s) that paging is not restricted based on the stored paging restriction, the network has downlink ESM signalling pending",
+    "NOTE 1: If the network pages the UE due to downlink signalling pending, the network initiates the release of the NAS signalling connection after network-requested procedure is completed",
+    "For the UE using eDRX, the network initiates the paging procedure when NAS signalling messages, cdma2000 xae signalling messages or user data is pending to be sent to the UE within the paging time window. If NAS signalling messages, cdma2000 xae signalling messages or user data is pending to be sent to the UE outside the paging time window and the eDRX value that the network provides to the UE in the Extended DRX parameters IE during the last attach procedure or the last tracking area updating procedure is not all zeros (i.e. the E-UTRAN eDRX cycle length duration is higher than 5.12 seconds), the network initiates the paging procedure at T time ahead of the beginning of the next paging time window",
+    "NOTE 2: T time is a short time period based on implementation. The operator can take possible imperfections in the synchronization between the CN and the UE into account when choosing T time",
+    "Figure 5.6.2.2.1.1: Paging procedure using S-TMSI",
+    "To initiate the procedure the EMM entity in the network requests the lower layer to start paging (see 3GPP S 36.300 [20], 3GPP S 36.413 [23]) and shall start the timer",
+    "- T3415 for this paging procedure, if the network accepted to use eDRX for the UE and the UE does not have a PDN connection for emergency bearer services",
+    "- Otherwise, T3413 for this paging procedure",
+    "If the network detects that the pending user data to be sent to the UE is related to the voice service as specified in 3GPP S 23.401 [7] and the network decides to initiate the paging procedure based on the stored paging restriction information, if any, the EMM entity in the network should request the lower layer to include the Voice Service Indication in the Paging message when the UE and the network support the paging indication for voice services",
+    "If the network starts timer T3415, the network shall set timer T3415 to a value smaller than the value of timer T3-RESPONSE (see 3GPP S 29.274 [16D] for further details on timer T3-RESPONSE)",
+    "The EMM entity may provide the lower layer with a list of CSG IDs, including the CSG IDs of both the expired and the not expired subscriptions. If there is a PDN connection for emergency bearer services established, the EMM entity in the network shall not provide the list of CSG IDs to the lower layer",
+    "If the negotiated UE paging probability information is available in the EMM context of the UE, the EMM entity shall provide the lower layer with the negotiated UE paging probability information (see 3GPP S 36.300 [20], 3GPP S 36.413 [23])",
+    "Upon reception of a paging indication, if control plane CIoT EPS optimization is not used by the UE, the UE shall stop the timer T3346, if running, and shall initiate",
+    "- a service request procedure to respond to the paging (see 3GPP S 23.401 [10] and 3GPP S 36.413 [23]); or",
+    "- a tracking area updating procedure as specified in clauses 5.5.3.2.2 and 5.5.3.3.2",
+    "and additionally if the UE is in the EMM-IDLE mode with suspend indication, resume the suspended NAS signalling connection to the MME as specified in clause 5.3.1.3",
+    "Upon reception of a paging indication, if control plane CIoT EPS optimization is used by the UE, the UE shall stop the timer T3346, if running, and shall additionally",
+    "- initiate a service request procedure as specified in clause 5.6.1.2.2 if the UE is in the EMM-IDLE mode without suspend indication",
+    "- initiate a tracking area updating procedure as specified in clauses 5.5.3.2.2; or",
+    "- proceed the behaviour as specified in clause 5.3.1.3 if the UE is in the EMM-IDLE mode with suspend indication",
+    "NOTE 3: If the UE is in the EMM-IDLE mode without suspend indication and has an uplink user data to be sent to the network using control plane CIoT EPS optimization when receiving the paging indication, the UE can piggyback the uplink user data during the service request procedure initiated to respond to the paging, as specified in clause 5.6.1.2.2",
+    "Upon reception of a paging indication, if the network supports the reject paging request and the MUSIM UE decides not to accept the paging, the UE may initiate a service request procedure to reject the paging as specified in clause 5.6.1.1",
+    "NOTE 4: As an implementation option, the MUSIM UE is allowed to not respond to paging based on the information available in the paging message, e.g. voice service indication",
+    "If the paging for EPS services was received during an ongoing UE-initiated EMM specific procedure or service request procedure, then the UE shall ignore the paging. The network shall proceed with the EMM specific procedure or the service request procedure, and stop the timer for the paging procedure (i.e. either timer T3413 or timer T3415). If the network receives an ATTACH REQUEST message when the paging procedure is ongoing, it should be considered as an abnormal case, and the behaviour of the network for this case is specified in clause 5.6.2.2.1.2",
+    "The network shall stop the timer for the paging procedure (i.e. either timer T3413 or timer T3415) when an integrity-protected response is received from the UE and successfully integrity checked by the network or when the EMM entity in the MME receives an indication from the lower layer that it has received the S1-AP UE context resume request message as specified in 3GPP S 36.413 [23]. If the response received is not integrity protected, or the integrity check is unsuccessful, the timer for the paging procedure (i.e. either timer T3413 or timer T3415) shall be kept running unless",
+    "- the UE has a PDN connection for emergency bearer services; or",
+    "- the response received is a TRACKING AREA UPDATE REQUEST message and the security mode control procedure or authentication procedure performed during tracking area updating procedure has completed successfully",
+    "Upon expiry of timer T3413, the network may reinitiate paging",
+    "If the network, while waiting for a response to the paging sent without paging priority, receives downlink signalling or downlink data associated with priority EPS bearers, the network shall stop the timer for the paging procedure (i.e. either timer T3413 or timer T3415), and then initiate the paging procedure with paging priority",
+    "Upon expiry of timer T3415, the network shall abort the paging procedure and shall proceed as specified in 3GPP S 23.401 [10]",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.2.2.1.1",
+      "file": "Figure_5_6_2_2_1_1_p258.png.json",
+      "title": "Paging procedure using S-TMSI",
+      "content": {
+        "figure_id": "5.6.2.2.1.1",
+        "title": "Paging procedure using S-TMSI",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "AS",
+              "name": "Request paging",
+              "notes": "Start T3413 or T3415"
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "Paging",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "SERVICE REQUEST or EXTENDED SERVICE REQUEST or CONTROL PLANE SERVICE REQUEST",
+              "notes": "Stop T3413 or T3415"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "To initiate the procedure the EMM entity in the network requests the lower layer to start paging",
+            "T3415 for this paging procedure, if the network accepted to use eDRX for the UE and the UE does not have a PDN connection for emergency bearer services",
+            "Otherwise, T3413 for this paging procedure",
+            "If the network detects that the pending user data to be sent to the UE is related to the voice service and decides to initiate the paging procedure based on the stored paging restriction information, the EMM entity should request the lower layer to include the Voice Service Indication in the Paging message",
+            "If the network starts timer T3415, the network shall set timer T3415 to a value smaller than the value of timer T3-RESPONSE"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

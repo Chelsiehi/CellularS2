@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.8.4A.1",
+  "title": "Core network selection",
+  "entities": [
+    {
+      "id": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "name": "Core network selection",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by a UE supporting CIoT optimizations to select between EPC or 5GCN core network types based on various indications and UE capabilities.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "CONDITION_CIOT_UE_SUPPORT",
+      "name": "UE supports CIoT optimizations",
+      "entity_type": "Condition",
+      "description": "Condition that the UE must support CIoT optimizations to perform core network selection.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "CONDITION_DUAL_CONNECTIVITY",
+      "name": "E-UTRA cell connected to both EPC and 5GCN",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate the current E-UTRA cell is connected to both EPC and 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_EPC_SELECTION",
+      "name": "EPC core network type",
+      "entity_type": "Property",
+      "description": "Selected EPC core network type based on selection criteria.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "PROPERTY_5GCN_SELECTION",
+      "name": "5GCN core network type",
+      "entity_type": "Property",
+      "description": "Selected 5GCN core network type based on selection criteria.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "IE_CIOT_EPS_OPTIMIZATIONS_UE",
+      "name": "CIoT EPS optimizations supported by UE",
+      "entity_type": "Information Element",
+      "description": "Information about CIoT EPS optimizations supported by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "IE_CIOT_5GS_OPTIMIZATIONS_UE",
+      "name": "CIoT 5GS optimizations supported by UE",
+      "entity_type": "Information Element",
+      "description": "Information about CIoT 5GS optimizations supported by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "IE_PREFERRED_CIOT_BEHAVIOUR_EPC",
+      "name": "UE's preferred CIoT network behaviour for EPC",
+      "entity_type": "Information Element",
+      "description": "UE's preferred CIoT network behaviour configuration for EPC.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "IE_PREFERRED_CIOT_BEHAVIOUR_5GCN",
+      "name": "UE's preferred CIoT network behaviour for 5GCN",
+      "entity_type": "Information Element",
+      "description": "UE's preferred CIoT network behaviour configuration for 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "PROCEDURE_INITIAL_REGISTRATION",
+      "name": "Initial registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure during which the UE provides the selected core network type information to the lower layer.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "CONDITION_CIOT_UE_SUPPORT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Core network selection procedure requires that the UE supports CIoT optimizations.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "CONDITION_DUAL_CONNECTIVITY",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Core network selection procedure requires that lower layers indicate dual connectivity to both EPC and 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "IE_CIOT_EPS_OPTIMIZATIONS_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Core network selection is guarded by CIoT EPS optimizations supported by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "IE_CIOT_5GS_OPTIMIZATIONS_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Core network selection is guarded by CIoT 5GS optimizations supported by the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "IE_PREFERRED_CIOT_BEHAVIOUR_EPC",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Core network selection is guarded by UE's preferred CIoT network behaviour for EPC.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "IE_PREFERRED_CIOT_BEHAVIOUR_5GCN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Core network selection is guarded by UE's preferred CIoT network behaviour for 5GCN.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "PROPERTY_EPC_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Core network selection procedure establishes the selected EPC core network type.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "PROPERTY_5GCN_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Core network selection procedure establishes the selected 5GCN core network type.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_CORE_NETWORK_SELECTION",
+      "target": "PROCEDURE_INITIAL_REGISTRATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Core network selection procedure has a step to provide selected core network type during initial registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.8.4A.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.1.5",
+  "title": "Coordination between 5GMM and GMM",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that operates in either single-registration mode or dual-registration mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "SIM_USIM",
+      "name": "SIM/USIM",
+      "entity_type": "Property",
+      "description": "The subscriber identity module used by the UE for authentication and service access.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_INVALID_3GPP",
+      "name": "SIM/USIM invalid for 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition where the UE considers the SIM/USIM invalid for any of the 3GPP access modes: N1 mode, S1 mode, A/Gb mode, or Iu mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "CONDITION_INVALID_5GS",
+      "name": "USIM invalid for 5GS services",
+      "entity_type": "Condition",
+      "description": "Condition where the UE considers the USIM invalid for 5GS services for any of the 3GPP access modes: N1 mode, S1 mode, A/Gb mode, or Iu mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_INVALID_ALL_3GPP",
+      "name": "Consider SIM/USIM invalid for all 3GPP accesses",
+      "entity_type": "Property",
+      "description": "System behavior where if the SIM/USIM is invalid for any 3GPP access mode, it is considered invalid for all 3GPP access modes.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "BEHAVIOR_INVALID_ALL_5GS",
+      "name": "Consider USIM invalid for all 5GS services",
+      "entity_type": "Property",
+      "description": "System behavior where if the USIM is invalid for 5GS services in any 3GPP access mode, it is considered invalid for 5GS services in all 3GPP access modes.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_INVALID_3GPP",
+      "target": "BEHAVIOR_INVALID_ALL_3GPP",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE considers the SIM/USIM invalid for any 3GPP access mode, it establishes the behavior to consider it invalid for all 3GPP access modes.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_INVALID_5GS",
+      "target": "BEHAVIOR_INVALID_ALL_5GS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE considers the USIM invalid for 5GS services in any 3GPP access mode, it establishes the behavior to consider it invalid for 5GS services in all 3GPP access modes.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UE",
+      "target": "SIM_USIM",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The UE uses the SIM/USIM for authentication and service access across different modes.",
+      "provenance": [
+        "TS 24.501, Clause 5.1.5"
+      ]
+    }
+  ]
+}

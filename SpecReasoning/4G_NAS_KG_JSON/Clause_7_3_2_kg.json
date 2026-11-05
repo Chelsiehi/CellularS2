@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "7.3.2",
+  "title": "EPS bearer identity",
+  "entities": [
+    {
+      "id": "EPS_BEARER_ID",
+      "name": "EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identifier used in ESM messages to reference EPS bearer contexts. Invalid values include assigned/reserved values in certain contexts or values that don't match existing bearers.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "ESM_CAUSE_43",
+      "name": "ESM cause #43",
+      "entity_type": "Property",
+      "description": "ESM cause value indicating 'invalid EPS bearer identity'. Used in reject and status messages when invalid EPS bearer identity is detected.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "PROC_NETWORK_HANDLING",
+      "name": "Network handling of invalid EPS bearer identity",
+      "entity_type": "Procedure",
+      "description": "Network procedures for handling unknown, erroneous, or unforeseen EPS bearer identity values in ESM message headers.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "PROC_UE_HANDLING",
+      "name": "UE handling of invalid EPS bearer identity",
+      "entity_type": "Procedure",
+      "description": "UE procedures for handling unknown, erroneous, or unforeseen EPS bearer identity values in ESM message headers.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "COND_INVALID_EBI",
+      "name": "Invalid EPS bearer identity condition",
+      "entity_type": "Condition",
+      "description": "Condition where received EPS bearer identity is assigned/reserved in wrong context or doesn't match existing bearer context.",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NETWORK_HANDLING",
+      "target": "COND_INVALID_EBI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network handling procedure is triggered by detection of invalid EPS bearer identity condition",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_UE_HANDLING",
+      "target": "COND_INVALID_EBI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE handling procedure is triggered by detection of invalid EPS bearer identity condition",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_INVALID_EBI",
+      "target": "ESM_CAUSE_43",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Detection of invalid EPS bearer identity condition leads to generation of ESM cause #43",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_BEARER_ID",
+      "target": "COND_INVALID_EBI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EPS bearer identity is subject to validation conditions for invalid values",
+      "provenance": [
+        "TS 24.301, Clause 7.3.2"
+      ]
+    }
+  ]
+}

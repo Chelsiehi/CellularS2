@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROCEDURE_RRC_RECONFIGURATION",
+      "name": "RRC Reconfiguration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE upon various failure conditions to re-establish RRC connection",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "CONDITION_RLF_MCG_NO_T316",
+      "name": "Radio Link Failure of MCG without T316 configured",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects radio link failure of MCG and t316 is not configured",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "CONDITION_INTEGRITY_FAILURE_SRB1_SRB2",
+      "name": "Integrity check failure on SRB1 or SRB2",
+      "entity_type": "Condition",
+      "description": "Integrity check failure indication from lower layers concerning SRB1 or SRB2, except if detected on RRCReestablishment message",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "CONDITION_T316_EXPIRY",
+      "name": "T316 timer expiry",
+      "entity_type": "Condition",
+      "description": "Condition triggered upon T316 timer expiry",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "TIMER_T310",
+      "name": "Timer T310",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon procedure initiation",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "TIMER_T311",
+      "name": "Timer T311",
+      "entity_type": "Timer",
+      "description": "Timer started upon procedure initiation",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "TIMER_T316",
+      "name": "Timer T316",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon procedure initiation if running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_SUSPEND_RBS",
+      "name": "Suspend all RBs except SRB0",
+      "entity_type": "Property",
+      "description": "UE suspends all radio bearers except SRB0 when not configured with conditionalReconfiguration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_RELEASE_MCG_SCELLS",
+      "name": "Release MCG SCell(s)",
+      "entity_type": "Property",
+      "description": "UE releases MCG secondary cells if configured",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_PERFORM_MR_DC_RELEASE",
+      "name": "Perform MR-DC release",
+      "entity_type": "Property",
+      "description": "UE performs Multi-RAT Dual Connectivity release as specified in clause 5.3.5.10",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITION_RLF_MCG_NO_T316",
+      "target": "PROCEDURE_RRC_RECONFIGURATION",
+      "relation_type": "action_triggered_by",
+      "family": "core",
+      "description": "Radio link failure of MCG without T316 configured triggers RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_INTEGRITY_FAILURE_SRB1_SRB2",
+      "target": "PROCEDURE_RRC_RECONFIGURATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Integrity check failure on SRB1 or SRB2 triggers RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_T316_EXPIRY",
+      "target": "PROCEDURE_RRC_RECONFIGURATION",
+      "relation_type": "action_triggered_by",
+      "family": "core",
+      "description": "T316 timer expiry triggers RRC reconfiguration procedure",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "TIMER_T310",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T310 if running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "TIMER_T311",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T311",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "TIMER_T316",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T316 if running",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "PROPERTY_SUSPEND_RBS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to suspend all RBs except SRB0",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "PROPERTY_RELEASE_MCG_SCELLS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to release MCG SCell(s) if configured",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_RRC_RECONFIGURATION",
+      "target": "PROPERTY_PERFORM_MR_DC_RELEASE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to perform MR-DC release",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.2"
+      ]
+    }
+  ]
+}

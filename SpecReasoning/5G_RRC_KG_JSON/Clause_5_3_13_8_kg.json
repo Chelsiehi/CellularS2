@@ -1,0 +1,218 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.13.8",
+  "title": "RNA update",
+  "entities": [
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE state",
+      "entity_type": "State",
+      "description": "Radio Resource Control inactive state where UE maintains connection context but is not actively communicating.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE state",
+      "entity_type": "State",
+      "description": "Radio Resource Control idle state where UE has no active connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "PROCEDURE_RRC_RESUME",
+      "name": "RRC connection resume procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure to resume an RRC connection from RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "TIMER_T319A",
+      "name": "T319a timer",
+      "entity_type": "Timer",
+      "description": "Timer used in RRC_INACTIVE state procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "VARIABLE_PENDING_RNA_UPDATE",
+      "name": "pendingRNA-Update variable",
+      "entity_type": "Property",
+      "description": "Boolean variable indicating whether an RNA update is pending.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "COND_RNA_UPDATE_TRIGGERED",
+      "name": "RNA Update triggered at SIB1 reception",
+      "entity_type": "Condition",
+      "description": "Condition where RNA update is triggered upon receiving System Information Block 1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "COND_BARRING_ALLEVIATED",
+      "name": "Barring alleviated for Access Categories",
+      "entity_type": "Condition",
+      "description": "Condition where access barring is lifted for Access Category '8' or '2'.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "COND_NO_UPPER_LAYER_REQUEST",
+      "name": "No upper layer RRC connection resumption request",
+      "entity_type": "Condition",
+      "description": "Condition where upper layers do not request RRC connection resumption.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "IE_RESUME_CAUSE",
+      "name": "resumeCause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for RRC connection resumption.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "VALUE_RNA_UPDATE",
+      "name": "rna-Update",
+      "entity_type": "Identifier",
+      "description": "Value for resumeCause indicating RNA update as the reason for resumption.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "PROPERTY_GO_TO_IDLE",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Property",
+      "description": "Procedural actions performed when UE transitions to RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "COND_RNA_UPDATE_TRIGGERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "RNA update triggering condition applies when UE is in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_RNA_UPDATE_TRIGGERED",
+      "target": "PROCEDURE_RRC_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RNA update trigger condition guards initiation of RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_RNA_UPDATE_TRIGGERED",
+      "target": "TIMER_T319A",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RNA update procedure requires that T319a timer is not running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_RRC_RESUME",
+      "target": "IE_RESUME_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRC connection resume procedure includes resumeCause information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_RESUME_CAUSE",
+      "target": "VALUE_RNA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "resumeCause IE is set to rna-Update value for RNA update procedures.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_BARRING_ALLEVIATED",
+      "target": "PROCEDURE_RRC_RESUME",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barring alleviation condition guards initiation of RRC connection resume procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_BARRING_ALLEVIATED",
+      "target": "COND_NO_UPPER_LAYER_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Barring alleviation procedure requires no upper layer resumption request.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_BARRING_ALLEVIATED",
+      "target": "VARIABLE_PENDING_RNA_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Barring alleviation procedure requires pendingRNA-Update variable is set to true.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "STATE_RRC_INACTIVE",
+      "target": "PROPERTY_GO_TO_IDLE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE in RRC_INACTIVE state performs actions to transition to RRC_IDLE when no suitable cell is found.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROPERTY_GO_TO_IDLE",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "Actions upon going to RRC_IDLE result in state transition to RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.13.8"
+      ]
+    }
+  ]
+}

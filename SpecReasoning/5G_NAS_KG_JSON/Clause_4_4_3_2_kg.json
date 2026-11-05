@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.4.3.2",
+  "title": "Replay protection",
+  "entities": [
+    {
+      "id": "REPLAY_PROTECTION",
+      "name": "Replay protection",
+      "entity_type": "Property",
+      "description": "Mechanism ensuring the same NAS message is not accepted twice by the receiver. For a given 5G NAS security context, a given NAS COUNT value is accepted at most once and only if message integrity verifies correctly.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "NAS_MESSAGE",
+      "name": "NAS message",
+      "entity_type": "Message",
+      "description": "Non-Access Stratum message exchanged between UE and AMF.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "AMF",
+      "entity_type": "Property",
+      "description": "Access and Mobility Management Function, network entity that supports replay protection for received NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "UE",
+      "entity_type": "Property",
+      "description": "User Equipment, terminal device that supports replay protection for received NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "NAS_COUNT",
+      "name": "NAS COUNT",
+      "entity_type": "Identifier",
+      "description": "Counter value used in NAS security context to provide replay protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "SECURITY_CONTEXT_5G_NAS",
+      "name": "5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context established between UE and network for NAS message protection.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "CONDITION_5G_IA0",
+      "name": "5G-IA0 used",
+      "entity_type": "Condition",
+      "description": "Condition where 5G-IA0 security algorithm is applied, making replay protection not applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "MESSAGE_INTEGRITY_VERIFICATION",
+      "name": "Message integrity verification",
+      "entity_type": "Condition",
+      "description": "Process of verifying the integrity of a NAS message, required for replay protection to accept a NAS COUNT value.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AMF",
+      "target": "REPLAY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "AMF supports replay protection for received NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "REPLAY_PROTECTION",
+      "relation_type": "requires_protection",
+      "family": "sec",
+      "description": "UE supports replay protection for received NAS messages.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "REPLAY_PROTECTION",
+      "target": "NAS_COUNT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Replay protection uses NAS COUNT values to ensure messages are not accepted twice.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REPLAY_PROTECTION",
+      "target": "SECURITY_CONTEXT_5G_NAS",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Replay protection operates within a specific 5G NAS security context.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "REPLAY_PROTECTION",
+      "target": "MESSAGE_INTEGRITY_VERIFICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Replay protection requires successful message integrity verification to accept a NAS COUNT value.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_5G_IA0",
+      "target": "REPLAY_PROTECTION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "When 5G-IA0 is used, replay protection is not applicable.",
+      "provenance": [
+        "TS 24.501, Clause 4.4.3.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.4",
+  "title": "RLC bearer addition/modification",
+  "entities": [
+    {
+      "id": "RLC_BEARER_CONFIG",
+      "name": "RLC-BearerConfig",
+      "entity_type": "Information Element",
+      "description": "Configuration information for RLC bearers received in rlc-BearerToAddModList IE",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "LOGICAL_CHANNEL_IDENTITY",
+      "name": "logicalChannelIdentity/LogicalChannelIdentityExt",
+      "entity_type": "Identifier",
+      "description": "Identifier for logical channels within the same cell group",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "DAPS_BEARER",
+      "name": "DAPS bearer",
+      "entity_type": "Property",
+      "description": "A bearer type that maintains both source and target connections during handover",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "SRB_BEARER",
+      "name": "SRB bearer",
+      "entity_type": "Property",
+      "description": "Signaling Radio Bearer used for control plane signaling",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "RLC_ENTITY",
+      "name": "RLC entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity responsible for data transfer reliability",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "LOGICAL_CHANNEL",
+      "name": "Logical channel",
+      "entity_type": "Property",
+      "description": "MAC layer logical channel configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "PDCP_ENTITY",
+      "name": "PDCP entity",
+      "entity_type": "Property",
+      "description": "Packet Data Convergence Protocol entity identified by servedRadioBearer or servedMBS-RadioBearer",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "CONFIGURED_RLC_BEARER",
+      "name": "Configured RLC bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE's current configuration contains an RLC bearer with the received logicalChannelIdentity within the same cell group",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "NEW_RLC_BEARER",
+      "name": "New RLC bearer condition",
+      "entity_type": "Condition",
+      "description": "Condition where logical channel with given logicalChannelIdentity is not configured within the same cell group",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REESTABLISH_RLC",
+      "name": "reestablishRLC condition",
+      "entity_type": "Condition",
+      "description": "Condition triggered when reestablishRLC is received, requiring RLC entity re-establishment",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RLC_BEARER_CONFIG",
+      "target": "CONFIGURED_RLC_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RLC-BearerConfig triggers evaluation of whether RLC bearer with same logicalChannelIdentity exists",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONFIGURED_RLC_BEARER",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RLC bearer exists, UE reconfigures RLC entity according to received rlc-Config",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONFIGURED_RLC_BEARER",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When RLC bearer exists, UE reconfigures logical channel according to received mac-LogicalChannelConfig",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "REESTABLISH_RLC",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When reestablishRLC is received, UE re-establishes the RLC entity as specified in TS 38.322",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NEW_RLC_BEARER",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When new RLC bearer is configured, UE establishes RLC entity according to rlc-Config or default configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "NEW_RLC_BEARER",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When new RLC bearer is configured, UE configures MAC entity with logical channel according to mac-LogicalChannelConfig or default configuration",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "NEW_RLC_BEARER",
+      "target": "PDCP_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When new RLC bearer is configured, UE associates logical channel with PDCP entity identified by servedRadioBearer or servedMBS-RadioBearer",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "DAPS_BEARER",
+      "target": "CONFIGURED_RLC_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "DAPS bearer configuration affects RLC bearer reconfiguration behavior",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "SRB_BEARER",
+      "target": "CONFIGURED_RLC_BEARER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SRB bearer configuration affects RLC bearer reconfiguration behavior",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.4"
+      ]
+    }
+  ]
+}

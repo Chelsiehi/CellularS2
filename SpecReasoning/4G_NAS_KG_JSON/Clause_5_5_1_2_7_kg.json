@@ -1,0 +1,236 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.1.2.7",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "ATTACH_PROCEDURE",
+      "name": "Attach procedure",
+      "entity_type": "Procedure",
+      "description": "Network-initiated attach procedure for UE registration.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "ATTACH_ACCEPT",
+      "name": "ATTACH ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept UE attach request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "ATTACH_COMPLETE",
+      "name": "ATTACH COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject UE attach request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "ATTACH_REQUEST",
+      "name": "ATTACH REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identity assigned to UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "T3450",
+      "name": "Timer T3450",
+      "entity_type": "Timer",
+      "description": "Timer used for ATTACH ACCEPT retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "EMM_DEREGISTERED",
+      "name": "EMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is not registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "LOWER_LAYER_FAILURE",
+      "name": "Lower layer failure",
+      "entity_type": "Condition",
+      "description": "Failure condition in lower protocol layers.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "PROTOCOL_ERROR",
+      "name": "Protocol error",
+      "entity_type": "Condition",
+      "description": "Condition when ATTACH REQUEST contains protocol errors.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "GUTI_VALIDITY",
+      "name": "GUTI validity handling",
+      "entity_type": "Property",
+      "description": "Network behavior regarding old and new GUTI validity after attach procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "UE_SECURITY_CAPABILITIES",
+      "name": "UE security capabilities",
+      "entity_type": "Property",
+      "description": "UE security capabilities including encryption and integrity algorithms.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "ATTACH_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Lower layer failure causes network to abort attach procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure causes network to enter EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "LOWER_LAYER_FAILURE",
+      "target": "GUTI_VALIDITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Lower layer failure triggers GUTI validity handling property.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROTOCOL_ERROR",
+      "target": "ATTACH_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Protocol error in ATTACH REJECT causes network to send ATTACH REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_PROCEDURE",
+      "target": "T3450",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Attach procedure starts timer T3450 for ATTACH ACCEPT retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "ATTACH_PROCEDURE",
+      "target": "T3450",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Attach procedure resets and restarts timer T3450 on retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "T3450",
+      "target": "ATTACH_ACCEPT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Timer T3450 expiry triggers ATTACH ACCEPT retransmission.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "T3450",
+      "target": "EMM_DEREGISTERED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3450 causes network to enter EMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "EMM_REGISTERED",
+      "target": "ATTACH_REQUEST",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "ATTACH REQUEST received in EMM-REGISTERED state triggers special handling.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "UE_SECURITY_CAPABILITIES",
+      "target": "ATTACH_REJECT",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "Invalid UE security capabilities cause network to send ATTACH REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.1.2.7"
+      ]
+    }
+  ]
+}

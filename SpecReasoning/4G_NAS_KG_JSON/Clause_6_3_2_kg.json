@@ -1,0 +1,259 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.3.2",
+  "title": "Principles of address handling for ESM procedures",
+  "entities": [
+    {
+      "id": "TRANSACTION_RELATED_PROCEDURE",
+      "name": "Transaction related procedure",
+      "entity_type": "Procedure",
+      "description": "ESM procedures that use the procedure transaction identity as address parameter in the ESM message header. When initiated, entities include a valid PTI value and set EBI to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT_RELATED_PROCEDURE",
+      "name": "EPS bearer context related procedure",
+      "entity_type": "Procedure",
+      "description": "ESM procedures that use the EPS bearer identity as address parameter in the ESM message header. When network-initiated, includes valid EBI value with PTI set based on trigger condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "PTI",
+      "name": "Procedure transaction identity",
+      "entity_type": "Identifier",
+      "description": "Address parameter used in transaction related procedures. Can be set to valid value or 'no procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "EBI",
+      "name": "EPS bearer identity",
+      "entity_type": "Identifier",
+      "description": "Address parameter used in EPS bearer context related procedures. Can be set to valid value or 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "TRANSACTION_RELATED_REQUEST",
+      "name": "Transaction related request message",
+      "entity_type": "Message",
+      "description": "Initial message in transaction related procedures containing PTI and EBI parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.1"
+      ]
+    },
+    {
+      "id": "TRANSACTION_RELATED_RESPONSE",
+      "name": "Transaction related response message",
+      "entity_type": "Message",
+      "description": "Response message in transaction related procedures containing PTI and EBI parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.2"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT_REQUEST",
+      "name": "EPS bearer context related request",
+      "entity_type": "Message",
+      "description": "Request message in EPS bearer context related procedures containing EBI and PTI parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.3"
+      ]
+    },
+    {
+      "id": "EPS_BEARER_CONTEXT_RESPONSE",
+      "name": "EPS bearer context related response",
+      "entity_type": "Message",
+      "description": "Response message in EPS bearer context related procedures containing EBI and PTI parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.3"
+      ]
+    },
+    {
+      "id": "COND_TRIGGERED_BY_TRANSACTION",
+      "name": "Triggered by transaction related request",
+      "entity_type": "Condition",
+      "description": "Condition where EPS bearer context procedure is triggered by receipt of transaction related request message from UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_INTERNAL_TRIGGER",
+      "name": "Network-internal trigger",
+      "entity_type": "Condition",
+      "description": "Condition where EPS bearer context procedure is triggered network-internally.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "COND_USER_DATA_TRANSPORT",
+      "name": "Triggered by user data transport via control plane",
+      "entity_type": "Condition",
+      "description": "Condition where EPS bearer context procedure is triggered by transport of user data via control plane.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TRANSACTION_RELATED_PROCEDURE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Transaction related procedures use PTI as address parameter in ESM message header.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TRANSACTION_RELATED_PROCEDURE",
+      "target": "EBI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Transaction related procedures set EBI to 'no EPS bearer identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EPS_BEARER_CONTEXT_RELATED_PROCEDURE",
+      "target": "EBI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related procedures use EBI as address parameter in ESM message header.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "EPS_BEARER_CONTEXT_RELATED_PROCEDURE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related procedures include PTI parameter with value based on trigger condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TRANSACTION_RELATED_REQUEST",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Transaction related request messages contain PTI parameter.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TRANSACTION_RELATED_REQUEST",
+      "target": "EBI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Transaction related request messages contain EBI parameter.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EPS_BEARER_CONTEXT_REQUEST",
+      "target": "EBI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related request messages contain EBI parameter.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EPS_BEARER_CONTEXT_REQUEST",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related request messages contain PTI parameter.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2",
+        "Figure 6.3.2.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_TRIGGERED_BY_TRANSACTION",
+      "target": "PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When triggered by transaction related request, PTI value from request is included in EPS bearer context request.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_NETWORK_INTERNAL_TRIGGER",
+      "target": "PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When triggered network-internally, PTI is set to 'no procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_USER_DATA_TRANSPORT",
+      "target": "PTI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When triggered by user data transport via control plane, PTI is set to 'no procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "EPS_BEARER_CONTEXT_RESPONSE",
+      "target": "EBI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related response messages contain EBI value received from network.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "EPS_BEARER_CONTEXT_RESPONSE",
+      "target": "PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EPS bearer context related response messages set PTI to 'no procedure transaction identity assigned'.",
+      "provenance": [
+        "TS 24.301, Clause 6.3.2"
+      ]
+    }
+  ]
+}

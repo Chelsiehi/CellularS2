@@ -1,0 +1,227 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.7.5",
+  "title": "Reception of the RRCReestablishment by the UE",
+  "entities": [
+    {
+      "id": "PROC_RRC_REESTABLISHMENT",
+      "name": "RRC Reestablishment Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE upon receiving RRCReestablishment message to reestablish RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT",
+      "name": "RRCReestablishment",
+      "entity_type": "Message",
+      "description": "Message received by UE to initiate RRC connection reestablishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "name": "RRCReestablishmentComplete",
+      "entity_type": "Message",
+      "description": "Message sent by UE to indicate successful completion of RRC reestablishment procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "IE_SL_L2_REMOTE_UE_CONFIG",
+      "name": "sl-L2RemoteUEConfig",
+      "entity_type": "Information Element",
+      "description": "Information element indicating L2 U2N Remote UE configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "TIMER_T301",
+      "name": "T301",
+      "entity_type": "Timer",
+      "description": "Timer stopped upon reception of RRCReestablishment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "TIMER_T311",
+      "name": "T311",
+      "entity_type": "Timer",
+      "description": "Timer that upon expiry triggers RRC connection failure actions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "KEY_K",
+      "name": "K key",
+      "entity_type": "Property",
+      "description": "Base key used for deriving security keys during RRC reestablishment.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCINT",
+      "name": "K_RRCint key",
+      "entity_type": "Property",
+      "description": "Integrity protection key for RRC signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "KEY_K_RRCENC",
+      "name": "K_RRCenc key",
+      "entity_type": "Property",
+      "description": "Ciphering key for RRC signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_CHECK_FAILS",
+      "name": "Integrity protection check fails",
+      "entity_type": "Condition",
+      "description": "Condition when integrity verification of RRCReestablishment message fails.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "PROP_RESUME_INTEGRITY_PROTECTION",
+      "name": "Resume integrity protection",
+      "entity_type": "Property",
+      "description": "Action to resume integrity protection for SRB1 using K_RRCint key.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "PROP_RESUME_CIPHERING",
+      "name": "Resume ciphering",
+      "entity_type": "Property",
+      "description": "Action to resume ciphering for SRB1 using K_RRCenc key.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with reception of RRCReestablishment message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "TIMER_T301",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Procedure stops timer T301 upon message reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_RRC_REESTABLISHMENT",
+      "target": "IE_SL_L2_REMOTE_UE_CONFIG",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReestablishment message may contain sl-L2RemoteUEConfig IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "KEY_K_RRCINT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure derives K_RRCint key for integrity protection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "KEY_K_RRCENC",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure derives K_RRCenc key for ciphering.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "COND_INTEGRITY_CHECK_FAILS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior depends on integrity check result.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "PROP_RESUME_INTEGRITY_PROTECTION",
+      "relation_type": "has_step",
+      "family": "sec",
+      "description": "Procedure resumes integrity protection for SRB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "PROP_RESUME_CIPHERING",
+      "relation_type": "has_step",
+      "family": "sec",
+      "description": "Procedure resumes ciphering for SRB1.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_RRC_REESTABLISHMENT",
+      "target": "MSG_RRC_REESTABLISHMENT_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure completes with transmission of RRCReestablishmentComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T311",
+      "target": "PROC_RRC_REESTABLISHMENT",
+      "relation_type": "action_triggered_by",
+      "family": "core",
+      "description": "T311 expiry triggers RRC connection failure actions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.7.5"
+      ]
+    }
+  ]
+}

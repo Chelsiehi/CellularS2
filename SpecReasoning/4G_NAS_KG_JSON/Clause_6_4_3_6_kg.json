@@ -1,0 +1,238 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.4.3.6",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "TIMER_T3486",
+      "name": "Timer T3486",
+      "entity_type": "Timer",
+      "description": "Timer used during EPS bearer context modification procedure. On expiry, the MME resends MODIFY EPS BEARER CONTEXT REQUEST and restarts timer. After fifth expiry, procedure is aborted.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_EPS_BEARER_MOD",
+      "name": "EPS bearer context modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for modifying EPS bearer context parameters initiated by the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "MSG_MODIFY_EPS_BEARER_REQ",
+      "name": "MODIFY EPS BEARER CONTEXT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE to request modification of EPS bearer context parameters.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "STATE_BEARER_CONTEXT_ACTIVE",
+      "name": "BEARER CONTEXT ACTIVE",
+      "entity_type": "State",
+      "description": "State entered by MME after aborting EPS bearer context modification procedure due to timer T3486 expiry.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_PDN_DISCONNECT",
+      "name": "UE requested PDN disconnect procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to disconnect a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "MSG_PDN_DISCONNECT_REQ",
+      "name": "PDN DISCONNECT REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request disconnection of a PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PROC_BEARER_RESOURCE_MOD",
+      "name": "UE requested bearer resource modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "MSG_BEARER_RESOURCE_MOD_REQ",
+      "name": "BEARER RESOURCE MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of bearer resources.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "STATE_MODIFY_PENDING",
+      "name": "BEARER CONTEXT MODIFY PENDING",
+      "entity_type": "State",
+      "description": "State during EPS bearer context modification procedure where modification is pending.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_PDN_DISCONNECT",
+      "name": "Collision with PDN disconnect procedure",
+      "entity_type": "Condition",
+      "description": "Condition when MME receives PDN DISCONNECT REQUEST during EPS bearer context modification for same PDN connection.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "COND_COLLISION_BEARER_RESOURCE_MOD",
+      "name": "Collision with bearer resource modification procedure",
+      "entity_type": "Condition",
+      "description": "Condition when MME receives BEARER RESOURCE MODIFICATION REQUEST during EPS bearer context modification for same bearer.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Property indicating procedure termination due to abnormal conditions like timer expiry or collision.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "TIMER_T3486",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "EPS bearer context modification procedure starts timer T3486.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_EPS_BEARER_MOD",
+      "target": "MSG_MODIFY_EPS_BEARER_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "EPS bearer context modification procedure includes sending MODIFY EPS BEARER CONTEXT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TIMER_T3486",
+      "target": "MSG_MODIFY_EPS_BEARER_REQ",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "On T3486 expiry, MME resends MODIFY EPS BEARER CONTEXT REQUEST and resets timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3486",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of T3486 establishes procedure abortion.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROP_ABORT_PROCEDURE",
+      "target": "STATE_BEARER_CONTEXT_ACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure abortion establishes transition to BEARER CONTEXT ACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_COLLISION_PDN_DISCONNECT",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision with PDN disconnect procedure establishes local termination of EPS bearer modification.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_COLLISION_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQ",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggered by receiving PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_COLLISION_BEARER_RESOURCE_MOD",
+      "target": "MSG_BEARER_RESOURCE_MOD_REQ",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggered by receiving BEARER RESOURCE MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_COLLISION_BEARER_RESOURCE_MOD",
+      "target": "STATE_MODIFY_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Collision condition requires BEARER CONTEXT MODIFY PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROC_PDN_DISCONNECT",
+      "target": "MSG_PDN_DISCONNECT_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN disconnect procedure includes receiving PDN DISCONNECT REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROC_BEARER_RESOURCE_MOD",
+      "target": "MSG_BEARER_RESOURCE_MOD_REQ",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Bearer resource modification procedure includes receiving BEARER RESOURCE MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.4.3.6"
+      ]
+    }
+  ]
+}

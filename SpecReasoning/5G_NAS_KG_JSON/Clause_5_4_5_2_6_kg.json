@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.5.2.6",
+  "title": "Abnormal cases in the UE",
+  "entities": [
+    {
+      "id": "PROC_UE_INIT_NAS_TRANSPORT",
+      "name": "UE-initiated NAS transport procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to initiate NAS transport, handling various abnormal cases like access barring, timer conditions, and transmission failures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "MSG_UL_NAS_TRANSPORT",
+      "name": "UL NAS TRANSPORT message",
+      "entity_type": "Message",
+      "description": "Uplink NAS transport message sent by UE, subject to various conditions and restrictions in abnormal cases.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "IE_PAYLOAD_CONTAINER_TYPE",
+      "name": "Payload container type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of payload container, with values like 'N1 SM information'.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "IE_REQUEST_TYPE",
+      "name": "Request type IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of request, with values like 'initial request', 'MA PDU request', 'initial emergency request', etc.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3447",
+      "name": "Timer T3447",
+      "entity_type": "Timer",
+      "description": "Timer that restricts sending UL NAS TRANSPORT message unless specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "Timer T3346",
+      "entity_type": "Timer",
+      "description": "Timer that restricts sending UL NAS TRANSPORT message unless specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_BARRED",
+      "name": "Access attempt barred",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate access attempt is barred, preventing UE from starting NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_PDU_EXISTS",
+      "name": "Emergency PDU session exists",
+      "entity_type": "Condition",
+      "description": "Condition where an emergency PDU session exists, affecting UL NAS TRANSPORT message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_TAI_NOT_IN_LIST",
+      "name": "Current TAI not in TAI list",
+      "entity_type": "Condition",
+      "description": "Condition where current TAI is not in TAI list, causing NAS transport procedure abortion and registration procedure initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_RRC_SUSPENDED",
+      "name": "RRC connection suspended",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate RRC connection has been suspended, causing NAS transport procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "COND_NAS_MAC_CALC",
+      "name": "NAS MAC calculation indication",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate to calculate NAS MAC, requiring UE to calculate and provide NAS MAC to lower layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "PROP_UE_HIGH_PRIORITY",
+      "name": "UE configured for high priority access",
+      "entity_type": "Property",
+      "description": "Property indicating UE is configured for high priority access in selected PLMN, allowing UL NAS TRANSPORT message transmission even when timers are running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_ACCESS_BARRED",
+      "target": "PROC_UE_INIT_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Access barring condition prevents starting UE-initiated NAS transport procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_EMERGENCY_PDU_EXISTS",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDU session existence condition restricts UL NAS TRANSPORT message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_TAI_NOT_IN_LIST",
+      "target": "PROC_UE_INIT_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "TAI not in list condition causes NAS transport procedure abortion and registration procedure initiation.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TIMER_T3447",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3447 running restricts UL NAS TRANSPORT message transmission unless specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TIMER_T3346",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer T3346 running restricts UL NAS TRANSPORT message transmission unless specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_RRC_SUSPENDED",
+      "target": "PROC_UE_INIT_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "RRC connection suspended condition causes NAS transport procedure abortion.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NAS_MAC_CALC",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "NAS MAC calculation indication requires UE to calculate NAS MAC before sending UL NAS TRANSPORT message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_UE_HIGH_PRIORITY",
+      "target": "MSG_UL_NAS_TRANSPORT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE high priority access property allows UL NAS TRANSPORT message transmission even when timers T3447 or T3346 are running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_PAYLOAD_CONTAINER_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Payload container type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_UL_NAS_TRANSPORT",
+      "target": "IE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UL NAS TRANSPORT message contains Request type IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.5.2.6"
+      ]
+    }
+  ]
+}

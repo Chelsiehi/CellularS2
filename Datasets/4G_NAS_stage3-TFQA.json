@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "QA-FIG-0001",
+    "type": "FIGURE_QA",
+    "question": "What conditions cause a transition from CS/PS mode 1 to PS mode 1 for a CS voice capable UE?",
+    "answer": "The transition occurs when the Voice Domain Preference for E-UTRAN changes to \"IMS PS voice only\" while the UE is configured to prefer SMS over IP networks and is IMS registered, or when the SMS configuration changes to prefer SMS over IP networks while the UE is IMS registered and the Voice Domain Preference is \"IMS PS voice only\".",
+    "evidence": "TS 24.301, Figure 4.3.2.1.1, Change of UE mode of operation for a CS voice capable UE"
+  },
+  {
+    "id": "QA-FIG-0002",
+    "type": "FIGURE_QA",
+    "question": "Under what conditions does a UE transition from PS mode 1 to CS/PS mode 1?",
+    "answer": "The UE transitions from PS mode 1 to CS/PS mode 1 upon receiving an unsuccessful IMS registration indication from upper layers or when the SMS configuration is changed to not use SMS over IP networks.",
+    "evidence": "TS 24.301, Figure 4.3.2.1.2, Change of UE mode of operation for a UE with no CS voice capability"
+  },
+  {
+    "id": "QA-XFIG-0001",
+    "type": "CROSS_FIGURE_QA",
+    "question": "For a CS voice capable UE, what specific condition triggers a transition from CS/PS mode 1 to PS mode 1, and for a UE with no CS voice capability, what condition triggers a transition from CS/PS mode 1 to PS mode 1?",
+    "answer": "For a CS voice capable UE, the transition from CS/PS mode 1 to PS mode 1 occurs when the Voice Domain Preference for E-UTRAN changes to \"IMS PS voice only\", the UE is configured to prefer SMS over IP networks, and the UE is IMS registered. For a UE with no CS voice capability, the transition from CS/PS mode 1 to PS mode 1 occurs when the SMS configuration is changed to prefer to use SMS over IP networks and the UE is IMS registered.",
+    "evidence": "TS 24.301, Figure 4.3.2.1.1, Change of UE mode of operation for a CS voice capable UE; TS 24.301, Figure 4.3.2.1.2, Change of UE mode of operation for a UE with no CS voice capability"
+  },
+  {
+    "id": "QA-TBL-0001",
+    "type": "TABLE_QA",
+    "question": "What procedure should a UE execute when changing from data centric to voice centric usage setting if CS fallback is not available and IMS voice is not available?",
+    "answer": "Disable the E-UTRA capability (see clause 4.5)",
+    "evidence": "TS 24.301, Table 4.3.2.2.2, Table 4.3.2.2.2: Change of UE's usage setting for a UE in CS/PS mode 1 or CS/PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0002",
+    "type": "TABLE_QA",
+    "question": "What procedure should be executed when a UE's usage setting changes from voice centric to data centric while E-UTRA is disabled?",
+    "answer": "Re-enable the E-UTRA capability (see clause 4.5).",
+    "evidence": "TS 24.301, Table 4.3.2.2.1, Table 4.3.2.2.1: Change of UE's usage setting for a UE in PS mode 1 or PS mode 2"
+  },
+  {
+    "id": "QA-XTBL-0001",
+    "type": "CROSS_TABLE_QA",
+    "question": "What procedures should a UE execute when changing from data centric to voice centric usage setting in both CS/PS mode and PS mode scenarios when IMS voice is unavailable, and how do the conditions differ?",
+    "answer": "In CS/PS mode (Table 4.3.2.2.2), when changing from data centric to voice centric with 'IMS voice not available', the procedure depends on additional conditions: if 'CS fallback is not available' (which includes EMM causes #16, #17, and #18), the UE disables E-UTRA capability; if the UE received a 'CS fallback not preferred' or 'SMS only' indication during the last successful combined attach/TAU, it also disables E-UTRA capability. In PS mode (Table 4.3.2.2.1), when changing from data centric to voice centric with 'IMS voice not available', the procedure depends on voice domain selection outcome: disable E-UTRA capability if selection results in a different RAT, or perform combined TAU with IMSI attach if attempting to stay in E-UTRAN.",
+    "evidence": "TS 24.301, Table 4.3.2.2.2, Table 4.3.2.2.2: Change of UE's usage setting for a UE in CS/PS mode 1 or CS/PS mode 2; TS 24.301, Table 4.3.2.2.1, Table 4.3.2.2.1: Change of UE's usage setting for a UE in PS mode 1 or PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0003",
+    "type": "TABLE_QA",
+    "question": "What procedure should a UE execute when changing its voice domain preference for E-UTRAN from 'IMS PS voice only' to 'CS voice preferred, IMS PS Voice as secondary' while in PS mode 1 or PS mode 2?",
+    "answer": "The UE shall transit from PS mode 1 to CS/PS mode 1 or from PS mode 2 to CS/PS mode 2, and perform a combined tracking area update with IMSI attach.",
+    "evidence": "TS 24.301, Table 4.3.2.3.1, Table 4.3.2.3.1: Change of voice domain preference for E-UTRAN for a UE in PS mode 1 or PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0004",
+    "type": "TABLE_QA",
+    "question": "What procedure should a UE execute when changing from any voice domain preference configuration to 'IMS PS voice only'?",
+    "answer": "The UE may transit from CS/PS mode 1 to PS mode 1 or from CS/PS mode 2 to PS mode 2, and may detach for non-EPS services.",
+    "evidence": "TS 24.301, Table 4.3.2.3.2, Table 4.3.2.3.2: Change of voice domain preference for E-UTRAN for a UE in CS/PS mode 1 or CS/PS mode 2"
+  },
+  {
+    "id": "QA-XTBL-0002",
+    "type": "CROSS_TABLE_QA",
+    "question": "What procedures are executed when a UE changes from 'IMS PS voice only' to 'CS voice only' while in PS mode 1, and what subsequent action is required if the UE later changes from 'CS voice only' back to any configuration after E-UTRA capability was disabled?",
+    "answer": "When changing from 'IMS PS voice only' to 'CS voice only' while in PS mode 1, the UE executes a transit from PS mode 1 to CS/PS mode 1 with a combined tracking area update with IMSI attach. If the UE later changes from 'CS voice only' to any configuration after E-UTRA capability was disabled due to a voice domain preference change, it must re-enable the E-UTRA capability, delaying this re-enablement until any existing RR or RRC connection is released.",
+    "evidence": "TS 24.301, Table 4.3.2.3.1, Table 4.3.2.3.1: Change of voice domain preference for E-UTRAN for a UE in PS mode 1 or PS mode 2; TS 24.301, Table 4.3.2.3.2, Table 4.3.2.3.2: Change of voice domain preference for E-UTRAN for a UE in CS/PS mode 1 or CS/PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0005",
+    "type": "TABLE_QA",
+    "question": "Under what conditions should a UE in CS/PS mode 1 disable its E-UTRA capability when it is not available for voice calls in the IMS indication?",
+    "answer": "The UE should disable the E-UTRA capability when it is not available for voice calls in the IMS indication and either CS fallback is not available (including EMM causes #16, #17, and #18), or the UE received a 'CS fallback not preferred' or 'SMS only' indication during the last successful combined attach or combined tracking area updating procedure.",
+    "evidence": "TS 24.301, Table 4.3.2.4.3, Table 4.3.2.4.3: Change of IMS registration status for a UE in CS/PS mode 1"
+  },
+  {
+    "id": "QA-TBL-0006",
+    "type": "TABLE_QA",
+    "question": "What procedure should a UE in PS mode 2 execute when it is not available for voice calls in the IMS indication and its voice domain preference for E-UTRAN is 'IMS PS voice preferred, CS Voice as secondary'?",
+    "answer": "Transit to CS/PS mode 2. Combined tracking area update with IMSI attach",
+    "evidence": "TS 24.301, Table 4.3.2.4.2, Table 4.3.2.4.2: Change of IMS registration status for a UE in PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0007",
+    "type": "TABLE_QA",
+    "question": "What procedure should a UE in PS mode 1 execute when it is not available for voice calls in the IMS indication, has SMS configuration preferring SMS over IP networks, and has voice domain preference for E-UTRAN set to 'IMS PS voice only'?",
+    "answer": "Disable the E-UTRA capability (see clause 4.5)",
+    "evidence": "TS 24.301, Table 4.3.2.4.1, Table 4.3.2.4.1: Change of IMS registration status for a UE in PS mode 1"
+  },
+  {
+    "id": "QA-XTBL-0003",
+    "type": "CROSS_TABLE_QA",
+    "question": "What procedures should a UE execute when it is not available for voice calls in the IMS indication, with SMS configuration preferring SMS over IP networks, and the voice domain preference is 'IMS PS voice only', comparing PS mode 1 and CS/PS mode 1 scenarios?",
+    "answer": "In PS mode 1, the UE should disable the E-UTRA capability. In CS/PS mode 1, if the UE is in state EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM with timer T3402 running, it may disable the E-UTRA capability.",
+    "evidence": "TS 24.301, Table 4.3.2.4.3, Table 4.3.2.4.3: Change of IMS registration status for a UE in CS/PS mode 1; TS 24.301, Table 4.3.2.4.2, Table 4.3.2.4.2: Change of IMS registration status for a UE in PS mode 2; TS 24.301, Table 4.3.2.4.1, Table 4.3.2.4.1: Change of IMS registration status for a UE in PS mode 1"
+  },
+  {
+    "id": "QA-TBL-0008",
+    "type": "TABLE_QA",
+    "question": "What procedures may a UE execute when changing to prefer SMS over IP networks, given it can use SMS via IMS and lacks CS voice capability?",
+    "answer": "The UE may transit from CS/PS mode 1 to PS mode 1 or from CS/PS mode 2 to PS mode 2, and may detach for non-EPS services.",
+    "evidence": "TS 24.301, Table 4.3.2.5.2, Table 4.3.2.5.2: Change of configuration regarding the use of SMS in CS/PS mode 1 or CS/PS mode 2"
+  },
+  {
+    "id": "QA-TBL-0009",
+    "type": "TABLE_QA",
+    "question": "What procedure should be executed when the SMS configuration changes to 'SMS service is not preferred to be invoked over IP networks' or the UE becomes unable to use SMS via IMS?",
+    "answer": "Transit from PS mode 1 to CS/PS mode 1 or from PS mode 2 to CS/PS mode 2, combined with a tracking area update and IMSI attach, which may include 'SMS only'.",
+    "evidence": "TS 24.301, Table 4.3.2.5.1, Table 4.3.2.5.1: Change of configuration regarding the use of SMS in PS mode 1 or PS mode 2"
+  },
+  {
+    "id": "QA-XTBL-0004",
+    "type": "CROSS_TABLE_QA",
+    "question": "What procedures can a UE execute when changing its SMS configuration to prefer SMS over IP networks while being able to use SMS via IMS, and what contrasting procedure applies when changing to not prefer SMS over IP networks or being unable to use IMS for SMS?",
+    "answer": "When changing to 'SMS service is preferred to be invoked over IP networks' with IMS SMS capability and either no CS voice capability or voice domain preference set to 'IMS PS voice only', the UE may transit from CS/PS mode 1 to PS mode 1 (or CS/PS mode 2 to PS mode 2) and detach for non-EPS services. In contrast, when changing to 'SMS service is not preferred to be invoked over IP networks' or if the UE is unable to use SMS via IMS, the UE transits from PS mode 1 to CS/PS mode 1 (or PS mode 2 to CS/PS mode 2) and performs a combined tracking area update with IMSI attach.",
+    "evidence": "TS 24.301, Table 4.3.2.5.2, Table 4.3.2.5.2: Change of configuration regarding the use of SMS in CS/PS mode 1 or CS/PS mode 2; TS 24.301, Table 4.3.2.5.1, Table 4.3.2.5.1: Change of configuration regarding the use of SMS in PS mode 1 or PS mode 2"
+  },
+  {
+    "id": "QA-FIG-0003",
+    "type": "FIGURE_QA",
+    "question": "From which EMM main state does the UE transition to EMM-SERVICE-REQUEST-INITIATED, and what is the condition for this transition?",
+    "answer": "The UE transitions from the EMM-REGISTERED state to the EMM-SERVICE-REQUEST-INITIATED state when a SERVICE REQUEST is requested.",
+    "evidence": "TS 24.301, Figure 5.1.3.2.2.7.1, EMM main states in the UE"
+  },
+  {
+    "id": "QA-FIG-0004",
+    "type": "FIGURE_QA",
+    "question": "From which EMM main state does the MME transition to EMM-DEREGISTERED-INITIATED, and under what condition?",
+    "answer": "The MME transitions from the EMM-REGISTERED state to the EMM-DEREGISTERED-INITIATED state when a Network initiated DETACH is requested.",
+    "evidence": "TS 24.301, Figure 5.1.3.4.4.1, EMM main states in the MME"
+  },
+  {
+    "id": "QA-FIG-0005",
+    "type": "FIGURE_QA",
+    "question": "What message does the MME send to the UE to initiate the GUTI reallocation procedure, and what action is associated with its transmission?",
+    "answer": "The MME sends the GUTI REALLOCATION COMMAND message to the UE, and the transmission starts timer T3450.",
+    "evidence": "TS 24.301, Figure 5.4.1.2.1, GUTI reallocation procedure"
+  },
+  {
+    "id": "QA-FIG-0006",
+    "type": "FIGURE_QA",
+    "question": "What action does the MME take upon sending the AUTHENTICATION REQUEST message to the UE?",
+    "answer": "The MME starts timer T3460.",
+    "evidence": "TS 24.301, Figure 5.4.2.2.1, Authentication procedure"
+  },
+  {
+    "id": "QA-FIG-0007",
+    "type": "FIGURE_QA",
+    "question": "What specific action does the MME take upon receiving an AUTHENTICATION FAILURE message with cause 'synch failure' from the UE?",
+    "answer": "The MME performs re-synchronization with the HSS.",
+    "evidence": "TS 24.301, Figure 5.4.2.7.2, Authentication failure procedure (EMM cause #21 \"synch failure\")"
+  },
+  {
+    "id": "QA-FIG-0008",
+    "type": "FIGURE_QA",
+    "question": "What specific EMM cause values trigger the authentication failure procedure depicted in the figure, and what is the first message sent by the UE in response to the initial AUTHENTICATION REQUEST when such a cause applies?",
+    "answer": "The procedure is triggered by EMM cause #20 \"MAC failure\" or #26 \"non-EPS authentication unacceptable\". Upon receiving the initial AUTHENTICATION REQUEST from the MME, the UE sends an AUTHENTICATION FAILURE message with the corresponding cause.",
+    "evidence": "TS 24.301, Figure 5.4.2.7.1, Authentication failure procedure (EMM cause #20 \"MAC failure\" or #26 \"non-EPS authentication unacceptable\")"
+  },
+  {
+    "id": "QA-XFIG-0002",
+    "type": "CROSS_FIGURE_QA",
+    "question": "What are the distinct timer management actions taken by the UE when sending an AUTHENTICATION FAILURE message with cause #21 versus cause #20, and what subsequent network procedure is triggered specifically for cause #21?",
+    "answer": "For cause #21 'synch failure', the UE starts T3420 when sending AUTHENTICATION FAILURE, while for cause #20 'MAC failure', the UE starts T3418. The specific subsequent procedure triggered only for cause #21 is that the MME performs re-synchronization with the HSS upon receiving the synch failure indication.",
+    "evidence": "TS 24.301, Figure 5.4.2.7.2, Authentication failure procedure (EMM cause #21 \"synch failure\"); TS 24.301, Figure 5.4.2.7.1, Authentication failure procedure (EMM cause #20 \"MAC failure\" or #26 \"non-EPS authentication unacceptable\")"
+  },
+  {
+    "id": "QA-FIG-0009",
+    "type": "FIGURE_QA",
+    "question": "What action does the MME take upon sending the SECURITY MODE COMMAND message to the UE during the security mode control procedure?",
+    "answer": "The MME starts timer T3460.",
+    "evidence": "TS 24.301, Figure 5.4.3.2.1, Security mode control procedure"
+  },
+  {
+    "id": "QA-FIG-0010",
+    "type": "FIGURE_QA",
+    "question": "What action does the MME take to initiate the identification procedure towards the UE, and what timer is associated with this action?",
+    "answer": "The MME sends an IDENTITY REQUEST message to the UE and starts timer T3470.",
+    "evidence": "TS 24.301, Figure 5.4.4.2.1, Identification procedure"
+  },
+  {
+    "id": "QA-FIG-0011",
+    "type": "FIGURE_QA",
+    "question": "What is the sole message transmitted from the network to the UE in the EMM information procedure as defined in the figure?",
+    "answer": "The EMM INFORMATION message",
+    "evidence": "TS 24.301, Figure 5.4.5.2.1, EMM information procedure"
+  },
+  {
+    "id": "QA-FIG-0012",
+    "type": "FIGURE_QA",
+    "question": "What message does the UE send to the MME to initiate the attach procedure, and which timer is started as a result?",
+    "answer": "The UE sends an ATTACH REQUEST message to the MME, which starts timer T3410.",
+    "evidence": "TS 24.301, Figure 5.5.1.2.2.1, Attach procedure and combined attach procedure"
+  },
+  {
+    "id": "QA-FIG-0013",
+    "type": "FIGURE_QA",
+    "question": "What action does the UE take that initiates the start of timer T3421 in the UE initiated detach procedure?",
+    "answer": "The UE sends a DETACH REQUEST message to the MME.",
+    "evidence": "TS 24.301, Figure 5.5.2.2.1.1, UE initiated detach procedure"
+  },
+  {
+    "id": "QA-FIG-0014",
+    "type": "FIGURE_QA",
+    "question": "What message does the MME send to the UE to initiate the network initiated detach procedure, and what action is taken regarding timer T3422 when this message is sent?",
+    "answer": "The MME sends a DETACH REQUEST message to the UE, and timer T3422 is started by the MME upon sending this message.",
+    "evidence": "TS 24.301, Figure 5.5.2.3.1, Network initiated detach procedure"
+  },
+  {
+    "id": "QA-FIG-0015",
+    "type": "FIGURE_QA",
+    "question": "Under what condition is timer T3450 started during the tracking area updating procedure, and which entity starts it?",
+    "answer": "Timer T3450 is started by the MME if a GUTI is allocated in the TRACKING AREA UPDATE ACCEPT message.",
+    "evidence": "TS 24.301, Figure 5.5.3.2.2.1, Tracking area updating procedure"
+  },
+  {
+    "id": "QA-FIG-0016",
+    "type": "FIGURE_QA",
+    "question": "What action does the UE take upon sending a CONTROL PLANE SERVICE REQUEST to the AS, and what timer is associated with this action?",
+    "answer": "The UE starts timer T3417 upon sending a CONTROL PLANE SERVICE REQUEST to the AS.",
+    "evidence": "TS 24.301, Figure 5.6.1.1.2, Service request procedure (part 2)"
+  },
+  {
+    "id": "QA-FIG-0017",
+    "type": "FIGURE_QA",
+    "question": "What are the four possible AS responses that stop timer T3417 after a UE sends a CONTROL PLANE SERVICE REQUEST?",
+    "answer": "The four possible AS responses that stop timer T3417 are: Security Protected NAS message, AS indication about release of RRC connection, AS indication about bearer establishment for user plane, and SERVICE REJECT.",
+    "evidence": "TS 24.301, Figure 5.6.1.1.1, Service request procedure (part 1)"
+  },
+  {
+    "id": "QA-XFIG-0003",
+    "type": "CROSS_FIGURE_QA",
+    "question": "What are the three possible outcomes that can stop timer T3417 after a UE sends a CONTROL PLANE SERVICE REQUEST, and which specific messages or indications from the AS cause each stop?",
+    "answer": "Timer T3417 can be stopped by three different AS responses: 1) A Security Protected NAS message (e.g., SECURITY MODE COMMAND, SERVICE ACCEPT, or ESM DATA TRANSPORT), 2) An AS indication about release of RRC connection, and 3) An AS indication about bearer establishment for user plane. Additionally, a SERVICE REJECT message from the AS also stops T3417.",
+    "evidence": "TS 24.301, Figure 5.6.1.1.2, Service request procedure (part 2); TS 24.301, Figure 5.6.1.1.1, Service request procedure (part 1)"
+  },
+  {
+    "id": "QA-FIG-0018",
+    "type": "FIGURE_QA",
+    "question": "What are the two possible timer types the MME can start when requesting paging from the AS, and what condition determines which timer is used?",
+    "answer": "The MME can start either timer T3413 or timer T3415. T3415 is used if the network accepted to use eDRX for the UE and the UE does not have a PDN connection for emergency bearer services; otherwise, T3413 is used.",
+    "evidence": "TS 24.301, Figure 5.6.2.2.1.1, Paging procedure using S-TMSI"
+  },
+  {
+    "id": "QA-FIG-0019",
+    "type": "FIGURE_QA",
+    "question": "According to the paging procedure using IMSI, what message does the UE send to the MME after receiving the paging from the AS?",
+    "answer": "The UE sends an ATTACH REQUEST message to the MME.",
+    "evidence": "TS 24.301, Figure 5.6.2.2.2.1, Paging procedure using IMSI"
+  },
+  {
+    "id": "QA-FIG-0020",
+    "type": "FIGURE_QA",
+    "question": "According to the paging procedure for CS fallback, what message does the UE send to the MME after being paged by the AS?",
+    "answer": "The UE sends an EXTENDED SERVICE REQUEST message to the MME.",
+    "evidence": "TS 24.301, Figure 5.6.2.3.1.1, Paging procedure for CS fallback to A/Gb or Iu mode"
+  },
+  {
+    "id": "QA-FIG-0021",
+    "type": "FIGURE_QA",
+    "question": "According to the EMM status procedure, what is the primary purpose of sending an EMM STATUS message?",
+    "answer": "The purpose is to report certain error conditions detected upon receipt of EMM protocol data.",
+    "evidence": "TS 24.301, Figure 5.7.1, EMM status procedure"
+  },
+  {
+    "id": "QA-FIG-0022",
+    "type": "FIGURE_QA",
+    "question": "What are the two primary states defined for EPS bearer context handling in the UE according to the state transition overview?",
+    "answer": "The two primary states are BEARER CONTEXT INACTIVE and BEARER CONTEXT ACTIVE.",
+    "evidence": "TS 24.301, Figure 6.1.3.2.2.1, The ESM sublayer states for EPS bearer context handling in the UE (overview)"
+  },
+  {
+    "id": "QA-FIG-0023",
+    "type": "FIGURE_QA",
+    "question": "What conditions cause a transition from PROCEDURE TRANSACTION PENDING to PROCEDURE TRANSACTION INACTIVE in the UE?",
+    "answer": "The transition occurs upon a UE initiated ESM procedure reject by the network or a network initiated ESM procedure.",
+    "evidence": "TS 24.301, Figure 6.1.3.2.4.1, The procedure transaction states in the UE (overview)"
+  },
+  {
+    "id": "QA-FIG-0024",
+    "type": "FIGURE_QA",
+    "question": "From which state does the network transition to the BEARER CONTEXT MODIFY PENDING state, and what is the condition for this transition?",
+    "answer": "The network transitions from the BEARER CONTEXT ACTIVE state to the BEARER CONTEXT MODIFY PENDING state upon receiving a MODIFY EPS BEARER CONTEXT REQUEST.",
+    "evidence": "TS 24.301, Figure 6.1.3.3.5.1, The ESM sublayer states for EPS bearer context handling in the network (overview)"
+  },
+  {
+    "id": "QA-FIG-0025",
+    "type": "FIGURE_QA",
+    "question": "What condition triggers the transition from PROCEDURE TRANSACTION INACTIVE to PROCEDURE TRANSACTION PENDING in the network?",
+    "answer": "The transition is triggered by a network initiated ESM procedure request.",
+    "evidence": "TS 24.301, Figure 6.1.3.3.7.1, The procedure transaction states in the network (overview)"
+  },
+  {
+    "id": "QA-FIG-0026",
+    "type": "FIGURE_QA",
+    "question": "According to the procedure for EPS bearer context related operations triggered by the network for control plane user data transport, what specific value is assigned to the Procedure Transaction Identity in the request message?",
+    "answer": "The Procedure Transaction Identity (PTI) is set to 'unassigned' or 'no procedure transaction identity assigned' in the EPS bearer context related request message.",
+    "evidence": "TS 24.301, Figure 6.3.2.5, EPS bearer context related procedure triggered by network for the transport of user data via the control plane"
+  },
+  {
+    "id": "QA-FIG-0027",
+    "type": "FIGURE_QA",
+    "question": "What are the specific parameters included in the EPS bearer context related request message sent from the UE to the MME for user data transport via the control plane?",
+    "answer": "The EPS bearer context related request message contains PTI = unassigned and EBI = e parameters.",
+    "evidence": "TS 24.301, Figure 6.3.2.6, EPS bearer context related procedure triggered by UE for the transport of user data via the control plane"
+  },
+  {
+    "id": "QA-FIG-0028",
+    "type": "FIGURE_QA",
+    "question": "In the EPS bearer context related procedure triggered network-internally, what are the identities used in the messages exchanged between the MME and UE?",
+    "answer": "The PTI is set to unassigned and the EBI is set to e in both the request and response messages.",
+    "evidence": "TS 24.301, Figure 6.3.2.4, EPS bearer context related procedure triggered network-internally"
+  },
+  {
+    "id": "QA-FIG-0029",
+    "type": "FIGURE_QA",
+    "question": "What are the PTI and EBI values in the EPS bearer context related request message sent from the MME to the UE, and what is the significance of these values?",
+    "answer": "In the EPS bearer context related request message from MME to UE, PTI = a and EBI = e. The PTI value 'a' is carried forward from the initial transaction related request to maintain procedure transaction identity, while the EBI value 'e' is assigned by the network to identify the specific EPS bearer context.",
+    "evidence": "TS 24.301, Figure 6.3.2.3, EPS bearer context related procedure triggered by a transaction related request"
+  },
+  {
+    "id": "QA-FIG-0030",
+    "type": "FIGURE_QA",
+    "question": "In the scenario where a transaction related procedure is initiated by the UE and subsequently rejected by the network, what are the specific message names exchanged between the UE and MME, and what is the value of the PTI in these messages?",
+    "answer": "The UE sends a 'transaction related request' to the MME, and the MME responds with a 'transaction related reject' to the UE. In both messages, the Procedure Transaction Identity (PTI) is set to the value 'a'.",
+    "evidence": "TS 24.301, Figure 6.3.2.1, Transaction related procedure initiated by the UE and rejected by the network"
+  },
+  {
+    "id": "QA-FIG-0031",
+    "type": "FIGURE_QA",
+    "question": "According to the procedure flow for a transaction related procedure initiated by the UE, what are the two address parameters included in the messages exchanged between the UE and MME?",
+    "answer": "The messages include the Procedure Transaction Identity (PTI) and the EPS Bearer Identity (EBI).",
+    "evidence": "TS 24.301, Figure 6.3.2.2a, Transaction related procedure initiated by the UE"
+  },
+  {
+    "id": "QA-FIG-0032",
+    "type": "FIGURE_QA",
+    "question": "In a transaction related procedure initiated by the network according to Figure 6.3.2.2, what are the specific values for the PTI and EBI parameters in both the request and response messages?",
+    "answer": "In both the transaction related request from MME to UE and the transaction related response from UE to MME, the PTI is set to 'a' and the EBI is 'not assigned'.",
+    "evidence": "TS 24.301, Figure 6.3.2.2, Transaction related procedure initiated by the network"
+  },
+  {
+    "id": "QA-FIG-0033",
+    "type": "FIGURE_QA",
+    "question": "What are the two messages exchanged between the UE and MME in the transaction related procedure where the UE initiates and the network responds with a network initiated transaction related request?",
+    "answer": "The UE sends a transaction related request to the MME, and the MME responds with a network initiated transaction related request to the UE.",
+    "evidence": "TS 24.301, Figure 6.3.2.1a, Transaction related procedure initiated by the UE and responded by a network initiated transaction related request"
+  },
+  {
+    "id": "QA-XFIG-0004",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In EPS bearer context related procedures, how does the assignment of the Procedure Transaction Identity (PTI) differ between procedures triggered by transport of user data via the control plane and those triggered by a transaction related request?",
+    "answer": "In procedures triggered by transport of user data via the control plane (Figures 6.3.2.5 and 6.3.2.6), the PTI is set to 'unassigned' in the EPS bearer context related request message. In contrast, when triggered by a transaction related request (Figure 6.3.2.3), the PTI value 'a' from the initial UE request is carried forward to the network's EPS bearer context related request, and only the response message has PTI set to 'unassigned'.",
+    "evidence": "TS 24.301, Figure 6.3.2.5, EPS bearer context related procedure triggered by network for the transport of user data via the control plane; TS 24.301, Figure 6.3.2.6, EPS bearer context related procedure triggered by UE for the transport of user data via the control plane; TS 24.301, Figure 6.3.2.4, EPS bearer context related procedure triggered network-internally; TS 24.301, Figure 6.3.2.3, EPS bearer context related procedure triggered by a transaction related request; TS 24.301, Figure 6.3.2.1, Transaction related procedure initiated by the UE and rejected by the network; TS 24.301, Figure 6.3.2.2a, Transaction related procedure initiated by the UE; TS 24.301, Figure 6.3.2.2, Transaction related procedure initiated by the network; TS 24.301, Figure 6.3.2.1a, Transaction related procedure initiated by the UE and responded by a network initiated transaction related request"
+  },
+  {
+    "id": "QA-FIG-0034",
+    "type": "FIGURE_QA",
+    "question": "What are the two possible responses the UE can send to the network after receiving the ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST?",
+    "answer": "The UE can send either an ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT or an ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message to the network.",
+    "evidence": "TS 24.301, Figure 6.4.1.2.1, Default EPS bearer context activation procedure"
+  },
+  {
+    "id": "QA-FIG-0035",
+    "type": "FIGURE_QA",
+    "question": "What action does the MME take upon sending the ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message to the UE?",
+    "answer": "The MME starts timer T3485 and enters the state BEARER CONTEXT ACTIVE PENDING.",
+    "evidence": "TS 24.301, Figure 6.4.2.2.1, Dedicated EPS bearer context activation procedure"
+  },
+  {
+    "id": "QA-FIG-0036",
+    "type": "FIGURE_QA",
+    "question": "What message does the Network send to the UE to initiate the EPS bearer context modification procedure, and what timer action is associated with it?",
+    "answer": "The Network sends a MODIFY EPS BEARER CONTEXT REQUEST message to the UE, and timer T3486 is started.",
+    "evidence": "TS 24.301, Figure 6.4.3.2.1, EPS bearer context modification procedure"
+  },
+  {
+    "id": "QA-FIG-0037",
+    "type": "FIGURE_QA",
+    "question": "What message does the UE send to the Network to respond to the deactivation request, and what action does this cause the Network to take regarding timer T3495?",
+    "answer": "The UE sends a DEACTIVATE EPS BEARER CONTEXT ACCEPT message, which causes the Network to stop timer T3495.",
+    "evidence": "TS 24.301, Figure 6.4.4.2.1, EPS bearer context deactivation procedure"
+  },
+  {
+    "id": "QA-FIG-0038",
+    "type": "FIGURE_QA",
+    "question": "What are the two possible messages from the Network that cause the UE to stop timer T3482 during the UE requested PDN connectivity procedure?",
+    "answer": "The UE stops timer T3482 upon receiving either ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST or PDN CONNECTIVITY REJECT from the Network.",
+    "evidence": "TS 24.301, Figure 6.5.1.2.1, UE requested PDN connectivity procedure"
+  },
+  {
+    "id": "QA-FIG-0039",
+    "type": "FIGURE_QA",
+    "question": "What are the two possible responses from the network that cause the UE to stop timer T3492 during the PDN disconnection procedure?",
+    "answer": "The network can respond with either a DEACTIVATE EPS BEARER CONTEXT REQUEST or a PDN DISCONNECT REJECT message.",
+    "evidence": "TS 24.301, Figure 6.5.2.2.1, UE requested PDN disconnection procedure"
+  },
+  {
+    "id": "QA-FIG-0040",
+    "type": "FIGURE_QA",
+    "question": "What are the three possible response messages from the Network to a UE's BEARER RESOURCE ALLOCATION REQUEST, and what timer action is associated with each?",
+    "answer": "The Network may respond with ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST, MODIFY EPS BEARER CONTEXT REQUEST, or BEARER RESOURCE ALLOCATION REJECT, and for each of these responses, timer T3480 is stopped.",
+    "evidence": "TS 24.301, Figure 6.5.3.2.1, UE requested bearer resource allocation procedure"
+  },
+  {
+    "id": "QA-FIG-0041",
+    "type": "FIGURE_QA",
+    "question": "What timer is started by the UE when it initiates the bearer resource modification procedure, and which specific message triggers its start?",
+    "answer": "Timer T3481 is started when the UE sends the BEARER RESOURCE MODIFICATION REQUEST message to the Network.",
+    "evidence": "TS 24.301, Figure 6.5.4.2.1, UE requested bearer resource modification procedure"
+  },
+  {
+    "id": "QA-FIG-0042",
+    "type": "FIGURE_QA",
+    "question": "What action must the UE take upon receiving an ESM INFORMATION REQUEST message from the network, and what specific identifier must it include in its response?",
+    "answer": "The UE shall send an ESM INFORMATION RESPONSE message to the network and include the PTI (Procedure Transaction Identity) from the ESM INFORMATION REQUEST message.",
+    "evidence": "TS 24.301, Figure 6.6.1.2.2.1, ESM information request procedure"
+  },
+  {
+    "id": "QA-FIG-0043",
+    "type": "FIGURE_QA",
+    "question": "Under what conditions can the network initiate the notification procedure according to the figure?",
+    "answer": "The network may initiate the notification procedure at any time while a PDN connection exists or a procedure transaction is ongoing.",
+    "evidence": "TS 24.301, Figure 6.6.2.2.1, Notification procedure"
+  },
+  {
+    "id": "QA-FIG-0044",
+    "type": "FIGURE_QA",
+    "question": "What action does the UE take upon receiving the REMOTE UE REPORT RESPONSE message from the network?",
+    "answer": "The UE stops timer T3493 and enters the state PROCEDURE TRANSACTION INACTIVE.",
+    "evidence": "TS 24.301, Figure 6.6.3.2.1, Remote UE Report procedure"
+  },
+  {
+    "id": "QA-FIG-0045",
+    "type": "FIGURE_QA",
+    "question": "Under what two EMM modes does the UE initiate the transport of user data via the control plane, and how does the message transmission differ between them?",
+    "answer": "The UE initiates the procedure in either EMM-CONNECTED mode or EMM-IDLE mode. In EMM-CONNECTED mode, the UE sends the ESM DATA TRANSPORT message directly. In EMM-IDLE mode, the UE sends the ESM DATA TRANSPORT message included within a CONTROL PLANE SERVICE REQUEST message.",
+    "evidence": "TS 24.301, Figure 6.6.4.2.1, UE initiated transport of user data via the control plane procedure"
+  },
+  {
+    "id": "QA-FIG-0046",
+    "type": "FIGURE_QA",
+    "question": "In the network initiated transport of user data via the control plane procedure, which entity sends the ESM DATA TRANSPORT message and to which entity is it sent?",
+    "answer": "The Network sends the ESM DATA TRANSPORT message to the UE.",
+    "evidence": "TS 24.301, Figure 6.6.4.3.1, Network initiated transport of user data via the control plane procedure"
+  },
+  {
+    "id": "QA-FIG-0047",
+    "type": "FIGURE_QA",
+    "question": "According to the ESM status procedure, what are the two possible directions for sending an ESM STATUS message?",
+    "answer": "The ESM STATUS message can be sent from the Network to the UE or from the UE to the Network.",
+    "evidence": "TS 24.301, Figure 6.7.1, ESM status procedure"
+  },
+  {
+    "id": "QA-TBL-0010",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Generic message container information element in the UPLINK GENERIC NAS TRANSPORT message?",
+    "answer": "The Generic message container is formatted as LV-E (Length-Value-Extended) with a length of 3 to n octets.",
+    "evidence": "TS 24.301, Table 8.2.32.1, Table 8.2.32.1: UPLINK GENERIC NAS TRANSPORT message content"
+  },
+  {
+    "id": "QA-TBL-0011",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EMM cause information element in the ATTACH REJECT message?",
+    "answer": "The EMM cause information element has a format of V (Value) and a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.2.3.1, Table 8.2.3.1: ATTACH REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0012",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the CLI information element in the CS SERVICE NOTIFICATION message?",
+    "answer": "The CLI information element has a TLV format and a length of 3-14 octets.",
+    "evidence": "TS 24.301, Table 8.2.9.1, Table 8.2.9.1: CS SERVICE NOTIFICATION message content"
+  },
+  {
+    "id": "QA-TBL-0013",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Generic message container information element in the DOWNLINK GENERIC NAS TRANSPORT message?",
+    "answer": "The Generic message container is formatted as LV-E (Length-Value-Extended) with a length of 3 to n octets.",
+    "evidence": "TS 24.301, Table 8.2.31.1, Table 8.2.31.1: DOWNLINK GENERIC NAS TRANSPORT message content"
+  },
+  {
+    "id": "QA-TBL-0014",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the NAS key set identifier ASME information element in the AUTHENTICATION REQUEST message?",
+    "answer": "The NAS key set identifier ASME has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.7.1, Table 8.2.7.1: AUTHENTICATION REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0015",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Control plane service type information element in the CONTROL PLANE SERVICE REQUEST message?",
+    "answer": "The Control plane service type has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.33.1, Table 8.2.33.1: CONTROL PLANE SERVICE REQUEST message content"
+  },
+  {
+    "id": "QA-XTBL-0005",
+    "type": "CROSS_TABLE_QA",
+    "question": "Which two EPS mobility management messages include a mandatory Generic message container element, and what is the common format and length specification for this container?",
+    "answer": "The UPLINK GENERIC NAS TRANSPORT and DOWNLINK GENERIC NAS TRANSPORT messages both include a mandatory Generic message container element. According to the tables, in both messages this container has the format 'LV-E' and a length of '3-n' octets.",
+    "evidence": "TS 24.301, Table 8.2.32.1, Table 8.2.32.1: UPLINK GENERIC NAS TRANSPORT message content; TS 24.301, Table 8.2.3.1, Table 8.2.3.1: ATTACH REJECT message content; TS 24.301, Table 8.2.9.1, Table 8.2.9.1: CS SERVICE NOTIFICATION message content; TS 24.301, Table 8.2.31.1, Table 8.2.31.1: DOWNLINK GENERIC NAS TRANSPORT message content; TS 24.301, Table 8.2.7.1, Table 8.2.7.1: AUTHENTICATION REQUEST message content; TS 24.301, Table 8.2.33.1, Table 8.2.33.1: CONTROL PLANE SERVICE REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0016",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the NAS message container in a DOWNLINK NAS TRANSPORT message?",
+    "answer": "The NAS message container has an LV format and a length of 3-252 octets.",
+    "evidence": "TS 24.301, Table 8.2.12.1, Table 8.2.12.1: DOWNLINK NAS TRANSPORT message content"
+  },
+  {
+    "id": "QA-TBL-0017",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Identity type information element in an IDENTITY REQUEST message?",
+    "answer": "The Identity type IE has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.18.1, Table 8.2.18.1: IDENTITY REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0018",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Detach type information element in a DETACH REQUEST message?",
+    "answer": "The Detach type IE has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.11.2.1, Table 8.2.11.2.1: DETACH REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0019",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Mobile Identity information element in an IDENTITY RESPONSE message?",
+    "answer": "The Mobile Identity IE has format LV and length 4-10 octets.",
+    "evidence": "TS 24.301, Table 8.2.19.1, Table 8.2.19.1: IDENTITY RESPONSE message content"
+  },
+  {
+    "id": "QA-TBL-0020",
+    "type": "TABLE_QA",
+    "question": "What is the Information Element Identifier (IEI) and format for the 'Short name for network' element in an EMM INFORMATION message?",
+    "answer": "The IEI for 'Short name for network' is 45, and its format is TLV.",
+    "evidence": "TS 24.301, Table 8.2.13.1, Table 8.2.13.1: EMM INFORMATION message content"
+  },
+  {
+    "id": "QA-TBL-0021",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Detach type information element in the DETACH REQUEST message?",
+    "answer": "The Detach type IE has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.11.1.1, Table 8.2.11.1.1: DETACH REQUEST message content"
+  },
+  {
+    "id": "QA-XTBL-0006",
+    "type": "CROSS_TABLE_QA",
+    "question": "What is the difference in the mandatory information elements between a DOWNLINK NAS TRANSPORT message carrying a NAS payload and an IDENTITY REQUEST message?",
+    "answer": "A DOWNLINK NAS TRANSPORT message includes a mandatory NAS message container (IEI: none, Type: 9.9.3.22, Format: LV, Length: 3-252) for transporting another NAS message, whereas an IDENTITY REQUEST message includes a mandatory Identity type (IEI: none, Type: 9.9.3.17, Format: V, Length: 1/2) and a mandatory Spare half octet (IEI: none, Type: 9.9.2.9, Format: V, Length: 1/2) instead.",
+    "evidence": "TS 24.301, Table 8.2.12.1, Table 8.2.12.1: DOWNLINK NAS TRANSPORT message content; TS 24.301, Table 8.2.18.1, Table 8.2.18.1: IDENTITY REQUEST message content; TS 24.301, Table 8.2.11.2.1, Table 8.2.11.2.1: DETACH REQUEST message content; TS 24.301, Table 8.2.19.1, Table 8.2.19.1: IDENTITY RESPONSE message content; TS 24.301, Table 8.2.13.1, Table 8.2.13.1: EMM INFORMATION message content; TS 24.301, Table 8.2.11.1.1, Table 8.2.11.1.1: DETACH REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0022",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements included in the DETACH ACCEPT message according to the specified table?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, and Detach accept message identity.",
+    "evidence": "TS 24.301, Table 8.2.10.2.1, Table 8.2.10.2.1: DETACH ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0023",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in a Detach Accept message according to the specified table, and what is the length of each?",
+    "answer": "The mandatory information elements are Protocol discriminator (Length: 1/2), Security header type (Length: 1/2), and Detach accept message identity (Length: 1).",
+    "evidence": "TS 24.301, Table 8.2.10.1.1, Table 8.2.10.1.1: DETACH ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0024",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements and their respective lengths in an EMM STATUS message according to the specification?",
+    "answer": "The mandatory information elements are: Protocol discriminator (length: 1/2 octet), Security header type (length: 1/2 octet), EMM status message identity (length: 1 octet), and EMM cause (length: 1 octet).",
+    "evidence": "TS 24.301, Table 8.2.14.1, Table 8.2.14.1: EMM STATUS message content"
+  },
+  {
+    "id": "QA-TBL-0025",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Service Type information element in the EXTENDED SERVICE REQUEST message?",
+    "answer": "The Service Type information element has a format of V (Value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.15.1, Table 8.2.15.1: EXTENDED SERVICE REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0026",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the TAI list information element when it is included in the GUTI REALLOCATION COMMAND message?",
+    "answer": "The TAI list information element uses TLV format with a length ranging from 8 to 98 octets.",
+    "evidence": "TS 24.301, Table 8.2.16.1, Table 8.2.16.1: GUTI REALLOCATION COMMAND message content"
+  },
+  {
+    "id": "QA-TBL-0027",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements present in the GUTI REALLOCATION COMPLETE message according to Table 8.2.17.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, and GUTI reallocation complete message identity.",
+    "evidence": "TS 24.301, Table 8.2.17.1, Table 8.2.17.1: GUTI REALLOCATION COMPLETE message content"
+  },
+  {
+    "id": "QA-TBL-0028",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS attach result information element in the ATTACH ACCEPT message?",
+    "answer": "The EPS attach result is formatted as a value (V) with a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.1.1, Table 8.2.1.1: ATTACH ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0029",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the TRACKING AREA UPDATE REJECT message according to Table 8.2.28.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, Tracking area update reject message identity, and EMM cause.",
+    "evidence": "TS 24.301, Table 8.2.28.1, Table 8.2.28.1: TRACKING AREA UPDATE REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0030",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the T3442 value information element in the SERVICE REJECT message?",
+    "answer": "The T3442 value IE has a TV format and a length of 2 octets.",
+    "evidence": "TS 24.301, Table 8.2.24.1, Table 8.2.24.1: SERVICE REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0031",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Selected NAS security algorithms information element in the SECURITY MODE COMMAND message?",
+    "answer": "The Selected NAS security algorithms IE has a format of V (Value) and a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.2.20.1, Table 8.2.20.1: SECURITY MODE COMMAND message content"
+  },
+  {
+    "id": "QA-TBL-0032",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the ESM message container in the ATTACH COMPLETE message?",
+    "answer": "The ESM message container has a format of LV-E and a length of 5 to n octets.",
+    "evidence": "TS 24.301, Table 8.2.2.1, Table 8.2.2.1: ATTACH COMPLETE message content"
+  },
+  {
+    "id": "QA-XTBL-0007",
+    "type": "CROSS_TABLE_QA",
+    "question": "Which two messages from the provided tables include the EMM cause information element as mandatory, and what are their respective message identities?",
+    "answer": "The TRACKING AREA UPDATE REJECT and SERVICE REJECT messages both include EMM cause as a mandatory (M) information element. Their message identities are 'Tracking area update reject message identity' and 'Service reject message identity' respectively, both referenced under Message type 9.8.",
+    "evidence": "TS 24.301, Table 8.2.28.1, Table 8.2.28.1: TRACKING AREA UPDATE REJECT message content; TS 24.301, Table 8.2.24.1, Table 8.2.24.1: SERVICE REJECT message content; TS 24.301, Table 8.2.20.1, Table 8.2.20.1: SECURITY MODE COMMAND message content; TS 24.301, Table 8.2.2.1, Table 8.2.2.1: ATTACH COMPLETE message content"
+  },
+  {
+    "id": "QA-TBL-0033",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the IMEISV information element in the SECURITY MODE COMPLETE message?",
+    "answer": "The IMEISV information element uses TLV format with a length of 11 octets.",
+    "evidence": "TS 24.301, Table 8.2.21.1, Table 8.2.21.1: SECURITY MODE COMPLETE message content"
+  },
+  {
+    "id": "QA-TBL-0034",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in a SECURITY MODE REJECT message according to the table, and what is the length of the EMM cause element?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, Security mode reject message identity, and EMM cause. The EMM cause element has a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.2.22.1, Table 8.2.22.1: SECURITY MODE REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0035",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in a SECURITY PROTECTED NAS MESSAGE, and what is the length of the Sequence number field?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, Message authentication code, Sequence number, and NAS message. The Sequence number field has a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.2.23.1, Table 8.2.23.1: SECURITY PROTECTED NAS MESSAGE message content"
+  },
+  {
+    "id": "QA-TBL-0036",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the KSI and sequence number information element in the SERVICE REQUEST message?",
+    "answer": "The KSI and sequence number information element has a format of V (value) and a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.2.25.1, Table 8.2.25.1: SERVICE REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0037",
+    "type": "TABLE_QA",
+    "question": "What is the structure of the message defined in TS 24.301, Clause 8.2.26.1?",
+    "answer": "The message structure is defined in TS 24.301, Table 8.2.26.1, Message definition.",
+    "evidence": "TS 24.301, Table 8.2.26.1, Message definition"
+  },
+  {
+    "id": "QA-TBL-0038",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the TRACKING AREA UPDATE COMPLETE message according to Table 8.2.27.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, and Tracking area update complete message identity.",
+    "evidence": "TS 24.301, Table 8.2.27.1, Table 8.2.27.1: TRACKING AREA UPDATE COMPLETE message content"
+  },
+  {
+    "id": "QA-TBL-0039",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS update type information element in the TRACKING AREA UPDATE REQUEST message?",
+    "answer": "The EPS update type has a variable (V) format and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.2.29.1, Table 8.2.29.1: TRACKING AREA UPDATE REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0040",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the NAS message container in the UPLINK NAS TRANSPORT message?",
+    "answer": "The NAS message container has an LV format and a length of 3-252 octets.",
+    "evidence": "TS 24.301, Table 8.2.30.1, Table 8.2.30.1: UPLINK NAS TRANSPORT message content"
+  },
+  {
+    "id": "QA-TBL-0041",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer context status information element when it is included in the SERVICE ACCEPT message?",
+    "answer": "The EPS bearer context status information element, when present, uses TLV format and has a length of 4 octets.",
+    "evidence": "TS 24.301, Table 8.2.34.1, Table 8.2.34.1: SERVICE ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0042",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS mobile identity information element in the ATTACH REQUEST message?",
+    "answer": "The EPS mobile identity is formatted as LV (Length-Value) with a length of 5 to 12 octets.",
+    "evidence": "TS 24.301, Table 8.2.4.1, Table 8.2.4.1: ATTACH REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0043",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Authentication failure parameter information element in the AUTHENTICATION FAILURE message?",
+    "answer": "The Authentication failure parameter IE has a format of TLV and a length of 16 octets.",
+    "evidence": "TS 24.301, Table 8.2.5.1, Table 8.2.5.1: AUTHENTICATION FAILURE message content"
+  },
+  {
+    "id": "QA-TBL-0044",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements present in the AUTHENTICATION REJECT message according to Table 8.2.6.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, Security header type, and Authentication reject message type.",
+    "evidence": "TS 24.301, Table 8.2.6.1, Table 8.2.6.1: AUTHENTICATION REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0045",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Authentication response parameter information element in the AUTHENTICATION RESPONSE message?",
+    "answer": "The Authentication response parameter is formatted as LV (Length-Value) with a length of 5-17 octets.",
+    "evidence": "TS 24.301, Table 8.2.8.1, Table 8.2.8.1: AUTHENTICATION RESPONSE message content"
+  },
+  {
+    "id": "QA-TBL-0046",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in a PDN CONNECTIVITY REJECT message according to the specification?",
+    "answer": "The mandatory information elements are Protocol discriminator, EPS bearer identity, Procedure transaction identity, PDN connectivity reject message identity, and ESM cause.",
+    "evidence": "TS 24.301, Table 8.3.1, Table 8.3.19.1: PDN CONNECTIVITY REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0047",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in a PDN CONNECTIVITY REJECT message?",
+    "answer": "The EPS bearer identity has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.19.1, Table 8.3.19.1: PDN CONNECTIVITY REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0048",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the ESM DUMMY MESSAGE according to Table 8.3.12A.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, EPS bearer identity, Procedure transaction identity, and ESM dummy message message identity.",
+    "evidence": "TS 24.301, Table 8.3.1, Table 8.3.12A.1: ESM DUMMY MESSAGE message content"
+  },
+  {
+    "id": "QA-TBL-0049",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Protocol discriminator information element in the MODIFY EPS BEARER CONTEXT ACCEPT message?",
+    "answer": "The Protocol discriminator has a format of V (value only) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.16.1, Table 8.3.16.1: MODIFY EPS BEARER CONTEXT ACCEPT message content"
+  },
+  {
+    "id": "QA-XTBL-0008",
+    "type": "CROSS_TABLE_QA",
+    "question": "What are the mandatory information elements common to both the PDN CONNECTIVITY REJECT and MODIFY EPS BEARER CONTEXT ACCEPT messages, and what is the length of the Procedure transaction identity in these messages?",
+    "answer": "Both messages mandatorily include Protocol discriminator, EPS bearer identity, Procedure transaction identity, and a Message type specific to each message. The Procedure transaction identity has a length of 1 octet in both messages.",
+    "evidence": "TS 24.301, Table 8.3.1, Table 8.3.19.1: PDN CONNECTIVITY REJECT message content; TS 24.301, Table 8.3.19.1, Table 8.3.19.1: PDN CONNECTIVITY REJECT message content; TS 24.301, Table 8.3.1, Table 8.3.12A.1: ESM DUMMY MESSAGE message content; TS 24.301, Table 8.3.16.1, Table 8.3.16.1: MODIFY EPS BEARER CONTEXT ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0050",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the BEARER RESOURCE MODIFICATION REQUEST message?",
+    "answer": "The EPS bearer identity information element has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.10.1, Table 8.3.10.1: BEARER RESOURCE MODIFICATION REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0051",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Protocol configuration options information element in the DEACTIVATE EPS BEARER CONTEXT ACCEPT message?",
+    "answer": "The Protocol configuration options IE has TLV format and a length of 3-253 octets.",
+    "evidence": "TS 24.301, Table 8.3.11.1, Table 8.3.11.1: DEACTIVATE EPS BEARER CONTEXT ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0052",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the DEACTIVATE EPS BEARER CONTEXT REQUEST message?",
+    "answer": "The EPS bearer identity information element has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.12.1, Table 8.3.12.1: DEACTIVATE EPS BEARER CONTEXT REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0053",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in an ESM INFORMATION REQUEST message according to Table 8.3.13.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, EPS bearer identity, Procedure transaction identity, and ESM information request message identity.",
+    "evidence": "TS 24.301, Table 8.3.13.1, Table 8.3.13.1: ESM INFORMATION REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0054",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Access point name information element in the ESM INFORMATION RESPONSE message?",
+    "answer": "The Access point name IE has format TLV and length 3-102 octets.",
+    "evidence": "TS 24.301, Table 8.3.14.1, Table 8.3.14.1: ESM INFORMATION RESPONSE message content"
+  },
+  {
+    "id": "QA-TBL-0055",
+    "type": "TABLE_QA",
+    "question": "What is the length in octets of the EPS bearer identity information element in the ESM STATUS message?",
+    "answer": "1/2 octet",
+    "evidence": "TS 24.301, Table 8.3.15.1, Table 8.3.15.1: ESM STATUS message content"
+  },
+  {
+    "id": "QA-TBL-0056",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the MODIFY EPS BEARER CONTEXT REJECT message according to Table 8.3.17.1?",
+    "answer": "The mandatory information elements are: Protocol discriminator, EPS bearer identity, Procedure transaction identity, Modify EPS bearer context reject message identity, and ESM cause.",
+    "evidence": "TS 24.301, Table 8.3.17.1, Table 8.3.17.1: MODIFY EPS BEARER CONTEXT REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0057",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the New EPS QoS information element in the MODIFY EPS BEARER CONTEXT REQUEST message?",
+    "answer": "The New EPS QoS information element uses TLV format and has a length of 3 to 15 octets.",
+    "evidence": "TS 24.301, Table 8.3.18.1, Table 8.3.18.1: MODIFY EPS BEARER CONTEXT REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0058",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Protocol configuration options information element in the ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT message?",
+    "answer": "The Protocol configuration options IE has a TLV format and a length of 3-253 octets.",
+    "evidence": "TS 24.301, Table 8.3.1.1, Table 8.3.1.1: ACTIVATE DEDICATED EPS BEARER CONTEXT ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0059",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the PDN CONNECTIVITY REQUEST message?",
+    "answer": "The EPS bearer identity is formatted as a V (value) type with a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.20.1, Table 8.3.20.1: PDN CONNECTIVITY REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0060",
+    "type": "TABLE_QA",
+    "question": "What is the length in octets of the EPS bearer identity information element in the PDN DISCONNECT REJECT message?",
+    "answer": "1/2 octet",
+    "evidence": "TS 24.301, Table 8.3.21.1, Table 8.3.21.1: PDN DISCONNECT REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0061",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the PDN DISCONNECT REQUEST message?",
+    "answer": "The EPS bearer identity information element has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.22.1, Table 8.3.22.1: PDN DISCONNECT REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0062",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Remote UE Context Connected information element in the REMOTE UE REPORT message?",
+    "answer": "The Remote UE Context Connected information element has a TLV-E format and a length of 3-65538 octets.",
+    "evidence": "TS 24.301, Table 8.3.23.1, Table 8.3.23.1: REMOTE UE REPORT message content"
+  },
+  {
+    "id": "QA-TBL-0063",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the REMOTE UE REPORT RESPONSE message?",
+    "answer": "The EPS bearer identity has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.24.1, Table 8.3.24.1: REMOTE UE REPORT RESPONSE message content"
+  },
+  {
+    "id": "QA-TBL-0064",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the User data container information element in the ESM DATA TRANSPORT message?",
+    "answer": "The User data container has format LV-E and length 2-n.",
+    "evidence": "TS 24.301, Table 8.3.25.1, Table 8.3.25.1: ESM DATA TRANSPORT message content"
+  },
+  {
+    "id": "QA-TBL-0065",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message according to Table 8.3.2.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, EPS bearer identity, Procedure transaction identity, Activate dedicated EPS bearer context reject message identity, and ESM cause.",
+    "evidence": "TS 24.301, Table 8.3.2.1, Table 8.3.2.1: ACTIVATE DEDICATED EPS BEARER CONTEXT REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0066",
+    "type": "TABLE_QA",
+    "question": "What is the presence and format of the Protocol discriminator information element in the ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message?",
+    "answer": "The Protocol discriminator is Mandatory (M) and has a Variable (V) format with a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.3.1, Table 8.3.3.1: ACTIVATE DEDICATED EPS BEARER CONTEXT REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0067",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Protocol configuration options information element in the ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message?",
+    "answer": "The Protocol configuration options IE has TLV format and a length of 3-253 octets.",
+    "evidence": "TS 24.301, Table 8.3.4.1, Table 8.3.4.1: ACTIVATE DEFAULT EPS BEARER CONTEXT ACCEPT message content"
+  },
+  {
+    "id": "QA-TBL-0068",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message?",
+    "answer": "The EPS bearer identity has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.5.1, Table 8.3.5.1: ACTIVATE DEFAULT EPS BEARER CONTEXT REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0069",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message?",
+    "answer": "The EPS bearer identity information element has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.6.1, Table 8.3.6.1: ACTIVATE DEFAULT EPS BEARER CONTEXT REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0070",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the EPS bearer identity information element in the BEARER RESOURCE ALLOCATION REJECT message?",
+    "answer": "The EPS bearer identity has a format of V (value) and a length of 1/2 octet.",
+    "evidence": "TS 24.301, Table 8.3.7.1, Table 8.3.7.1: BEARER RESOURCE ALLOCATION REJECT message content"
+  },
+  {
+    "id": "QA-TBL-0071",
+    "type": "TABLE_QA",
+    "question": "What is the format and length of the Procedure transaction identity information element in the BEARER RESOURCE ALLOCATION REQUEST message?",
+    "answer": "The Procedure transaction identity has a format of V (Value) and a length of 1 octet.",
+    "evidence": "TS 24.301, Table 8.3.8.1, Table 8.3.8.1: BEARER RESOURCE ALLOCATION REQUEST message content"
+  },
+  {
+    "id": "QA-TBL-0072",
+    "type": "TABLE_QA",
+    "question": "What are the mandatory information elements in the BEARER RESOURCE MODIFICATION REJECT message according to Table 8.3.9.1?",
+    "answer": "The mandatory information elements are Protocol discriminator, EPS bearer identity, Procedure transaction identity, Bearer resource modification reject message identity, and ESM cause.",
+    "evidence": "TS 24.301, Table 8.3.9.1, Table 8.3.9.1: BEARER RESOURCE MODIFICATION REJECT message content"
+  },
+  {
+    "id": "QA-FIG-0048",
+    "type": "FIGURE_QA",
+    "question": "In the general organization of a plain NAS message, which field occupies bits 4 to 1 of the first octet?",
+    "answer": "Protocol discriminator",
+    "evidence": "TS 24.301, Figure 9.1.1, General message organization example for a plain NAS message"
+  },
+  {
+    "id": "QA-FIG-0049",
+    "type": "FIGURE_QA",
+    "question": "According to the general message organization for a security protected NAS message, which field occupies octets 2 through 5?",
+    "answer": "The Message authentication code field occupies octets 2 through 5.",
+    "evidence": "TS 24.301, Figure 9.1.2, General message organization example for a security protected NAS message"
+  },
+  {
+    "id": "QA-XFIG-0005",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the NAS message organization, what is the difference in the content of octet 1 between a plain NAS message and a security protected NAS message?",
+    "answer": "In a plain NAS message (Figure 9.1.1), octet 1 contains the 'EPS bearer identity or Security header type' field in bits 8-5 and the 'Protocol discriminator' field in bits 4-1. In a security protected NAS message (Figure 9.1.2), octet 1 contains the 'Security header type' field in bits 8-5 and the 'Protocol discriminator' field in bits 4-1.",
+    "evidence": "TS 24.301, Figure 9.1.1, General message organization example for a plain NAS message; TS 24.301, Figure 9.1.2, General message organization example for a security protected NAS message"
+  },
+  {
+    "id": "QA-TBL-0073",
+    "type": "TABLE_QA",
+    "question": "What security header type value indicates a plain NAS message that is not security protected?",
+    "answer": "The security header type value 0000 (bits 8-5 of octet 1) indicates a plain NAS message, not security protected.",
+    "evidence": "TS 24.301, Table 9.3.1, Table 9.3.1: Security header type"
+  },
+  {
+    "id": "QA-TBL-0074",
+    "type": "TABLE_QA",
+    "question": "What is the binary message type value for an Activate default EPS bearer context accept message?",
+    "answer": "11000010",
+    "evidence": "TS 24.301, Table 9.8.2, Table 9.8.2: Message types for EPS session management"
+  },
+  {
+    "id": "QA-TBL-0075",
+    "type": "TABLE_QA",
+    "question": "What is the binary message type value for an Attach accept message in EPS mobility management?",
+    "answer": "01000010",
+    "evidence": "TS 24.301, Table 9.8.1, Table 9.8.1: Message types for EPS mobility management"
+  },
+  {
+    "id": "QA-XTBL-0009",
+    "type": "CROSS_TABLE_QA",
+    "question": "What are the binary message type values for an Attach request (EPS mobility management) and an Activate default EPS bearer context request (EPS session management)?",
+    "answer": "Attach request has binary value 01000001, and Activate default EPS bearer context request has binary value 11000001.",
+    "evidence": "TS 24.301, Table 9.8.2, Table 9.8.2: Message types for EPS session management; TS 24.301, Table 9.8.1, Table 9.8.1: Message types for EPS mobility management"
+  },
+  {
+    "id": "QA-TBL-0076",
+    "type": "TABLE_QA",
+    "question": "According to the specification, what does the Remote UE context list entry in octet 5 and beyond contain?",
+    "answer": "It contains the contents of a remote UE context applicable for one individual UE, coded as shown in figure 9.9.4.20.2 and table 9.9.4.20.2.",
+    "evidence": "TS 24.301, Table 9.9.4.20.1, Table 9.9.4.20.1: Remote UE context list"
+  },
+  {
+    "id": "QA-TBL-0077",
+    "type": "TABLE_QA",
+    "question": "What is the EPS bearer identity value when the linked EPS bearer identity information element has bits 4, 3, 2, 1 set to 0, 0, 1, 0 respectively?",
+    "answer": "EPS bearer identity value 2",
+    "evidence": "TS 24.301, Table 9.9.4.6.1, Table 9.9.4.6.1: Linked EPS bearer identity information element"
+  },
+  {
+    "id": "QA-TBL-0078",
+    "type": "TABLE_QA",
+    "question": "What is the purpose of the third octet in the Re-attempt indicator information element, and what specific values does it contain?",
+    "answer": "The third octet contains the EPLM NC value in bits 2-1 and the RATC value in bit 1, with bits 8-3 set to zeros.",
+    "evidence": "TS 24.301, Table 9.9.4, Table 9.9.4.13A: Re-attempt indicator information element"
+  },
+  {
+    "id": "QA-TBL-0079",
+    "type": "TABLE_QA",
+    "question": "According to the Extended APN aggregate maximum bit rate information element, what is the unit for extended APN-AMBR for downlink when the octet 3 bits are set to '0 0 0 0 0 0 1 1'?",
+    "answer": "The value is incremented in multiples of 4 Mbps.",
+    "evidence": "TS 24.301, Table 9.9.4.29.1, Table 9.9.4.29.1: Extended APN aggregate maximum bit rate information element"
+  },
+  {
+    "id": "QA-TBL-0080",
+    "type": "TABLE_QA",
+    "question": "How is the header compression configuration status indicated for EPS bearers EBI(1) through EBI(15) when the corresponding bit is set to 0?",
+    "answer": "A value of 0 indicates that the header compression configuration for the corresponding EPS bearer is used.",
+    "evidence": "TS 24.301, Table 9.9.4.27.1, Table 9.9.4.27.1: Header compression configuration status information element"
+  },
+  {
+    "id": "QA-TBL-0081",
+    "type": "TABLE_QA",
+    "question": "How is the parity of the number of identity digits indicated in the Remote UE context list information element?",
+    "answer": "The parity is indicated by bit 4 of octet 4. A value of 0 indicates an even number of identity digits, and a value of 1 indicates an odd number of identity digits.",
+    "evidence": "TS 24.301, Table 9.9.4.20.2, Table 9.9.4.20.2: Remote UE context list information element"
+  },
+  {
+    "id": "QA-TBL-0082",
+    "type": "TABLE_QA",
+    "question": "What is the binary value and corresponding meaning of the notification indicator for 'SRVCC handover cancelled, IMS session re-establishment required'?",
+    "answer": "The binary value is 00000001 (Bits 8 to 1), and it indicates SRVCC handover cancelled, IMS session re-establishment required.",
+    "evidence": "TS 24.301, Table 9.9.4.1, Table 9.9.4.7A.1: Notification indicator information element"
+  },
+  {
+    "id": "QA-TBL-0083",
+    "type": "TABLE_QA",
+    "question": "What is the purpose of octets 4 to n within the User data container information element?",
+    "answer": "Octets 4 to n contain user data to be delivered between the UE and the MME.",
+    "evidence": "TS 24.301, Table 9.9.4.24.1, Table 9.9.4.24.1: User data container information element"
+  },
+  {
+    "id": "QA-TBL-0084",
+    "type": "TABLE_QA",
+    "question": "What PDN type value in octet 3 corresponds to an IPv6-only PDN address?",
+    "answer": "The PDN type value for IPv6 is 010 (bits 3-2-1).",
+    "evidence": "TS 24.301, Table 9.9.4.9.1, Table 9.9.4.9.1: PDN address information element"
+  },
+  {
+    "id": "QA-TBL-0085",
+    "type": "TABLE_QA",
+    "question": "What does the ESM information transfer flag value of 1 indicate about the security protection requirement?",
+    "answer": "A value of 1 indicates that security protected ESM information transfer is required.",
+    "evidence": "TS 24.301, Table 9.9.4.5.1, Table 9.9.4.5.1: ESM information transfer flag information element"
+  },
+  {
+    "id": "QA-TBL-0086",
+    "type": "TABLE_QA",
+    "question": "According to the Extended quality of service information element, what is the interpretation when the unit for maximum bit rate (octet 3) has the binary value '00000010'?",
+    "answer": "The value is incremented in multiples of 1 Mbps.",
+    "evidence": "TS 24.301, Table 9.9.4.30.1, Table 9.9.4.30.1: Extended quality of service information element"
+  },
+  {
+    "id": "QA-TBL-0087",
+    "type": "TABLE_QA",
+    "question": "What is the ESM cause value indicated by the binary pattern 00011101 in octet 2?",
+    "answer": "Operator Determined Barring",
+    "evidence": "TS 24.301, Table 9.9.4.4.1, Table 9.9.4.4.1: ESM cause information element"
+  },
+  {
+    "id": "QA-TBL-0088",
+    "type": "TABLE_QA",
+    "question": "According to Table 9.9.4.21.1, what is the coding for bits 4 to 8 of octet 1 in the PKMF Address information element?",
+    "answer": "Bits 4 to 8 of octet 1 are spare and shall be coded as zero.",
+    "evidence": "TS 24.301, Table 9.9.4.21.1, Table 9.9.4.21.1: PKMF Address information element"
+  },
+  {
+    "id": "QA-TBL-0089",
+    "type": "TABLE_QA",
+    "question": "According to Table 9.9.4.23.1, what is the interpretation if the Control plane only indication value (CPOI) in octet 1 is received as 0?",
+    "answer": "If the CPOI value 0 is received, it shall be interpreted as if the Control plane indication IE was not included in the message.",
+    "evidence": "TS 24.301, Table 9.9.4.23.1, Table 9.9.4.23.1: Control plane only indication information element"
+  },
+  {
+    "id": "QA-TBL-0090",
+    "type": "TABLE_QA",
+    "question": "According to the Release assistance indication information element, what does the bit combination '0 1' indicate about expected data transmission?",
+    "answer": "No further uplink and no further downlink data transmission subsequent to the uplink data transmission is expected.",
+    "evidence": "TS 24.301, Table 9.9.4.25.1, Table 9.9.4.25.1: Release assistance indication information element"
+  },
+  {
+    "id": "QA-XTBL-0010",
+    "type": "CROSS_TABLE_QA",
+    "question": "How is the EPS bearer identity value 2 represented in the linked EPS bearer identity information element, and what does a bit value of 0 indicate for EBI(1) in the header compression configuration status information element?",
+    "answer": "In the linked EPS bearer identity information element, EPS bearer identity value 2 is represented by bits 4, 3, 2, 1 set to 0, 0, 1, 0 respectively. In the header compression configuration status information element, a bit value of 0 for EBI(1) indicates that the header compression configuration for the corresponding EPS bearer is used.",
+    "evidence": "TS 24.301, Table 9.9.4.20.1, Table 9.9.4.20.1: Remote UE context list; TS 24.301, Table 9.9.4.6.1, Table 9.9.4.6.1: Linked EPS bearer identity information element; TS 24.301, Table 9.9.4, Table 9.9.4.13A: Re-attempt indicator information element; TS 24.301, Table 9.9.4.29.1, Table 9.9.4.29.1: Extended APN aggregate maximum bit rate information element; TS 24.301, Table 9.9.4.27.1, Table 9.9.4.27.1: Header compression configuration status information element; TS 24.301, Table 9.9.4.20.2, Table 9.9.4.20.2: Remote UE context list information element; TS 24.301, Table 9.9.4.1, Table 9.9.4.7A.1: Notification indicator information element; TS 24.301, Table 9.9.4.24.1, Table 9.9.4.24.1: User data container information element; TS 24.301, Table 9.9.4.9.1, Table 9.9.4.9.1: PDN address information element; TS 24.301, Table 9.9.4.5.1, Table 9.9.4.5.1: ESM information transfer flag information element; TS 24.301, Table 9.9.4.30.1, Table 9.9.4.30.1: Extended quality of service information element; TS 24.301, Table 9.9.4.4.1, Table 9.9.4.4.1: ESM cause information element; TS 24.301, Table 9.9.4.21.1, Table 9.9.4.21.1: PKMF Address information element; TS 24.301, Table 9.9.4.23.1, Table 9.9.4.23.1: Control plane only indication information element; TS 24.301, Table 9.9.4.25.1, Table 9.9.4.25.1: Release assistance indication information element"
+  },
+  {
+    "id": "QA-FIG-0050",
+    "type": "FIGURE_QA",
+    "question": "In the Header compression configuration information element, which octet contains the Spare bit and the configuration parameters P0x0104 through P0x0003?",
+    "answer": "Octet 3",
+    "evidence": "TS 24.301, Figure 9.9.4.22.1, Header compression configuration information element"
+  },
+  {
+    "id": "QA-FIG-0051",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the field located in octet 2 of the APN aggregate maximum bit rate information element?",
+    "answer": "The field in octet 2 specifies the length of the APN aggregate maximum bit rate contents.",
+    "evidence": "TS 24.301, Figure 9.9.4.2.1, APN aggregate maximum bit rate information element"
+  },
+  {
+    "id": "QA-FIG-0052",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the bit in position 1 of the ESM information transfer flag information element?",
+    "answer": "The bit in position 1 is the EIT value, which indicates whether a security protected ESM information transfer is required (1) or not required (0).",
+    "evidence": "TS 24.301, Figure 9.9.4.5.1, ESM information transfer flag information element"
+  },
+  {
+    "id": "QA-FIG-0053",
+    "type": "FIGURE_QA",
+    "question": "According to the Control plane only indication information element layout, what is the purpose of the CPOI value bit and how should a received value of 0 be interpreted?",
+    "answer": "The CPOI value bit indicates whether a PDN connection can be used for control plane CIoT EPS optimization only; a value of 1 means it can, while a received value of 0 is reserved and shall be interpreted as if the Control plane indication IE was not included in the message.",
+    "evidence": "TS 24.301, Figure 9.9.4.23.1, Control plane only indication information element"
+  },
+  {
+    "id": "QA-FIG-0054",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the octet 2 field in the PDN address information element?",
+    "answer": "Octet 2 contains the 'Length of PDN address contents' field, which specifies the length of the PDN address contents.",
+    "evidence": "TS 24.301, Figure 9.9.4.9.1, PDN address information element"
+  },
+  {
+    "id": "QA-FIG-0055",
+    "type": "FIGURE_QA",
+    "question": "What is the octet location of the 'Unit for extended APN-AMBR for uplink' field within the Extended APN aggregate maximum bit rate information element?",
+    "answer": "Octet 6",
+    "evidence": "TS 24.301, Figure 9.9.4.29.1, Extended APN aggregate maximum bit rate information element"
+  },
+  {
+    "id": "QA-FIG-0056",
+    "type": "FIGURE_QA",
+    "question": "According to the figure, what is the octet range for the field that indicates the number of remote UE contexts included in the list?",
+    "answer": "Octet 4",
+    "evidence": "TS 24.301, Figure 9.9.4.20.1, Remote UE context list"
+  },
+  {
+    "id": "QA-FIG-0057",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet location for the Notification indicator value field within the information element?",
+    "answer": "The Notification indicator value field occupies bits 8-1 of octet 3.",
+    "evidence": "TS 24.301, Figure 9.9.4.7A.1, Notification indicator information element"
+  },
+  {
+    "id": "QA-FIG-0058",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet location for the Cause value field within the ESM cause information element?",
+    "answer": "The Cause value field occupies bits 1-8 in octet 2.",
+    "evidence": "TS 24.301, Figure 9.9.4.4.1, ESM cause information element"
+  },
+  {
+    "id": "QA-FIG-0059",
+    "type": "FIGURE_QA",
+    "question": "In the Header compression configuration status information element, which octet contains the Length of the contents field?",
+    "answer": "Octet 2",
+    "evidence": "TS 24.301, Figure 9.9.4.27.1, Header compression configuration status information element"
+  },
+  {
+    "id": "QA-FIG-0060",
+    "type": "FIGURE_QA",
+    "question": "According to the EPS quality of service information element layout, which octet contains the QoS Class Identifier (QCI)?",
+    "answer": "Octet 3",
+    "evidence": "TS 24.301, Figure 9.9.4.3.1, EPS quality of service information element"
+  },
+  {
+    "id": "QA-FIG-0061",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the User data container information element as described in the figure?",
+    "answer": "The User data container information element is used to encapsulate the user data transferred between the UE and the MME.",
+    "evidence": "TS 24.301, Figure 9.9.4.24.1, User data container information element"
+  },
+  {
+    "id": "QA-FIG-0062",
+    "type": "FIGURE_QA",
+    "question": "What is the octet range for the Address information field in the PKMF Address IE when the Address type indicates IPv6?",
+    "answer": "Octet 4 to 19",
+    "evidence": "TS 24.301, Figure 9.9.4.21.1, PKMF Address"
+  },
+  {
+    "id": "QA-FIG-0063",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the Linked EPS bearer identity information element as defined in the figure?",
+    "answer": "The purpose is to identify the default bearer associated with a dedicated EPS bearer or to identify the EPS bearer (default or dedicated) with which one or more packet filters specified in a traffic flow aggregate are associated.",
+    "evidence": "TS 24.301, Figure 9.9.4.6.1, Linked EPS bearer identity information element"
+  },
+  {
+    "id": "QA-FIG-0064",
+    "type": "FIGURE_QA",
+    "question": "What are the possible bit values and their corresponding meanings for the DDX field in the Release assistance indication information element?",
+    "answer": "The DDX field bits are: 00 = No information regarding DDX is conveyed; 01 = No further uplink and no further downlink data transmission subsequent to the uplink data transmission is expected; 10 = Only a single downlink data transmission and no further uplink data transmission subsequent to the uplink data transmission is expected; 11 = reserved.",
+    "evidence": "TS 24.301, Figure 9.9.4.25.1, Release assistance indication information element"
+  },
+  {
+    "id": "QA-FIG-0065",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the 'Length of remote UE context' field in the Remote UE context information element, and in which octet is it located?",
+    "answer": "The 'Length of remote UE context' field indicates the length of the remote UE context and is located in octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.4.20.2, Remote UE context"
+  },
+  {
+    "id": "QA-FIG-0066",
+    "type": "FIGURE_QA",
+    "question": "According to the Extended quality of service information element structure, which octet contains the field that specifies the unit for the maximum bit rate?",
+    "answer": "Octet 3",
+    "evidence": "TS 24.301, Figure 9.9.4.30.1, Extended quality of service information element"
+  },
+  {
+    "id": "QA-FIG-0067",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the Serving PLMN rate control value field in the information element, and what does the specific value FFFFH indicate?",
+    "answer": "The Serving PLMN rate control value is a binary encoded integer indicating the maximum number of uplink ESM DATA TRANSPORT messages including User data container IEs the UE is allowed to send per 6 minute interval. The value FFFFH indicates that this maximum number is not restricted.",
+    "evidence": "TS 24.301, Figure 9.9.4.28.1, Serving PLMN rate control information element"
+  },
+  {
+    "id": "QA-XFIG-0006",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the Header compression configuration information element, which octet contains the configuration parameters P0x0104, P0x0103, and P0x0102, and how does the length field in the APN aggregate maximum bit rate information element indicate the size of its contents?",
+    "answer": "In the Header compression configuration information element, the configuration parameters P0x0104, P0x0103, and P0x0102 are located in octet 3, specifically in bits 7, 6, and 5 respectively. In the APN aggregate maximum bit rate information element, the length field, which occupies octet 2, indicates the size of the contents that follow.",
+    "evidence": "TS 24.301, Figure 9.9.4.22.1, Header compression configuration information element; TS 24.301, Figure 9.9.4.2.1, APN aggregate maximum bit rate information element; TS 24.301, Figure 9.9.4.5.1, ESM information transfer flag information element; TS 24.301, Figure 9.9.4.23.1, Control plane only indication information element; TS 24.301, Figure 9.9.4.9.1, PDN address information element; TS 24.301, Figure 9.9.4.29.1, Extended APN aggregate maximum bit rate information element; TS 24.301, Figure 9.9.4.20.1, Remote UE context list; TS 24.301, Figure 9.9.4.7A.1, Notification indicator information element; TS 24.301, Figure 9.9.4.4.1, ESM cause information element; TS 24.301, Figure 9.9.4.27.1, Header compression configuration status information element; TS 24.301, Figure 9.9.4.3.1, EPS quality of service information element; TS 24.301, Figure 9.9.4.24.1, User data container information element; TS 24.301, Figure 9.9.4.21.1, PKMF Address; TS 24.301, Figure 9.9.4.6.1, Linked EPS bearer identity information element; TS 24.301, Figure 9.9.4.25.1, Release assistance indication information element; TS 24.301, Figure 9.9.4.20.2, Remote UE context; TS 24.301, Figure 9.9.4.30.1, Extended quality of service information element; TS 24.301, Figure 9.9.4.28.1, Serving PLMN rate control information element"
+  },
+  {
+    "id": "QA-TBL-0091",
+    "type": "TABLE_QA",
+    "question": "What determines the coding of the additional information value in the Additional information IE?",
+    "answer": "The coding of the additional information value is dependent on the generic message container type.",
+    "evidence": "TS 24.301, Table 9.9.2.0.1, Table 9.9.2.0.1: Additional information information element"
+  },
+  {
+    "id": "QA-FIG-0068",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the Additional information information element as defined in the figure?",
+    "answer": "The purpose of the Additional information information element is to provide additional information to upper layers in relation to the generic NAS message transport mechanism.",
+    "evidence": "TS 24.301, Figure 9.9.2.0.1, Additional information information element"
+  },
+  {
+    "id": "QA-TBL-0092",
+    "type": "TABLE_QA",
+    "question": "According to the EPS bearer context status information element table, what is the structure of the information element?",
+    "answer": "The EPS bearer context status information element is structured with a 1-octet EPS bearer context status information element identifier, followed by a 2-octet EPS bearer context status contents.",
+    "evidence": "TS 24.301, Table 9.9.2.1.1, Table 9.9.2.1.1: EPS bearer context status information element"
+  },
+  {
+    "id": "QA-FIG-0069",
+    "type": "FIGURE_QA",
+    "question": "In the EPS bearer context status information element, what is the purpose of the field located in octet 2?",
+    "answer": "The field in octet 2 specifies the length of the EPS bearer context status contents.",
+    "evidence": "TS 24.301, Figure 9.9.2.1.1, EPS bearer context status information element"
+  },
+  {
+    "id": "QA-TBL-0093",
+    "type": "TABLE_QA",
+    "question": "What is the purpose of the 'DL NAS COUNT value (short)' field in the NAS security parameters from E-UTRA information element?",
+    "answer": "The 'DL NAS COUNT value (short)' field contains the 4 least significant bits of the binary representation of the downlink NAS COUNT value applicable when this information element is sent.",
+    "evidence": "TS 24.301, Table 9.9.2.6.1, Table 9.9.2.6.1: NAS security parameters from E-UTRA information element"
+  },
+  {
+    "id": "QA-FIG-0070",
+    "type": "FIGURE_QA",
+    "question": "What is the length in octets of the NAS security parameters from E-UTRA information element, and which bits in the second octet are designated as spare?",
+    "answer": "The NAS security parameters from E-UTRA is a type 3 information element with a length of 2 octets. In the second octet, bits 5 to 8 are spare and shall be coded as zero.",
+    "evidence": "TS 24.301, Figure 9.9.2.6.1, NAS security parameters from E-UTRA information element"
+  },
+  {
+    "id": "QA-TBL-0094",
+    "type": "TABLE_QA",
+    "question": "How are the type of integrity protection algorithm and type of ciphering algorithm encoded within the NAS security parameters to E-UTRA information element?",
+    "answer": "The type of integrity protection algorithm is encoded in bits 1 to 3 of octet 6, and the type of ciphering algorithm is encoded in bits 5 to 7 of octet 6, as specified for the NAS security algorithms information element. Bits 4 and 8 of octet 6 are spare and are coded as zero.",
+    "evidence": "TS 24.301, Table 9.9.2.7.1, Table 9.9.2.7.1: NAS security parameters to E-UTRA information element"
+  },
+  {
+    "id": "QA-FIG-0071",
+    "type": "FIGURE_QA",
+    "question": "What is the octet range for the NonceMME value field in the NAS security parameters to E-UTRA information element?",
+    "answer": "Octets 2 to 5",
+    "evidence": "TS 24.301, Figure 9.9.2.7.1, NAS security parameters to E-UTRA information element"
+  },
+  {
+    "id": "QA-FIG-0072",
+    "type": "FIGURE_QA",
+    "question": "What are the possible values for the Additional update result value field and their meanings?",
+    "answer": "The Additional update result value field uses bits 2-1 of octet 1. The values are: 00 for no additional information, 01 for CS Fallback not preferred, 10 for SMS only, and 11 is reserved.",
+    "evidence": "TS 24.301, Figure 9.9.3.0A.1, Additional update result information element"
+  },
+  {
+    "id": "QA-FIG-0073",
+    "type": "FIGURE_QA",
+    "question": "According to the Additional update type information element layout, what is the bit range and octet for the Signalling Active Flag (SAF) field?",
+    "answer": "The Signalling Active Flag (SAF) field occupies bits 3-2 in octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.0B.1, Additional update type information element"
+  },
+  {
+    "id": "QA-TBL-0095",
+    "type": "TABLE_QA",
+    "question": "What does the SMS services status value '010' indicate according to the provided tables?",
+    "answer": "Network failure",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.4B.1: SMS services status information element"
+  },
+  {
+    "id": "QA-TBL-0096",
+    "type": "TABLE_QA",
+    "question": "What is the meaning of the Additional update result value when bits 2 and 1 are set to '1 0'?",
+    "answer": "SMS only",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.0A.1: Additional update result information element"
+  },
+  {
+    "id": "QA-TBL-0097",
+    "type": "TABLE_QA",
+    "question": "What service type value in octet 1 indicates a mobile terminating CS fallback or 1xCS fallback scenario?",
+    "answer": "The service type value with bits 4-3-2-1 set to '0 0 0 1' indicates mobile terminating CS fallback or 1xCS fallback.",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.27.1: Service type information element"
+  },
+  {
+    "id": "QA-TBL-0098",
+    "type": "TABLE_QA",
+    "question": "What does the Additional update type information element indicate when the AUTV bit 1 is set to 1?",
+    "answer": "When the Additional update type value (AUTV) bit 1 is set to 1, it indicates SMS only.",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.0B.1: Additional update type information element"
+  },
+  {
+    "id": "QA-TBL-0099",
+    "type": "TABLE_QA",
+    "question": "According to Table 9.9.3.37A.1, what does the bit value '1' indicate for the Extended Emergency Number List Validity information element?",
+    "answer": "The bit value '1' indicates that the Extended Local Emergency Numbers List is valid only in the PLMN from which this IE is received.",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.37A.1: Extended Emergency Number List Validity information IE"
+  },
+  {
+    "id": "QA-TBL-0100",
+    "type": "TABLE_QA",
+    "question": "According to TS 24.301, what is the paging identity value indicated when bit 1 of octet 2 is set to 0 in the paging identity information element?",
+    "answer": "When bit 1 of octet 2 is set to 0, the paging identity value is IMSI.",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.25A.1: Paging identity information element"
+  },
+  {
+    "id": "QA-XTBL-0011",
+    "type": "CROSS_TABLE_QA",
+    "question": "If a UE receives an SMS services status information element with bits 3-1 set to '010' and an additional update result information element with octet 1 bits 2-1 set to '10', what is the indicated network condition and service availability?",
+    "answer": "The network condition is 'Network failure' for SMS services, and the additional update result indicates 'SMS only' service availability.",
+    "evidence": "TS 24.301, Table 9.9.3.1, Table 9.9.3.4B.1: SMS services status information element; TS 24.301, Table 9.9.3.1, Table 9.9.3.0A.1: Additional update result information element; TS 24.301, Table 9.9.3.1, Table 9.9.3.27.1: Service type information element; TS 24.301, Table 9.9.3.1, Table 9.9.3.0B.1: Additional update type information element; TS 24.301, Table 9.9.3.1, Table 9.9.3.37A.1: Extended Emergency Number List Validity information IE; TS 24.301, Table 9.9.3.1, Table 9.9.3.25A.1: Paging identity information element"
+  },
+  {
+    "id": "QA-TBL-0101",
+    "type": "TABLE_QA",
+    "question": "What is the EPS attach result value in octet 1 when the bits 3, 2, 1 are set to 0, 1, 0?",
+    "answer": "combined EPS/IMSI attach",
+    "evidence": "TS 24.301, Table 9.9.3.10.1, Table 9.9.3.10.1: EPS attach result information element"
+  },
+  {
+    "id": "QA-FIG-0074",
+    "type": "FIGURE_QA",
+    "question": "What are the two defined EPS attach result values and their corresponding bit patterns in octet 1?",
+    "answer": "The defined values are EPS only, coded as bits 3-1 = 001, and combined EPS/IMSI attach, coded as bits 3-1 = 010.",
+    "evidence": "TS 24.301, Figure 9.9.3.10.1, EPS attach result information element"
+  },
+  {
+    "id": "QA-TBL-0102",
+    "type": "TABLE_QA",
+    "question": "What is the EPS attach type value in octet 1 for a combined EPS/IMSI attach?",
+    "answer": "The EPS attach type value for a combined EPS/IMSI attach is 0 1 0 (bits 3,2,1).",
+    "evidence": "TS 24.301, Table 9.9.3.11.1, Table 9.9.3.11.1: EPS attach type information element"
+  },
+  {
+    "id": "QA-FIG-0075",
+    "type": "FIGURE_QA",
+    "question": "According to the EPS attach type information element, what is the specific bit range and octet for the EPS attach type value field, and what does the value '010' represent?",
+    "answer": "The EPS attach type value field occupies bits 3-1 of octet 1, and the value '010' represents a combined EPS/IMSI attach.",
+    "evidence": "TS 24.301, Figure 9.9.3.11.1, EPS attach type information element"
+  },
+  {
+    "id": "QA-TBL-0103",
+    "type": "TABLE_QA",
+    "question": "What is the bit pattern in octet 3 that indicates the EPS mobile identity is an IMEI?",
+    "answer": "The bit pattern 0 1 1 in bits 3-2-1 of octet 3 indicates the EPS mobile identity is an IMEI.",
+    "evidence": "TS 24.301, Table 9.9.3.12.1, Table 9.9.3.12.1: EPS mobile identity information element"
+  },
+  {
+    "id": "QA-FIG-0076",
+    "type": "FIGURE_QA",
+    "question": "According to the EPS mobile identity information element structure for type of identity IMSI or IMEI, which octet contains the field that indicates the length of the EPS mobile identity contents?",
+    "answer": "Octet 2",
+    "evidence": "TS 24.301, Figure 9.9.3.12.2, EPS mobile identity information element for type of identity \"IMSI\" or \"IMEI\""
+  },
+  {
+    "id": "QA-FIG-0077",
+    "type": "FIGURE_QA",
+    "question": "In the EPS mobile identity information element for a GUTI, what is the purpose of the field located in octet 3, bits 8-5?",
+    "answer": "The field in octet 3, bits 8-5, is designated as 'Spare bits' and is set to the binary value 1111.",
+    "evidence": "TS 24.301, Figure 9.9.3.12.1, EPS mobile identity information element for type of identity \"GUTI\""
+  },
+  {
+    "id": "QA-XFIG-0007",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the EPS mobile identity information element, what is the purpose of the 'odd/even indic' field and in which octet is it located for both IMSI/IMEI and GUTI identity types?",
+    "answer": "The 'odd/even indic' field indicates whether the number of identity digits is odd or even, and it is located in octet 3 for both IMSI/IMEI (Figure 9.9.3.12.2) and GUTI (Figure 9.9.3.12.1) identity types.",
+    "evidence": "TS 24.301, Figure 9.9.3.12.2, EPS mobile identity information element for type of identity \"IMSI\" or \"IMEI\"; TS 24.301, Figure 9.9.3.12.1, EPS mobile identity information element for type of identity \"GUTI\""
+  },
+  {
+    "id": "QA-FIG-0078",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the field located at bit 8 of octet 3 in the EPS network feature support information element?",
+    "answer": "The field at bit 8 of octet 3 indicates Control Plane CIoT optimization (CP-CIoT).",
+    "evidence": "TS 24.301, Figure 9.9.3.12A.1, EPS network feature support information element"
+  },
+  {
+    "id": "QA-TBL-0104",
+    "type": "TABLE_QA",
+    "question": "According to the EPS update result information element, what does the binary value '001' indicate?",
+    "answer": "combined TA/LA updated",
+    "evidence": "TS 24.301, Table 9.9.3.13.1, Table 9.9.3.13.1: EPS update result information element"
+  },
+  {
+    "id": "QA-FIG-0079",
+    "type": "FIGURE_QA",
+    "question": "According to the EPS update result information element, what is the bit range and octet for the EPS update result value field?",
+    "answer": "The EPS update result value field occupies bits 3-1 in octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.13.1, EPS update result information element"
+  },
+  {
+    "id": "QA-TBL-0105",
+    "type": "TABLE_QA",
+    "question": "What EPS update type value corresponds to combined TA/LA updating with IMSI attach?",
+    "answer": "The EPS update type value for combined TA/LA updating with IMSI attach is bits 3-2-1 = 0-1-0 (octet 1, bits 1 to 3).",
+    "evidence": "TS 24.301, Table 9.9.3.14.1, Table 9.9.3.14.1: EPS update type information element"
+  },
+  {
+    "id": "QA-FIG-0080",
+    "type": "FIGURE_QA",
+    "question": "According to the EPS update type information element, what is the bit range and octet location for the Active flag, and what does a value of 1 indicate?",
+    "answer": "The Active flag is located at bit 4 of octet 1. A value of 1 indicates that bearer establishment is requested.",
+    "evidence": "TS 24.301, Figure 9.9.3.14.1, EPS update type information element"
+  },
+  {
+    "id": "QA-TBL-0106",
+    "type": "TABLE_QA",
+    "question": "What is the maximum size, in octets, that the ESM message container information element can hold?",
+    "answer": "65535 octets",
+    "evidence": "TS 24.301, Table 9.9.3.15.1, Table 9.9.3.15.1: ESM message container information element"
+  },
+  {
+    "id": "QA-FIG-0081",
+    "type": "FIGURE_QA",
+    "question": "According to the ESM message container information element structure, which octets are used to specify the length of the ESM message container contents?",
+    "answer": "Octets 2, 3, and 4",
+    "evidence": "TS 24.301, Figure 9.9.3.15.1, ESM message container information element"
+  },
+  {
+    "id": "QA-TBL-0107",
+    "type": "TABLE_QA",
+    "question": "What is the purpose of the sequence number field in the KSI and sequence number information element?",
+    "answer": "The sequence number field contains the 5 least significant bits of the NAS COUNT value applicable when this message is sent.",
+    "evidence": "TS 24.301, Table 9.9.3.19.1, Table 9.9.3.19.1: KSI and sequence number information element"
+  },
+  {
+    "id": "QA-FIG-0082",
+    "type": "FIGURE_QA",
+    "question": "According to the KSI and sequence number information element, which octet contains the field that holds the 5 least significant bits of the NAS COUNT value?",
+    "answer": "Octet 2",
+    "evidence": "TS 24.301, Figure 9.9.3.19.1, KSI and sequence number information element"
+  },
+  {
+    "id": "QA-TBL-0108",
+    "type": "TABLE_QA",
+    "question": "What service type value corresponds to bits '0 0 1 0' in the service type information element?",
+    "answer": "mobile originating CS fallback emergency call or 1xCS fallback emergency call",
+    "evidence": "TS 24.301, Table 9.9.3.27.1, Table 9.9.3.27.1: Service type information element"
+  },
+  {
+    "id": "QA-FIG-0083",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range for the Service type value field within the Service type information element?",
+    "answer": "The Service type value field occupies bits 4 to 1 of octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.27.1, Service type information element"
+  },
+  {
+    "id": "QA-TBL-0109",
+    "type": "TABLE_QA",
+    "question": "According to Table 9.9.3.21.1, what does a TSC bit value of 0 indicate for the NAS key set identifier?",
+    "answer": "A TSC bit value of 0 indicates a native security context (for KSIASME or KSIAMF).",
+    "evidence": "TS 24.301, Table 9.9.3.21.1, Table 9.9.3.21.1: NAS key set identifier information element"
+  },
+  {
+    "id": "QA-FIG-0084",
+    "type": "FIGURE_QA",
+    "question": "Within the NAS key set identifier information element, what is the purpose of the TSC bit and how does its interpretation change based on the NAS key set identifier value?",
+    "answer": "The TSC bit (bit 4 of octet 1) indicates the type of security context: 0 for native security context (for KSIasme or KSIamf) and 1 for mapped security context (for KSIsgsn or KSIamf). However, the TSC bit does not apply when the NAS key set identifier value (bits 3-1) is '111'.",
+    "evidence": "TS 24.301, Figure 9.9.3.21.1, NAS key set identifier information element"
+  },
+  {
+    "id": "QA-TBL-0110",
+    "type": "TABLE_QA",
+    "question": "What type of SMS message can be contained within the NAS message container information element according to the specified clause?",
+    "answer": "The NAS message container can contain an SMS message, specifically CP-DATA, CP-ACK, or CP-ERROR as defined in clause 7.2 of 3GPP TS 24.011.",
+    "evidence": "TS 24.301, Table 9.9.3.22.1, Table 9.9.3.22.1: NAS message container information element"
+  },
+  {
+    "id": "QA-FIG-0085",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the NAS message container contents field in the NAS message container information element?",
+    "answer": "The NAS message container contents field can contain an SMS message, specifically CP-DATA, CP-ACK, or CP-ERROR, as defined in 3GPP TS 24.011 clause 7.2.",
+    "evidence": "TS 24.301, Figure 9.9.3.22.1, NAS message container information element"
+  },
+  {
+    "id": "QA-TBL-0111",
+    "type": "TABLE_QA",
+    "question": "According to the NAS security algorithms information element, what is the bit pattern and corresponding algorithm for EPS integrity algorithm 128-EIA1?",
+    "answer": "The bit pattern is 0 0 1, and it corresponds to EPS integrity algorithm 128-EIA1.",
+    "evidence": "TS 24.301, Table 9.9.3.23.1, Table 9.9.3.23.1: NAS security algorithms information element"
+  },
+  {
+    "id": "QA-FIG-0086",
+    "type": "FIGURE_QA",
+    "question": "Within the NAS security algorithms information element, which bits in octet 2 are designated to indicate the type of integrity protection algorithm?",
+    "answer": "Bits 3 to 1 of octet 2 indicate the type of integrity protection algorithm.",
+    "evidence": "TS 24.301, Figure 9.9.3.23.1, NAS security algorithms information element"
+  },
+  {
+    "id": "QA-TBL-0112",
+    "type": "TABLE_QA",
+    "question": "What is the range of octets that contain the Nonce value in the Nonce information element?",
+    "answer": "The Nonce value is contained in octets 2 to 5.",
+    "evidence": "TS 24.301, Table 9.9.3.25.1, Table 9.9.3.25.1: Nonce information element"
+  },
+  {
+    "id": "QA-FIG-0087",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet range for the Nonce value field within the Nonce information element?",
+    "answer": "The Nonce value field occupies bits 1-8 of octets 2-5.",
+    "evidence": "TS 24.301, Figure 9.9.3.25.1, Nonce information element"
+  },
+  {
+    "id": "QA-FIG-0088",
+    "type": "FIGURE_QA",
+    "question": "According to the Paging identity information element structure, what is the bit range and octet for the 'Paging identity value' field, and what do its values indicate?",
+    "answer": "The 'Paging identity value' field occupies bit 1 of octet 2, where a value of 0 indicates IMSI and a value of 1 indicates TMSI.",
+    "evidence": "TS 24.301, Figure 9.9.3.25A.1, Paging identity information element"
+  },
+  {
+    "id": "QA-FIG-0089",
+    "type": "FIGURE_QA",
+    "question": "According to the Extended EMM cause information element bit layout, which specific bit position indicates whether NB-IoT is allowed?",
+    "answer": "Bit 3 of octet 1 indicates the NB-IoT allowed flag.",
+    "evidence": "TS 24.301, Figure 9.9.3.26A.1, Extended EMM cause information element"
+  },
+  {
+    "id": "QA-TBL-0113",
+    "type": "TABLE_QA",
+    "question": "What is the purpose of the Short MAC value field in the Short MAC information element?",
+    "answer": "The Short MAC value field contains the 2 least significant octets of the message authentication code calculated for the SERVICE REQUEST message.",
+    "evidence": "TS 24.301, Table 9.9.3.28.1, Table 9.9.3.28.1: Short MAC information element"
+  },
+  {
+    "id": "QA-FIG-0090",
+    "type": "FIGURE_QA",
+    "question": "According to the Short MAC information element structure, what is the bit range and octet range for the Short MAC value field?",
+    "answer": "The Short MAC value field spans bits 4-1 of octet 1 through octet 2.",
+    "evidence": "TS 24.301, Figure 9.9.3.28.1, Short MAC information element"
+  },
+  {
+    "id": "QA-TBL-0114",
+    "type": "TABLE_QA",
+    "question": "According to TS 24.301, what is the coding reference for the CLI value part in the Authentication parameter RAND information element?",
+    "answer": "The coding of the CLI value part is the same as for octets 3 to 14 of the Calling party BCD number information element defined in clause 10.5.4.9 of 3GPP TS 24.008.",
+    "evidence": "TS 24.301, Table 9.9.3.38.1, Table 9.9.3.38.1: CLI information element"
+  },
+  {
+    "id": "QA-TBL-0115",
+    "type": "TABLE_QA",
+    "question": "According to Table 9.9.3.39.1, where is the detailed coding specification for the SS Code value defined?",
+    "answer": "The coding of the SS Code value is given in clause 17.7.5 of 3GPP TS 29.002.",
+    "evidence": "TS 24.301, Table 9.9.3.39.1, Table 9.9.3.39.1: SS Code information element"
+  },
+  {
+    "id": "QA-XTBL-0012",
+    "type": "CROSS_TABLE_QA",
+    "question": "How is the CLI value part coded in relation to another 3GPP specification, and which specification defines the coding for the SS Code value?",
+    "answer": "The CLI value part is coded the same as octets 3 to 14 of the Calling party BCD number information element defined in 3GPP TS 24.008 clause 10.5.4.9, while the SS Code value coding is defined in 3GPP TS 29.002 clause 17.7.5.",
+    "evidence": "TS 24.301, Table 9.9.3.38.1, Table 9.9.3.38.1: CLI information element; TS 24.301, Table 9.9.3.39.1, Table 9.9.3.39.1: SS Code information element"
+  },
+  {
+    "id": "QA-FIG-0091",
+    "type": "FIGURE_QA",
+    "question": "According to the CLI information element structure, what is the bit range and octet location for the CLI IEI field?",
+    "answer": "The CLI IEI field occupies bits 5-8 of octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.38.1, CLI information element"
+  },
+  {
+    "id": "QA-FIG-0092",
+    "type": "FIGURE_QA",
+    "question": "According to the SS Code information element structure, what is the bit range and octet location of the SS Code value field?",
+    "answer": "The SS Code value field occupies bits 1-8 in octet 2.",
+    "evidence": "TS 24.301, Figure 9.9.3.39.1, SS Code information element"
+  },
+  {
+    "id": "QA-XFIG-0008",
+    "type": "CROSS_FIGURE_QA",
+    "question": "What are the octet ranges for the value parts of the CLI and SS Code information elements, and how do their minimum lengths differ?",
+    "answer": "The CLI value part occupies octets 3 to 14, while the SS Code value is in octet 2. The CLI IE has a minimum length of 3 octets, whereas the SS Code IE has a fixed length of 2 octets.",
+    "evidence": "TS 24.301, Figure 9.9.3.38.1, CLI information element; TS 24.301, Figure 9.9.3.39.1, SS Code information element"
+  },
+  {
+    "id": "QA-TBL-0116",
+    "type": "TABLE_QA",
+    "question": "How should the UE transmit the MCC and MNC values when they contain elements not in the valid digit sets, and what action should the network take upon receiving such values?",
+    "answer": "In abnormal cases where the MCC stored in the UE contains elements not in the set {0, 1 ... 9}, the UE should transmit the stored values using full hexadecimal encoding. Similarly, if the MNC stored in the UE has digit 1 or 2 not in the set {0, 1 ... 9}, or digit 3 not in the set {0, 1 ... 9, F} hex, the UE shall transmit the stored values using full hexadecimal encoding. When receiving such an MCC or MNC, the network shall treat the TAI as deleted.",
+    "evidence": "TS 24.301, Table 9.9.3.32.1, Table 9.9.3.32.1: Tracking area identity information element"
+  },
+  {
+    "id": "QA-FIG-0093",
+    "type": "FIGURE_QA",
+    "question": "According to the bit layout, which octet contains the Information Element Identifier for the tracking area identity, and what is its bit range?",
+    "answer": "The Information Element Identifier for tracking area identity is located in octet 1, occupying bits 8 to 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.32.1, Tracking area identity information element"
+  },
+  {
+    "id": "QA-TBL-0117",
+    "type": "TABLE_QA",
+    "question": "According to TS 24.301, which table defines the structure of the Tracking area identity list information element?",
+    "answer": "The structure is defined in Table 9.9.3.33.1.",
+    "evidence": "TS 24.301, Table 9.9.3.33.1, Table 9.9.3.33.1: Tracking area identity list information element"
+  },
+  {
+    "id": "QA-FIG-0094",
+    "type": "FIGURE_QA",
+    "question": "According to the figure, what is the purpose of the octet at position 2 in the Tracking area identity list information element?",
+    "answer": "The octet at position 2 contains the 'Length of tracking area identity list contents', which specifies the length of the subsequent contents that make up the list.",
+    "evidence": "TS 24.301, Figure 9.9.3.33.1, Tracking area identity list information element"
+  },
+  {
+    "id": "QA-FIG-0095",
+    "type": "FIGURE_QA",
+    "question": "In the partial tracking area identity list with type '01', which octet contains the bits for the 'Number of elements' field, and what is its specific bit range within that octet?",
+    "answer": "The 'Number of elements' field is located in octet 1, specifically occupying bits 5 to 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.33.3, Partial tracking area identity list – type of list = \"01\""
+  },
+  {
+    "id": "QA-FIG-0096",
+    "type": "FIGURE_QA",
+    "question": "In the partial tracking area identity list with type '00', which octet contains the bits for both the spare field and the type of list indicator?",
+    "answer": "Octet 1 contains the spare bit (bit 8) and the type of list bits (bits 7-6).",
+    "evidence": "TS 24.301, Figure 9.9.3.33.2, Partial tracking area identity list – type of list = \"00\""
+  },
+  {
+    "id": "QA-FIG-0097",
+    "type": "FIGURE_QA",
+    "question": "According to the bit layout for a partial tracking area identity list with type '10', which octet contains the bits for both MCC digit 1 and MCC digit 2?",
+    "answer": "Octet 2 contains MCC digit 2 (bits 8-5) and MCC digit 1 (bits 4-1).",
+    "evidence": "TS 24.301, Figure 9.9.3.33.4, Partial tracking area identity list – type of list = \"10\""
+  },
+  {
+    "id": "QA-XFIG-0009",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the Tracking Area Identity List information element, what is the purpose of the field in octet 2, and how does the 'Number of elements' field in the first octet of a partial list with type '01' relate to the overall structure?",
+    "answer": "The field in octet 2 of the Tracking Area Identity List information element specifies the 'Length of tracking area identity list contents', defining the total length of all subsequent partial lists. Within a partial list where the 'Type of list' field is '01', the 'Number of elements' field in bits 5-1 of the first octet indicates how many TAI elements are contained within that specific partial list, contributing to the overall contents whose length is counted in octet 2 of the main IE.",
+    "evidence": "TS 24.301, Figure 9.9.3.33.1, Tracking area identity list information element; TS 24.301, Figure 9.9.3.33.3, Partial tracking area identity list – type of list = \"01\"; TS 24.301, Figure 9.9.3.33.2, Partial tracking area identity list – type of list = \"00\"; TS 24.301, Figure 9.9.3.33.4, Partial tracking area identity list – type of list = \"10\""
+  },
+  {
+    "id": "QA-FIG-0098",
+    "type": "FIGURE_QA",
+    "question": "In the UE network capability information element, which octet contains the bit indicating support for the 128-EIA2 ciphering algorithm?",
+    "answer": "Octet 4",
+    "evidence": "TS 24.301, Figure 9.9.3.34.1, UE network capability information element"
+  },
+  {
+    "id": "QA-TBL-0118",
+    "type": "TABLE_QA",
+    "question": "What is the binary value and its corresponding meaning when the UE radio capability information update is required?",
+    "answer": "The binary value is 1, which indicates that a UE radio capability information update is needed.",
+    "evidence": "TS 24.301, Table 9.9.3.35.1, Table 9.9.3.35.1: UE radio capability information update needed information element"
+  },
+  {
+    "id": "QA-FIG-0099",
+    "type": "FIGURE_QA",
+    "question": "Within the UE radio capability information update needed information element, what is the purpose and possible values of the bit labeled 'URC upd'?",
+    "answer": "The 'URC upd' bit is the UE radio capability information update needed flag. A value of 0 indicates a UE radio capability information update is not needed, while a value of 1 indicates an update is needed.",
+    "evidence": "TS 24.301, Figure 9.9.3.35.1, UE radio capability information update needed information element"
+  },
+  {
+    "id": "QA-FIG-0100",
+    "type": "FIGURE_QA",
+    "question": "According to the UE security capability information element, which octet contains the bit fields for the 128-EEA1 and 128-EEA2 encryption algorithm support indicators?",
+    "answer": "Octet 3 contains the bit fields for 128-EEA1 (bit 7) and 128-EEA2 (bit 6) encryption algorithm support.",
+    "evidence": "TS 24.301, Figure 9.9.3.36.1, UE security capability information element"
+  },
+  {
+    "id": "QA-TBL-0119",
+    "type": "TABLE_QA",
+    "question": "What is contained within octets 3 to 18 of the Authentication response parameter information element?",
+    "answer": "The RES or RES* value.",
+    "evidence": "TS 24.301, Table 9.9.3.4.1, Table 9.9.3.4.1: Authentication response parameter information element"
+  },
+  {
+    "id": "QA-TBL-0120",
+    "type": "TABLE_QA",
+    "question": "What is the bit pattern and corresponding description for the LTE Positioning Protocol (LPP) message container in the generic message container type information element?",
+    "answer": "The bit pattern 00000001 corresponds to the LTE Positioning Protocol (LPP) message container, as specified in TS 24.301, Table 9.9.3.42.1.",
+    "evidence": "TS 24.301, Table 9.9.3.42.1, Table 9.9.3.42.1: Generic message container type information element"
+  },
+  {
+    "id": "QA-TBL-0121",
+    "type": "TABLE_QA",
+    "question": "What is the LCS indicator value when bits 8 to 1 are set to '0 0 0 0 0 0 0 1'?",
+    "answer": "MT-LR",
+    "evidence": "TS 24.301, Table 9.9.3.40.1, Table 9.9.3.40.1: LCS indicator information element"
+  },
+  {
+    "id": "QA-TBL-0122",
+    "type": "TABLE_QA",
+    "question": "According to TS 24.301, where is the coding for the value part of the LCS client identity information element specified?",
+    "answer": "The coding of the value part of the LCS client identity is specified in clause 17.7.13 of 3GPP TS 29.002 [15C].",
+    "evidence": "TS 24.301, Table 9.9.3.41.1, Table 9.9.3.41.1: LCS client identity information element"
+  },
+  {
+    "id": "QA-TBL-0123",
+    "type": "TABLE_QA",
+    "question": "According to the GUTI type information element, what is the coding for a Mapped GUTI in octet 1?",
+    "answer": "A Mapped GUTI is coded with bit 1 set to 1 in octet 1.",
+    "evidence": "TS 24.301, Table 9.9.3.45.1, Table 9.9.3.45.1: GUTI type information element"
+  },
+  {
+    "id": "QA-XTBL-0013",
+    "type": "CROSS_TABLE_QA",
+    "question": "What is the bit pattern for a Location services message container in the generic message container type IE, and what does the LCS indicator value '00000001' represent?",
+    "answer": "The bit pattern for a Location services message container is '00000010'. The LCS indicator value '00000001' represents MT-LR.",
+    "evidence": "TS 24.301, Table 9.9.3.4.1, Table 9.9.3.4.1: Authentication response parameter information element; TS 24.301, Table 9.9.3.42.1, Table 9.9.3.42.1: Generic message container type information element; TS 24.301, Table 9.9.3.40.1, Table 9.9.3.40.1: LCS indicator information element; TS 24.301, Table 9.9.3.41.1, Table 9.9.3.41.1: LCS client identity information element; TS 24.301, Table 9.9.3.45.1, Table 9.9.3.45.1: GUTI type information element"
+  },
+  {
+    "id": "QA-FIG-0101",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range for the LCS indicator value field in the LCS indicator information element?",
+    "answer": "The LCS indicator value field occupies bits 1-8 of octet 2.",
+    "evidence": "TS 24.301, Figure 9.9.3.40.1, LCS indicator information element"
+  },
+  {
+    "id": "QA-FIG-0102",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the field located in octet 1, bits 8 to 5, of the Authentication response parameter information element?",
+    "answer": "It is the Information element identifier (IEI) for the authentication response parameter.",
+    "evidence": "TS 24.301, Figure 9.9.3.4.1, Authentication response parameter information element"
+  },
+  {
+    "id": "QA-FIG-0103",
+    "type": "FIGURE_QA",
+    "question": "According to the SMS services status information element bit layout, what is the bit range and octet for the field that indicates the specific status of SMS services availability?",
+    "answer": "The SMS services status value field is located in bits 3-1 of octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.4B.1, SMS services status information element"
+  },
+  {
+    "id": "QA-FIG-0104",
+    "type": "FIGURE_QA",
+    "question": "What is the octet range for the LCS client identity value part in the LCS client identity information element?",
+    "answer": "Octets 3-257",
+    "evidence": "TS 24.301, Figure 9.9.3.41.1, LCS client identity information element"
+  },
+  {
+    "id": "QA-FIG-0105",
+    "type": "FIGURE_QA",
+    "question": "According to the GUTI type information element, what is the bit range and octet for the field that indicates whether the GUTI is native or mapped?",
+    "answer": "The GUTI type field is located at bit 1 of octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.45.1, GUTI type information element"
+  },
+  {
+    "id": "QA-XFIG-0010",
+    "type": "CROSS_FIGURE_QA",
+    "question": "What is the octet range for the value part of the LCS client identity information element, and how does its length field compare in position to the length field in the authentication response parameter?",
+    "answer": "The LCS client identity value part occupies octets 3-257, while its length field is in octet 2. In contrast, the authentication response parameter also has its length field in octet 2, but its value field (RES or RES*) occupies octets 3-18.",
+    "evidence": "TS 24.301, Figure 9.9.3.40.1, LCS indicator information element; TS 24.301, Figure 9.9.3.4.1, Authentication response parameter information element; TS 24.301, Figure 9.9.3.4B.1, SMS services status information element; TS 24.301, Figure 9.9.3.41.1, LCS client identity information element; TS 24.301, Figure 9.9.3.45.1, GUTI type information element"
+  },
+  {
+    "id": "QA-TBL-0124",
+    "type": "TABLE_QA",
+    "question": "What is the maximum size in octets for the generic message container contents, and where is this defined?",
+    "answer": "The maximum size is 65535 octets, as specified in TS 24.301, Table 9.9.3.43.1: Generic message container information element.",
+    "evidence": "TS 24.301, Table 9.9.3.43.1, Table 9.9.3.43.1: Generic message container information element"
+  },
+  {
+    "id": "QA-FIG-0106",
+    "type": "FIGURE_QA",
+    "question": "According to the figure, what is the purpose of the octets 2-4 in the Generic message container information element?",
+    "answer": "The octets 2-4 contain the 'Length of generic message container contents', which specifies the length of the container contents in octets.",
+    "evidence": "TS 24.301, Figure 9.9.3.43.1, Generic message container information element"
+  },
+  {
+    "id": "QA-TBL-0125",
+    "type": "TABLE_QA",
+    "question": "What is the control plane service type value for a mobile originating request?",
+    "answer": "The control plane service type value for a mobile originating request is 0 0 0 (bits 3 2 1).",
+    "evidence": "TS 24.301, Table 9.9.3.47.1, Table 9.9.3.47.1: Control plane service type information element"
+  },
+  {
+    "id": "QA-FIG-0107",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet range for the Control plane service type value field in the information element?",
+    "answer": "The Control plane service type value field occupies bits 1-3 in octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.47.1, Control plane service type information element"
+  },
+  {
+    "id": "QA-TBL-0126",
+    "type": "TABLE_QA",
+    "question": "According to the network policy information element, what does a value of 0 for the redirection to GERAN security policy indicate?",
+    "answer": "A value of 0 indicates that unsecured redirection to GERAN is allowed.",
+    "evidence": "TS 24.301, Table 9.9.3.52.1, Table 9.9.3.52.1: Network policy information element"
+  },
+  {
+    "id": "QA-TBL-0127",
+    "type": "TABLE_QA",
+    "question": "What does bit 1 in octet 3 of the N1 UE network capability IE indicate when set to 0?",
+    "answer": "Control plane CIoT 5GS optimization not supported",
+    "evidence": "TS 24.301, Table 9.9.3.57.1, Table 9.9.3.57.1: N1 UE network capability information element"
+  },
+  {
+    "id": "QA-TBL-0128",
+    "type": "TABLE_QA",
+    "question": "In the UE radio capability ID request information element, what does a bit value of 1 in octet 3, bit 1 indicate?",
+    "answer": "It indicates that the UE radio capability ID is requested.",
+    "evidence": "TS 24.301, Table 9.9.3.59.1, Table 9.9.3.59.1: UE radio capability ID request information element"
+  },
+  {
+    "id": "QA-TBL-0129",
+    "type": "TABLE_QA",
+    "question": "What does the CSFB response value '001' indicate in the CSFB response information element?",
+    "answer": "CS fallback accepted by the UE",
+    "evidence": "TS 24.301, Table 9.9.3.5.1, Table 9.9.3.5.1: CSFB response information element"
+  },
+  {
+    "id": "QA-TBL-0130",
+    "type": "TABLE_QA",
+    "question": "What does a value of 1 in bit 1 of octet 2 indicate in the Additional information requested IE?",
+    "answer": "It indicates that ciphering keys for ciphered broadcast assistance data are requested.",
+    "evidence": "TS 24.301, Table 9.9.3.55.1, Table 9.9.3.55.1: Additional information requested information element"
+  },
+  {
+    "id": "QA-TBL-0131",
+    "type": "TABLE_QA",
+    "question": "According to TS 24.301, what is the interpretation of bits 3 to 1 of octet 3 in the UE radio capability ID availability IE when set to '001'?",
+    "answer": "When bits 3 to 1 of octet 3 are set to '001', it indicates that the UE radio capability ID is available.",
+    "evidence": "TS 24.301, Table 9.9.3.58.1, Table 9.9.3.58.1: UE radio capability ID availability information element"
+  },
+  {
+    "id": "QA-XTBL-0014",
+    "type": "CROSS_TABLE_QA",
+    "question": "In a CSFB response where the UE indicates CS fallback is accepted, and the network policy indicates unsecured redirection to GERAN is not allowed, what are the specific bit values for the CSFB response and the redirection policy?",
+    "answer": "The CSFB response value would be '0 0 1' (bits 3,2,1 of octet 1) indicating CS fallback accepted by the UE. The network policy would have bit 1 of octet 1 set to '1' indicating unsecured redirection to GERAN not allowed.",
+    "evidence": "TS 24.301, Table 9.9.3.52.1, Table 9.9.3.52.1: Network policy information element; TS 24.301, Table 9.9.3.57.1, Table 9.9.3.57.1: N1 UE network capability information element; TS 24.301, Table 9.9.3.59.1, Table 9.9.3.59.1: UE radio capability ID request information element; TS 24.301, Table 9.9.3.5.1, Table 9.9.3.5.1: CSFB response information element; TS 24.301, Table 9.9.3.55.1, Table 9.9.3.55.1: Additional information requested information element; TS 24.301, Table 9.9.3.58.1, Table 9.9.3.58.1: UE radio capability ID availability information element"
+  },
+  {
+    "id": "QA-FIG-0108",
+    "type": "FIGURE_QA",
+    "question": "In the UE additional security capability information element, which octet contains the bit fields for the 5G encryption algorithms EA0 through EA5?",
+    "answer": "Octet 3",
+    "evidence": "TS 24.301, Figure 9.9.3.53.1, UE additional security capability information element"
+  },
+  {
+    "id": "QA-FIG-0109",
+    "type": "FIGURE_QA",
+    "question": "According to the network policy information element, what is the purpose of the bit labeled 'redir-policy' in octet 1?",
+    "answer": "The 'redir-policy' bit indicates the redirection to GERAN security policy, specifying whether unsecured redirection to GERAN is allowed or not allowed.",
+    "evidence": "TS 24.301, Figure 9.9.3.52.1, Network policy information element"
+  },
+  {
+    "id": "QA-FIG-0110",
+    "type": "FIGURE_QA",
+    "question": "According to the CSFB response information element structure, what is the bit range and octet location of the CSFB response value field?",
+    "answer": "The CSFB response value field occupies bits 1-2 in octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.3.5.1, CSFB response information element"
+  },
+  {
+    "id": "QA-FIG-0111",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet location for the UE radio capability ID availability value field in the information element?",
+    "answer": "The UE radio capability ID availability value field is located in bits 3 to 1 of octet 3.",
+    "evidence": "TS 24.301, Figure 9.9.3.58.1, UE radio capability ID availability information element"
+  },
+  {
+    "id": "QA-FIG-0112",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the octets 2-4 in the Ciphering key data information element?",
+    "answer": "The octets 2-4 contain the length field for the ciphering key data contents.",
+    "evidence": "TS 24.301, Figure 9.9.3.56.1, Ciphering key data information element"
+  },
+  {
+    "id": "QA-FIG-0113",
+    "type": "FIGURE_QA",
+    "question": "What is the purpose of the URCIDR bit in the UE radio capability ID request information element, and in which octet is it located?",
+    "answer": "The URCIDR bit indicates whether a UE radio capability ID is requested (1) or not requested (0), and it is located in octet 3.",
+    "evidence": "TS 24.301, Figure 9.9.3.59.1, UE radio capability ID request information element"
+  },
+  {
+    "id": "QA-FIG-0114",
+    "type": "FIGURE_QA",
+    "question": "According to the N1 UE network capability information element structure, what is the purpose of the field located at bit 7 of octet 3?",
+    "answer": "The field at bit 7 of octet 3 indicates the 5G Enhanced Header Compression Control Plane Cellular IoT (5G-EHC-CP CIoT) capability.",
+    "evidence": "TS 24.301, Figure 9.9.3.57.1, N1 UE network capability information element"
+  },
+  {
+    "id": "QA-FIG-0115",
+    "type": "FIGURE_QA",
+    "question": "In the Additional information requested information element, what is the bit range and octet for the Cipher Key field, and what does a value of 1 indicate?",
+    "answer": "The Cipher Key field is located in bit 1 of octet 2. A value of 1 indicates that ciphering keys for ciphered broadcast assistance data are requested.",
+    "evidence": "TS 24.301, Figure 9.9.3.55.1, Additional information requested information element"
+  },
+  {
+    "id": "QA-FIG-0116",
+    "type": "FIGURE_QA",
+    "question": "According to the ciphering data set layout, what is the octet range for the ciphering key field?",
+    "answer": "Octets 3 to 18",
+    "evidence": "TS 24.301, Figure 9.9.3.56.2, Ciphering data set"
+  },
+  {
+    "id": "QA-XFIG-0011",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the CSFB response information element, what is the bit range and octet for the CSFB response value, and how does the UE radio capability ID availability information element indicate availability in its corresponding value field?",
+    "answer": "In the CSFB response information element, the CSFB response value is located in bits 1-2 of octet 1. In the UE radio capability ID availability information element, the availability is indicated by the UE radio capability ID availability value field in bits 3-1 of octet 3, where '001' signifies available and '000' signifies not available.",
+    "evidence": "TS 24.301, Figure 9.9.3.53.1, UE additional security capability information element; TS 24.301, Figure 9.9.3.52.1, Network policy information element; TS 24.301, Figure 9.9.3.5.1, CSFB response information element; TS 24.301, Figure 9.9.3.58.1, UE radio capability ID availability information element; TS 24.301, Figure 9.9.3.56.1, Ciphering key data information element; TS 24.301, Figure 9.9.3.59.1, UE radio capability ID request information element; TS 24.301, Figure 9.9.3.57.1, N1 UE network capability information element; TS 24.301, Figure 9.9.3.55.1, Additional information requested information element; TS 24.301, Figure 9.9.3.56.2, Ciphering data set"
+  },
+  {
+    "id": "QA-TBL-0132",
+    "type": "TABLE_QA",
+    "question": "What is the content and structure of the HashMME value field in the HashMME information element?",
+    "answer": "The HashMME value field contains the binary representation of the HashMME, spanning octets 3 to 10. Within this structure, bit 8 of octet 3 represents the most significant bit of the HashMME, and bit 1 of octet 10 represents the least significant bit.",
+    "evidence": "TS 24.301, Table 9.9.3.50.1, Table 9.9.3.50.1: HashMME information element"
+  },
+  {
+    "id": "QA-FIG-0117",
+    "type": "FIGURE_QA",
+    "question": "According to the HashMME information element structure, what is the bit range and octet range for the HashMME value field?",
+    "answer": "The HashMME value field occupies bit 1-8 of octets 3 through 10.",
+    "evidence": "TS 24.301, Figure 9.9.3.50.1, HashMME information element"
+  },
+  {
+    "id": "QA-TBL-0133",
+    "type": "TABLE_QA",
+    "question": "What is the maximum size in octets for the Replayed NAS message container contents, and which specific NAS messages can it contain according to the table?",
+    "answer": "The maximum size is 65535 octets, and it can contain an ATTACH REQUEST message as defined in clause 8.2.4 or a TRACKING AREA UPDATE REQUEST message as defined in clause 8.2.29.",
+    "evidence": "TS 24.301, Table 9.9.3.51.1, Table 9.9.3.51.1: Replayed NAS message container information element"
+  },
+  {
+    "id": "QA-FIG-0118",
+    "type": "FIGURE_QA",
+    "question": "What is the maximum size in octets for the Replayed NAS message container contents field, and which specific NAS messages can this container hold according to the figure?",
+    "answer": "The maximum size is 65535 octets, and it can contain either an ATTACH REQUEST message as defined in clause 8.2.4 or a TRACKING AREA UPDATE REQUEST message as defined in clause 8.2.29.",
+    "evidence": "TS 24.301, Figure 9.9.3.51.1, Replayed NAS message container information element"
+  },
+  {
+    "id": "QA-TBL-0134",
+    "type": "TABLE_QA",
+    "question": "What is the value of the Daylight saving time information element when it indicates that daylight saving time is not in effect?",
+    "answer": "0",
+    "evidence": "TS 24.301, Table 9.9.3.66.1, Daylight saving time"
+  },
+  {
+    "id": "QA-TBL-0135",
+    "type": "TABLE_QA",
+    "question": "What does the value part of the WUS assistance information information element consist of?",
+    "answer": "The value part consists of one or several types of WUS assistance information.",
+    "evidence": "TS 24.301, Table 9.9.3.62.1, Table 9.9.3.62.1: WUS assistance information information element"
+  },
+  {
+    "id": "QA-TBL-0136",
+    "type": "TABLE_QA",
+    "question": "How is the IMSI offset value represented within the IMSI offset information element, and which bits define its most and least significant positions?",
+    "answer": "The IMSI offset value is contained in octets 3 to 4 as a binary representation, where bit 8 of octet 3 is the most significant bit and bit 1 of octet 4 is the least significant bit.",
+    "evidence": "TS 24.301, Table 9.9.3.64.1, Table 9.9.3.64.1: IMSI offset information element"
+  },
+  {
+    "id": "QA-TBL-0137",
+    "type": "TABLE_QA",
+    "question": "What does the NB-S1 DRX parameter information element specify when bits 4 to 1 of octet 3 are set to '0100'?",
+    "answer": "It specifies a DRX cycle parameter T = 256.",
+    "evidence": "TS 24.301, Table 9.9.3.63.1, Table 9.9.3.63.1: NB-S1 DRX parameter information element"
+  },
+  {
+    "id": "QA-TBL-0138",
+    "type": "TABLE_QA",
+    "question": "According to the EPS additional request result information element, what does it indicate when bits 2 and 1 of octet 3 are set to 0 and 1, respectively?",
+    "answer": "It indicates that paging restriction is accepted.",
+    "evidence": "TS 24.301, Table 9.9.3.67.1, Table 9.9.3.67.1: EPS additional request result information element"
+  },
+  {
+    "id": "QA-TBL-0139",
+    "type": "TABLE_QA",
+    "question": "What is the request type value in bits 4 to 1 of octet 3 when indicating NAS signalling connection release?",
+    "answer": "The request type value is 0001 (bits 4 to 1 of octet 3) for NAS signalling connection release.",
+    "evidence": "TS 24.301, Table 9.9.3.65.1, Table 9.9.3.65.1: UE request type information element"
+  },
+  {
+    "id": "QA-XTBL-0015",
+    "type": "CROSS_TABLE_QA",
+    "question": "In the NB-S1 DRX parameter information element, what DRX cycle parameter T value corresponds to bits '0 1 0 0', and what is the interpretation of bits '2 1' being '0 1' in the EPS additional request result information element?",
+    "answer": "Bits '0 1 0 0' in the NB-S1 DRX parameter information element correspond to DRX cycle parameter T = 256. In the EPS additional request result information element, bits '2 1' being '0 1' indicates that paging restriction is accepted.",
+    "evidence": "TS 24.301, Table 9.9.3.66.1, Daylight saving time; TS 24.301, Table 9.9.3.62.1, Table 9.9.3.62.1: WUS assistance information information element; TS 24.301, Table 9.9.3.64.1, Table 9.9.3.64.1: IMSI offset information element; TS 24.301, Table 9.9.3.63.1, Table 9.9.3.63.1: NB-S1 DRX parameter information element; TS 24.301, Table 9.9.3.67.1, Table 9.9.3.67.1: EPS additional request result information element; TS 24.301, Table 9.9.3.65.1, Table 9.9.3.65.1: UE request type information element"
+  },
+  {
+    "id": "QA-FIG-0119",
+    "type": "FIGURE_QA",
+    "question": "According to the paging restriction information element structure for the specified types, what is the purpose of the field located in octet 2, bits 8 to 1?",
+    "answer": "The field in octet 2, bits 8 to 1, specifies the length of the paging restriction contents.",
+    "evidence": "TS 24.301, Figure 9.9.3.66.2, Paging restriction information element for Paging restriction type = \"All paging is restricted except for specified PDN connection(s)\" and for Paging restriction type = \"All paging is restricted except for voice service and specified PDN connection(s)\""
+  },
+  {
+    "id": "QA-FIG-0120",
+    "type": "FIGURE_QA",
+    "question": "According to the IMSI offset information element structure, which octet contains the most significant bit of the IMSI offset value?",
+    "answer": "Octet 3 contains the most significant bit of the IMSI offset value, as bit 8 of octet 3 represents the most significant bit.",
+    "evidence": "TS 24.301, Figure 9.9.3.64.1, IMSI offset information element"
+  },
+  {
+    "id": "QA-FIG-0121",
+    "type": "FIGURE_QA",
+    "question": "According to the UE request type information element structure, what is the purpose of the field occupying bits 4 to 1 of octet 3, and what are two of its defined values?",
+    "answer": "The field occupying bits 4 to 1 of octet 3 is the 'Request type' field. Two of its defined values are '0001' for NAS signalling connection release and '0010' for Rejection of paging.",
+    "evidence": "TS 24.301, Figure 9.9.3.65.1, UE request type information element"
+  },
+  {
+    "id": "QA-FIG-0122",
+    "type": "FIGURE_QA",
+    "question": "What is the octet range for the 'Length of WUS assistance information contents' field in the WUS assistance information information element?",
+    "answer": "Octets 2-3",
+    "evidence": "TS 24.301, Figure 9.9.3.62.1, WUS assistance information information element"
+  },
+  {
+    "id": "QA-FIG-0123",
+    "type": "FIGURE_QA",
+    "question": "According to the figure for WUS assistance information type with type of information '000', which bits in octet 1 are allocated to the UE paging probability information value?",
+    "answer": "Bits 5-1",
+    "evidence": "TS 24.301, Figure 9.9.3.62.2, WUS assistance information type –type of information= \"000\""
+  },
+  {
+    "id": "QA-FIG-0124",
+    "type": "FIGURE_QA",
+    "question": "Within the EPS additional request result information element, which specific bits in octet 3 are designated as spare and how are they coded?",
+    "answer": "Bits 8, 7, 6, 5, 4, and 3 of octet 3 are spare bits, and each is coded as 0.",
+    "evidence": "TS 24.301, Figure 9.9.3.67.1, EPS additional request result information element"
+  },
+  {
+    "id": "QA-FIG-0125",
+    "type": "FIGURE_QA",
+    "question": "What is the bit range and octet for the Paging restriction type field in the Paging restriction information element?",
+    "answer": "The Paging restriction type field occupies bits 4-1 of octet 3.",
+    "evidence": "TS 24.301, Figure 9.9.3.66.1, Paging restriction information element for Paging restriction type = \"All paging is restricted\" and for Paging restriction type = \"All paging is restricted except voice\""
+  },
+  {
+    "id": "QA-FIG-0126",
+    "type": "FIGURE_QA",
+    "question": "What is the octet range for the 'Length of NB-S1 mode DRX parameters contents' field in the NB-S1 DRX parameter information element?",
+    "answer": "Octet 2",
+    "evidence": "TS 24.301, Figure 9.9.3.63.1, NB-S1 DRX parameter information element"
+  },
+  {
+    "id": "QA-XFIG-0012",
+    "type": "CROSS_FIGURE_QA",
+    "question": "In the Paging restriction information element for the type 'All paging is restricted except for specified PDN connection(s)', which octet and bit range contains the Paging restriction type, and how does the length field in the IMSI offset information element indicate the size of the IMSI offset value?",
+    "answer": "In the Paging restriction information element (Figure 9.9.3.66.2), the Paging restriction type is located in bits 4-1 of octet 3. For the IMSI offset information element (Figure 9.9.3.64.1), the 'Length of IMSI offset value' field in octet 2 indicates the length of the IMSI offset value that follows.",
+    "evidence": "TS 24.301, Figure 9.9.3.66.2, Paging restriction information element for Paging restriction type = \"All paging is restricted except for specified PDN connection(s)\" and for Paging restriction type = \"All paging is restricted except for voice service and specified PDN connection(s)\"; TS 24.301, Figure 9.9.3.64.1, IMSI offset information element; TS 24.301, Figure 9.9.3.65.1, UE request type information element; TS 24.301, Figure 9.9.3.62.1, WUS assistance information information element; TS 24.301, Figure 9.9.3.62.2, WUS assistance information type –type of information= \"000\"; TS 24.301, Figure 9.9.3.67.1, EPS additional request result information element; TS 24.301, Figure 9.9.3.66.1, Paging restriction information element for Paging restriction type = \"All paging is restricted\" and for Paging restriction type = \"All paging is restricted except voice\"; TS 24.301, Figure 9.9.3.63.1, NB-S1 DRX parameter information element"
+  },
+  {
+    "id": "QA-TBL-0140",
+    "type": "TABLE_QA",
+    "question": "What is the interpretation of bits '0 1 1' in the UE to network direction for the Detach type information element?",
+    "answer": "In the UE to network direction, bits '0 1 1' indicate a combined EPS/IMSI detach.",
+    "evidence": "TS 24.301, Table 9.9.3.7.1, Table 9.9.3.7.1: Detach type information element"
+  },
+  {
+    "id": "QA-FIG-0127",
+    "type": "FIGURE_QA",
+    "question": "According to the Detach type information element bit layout, which bits are used to indicate the Type of detach?",
+    "answer": "Bits 3 to 1 in octet 1 are used to indicate the Type of detach.",
+    "evidence": "TS 24.301, Figure 9.9.3.7.1, Detach type information element"
+  },
+  {
+    "id": "QA-TBL-0141",
+    "type": "TABLE_QA",
+    "question": "What is the EMM cause value in octet 2 when the IMEI is not accepted?",
+    "answer": "The EMM cause value is 00000101 (binary) when the IMEI is not accepted, as specified in TS 24.301, Table 9.9.3.9.1: EMM cause information element.",
+    "evidence": "TS 24.301, Table 9.9.3.9.1, Table 9.9.3.9.1: EMM cause information element"
+  },
+  {
+    "id": "QA-FIG-0128",
+    "type": "FIGURE_QA",
+    "question": "According to the EMM cause information element structure, what is the bit range and octet location of the Cause value field?",
+    "answer": "The Cause value field occupies bits 8-1 of octet 2.",
+    "evidence": "TS 24.301, Figure 9.9.3.9.1, EMM cause information element"
+  },
+  {
+    "id": "QA-TBL-0142",
+    "type": "TABLE_QA",
+    "question": "What is the PDN type value in octet 1 when the bits 3, 2, and 1 are set to 0, 1, and 1 respectively?",
+    "answer": "IPv4v6",
+    "evidence": "TS 24.301, Table 9.9.4.10.1, Table 9.9.4.10.1: PDN type information element"
+  },
+  {
+    "id": "QA-FIG-0129",
+    "type": "FIGURE_QA",
+    "question": "According to the PDN type information element layout, what is the bit range and octet location of the field that indicates the IP version capability?",
+    "answer": "The PDN type value field is located in bits 1-3 of octet 1.",
+    "evidence": "TS 24.301, Figure 9.9.4.10.1, PDN type information element"
+  },
+  {
+    "id": "QA-FIG-0130",
+    "type": "FIGURE_QA",
+    "question": "According to the Re-attempt indicator information element layout, which octet contains the bit designated for the RATC value?",
+    "answer": "Octet 3",
+    "evidence": "TS 24.301, Figure 9.9.4.13A, Re-attempt indicator information element"
+  },
+  {
+    "id": "QA-TBL-0143",
+    "type": "TABLE_QA",
+    "question": "In which state does timer T3413 operate, and what specific condition triggers its start?",
+    "answer": "Timer T3413 operates in the EMM-REGISTERED state and is started when the paging procedure for EPS services is initiated.",
+    "evidence": "TS 24.301, Table 10.2.2, Table 10.2.2: EPS mobility management timers - network side"
+  }
+]

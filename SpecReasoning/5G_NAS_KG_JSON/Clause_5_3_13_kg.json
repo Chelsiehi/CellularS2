@@ -1,0 +1,240 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.13",
+  "title": "Lists of 5GS forbidden tracking areas",
+  "entities": [
+    {
+      "id": "LIST_FORBIDDEN_TA_ROAMING",
+      "name": "5GS forbidden tracking areas for roaming",
+      "entity_type": "Property",
+      "description": "List maintained by UE containing tracking areas where roaming is forbidden. Managed independently per access type (3GPP or wireline).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "LIST_FORBIDDEN_TA_REGIONAL",
+      "name": "5GS forbidden tracking areas for regional provision of service",
+      "entity_type": "Property",
+      "description": "List maintained by UE containing tracking areas where regional service provision is forbidden. Managed independently per access type (3GPP or wireline).",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that maintains and manages the forbidden tracking area lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "CONDITION_ERASURE",
+      "name": "List erasure conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that trigger erasure of forbidden tracking area lists: UE switch off, UICC removal, subscriber data update, or periodic erasure every 12-24 hours.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "CONDITION_REMOVAL",
+      "name": "TA removal conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that remove a tracking area from forbidden lists: receiving TA in TAI list or Service area list of allowed tracking areas in REGISTRATION ACCEPT or CONFIGURATION UPDATE COMMAND, except when registered for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "CONDITION_UPDATE_3GPP",
+      "name": "3GPP access update conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that update forbidden lists over 3GPP access: receiving REGISTRATION REJECT, SERVICE REJECT, or DEREGISTRATION REQUEST with 5GMM causes #12, #13, #15, or receiving REGISTRATION ACCEPT/SERVICE ACCEPT with forbidden TAIs.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "CONDITION_UPDATE_WIRELINE",
+      "name": "Wireline access update conditions",
+      "entity_type": "Condition",
+      "description": "Conditions that update forbidden lists over wireline access: receiving REGISTRATION REJECT, SERVICE REJECT, or DEREGISTRATION REQUEST with 5GMM causes #12 or #13.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message that can contain allowed tracking areas, triggering removal from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "name": "CONFIGURATION UPDATE COMMAND",
+      "entity_type": "Message",
+      "description": "NAS message that can contain allowed tracking areas, triggering removal from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "MSG_REJECT_REQUEST",
+      "name": "REJECT/REQUEST messages",
+      "entity_type": "Message",
+      "description": "NAS messages including REGISTRATION REJECT, SERVICE REJECT, DEREGISTRATION REQUEST that can trigger updates to forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "PROPERTY_LIST_MANAGEMENT",
+      "name": "List management properties",
+      "entity_type": "Property",
+      "description": "Properties governing list management: capacity of 40+ TAIs, oldest entry deletion when full, independent management per access type.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE maintains and stores the list of forbidden tracking areas for roaming.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UE",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE maintains and stores the list of forbidden tracking areas for regional provision of service.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_ERASURE",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Erasure conditions trigger deletion of forbidden tracking area lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_ERASURE",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Erasure conditions trigger deletion of forbidden tracking area lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_REMOVAL",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Removal conditions trigger deletion of specific tracking areas from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "CONDITION_REMOVAL",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Removal conditions trigger deletion of specific tracking areas from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "CONDITION_REMOVAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message can contain allowed tracking areas that trigger removal from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_CONFIGURATION_UPDATE_COMMAND",
+      "target": "CONDITION_REMOVAL",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CONFIGURATION UPDATE COMMAND message can contain allowed tracking areas that trigger removal from forbidden lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_REJECT_REQUEST",
+      "target": "CONDITION_UPDATE_3GPP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REJECT/REQUEST messages with specific 5GMM causes trigger updates to forbidden lists over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_REJECT_REQUEST",
+      "target": "CONDITION_UPDATE_WIRELINE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REJECT/REQUEST messages with specific 5GMM causes trigger updates to forbidden lists over wireline access.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "PROPERTY_LIST_MANAGEMENT",
+      "target": "LIST_FORBIDDEN_TA_ROAMING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List management properties govern the capacity and maintenance of forbidden tracking area lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "PROPERTY_LIST_MANAGEMENT",
+      "target": "LIST_FORBIDDEN_TA_REGIONAL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "List management properties govern the capacity and maintenance of forbidden tracking area lists.",
+      "provenance": [
+        "TS 24.501, Clause 5.3.13"
+      ]
+    }
+  ]
+}

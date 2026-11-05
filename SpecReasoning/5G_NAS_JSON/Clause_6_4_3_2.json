@@ -1,0 +1,74 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.3.2",
+  "title": "UE-requested PDU session release procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-------------------------------------------------------------",
+    "In order to initiate the UE-requested PDU session release procedure, the UE shall create a PDU SESSION RELEASE REQUEST message",
+    "The UE may set the 5GSM cause IE of the PDU SESSION RELEASE REQUEST message to indicate the reason for releasing the PDU session",
+    "The 5GSM cause IE typically indicates one of the following 5GSM cause values",
+    "#44 Semantic errors in packet filter(s)",
+    "#45 Syntactical error in packet filter(s)",
+    "#83 Semantic error in the QoS operation",
+    "#84 Syntactical error in the QoS operation",
+    "#96 Invalid mandatory information",
+    "The UE shall allocate a PTI value currently not used and shall set the PTI IE of the PDU SESSION RELEASE REQUEST message to the allocated PTI value",
+    "The UE shall transport the PDU SESSION RELEASE REQUEST message and the PDU session ID, using the NAS transport procedure as specified in subclause5.4.5, and the UE shall start timer T3582 (see example in figure6.4.3.2.1)",
+    "If the UE is releasing the PDU session due to",
+    "a) errors in QoS operations or packet filters; or",
+    "b) the number of the authorized QoS rules, the number of the packet filters, or the number of the authorized QoS flow descriptions associated with the PDU session have reached the maximum number supported by the UE",
+    "the UE shall include the 5GSM cause IE in the PDU SESSION RELEASE REQUEST message as described in subclauses6.3.2.4 and 6.4.1.3",
+    "Figure6.4.3.2.1: UE-requested PDU session release procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.4.3.2.1",
+      "file": "Figure_6_4_3_2_1_p597.png.json",
+      "title": "UE-requested PDU session release procedure",
+      "content": {
+        "figure_id": "6.4.3.2.1",
+        "title": "UE-requested PDU session release procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "SMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "PDU SESSION RELEASE REQUEST",
+              "notes": "Start T3582"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "Network-requested PDU session release procedure",
+              "notes": "Stop T3582"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION RELEASE REJECT",
+              "notes": "Stop T3582, OR"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Start T3582: Timer starts when UE sends PDU SESSION RELEASE REQUEST",
+            "Stop T3582: Timer stops upon Network-requested PDU session release procedure OR PDU SESSION RELEASE REJECT"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

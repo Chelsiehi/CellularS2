@@ -1,0 +1,72 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.6.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_5GMM_STATUS",
+      "name": "5GMM status procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to report error conditions detected upon receipt of 5GMM protocol data in the AMF or UE. The 5GMM STATUS message can be sent by both entities.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1",
+        "Figure 5.4.6.1"
+      ]
+    },
+    {
+      "id": "MSG_5GMM_STATUS",
+      "name": "5GMM STATUS",
+      "entity_type": "Message",
+      "description": "Message used in the 5GMM status procedure to report error conditions detected in 5GMM protocol data.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1",
+        "Figure 5.4.6.1"
+      ]
+    },
+    {
+      "id": "COND_ERROR_DETECTED",
+      "name": "Error conditions detected",
+      "entity_type": "Condition",
+      "description": "Condition where certain error conditions are detected upon receipt of 5GMM protocol data in the AMF or UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5GMM_STATUS",
+      "target": "MSG_5GMM_STATUS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The 5GMM status procedure involves sending the 5GMM STATUS message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1",
+        "Figure 5.4.6.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_ERROR_DETECTED",
+      "target": "PROC_5GMM_STATUS",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Detection of error conditions triggers the 5GMM status procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_5GMM_STATUS",
+      "target": "COND_ERROR_DETECTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The 5GMM STATUS message reports the error conditions detected.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.6.1"
+      ]
+    }
+  ]
+}

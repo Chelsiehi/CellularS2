@@ -1,0 +1,238 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.3.4",
+  "title": "Reception of the RRCSetup by the UE",
+  "entities": [
+    {
+      "id": "RRCSetup",
+      "name": "RRCSetup",
+      "entity_type": "Message",
+      "description": "RRC connection setup message received by the UE from the network to establish an RRC connection.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "RRCSetupComplete",
+      "name": "RRCSetupComplete",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the network to complete the RRC connection setup procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "UE_Inactive_AS_Context",
+      "name": "UE Inactive AS Context",
+      "entity_type": "Property",
+      "description": "Stored AS context information for the UE in RRC_INACTIVE state, which is discarded upon RRCSetup reception in certain conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "AS_Security_Context",
+      "name": "AS Security Context",
+      "entity_type": "Property",
+      "description": "Current AS security context including KRRCenc, KRRCint, KUPint, and KUPenc keys, which is discarded upon RRCSetup reception in certain conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "T380",
+      "name": "Timer T380",
+      "entity_type": "Timer",
+      "description": "Timer related to UE inactivity or context management, stopped if running upon RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "T390",
+      "name": "Timer T390",
+      "entity_type": "Timer",
+      "description": "Timer for access category barring, stopped for all access categories upon RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "T302",
+      "name": "Timer T302",
+      "entity_type": "Timer",
+      "description": "Timer for RRC connection establishment, stopped upon RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "T320",
+      "name": "Timer T320",
+      "entity_type": "Timer",
+      "description": "Timer related to cell reselection priorities, stopped if running upon RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "T331",
+      "name": "Timer T331",
+      "entity_type": "Timer",
+      "description": "Timer related to RRC connection resume, stopped upon RRCSetup reception in response to RRCResumeRequest.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "PCell",
+      "name": "PCell",
+      "entity_type": "Property",
+      "description": "Primary cell considered by the UE as the serving cell after RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "VarRLF_Report",
+      "name": "VarRLF-Report",
+      "entity_type": "Property",
+      "description": "Variable storing radio link failure or handover failure information, updated upon RRCSetup reception under specific conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "Cell_Reselection_Procedure",
+      "name": "Cell Reselection Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for cell reselection in idle/inactive mode, stopped upon RRCSetup reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "RRCSetup",
+      "target": "UE_Inactive_AS_Context",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCSetup in response to RRCResumeRequest leads to discarding stored UE Inactive AS context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCSetup",
+      "target": "AS_Security_Context",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCSetup in response to RRCResumeRequest leads to discarding current AS security context.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "RRCSetup",
+      "target": "T380",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup stops timer T380 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "RRCSetup",
+      "target": "T390",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup stops timer T390 for all access categories.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "RRCSetup",
+      "target": "T302",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup stops timer T302.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRCSetup",
+      "target": "T320",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup stops timer T320 if running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "RRCSetup",
+      "target": "T331",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup in response to RRCResumeRequest stops timer T331.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "RRCSetup",
+      "target": "PCell",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCSetup leads the UE to consider the current cell as the PCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "RRCSetup",
+      "target": "Cell_Reselection_Procedure",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of RRCSetup stops the cell reselection procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "RRCSetup",
+      "target": "VarRLF_Report",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Reception of RRCSetup under specific conditions updates VarRLF-Report with reconnection time and cell identity.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "RRCSetup",
+      "target": "RRCSetupComplete",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Reception of RRCSetup leads to the UE setting the content of and submitting the RRCSetupComplete message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.3.4"
+      ]
+    }
+  ]
+}

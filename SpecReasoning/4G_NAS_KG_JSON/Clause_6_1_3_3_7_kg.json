@@ -1,0 +1,97 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.1.3.3.7",
+  "title": "PROCEDURE TRANSACTION PENDING",
+  "entities": [
+    {
+      "id": "STATE_PROC_TX_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State where no procedure transaction is active between network and UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "STATE_PROC_TX_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State where the network has initiated a procedure transaction towards the UE and is awaiting response.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_INITIATED_ESM",
+      "name": "network initiated ESM procedure request",
+      "entity_type": "Condition",
+      "description": "Condition triggered when network initiates an ESM procedure request towards the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_UE_ESM_RESPONSE",
+      "name": "ESM procedure response by the UE",
+      "entity_type": "Condition",
+      "description": "Condition triggered when UE sends a response to the network-initiated ESM procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_NETWORK_INITIATED_ESM",
+      "target": "STATE_PROC_TX_PENDING",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Network initiated ESM procedure request transitions state from INACTIVE to PENDING.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_UE_ESM_RESPONSE",
+      "target": "STATE_PROC_TX_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ESM procedure response by the UE transitions state from PENDING to INACTIVE.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "STATE_PROC_TX_INACTIVE",
+      "target": "STATE_PROC_TX_PENDING",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "State transition from INACTIVE to PENDING triggered by network initiated ESM procedure request.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "STATE_PROC_TX_PENDING",
+      "target": "STATE_PROC_TX_INACTIVE",
+      "relation_type": "state_transition",
+      "family": "sec",
+      "description": "State transition from PENDING to INACTIVE triggered by ESM procedure response by the UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.1.3.3.7",
+        "Figure 6.1.3.3.7.1"
+      ]
+    }
+  ]
+}

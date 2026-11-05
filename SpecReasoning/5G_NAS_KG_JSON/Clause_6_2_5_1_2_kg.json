@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.2",
+  "title": "Session-AMBR",
+  "entities": [
+    {
+      "id": "SESSION_AMBR",
+      "name": "Session-AMBR",
+      "entity_type": "Information Element",
+      "description": "The session-AMBR (Aggregate Maximum Bit Rate) is provided by the network to the UE and is associated with a PDU session. It indicates the maximum bit rate for the session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    },
+    {
+      "id": "PDU_SESSION",
+      "name": "PDU session",
+      "entity_type": "Property",
+      "description": "A PDU (Protocol Data Unit) session is a logical connection between the UE and the network for data transmission.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    },
+    {
+      "id": "AVERAGING_WINDOW",
+      "name": "Averaging window",
+      "entity_type": "Property",
+      "description": "The averaging window is a time period of two seconds used by the UE for enforcing the uplink rate limitation based on the session-AMBR.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    },
+    {
+      "id": "UL_RATE_LIMITATION",
+      "name": "UL rate limitation",
+      "entity_type": "Property",
+      "description": "The uplink rate limitation is enforced by the UE based on the session-AMBR value over the averaging window.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SESSION_AMBR",
+      "target": "PDU_SESSION",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "The session-AMBR is associated with a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "UL_RATE_LIMITATION",
+      "target": "SESSION_AMBR",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The UL rate limitation is indicated by the session-AMBR.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "UL_RATE_LIMITATION",
+      "target": "AVERAGING_WINDOW",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The UE's enforcement of UL rate limitation uses the averaging window.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.2"
+      ]
+    }
+  ]
+}

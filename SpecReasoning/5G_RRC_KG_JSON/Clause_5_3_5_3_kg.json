@@ -1,0 +1,207 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.3",
+  "title": "Reception of an RRCReconfiguration by the UE",
+  "entities": [
+    {
+      "id": "RRCReconfiguration",
+      "name": "RRCReconfiguration",
+      "entity_type": "Message",
+      "description": "RRC message used to reconfigure UE radio parameters, received directly or via conditional reconfiguration execution.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "CONDITIONAL_RECONFIG",
+      "name": "Conditional Reconfiguration",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE applies pre-configured RRCReconfiguration upon meeting certain conditions (CHO, CPA, CPC).",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "SCG_DEACTIVATION",
+      "name": "SCG deactivation",
+      "entity_type": "Procedure",
+      "description": "Procedure to deactivate Secondary Cell Group as specified in clause 5.3.5.13b.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "SCG_ACTIVATION",
+      "name": "SCG activation",
+      "entity_type": "Procedure",
+      "description": "Procedure to activate Secondary Cell Group as specified in clause 5.3.5.13a.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "IE_SCG_STATE",
+      "name": "scg-State",
+      "entity_type": "Information Element",
+      "description": "IE in RRCReconfiguration indicating SCG activation or deactivation state.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "IE_DAPS_SOURCE_RELEASE",
+      "name": "daps-SourceRelease",
+      "entity_type": "Information Element",
+      "description": "IE in RRCReconfiguration triggering release of source configuration in DAPS handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "DAPS_BEARER_RELEASE",
+      "name": "DAPS bearer release",
+      "entity_type": "Procedure",
+      "description": "Procedure to release RLC entities and reconfigure PDCP for DAPS bearers during source release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "SRB_RELEASE",
+      "name": "SRB release for source SpCell",
+      "entity_type": "Procedure",
+      "description": "Procedure to release PDCP and RLC entities for SRBs in source SpCell during DAPS handover.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "SOURCE_KEY_DISCARD",
+      "name": "Source key discard",
+      "entity_type": "Procedure",
+      "description": "Procedure to discard security keys (K_RRCenc, K_RRCint, K_UPint, K_UPenc) used in source SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "COND_T311_RUNNING",
+      "name": "Conditional reconfiguration execution during T311",
+      "entity_type": "Condition",
+      "description": "Condition where RRCReconfiguration is applied due to conditional reconfiguration execution while timer T311 is running.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "VAR_CONDITIONAL_RECONFIG_CLEAR",
+      "name": "VarConditionalReconfig clearance",
+      "entity_type": "Property",
+      "description": "UE removes all entries in VarConditionalReconfig variable after conditional reconfiguration execution during T311.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "CONDITIONAL_RECONFIG",
+      "target": "RRCReconfiguration",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Conditional reconfiguration procedure involves execution of RRCReconfiguration message.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "RRCReconfiguration",
+      "target": "IE_SCG_STATE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfiguration message may contain scg-State IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_SCG_STATE",
+      "target": "SCG_DEACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of scg-State IE triggers SCG deactivation procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_SCG_STATE",
+      "target": "SCG_ACTIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of scg-State IE triggers SCG activation procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_T311_RUNNING",
+      "target": "VAR_CONDITIONAL_RECONFIG_CLEAR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of conditional reconfiguration execution during T311 running establishes clearance of VarConditionalReconfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "RRCReconfiguration",
+      "target": "IE_DAPS_SOURCE_RELEASE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "RRCReconfiguration message may contain daps-SourceRelease IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_DAPS_SOURCE_RELEASE",
+      "target": "DAPS_BEARER_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of daps-SourceRelease IE triggers DAPS bearer release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_DAPS_SOURCE_RELEASE",
+      "target": "SRB_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of daps-SourceRelease IE triggers SRB release procedure for source SpCell.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_DAPS_SOURCE_RELEASE",
+      "target": "SOURCE_KEY_DISCARD",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of daps-SourceRelease IE triggers source key discard procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.3"
+      ]
+    }
+  ]
+}

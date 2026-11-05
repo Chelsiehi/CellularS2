@@ -1,0 +1,287 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.3.7",
+  "title": "Abnormal cases",
+  "entities": [
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication procedure using 5G AKA method for establishing security context between UE and network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE containing authentication challenge parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network containing authentication response parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_FAILURE",
+      "name": "AUTHENTICATION FAILURE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to network indicating authentication failure with specific 5GMM cause.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "MSG_AUTH_REJECT",
+      "name": "AUTHENTICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to UE to terminate authentication procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3560",
+      "name": "Timer T3560",
+      "entity_type": "Timer",
+      "description": "Network timer for AUTHENTICATION REQUEST retransmission, expires after 4 retransmissions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "TIMER_T3520",
+      "name": "Timer T3520",
+      "entity_type": "Timer",
+      "description": "UE timer started upon sending AUTHENTICATION FAILURE message, guards authentication failure handling.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "COND_MAC_FAILURE",
+      "name": "MAC failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects MAC validation failure in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "COND_SYNCH_FAILURE",
+      "name": "Synchronization failure condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects sequence number synchronization failure in AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "COND_NON_5G_AUTH",
+      "name": "Non-5G authentication unacceptable condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE rejects non-5G authentication method in AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "COND_NGKSI_IN_USE",
+      "name": "ngKSI already in use condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE detects ngKSI parameter conflict in AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_PROCEDURE",
+      "name": "Procedure abortion",
+      "entity_type": "Property",
+      "description": "Network behavior to abort authentication procedure upon timer expiry or lower layer failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "PROP_REINIT_PROCEDURE",
+      "name": "Procedure re-initiation",
+      "entity_type": "Property",
+      "description": "Network behavior to re-initiate authentication procedure after receiving specific failure causes.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "MSG_AUTH_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes sending AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "MSG_AUTH_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Authentication procedure includes receiving AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "TIMER_T3560",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Network starts timer T3560 when sending AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "TIMER_T3560",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Network resets and starts timer T3560 upon retransmission of AUTHENTICATION REQUEST.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_AUTH_FAILURE",
+      "target": "TIMER_T3520",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE starts timer T3520 when sending AUTHENTICATION FAILURE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_MAC_FAILURE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "MAC failure condition triggers sending AUTHENTICATION FAILURE message with cause #20.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_SYNCH_FAILURE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Synchronization failure condition triggers sending AUTHENTICATION FAILURE message with cause #21.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NON_5G_AUTH",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Non-5G authentication condition triggers sending AUTHENTICATION FAILURE message with cause #26.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NGKSI_IN_USE",
+      "target": "MSG_AUTH_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "ngKSI conflict condition triggers sending AUTHENTICATION FAILURE message with cause #71.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TIMER_T3560",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Fifth expiry of timer T3560 establishes procedure abortion by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_AUTH_REJECT",
+      "target": "PROP_ABORT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of AUTHENTICATION REJECT message establishes procedure termination.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "COND_SYNCH_FAILURE",
+      "target": "PROP_REINIT_PROCEDURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Synchronization failure condition establishes procedure re-initiation by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_AUTH_REQUEST",
+      "target": "TIMER_T3520",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of new AUTHENTICATION REQUEST stops timer T3520 if running.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7"
+      ]
+    },
+    {
+      "id": "REL_14",
+      "source": "MSG_AUTH_RESPONSE",
+      "target": "TIMER_T3560",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of AUTHENTICATION RESPONSE stops timer T3560.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.3.7",
+        "Figure 5.4.1.3.7.1"
+      ]
+    }
+  ]
+}

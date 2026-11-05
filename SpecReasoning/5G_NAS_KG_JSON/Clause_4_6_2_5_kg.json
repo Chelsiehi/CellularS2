@@ -1,0 +1,227 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.6.2.5",
+  "title": "Mobility management based network slice admission control",
+  "entities": [
+    {
+      "id": "PROC_NSAC",
+      "name": "Network Slice Admission Control",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by AMF to monitor and control the number of registered UEs per network slice subject to NSAC.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_NSSAI",
+      "name": "Allowed NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element containing the network slices allowed for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "IE_REJECTED_NSSAI",
+      "name": "Rejected NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element containing the network slices rejected for the UE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "NAS message used to accept UE registration and provide allowed/rejected NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "NAS message used to reject UE registration when all requested S-NSSAIs are rejected.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "PROC_UE_CONFIG_UPDATE",
+      "name": "Generic UE Configuration Update Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure used to update UE configuration including allowed/rejected NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "PROC_NETWORK_DEREGISTRATION",
+      "name": "Network-initiated De-registration Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to de-register UE when all S-NSSAIs are rejected.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_DEREGISTRATION_REQUEST",
+      "name": "DEREGISTRATION REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used in network-initiated de-registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "COND_EAC_ACTIVATED",
+      "name": "EAC Mode Activated",
+      "entity_type": "Condition",
+      "description": "Condition where EAC mode is activated for an S-NSSAI when UE count reaches threshold.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "COND_EAC_DEACTIVATED",
+      "name": "EAC Mode Deactivated",
+      "entity_type": "Condition",
+      "description": "Condition where EAC mode is deactivated for an S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_SESSION",
+      "name": "Emergency PDU Session Active",
+      "entity_type": "Condition",
+      "description": "Condition where UE has emergency PDU session established or is establishing one.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "PROP_MAX_UE_REACHED",
+      "name": "Maximum UEs Reached",
+      "entity_type": "Property",
+      "description": "Property indicating that maximum number of UEs has been reached for S-NSSAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NSAC",
+      "target": "COND_EAC_ACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network slice admission control requires EAC mode to be activated for pre-allocation control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NSAC",
+      "target": "COND_EAC_DEACTIVATED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network slice admission control requires EAC mode to be deactivated for post-allocation control.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_ALLOWED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains Allowed NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains Rejected NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message contains Rejected NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROP_MAX_UE_REACHED",
+      "target": "MSG_REGISTRATION_REJECT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum UEs reached condition establishes REGISTRATION REJECT message transmission.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROP_MAX_UE_REACHED",
+      "target": "PROC_UE_CONFIG_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum UEs reached condition establishes Generic UE Configuration Update Procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROP_MAX_UE_REACHED",
+      "target": "PROC_NETWORK_DEREGISTRATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Maximum UEs reached condition establishes Network-initiated De-registration Procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_DEREGISTRATION_REQUEST",
+      "target": "IE_REJECTED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "DEREGISTRATION REQUEST message contains Rejected NSSAI IE.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_SESSION",
+      "target": "PROC_UE_CONFIG_UPDATE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency session condition guards execution of Generic UE Configuration Update instead of de-registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.6.2.5"
+      ]
+    }
+  ]
+}

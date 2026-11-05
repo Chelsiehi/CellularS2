@@ -1,0 +1,216 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.6.3.3",
+  "title": "Notification procedure completion",
+  "entities": [
+    {
+      "id": "TIMER_T3565",
+      "name": "Timer T3565",
+      "entity_type": "Timer",
+      "description": "Timer used during notification procedure completion. Stopped upon reception of SERVICE REQUEST, CONTROL PLANE SERVICE REQUEST, REGISTRATION REQUEST messages, NGAP UE context resume request indication, or NOTIFICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message that triggers stopping of timer T3565 and initiation of service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "Message that triggers stopping of timer T3565 and initiation of service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "Message that triggers stopping of timer T3565 and initiation of registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_NOTIFICATION_RESPONSE",
+      "name": "NOTIFICATION RESPONSE message",
+      "entity_type": "Message",
+      "description": "Message received over non-3GPP access that triggers stopping of timer T3565 and notification to SMF about UE unreachability.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_STATUS",
+      "name": "PDU session status information element",
+      "entity_type": "Information Element",
+      "description": "Information element included in NOTIFICATION RESPONSE message indicating PDU session status for local release procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service request procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when SERVICE REQUEST or CONTROL PLANE SERVICE REQUEST messages are received.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "PROCEDURE_REGISTRATION",
+      "name": "Registration procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated when REGISTRATION REQUEST message is received for mobility and periodic registration update.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE state",
+      "entity_type": "State",
+      "description": "5GSM state indicating PDU session is inactive.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "CONDITION_NO_USER_PLANE_RESOURCES",
+      "name": "No user-plane resources need to be re-established",
+      "entity_type": "Condition",
+      "description": "Condition where user-plane resources of PDU session(s) do not need re-establishment, triggering SMF notification.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "ACTION_LOCAL_RELEASE",
+      "name": "Local release of PDU sessions",
+      "entity_type": "Property",
+      "description": "Action performed by AMF to locally release PDU sessions based on PDU session status information.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "ACTION_SMF_RELEASE_REQUEST",
+      "name": "Request SMF to perform local release",
+      "entity_type": "Property",
+      "description": "Action where AMF requests SMF to perform local release of PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "TIMER_T3565",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of SERVICE REQUEST message stops timer T3565",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "TIMER_T3565",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of CONTROL PLANE SERVICE REQUEST message stops timer T3565",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "TIMER_T3565",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of REGISTRATION REQUEST message stops timer T3565",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_NOTIFICATION_RESPONSE",
+      "target": "TIMER_T3565",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Reception of NOTIFICATION RESPONSE message stops timer T3565",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_NOTIFICATION_RESPONSE",
+      "target": "IE_PDU_SESSION_STATUS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "NOTIFICATION RESPONSE message may contain PDU session status information element",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_PDU_SESSION_STATUS",
+      "target": "STATE_PDU_SESSION_INACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PDU session status IE indicates whether PDU sessions are in INACTIVE state",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "CONDITION_NO_USER_PLANE_RESOURCES",
+      "target": "ACTION_SMF_RELEASE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of no user-plane resources needing re-establishment triggers SMF notification",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_PDU_SESSION_STATUS",
+      "target": "ACTION_LOCAL_RELEASE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session status IE triggers local release of PDU sessions",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_PDU_SESSION_STATUS",
+      "target": "ACTION_SMF_RELEASE_REQUEST",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session status IE triggers request to SMF for local release",
+      "provenance": [
+        "TS 24.501, Clause 5.6.3.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2.6A",
+  "title": "Abnormal cases in the UE, SMS services not accepted",
+  "entities": [
+    {
+      "id": "TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept tracking area update request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "SMS_SERVICES_STATUS_IE",
+      "name": "SMS services status IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating SMS service status.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "T3430",
+      "name": "Timer T3430",
+      "entity_type": "Timer",
+      "description": "Timer related to tracking area update procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "T3411",
+      "name": "Timer T3411",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter is less than 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "T3402",
+      "name": "Timer T3402",
+      "entity_type": "Timer",
+      "description": "Timer started when tracking area updating attempt counter equals 5.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "UE state indicating registered with normal service.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "TAU_ATTEMPT_COUNTER_LT_5",
+      "name": "Tracking area updating attempt counter less than 5",
+      "entity_type": "Condition",
+      "description": "Condition where tracking area update attempts are below maximum.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "TAU_ATTEMPT_COUNTER_EQ_5",
+      "name": "Tracking area updating attempt counter equal to 5",
+      "entity_type": "Condition",
+      "description": "Condition where tracking area update attempts reach maximum.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "name": "EPS update status EU1 UPDATED",
+      "entity_type": "Property",
+      "description": "Property indicating EPS update status is set to updated.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "name": "Tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for updating tracking area for EPS services and SMS only.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "SMS_SERVICES_STATUS_IE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains SMS services status IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "TAU_ATTEMPT_COUNTER_LT_5",
+      "target": "T3411",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Condition where attempt counter is less than 5 starts timer T3411.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "TAU_ATTEMPT_COUNTER_LT_5",
+      "target": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where attempt counter is less than 5 establishes EPS update status to EU1 UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "TAU_ATTEMPT_COUNTER_LT_5",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where attempt counter is less than 5 establishes state EMM-REGISTERED.NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "TAU_ATTEMPT_COUNTER_EQ_5",
+      "target": "T3402",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Condition where attempt counter equals 5 starts timer T3402.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "TAU_ATTEMPT_COUNTER_EQ_5",
+      "target": "EPS_UPDATE_STATUS_EU1_UPDATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where attempt counter equals 5 establishes EPS update status to EU1 UPDATED.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "TAU_ATTEMPT_COUNTER_EQ_5",
+      "target": "EMM_REGISTERED_NORMAL_SERVICE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where attempt counter equals 5 establishes state EMM-REGISTERED.NORMAL-SERVICE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "T3411",
+      "target": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Timer T3411 expiration triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "T3402",
+      "target": "TRACKING_AREA_UPDATING_PROCEDURE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "Timer T3402 expiration triggers tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "TAU_ATTEMPT_COUNTER_LT_5",
+      "target": "T3430",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Condition where attempt counter is less than 5 stops timer T3430 if running.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2.6A"
+      ]
+    }
+  ]
+}

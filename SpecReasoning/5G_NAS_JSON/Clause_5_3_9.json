@@ -1,0 +1,33 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.3.9",
+  "title": "Handling of NAS level mobility management congestion control",
+  "has_text": true,
+  "figures_count": 0,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------------------------",
+    "The AMF may detect 5GMM signalling congestion and perform general NAS level congestion control. Under the 5GMM signalling congestion conditions the AMF may reject 5GMM signalling requests from UEs as specified in 3GPPTS23.501[8]. The AMF should not reject the following",
+    "a) requests for emergency services",
+    "b) requests for emergency services fallback",
+    "c) requests from UEs configured for high priority access in selected PLMN",
+    "d) DEREGISTRATION REQUEST message",
+    "e) requests for mobile terminated services, triggered by paging or a notification procedure; and",
+    "f) requests for initial registration or mobility and periodic registration update, when emergency is indicated by lower layers",
+    "When general NAS level congestion control is active, the AMF may include a value for the mobility management back-off timer T3346 in the reject messages. The UE starts the timer T3346 with the value received in the 5GMM reject messages. To avoid that large numbers of UEs simultaneously initiate deferred requests, the AMF should select the value for the timer T3346 for the rejected UEs so that timeouts are not synchronised",
+    "If the UE is registered in the same PLMN over the 3GPP access and non-3GPP access, and the UE receives the timer T3346 from the AMF, the timer T3346 shall apply to both 3GPP access and non-3GPP access",
+    "If the UE receives the paging message or NOTIFICATION message when timer T3346 is running and the UE is registered to the same PLMN over 3GPP access and non-3GPP access, the UE shall stop the timer T3346 for both accesses and respond to the paging message or NOTIFICATION message as specified in subclause5.6.2 and subclause5.6.3",
+    "NOTE1: As an implementation option, MUSIM UE is allowed to not respond to paging based on the information available in the paging message, e.g. voice service indication",
+    "If the timer T3346 is running when the UE enters state 5GMM-DEREGISTERED, the UE remains switched on, and the USIM in the UE remains the same, then the timer T3346 is kept running until it expires or it is stopped",
+    "If the UE is switched off when the timer T3346 is running, the UE shall behave as follows when the UE is switched on and the USIM in the UE remains the same",
+    "let t1 be the time remaining for T3346 timeout at switch off and let t be the time elapsed between switch off and switch on. If t1 is greater than t, then the timer shall be restarted with the value t1t. If t1 is equal to or less than t, then the timer need not be restarted. If the UE is not capable of determining t, then the UE shall restart the timer with the value t1",
+    "If the UE enters a new PLMN while timer T3346 is running, and the new PLMN is not equivalent to the PLMN where the UE started timer T3346, the UE shall stop timer T3346 when initiating 5GMM procedures in the new PLMN",
+    "After a change in registration area, if the timer T3346 is running and 5GS update status is 5U1 UPDATED then the UE shall set the 5GS update status to 5U2 NOT UPDATED and enter state 5GMM-REGISTERED.ATTEMPTING-REGISTRATION-UPDATE",
+    "If timer T3346 is running or is deactivated, and the UE is a UE configured for high priority access in selected PLMN, or the UE needs to initiate signalling for emergency services or emergency services fallback, then the UE is allowed to initiate 5GMM procedures",
+    "NOTE2: UE can, based on implementation, restrict lower layers of non-3GPP access from establishing access stratum connection on a registered PLMN when timer T3346 is running for the same PLMN",
+    "",
+    ""
+  ],
+  "figures": [],
+  "tables": []
+}

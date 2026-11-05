@@ -1,0 +1,78 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.7.5.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_FAILURE_INFORMATION",
+      "name": "Failure Information procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to inform the network about detected failures.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    },
+    {
+      "id": "MSG_FAILURE_INFORMATION",
+      "name": "FailureInformation message",
+      "entity_type": "Message",
+      "description": "Message transmitted by UE to report detected failures to the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    },
+    {
+      "id": "COND_RLC_BEARER_FAILURE",
+      "name": "RLC bearer failure detected",
+      "entity_type": "Condition",
+      "description": "Condition met when UE detects failure for an RLC bearer as specified in 5.3.10.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    },
+    {
+      "id": "COND_DAPS_HO_FAILURE",
+      "name": "DAPS handover failure detected",
+      "entity_type": "Condition",
+      "description": "Condition met when UE detects DAPS handover failure as specified in 5.3.5.8.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_FAILURE_INFORMATION",
+      "target": "COND_RLC_BEARER_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is triggered by detection of RLC bearer failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_FAILURE_INFORMATION",
+      "target": "COND_DAPS_HO_FAILURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure initiation is triggered by detection of DAPS handover failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_FAILURE_INFORMATION",
+      "target": "MSG_FAILURE_INFORMATION",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes transmission of FailureInformation message.",
+      "provenance": [
+        "TS 38.331, Clause 5.7.5.2"
+      ]
+    }
+  ]
+}

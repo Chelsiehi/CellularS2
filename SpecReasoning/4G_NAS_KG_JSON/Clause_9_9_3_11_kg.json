@@ -1,0 +1,135 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.11",
+  "title": "EPS attach type",
+  "entities": [
+    {
+      "id": "IE_EPS_ATTACH_TYPE",
+      "name": "EPS attach type",
+      "entity_type": "Information Element",
+      "description": "Information element that indicates the type of the requested attach in EPS. It is a type 1 information element with specific coding rules.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "IEI_EPS_ATTACH_TYPE",
+      "name": "EPS attach type IEI",
+      "entity_type": "Identifier",
+      "description": "Information Element Identifier for EPS attach type, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "SPARE_BIT4",
+      "name": "Spare bit 4",
+      "entity_type": "Property",
+      "description": "Bit 4 of octet 1 is spare and shall be coded as zero in the EPS attach type IE.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "ATTACH_TYPE_VALUE",
+      "name": "EPS attach type value",
+      "entity_type": "Property",
+      "description": "3-bit field in bits 3-1 of octet 1 encoding the attach type: 001=EPS attach, 010=combined EPS/IMSI attach, 011=EPS RLOS attach, 110=EPS emergency attach, 111=reserved. All other values are unused and interpreted as 'EPS attach' by the network.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "COND_UNUSED_VALUES",
+      "name": "Unused values condition",
+      "entity_type": "Condition",
+      "description": "All values of EPS attach type value other than the defined ones are unused and shall be interpreted as 'EPS attach' if received by the network.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "COND_RLOS_INTERPRETATION",
+      "name": "RLOS attach interpretation condition",
+      "entity_type": "Condition",
+      "description": "EPS RLOS attach shall be interpreted as 'EPS attach' by a network not supporting attach for access to RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EPS_ATTACH_TYPE",
+      "target": "IEI_EPS_ATTACH_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS attach type IE contains the IEI field identifying it.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_ATTACH_TYPE",
+      "target": "SPARE_BIT4",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS attach type IE contains a spare bit that must be coded as zero.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_ATTACH_TYPE",
+      "target": "ATTACH_TYPE_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS attach type IE contains the attach type value field encoding the specific attach type.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ATTACH_TYPE_VALUE",
+      "target": "COND_UNUSED_VALUES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The attach type value field is guarded by the condition that unused values are interpreted as 'EPS attach'.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ATTACH_TYPE_VALUE",
+      "target": "COND_RLOS_INTERPRETATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The attach type value field is guarded by the condition that EPS RLOS attach is interpreted as 'EPS attach' in networks not supporting RLOS.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.11",
+        "Figure 9.9.3.11.1",
+        "Table 9.9.3.11.1"
+      ]
+    }
+  ]
+}

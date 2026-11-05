@@ -1,0 +1,249 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.2.2",
+  "title": "SI change indication and PWS notification",
+  "entities": [
+    {
+      "id": "SHORT_MESSAGE",
+      "name": "Short Message",
+      "entity_type": "Message",
+      "description": "Message transmitted with P-RNTI over DCI used to indicate SI modifications and PWS notifications.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "SI_CHANGE_INDICATION",
+      "name": "SI change indication",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE monitors for system information modifications via Short Message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "PWS_NOTIFICATION",
+      "name": "PWS notification",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE monitors for Public Warning System notifications via Short Message.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_ETWS_CMAS_INDICATION",
+      "name": "etwsAndCmasIndication bit",
+      "entity_type": "Information Element",
+      "description": "Bit in Short Message indicating ETWS or CMAS notification.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_SYSTEMINFO_MODIFICATION",
+      "name": "systemInfoModification bit",
+      "entity_type": "Information Element",
+      "description": "Bit in Short Message indicating system information modification.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_SYSTEMINFO_MODIFICATION_EDRX",
+      "name": "systemInfoModification-eDRX bit",
+      "entity_type": "Information Element",
+      "description": "Bit in Short Message indicating system information modification for eDRX configured UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "RRC idle state where UE monitors paging occasions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "RRC inactive state where UE monitors paging occasions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_RRC_CONNECTED",
+      "name": "RRC_CONNECTED",
+      "entity_type": "State",
+      "description": "RRC connected state where UE may monitor paging occasions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "TIMER_T319A",
+      "name": "T319a",
+      "entity_type": "Timer",
+      "description": "Timer that affects monitoring behavior in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "CONDITION_EDRX_LONGER",
+      "name": "eDRX cycle longer than modification period",
+      "entity_type": "Condition",
+      "description": "Condition where UE uses extended DRX cycle longer than modification period.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "PROPERTY_MONITOR_PAGING",
+      "name": "Monitor paging occasions",
+      "entity_type": "Property",
+      "description": "UE behavior to monitor paging occasions for Short Message reception.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "SHORT_MESSAGE",
+      "target": "IE_ETWS_CMAS_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Short Message contains etwsAndCmasIndication bit for PWS notifications.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "SHORT_MESSAGE",
+      "target": "IE_SYSTEMINFO_MODIFICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Short Message contains systemInfoModification bit for SI changes.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SHORT_MESSAGE",
+      "target": "IE_SYSTEMINFO_MODIFICATION_EDRX",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Short Message contains systemInfoModification-eDRX bit for eDRX configured UEs.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SI_CHANGE_INDICATION",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SI change indication monitoring requires UE to be in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SI_CHANGE_INDICATION",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "SI change indication monitoring requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PWS_NOTIFICATION",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PWS notification monitoring requires UE to be in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PWS_NOTIFICATION",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PWS notification monitoring requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROPERTY_MONITOR_PAGING",
+      "target": "STATE_RRC_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Monitoring paging occasions requires UE to be in RRC_IDLE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROPERTY_MONITOR_PAGING",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Monitoring paging occasions requires UE to be in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROPERTY_MONITOR_PAGING",
+      "target": "STATE_RRC_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Monitoring paging occasions may occur in RRC_CONNECTED state under certain conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_EDRX_LONGER",
+      "target": "IE_SYSTEMINFO_MODIFICATION_EDRX",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "eDRX cycle longer than modification period condition guards systemInfoModification-eDRX bit usage.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "TIMER_T319A",
+      "target": "STATE_RRC_INACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "T319a timer running condition affects monitoring behavior in RRC_INACTIVE state.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.2.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.7.2.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_REGISTRATION_NON3GPP",
+      "name": "Registration procedure over non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Registration procedure performed separately for non-3GPP access. Requires access stratum connection establishment before initiation. Allocates registration area associated with single TAI.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "PROC_SERVICE_REQUEST_NON3GPP",
+      "name": "UE-initiated service request procedure via non-3GPP access",
+      "entity_type": "Procedure",
+      "description": "Service request procedure initiated by UE in 5GMM-REGISTERED state and 5GMM-IDLE mode over non-3GPP access when access stratum connection is established.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_REGISTERED",
+      "name": "5GMM-REGISTERED state",
+      "entity_type": "State",
+      "description": "5GMM state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "MODE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5GMM mode where UE is idle and not actively communicating.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REQUEST",
+      "name": "REGISTRATION REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message used for registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message used for service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "name": "CONTROL PLANE SERVICE REQUEST message",
+      "entity_type": "Message",
+      "description": "NAS message used for control plane service request procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "IE_ALLOWED_PDU_SESSION",
+      "name": "Allowed PDU session IE",
+      "entity_type": "Information Element",
+      "description": "Information element that shall not be included in messages sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction IE",
+      "entity_type": "Information Element",
+      "description": "Information element that shall not be included in messages sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "COND_ACCESS_STRATUM_ESTABLISHED",
+      "name": "Access stratum connection established",
+      "entity_type": "Condition",
+      "description": "Condition where lower layers indicate successful establishment of access stratum connection.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "PROP_N1_NAS_CONNECTION_ESTABLISHED",
+      "name": "N1 NAS signalling connection established",
+      "entity_type": "Property",
+      "description": "Property indicating that N1 NAS signalling connection is established when access stratum connection is successfully established.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "PROP_AMF_PAGING_RESTRICTION_PERSISTENCE",
+      "name": "AMF maintains paging restriction preferences",
+      "entity_type": "Property",
+      "description": "Property that AMF shall not delete stored paging restriction preferences and shall not stop restricting paging when receiving messages over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_REGISTRATION_NON3GPP",
+      "target": "COND_ACCESS_STRATUM_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Registration procedure over non-3GPP access requires access stratum connection to be established first.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SERVICE_REQUEST_NON3GPP",
+      "target": "STATE_5GMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure via non-3GPP access requires UE to be in 5GMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SERVICE_REQUEST_NON3GPP",
+      "target": "MODE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure via non-3GPP access requires UE to be in 5GMM-IDLE mode.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_SERVICE_REQUEST_NON3GPP",
+      "target": "COND_ACCESS_STRATUM_ESTABLISHED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Service request procedure via non-3GPP access requires access stratum connection to be established.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message shall not contain Allowed PDU session IE when sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_ALLOWED_PDU_SESSION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SERVICE REQUEST message shall not contain Allowed PDU session IE when sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "REGISTRATION REQUEST message shall not contain Paging restriction IE when sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SERVICE REQUEST message shall not contain Paging restriction IE when sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "CONTROL PLANE SERVICE REQUEST message shall not contain Paging restriction IE when sent over non-3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_ACCESS_STRATUM_ESTABLISHED",
+      "target": "PROP_N1_NAS_CONNECTION_ESTABLISHED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When access stratum connection is established, N1 NAS signalling connection is considered established.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_REGISTRATION_REQUEST",
+      "target": "PROP_AMF_PAGING_RESTRICTION_PERSISTENCE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When receiving REGISTRATION REQUEST message over non-3GPP access, AMF shall not delete stored paging restriction preferences and shall not stop restricting paging.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SERVICE_REQUEST",
+      "target": "PROP_AMF_PAGING_RESTRICTION_PERSISTENCE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When receiving SERVICE REQUEST message over non-3GPP access, AMF shall not delete stored paging restriction preferences and shall not stop restricting paging.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    },
+    {
+      "id": "REL_13",
+      "source": "MSG_CONTROL_PLANE_SERVICE_REQUEST",
+      "target": "PROP_AMF_PAGING_RESTRICTION_PERSISTENCE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When receiving CONTROL PLANE SERVICE REQUEST message over non-3GPP access, AMF shall not delete stored paging restriction preferences and shall not stop restricting paging.",
+      "provenance": [
+        "TS 24.501, Clause 4.7.2.1"
+      ]
+    }
+  ]
+}

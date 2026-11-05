@@ -1,0 +1,167 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.6B",
+  "title": "EAP based Identification response by the UE",
+  "entities": [
+    {
+      "id": "AUTHENTICATION_REQUEST",
+      "name": "AUTHENTICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by the network to initiate authentication, containing EAP-Request/Identity or EAP-Request/AKA'-Identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "AUTHENTICATION_RESPONSE",
+      "name": "AUTHENTICATION RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by the UE in response to AUTHENTICATION REQUEST, containing EAP-Response/Identity or EAP-Response/AKA'-Identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "EAP_REQUEST_IDENTITY",
+      "name": "EAP-Request/Identity",
+      "entity_type": "Information Element",
+      "description": "EAP method requesting identity from the UE, carried in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_IDENTITY",
+      "name": "EAP-Response/Identity",
+      "entity_type": "Information Element",
+      "description": "EAP method providing requested identity from the UE, carried in AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "EAP_REQUEST_AKA_IDENTITY",
+      "name": "EAP-Request/AKA'-Identity",
+      "entity_type": "Information Element",
+      "description": "EAP method for AKA' authentication requesting identity from the UE, carried in AUTHENTICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_IDENTITY",
+      "name": "EAP-Response/AKA'-Identity",
+      "entity_type": "Information Element",
+      "description": "EAP method for AKA' authentication providing requested identity from the UE, carried in AUTHENTICATION RESPONSE message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "AT_PERMANENT_REQ",
+      "name": "AT_PERMANENT_REQ",
+      "entity_type": "Information Element",
+      "description": "Attribute in EAP-Request/AKA'-Identity indicating permanent identity request.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "name": "EAP-Response/AKA'-Client-Error",
+      "entity_type": "Information Element",
+      "description": "EAP method indicating client error with code 'unable to process packet', sent when AT_PERMANENT_REQ is received.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "COND_AT_PERMANENT_REQ",
+      "name": "AT_PERMANENT_REQ present",
+      "entity_type": "Condition",
+      "description": "Condition where EAP-Request/AKA'-Identity carries the AT_PERMANENT_REQ attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "EAP_REQUEST_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains EAP-Request/Identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AUTHENTICATION_REQUEST",
+      "target": "EAP_REQUEST_AKA_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION REQUEST message contains EAP-Request/AKA'-Identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "EAP_RESPONSE_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains EAP-Response/Identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "AUTHENTICATION_RESPONSE",
+      "target": "EAP_RESPONSE_AKA_IDENTITY",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AUTHENTICATION RESPONSE message contains EAP-Response/AKA'-Identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EAP_REQUEST_AKA_IDENTITY",
+      "target": "AT_PERMANENT_REQ",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP-Request/AKA'-Identity may contain AT_PERMANENT_REQ attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_AT_PERMANENT_REQ",
+      "target": "EAP_RESPONSE_AKA_CLIENT_ERROR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition where AT_PERMANENT_REQ is present establishes sending of EAP-Response/AKA'-Client-Error.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EAP_REQUEST_AKA_IDENTITY",
+      "target": "COND_AT_PERMANENT_REQ",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "EAP-Request/AKA'-Identity is guarded by condition of AT_PERMANENT_REQ presence.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.6B"
+      ]
+    }
+  ]
+}

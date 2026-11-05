@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.10",
+  "title": "BH RLC channel release",
+  "entities": [
+    {
+      "id": "PROCEDURE_BH_RLC_CHANNEL_RELEASE",
+      "name": "BH RLC channel release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for releasing BH RLC channels and associated entities when triggered by bh-RLC-ChannelToReleaseList or SCG release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "BH_RLC_CHANNEL_TO_RELEASE_LIST",
+      "name": "bh-RLC-ChannelToReleaseList",
+      "entity_type": "Information Element",
+      "description": "List containing BH-RLC-ChannelID values to be released as part of current IAB-node configuration within the same cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "BH_RLC_CHANNEL_ID",
+      "name": "BH-RLC-ChannelID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a Backhaul RLC channel.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "SCG_RELEASE",
+      "name": "SCG release",
+      "entity_type": "Procedure",
+      "description": "Secondary Cell Group release procedure that triggers BH RLC channel release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "RLC_ENTITY",
+      "name": "RLC entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity that must be released according to TS 38.322, clause 5.1.3.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "LOGICAL_CHANNEL",
+      "name": "logical channel",
+      "entity_type": "Property",
+      "description": "Logical channel corresponding to the BH RLC channel that must be released.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_BH_RLC_CHANNEL_RELEASE",
+      "target": "BH_RLC_CHANNEL_TO_RELEASE_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "BH RLC channel release procedure uses the bh-RLC-ChannelToReleaseList to identify channels for release.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "BH_RLC_CHANNEL_TO_RELEASE_LIST",
+      "target": "BH_RLC_CHANNEL_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "bh-RLC-ChannelToReleaseList contains BH-RLC-ChannelID values.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SCG_RELEASE",
+      "target": "PROCEDURE_BH_RLC_CHANNEL_RELEASE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SCG release triggers the BH RLC channel release procedure.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROCEDURE_BH_RLC_CHANNEL_RELEASE",
+      "target": "RLC_ENTITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "BH RLC channel release procedure results in release of RLC entities.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROCEDURE_BH_RLC_CHANNEL_RELEASE",
+      "target": "LOGICAL_CHANNEL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "BH RLC channel release procedure results in release of corresponding logical channels.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.10"
+      ]
+    }
+  ]
+}

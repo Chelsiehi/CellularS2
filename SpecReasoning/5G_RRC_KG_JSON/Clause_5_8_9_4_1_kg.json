@@ -1,0 +1,107 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.9.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_SL_COMMON_CONTROL",
+      "name": "Sidelink Common Control Information Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for handling sidelink common control information carried by MasterInformationBlockSidelink, which applies to both sidelink communication and discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "MSG_MIB_SL",
+      "name": "MasterInformationBlockSidelink",
+      "entity_type": "Message",
+      "description": "Message that carries sidelink common control information for NR sidelink communication and discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "IE_SL_COMMON_CONTROL_INFO",
+      "name": "Sidelink Common Control Information",
+      "entity_type": "Information Element",
+      "description": "Common control information for sidelink communication and discovery carried in MasterInformationBlockSidelink.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "COND_SELECTED_SYNCREF",
+      "name": "UE has selected SyncRef UE",
+      "entity_type": "Condition",
+      "description": "Condition where the UE has a selected synchronization reference UE as specified in clause 5.8.6.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "PROP_VALID_MIB_SL",
+      "name": "Valid MasterInformationBlockSidelink",
+      "entity_type": "Property",
+      "description": "Property indicating the UE maintains a valid version of the MasterInformationBlockSidelink message from its SyncRef UE.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "UE_SL_CONFIGURED",
+      "name": "UE configured for NR sidelink",
+      "entity_type": "Condition",
+      "description": "Condition where the UE is configured to receive or transmit NR sidelink communication or discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_MIB_SL",
+      "target": "IE_SL_COMMON_CONTROL_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MasterInformationBlockSidelink message carries the sidelink common control information.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SL_COMMON_CONTROL",
+      "target": "MSG_MIB_SL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The sidelink common control procedure involves handling the MasterInformationBlockSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SL_COMMON_CONTROL",
+      "target": "UE_SL_CONFIGURED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "The procedure applies to UEs configured for NR sidelink communication/discovery.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SELECTED_SYNCREF",
+      "target": "PROP_VALID_MIB_SL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If the UE has a selected SyncRef UE, it must ensure having a valid MasterInformationBlockSidelink message.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.9.4.1"
+      ]
+    }
+  ]
+}

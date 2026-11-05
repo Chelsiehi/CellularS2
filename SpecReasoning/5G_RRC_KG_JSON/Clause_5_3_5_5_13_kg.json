@@ -1,0 +1,169 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.3.5.5.13",
+  "title": "Uu Relay RLC channel addition/modification",
+  "entities": [
+    {
+      "id": "Uu_Relay_RLC_ChannelConfig",
+      "name": "Uu Relay RLC Channel Config",
+      "entity_type": "Information Element",
+      "description": "Configuration information for Uu Relay RLC channels received in the Uu-Relay-RLC-ChannelToAddModList IE.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "Uu_Relay_RLC_ChannelToAddModList_IE",
+      "name": "Uu-Relay-RLC-ChannelToAddModList IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing a list of Uu Relay RLC channel configurations to add or modify.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "uu_Relay_RLC_ChannelID",
+      "name": "uu-Relay-RLC-ChannelID",
+      "entity_type": "Identifier",
+      "description": "Identifier for a Uu Relay RLC channel within a cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "RLC_Entity",
+      "name": "RLC Entity",
+      "entity_type": "Property",
+      "description": "Radio Link Control entity that handles RLC layer operations for Uu relay channels.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "Logical_Channel",
+      "name": "Logical Channel",
+      "entity_type": "Property",
+      "description": "MAC logical channel configured for Uu relay communication.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "Existing_Channel_Condition",
+      "name": "Existing Uu Relay RLC Channel Condition",
+      "entity_type": "Condition",
+      "description": "Condition where a Uu Relay RLC channel with the same uu-Relay-RLC-ChannelID already exists in the current configuration within the same cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "New_Channel_Condition",
+      "name": "New Uu Relay RLC Channel Condition",
+      "entity_type": "Condition",
+      "description": "Condition where a Uu Relay RLC channel with the given uu-Relay-RLC-ChannelID was not previously configured within the same cell group.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "ReestablishRLC_Condition",
+      "name": "reestablishRLC Condition",
+      "entity_type": "Condition",
+      "description": "Condition where the reestablishRLC parameter is received in the configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "Uu_Relay_RLC_ChannelToAddModList_IE",
+      "target": "Uu_Relay_RLC_ChannelConfig",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The Uu-Relay-RLC-ChannelToAddModList IE contains Uu Relay RLC channel configurations.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "Uu_Relay_RLC_ChannelConfig",
+      "target": "uu_Relay_RLC_ChannelID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uu Relay RLC Channel Config contains the uu-Relay-RLC-ChannelID identifier.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "Existing_Channel_Condition",
+      "target": "ReestablishRLC_Condition",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When an existing channel is found, the reestablishRLC condition determines if RLC re-establishment is performed.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ReestablishRLC_Condition",
+      "target": "RLC_Entity",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "If reestablishRLC is received, the RLC entity is re-established as per TS 38.322.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "Existing_Channel_Condition",
+      "target": "RLC_Entity",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For existing channels, the RLC entity is reconfigured according to the received rlc-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "Existing_Channel_Condition",
+      "target": "Logical_Channel",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For existing channels, the logical channel is reconfigured according to the received mac-LogicalChannelConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "New_Channel_Condition",
+      "target": "RLC_Entity",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For new channels, an RLC entity is established according to the received rlc-Config.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "New_Channel_Condition",
+      "target": "Logical_Channel",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "For new channels, a logical channel is configured in the MAC entity according to the received mac-LogicalChannelConfig.",
+      "provenance": [
+        "TS 38.331, Clause 5.3.5.5.13"
+      ]
+    }
+  ]
+}

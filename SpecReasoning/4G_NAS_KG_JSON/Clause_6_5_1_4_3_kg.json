@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.5.1.4.3",
+  "title": "Handling of network rejection due to ESM cause other than ESM cause #26",
+  "entities": [
+    {
+      "id": "PROC_PDN_CONNECTIVITY",
+      "name": "PDN Connectivity Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for establishing PDN connectivity, initiated by UE sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request PDN connectivity.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "MSG_PDN_CONNECTIVITY_REJECT",
+      "name": "PDN CONNECTIVITY REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject PDN connectivity request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "MSG_ATTACH_REJECT",
+      "name": "ATTACH REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject attach request.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing timer value for back-off procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_REATTEMPT_INDICATOR",
+      "name": "Re-attempt indicator IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating whether re-attempt is allowed in equivalent PLMNs or different RATs.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "IE_ESM_CAUSE",
+      "name": "ESM cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for ESM procedure rejection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "TIMER_BACK_OFF",
+      "name": "Back-off timer",
+      "entity_type": "Timer",
+      "description": "Timer used to prevent UE from sending PDN CONNECTIVITY REQUEST messages for specific APN/PLMN combinations.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_STANDALONE_REQUEST",
+      "name": "Standalone PDN CONNECTIVITY REQUEST",
+      "entity_type": "Condition",
+      "description": "Condition where PDN CONNECTIVITY REQUEST is sent without ATTACH REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_WITH_ATTACH_REQUEST",
+      "name": "PDN CONNECTIVITY REQUEST with ATTACH REQUEST",
+      "entity_type": "Condition",
+      "description": "Condition where PDN CONNECTIVITY REQUEST is sent together with ATTACH REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "COND_INTEGRITY_PROTECTED",
+      "name": "Integrity protected ATTACH REJECT",
+      "entity_type": "Condition",
+      "description": "Condition where ATTACH REJECT message is integrity protected.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "PROP_BACK_OFF_TIMER_STARTED",
+      "name": "Back-off timer started",
+      "entity_type": "Property",
+      "description": "Property indicating that back-off timer has been started for specific APN/PLMN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "PROP_BACK_OFF_TIMER_DEACTIVATED",
+      "name": "Back-off timer deactivated",
+      "entity_type": "Property",
+      "description": "Property indicating that back-off timer is deactivated for specific APN/PLMN combination.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_ESM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message contains ESM cause IE indicating rejection reason.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message may contain Back-off timer value IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDN_CONNECTIVITY_REJECT",
+      "target": "IE_REATTEMPT_INDICATOR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDN CONNECTIVITY REJECT message may contain Re-attempt indicator IE.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "MSG_PDN_CONNECTIVITY_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PDN connectivity procedure includes sending PDN CONNECTIVITY REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PDN_CONNECTIVITY",
+      "target": "TIMER_BACK_OFF",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "PDN connectivity procedure may start back-off timer upon rejection.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_STANDALONE_REQUEST",
+      "target": "PROP_BACK_OFF_TIMER_STARTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDN CONNECTIVITY REQUEST is sent standalone and Back-off timer value IE is included with non-zero value, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_STANDALONE_REQUEST",
+      "target": "PROP_BACK_OFF_TIMER_DEACTIVATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDN CONNECTIVITY REQUEST is sent standalone and Back-off timer value IE indicates deactivated, UE deactivates back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_WITH_ATTACH_REQUEST",
+      "target": "PROP_BACK_OFF_TIMER_STARTED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When PDN CONNECTIVITY REQUEST is sent with ATTACH REQUEST and Back-off timer value IE is included with non-zero value, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_INTEGRITY_PROTECTED",
+      "target": "PROP_BACK_OFF_TIMER_STARTED",
+      "relation_type": "establishes",
+      "family": "sec",
+      "description": "When ATTACH REJECT is integrity protected and Back-off timer value IE is included with non-zero value, UE starts back-off timer.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MSG_ATTACH_REJECT",
+      "target": "COND_INTEGRITY_PROTECTED",
+      "relation_type": "guards_by",
+      "family": "sec",
+      "description": "ATTACH REJECT message may or may not be integrity protected, affecting UE behavior.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_BACK_OFF_TIMER_VALUE",
+      "target": "TIMER_BACK_OFF",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Back-off timer value IE determines whether timer is started, deactivated, or set to zero.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_REATTEMPT_INDICATOR",
+      "target": "PROP_BACK_OFF_TIMER_STARTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Re-attempt indicator IE affects whether back-off timer is started for equivalent PLMNs.",
+      "provenance": [
+        "TS 24.301, Clause 6.5.1.4.3"
+      ]
+    }
+  ]
+}

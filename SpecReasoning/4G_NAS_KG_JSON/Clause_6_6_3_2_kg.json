@@ -1,0 +1,218 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.3.2",
+  "title": "Remote UE Report initiated by the UE",
+  "entities": [
+    {
+      "id": "PROCEDURE_REMOTE_UE_REPORT",
+      "name": "Remote UE Report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the UE to report information about newly connected or disconnected remote UEs to the network.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the network to initiate the Remote UE Report procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "name": "REMOTE UE REPORT RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by the network to the UE in response to the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_REMOTE_UE_INFO",
+      "name": "Remote UE information",
+      "entity_type": "Information Element",
+      "description": "Information about newly connected or disconnected remote UEs included in the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "IE_ENCRYPTED_IMSI",
+      "name": "Encrypted IMSI remote UE identity",
+      "entity_type": "Information Element",
+      "description": "Encrypted IMSI identity of a remote UE included in the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "IE_PKMF_ADDRESS",
+      "name": "ProSe Key Management Function address",
+      "entity_type": "Information Element",
+      "description": "Address of the ProSe Key Management Function corresponding to an encrypted IMSI remote UE identity.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "IE_DEFAULT_EPS_BEARER_ID",
+      "name": "Default EPS bearer identity",
+      "entity_type": "Information Element",
+      "description": "Identity of the default EPS bearer associated with the PDN connection for the remote UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3493",
+      "name": "T3493",
+      "entity_type": "Timer",
+      "description": "Timer started by the UE when sending the REMOTE UE REPORT message and stopped upon receipt of the REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "name": "PROCEDURE TRANSACTION PENDING",
+      "entity_type": "State",
+      "description": "State entered by the UE after sending the REMOTE UE REPORT message and starting timer T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by the UE after receiving the REMOTE UE REPORT RESPONSE message and stopping timer T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_ENCRYPTED_IMSI_PRESENT",
+      "name": "Encrypted IMSI present",
+      "entity_type": "Condition",
+      "description": "Condition that if any encrypted IMSI remote UE identity is included in the REMOTE UE REPORT message, the UE shall include the corresponding ProSe Key Management Function address.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_REMOTE_UE_REPORT",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The Remote UE Report procedure is initiated by sending the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_REMOTE_UE_INFO",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REMOTE UE REPORT message contains information about newly connected or disconnected remote UEs.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_DEFAULT_EPS_BEARER_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REMOTE UE REPORT message contains the default EPS bearer identity of the PDN connection associated with the remote UE.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_ENCRYPTED_IMSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REMOTE UE REPORT message may contain encrypted IMSI remote UE identities.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "CONDITION_ENCRYPTED_IMSI_PRESENT",
+      "target": "IE_PKMF_ADDRESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "If encrypted IMSI is present, the UE shall include the corresponding ProSe Key Management Function address.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "TIMER_T3493",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Sending the REMOTE UE REPORT message starts timer T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "STATE_PROCEDURE_TRANSACTION_PENDING",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "After sending the REMOTE UE REPORT message, the UE enters the PROCEDURE TRANSACTION PENDING state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "target": "TIMER_T3493",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving the REMOTE UE REPORT RESPONSE message stops timer T3493.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "After receiving the REMOTE UE REPORT RESPONSE message, the UE enters the PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.2",
+        "Figure 6.6.3.2.1"
+      ]
+    }
+  ]
+}

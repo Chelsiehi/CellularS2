@@ -1,0 +1,118 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.2.2.4",
+  "title": "Actions upon receipt of System Information",
+  "entities": [
+    {
+      "id": "PROC_SI_RECEIPT",
+      "name": "System Information Reception Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure performed by the UE upon receiving System Information from the network.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "MSG_SI",
+      "name": "System Information",
+      "entity_type": "Message",
+      "description": "Broadcast message containing essential network parameters and configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_IDLE",
+      "name": "RRC_IDLE",
+      "entity_type": "State",
+      "description": "UE state where it monitors system information and performs cell selection/reselection.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "STATE_INACTIVE",
+      "name": "RRC_INACTIVE",
+      "entity_type": "State",
+      "description": "UE state where it maintains connection context but operates with reduced signaling.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "COND_SI_VALID",
+      "name": "System Information Valid",
+      "entity_type": "Condition",
+      "description": "Condition where received System Information is complete and meets validity criteria.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "PROP_CONFIG_UPDATE",
+      "name": "Configuration Update",
+      "entity_type": "Property",
+      "description": "UE updates its configuration based on received System Information parameters.",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SI_RECEIPT",
+      "target": "MSG_SI",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves receiving System Information message",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SI_RECEIPT",
+      "target": "STATE_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure is performed when UE is in RRC_IDLE state",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SI_RECEIPT",
+      "target": "STATE_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure is performed when UE is in RRC_INACTIVE state",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_SI_VALID",
+      "target": "PROP_CONFIG_UPDATE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Valid System Information triggers configuration update in UE",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_SI_RECEIPT",
+      "target": "COND_SI_VALID",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes validation of received System Information",
+      "provenance": [
+        "TS 38.331, Clause 5.2.2.4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.2.3",
+  "title": "Notification procedure in the UE",
+  "entities": [
+    {
+      "id": "NOTIFICATION_PROCEDURE_UE",
+      "name": "Notification procedure in the UE",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by the UE when receiving a NOTIFICATION message, where the ESM protocol entity provides the notification indicator to the upper layer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_MESSAGE",
+      "name": "NOTIFICATION message",
+      "entity_type": "Message",
+      "description": "Message received by the UE that triggers the notification procedure.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "NOTIFICATION_INDICATOR",
+      "name": "Notification indicator",
+      "entity_type": "Information Element",
+      "description": "Information element provided by the ESM protocol entity to the upper layer, indicating specific network conditions.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "SRVCC_HANDOVER_CANCELLED",
+      "name": "SRVCC handover cancelled, IMS session re-establishment required",
+      "entity_type": "Condition",
+      "description": "Specific condition indicated by the notification indicator value #1, signaling that SRVCC handover was cancelled and IMS session re-establishment is needed.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "NOTIFICATION_PROCEDURE_UE",
+      "target": "NOTIFICATION_MESSAGE",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The notification procedure is triggered by receiving the NOTIFICATION message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "NOTIFICATION_PROCEDURE_UE",
+      "target": "NOTIFICATION_INDICATOR",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The procedure establishes the notification indicator to be provided to the upper layer.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "NOTIFICATION_INDICATOR",
+      "target": "SRVCC_HANDOVER_CANCELLED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The notification indicator can have the value indicating SRVCC handover cancelled condition.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.4.3.5",
+  "title": "Mobility from NR failure",
+  "entities": [
+    {
+      "id": "MOBILITY_FROM_NR_FAILURE",
+      "name": "Mobility from NR failure handling",
+      "entity_type": "Procedure",
+      "description": "Procedure executed by UE when mobility from NR to another RAT fails, involving connection re-establishment and potential RLF reporting.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "MOBILITY_FROM_NR_COMMAND",
+      "name": "MobilityFromNRCommand message",
+      "entity_type": "Message",
+      "description": "RRC message that triggers mobility from NR to another radio access technology.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "TARGET_RAT_TYPE",
+      "name": "targetRAT-Type",
+      "entity_type": "Information Element",
+      "description": "Information element in MobilityFromNRCommand indicating the target radio access technology.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "VOICE_FALLBACK_INDICATION",
+      "name": "voiceFallbackIndication",
+      "entity_type": "Information Element",
+      "description": "Optional information element in MobilityFromNRCommand indicating voice fallback scenario.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "CONNECTION_REESTABLISHMENT",
+      "name": "Connection re-establishment procedure",
+      "entity_type": "Procedure",
+      "description": "RRC procedure to re-establish connection after failure, specified in clause 5.3.7.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "RRC_IDLE_ACTIONS",
+      "name": "Actions upon going to RRC_IDLE",
+      "entity_type": "Procedure",
+      "description": "Procedure executed when UE transitions to RRC_IDLE state with release cause 'RRC connection failure'.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "VAR_RLF_REPORT",
+      "name": "VarRLF-Report",
+      "entity_type": "Property",
+      "description": "Variable storing radio link failure report information for inter-RAT mobility robustness optimization.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "SOURCE_PCELL_CONFIG",
+      "name": "Source PCell configuration",
+      "entity_type": "Property",
+      "description": "Original configuration used in the source primary cell before mobility attempt.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "CONNECTION_FAILURE_CONDITION",
+      "name": "Connection establishment failure to target RAT",
+      "entity_type": "Condition",
+      "description": "Condition where UE fails to establish connection to target radio access technology.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "CONFIGURATION_INCOMPLIANCE_CONDITION",
+      "name": "Unable to comply with configuration",
+      "entity_type": "Condition",
+      "description": "Condition where UE cannot comply with configuration in MobilityFromNRCommand.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "PROTOCOL_ERROR_CONDITION",
+      "name": "Protocol error in inter-RAT information",
+      "entity_type": "Condition",
+      "description": "Condition where protocol error in inter-RAT information causes procedure failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "EUTRA_TARGET_CONDITION",
+      "name": "targetRAT-Type set to eutra with MRO support",
+      "entity_type": "Condition",
+      "description": "Condition where target RAT is E-UTRA and UE supports Radio Link Failure Report for Inter-RAT MRO EUTRA.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "VOICE_FALLBACK_CONDITION",
+      "name": "voiceFallbackIndication included",
+      "entity_type": "Condition",
+      "description": "Condition where voiceFallbackIndication is present in MobilityFromNRCommand.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "SUITABLE_EUTRA_CELL_CONDITION",
+      "name": "Suitable E-UTRA cell selected",
+      "entity_type": "Condition",
+      "description": "Condition where UE successfully selects a suitable E-UTRA cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MOBILITY_FROM_NR_FAILURE",
+      "target": "CONNECTION_FAILURE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is triggered when UE fails to establish connection to target RAT.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MOBILITY_FROM_NR_FAILURE",
+      "target": "CONFIGURATION_INCOMPLIANCE_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is triggered when UE cannot comply with MobilityFromNRCommand configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MOBILITY_FROM_NR_FAILURE",
+      "target": "PROTOCOL_ERROR_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure is triggered when protocol error in inter-RAT information causes failure.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MOBILITY_FROM_NR_COMMAND",
+      "target": "TARGET_RAT_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MobilityFromNRCommand message contains targetRAT-Type information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MOBILITY_FROM_NR_COMMAND",
+      "target": "VOICE_FALLBACK_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "MobilityFromNRCommand message may contain voiceFallbackIndication information element.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EUTRA_TARGET_CONDITION",
+      "target": "VAR_RLF_REPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When target is E-UTRA with MRO support, UE stores handover failure information in VarRLF-Report.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "VOICE_FALLBACK_CONDITION",
+      "target": "SUITABLE_EUTRA_CELL_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When voiceFallbackIndication is included, UE attempts to select E-UTRA cell.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "SUITABLE_EUTRA_CELL_CONDITION",
+      "target": "RRC_IDLE_ACTIONS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "When suitable E-UTRA cell is selected, UE performs actions to go to RRC_IDLE.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MOBILITY_FROM_NR_FAILURE",
+      "target": "SOURCE_PCELL_CONFIG",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "UE reverts back to source PCell configuration during failure handling.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MOBILITY_FROM_NR_FAILURE",
+      "target": "CONNECTION_REESTABLISHMENT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE initiates connection re-establishment procedure as part of mobility failure handling.",
+      "provenance": [
+        "TS 38.331, Clause 5.4.3.5"
+      ]
+    }
+  ]
+}

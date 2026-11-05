@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.7.22",
+  "title": "EAP message",
+  "entities": [
+    {
+      "id": "IE_EAP_MESSAGE",
+      "name": "EAP message",
+      "entity_type": "Information Element",
+      "description": "Information element included in REGISTRATION ACCEPT message when sent as part of emergency services registration to convey EAP-failure message.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_ACCEPT",
+      "name": "REGISTRATION ACCEPT",
+      "entity_type": "Message",
+      "description": "5GMM message used to accept registration request from UE.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_REGISTRATION",
+      "name": "registration for emergency services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is performing registration specifically for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    },
+    {
+      "id": "MSG_EAP_FAILURE",
+      "name": "EAP-failure message",
+      "entity_type": "Message",
+      "description": "EAP message indicating authentication failure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_ACCEPT",
+      "target": "IE_EAP_MESSAGE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION ACCEPT message contains EAP message IE when sent for emergency services registration.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EAP_MESSAGE",
+      "target": "COND_EMERGENCY_REGISTRATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of EAP message IE is guarded by the condition of emergency services registration.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EAP_MESSAGE",
+      "target": "MSG_EAP_FAILURE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP message IE conveys the EAP-failure message content.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.7.22"
+      ]
+    }
+  ]
+}

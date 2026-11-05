@@ -1,0 +1,109 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "6.6.3.3",
+  "title": "Remote UE Report completion by the network",
+  "entities": [
+    {
+      "id": "PROCEDURE_REMOTE_UE_REPORT_COMPLETION",
+      "name": "Remote UE Report completion by the network",
+      "entity_type": "Procedure",
+      "description": "Procedure where the MME responds to a REMOTE UE REPORT message from the UE by sending a REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT",
+      "entity_type": "Message",
+      "description": "Message sent by the UE to the MME containing remote UE information.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "name": "REMOTE UE REPORT RESPONSE",
+      "entity_type": "Message",
+      "description": "Message sent by the MME to the UE in response to a REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "IE_PTI",
+      "name": "Procedure Transaction Identity",
+      "entity_type": "Information Element",
+      "description": "Identifier included in the REMOTE UE REPORT message and copied into the REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "ENTITY_MME",
+      "name": "MME",
+      "entity_type": "Property",
+      "description": "Mobility Management Entity that processes the REMOTE UE REPORT and sends the response.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_REMOTE_UE_REPORT_COMPLETION",
+      "target": "MSG_REMOTE_UE_REPORT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure is triggered by receipt of the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_REMOTE_UE_REPORT_COMPLETION",
+      "target": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "The procedure includes sending the REMOTE UE REPORT RESPONSE message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REMOTE_UE_REPORT_RESPONSE",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REMOTE UE REPORT RESPONSE message includes the PTI from the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_PTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The REMOTE UE REPORT message contains the PTI information element.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "ENTITY_MME",
+      "target": "PROCEDURE_REMOTE_UE_REPORT_COMPLETION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "The MME performs the procedure upon receipt of the REMOTE UE REPORT message.",
+      "provenance": [
+        "TS 24.301, Clause 6.6.3.3"
+      ]
+    }
+  ]
+}

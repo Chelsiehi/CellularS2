@@ -1,0 +1,138 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "9.9.3.10",
+  "title": "EPS attach result",
+  "entities": [
+    {
+      "id": "IE_EPS_ATTACH_RESULT",
+      "name": "EPS attach result",
+      "entity_type": "Information Element",
+      "description": "Information element that specifies the result of an attach procedure. It is a type 1 information element with specific coding for result values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "IEI_EPS_ATTACH_RESULT",
+      "name": "EPS attach result IEI",
+      "entity_type": "Identifier",
+      "description": "Information element identifier for the EPS attach result IE, located in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "SPARE_BIT_4",
+      "name": "Spare bit 4",
+      "entity_type": "Property",
+      "description": "Bit 4 of octet 1 is spare and shall be coded as zero.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "EPS_ONLY",
+      "name": "EPS only",
+      "entity_type": "Condition",
+      "description": "EPS attach result value indicating EPS only attach. Coded as bits 3-1 = 001.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "COMBINED_EPS_IMSI_ATTACH",
+      "name": "Combined EPS/IMSI attach",
+      "entity_type": "Condition",
+      "description": "EPS attach result value indicating combined EPS/IMSI attach. Coded as bits 3-1 = 010.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "RESERVED_VALUES",
+      "name": "Reserved values",
+      "entity_type": "Condition",
+      "description": "All other values for bits 3-1 beyond 001 and 010 are reserved.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "IEI_EPS_ATTACH_RESULT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS attach result IE contains the IEI identifier in bits 8-5 of octet 1.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "SPARE_BIT_4",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The EPS attach result IE contains a spare bit at position 4 of octet 1 that must be coded as zero.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "EPS_ONLY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS attach result IE can have value 'EPS only' when bits 3-1 are 001.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "COMBINED_EPS_IMSI_ATTACH",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS attach result IE can have value 'combined EPS/IMSI attach' when bits 3-1 are 010.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_EPS_ATTACH_RESULT",
+      "target": "RESERVED_VALUES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The EPS attach result IE restricts all other bit patterns beyond 001 and 010 to reserved values.",
+      "provenance": [
+        "TS 24.301, Clause 9.9.3.10",
+        "Figure 9.9.3.10.1",
+        "Table 9.9.3.10.1"
+      ]
+    }
+  ]
+}

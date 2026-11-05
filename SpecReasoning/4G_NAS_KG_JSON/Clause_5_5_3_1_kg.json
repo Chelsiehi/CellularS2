@@ -1,0 +1,256 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_TAU",
+      "name": "Tracking Area Updating Procedure",
+      "entity_type": "Procedure",
+      "description": "UE-initiated procedure used for updating registration, periodic notification, inter-system changes, parameter updates, and recovery from errors.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "MSG_TAU_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network in response to tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "MSG_TAU_REJECT",
+      "name": "TRACKING AREA UPDATE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by network to reject tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "IE_EMM_CAUSE",
+      "name": "EMM Cause",
+      "entity_type": "Information Element",
+      "description": "Information element indicating reason for rejection or failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE",
+      "entity_type": "State",
+      "description": "EPS Mobility Management idle state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_CONNECTED",
+      "name": "EMM-CONNECTED",
+      "entity_type": "State",
+      "description": "EPS Mobility Management connected state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REG_ATTEMPTING_UPDATE",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE",
+      "entity_type": "State",
+      "description": "Substate where UE is attempting to update registration.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REG_ATTEMPTING_UPDATE_MM",
+      "name": "EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM",
+      "entity_type": "State",
+      "description": "Substate where UE is attempting to update mobility management.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3245",
+      "name": "T3245",
+      "entity_type": "Timer",
+      "description": "Timer started when PLMN is forbidden.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3402",
+      "name": "T3402",
+      "entity_type": "Timer",
+      "description": "Timer related to tracking area updating attempts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3346",
+      "name": "T3346",
+      "entity_type": "Timer",
+      "description": "Timer related to tracking area updating attempts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "COUNTER_TAU_ATTEMPT",
+      "name": "Tracking Area Updating Attempt Counter",
+      "entity_type": "Property",
+      "description": "Counter limiting number of rejected tracking area update attempts.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACHED",
+      "name": "UE attached for emergency bearer services",
+      "entity_type": "Condition",
+      "description": "Condition where UE is attached for emergency services.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "COND_CIOT_OPT_NOT_USED",
+      "name": "Control plane CIoT EPS optimization not used",
+      "entity_type": "Condition",
+      "description": "Condition where control plane CIoT EPS optimization is not active.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_TAU",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure can be initiated in EMM-IDLE mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_TAU",
+      "target": "STATE_EMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Tracking area updating procedure can be initiated in EMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_TAU_REJECT",
+      "target": "IE_EMM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT message contains EMM Cause IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TAU_REJECT",
+      "target": "TIMER_T3245",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REJECT with EMM cause #11 starts timer T3245.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_TAU",
+      "target": "COUNTER_TAU_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Successful tracking area updating procedure resets the attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "STATE_EMM_REG_ATTEMPTING_UPDATE",
+      "target": "COUNTER_TAU_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Counter reset when UE is in EMM-REGISTERED.ATTEMPTING-TO-UPDATE and certain conditions occur.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "STATE_EMM_REG_ATTEMPTING_UPDATE_MM",
+      "target": "COUNTER_TAU_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Counter reset when UE is in EMM-REGISTERED.ATTEMPTING-TO-UPDATE-MM and certain conditions occur.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "TIMER_T3402",
+      "target": "COUNTER_TAU_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Expiry of timer T3402 resets the tracking area updating attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "TIMER_T3346",
+      "target": "COUNTER_TAU_ATTEMPT",
+      "relation_type": "resets",
+      "family": "core",
+      "description": "Starting timer T3346 resets the tracking area updating attempt counter.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_EMERGENCY_ATTACHED",
+      "target": "MSG_TAU_ACCEPT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When UE is attached for emergency services, network shall not indicate certain features in TRACKING AREA UPDATE ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "COND_CIOT_OPT_NOT_USED",
+      "target": "PROC_TAU",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "When control plane CIoT EPS optimization is not used, UE may request re-establishment of radio and S1 bearers during TAU.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.1"
+      ]
+    }
+  ]
+}

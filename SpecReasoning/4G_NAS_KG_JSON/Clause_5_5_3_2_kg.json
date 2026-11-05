@@ -1,0 +1,178 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.5.3.2",
+  "title": "Normal and periodic tracking area updating procedure",
+  "entities": [
+    {
+      "id": "PROC_NORMAL_PERIODIC_TAU",
+      "name": "Normal and periodic tracking area updating procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to update its tracking area information with the network, including both normal updates and periodic updates required by the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "name": "TRACKING AREA UPDATE REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to initiate tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "name": "TRACKING AREA UPDATE ACCEPT",
+      "entity_type": "Message",
+      "description": "Message sent by network to accept tracking area update request.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "name": "TRACKING AREA UPDATE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to complete tracking area updating procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_UPDATE_TYPE",
+      "name": "Update type",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the type of tracking area update (normal or periodic).",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_GUTI",
+      "name": "GUTI",
+      "entity_type": "Identifier",
+      "description": "Globally Unique Temporary Identifier used to identify the UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "IE_TAI_LIST",
+      "name": "TAI list",
+      "entity_type": "Information Element",
+      "description": "List of tracking area identities where the UE is registered.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED",
+      "name": "EMM-REGISTERED",
+      "entity_type": "State",
+      "description": "EMM state where UE is registered with the network.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "TIMER_T3412",
+      "name": "T3412",
+      "entity_type": "Timer",
+      "description": "Timer used for periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NORMAL_PERIODIC_TAU",
+      "target": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure starts with UE sending TRACKING AREA UPDATE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NORMAL_PERIODIC_TAU",
+      "target": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure continues with network sending TRACKING AREA UPDATE ACCEPT message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_NORMAL_PERIODIC_TAU",
+      "target": "MSG_TRACKING_AREA_UPDATE_COMPLETE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure completes with UE sending TRACKING AREA UPDATE COMPLETE message.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_UPDATE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains update type information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_TRACKING_AREA_UPDATE_REQUEST",
+      "target": "IE_GUTI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE REQUEST message contains GUTI identifier.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_TRACKING_AREA_UPDATE_ACCEPT",
+      "target": "IE_TAI_LIST",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "TRACKING AREA UPDATE ACCEPT message contains TAI list information element.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_NORMAL_PERIODIC_TAU",
+      "target": "STATE_EMM_REGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Procedure requires UE to be in EMM-REGISTERED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_NORMAL_PERIODIC_TAU",
+      "target": "TIMER_T3412",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts T3412 timer for periodic tracking area updating.",
+      "provenance": [
+        "TS 24.301, Clause 5.5.3.2"
+      ]
+    }
+  ]
+}

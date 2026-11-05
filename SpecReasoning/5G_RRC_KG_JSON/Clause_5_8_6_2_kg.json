@@ -1,0 +1,198 @@
+{
+  "spec": "TS 38.331",
+  "clause_id": "5.8.6.2",
+  "title": "Selection and reselection of synchronisation reference",
+  "entities": [
+    {
+      "id": "PROC_SYNC_REF_SELECTION",
+      "name": "Synchronization Reference Selection Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to select and reselect synchronization reference for NR sidelink communication based on configured priorities, measurements, and conditions.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "SYNC_REF_CELL",
+      "name": "Cell as Synchronization Reference",
+      "entity_type": "State",
+      "description": "Synchronization reference source from a cell when sl-SyncPriority is set to gnbEnb and frequency is configured in sl-ConfigDedicatedNR or SIB12.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "SYNC_REF_GNSS",
+      "name": "GNSS as Synchronization Reference",
+      "entity_type": "State",
+      "description": "Synchronization reference source from GNSS when sl-SyncPriority is set to gnss and GNSS is reliable according to TS 38.101-1 and TS 38.133.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "SYNC_REF_UE",
+      "name": "SyncRef UE as Synchronization Reference",
+      "entity_type": "State",
+      "description": "Synchronization reference source from another UE detected via SLSS with sufficient PSBCH-RSRP measurement.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "COND_GNSS_RELIABLE",
+      "name": "GNSS is reliable",
+      "entity_type": "Condition",
+      "description": "Condition where GNSS meets reliability requirements as defined in TS 38.101-1 and TS 38.133.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "COND_PSBCH_RSRP_SUFFICIENT",
+      "name": "PSBCH-RSRP exceeds minimum requirement",
+      "entity_type": "Condition",
+      "description": "Condition where PSBCH-RSRP measurement exceeds the minimum requirement defined in TS 38.133 by sl-SyncRefMinHyst.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "COND_HIGHER_PRIORITY_GROUP",
+      "name": "Higher priority group",
+      "entity_type": "Condition",
+      "description": "Condition where candidate synchronization reference belongs to a higher priority group than current reference.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "IE_SL_SYNC_PRIORITY",
+      "name": "sl-SyncPriority",
+      "entity_type": "Information Element",
+      "description": "Information element that configures synchronization priority (gnbEnb or gnss) for NR sidelink communication frequency.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "IE_SL_SYNC_REF_MIN_HYST",
+      "name": "sl-SyncRefMinHyst",
+      "entity_type": "Information Element",
+      "description": "Information element that defines hysteresis value for PSBCH-RSRP minimum requirement comparison.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "PROP_PRIORITY_GROUP_ORDER",
+      "name": "Priority group order",
+      "entity_type": "Property",
+      "description": "Property defining the order of priority groups for synchronization reference selection based on sl-SyncPriority configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "SYNC_REF_CELL",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to select cell as synchronization reference when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "SYNC_REF_GNSS",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to select GNSS as synchronization reference when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "SYNC_REF_UE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure includes step to select SyncRef UE as synchronization reference when conditions are met.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SYNC_REF_GNSS",
+      "target": "COND_GNSS_RELIABLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Selection of GNSS as synchronization reference requires GNSS to be reliable.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "SYNC_REF_UE",
+      "target": "COND_PSBCH_RSRP_SUFFICIENT",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Selection of SyncRef UE requires PSBCH-RSRP to exceed minimum requirement with hysteresis.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "COND_HIGHER_PRIORITY_GROUP",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure reselection is guarded by higher priority group condition.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "IE_SL_SYNC_PRIORITY",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by sl-SyncPriority configuration.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_PSBCH_RSRP_SUFFICIENT",
+      "target": "IE_SL_SYNC_REF_MIN_HYST",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "PSBCH-RSRP condition is defined using sl-SyncRefMinHyst parameter.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROC_SYNC_REF_SELECTION",
+      "target": "PROP_PRIORITY_GROUP_ORDER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure establishes priority group order for synchronization reference selection.",
+      "provenance": [
+        "TS 38.331, Clause 5.8.6.2"
+      ]
+    }
+  ]
+}

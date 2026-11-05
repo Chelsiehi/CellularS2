@@ -1,0 +1,147 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.3",
+  "title": "UE successfully authenticates network",
+  "entities": [
+    {
+      "id": "EAP_AKA_CHALLENGE",
+      "name": "EAP-request/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "Authentication challenge message sent by network to UE containing 5G authentication challenge data and ABBA parameter.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "EAP_RESPONSE_AKA_CHALLENGE",
+      "name": "EAP-response/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "Authentication response message sent by UE to network containing authentication response (RES) and optionally AT_RESULT_IND attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "USIM",
+      "name": "USIM",
+      "entity_type": "Property",
+      "description": "Universal Subscriber Identity Module that derives CK, IK and computes authentication response (RES) using 5G authentication challenge data.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "ME",
+      "name": "ME",
+      "entity_type": "Property",
+      "description": "Mobile Equipment that derives keys, generates security contexts, and handles authentication procedures.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "SNPN_MODE",
+      "name": "SNPN access operation mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE operates in Standalone Non-Public Network access mode with specific credential indications.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "MSK_INDICATION",
+      "name": "Indication to use MSK for KAUSF derivation",
+      "entity_type": "Condition",
+      "description": "Condition where USIM credentials contain indication to use MSK instead of EMSK for KAUSF derivation after successful authentication.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "name": "Partial native 5G NAS security context",
+      "entity_type": "Property",
+      "description": "Security context created in ME volatile memory identified by ngKSI value, containing KAMF and other security parameters.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "AT_RESULT_IND",
+      "name": "AT_RESULT_IND attribute",
+      "entity_type": "Information Element",
+      "description": "Optional attribute that may be included in EAP-response/AKA'-challenge message as specified in RFC 5448.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "EAP_AKA_CHALLENGE",
+      "target": "USIM",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "EAP-request/AKA'-challenge message triggers USIM to derive CK, IK and compute RES",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "USIM",
+      "target": "ME",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "USIM passes RES to ME for further processing",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SNPN_MODE",
+      "target": "MSK_INDICATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "SNPN access operation mode guards the condition for using MSK instead of EMSK",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "ME",
+      "target": "PARTIAL_NAS_SECURITY_CONTEXT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "ME creates partial native 5G NAS security context in volatile memory when new KAUSF is generated",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "EAP_RESPONSE_AKA_CHALLENGE",
+      "target": "AT_RESULT_IND",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP-response/AKA'-challenge message may contain AT_RESULT_IND attribute",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "EAP_AKA_CHALLENGE",
+      "target": "AT_RESULT_IND",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Presence of AT_RESULT_IND in EAP-request/AKA'-challenge message guards UE's inclusion of AT_RESULT_IND in response",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.6.2.5",
+  "title": "Abnormal cases on the network side",
+  "entities": [
+    {
+      "id": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "name": "Network-requested PDU session release procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by the network to release a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "PROC_REMOTE_UE_REPORT",
+      "name": "Remote UE report procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where UE sends REMOTE UE REPORT message to the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_REMOTE_UE_REPORT",
+      "name": "REMOTE UE REPORT message",
+      "entity_type": "Message",
+      "description": "Message sent by UE during remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "name": "PDU SESSION RELEASE COMMAND message",
+      "entity_type": "Message",
+      "description": "Message sent by network during network-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "MSG_5GSM_STATUS",
+      "name": "5GSM STATUS message",
+      "entity_type": "Message",
+      "description": "Message sent by network to indicate 5GSM protocol status.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "IE_PDU_SESSION_ID",
+      "name": "PDU session identity",
+      "entity_type": "Information Element",
+      "description": "Identifies a specific PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "STATE_PDU_SESSION_INACTIVE",
+      "name": "PDU SESSION INACTIVE",
+      "entity_type": "State",
+      "description": "State of a PDU session when it is inactive.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "COND_COLLISION",
+      "name": "Collision of procedures",
+      "entity_type": "Condition",
+      "description": "Condition when network-requested PDU session release procedure and remote UE report procedure occur simultaneously for same PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_INACTIVE",
+      "name": "PDU session inactive condition",
+      "entity_type": "Condition",
+      "description": "Condition when PDU session ID in REMOTE UE REPORT message belongs to a PDU session in INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "PROP_ABORT_REMOTE_UE_REPORT",
+      "name": "Abort remote UE report procedure",
+      "entity_type": "Property",
+      "description": "SMF behavior to abort remote UE report procedure when collision occurs.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "PROP_SEND_5GSM_STATUS",
+      "name": "Send 5GSM STATUS with cause #43",
+      "entity_type": "Property",
+      "description": "SMF behavior to send 5GSM STATUS message with cause #43 when PDU session is inactive.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "COND_COLLISION",
+      "target": "PROP_ABORT_REMOTE_UE_REPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Collision condition establishes the behavior to abort remote UE report procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_COLLISION",
+      "target": "PROC_NW_REQ_PDU_SESSION_RELEASE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Collision condition guards the continuation of network-requested PDU session release procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_REMOTE_UE_REPORT",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REMOTE UE REPORT message contains PDU session identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_PDU_SESSION_RELEASE_COMMAND",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION RELEASE COMMAND message contains PDU session identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PDU_SESSION_INACTIVE",
+      "target": "PROP_SEND_5GSM_STATUS",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session inactive condition establishes the behavior to send 5GSM STATUS message.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_PDU_SESSION_INACTIVE",
+      "target": "STATE_PDU_SESSION_INACTIVE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "PDU session inactive condition requires the PDU SESSION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_5GSM_STATUS",
+      "target": "IE_PDU_SESSION_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "5GSM STATUS message contains PDU session identity IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.6.2.5"
+      ]
+    }
+  ]
+}

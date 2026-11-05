@@ -1,0 +1,209 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.24",
+  "title": "Minimization of service interruption",
+  "entities": [
+    {
+      "id": "MINT",
+      "name": "Minimization of service interruption",
+      "entity_type": "Procedure",
+      "description": "Enables UE to obtain service from a PLMN offering disaster roaming when a disaster condition applies to the UE's determined PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "DISASTER_ROAMING_WAIT_RANGE",
+      "name": "Disaster roaming wait range",
+      "entity_type": "Property",
+      "description": "A provisioned range used by UE to generate random timer values before initiating disaster roaming registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "DISASTER_RETURN_WAIT_RANGE",
+      "name": "Disaster return wait range",
+      "entity_type": "Property",
+      "description": "A provisioned range used by UE to generate random timer values before initiating registration after disaster condition ends.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "DISASTER_ROAMING_TIMER",
+      "name": "Disaster roaming timer",
+      "entity_type": "Timer",
+      "description": "Timer started with random value from disaster roaming wait range to delay disaster roaming registration.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "DISASTER_RETURN_TIMER",
+      "name": "Disaster return timer",
+      "entity_type": "Timer",
+      "description": "Timer started with random value from disaster return wait range to delay registration after disaster condition ends.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REGISTRATION_PROCEDURE_DISASTER_ROAMING",
+      "name": "Registration procedure for disaster roaming services",
+      "entity_type": "Procedure",
+      "description": "Registration procedure performed by UE to obtain disaster roaming services.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "EMERGENCY_REGISTRATION",
+      "name": "Emergency registration",
+      "entity_type": "Procedure",
+      "description": "Registration procedure initiated when UE needs to request emergency PDU session during disaster roaming.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "5GMM_DEREGISTERED",
+      "name": "5GMM-DEREGISTERED",
+      "entity_type": "State",
+      "description": "UE state where MINT-related data is preserved in non-volatile memory.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "DISASTER_CONDITION_ENDED",
+      "name": "Disaster condition ended",
+      "entity_type": "Condition",
+      "description": "Condition indicating that the disaster situation has concluded.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "EMERGENCY_PDU_SESSION",
+      "name": "Emergency PDU session",
+      "entity_type": "Property",
+      "description": "Emergency data session that affects disaster roaming registration timing.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MINT",
+      "target": "DISASTER_ROAMING_WAIT_RANGE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "MINT procedure uses disaster roaming wait range for timer generation.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MINT",
+      "target": "DISASTER_RETURN_WAIT_RANGE",
+      "relation_type": "defined_in",
+      "family": "core",
+      "description": "MINT procedure uses disaster return wait range for timer generation.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MINT",
+      "target": "DISASTER_ROAMING_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MINT procedure starts disaster roaming timer when wait range is available.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MINT",
+      "target": "DISASTER_RETURN_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "MINT procedure starts disaster return timer when wait range is available.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "DISASTER_ROAMING_TIMER",
+      "target": "REGISTRATION_PROCEDURE_DISASTER_ROAMING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiration triggers disaster roaming registration procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "DISASTER_RETURN_TIMER",
+      "target": "REGISTRATION_PROCEDURE_DISASTER_ROAMING",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Timer expiration triggers registration procedure after disaster condition ends.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "EMERGENCY_PDU_SESSION",
+      "target": "DISASTER_ROAMING_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency PDU session presence affects disaster roaming timer behavior.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "EMERGENCY_REGISTRATION",
+      "target": "DISASTER_ROAMING_TIMER",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Emergency registration can be initiated while disaster roaming timer is running.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "DISASTER_CONDITION_ENDED",
+      "target": "DISASTER_RETURN_TIMER",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Disaster condition ending triggers start of disaster return timer.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "MINT",
+      "target": "5GMM_DEREGISTERED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "MINT data is preserved when UE enters 5GMM-DEREGISTERED state.",
+      "provenance": [
+        "TS 24.501, Clause 4.24"
+      ]
+    }
+  ]
+}

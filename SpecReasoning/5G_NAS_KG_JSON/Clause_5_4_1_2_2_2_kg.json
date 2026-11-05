@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.4.1.2.2.2",
+  "title": "Initiation",
+  "entities": [
+    {
+      "id": "PROC_EAP_AKA_PRIMARY_AUTH",
+      "name": "EAP based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Authentication procedure using EAP-AKA' where AUSF/AAA server sends EAP-request/AKA'-challenge message with AT_KDF_INPUT set to SNN and may include AT_RESULT_IND attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "MSG_EAP_REQUEST_AKA_CHALLENGE",
+      "name": "EAP-request/AKA'-challenge message",
+      "entity_type": "Message",
+      "description": "EAP message sent by AUSF/AAA server containing AT_KDF_INPUT attribute set to SNN and optionally AT_RESULT_IND attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_AT_KDF_INPUT",
+      "name": "AT_KDF_INPUT attribute",
+      "entity_type": "Information Element",
+      "description": "EAP attribute containing network name field set to SNN for key derivation function input.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "IE_AT_RESULT_IND",
+      "name": "AT_RESULT_IND attribute",
+      "entity_type": "Information Element",
+      "description": "Optional EAP attribute that may be included in EAP-request/AKA'-challenge message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "ID_SNN",
+      "name": "SNN",
+      "entity_type": "Identifier",
+      "description": "Serving Network Name in format described in subclause 9.12.1, used as input for AT_KDF_INPUT attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "ID_NGKSI",
+      "name": "ngKSI",
+      "entity_type": "Identifier",
+      "description": "Next Generation Key Set Identifier selected by network and sent to UE along with each EAP message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "ID_ABBA",
+      "name": "ABBA value",
+      "entity_type": "Identifier",
+      "description": "Anti-Bidding Down Between Architectures value sent to UE along with EAP request and EAP-success messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "COND_NETWORK_NAME_CHECK",
+      "name": "Network name check condition",
+      "entity_type": "Condition",
+      "description": "UE checks if network name field of AT_KDF_INPUT matches SNN constructed per 9.12.1 and matches PLMN/SNPN identity of selected network.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_IDLE",
+      "name": "5GMM-IDLE mode",
+      "entity_type": "State",
+      "description": "5G Mobility Management idle state where UE uses PLMN identity of selected PLMN for network name check.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_CONNECTED",
+      "name": "5GMM-CONNECTED mode",
+      "entity_type": "State",
+      "description": "5G Mobility Management connected state where UE uses specific PLMN/SNPN identity for network name check based on handover and cell conditions.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_EAP_AKA_PRIMARY_AUTH",
+      "target": "MSG_EAP_REQUEST_AKA_CHALLENGE",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure initiation involves sending EAP-request/AKA'-challenge message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_EAP_REQUEST_AKA_CHALLENGE",
+      "target": "IE_AT_KDF_INPUT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP-request/AKA'-challenge message contains AT_KDF_INPUT attribute set to SNN.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_EAP_REQUEST_AKA_CHALLENGE",
+      "target": "IE_AT_RESULT_IND",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EAP-request/AKA'-challenge message may optionally contain AT_RESULT_IND attribute.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "IE_AT_KDF_INPUT",
+      "target": "ID_SNN",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "AT_KDF_INPUT attribute contains SNN as network name field.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_EAP_AKA_PRIMARY_AUTH",
+      "target": "ID_NGKSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure involves network selecting ngKSI value and sending it to UE with each EAP message.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_EAP_AKA_PRIMARY_AUTH",
+      "target": "ID_ABBA",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Procedure involves sending ABBA value to UE with EAP request and EAP-success messages.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "COND_NETWORK_NAME_CHECK",
+      "target": "IE_AT_KDF_INPUT",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network name check condition verifies AT_KDF_INPUT attribute's network name field matches SNN and selected network identity.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "COND_NETWORK_NAME_CHECK",
+      "target": "STATE_5GMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network name check uses PLMN identity of selected PLMN when UE moves from 5GMM-IDLE to 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_NETWORK_NAME_CHECK",
+      "target": "STATE_5GMM_CONNECTED",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Network name check uses specific PLMN/SNPN identity based on handover and cell conditions in 5GMM-CONNECTED mode.",
+      "provenance": [
+        "TS 24.501, Clause 5.4.1.2.2.2"
+      ]
+    }
+  ]
+}

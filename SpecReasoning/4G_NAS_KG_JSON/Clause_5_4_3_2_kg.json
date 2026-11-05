@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.4.3.2",
+  "title": "NAS security mode control initiation by the network",
+  "entities": [
+    {
+      "id": "PROC_NAS_SEC_MODE_CTRL",
+      "name": "NAS Security Mode Control Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by MME to establish NAS security context. Involves sending SECURITY MODE COMMAND message and starting timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_CMD",
+      "name": "SECURITY MODE COMMAND",
+      "entity_type": "Message",
+      "description": "Message sent by MME to UE to initiate security mode control procedure. Contains security algorithms, key set identifier, and replayed UE security capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_COMPLETE",
+      "name": "SECURITY MODE COMPLETE",
+      "entity_type": "Message",
+      "description": "Message sent by UE to MME to confirm successful security mode control procedure. May include IMEISV or UE radio capability ID when requested.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SEC_MODE_REJECT",
+      "name": "SECURITY MODE REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by UE to MME to indicate security mode control procedure failure.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3460",
+      "name": "T3460",
+      "entity_type": "Timer",
+      "description": "Timer started by MME when sending SECURITY MODE COMMAND. Stopped upon receiving SECURITY MODE COMPLETE or SECURITY MODE REJECT.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "IE_NAS_KSI",
+      "name": "NAS Key Set Identifier",
+      "entity_type": "Information Element",
+      "description": "IE containing key set identifier and type of security context flag (native or mapped security context).",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_SEC_CAP",
+      "name": "Security Capabilities",
+      "entity_type": "Information Element",
+      "description": "Replayed UE security capabilities including NAS, RRC and UP ciphering and integrity capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_ADD_SEC_CAP",
+      "name": "UE Additional Security Capability",
+      "entity_type": "Information Element",
+      "description": "Additional security capabilities of UE included when supported by MME and provided by UE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "IE_HASHMME",
+      "name": "HASHMME",
+      "entity_type": "Information Element",
+      "description": "Hash value calculated by MME from plain ATTACH REQUEST or TRACKING AREA UPDATE REQUEST message when received without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "COND_EMERGENCY_ATTACH",
+      "name": "Emergency Attach Procedure",
+      "entity_type": "Condition",
+      "description": "Condition when security mode control is initiated during attach procedure for emergency bearer services with no shared EPS security context.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "COND_TAU_GPRS_KSI",
+      "name": "TAU with GPRS Ciphering Key Sequence Number",
+      "entity_type": "Condition",
+      "description": "Condition when security mode control is initiated upon receipt of TRACKING AREA UPDATE REQUEST with GPRS ciphering key sequence number IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "PROP_LOCAL_KASME",
+      "name": "Locally Generated KASME",
+      "entity_type": "Property",
+      "description": "Property where MME and UE create locally generated KASME when security mode control is initiated under specific emergency conditions.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "PROP_DL_NAS_COUNT_RESET",
+      "name": "Downlink NAS COUNT Reset",
+      "entity_type": "Property",
+      "description": "Property where MME resets downlink NAS COUNT counter and uses it to integrity protect initial SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_NAS_SEC_MODE_CTRL",
+      "target": "MSG_SEC_MODE_CMD",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Security mode control procedure includes sending SECURITY MODE COMMAND message.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROC_NAS_SEC_MODE_CTRL",
+      "target": "TIMER_T3460",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Procedure starts timer T3460 when sending SECURITY MODE COMMAND.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_SEC_MODE_COMPLETE",
+      "target": "TIMER_T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SECURITY MODE COMPLETE stops timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_SEC_MODE_REJECT",
+      "target": "TIMER_T3460",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receiving SECURITY MODE REJECT stops timer T3460.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2",
+        "Figure 5.4.3.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_NAS_KSI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains NAS Key Set Identifier IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_SEC_CAP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains replayed UE security capabilities.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_ADD_SEC_CAP",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains UE additional security capabilities when supported.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_SEC_MODE_CMD",
+      "target": "IE_HASHMME",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "SECURITY MODE COMMAND contains HASHMME when ATTACH REQUEST or TAU REQUEST is received without integrity protection.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_EMERGENCY_ATTACH",
+      "target": "PROP_LOCAL_KASME",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Emergency attach condition establishes creation of locally generated KASME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "COND_TAU_GPRS_KSI",
+      "target": "PROP_DL_NAS_COUNT_RESET",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "TAU with GPRS ciphering key sequence number condition establishes downlink NAS COUNT reset.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "MSG_SEC_MODE_CMD",
+      "relation_type": "integrity_required",
+      "target": "PROP_DL_NAS_COUNT_RESET",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND requires integrity protection using reset downlink NAS COUNT.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "MSG_SEC_MODE_CMD",
+      "relation_type": "may_be_unprotected",
+      "target": "PROP_LOCAL_KASME",
+      "family": "sec",
+      "description": "SECURITY MODE COMMAND may be sent unciphered but integrity protected when using locally generated KASME.",
+      "provenance": [
+        "TS 24.301, Clause 5.4.3.2"
+      ]
+    }
+  ]
+}

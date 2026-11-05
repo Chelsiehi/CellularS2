@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.3",
+  "title": "UE-requested PDU session modification procedure accepted by the network",
+  "entities": [
+    {
+      "id": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "UE-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to modify PDU session parameters, which can be accepted by the network.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of PDU session parameters.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "PORT_MANAGEMENT_INFO_CONTAINER",
+      "name": "Port management information container IE",
+      "entity_type": "Information Element",
+      "description": "Information element containing port management information for PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "name": "Network-requested PDU session modification procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by network to modify PDU session parameters as specified in subclause 6.3.2.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "SMF",
+      "entity_type": "Property",
+      "description": "Session Management Function that handles PDU session modification requests and procedures.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE_REQUESTED_PDU_SESSION_MODIFICATION",
+      "target": "PDU_SESSION_MODIFICATION_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "UE-requested PDU session modification procedure involves sending PDU SESSION MODIFICATION REQUEST message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PDU_SESSION_MODIFICATION_REQUEST",
+      "target": "PORT_MANAGEMENT_INFO_CONTAINER",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REQUEST message may contain Port management information container IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "SMF",
+      "target": "NETWORK_REQUESTED_PDU_SESSION_MODIFICATION",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "SMF performs network-requested PDU session modification procedure upon accepting UE request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMF",
+      "target": "PORT_MANAGEMENT_INFO_CONTAINER",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "SMF handles Port management information container IE contents as specified in TS 23.501 and TS 23.502.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.2",
+  "title": "UE-requested PDU session modification procedure initiation",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "------------------------------------------------------------------",
+    "In order to initiate the UE-requested PDU session modification procedure, the UE shall create a PDU SESSION MODIFICATION REQUEST message",
+    "The UE shall allocate a PTI value currently not used and shall set the PTI IE of the PDU SESSION MODIFICATION REQUEST message to the allocated PTI value",
+    "The UE shall not perform the UE-requested PDU session modification procedure for an emergency PDU session, except for a procedure initiated according to subclause6.4.2.1, item e) only, and for the error cases described in subclause6.4.1.3 and subclause6.3.2.3",
+    "The UE shall not perform the UE-requested PDU session modification procedure for a PDU session for LADN when the UE is located outside the LADN service area except for indicating a change of 3GPP PS data off UE status",
+    "If the UE requests a specific QoS handling and the PDU session is not associated with the control plane only indication, the UE shall include the Requested QoS rules IE indicating requested QoS rules or the Requested QoS flow descriptions IE indicating requested QoS flow descriptions or both for the specific QoS handling. The Requested QoS rules IE includes the packet filters which describe the service data flows requested by the UE. The specific QoS parameters requested by the UE are specified in the Requested QoS flow descriptions IE. If the UE requests the network to bind specific service data flows to a dedicated QoS flow, the UE shall create a new QoS rule by setting the rule operation code to \"Create new QoS rule\" and shall set the segregation bit to \"Segregation requested\" for the corresponding QoS rule in the Requested QoS rules IE. The UE shall set the QRI values to \"no QoS rule identifier assigned\" in the Requested QoS rules IE, if the QoS rules are newly created; otherwise, the UE shall set the QRI values to those of the existing QoS rules for which the specific QoS handling applies. The UE shall set the QFI values to \"no QoS flow identifier assigned\" in the Requested QoS flow descriptions IE, if the QoS flow descriptions are newly created; otherwise, the UE shall set the QFI values to the QFIs of the existing QoS flow descriptions for which the specific QoS handling applies. The UE shall not request to create more than one QoS flow in a UE-requested PDU session modification procedure. If the SMF receives a PDU SESSION MODIFICATION REQUEST message with a Requested QoS rules IE containing more than one QoS rule with the rule operation code set to \"Create new QoS rule\", the SMF shall assign the same QFI to all the QoS rules which are created",
+    "If the UE requests to join or leave one or more MBS multicast sessions associated with a PDU session, the UE shall include the Requested MBS container IE in the PDU SESSION MODIFICATION REQUEST message and shall set the MBS operation to \"Join MBS session\" for the join case or to \"Leave MBS session\" for the leave case. The UE shall include the MBS session information(s) and shall set the Type of MBS session ID for each of the MBS session information to either \"Temporary Mobile Group Identity (TMGI)\" or \"Source specific IP multicast address\" depending on the type of the MBS session ID available in the UE. Then the remaining values of each of the MBS session informations shall be set as following",
+    "a) if the Type of MBS session ID is set to \"Temporary Mobile Group Identity (TMGI)\", the UE shall set the MBS session ID to the TMGI; or",
+    "b) if the Type of MBS session ID is set to \"Source specific IP multicast address for IPv4\" or \" Source specific IP multicast address for IPv6\", the UE shall set the Source IP address information and the Destination IP address information to the corresponding values",
+    "NOTE1: The UE obtains the details of the MBS session ID(s) i.e. TMGI, Source IP address information and Destination IP address information as a pre-configuration in the UE or during the MBS service announcement which is out of scope of this specification",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, if the UE is a UE operating in single-registration mode in a network supporting N26 interface, the PDU session is of \"IPv4\", \"IPv6\", \"IPv4v6\", or \"Ethernet\" PDU session type, the PDU session is not associated with the control plane only indication",
+    "a) the UE is performing the PDU session modification procedure to indicate the support of reflective QoS and the UE has not previously successfully performed the UE-requested PDU session modification to provide this indication, the UE shall set the RQoS bit to \"Reflective QoS supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message; or",
+    "b) the UE is performing the PDU session modification procedure to indicate that reflective QoS is not supported and the UE has not previously successfully performed the UE-requested PDU session modification to provide this indication, the UE shall set the RQoS bit to \"Reflective QoS not supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message",
+    "If the UE is performing the PDU session modification procedure to revoke the previously indicated support of reflective QoS and the PDU session is not associated with the control plane only indication, the UE shall set the RQoS bit to \"Reflective QoS not supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message. The UE shall not indicate support for reflective QoS for this PDU Session for the remaining lifetime of the PDU Session",
+    "NOTE2: The determination to revoke the usage of reflective QoS by the UE for a PDU session is implementation dependent",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, if the UE is a UE operating in single-registration mode in a network supporting N26 interface, the PDU session is of \"IPv6\" or \"IPv4v6\" PDU session type, the PDU session is not associated with the control plane only indication",
+    "a) the UE is performing the PDU session modification procedure to indicate the support of Multi-homed IPv6 PDU session and the UE has not previously successfully performed the UE-requested PDU session modification to provide this indication, the UE shall set the MH6-PDU bit to \"Multi-homed IPv6 PDU session supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message; or",
+    "b) the UE is performing the PDU session modification procedure to indicate that Multi-homed IPv6 PDU session is not supported and the UE has not previously successfully performed the UE-requested PDU session modification to provide this indication, the UE shall set the MH6-PDU bit to \"Multi-homed IPv6 PDU session not supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, if the UE is a UE operating in single-registration mode in a network supporting N26 interface, the PDU session is of \"IPv4\", \"IPv6\", \"IPv4v6\", or \"Ethernet\" PDU session type, the PDU session is not associated with the control plane only indication, the UE supports more than 16 packet filters for this PDU session, and the UE has not previously successfully performed the UE-requested PDU session modification to provide this indication, the UE shall indicate the maximum number of packet filters supported for the PDU session in the Maximum number of supported packet filters IE of the PDU SESSION MODIFICATION REQUEST message",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, if the UE is a UE operating in single-registration mode in a network supporting N26 interface, the PDU session is not associated with the control plane only indication, and the UE has not previously successfully performed the UE-requested PDU session modification to include the Integrity protection maximum data rate IE in the PDU SESSION MODIFICATION REQUEST message, the UE shall include the Integrity protection maximum data rate IE in the PDU SESSION MODIFICATION REQUEST message",
+    "If the UE is performing the PDU session modification procedure",
+    "a) to request the deletion of a non-default QoS rule due to errors in QoS operations or packet filters",
+    "b) to request the deletion of a QoS flow description due to errors in QoS operations; or",
+    "c) to request the deletion of a mapped EPS bearer context due to errors in mapped EPS bearer operation, TFT operation or packet filters",
+    "the UE shall include the 5GSM cause IE in the PDU SESSION MODIFICATION REQUEST message as described in subclauses6.3.2.3, 6.3.2.4 and 6.4.1.3",
+    "When the UE-requested PDU session modification procedure is used to indicate a change of 3GPP PS data off UE status for a PDU session, the UE shall include the Extended protocol configuration options IE in the PDU SESSION MODIFICATION REQUEST message and setting the 3GPP PS data off UE status",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, if the UE is a UE operating in single-registration mode in a network supporting N26 interface, the PDU session is not associated with the control plane only indication, the UE requests the PDU session to be an always-on PDU session in the 5GS and the UE has not previously successfully performed the UE-requested PDU session modification to request this, the UE shall include the Always-on PDU session requested IE and set the value of the IE to \"Always-on PDU session requested\" in the PDU SESSION MODIFICATION REQUEST message",
+    "If a port management information container needs to be delivered (see 3GPPTS23.501[8] and 3GPPTS23.502[9]), the UE shall include a Port management information container IE in the PDU SESSION MODIFICATION REQUEST message",
+    "To request re-negotiation of IP header compression configuration, the UE shall include the IP header compression configuration IE in the PDU SESSION MODIFICATION REQUEST message if the network indicated \"Control plane CIoT 5GS optimization supported\" and \"IP header compression for control plane CIoT 5GS optimization supported\" in the 5GS network support feature support IE",
+    "To request re-negotiation of Ethernet header compression configuration, the UE shall include the Ethernet header compression configuration IE in the PDU SESSION MODIFICATION REQUEST message if the network indicated \"Control plane CIoT 5GS optimization supported\" and \"Ethernet header compression for control plane CIoT 5GS optimization supported\" in the 5GS network support feature support IE",
+    "After an inter-system change from S1 mode to N1 mode, if",
+    "a) the UE is operating in single-registration mode in the network supporting N26 interface",
+    "b) the PDU session type value of the PDU session type IE is set to \"IPv4\", \"IPv6\" or \"IPv4v6\"",
+    "c) the UE indicates \"Control plane CIoT 5GS optimization supported\" and \"IP header compression for control plane CIoT 5GS optimization supported\" in the 5GMM capability IE of the REGISTRATION REQUEST message; and",
+    "d) the network indicates \"Control plane CIoT 5GS optimization supported\" and \"IP header compression for control plane CIoT 5GS optimization supported\" in the 5GS network support feature IE of the REGISTRATION ACCEPT message",
+    "the UE shall initiate the PDU session modification procedure to negotiate the IP header compression configuration and include the IP header compression configuration IE in the PDU SESSION MODIFICATION REQUEST message",
+    "The UE shall include the Service-level-AA container IE in the PDU SESSION MODIFICATION REQUEST message, when requesting to modify an established PDU session for C2 communication. In the Service-level-AA container IE, the UE shall include",
+    "a) the service-level device ID with the value set to the CAA-level UAV ID of the UE; and",
+    "b) if available, the service-level-AA payload with the value set to the C2 authorization payload and the service-level-AA payload type with the value set to \"C2 authorization payload\"",
+    "NOTE3: The C2 authorization payload in the service-level-AA payload can include the pairing information for C2 communication and the flight authorization information",
+    "After an inter-system change from S1 mode to N1 mode, if",
+    "a) the UE is operating in single-registration mode in a network that supports N26 interface",
+    "b) the PDU session type value of the PDU session type IE is set to \"Ethernet\"",
+    "c) the UE indicates \"Control plane CIoT 5GS optimization supported\" and \"Ethernet header compression for control plane CIoT 5GS optimization supported\" in the 5GMM capability IE of the REGISTRATION REQUEST message; and",
+    "d) the network indicates \"Control plane CIoT 5GS optimization supported\" and \"Ethernet header compression for control plane CIoT 5GS optimization supported\" in the 5GS network support feature IE of the REGISTRATION ACCEPT message",
+    "the UE shall initiate the PDU session modification procedure to negotiate the Ethernet header compression configuration and include the Ethernet header compression configuration IE in the PDU SESSION MODIFICATION REQUEST message",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, and if the UE is a UE operating in single-registration mode in a network supporting N26 interface, and the UE supports provisioning of ECS configuration information to the EEC in the UE and the UE has not previously successfully performed the UE-requested PDU session modification to include the ECS configuration information provisioning support indicator, the UE shall include the Extended protocol configuration options IE in the PDU SESSION MODIFICATION REQUEST message and shall include the ECS configuration information provisioning support indicator",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, and if the UE is a UE operating in single-registration mode in a network supporting N26 interface, and the UE supports receiving DNS server addresses in protocol configuration options and the UE has not previously successfully performed the UE-requested PDU session modification to indicate this support, the UE shall include the Extended protocol configuration options IE in the PDU SESSION MODIFICATION REQUEST message and",
+    "a) if the PDU session is of \"IPv4\" or \"IPv4v6\" PDU session type, the UE shall include the DNS server IPv4 address request; and",
+    "b) if the PDU session is of \"IPv6\" or \"IPv4v6\" PDU session type, the UE shall include the DNS server IPv6 address request",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, and if the UE is a UE operating in single-registration mode in a network supporting N26 interface, and the UE supports the EAS rediscovery and the UE has not previously successfully performed the UE-requested PDU session modification to indicate this support, the UE shall include the Extended protocol configuration options IE in the PDU SESSION MODIFICATION REQUEST message and shall include the EAS rediscovery support indication in the Extended protocol configuration options IE",
+    "For a PDN connection established when in S1 mode, after an inter-system change from S1 mode to N1 mode, and if the UE is a UE operating in single-registration mode in a network supporting N26 interface, and the UE supports the EDC, then the UE shall include the Extended protocol configuration options IE in the PDU SESSION MODIFICATION REQUEST message and shall include the EDC support indicator in the Extended protocol configuration options IE",
+    "The UE shall transport",
+    "a) the PDU SESSION MODIFICATION REQUEST message",
+    "b) the PDU session ID; and",
+    "c) if the UE-requested PDU session modification",
+    "1) is not initiated to indicate a change of 3GPP PS data off UE status associated to a PDU session, then the request type set to \"modification request\"; and",
+    "2) is initiated to indicate a change of 3GPP PS data off UE status associated to a PDU session, then without transporting the request type",
+    "using the NAS transport procedure as specified in subclause5.4.5, and the UE shall start timer T3581 (see example in figure6.4.2.2.1)",
+    "For a PDN connection established when in S1 mode and not associated with the control plane only indication, after inter-system change from S1 mode to N1 mode, if the UE is registered in a network supporting the ATSSS",
+    "a) the UE may request to modify a PDU session to an MA PDU session; or",
+    "b) the UE may allow the network to upgrade the PDU session to an MA PDU session. In order for the UE to allow the network to upgrade the PDU session to an MA PDU session, the UE shall set \"MA PDU session network upgrade is allowed\" in the MA PDU session information IE and set the request type to \"modification request\" in the UL NAS TRANSPORT message",
+    "NOTE4: If the DNN corresponds to an LADN DNN, the AMF does not forward the MA PDU session information IE to the SMF but sends the message back to the UE to inform of the unhandled request (see subclause5.4.5.2.5)",
+    "In case the UE executes case a) or b)",
+    "1) if the UE supports ATSSS Low-Layer functionality with any steering mode as specified in subclause5.32.6 of 3GPPTS23.501[8], the UE shall set the ATSSS-ST bits to \"ATSSS Low-Layer functionality with any steering mode supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message",
+    "2) if the UE supports MPTCP functionality with any steering mode and ATSSS-LL functionality with only Active-Standby steering mode as specified in subclause5.32.6 of 3GPPTS23.501[8], the UE shall set the ATSSS-ST bits to \"MPTCP functionality with any steering mode and ATSSS-LL functionality with only Active-Standby steering mode supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message",
+    "3) if the UE supports MPTCP functionality with any steering mode and ATSSS-LL functionality with any steering mode as specified in subclause5.32.6 of 3GPPTS23.501[8], the UE shall set the ATSSS-ST bits to \"MPTCP functionality with any steering mode and ATSSS-LL functionality with any steering mode supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message; and",
+    "4) if a performance measurement function in the UE can perform access performance measurements using the QoS flow of the non-default QoS rule as specified in subclause5.32.5 of 3GPPTS23.501[8], the UE shall set the APMQF bit to \"Access performance measurements per QoS flow supported\" in the 5GSM capability IE of the PDU SESSION MODIFICATION REQUEST message",
+    "Figure6.4.2.2.1: UE-requested PDU session modification procedure",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "6.4.2.2.1",
+      "file": "Figure_6_4_2_2_1_p582.png.json",
+      "title": "UE-requested PDU session modification procedure",
+      "content": {
+        "figure_id": "6.4.2.2.1",
+        "title": "UE-requested PDU session modification procedure",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "SMF"
+          ],
+          "messages": [
+            {
+              "from": "UE",
+              "to": "SMF",
+              "name": "PDU SESSION MODIFICATION REQUEST",
+              "notes": "Start T3581"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "Network-requested PDU session modification procedure",
+              "notes": "Stop T3581"
+            },
+            {
+              "from": "SMF",
+              "to": "UE",
+              "name": "PDU SESSION MODIFICATION REJECT",
+              "notes": "Stop T3581"
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "OR - indicates alternative message flows"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

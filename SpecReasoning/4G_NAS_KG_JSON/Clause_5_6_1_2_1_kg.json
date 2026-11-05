@@ -1,0 +1,267 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.1.2.1",
+  "title": "UE is not using EPS services with control plane CIoT EPS optimization",
+  "entities": [
+    {
+      "id": "PROCEDURE_SERVICE_REQUEST",
+      "name": "Service Request Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure initiated by UE to request establishment of bearers for user data transport or signaling.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_SERVICE_REQUEST",
+      "name": "SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message sent by UE to initiate service request procedure.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "MSG_EXTENDED_SERVICE_REQUEST",
+      "name": "EXTENDED SERVICE REQUEST",
+      "entity_type": "Message",
+      "description": "NAS message used for extended service requests including CS fallback and packet services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_SERVICE_TYPE",
+      "name": "Service type",
+      "entity_type": "Information Element",
+      "description": "IE indicating type of service requested (e.g., packet services via S1, mobile terminating CS fallback).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_UE_REQUEST_TYPE",
+      "name": "UE request type",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE request type (e.g., NAS signalling connection release, rejection of paging).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_CSFB_RESPONSE",
+      "name": "CSFB response",
+      "entity_type": "Information Element",
+      "description": "IE indicating UE response to CS fallback (accepted or rejected).",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "IE_PAGING_RESTRICTION",
+      "name": "Paging restriction IE",
+      "entity_type": "Information Element",
+      "description": "IE carrying UE paging restriction preference.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3417",
+      "name": "T3417",
+      "entity_type": "Timer",
+      "description": "Timer started when UE sends SERVICE REQUEST or EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3417EXT",
+      "name": "T3417ext",
+      "entity_type": "Timer",
+      "description": "Timer started for specific cases when sending EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3417EXT_MT",
+      "name": "T3417ext-mt",
+      "entity_type": "Timer",
+      "description": "Timer started for mobile terminated cases when sending EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "name": "EMM-SERVICE-REQUEST-INITIATED",
+      "entity_type": "State",
+      "description": "EMM state entered after sending SERVICE REQUEST or EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_REGISTERED_NORMAL_SERVICE",
+      "name": "EMM-REGISTERED.NORMAL-SERVICE",
+      "entity_type": "State",
+      "description": "EMM state entered when UE rejects CS fallback in connected mode.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NAS_LOW_PRIORITY",
+      "name": "UE configured for NAS signalling low priority",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for NAS signalling low priority.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "CONDITION_NETWORK_SUPPORTS_ESR",
+      "name": "Network supports EXTENDED SERVICE REQUEST for packet services",
+      "entity_type": "Condition",
+      "description": "Condition where network indicated support for EXTENDED SERVICE REQUEST in previous ATTACH ACCEPT or TAU ACCEPT.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "MSG_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Service request procedure includes sending EXTENDED SERVICE REQUEST message.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_SERVICE_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST contains Service type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_UE_REQUEST_TYPE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST contains UE request type IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_CSFB_RESPONSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST contains CSFB response IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "MSG_EXTENDED_SERVICE_REQUEST",
+      "target": "IE_PAGING_RESTRICTION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "EXTENDED SERVICE REQUEST may contain Paging restriction IE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "TIMER_T3417",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Service request procedure starts timer T3417.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "TIMER_T3417EXT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Service request procedure starts timer T3417ext for specific cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "TIMER_T3417EXT_MT",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Service request procedure starts timer T3417ext-mt for mobile terminated cases.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "PROCEDURE_SERVICE_REQUEST",
+      "target": "STATE_EMM_SERVICE_REQUEST_INITIATED",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Service request procedure establishes EMM-SERVICE-REQUEST-INITIATED state.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "CONDITION_NAS_LOW_PRIORITY",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "UE configured for NAS low priority condition guards sending of EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "CONDITION_NETWORK_SUPPORTS_ESR",
+      "target": "MSG_EXTENDED_SERVICE_REQUEST",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Network support for ESR condition guards sending of EXTENDED SERVICE REQUEST.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.1.2.1"
+      ]
+    }
+  ]
+}

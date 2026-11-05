@@ -1,0 +1,120 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "4.23.4",
+  "title": "5GS session management via a satellite NG-RAN cell",
+  "entities": [
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The user equipment that applies NAS timer values for satellite NG-RAN cell access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "AMF",
+      "name": "Access and Mobility Management Function",
+      "entity_type": "Property",
+      "description": "The AMF indicates whether extended NAS timers should be used for satellite NG-RAN cell access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "SMF",
+      "name": "Session Management Function",
+      "entity_type": "Property",
+      "description": "The SMF calculates NAS timer values when extended timer usage is indicated for satellite NG-RAN cell access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "NAS_TIMER_SATELLITE",
+      "name": "NAS Timer for Satellite NG-RAN Cell",
+      "entity_type": "Timer",
+      "description": "NAS timer with extended values applicable when accessing via a satellite NG-RAN cell.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4",
+        "Table 10.2.1",
+        "Table 10.3.2"
+      ]
+    },
+    {
+      "id": "EXTENDED_TIMER_INDICATION",
+      "name": "Extended NAS Timer Indication",
+      "entity_type": "Condition",
+      "description": "Condition where AMF indicates that extended NAS timers should be used for satellite NG-RAN cell access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "NAS_PROCEDURE",
+      "name": "NAS Procedure",
+      "entity_type": "Procedure",
+      "description": "Generic NAS procedure during which NAS timer values are calculated at start and remain fixed until completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "UE applies the NAS timer value for satellite NG-RAN cell access at the start of a NAS procedure.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "AMF",
+      "target": "EXTENDED_TIMER_INDICATION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "AMF indicates the use of extended NAS timers for satellite NG-RAN cell access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "EXTENDED_TIMER_INDICATION",
+      "target": "SMF",
+      "relation_type": "action_triggered_by",
+      "family": "sec",
+      "description": "When extended timer indication is present, SMF calculates the NAS timer value for satellite access.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "SMF",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "SMF calculates and applies the NAS timer value for satellite NG-RAN cell access when indicated.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "NAS_PROCEDURE",
+      "target": "NAS_TIMER_SATELLITE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "NAS timer value is calculated at the start of a NAS procedure and remains fixed until procedure completion, restart, or abortion.",
+      "provenance": [
+        "TS 24.501, Clause 4.23.4"
+      ]
+    }
+  ]
+}

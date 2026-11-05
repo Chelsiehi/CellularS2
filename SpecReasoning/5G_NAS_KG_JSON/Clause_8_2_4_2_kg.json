@@ -1,0 +1,78 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.4.2",
+  "title": "Authentication failure parameter",
+  "entities": [
+    {
+      "id": "IE_AUTH_FAILURE_PARAM",
+      "name": "Authentication failure parameter",
+      "entity_type": "Information Element",
+      "description": "Information element included in 5G AKA based primary authentication and key agreement procedure when 5GMM cause is #21 'synch failure'. Contains the AUTS parameter which is the response to the authentication challenge from the USIM.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    },
+    {
+      "id": "PROC_5G_AKA_AUTH",
+      "name": "5G AKA based primary authentication and key agreement procedure",
+      "entity_type": "Procedure",
+      "description": "Primary authentication and key agreement procedure using 5G AKA method.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    },
+    {
+      "id": "COND_SYNCH_FAILURE",
+      "name": "5GMM cause #21 synch failure",
+      "entity_type": "Condition",
+      "description": "Condition where the 5GMM cause value is set to #21 indicating synchronization failure.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    },
+    {
+      "id": "PARAM_AUTS",
+      "name": "AUTS parameter",
+      "entity_type": "Property",
+      "description": "Response to the authentication challenge from the USIM, part of the authentication failure parameter.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_5G_AKA_AUTH",
+      "target": "IE_AUTH_FAILURE_PARAM",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The authentication failure parameter IE is included in the 5G AKA authentication procedure",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_SYNCH_FAILURE",
+      "target": "IE_AUTH_FAILURE_PARAM",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The authentication failure parameter is included if and only if the 5GMM cause is #21 'synch failure'",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_AUTH_FAILURE_PARAM",
+      "target": "PARAM_AUTS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "The authentication failure parameter includes the AUTS parameter as the response to the authentication challenge",
+      "provenance": [
+        "TS 24.501, Clause 8.2.4.2"
+      ]
+    }
+  ]
+}

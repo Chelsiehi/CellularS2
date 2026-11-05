@@ -1,0 +1,258 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.2.5.1.4.2",
+  "title": "Derivation of packet filter for UL direction from DL user data packet",
+  "entities": [
+    {
+      "id": "PROC_PF_DERIVATION",
+      "name": "Packet Filter Derivation Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure for deriving an uplink packet filter from a downlink user data packet based on PDU session type and packet protocol characteristics.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "IE_PACKET_FILTER_UL",
+      "name": "Uplink Packet Filter",
+      "entity_type": "Information Element",
+      "description": "Packet filter components derived from downlink user data packet for uplink traffic filtering.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_IPV4_PACKET",
+      "name": "IPv4 Packet Condition",
+      "entity_type": "Condition",
+      "description": "Condition where received DL user data packet is IPv4 packet in IPv4 or IPv4v6 PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_IPV6_PACKET",
+      "name": "IPv6 Packet Condition",
+      "entity_type": "Condition",
+      "description": "Condition where received DL user data packet is IPv6 packet in IPv6 or IPv4v6 PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "COND_ETHERNET_PACKET",
+      "name": "Ethernet Packet Condition",
+      "entity_type": "Condition",
+      "description": "Condition where received DL user data packet belongs to Ethernet PDU session type.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_IPV4_REMOTE_ADDR",
+      "name": "IPv4 Remote Address Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to source address field of received DL user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_IPV4_LOCAL_ADDR",
+      "name": "IPv4 Local Address Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to destination address field of received DL user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_PROTOCOL_ID",
+      "name": "Protocol Identifier Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to protocol field (IPv4) or last next header field (IPv6) of received DL user data packet.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_LOCAL_PORT",
+      "name": "Local Port Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to destination port field of received DL user data packet for TCP/UDP protocols.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_REMOTE_PORT",
+      "name": "Remote Port Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to source port field of received DL user data packet for TCP/UDP protocols.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_SPI",
+      "name": "Security Parameter Index Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to SPI of uplink IPSec SA corresponding to downlink IPSec SA for ESP protocol.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_ETH_DEST_MAC",
+      "name": "Destination MAC Address Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to source MAC address of received DL user data packet for Ethernet PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "PF_COMP_ETH_SRC_MAC",
+      "name": "Source MAC Address Component",
+      "entity_type": "Information Element",
+      "description": "Packet filter component set to destination MAC address of received DL user data packet for Ethernet PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PF_DERIVATION",
+      "target": "IE_PACKET_FILTER_UL",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Packet filter derivation procedure creates the uplink packet filter.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "COND_IPV4_PACKET",
+      "target": "PROC_PF_DERIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IPv4 packet condition triggers the packet filter derivation procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "COND_IPV6_PACKET",
+      "target": "PROC_PF_DERIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IPv6 packet condition triggers the packet filter derivation procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_ETHERNET_PACKET",
+      "target": "PROC_PF_DERIVATION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Ethernet packet condition triggers the packet filter derivation procedure.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_IPV4_REMOTE_ADDR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains IPv4 remote address component.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_IPV4_LOCAL_ADDR",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains IPv4 local address component.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_PROTOCOL_ID",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains protocol identifier component.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_LOCAL_PORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains local port component for TCP/UDP protocols.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_REMOTE_PORT",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains remote port component for TCP/UDP protocols.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_10",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_SPI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains security parameter index component for ESP protocol.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_11",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_ETH_DEST_MAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains destination MAC address component for Ethernet PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    },
+    {
+      "id": "REL_12",
+      "source": "IE_PACKET_FILTER_UL",
+      "target": "PF_COMP_ETH_SRC_MAC",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Uplink packet filter contains source MAC address component for Ethernet PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 6.2.5.1.4.2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.1.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_PAGING_S_TMSI",
+      "name": "Paging procedure using S-TMSI",
+      "entity_type": "Procedure",
+      "description": "Network-initiated paging procedure for EPS services using S-TMSI with CN domain indicator set to PS. Used when NAS signalling messages, cdma2000 signalling messages, or user data is pending to be sent to the UE and no NAS signalling connection exists.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1",
+        "Figure 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "MSG_PAGING",
+      "name": "Paging message",
+      "entity_type": "Message",
+      "description": "Message sent by the network to page the UE. May include Voice Service Indication when voice service data is pending.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "IE_VOICE_SERVICE_INDICATION",
+      "name": "Voice Service Indication",
+      "entity_type": "Information Element",
+      "description": "Optional indication included in Paging message when pending user data is related to voice service and network supports paging indication for voice services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_DRX_PARAMETERS",
+      "name": "Extended DRX parameters",
+      "entity_type": "Information Element",
+      "description": "IE provided to UE during attach or tracking area updating procedure that contains eDRX configuration.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3413",
+      "name": "Timer T3413",
+      "entity_type": "Timer",
+      "description": "Timer started by network for paging procedure when eDRX is not used or UE has PDN connection for emergency bearer services. Network may reinitiate paging upon expiry.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3415",
+      "name": "Timer T3415",
+      "entity_type": "Timer",
+      "description": "Timer started by network for paging procedure when network accepted to use eDRX for UE and UE does not have PDN connection for emergency bearer services. Must be set smaller than T3-RESPONSE.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "STATE_EMM_IDLE",
+      "name": "EMM-IDLE mode",
+      "entity_type": "State",
+      "description": "UE state where no NAS signalling connection exists. UE may be in EMM-IDLE with or without suspend indication.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_PAGING_RESTRICTION",
+      "name": "Paging restriction conditions",
+      "entity_type": "Condition",
+      "description": "Conditions based on stored paging restriction type that determine whether network should initiate paging procedure. Includes restrictions for all paging, voice service exceptions, and PDN connection exceptions.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "COND_EDRX_ACTIVE",
+      "name": "eDRX active condition",
+      "entity_type": "Condition",
+      "description": "Condition where network has accepted to use eDRX for UE and UE does not have PDN connection for emergency bearer services.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "PROP_PAGING_PRIORITY",
+      "name": "Paging with priority",
+      "entity_type": "Property",
+      "description": "Network behavior to initiate paging with priority when receiving downlink signalling or data associated with priority EPS bearers while waiting for response to non-priority paging.",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "MSG_PAGING",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Paging procedure involves sending Paging message to UE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1",
+        "Figure 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PAGING",
+      "target": "IE_VOICE_SERVICE_INDICATION",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "Paging message may contain Voice Service Indication IE when voice service data is pending",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "COND_PAGING_RESTRICTION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Paging procedure execution is guarded by paging restriction conditions",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "COND_EDRX_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Choice of timer (T3413 vs T3415) is guarded by eDRX active condition",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "TIMER_T3413",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Paging procedure starts timer T3413 when eDRX is not used or UE has emergency PDN connection",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "TIMER_T3415",
+      "relation_type": "starts",
+      "family": "core",
+      "description": "Paging procedure starts timer T3415 when eDRX is active and no emergency PDN connection exists",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_PAGING_S_TMSI",
+      "target": "STATE_EMM_IDLE",
+      "relation_type": "requires_state",
+      "family": "core",
+      "description": "Paging procedure requires UE to be in EMM-IDLE state (no NAS signalling connection exists)",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "IE_EXTENDED_DRX_PARAMETERS",
+      "target": "COND_EDRX_ACTIVE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "eDRX active condition is determined by Extended DRX parameters IE provided to UE",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "COND_PAGING_RESTRICTION",
+      "target": "PROP_PAGING_PRIORITY",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Paging restriction conditions establish when paging with priority should be initiated",
+      "provenance": [
+        "TS 24.301, Clause 5.6.2.2.1.1"
+      ]
+    }
+  ]
+}

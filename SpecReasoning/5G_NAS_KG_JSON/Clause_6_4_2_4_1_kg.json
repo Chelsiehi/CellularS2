@@ -1,0 +1,207 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "6.4.2.4.1",
+  "title": "General",
+  "entities": [
+    {
+      "id": "PROC_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU Session Modification Reject Procedure",
+      "entity_type": "Procedure",
+      "description": "Procedure where SMF rejects a PDU session modification request by sending a PDU SESSION MODIFICATION REJECT message with appropriate cause value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "name": "PDU SESSION MODIFICATION REQUEST",
+      "entity_type": "Message",
+      "description": "Message sent by UE to request modification of a PDU session.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "name": "PDU SESSION MODIFICATION REJECT",
+      "entity_type": "Message",
+      "description": "Message sent by SMF to reject a PDU session modification request.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "IE_5GSM_CAUSE",
+      "name": "5GSM Cause IE",
+      "entity_type": "Information Element",
+      "description": "Information element indicating the reason for rejecting PDU session modification.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "IE_BACK_OFF_TIMER_VALUE",
+      "name": "Back-off timer value IE",
+      "entity_type": "Information Element",
+      "description": "Optional IE included in PDU SESSION MODIFICATION REJECT message to indicate back-off timer value.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "name": "Extended protocol configuration options IE",
+      "entity_type": "Information Element",
+      "description": "IE in PDU SESSION MODIFICATION REQUEST that may indicate 3GPP PS data off UE status.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "TIMER_T3581",
+      "name": "Timer T3581",
+      "entity_type": "Timer",
+      "description": "Timer stopped by UE upon receipt of PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "name": "PROCEDURE TRANSACTION INACTIVE",
+      "entity_type": "State",
+      "description": "State entered by UE after receiving PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "COND_OUTSIDE_LADN_SERVICE_AREA",
+      "name": "UE outside LADN service area",
+      "entity_type": "Condition",
+      "description": "Condition where UE requests PDU session modification while located outside LADN service area.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "COND_PS_DATA_OFF_STATUS_CHANGE",
+      "name": "3GPP PS data off UE status change detected",
+      "entity_type": "Condition",
+      "description": "Condition where SMF detects change in 3GPP PS data off UE status.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "COND_HIGH_PRIORITY_ACCESS",
+      "name": "High priority access or emergency request",
+      "entity_type": "Condition",
+      "description": "Condition where UE is configured for high priority access or request type is emergency-related.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PROC_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "Procedure involves sending PDU SESSION MODIFICATION REJECT message.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message contains 5GSM Cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REJECT message may contain Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_OUTSIDE_LADN_SERVICE_AREA",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition triggers inclusion of cause value #46 in 5GSM Cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PS_DATA_OFF_STATUS_CHANGE",
+      "target": "IE_5GSM_CAUSE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition prevents inclusion of certain cause values in 5GSM Cause IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_HIGH_PRIORITY_ACCESS",
+      "target": "IE_BACK_OFF_TIMER_VALUE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Condition prevents inclusion of Back-off timer value IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "TIMER_T3581",
+      "relation_type": "stops",
+      "family": "core",
+      "description": "Receipt of PDU SESSION MODIFICATION REJECT message stops timer T3581.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REJECT",
+      "target": "STATE_PROCEDURE_TRANSACTION_INACTIVE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receipt of PDU SESSION MODIFICATION REJECT message causes UE to enter PROCEDURE TRANSACTION INACTIVE state.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_PDU_SESSION_MODIFICATION_REQUEST",
+      "target": "IE_EXTENDED_PROTOCOL_CONFIGURATION_OPTIONS",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "PDU SESSION MODIFICATION REQUEST message contains Extended protocol configuration options IE.",
+      "provenance": [
+        "TS 24.501, Clause 6.4.2.4.1"
+      ]
+    }
+  ]
+}

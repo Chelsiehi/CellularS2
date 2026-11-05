@@ -1,0 +1,98 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.2.6.28",
+  "title": "Requested mapped NSSAI",
+  "entities": [
+    {
+      "id": "IE_REQUESTED_MAPPED_NSSAI",
+      "name": "Requested mapped NSSAI",
+      "entity_type": "Information Element",
+      "description": "Information element included by the UE when transferring PDN connections or PDU sessions to visited PLMN associated with S-NSSAI applicable in HPLMN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "UE",
+      "name": "User Equipment",
+      "entity_type": "Property",
+      "description": "The mobile device that includes the Requested mapped NSSAI IE under specific conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "CONDITION_PDN_PDU_TRANSFER",
+      "name": "PDN connection or PDU session transfer condition",
+      "entity_type": "Condition",
+      "description": "Condition where UE has a PDN connection or PDU session to transfer to visited PLMN associated with S-NSSAI applicable in HPLMN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "VPLMN",
+      "name": "Visited PLMN",
+      "entity_type": "Property",
+      "description": "The visited public land mobile network to which PDN connections or PDU sessions are transferred.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "HPLMN",
+      "name": "Home PLMN",
+      "entity_type": "Property",
+      "description": "The home public land mobile network where the S-NSSAI must be applicable.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "UE",
+      "target": "IE_REQUESTED_MAPPED_NSSAI",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "UE includes the Requested mapped NSSAI IE when specific conditions are met.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "CONDITION_PDN_PDU_TRANSFER",
+      "target": "IE_REQUESTED_MAPPED_NSSAI",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Inclusion of Requested mapped NSSAI IE is guarded by the condition of PDN connection or PDU session transfer.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "CONDITION_PDN_PDU_TRANSFER",
+      "target": "VPLMN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition establishes transfer to visited PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "CONDITION_PDN_PDU_TRANSFER",
+      "target": "HPLMN",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "The condition establishes that S-NSSAI must be applicable in HPLMN.",
+      "provenance": [
+        "TS 24.501, Clause 8.2.6.28"
+      ]
+    }
+  ]
+}

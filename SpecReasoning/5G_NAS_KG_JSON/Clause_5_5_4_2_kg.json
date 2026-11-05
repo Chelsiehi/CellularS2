@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.4.2",
+  "title": "ProSe relay transaction identity (PRTI)",
+  "entities": [
+    {
+      "id": "PRTI",
+      "name": "ProSe relay transaction identity",
+      "entity_type": "Identifier",
+      "description": "A transaction identity value allocated by the UE for the authentication and key agreement procedure for 5G ProSe UE-to-network relay.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PROSE_DIRECT_LINK_ESTABLISHMENT_REQUEST",
+      "name": "ProSe direct link establishment request",
+      "entity_type": "Message",
+      "description": "A request from a 5G ProSe remote UE for establishing a secure PC5 unicast link.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "AUTH_KEY_AGREEMENT_PROCEDURE",
+      "name": "Authentication and key agreement procedure for 5G ProSe UE-to-network relay",
+      "entity_type": "Procedure",
+      "description": "The procedure for authentication and key agreement between a 5G ProSe remote UE and the network via a relay UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PROSE_REMOTE_UE",
+      "name": "5G ProSe remote UE",
+      "entity_type": "Property",
+      "description": "A UE that requests establishment of a secure PC5 unicast link via a relay UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PRTI_ALLOCATION_CONDITION",
+      "name": "Receiving ProSe direct link establishment request",
+      "entity_type": "Condition",
+      "description": "Condition triggering PRTI allocation when the UE receives a ProSe direct link establishment request from a 5G ProSe remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "PRTI_RELEASE_CONDITION",
+      "name": "Authentication procedure completion or abortion",
+      "entity_type": "Condition",
+      "description": "Condition triggering PRTI release when the authentication and key agreement procedure for 5G ProSe UE-to-network relay completes or is aborted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "PRTI_ALLOCATION_CONDITION",
+      "target": "PRTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Triggering condition for allocating a PRTI value.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "PRTI",
+      "target": "PROSE_REMOTE_UE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PRTI value is associated with the 5G ProSe remote UE.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PRTI",
+      "target": "AUTH_KEY_AGREEMENT_PROCEDURE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PRTI is allocated for the authentication and key agreement procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PRTI_RELEASE_CONDITION",
+      "target": "PRTI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Triggering condition for releasing the allocated PRTI value.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROSE_DIRECT_LINK_ESTABLISHMENT_REQUEST",
+      "target": "PRTI_ALLOCATION_CONDITION",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "The ProSe direct link establishment request triggers the PRTI allocation condition.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.4.2"
+      ]
+    }
+  ]
+}

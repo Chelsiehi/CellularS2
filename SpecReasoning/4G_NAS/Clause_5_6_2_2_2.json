@@ -1,0 +1,70 @@
+{
+  "spec": "TS 24.301",
+  "clause_id": "5.6.2.2.2",
+  "title": "Paging for EPS services through E-UTRAN using IMSI",
+  "has_text": true,
+  "figures_count": 1,
+  "tables_count": 0,
+  "text": [
+    "-------------------------------------------------------------",
+    "Paging for EPS services using IMSI is an abnormal procedure used for error recovery in the network",
+    "The network may initiate paging for EPS services using IMSI with CN domain indicator set to \"PS\" if the S-TMSI is not available due to a network failure (see example in figure 5.6.2.2.2.1)",
+    "Figure 5.6.2.2.2.1: Paging procedure using IMSI",
+    "In S1 mode, to initiate the procedure the EMM entity in the network requests the lower layer to start paging. If the TAI list is not available due to a network failure, the network may perform the paging within all tracking areas served by the MME (see 3GPP S 36.331 [22] and 3GPP S 36.413 [23])",
+    "When a UE receives a paging for EPS services using IMSI from the network before a UE initiated EMM specific procedure has been completed, then the UE shall abort the EMM specific procedure and proceed according to the description in this clause",
+    "Upon reception of a paging for EPS services using IMSI, the UE shall stop timer T3346, if it is running, locally deactivate any EPS bearer context(s), if any, and locally detach from EPS. Additionally the UE shall delete the following parameters: last visited registered TAI, TAI list, GUTI and KSIASME. The UE shall set the EPS update status to EU2 NOT UPDATED and change the state to EMM-DEREGISTERED. The UE shall stop all timers T3396 that are running",
+    "If A/Gb mode or Iu mode is supported by the UE, the UE shall in addition handle the GMM parameters GMM state, GPRS update status, P-TMSI, P-TMSI signature, RAI, and GPRS ciphering key sequence number as specified in 3GPP S 24.008 [13] for the case when a paging for GPRS services using IMSI is received",
+    "After performing the local detach, the UE shall then perform an attach procedure as described in clause 5.5.1.2. If the UE is operating in CS/PS mode 1 or CS/PS mode 2 of operation, then the UE shall perform a combined attach procedure as described in clause 5.5.1.3. For this attach procedure and its reattempts, if any, the MS shall ignore the contents of the list of \"forbidden tracking areas for roaming\", as well as the list of \"forbidden tracking areas for regional provision of service\"",
+    "NOTE 1: In some cases, user interaction can be required, thus the UE cannot activate the dedicated bearer context(s), if any, automatically",
+    "NOTE 2: The UE does not respond to the paging except with the ATTACH REQUEST message, hence timers T3413 and T3415 in the network are not used when paging with IMSI",
+    "",
+    ""
+  ],
+  "figures": [
+    {
+      "figure_id": "5.6.2.2.2.1",
+      "file": "Figure_5_6_2_2_2_1_p260.png.json",
+      "title": "Paging procedure using IMSI",
+      "content": {
+        "figure_id": "5.6.2.2.2.1",
+        "title": "Paging procedure using IMSI",
+        "type": "PROCEDURE_FLOW",
+        "content": {
+          "states": [],
+          "transitions": [],
+          "entities": [
+            "UE",
+            "AS",
+            "MME"
+          ],
+          "messages": [
+            {
+              "from": "MME",
+              "to": "AS",
+              "name": "Request paging",
+              "notes": ""
+            },
+            {
+              "from": "AS",
+              "to": "UE",
+              "name": "Paging",
+              "notes": ""
+            },
+            {
+              "from": "UE",
+              "to": "MME",
+              "name": "ATTACH REQUEST",
+              "notes": ""
+            }
+          ],
+          "fields": [],
+          "notes": [
+            "Paging for EPS services using IMSI is an abnormal procedure used for error recovery in the network",
+            "The network may initiate paging for EPS services using IMSI with CN domain indicator set to 'PS' if the S-TMSI is not available due to a network failure"
+          ]
+        }
+      }
+    }
+  ],
+  "tables": []
+}

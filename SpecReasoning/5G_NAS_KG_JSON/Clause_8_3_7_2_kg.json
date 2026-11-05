@@ -1,0 +1,118 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "8.3.7.2",
+  "title": "5GSM capability",
+  "entities": [
+    {
+      "id": "IE_5GSM_CAPABILITY",
+      "name": "5GSM capability",
+      "entity_type": "Information Element",
+      "description": "Information element included in messages to indicate UE capabilities for PDU sessions, including support for reflective QoS and multi-homed IPv6 PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "COND_INTERSYSTEM_CHANGE",
+      "name": "Inter-system change from S1 mode to N1 mode",
+      "entity_type": "Condition",
+      "description": "Condition where UE moves from S1 mode to N1 mode in single-registration mode with N26 interface support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "COND_PDU_SESSION_TYPES",
+      "name": "PDU session type conditions",
+      "entity_type": "Condition",
+      "description": "Conditions based on PDU session type (IPv4, IPv6, IPv4v6, Ethernet) and UE capability support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "COND_REVOKE_REFLECTIVE_QOS",
+      "name": "Revoke reflective QoS support",
+      "entity_type": "Condition",
+      "description": "Condition where UE needs to revoke previously indicated support for reflective QoS.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "PROP_REFLECTIVE_QOS_SUPPORT",
+      "name": "UE supports reflective QoS",
+      "entity_type": "Property",
+      "description": "Property indicating UE capability to support reflective QoS for PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "PROP_MULTI_HOMED_IPV6_SUPPORT",
+      "name": "UE supports multi-homed IPv6 PDU session",
+      "entity_type": "Property",
+      "description": "Property indicating UE capability to support multi-homed IPv6 PDU sessions.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "IE_5GSM_CAPABILITY",
+      "target": "COND_INTERSYSTEM_CHANGE",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by inter-system change condition.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "IE_5GSM_CAPABILITY",
+      "target": "COND_PDU_SESSION_TYPES",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by PDU session type and capability conditions.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "IE_5GSM_CAPABILITY",
+      "target": "COND_REVOKE_REFLECTIVE_QOS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "IE inclusion is guarded by condition to revoke reflective QoS support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "COND_PDU_SESSION_TYPES",
+      "target": "PROP_REFLECTIVE_QOS_SUPPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session type condition establishes requirement for reflective QoS support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "COND_PDU_SESSION_TYPES",
+      "target": "PROP_MULTI_HOMED_IPV6_SUPPORT",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "PDU session type condition establishes requirement for multi-homed IPv6 support.",
+      "provenance": [
+        "TS 24.501, Clause 8.3.7.2"
+      ]
+    }
+  ]
+}

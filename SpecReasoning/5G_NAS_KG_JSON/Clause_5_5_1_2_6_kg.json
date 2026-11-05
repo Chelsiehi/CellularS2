@@ -1,0 +1,198 @@
+{
+  "spec": "TS 24.501",
+  "clause_id": "5.5.1.2.6",
+  "title": "Initial registration for emergency services not accepted by the network",
+  "entities": [
+    {
+      "id": "PROC_INIT_REG_EMERGENCY",
+      "name": "Initial registration for emergency services",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to register for emergency services with the network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "MSG_REGISTRATION_REJECT",
+      "name": "REGISTRATION REJECT",
+      "entity_type": "Message",
+      "description": "Network message rejecting UE registration request.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "IE_5GMM_CAUSE_5",
+      "name": "5GMM cause #5 PEI not accepted",
+      "entity_type": "Information Element",
+      "description": "5GMM cause value indicating PEI (Permanent Equipment Identifier) not accepted by network.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "STATE_5GMM_DEREGISTERED_NO_SUPI",
+      "name": "5GMM-DEREGISTERED.NO-SUPI",
+      "entity_type": "State",
+      "description": "5GMM state entered when UE receives REGISTRATION REJECT with cause #5 PEI not accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "COND_3GPP_ACCESS",
+      "name": "Over 3GPP access",
+      "entity_type": "Condition",
+      "description": "Condition where message is received over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "COND_NON3GPP_INTEGRITY_PROTECTED",
+      "name": "Over non-3GPP access and integrity protected",
+      "entity_type": "Condition",
+      "description": "Condition where message is received over non-3GPP access and is integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "PROP_INFORM_UPPER_LAYERS_FAILURE",
+      "name": "Inform upper layers of procedure failure",
+      "entity_type": "Property",
+      "description": "UE behavior to inform upper layers about registration procedure failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "PROC_PLMN_SELECTION",
+      "name": "PLMN selection",
+      "entity_type": "Procedure",
+      "description": "Procedure for UE to select a PLMN in shared network after registration failure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "COND_SHARED_NETWORK",
+      "name": "In a shared network",
+      "entity_type": "Condition",
+      "description": "Condition where UE operates in a shared network environment.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "COND_EQUIVALENT_PLMN",
+      "name": "Selected PLMN is equivalent PLMN",
+      "entity_type": "Condition",
+      "description": "Condition where selected PLMN is equivalent to current PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL_1",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "IE_5GMM_CAUSE_5",
+      "relation_type": "contains_IE",
+      "family": "core",
+      "description": "REGISTRATION REJECT message contains 5GMM cause #5 PEI not accepted.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_2",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "STATE_5GMM_DEREGISTERED_NO_SUPI",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Receiving REGISTRATION REJECT with cause #5 causes UE to enter 5GMM-DEREGISTERED.NO-SUPI state.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_3",
+      "source": "PROC_INIT_REG_EMERGENCY",
+      "target": "COND_3GPP_ACCESS",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition of message received over 3GPP access.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_4",
+      "source": "PROC_INIT_REG_EMERGENCY",
+      "target": "COND_NON3GPP_INTEGRITY_PROTECTED",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "Procedure behavior is guarded by condition of message received over non-3GPP access and integrity protected.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_5",
+      "source": "PROC_INIT_REG_EMERGENCY",
+      "target": "PROP_INFORM_UPPER_LAYERS_FAILURE",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Procedure failure establishes property of informing upper layers.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_6",
+      "source": "COND_SHARED_NETWORK",
+      "target": "PROC_PLMN_SELECTION",
+      "relation_type": "establishes",
+      "family": "core",
+      "description": "Condition of shared network establishes PLMN selection procedure.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_7",
+      "source": "PROC_PLMN_SELECTION",
+      "target": "PROC_INIT_REG_EMERGENCY",
+      "relation_type": "has_step",
+      "family": "core",
+      "description": "PLMN selection procedure has step of initiating initial registration for emergency services.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_8",
+      "source": "PROC_PLMN_SELECTION",
+      "target": "COND_EQUIVALENT_PLMN",
+      "relation_type": "guards_by",
+      "family": "core",
+      "description": "PLMN selection procedure behavior is guarded by condition of equivalent PLMN.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    },
+    {
+      "id": "REL_9",
+      "source": "MSG_REGISTRATION_REJECT",
+      "target": "COND_NON3GPP_INTEGRITY_PROTECTED",
+      "relation_type": "integrity_required",
+      "family": "sec",
+      "description": "REGISTRATION REJECT over non-3GPP access requires integrity protection.",
+      "provenance": [
+        "TS 24.501, Clause 5.5.1.2.6"
+      ]
+    }
+  ]
+}
